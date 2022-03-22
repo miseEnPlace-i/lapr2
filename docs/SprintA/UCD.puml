@@ -1,0 +1,18 @@
+@startuml UCD
+
+left to right direction
+
+actor "SNS User" as user
+actor "Nurse" as nurse
+actor "Receptionist" as recept
+actor "Center Administrator" as cadmin
+actor "DGS Administrator" as dgsadmin
+actor "Center Coordinator" as coordinator
+
+rectangle System {
+  usecase "Schedule a vaccine" as UC1
+}
+
+user --> UC1
+
+@enduml
