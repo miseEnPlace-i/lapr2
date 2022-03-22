@@ -8,11 +8,16 @@ actor "Receptionist" as recept
 actor "Center Administrator" as cadmin
 actor "DGS Administrator" as dgsadmin
 actor "Center Coordinator" as coordinator
+actor "DGS" as dgs
 
 rectangle System {
   usecase "Schedule a vaccine" as UC1
+  usecase "Obtain a vaccination certificate" as UC2
+  usecase "Send SMS with apointment details to SNS User" as UC3
 }
 
 user --> UC1
+user --> UC2
+dgs --> UC3
 
 @enduml
