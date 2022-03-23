@@ -1,0 +1,35 @@
+@startuml UCD
+
+left to right direction
+
+actor "SNS User" as user
+actor "Nurse" as nurse
+actor "Receptionist" as recept
+actor "Center Administrator" as cadmin
+actor "DGS Administrator" as dgsadmin
+actor "Center Coordinator" as coordinator
+actor "DGS" as dgs
+
+rectangle System {
+  usecase "Schedule a vaccine" as UC1
+  usecase "Obtain a vaccination certificate" as UC2
+  usecase "Send a SMS with apointment details to SNS User" as UC3
+  usecase "Deliver a vaccination certificate" as UC4  
+  usecase "Schedule a vaccine to a SNS User" as UC5
+  usecase "Check the list of SNS users that are present in the center to take the vaccine" as UC6
+  usecase "Check user's health information" as UC7
+  usecase "Report adverse reactions during recovery period" as UC8
+  usecase "Register a SNS user vaccination details"
+  
+}
+
+user --> UC1
+user --> UC2
+dgs --> UC3
+nurse --> UC4
+nurse --> UC5
+nurse --> UC6
+nurse --> UC7
+nurse --> UC8
+
+@enduml
