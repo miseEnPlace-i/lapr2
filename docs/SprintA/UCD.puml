@@ -32,8 +32,8 @@ nurse --> UC05
 nurse --> UC06
 nurse --> UC07
 nurse --> UC08
-nurse -> UC09
-recept -> UC10
+nurse --> UC09
+recept --> UC10
 
 
 @enduml
