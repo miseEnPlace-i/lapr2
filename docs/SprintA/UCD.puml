@@ -19,7 +19,7 @@ rectangle System {
   usecase "Check the list of SNS users that are present in the center to take the vaccine" as UC6
   usecase "Check user's health information" as UC7
   usecase "Report adverse reactions during recovery period" as UC8
-  usecase "Register a SNS user vaccination details"
+  usecase "Register a SNS user vaccination details" as UC9
   
 }
 
@@ -31,5 +31,6 @@ nurse --> UC5
 nurse --> UC6
 nurse --> UC7
 nurse --> UC8
+nurse -> UC9
 
 @enduml
