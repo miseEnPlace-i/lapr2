@@ -11,7 +11,6 @@ actor "Center Coordinator" as coordinator
 actor "DGS" as dgs
 
 rectangle System {
-  usecase "Register the arrival of an SNS User" as UC10
   usecase "Schedule a vaccine" as UC01
   usecase "Request an EU COVID-19 digital certificate" as UC02
   usecase "Send a SMS with apointment details to SNS User" as UC03
@@ -21,7 +20,16 @@ rectangle System {
   usecase "Check user's health information" as UC07
   usecase "Report adverse reactions during recovery period" as UC08
   usecase "Register a SNS user vaccination details" as UC09
-
+  usecase "Register the arrival of an SNS User" as UC10
+  usecase "Register new vaccination centers" as UC11
+  usecase "Register new SNS users" as UC12
+  usecase "Register new center coordinators" as UC13
+  usecase "Register new receptionists" as UC14
+  usecase "Register new nurses" as UC15
+  usecase "Monitor the vaccination process" as UC16
+  usecase "View stats and charts" as UC17
+  usecase "Generate reports about his center" as UC18
+  usecase "Analyse from other centers" as UC19
 }
 
 user --> UC01
@@ -34,6 +42,15 @@ nurse --> UC07
 nurse --> UC08
 nurse --> UC09
 recept --> UC10
+dgsadmin --> UC11
+dgsadmin --> UC12
+dgsadmin --> UC13
+dgsadmin --> UC14
+dgsadmin --> UC15
+coordinator --> UC16
+coordinator --> UC17
+coordinator --> UC18
+coordinator --> UC19
 
 
 @enduml
