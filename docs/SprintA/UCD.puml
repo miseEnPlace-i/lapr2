@@ -17,15 +17,15 @@ rectangle System {
   usecase "Send a SMS with apointment details to SNS User" as UC03
   usecase "Issue a vaccination certificate" as UC04
   usecase "Schedule a vaccine to a SNS User" as UC05
-  usecase "Check the list of SNS users that are present in the center to take the vaccine" as UC06
+  usecase "Check the list of SNS Users that are present in the center to take the vaccine" as UC06
   usecase "Check user's health information" as UC07
   usecase "Report adverse reactions during recovery period" as UC08
-  usecase "Register a SNS user vaccination details" as UC09
+  usecase "Register SNS User's vaccination details" as UC09
   usecase "Register the arrival of an SNS User" as UC10
   usecase "Confirm vaccination apointment for a given SNS number" as UC11
-  usecase "Register that a given SNS user is ready to take the vaccine" as UC12
+  usecase "Register that a given SNS User is ready to take the vaccine" as UC12
   usecase "Register a new vaccination center" as UC13
-  usecase "Register a new SNS user" as UC14
+  usecase "Register a new SNS User" as UC14
   usecase "Register a new center coordinator" as UC15
   usecase "Register a new receptionist" as UC16
   usecase "Register a new nurse" as UC17
