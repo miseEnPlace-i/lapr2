@@ -9,10 +9,11 @@ actor "Center Administrator" as cadmin
 actor "DGS Administrator" as dgsadmin
 actor "Center Coordinator" as coordinator
 actor "DGS" as dgs
+actor "System" as system
 
 rectangle System {
   usecase "Schedule a vaccine" as UC01
-  usecase "Request an EU COVID-19 digital certificate" as UC02
+  usecase "Request the issuance of the EU COVID-19 Digital Certificate" as UC02
   usecase "Send a SMS with apointment details to SNS User" as UC03
   usecase "Issue a vaccination certificate" as UC04
   usecase "Schedule a vaccine to a SNS User" as UC05
@@ -21,19 +22,22 @@ rectangle System {
   usecase "Report adverse reactions during recovery period" as UC08
   usecase "Register a SNS user vaccination details" as UC09
   usecase "Register the arrival of an SNS User" as UC10
-  usecase "Register new vaccination centers" as UC11
-  usecase "Register new SNS users" as UC12
-  usecase "Register new center coordinators" as UC13
-  usecase "Register new receptionists" as UC14
-  usecase "Register new nurses" as UC15
-  usecase "Monitor the vaccination process" as UC16
-  usecase "View center's stats and charts" as UC17
-  usecase "Generate a center report" as UC18
-  usecase "Analyse other centers" as UC19
-  usecase "Configure type of vaccines" as UC20
-  usecase "Configure vaccines" as UC21
-  usecase "Manage vaccination centers" as UC22
-  usecase "Manage employees" as UC23
+  usecase "Confirm vaccination apointment for a given SNS number" as UC11
+  usecase "Register that a given SNS user is ready to take the vaccine" as UC12
+  usecase "Register a new vaccination center" as UC13
+  usecase "Register a new SNS user" as UC14
+  usecase "Register a new center coordinator" as UC15
+  usecase "Register a new receptionist" as UC16
+  usecase "Register a new nurse" as UC17
+  usecase "Monitor the vaccination process" as UC18
+  usecase "View center's stats and charts" as UC19
+  usecase "Generate a center report" as UC20
+  usecase "Analyse other centers" as UC21
+  usecase "Configure type of vaccines" as UC22
+  usecase "Configure vaccines" as UC23
+  usecase "Manage vaccination centers" as UC24
+  usecase "Manage employees" as UC25
+  usecase "Send a SMS to notify the user that the recovery period ended" as US26
 }
 
 user --> UC01
@@ -46,19 +50,21 @@ nurse --> UC07
 nurse --> UC08
 nurse --> UC09
 recept --> UC10
-dgsadmin --> UC11
+recept --> UC11
 dgsadmin --> UC12
 dgsadmin --> UC13
 dgsadmin --> UC14
 dgsadmin --> UC15
-coordinator --> UC16
-coordinator --> UC17
+dgsadmin --> UC16
+dgsadmin --> UC17
 coordinator --> UC18
 coordinator --> UC19
-cadmin --> UC20
-cadmin --> UC21
+coordinator --> UC20
+coordinator --> UC21
 cadmin --> UC22
 cadmin --> UC23
-
+cadmin --> UC24
+cadmin --> UC25
+system --> US26
 
 @enduml
