@@ -27,12 +27,13 @@ rectangle System {
   usecase "Register new receptionists" as UC14
   usecase "Register new nurses" as UC15
   usecase "Monitor the vaccination process" as UC16
-  usecase "View stats and charts" as UC17
+  usecase "View center's stats and charts" as UC17
   usecase "Generate a center report" as UC18
-  usecase "Analyse from other centers" as UC19
-  usecase "Configures vaccines" as UC20
-  usecase "Manages vaccination centers" as UC21
-  usecase "Manages employees" as UC22
+  usecase "Analyse other centers" as UC19
+  usecase "Configure type of vaccines" as UC20
+  usecase "Configure vaccines" as UC21
+  usecase "Manage vaccination centers" as UC22
+  usecase "Manage employees" as UC23
 }
 
 user --> UC01
@@ -57,6 +58,7 @@ coordinator --> UC19
 cadmin --> UC20
 cadmin --> UC21
 cadmin --> UC22
+cadmin --> UC23
 
 
 @enduml
