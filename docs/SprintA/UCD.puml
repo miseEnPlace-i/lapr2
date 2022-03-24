@@ -29,15 +29,14 @@ rectangle System {
   usecase "Register a new center coordinator" as UC15
   usecase "Register a new receptionist" as UC16
   usecase "Register a new nurse" as UC17
-  usecase "Monitor the vaccination process" as UC18
-  usecase "View center's stats and charts" as UC19
-  usecase "Generate a center report" as UC20
-  usecase "Analyse other centers" as UC21
-  usecase "Configure type of vaccines" as UC22
-  usecase "Configure vaccines" as UC23
-  usecase "Manage vaccination centers" as UC24
-  usecase "Manage employees" as UC25
-  usecase "Send a SMS to notify the user that the recovery period ended" as US26
+  usecase "View center's statistics and charts" as UC18
+  usecase "Generate a center report" as UC19
+  usecase "Analyse other centers" as UC20
+  usecase "Configure type of vaccines" as UC21
+  usecase "Configure vaccines" as UC22
+  usecase "Manage vaccination centers" as UC23
+  usecase "Manage employees" as UC24
+  usecase "Send a SMS to notify the user that the recovery period ended" as US25
 }
 
 user --> UC01
@@ -60,11 +59,10 @@ dgsadmin --> UC17
 coordinator --> UC18
 coordinator --> UC19
 coordinator --> UC20
-coordinator --> UC21
+cadmin --> UC21
 cadmin --> UC22
 cadmin --> UC23
 cadmin --> UC24
-cadmin --> UC25
-system --> US26
+system --> US25
 
 @enduml
