@@ -43,7 +43,11 @@ configurability, installability, scalability and more._
 
 _Specifies or constraints the system design process. Examples may include: programming languages, software process, mandatory standards/patterns, use of development tools, class library, etc._
 
-(fill in here )
+For the design process of our application, there are several restrictions imposed by the client, covering multiple topics. 
+The application must be developed in Java, using an objected-oriented procedure.
+During the design process, as well as in the development process, the team must adopt recognized code standards, which should be used in all documents created in the project. Those standards must also be used in commit messages, in order to easily locate and manage changes in the source code.
+When it comes to the security of the app, the application must require a password for everyone that uses the software. Regarding privacy of user’s information, only nurses should access user’s health data.
+The app must offer all contents in English and Portuguese.
 
 ### Implementation Constraints
 
