@@ -12,37 +12,37 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 - ***
 
-  **Transaction Line Itemss**
+  **Transaction Line Items**
 
-- ***
+- Vaccination Type
 
   **Product/Service related to a Transaction or Transaction Line Item**
 
-- ***
+- Vaccine
 
   **Transaction Records**
 
-- ***
+- Vaccine administration; Vaccination scheduling; Register Vaccine; Register Nurse; Register Receptionist; Certificate Issuance;
 
   **Roles of People or Organizations**
 
-- ***
+- Nurse; Coordinator; Receptionist; Administrator; DGS Administrator; SNS User;
 
   **Places**
 
-- ***
+- Community Mass Vaccination Center; Health Care Center; Waiting room;
 
   **Noteworthy Events**
 
-- ***
+- Register Arrival; Schedule Confirmation; Vaccination Scheduling; Vaccination Administration; User waiting in recovery room; Leave vaccination center; Certificate Issuance; Check User's medical history
 
   **Physical Objects**
 
-- ***
+- Vaccine
 
   **Descriptions of Things**
 
-- ***
+- Vaccination Type
 
   **Catalogs**
 
@@ -58,15 +58,15 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
   **Organizations**
 
-- ***
+- DGS; ARS; AGES
 
   **Other External/Collaborating Systems**
 
-- ***
+- DGS
 
   **Records of finance, work, contracts, legal matters**
 
-- ***
+- Statistics; Charts; Report; Vaccination Certificate; EU Covid Certificate
 
   **Financial Instruments**
 
@@ -74,7 +74,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
   **Documents mentioned/used to perform some work**
 
-- ***
+- User's Medical History
 
 ##**Rationale to identify associations between conceptual classes**###
 
