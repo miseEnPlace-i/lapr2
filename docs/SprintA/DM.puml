@@ -1,3 +1,19 @@
 @startuml
 
+class Administrator {}
+
+class CommunityMassVaccinationCenter {}
+
+class Vaccine {}
+
+class VaccineType {
+    + id
+    + designation
+    + whoid
+}
+
+
+Vaccine "*" --> "1" VaccineType : has
+
+
 @enduml
