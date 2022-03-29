@@ -11,7 +11,7 @@ Scheduling - Provide a service to set up a vaccine at health cares or Vaccinatio
 
 Certificate - Provide a service to deliver a vaccination certificate.
 
-Registration - Provides a service to set up the registration of all the people related to the company. 
+Registration - Provides a service to set up the registration of all the people related to the company.
 
 Manage - Provide services to rule the facilities enroled with the company and employees.
 
@@ -35,11 +35,15 @@ documentation; consistency and standards._
 
 Error prevention - Testing often the application to make it hard for the user to commit the error.
 
-Interface aesthetics and design - Simple, intuitive and fast. 
+Interface aesthetics and design - The application graphical interface will be simple, intuitive and consistent developed in JavaFX 11.
 
 Help - Service to provide the user help on the application.
 
-Documentation - 
+Documentation - The application will have a user manual.
+
+Consistency - All user who wish to use the application will be authenticated wit a password holding seven alphanumeric characters, including three capital letters and two digits.
+
+User data - Only nurses will be allowed to access all user´s health data.
 
 ## Reliability
 
@@ -47,29 +51,29 @@ _Refers to the integrity, compliance and interoperability of the software. The r
 
 System running - Under all the optimal circunstances, the system will run continually since the launch.
 
-Average time between failures - 
+Average time between failures -
 
-Severity of failure - 
+Severity of failure -
 
-Possibility of recovery - 
+Possibility of recovery - The application will use object serialization to ensure data persistence between two runs of the application.
 
 ## Performance
 
 _Evaluates the performance requirements of the software, namely: response time, start-up time, recovery time, memory consumption, CPU usage, load capacity and application availability._
 
-Response time - 
+Response time -
 
-Start up time- 
+Start up time-
 
 Recovery time -
 
-Memory consumption - 
+Memory consumption -
 
 CPU usage -
 
 Load capacity -
 
-Application availability - 
+Application availability -
 
 ## Supportability
 
@@ -77,7 +81,10 @@ _The supportability requirements gathers several characteristics, such as:
 testability, adaptability, maintainability, compatibility,
 configurability, installability, scalability and more._
 
-(fill in here )
+Configurability - The application will support both Portuguese and English languages, at least.
+
+Testability - The application will implement unit tests for all methods, except for methods that
+implement Input/Output operations. The unit tests will be implemented using the JUnit 5 framework.
 
 ## +
 
