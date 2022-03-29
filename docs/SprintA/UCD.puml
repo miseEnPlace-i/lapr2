@@ -9,7 +9,6 @@ actor "Center Administrator" as cadmin
 actor "DGS Administrator" as dgsadmin
 actor "Center Coordinator" as coordinator
 actor "DGS" as dgs
-actor "System" as system
 
 rectangle System {
   usecase "UC01. Schedule a vaccine" as UC01
@@ -36,7 +35,6 @@ rectangle System {
   usecase "UC22. Configure vaccines" as UC22
   usecase "UC23. Manage vaccination centers" as UC23
   usecase "UC24. Manage employees" as UC24
-  usecase "UC25. Send a SMS to notify the user that the recovery period ended" as UC25
 }
 
 user --> UC01
@@ -63,6 +61,5 @@ cadmin --> UC21
 cadmin --> UC22
 cadmin --> UC23
 cadmin --> UC24
-system --> US25
 
 @enduml
