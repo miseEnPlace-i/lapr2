@@ -50,11 +50,11 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
   **Containers**
 
-- ***
+- Vaccination Center
 
   **Elements of Containers**
 
-- ***
+- Nurses; Recepcionist; VacineTypes;
 
   **Organizations**
 
