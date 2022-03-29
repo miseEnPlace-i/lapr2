@@ -62,11 +62,11 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
   **Other External/Collaborating Systems**
 
-- DGS
+- DGS; SMS
 
   **Records of finance, work, contracts, legal matters**
 
-- Statistics; Charts; Report; Vaccination Certificate; EU Covid Certificate
+- Statistics; Charts; Report; Vaccination Certificate; EU Covid Certificate; SMS Authorization
 
   **Financial Instruments**
 
