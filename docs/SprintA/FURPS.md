@@ -37,21 +37,39 @@ Error prevention - Testing often the application to make it hard for the user to
 
 Interface aesthetics and design - Simple, intuitive and fast. 
 
-Help - 
+Help - Service to provide the user help on the application.
 
-Documentation -
+Documentation - 
 
 ## Reliability
 
 _Refers to the integrity, compliance and interoperability of the software. The requirements to be considered are: frequency and severity of failure, possibility of recovery, possibility of prediction, accuracy, average time between failures._
 
-System running - Under all the 
+System running - Under all the optimal circunstances, the system will run continually since the launch.
+
+Average time between failures - 
+
+Severity of failure - 
+
+Possibility of recovery - 
 
 ## Performance
 
 _Evaluates the performance requirements of the software, namely: response time, start-up time, recovery time, memory consumption, CPU usage, load capacity and application availability._
 
-(fill in here )
+Response time - 
+
+Start up time- 
+
+Recovery time -
+
+Memory consumption - 
+
+CPU usage -
+
+Load capacity -
+
+Application availability - 
 
 ## Supportability
 

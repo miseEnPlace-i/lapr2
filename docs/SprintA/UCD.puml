@@ -14,7 +14,7 @@ actor "System" as system
 rectangle System {
   usecase "UC01. Schedule a vaccine" as UC01
   usecase "UC02. Request the issuance of the EU COVID-19 Digital Certificate" as UC02
-  usecase "UC03. Send a SMS with apointment details to SNS User" as UC03
+  usecase "UC03. Send a SMS with appointment details to SNS User" as UC03
   usecase "UC04. Issue a vaccination certificate" as UC04
   usecase "UC05. Schedule a vaccine to a SNS User" as UC05
   usecase "UC06. Check the list of SNS Users that are present in the center to take the vaccine" as UC06
@@ -22,7 +22,7 @@ rectangle System {
   usecase "UC08. Report adverse reactions during recovery period" as UC08
   usecase "UC09. Register SNS User's vaccination details" as UC09
   usecase "UC10. Register the arrival of an SNS User" as UC10
-  usecase "UC11. Confirm vaccination apointment for a given SNS number" as UC11
+  usecase "UC11. Confirm vaccination appointment for a given SNS number" as UC11
   usecase "UC12. Register that a given SNS User is ready to take the vaccine" as UC12
   usecase "UC13. Register a new vaccination center" as UC13
   usecase "UC14. Register a new SNS User" as UC14
