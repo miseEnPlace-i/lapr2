@@ -7,11 +7,25 @@ _Specifies functionalities that:_
 - _are common across several US/UC;_
 - _are not related to US/UC, namely: Audit, Reporting and Security._
 
-Scheduling - Provide a facility to set up a vaccine at health cares or Vaccination centers
+Scheduling - Provide a service to set up a vaccine at health cares or Vaccination centers.
 
-Certificate - Provide a service to deliver a vaccination certificate
+Certificate - Provide a service to deliver a vaccination certificate.
 
-Registration - Provides a facility to set up
+Registration - Provides a service to set up the registration of all the people related to the company. 
+
+Manage - Provide services to rule the facilities enroled with the company and employees.
+
+Analysing - Provide crucial data for the vaccination process analysis.
+
+Checking in - Provide service to register the arrival of the SNS user.
+
+Checking Users - Provide service to check user´s health information.
+
+Sending SMS - Provide service to deliver a SMS with informations of the vaccine appointment to the SNS user.
+
+Reporting - Provide reporting services.
+
+Security - Provide service to protect accessto certain recources or information.
 
 ## Usability
 
@@ -19,13 +33,19 @@ _Evaluates the user interface. It has several subcategories,
 among them: error prevention; interface aesthetics and design; help and
 documentation; consistency and standards._
 
-(fill in here )
+Error prevention - Testing often the application to make it hard for the user to commit the error.
+
+Interface aesthetics and design - Simple, intuitive and fast. 
+
+Help - 
+
+Documentation -
 
 ## Reliability
 
 _Refers to the integrity, compliance and interoperability of the software. The requirements to be considered are: frequency and severity of failure, possibility of recovery, possibility of prediction, accuracy, average time between failures._
 
-(fill in here )
+System running - Under all the 
 
 ## Performance
 
