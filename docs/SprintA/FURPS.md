@@ -7,7 +7,11 @@ _Specifies functionalities that:_
 - _are common across several US/UC;_
 - _are not related to US/UC, namely: Audit, Reporting and Security._
 
-(fill in here)
+Scheduling - Provide a facility to set up a vaccine at health cares or Vaccination centers
+
+Certificate - Provide a service to deliver a vaccination certificate
+
+Registration - Provides a facility to set up
 
 ## Usability
 
