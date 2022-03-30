@@ -46,13 +46,15 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Catalogs**
 
+- Vaccines
+
 **Containers**
 
-- Vaccination Center
+- ScheduledUsersList; WaitingUsersList; ReadyUsersList; RecoveringUsersList
 
 **Elements of Containers**
 
-- Nurses; Receptionist; VaccineTypes;
+- SNSUser
 
 **Organizations**
 
