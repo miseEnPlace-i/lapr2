@@ -48,7 +48,7 @@ nurse --> UC08
 nurse --> UC09
 recept --> UC10
 recept --> UC11
-dgsadmin --> UC12
+recept --> UC12
 dgsadmin --> UC13
 dgsadmin --> UC14
 dgsadmin --> UC15
