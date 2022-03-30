@@ -2,11 +2,6 @@
 
 ## Functionality
 
-_Specifies functionalities that:_
-
-- _are common across several US/UC;_
-- _are not related to US/UC, namely: Audit, Reporting and Security._
-
 Audit - If the user information is correct, the receptionist acknowledges the system that the user is ready to take the vaccine.
 
 Scheduling - Provide a service to allow SNS users to schedule a vaccine and obtain a vaccination certificate.
@@ -15,8 +10,7 @@ Persistence - The application should use object serialization to ensure data per
 
 Authentication - Those who wish to use the application must be authenticated with a password.
 
-Communication - The user may also authorize the DGS to send a SMS message with
-information about the scheduled appointment.
+Communication - The user may also authorize the DGS to send a SMS message with information about the scheduled appointment.
 
 Reporting - The JaCoCo plugin will be used to generate the coverage report.
 
