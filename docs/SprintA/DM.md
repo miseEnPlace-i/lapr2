@@ -10,83 +10,87 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Business Transactions**
 
-- ***
+- a
 
-  **Transaction Line Items**
+**Transaction Line Items**
 
-- Vaccination Type
+- VaccineType
 
-  **Product/Service related to a Transaction or Transaction Line Item**
-
-- Vaccine
-
-  **Transaction Records**
-
-- Vaccine administration; Vaccination scheduling; Register Vaccine; Register Nurse; Register Receptionist; Certificate Issuance;
-
-  **Roles of People or Organizations**
-
-- Nurse; Coordinator; Receptionist; Administrator; DGS Administrator; SNS User;
-
-  **Places**
-
-- Community Mass Vaccination Center; Health Care Center; Waiting room;
-
-  **Noteworthy Events**
-
-- Register Arrival; Schedule Confirmation; Vaccination Scheduling; Vaccination Administration; User waiting in recovery room; Leave vaccination center; Certificate Issuance; Check User's medical history
-
-  **Physical Objects**
+**Product/Service related to a Transaction or Transaction Line Item**
 
 - Vaccine
 
-  **Descriptions of Things**
+**Transaction Records**
 
-- Vaccination Type
+- VaccineAdministration; VaccinationScheduling; RegisterVaccine; RegisterNurse; RegisterReceptionist; CertificateIssuance;
 
-  **Catalogs**
+**Roles of People or Organizations**
 
-- ***
+- Nurse; Coordinator; Receptionist; Administrator; DGSAdministrator; SNSUser;
 
-  **Containers**
+**Places**
+
+- CommunityMassVaccinationCenter; HealthCareCenter; WaitingRoom;
+
+**Noteworthy Events**
+
+- RegisterSNSUserArrival; VaccinationScheduling; ScheduleConfirmation; VaccinationAdministration; UserWaitingInRecoveryRoom; LeaveVaccinationCenter; CertificateIssuance; CheckUserMedicalHistory
+
+**Physical Objects**
+
+- Vaccine
+
+**Descriptions of Things**
+
+- VaccineType; OngoingOutbreak
+
+**Catalogs**
+
+**Containers**
 
 - Vaccination Center
 
-  **Elements of Containers**
+**Elements of Containers**
 
-- Nurses; Recepcionist; VacineTypes;
+- Nurses; Receptionist; VaccineTypes;
 
-  **Organizations**
+**Organizations**
 
 - DGS; ARS; AGES
 
-  **Other External/Collaborating Systems**
+**Other External/Collaborating Systems**
 
-- DGS; SMS
+- DGS; SMSSender
 
-  **Records of finance, work, contracts, legal matters**
+**Records of finance, work, contracts, legamatters**
 
-- Statistics; Charts; Report; Vaccination Certificate; EU Covid Certificate; SMS Authorization
+- Statistics; Charts; Report; VaccinationCertificate; EUCovidCertificate; SMSAuthorization
 
-  **Financial Instruments**
+**Financial Instruments**
 
 - ***
 
-  **Documents mentioned/used to perform some work**
+**Documents mentioned/used to perform some work**
 
-- User's Medical History
+- MedicalHistory
 
 ##**Rationale to identify associations between conceptual classes**###
 
 An association is a relationship between instances of objects that indicates a relevant connection and that is worth of remembering, or it is derivable from the List of Common Associations:
 
-- **_A_** is physically or logically part of **_B_**
-- **_A_** is physically or logically contained in/on **_B_**
-- **_A_** is a description for **_B_**
-- **_A_** known/logged/recorded/reported/captured in **_B_**
-- **_A_** uses or manages or owns **_B_**
-- **_A_** is related with a transaction (item) of **_B_**
-- etc.
+- **_Vaccine_** has a **_VaccineType_**
+- **_HealthCareCenter_** belongs to a **_ARS_**
+- **_HealthCareCenter_** belongs to a **_ACES_**
+- **_CommunityMassVaccinationCenter_** is associated with an **_OngoingOutbreak_**
+- **_CommunityMassVaccinationCenter_** has some **_VaccineTypes_** assigned
+- **_SNSUser_** owns a **_MedicalHistory_**
+- Each **_CommunityMassVaccinationCenter_** has a **_CenterCoordinator_**
+- **_A_** ... **_B_**
+- **_A_** ... **_B_**
+- **_A_** ... **_B_**
+- **_A_** ... **_B_**
+- **_A_** ... **_B_**
+- **_A_** ... **_B_**
 
 | Concept (A) | Association | Concept (B) |
 | ----------- | :---------: | ----------: |
@@ -95,7 +99,7 @@ An association is a relationship between instances of objects that indicates a r
 
 ## Domain Model
 
-**Do NOT forget to identify concepts atributes too.**
+**Do NOT forget to identify concepts attributes too.**
 
 **Insert below the Domain Model Diagram in a SVG format**
 
