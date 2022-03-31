@@ -76,7 +76,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 - MedicalHistory
 
-##**Rationale to identify associations between conceptual classes**###
+## **Rationale to identify associations between conceptual classes**
 
 An association is a relationship between instances of objects that indicates a relevant connection and that is worth of remembering, or it is derivable from the List of Common Associations:
 
@@ -96,8 +96,13 @@ An association is a relationship between instances of objects that indicates a r
 
 | Concept (A) | Association | Concept (B) |
 | ----------- | :---------: | ----------: |
-| C1          |    verb1    |          C2 |
-| ...         |     ...     |         ... |
+| CommunityMassVaccination Center | administers | Vaccines |
+| CommunityMassVaccination Center | has | CenterCoordinator |
+| HealthcareCenter | administers | Vaccines |
+| HealthcareCenter | is associated | ARS |
+| HealthcareCenter | is associated | ACES |
+| Nurse | emits | VaccinationCertificate |
+| ... | ... | ... |
 
 ## Domain Model
 
