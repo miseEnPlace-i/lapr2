@@ -2,44 +2,64 @@
 
 ## Functionality
 
-_Specifies functionalities that:_
+---
 
-- _are common across several US/UC;_
-- _are not related to US/UC, namely: Audit, Reporting and Security._
-
-Scheduling - Provide a facility to set up a vaccine at health cares or Vaccination centers
-
-Certificate - Provide a service to deliver a vaccination certificate
-
-Registration - Provides a facility to set up
+| Category       | Description                                                                                                                                                          |
+| :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Certification  | Provide a service to deliver a vaccination certificate.                                                                                                              |
+| Registration   | Provides a service to set up the registration of all the people related to the company.                                                                              |
+| Sending SMS    | Provide a service to deliver a SMS with informations of the vaccine appointment to the SNS user.                                                                     |
+| User status    | Provide a service to check user´s health information.                                                                                                                |
+| Analysing      | Provide crucial data for the vaccination process analysis.                                                                                                           |
+| Audit          | If the user information is correct, the receptionist acknowledges the system that the user is ready to take the vaccine.                                             |
+| Scheduling     | Provide a service to allow SNS users to schedule a vaccine and obtain a vaccination certificate.                                                                     |
+| Persistence    | The application will use object serialization to ensure data persistence between two runs of the application.                                                        |
+| Authentication | Those who wish to use the application must be authenticated with a password.                                                                                         |
+| Communication  | The user may also authorize the DGS to send a SMS message with information about the scheduled appointment.                                                          |
+| Reporting      | The JaCoCo plugin will be used to generate the coverage report.                                                                                                      |
+| Security       | All user who wish to use the application will be authenticated wit a password holding seven alphanumeric characters, including three capital letters and two digits. |
 
 ## Usability
 
-_Evaluates the user interface. It has several subcategories,
-among them: error prevention; interface aesthetics and design; help and
-documentation; consistency and standards._
+---
 
-(fill in here )
+| Category                        | Description                                                                                                                                                          |
+| :------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Accessibility                   | If the user authorizes the sending of the SMS, the application will send an SMS message when the vaccination event is scheduled and registered in the system.        |
+| Error prevention                | Testing often the application to make it hard for the user to commit the error.                                                                                      |
+| Interface aesthetics and design | The application graphical interface will be simple, intuitive and consistent developed in JavaFX 11.                                                                 |
+| Help                            | Service to provide the user help on the application.                                                                                                                 |
+| Documentation                   | The application will have a user manual.                                                                                                                             |
+| Consistency                     | All user who wish to use the application will be authenticated wit a password holding seven alphanumeric characters, including three capital letters and two digits. |
+| User data                       | Only nurses will be allowed to access all user´s health data.                                                                                                        |
 
 ## Reliability
 
-_Refers to the integrity, compliance and interoperability of the software. The requirements to be considered are: frequency and severity of failure, possibility of recovery, possibility of prediction, accuracy, average time between failures._
+---
 
-(fill in here )
+| Category                | Description                                                                                                                    |
+| :---------------------- | :----------------------------------------------------------------------------------------------------------------------------- |
+| Accuracy                | The worst-case time complexity analysis of the algorithms should be properly documented in the user manual of the application. |
+| Possibility of recovery | The application will use object serialization to ensure data persistence between two runs of the application.                  |
 
 ## Performance
 
-_Evaluates the performance requirements of the software, namely: response time, start-up time, recovery time, memory consumption, CPU usage, load capacity and application availability._
+---
 
-(fill in here )
+| Category      | Description                                                                                                                                           |
+| :------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Response time | The implemented algorithm should be analyzed in terms of its worst-case time complexity, and it should be compared to a benchmark algorithm provided. |
 
 ## Supportability
 
-_The supportability requirements gathers several characteristics, such as:
-testability, adaptability, maintainability, compatibility,
-configurability, installability, scalability and more._
+---
 
-(fill in here )
+| Category        | Description                                                                                                                                                                           |
+| :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Configurability | The application will support both Portuguese and English languages, at least.                                                                                                         |
+| Testability     | The application will implement unit tests for all methods, except for methods that implement Input/Output operations. The unit tests will be implemented using the JUnit 5 framework. |
+| Compatibility   | The application will be compatible with any system.                                                                                                                                   |
+| Localizability  | The application will be administered by the portuguese General Health Direction (DGS)                                                                                                 |
 
 ## +
 
