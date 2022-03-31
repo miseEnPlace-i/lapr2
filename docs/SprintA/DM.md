@@ -96,12 +96,24 @@ An association is a relationship between instances of objects that indicates a r
 
 | Concept (A) | Association | Concept (B) |
 | ----------- | :---------: | ----------: |
-| CommunityMassVaccination Center | administers | Vaccines |
-| CommunityMassVaccination Center | has | CenterCoordinator |
+| CenterAdministrator | configures | VaccineType |
+| CenterAdministrator | configures | Vaccine |
+| CenterAdministrator | manages | CommunityMassVaccinationCenter |
+| CenterAdministrator | manages | Employees |
+| CommunityMassVaccinationCenter | administers | Vaccines |
+| CommunityMassVaccinationCenter | has | CenterCoordinator |
+| DGSAdministrator | registers | SNSUser |
+| DGSAdministrator | registers | CommunityMassVaccinationCenter |
+| DGSAdministrator | registers | CenterCoordinator |
+| DGSAdministrator | registers | Receptionists |
+| DGSAdministrator | registers | Nurses |
 | HealthcareCenter | administers | Vaccines |
 | HealthcareCenter | is associated | ARS |
 | HealthcareCenter | is associated | ACES |
 | Nurse | emits | VaccinationCertificate |
+| SNS User | schedule | Vaccine |
+| VaccineType | has | Vaccine |
+| ... | ... | ... |
 | ... | ... | ... |
 
 ## Domain Model
