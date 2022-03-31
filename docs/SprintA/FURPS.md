@@ -18,7 +18,7 @@
 | Communication  | The user may also authorize the DGS to send a SMS message with information about the scheduled appointment.                                                          |
 | Reporting      | The JaCoCo plugin will be used to generate the coverage report.                                                                                                      |
 | Security       | All user who wish to use the application will be authenticated wit a password holding seven alphanumeric characters, including three capital letters and two digits. |
- 
+
 ## Usability
 
 ---
@@ -49,7 +49,6 @@
 | Category      | Description                                                                                                                                           |
 | :------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Response time | The implemented algorithm should be analyzed in terms of its worst-case time complexity, and it should be compared to a benchmark algorithm provided. |
-  
 
 ## Supportability
 
