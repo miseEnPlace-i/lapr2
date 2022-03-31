@@ -1,3 +1,27 @@
 @startuml
+hide methods
+left to right direction
+skinparam classAttributeIconSize 0
+
+class Administrator {}
+
+class CommunityMassVaccinationCenter {}
+
+class Vaccine {}
+
+class VaccineType {
+    + id
+    + designation
+    + whoid
+}
+
+class DGS {}
+
+class HealthCareSystems {}
+
+class SNSUser {}
+
+Vaccine "*" --> "1" VaccineType : has
+
 
 @enduml

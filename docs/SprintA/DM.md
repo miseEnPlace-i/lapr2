@@ -10,92 +10,103 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Business Transactions**
 
-- ***
+- a
 
-  **Transaction Line Itemss**
+**Transaction Line Items**
 
-- ***
+- VaccineType
 
-  **Product/Service related to a Transaction or Transaction Line Item**
+**Product/Service related to a Transaction or Transaction Line Item**
 
-- ***
+- Vaccine
 
-  **Transaction Records**
+**Transaction Records**
 
-- ***
+- VaccineAdministration; VaccinationScheduling; RegisterVaccine; RegisterNurse; RegisterReceptionist; CertificateIssuance;
 
-  **Roles of People or Organizations**
+**Roles of People or Organizations**
 
-- ***
+- Nurse; Coordinator; Receptionist; Administrator; DGSAdministrator; SNSUser;
 
-  **Places**
+**Places**
 
-- ***
+- CommunityMassVaccinationCenter; HealthCareCenter; WaitingRoom;
 
-  ** Noteworthy Events**
+**Noteworthy Events**
 
-- ***
+- RegisterSNSUserArrival; VaccinationScheduling; ScheduleConfirmation; VaccinationAdministration; UserWaitingInRecoveryRoom; LeaveVaccinationCenter; CertificateIssuance; CheckUserMedicalHistory
 
-  **Physical Objects**
+**Physical Objects**
 
-- ***
+- Vaccine
 
-  **Descriptions of Things**
+**Descriptions of Things**
 
-- ***
+- VaccineType; OngoingOutbreak
 
-  **Catalogs**
+**Catalogs**
 
-- ***
+- Vaccines
 
-  **Containers**
+**Containers**
 
-- ***
+- ScheduledUsersList; WaitingUsersList; ReadyUsersList; RecoveringUsersList
 
-  **Elements of Containers**
+**Elements of Containers**
 
-- ***
+- SNSUser
 
-  **Organizations**
+**Organizations**
 
-- ***
+- DGS; ARS; AGES
 
-  **Other External/Collaborating Systems**
+**Other External/Collaborating Systems**
 
-- ***
+- DGS; SMSSender
 
-  **Records of finance, work, contracts, legal matters**
+**Records of finance, work, contracts, legamatters**
 
-- ***
+- Statistics; Charts; Report; VaccinationCertificate; EUCovidCertificate; SMSAuthorization
 
-  **Financial Instruments**
-
-- ***
-
-  **Documents mentioned/used to perform some work/**
+**Financial Instruments**
 
 - ***
 
-###**Rationale to identify associations between conceptual classes**###
+**Documents mentioned/used to perform some work**
+
+- MedicalHistory
+
+## **Rationale to identify associations between conceptual classes**
 
 An association is a relationship between instances of objects that indicates a relevant connection and that is worth of remembering, or it is derivable from the List of Common Associations:
 
-- **_A_** is physically or logically part of **_B_**
-- **_A_** is physically or logically contained in/on **_B_**
-- **_A_** is a description for **_B_**
-- **_A_** known/logged/recorded/reported/captured in **_B_**
-- **_A_** uses or manages or owns **_B_**
-- **_A_** is related with a transaction (item) of **_B_**
-- etc.
+- **_Vaccine_** has a **_VaccineType_**
+- **_HealthCareCenter_** belongs to a **_ARS_**
+- **_HealthCareCenter_** belongs to a **_ACES_**
+- **_CommunityMassVaccinationCenter_** is associated with an **_OngoingOutbreak_**
+- **_CommunityMassVaccinationCenter_** has some **_VaccineTypes_** assigned
+- **_SNSUser_** owns a **_MedicalHistory_**
+- Each **_CommunityMassVaccinationCenter_** has a **_CenterCoordinator_**
+- **_A_** ... **_B_**
+- **_A_** ... **_B_**
+- **_A_** ... **_B_**
+- **_A_** ... **_B_**
+- **_A_** ... **_B_**
+- **_A_** ... **_B_**
 
 | Concept (A) | Association | Concept (B) |
 | ----------- | :---------: | ----------: |
-| C1          |    verb1    |          C2 |
-| ...         |     ...     |         ... |
+| CommunityMassVaccination Center | administers | Vaccines |
+| CommunityMassVaccination Center | has | CenterCoordinator |
+| HealthcareCenter | administers | Vaccines |
+| HealthcareCenter | is associated | ARS |
+| HealthcareCenter | is associated | ACES |
+| Nurse | emits | VaccinationCertificate |
+| ... | ... | ... |
 
 ## Domain Model
 
-**Do NOT forget to identify concepts atributes too.**
+**Do NOT forget to identify concepts attributes too.**
 
 **Insert below the Domain Model Diagram in a SVG format**
 
