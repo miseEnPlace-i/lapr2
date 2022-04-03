@@ -100,6 +100,9 @@ An association is a relationship between instances of objects that indicates a r
 | CenterAdministrator            |  configures   |                        Vaccine |
 | CenterAdministrator            |    manages    | CommunityMassVaccinationCenter |
 | CenterAdministrator            |    manages    |                      Employees |
+| CenterCoordinator              |   analyses    |                          Stats |
+| CenterCoordinator              |   evaluates   |                    Performance |
+| CenterCoordinator              |   generates   |                        Reports |
 | CommunityMassVaccinationCenter |  administers  |                       Vaccines |
 | CommunityMassVaccinationCenter |      has      |              CenterCoordinator |
 | DGS                            |     sends     |          SMSVaccineAppointment |
@@ -112,19 +115,19 @@ An association is a relationship between instances of objects that indicates a r
 | HealthcareCenter               | is associated |                            ARS |
 | HealthcareCenter               | is associated |                           ACES |
 | Nurse                          |     emits     |         VaccinationCertificate |
-| Nurse                          |     check     |                 UserHealthInfo |
-| Nurse                          |     check     |                    ListSNSUser |
+| Nurse                          |    checks     |                 UserHealthInfo |
+| Nurse                          |    checks     |                    ListSNSUser |
 | Nurse                          |    reports    |               AdverseReactions |
 | Nurse                          |   registers   |             VaccinationDetails |
-| SNS User                       |   schedule    |                        Vaccine |
+| Nurse                          |   schedules   |                        Vaccine |
+| SNS User                       |   schedules   |                        Vaccine |
 | SNS User                       |   requests    |   EUCOVID-19DigitalCertificate |
 | VaccineType                    |      has      |                        Vaccine |
 | Lot number                     |      has      |                        Vaccine |
 | Receptionist                   |   registers   |                   UserArrivals |
 | Receptionist                   |   verifies    |                VaccineSchedule |
 | Receptionist                   |   confirms    |                      UserReady |
-| ...                            |      ...      |                            ... |
-| ...                            |      ...      |                            ... |
+| System                         |     sends     |  RecoveryPeriodEndNotification |
 
 ## Domain Model
 
