@@ -22,7 +22,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Transaction Records**
 
-- VaccineAdministration; VaccinationScheduling; RegisterVaccine; RegisterNurse; RegisterReceptionist; CertificateIssuance;
+- VaccineAdministration; VaccinationScheduling; RegisterVaccine; RegisterNurse; RegisterReceptionist; CertificateIssuance; UserArrival; AdverseReaction;
 
 **Roles of People or Organizations**
 
@@ -30,7 +30,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Places**
 
-- CommunityMassVaccinationCenter; HealthCareCenter; WaitingRoom;
+- CommunityMassVaccinationCenter; HealthCareCenter; WaitingRoom; RecoveryRoom;
 
 **Noteworthy Events**
 
@@ -62,7 +62,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Other External/Collaborating Systems**
 
-- DGS; SMSSender
+- DGS; SMSSender; Slots;
 
 **Records of finance, work, contracts, legamatters**
 
@@ -103,6 +103,7 @@ An association is a relationship between instances of objects that indicates a r
 | CenterCoordinator              |   analyses    |                          Stats |
 | CenterCoordinator              |   evaluates   |                    Performance |
 | CenterCoordinator              |   generates   |                        Reports |
+| CenterCoordinator              |   analyses    |                   OtherCenters |
 | CommunityMassVaccinationCenter |  administers  |                       Vaccines |
 | CommunityMassVaccinationCenter |      has      |              CenterCoordinator |
 | DGS                            |     sends     |          SMSVaccineAppointment |
@@ -120,14 +121,22 @@ An association is a relationship between instances of objects that indicates a r
 | Nurse                          |    reports    |               AdverseReactions |
 | Nurse                          |   registers   |             VaccinationDetails |
 | Nurse                          |   schedules   |                        Vaccine |
+| Nurse                          |     sends     |             SNSUserWaitingRoom |
+| Nurse                          |    informs    |           SNSUserOfTypeVaccine |
 | SNS User                       |   schedules   |                        Vaccine |
 | SNS User                       |   requests    |   EUCOVID-19DigitalCertificate |
 | VaccineType                    |      has      |                        Vaccine |
 | Lot number                     |      has      |                        Vaccine |
+| Dosage                         |      has      |                    VaccineType |
+| Age group                      |      has      |                    TypeVaccine |
+| Age group                      |      has      |          SpecificNumberOfDoses |
+| TimeIntervalDoses              |      has      |            SpecificVaccineType |
 | Receptionist                   |   registers   |                   UserArrivals |
 | Receptionist                   |   verifies    |                VaccineSchedule |
 | Receptionist                   |   confirms    |                      UserReady |
 | System                         |     sends     |  RecoveryPeriodEndNotification |
+| System                         |   verifies    |   PossibilityOfUserVaccination |
+
 
 ## Domain Model
 
