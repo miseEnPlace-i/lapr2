@@ -37,10 +37,11 @@
 
 ---
 
-| Category                | Description                                                                                                                    |
-| :---------------------- | :----------------------------------------------------------------------------------------------------------------------------- |
-| Accuracy                | The worst-case time complexity analysis of the algorithms should be properly documented in the user manual of the application. |
-| Possibility of recovery | The application will use object serialization to ensure data persistence between two runs of the application.                  |
+| Category                          | Description                                                                                                                    |
+| :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------- |
+| Frequency and severity of failure | The application will ensure that the frequency of the software failure is low                                                  |
+| Accuracy                          | The worst-case time complexity analysis of the algorithms should be properly documented in the user manual of the application. |
+| Possibility of recovery           | The application will use object serialization to ensure data persistence between two runs of the application.                  |
 
 ## Performance
 
@@ -54,12 +55,12 @@
 
 ---
 
-| Category        | Description                                                                                                                                                                           |
-| :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Configurability | The application will support both Portuguese and English languages, at least.                                                                                                         |
-| Testability     | The application will implement unit tests for all methods, except for methods that implement Input/Output operations. The unit tests will be implemented using the JUnit 5 framework. |
-| Compatibility   | The application will be compatible with any system.                                                                                                                                   |
-| Localizability  | The application will be administered by the portuguese General Health Direction (DGS)                                                                                                 |
+| Category        | Description                                                                                                                                                                                                                                             |
+| :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Configurability | The application will support both Portuguese and English languages, at least.                                                                                                                                                                           |
+| Testability     | The application will implement unit tests for all methods, except for methods that implement Input/Output operations. The unit tests will be implemented using the JUnit 5 framework. The JaCoCo plugin should be used to generate the coverage report. |
+| Compatibility   | The application will be compatible with any machine that has a operating system. (macOS,Windows,Linux)                                                                                                                                                  |
+| Localizability  | The application will be administered by the portuguese General Health Direction (DGS)                                                                                                                                                                   |
 
 ## +
 
