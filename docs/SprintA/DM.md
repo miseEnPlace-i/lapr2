@@ -121,21 +121,27 @@ An association is a relationship between instances of objects that indicates a r
 | Nurse                          |    reports    |               AdverseReactions |
 | Nurse                          |   registers   |             VaccinationDetails |
 | Nurse                          |   schedules   |                        Vaccine |
-| Nurse                          |     sends     |             SNSUserWaitingRoom |
+| Nurse                          |     sends     |            SNSUserRecoveryRoom |
 | Nurse                          |    informs    |           SNSUserOfTypeVaccine |
-| SNS User                       |   schedules   |                        Vaccine |
+| SNS User                       |   schedules   |           VaccineOnApplication |
 | SNS User                       |   requests    |   EUCOVID-19DigitalCertificate |
+| SNS User                       |   schedules   |      VaccineAtHealthcareCenter |
 | VaccineType                    |      has      |                        Vaccine |
 | Lot number                     |      has      |                        Vaccine |
 | Dosage                         |      has      |                    VaccineType |
 | Age group                      |      has      |                    TypeVaccine |
 | Age group                      |      has      |          SpecificNumberOfDoses |
 | TimeIntervalDoses              |      has      |            SpecificVaccineType |
+| Slot                           |      has      |                MaximumDuration |
+| Slot                           |      has      |                MaximumVaccines |
+| VaccinationCertificate         |      has      |                        Vaccine |
 | Receptionist                   |   registers   |                   UserArrivals |
 | Receptionist                   |   verifies    |                VaccineSchedule |
 | Receptionist                   |   confirms    |                      UserReady |
+| Receptionist                   |     sends     |             SNSUserWaitingRoom |
 | System                         |     sends     |  RecoveryPeriodEndNotification |
 | System                         |   verifies    |   PossibilityOfUserVaccination |
+| System                         |     sends     |        VaccinationInstructions |
 
 
 ## Domain Model
