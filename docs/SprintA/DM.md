@@ -143,7 +143,6 @@ An association is a relationship between instances of objects that indicates a r
 | System                         |   verifies    |   PossibilityOfUserVaccination |
 | System                         |     sends     |        VaccinationInstructions |
 
-
 ## Domain Model
 
 **Do NOT forget to identify concepts attributes too.**
