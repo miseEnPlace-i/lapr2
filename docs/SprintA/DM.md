@@ -34,7 +34,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Noteworthy Events**
 
-- RegisterSNSUserArrival; VaccinationScheduling; ScheduleConfirmation; VaccinationAdministration; UserWaitingInRecoveryRoom; LeaveVaccinationCenter; CertificateIssuance; CheckUserMedicalHistory
+- RegisterSNSUserArrival; VaccinationScheduling; ScheduleConfirmation;VaccinationAppointment; VaccinationAdministration; UserWaitingInRecoveryRoom; LeaveVaccinationCenter; CertificateIssuance; CheckUserMedicalHistory
 
 **Physical Objects**
 
@@ -99,6 +99,7 @@ An association is a relationship between instances of objects that indicates a r
 | Administrator                  |  configures   |                    VaccineType |
 | Administrator                  |  configures   |                        Vaccine |
 | Administrator                  |    manages    | CommunityMassVaccinationCenter |
+<<<<<<< HEAD
 | Administrator                  |    manages    |                   Receptionist |
 | Administrator                  |    manages    |                          Nurse |
 | Administrator                  |   registers   |                        SNSUser |
@@ -111,6 +112,21 @@ An association is a relationship between instances of objects that indicates a r
 | CommunityMassVaccinationCenter |  administers  |                       Vaccines |
 | CommunityMassVaccinationCenter |      has      |              CenterCoordinator |
 | CommunityMassVaccinationCenter |      has      |                   CenterReport |
+=======
+| Administrator                  |    manages    |                      Employees |
+| CenterCoordinator              |   analyses    |                          Stats |
+| CenterCoordinator              |   evaluates   |                    Performance |
+| CenterCoordinator              |   generates   |                        Reports |
+| CenterCoordinator              |   analyses    |                   OtherCenters |
+| CommunityMassVaccinationCenter |  administers  |                       Vaccines |
+| CommunityMassVaccinationCenter |      has      |              CenterCoordinator |
+| DGS                            |     sends     |          SMSVaccineAppointment |
+| Administrator                  |   registers   |                        SNSUser |
+| Administrator                  |   registers   | CommunityMassVaccinationCenter |
+| Administrator                  |   registers   |              CenterCoordinator |
+| Administrator                  |   registers   |                  Receptionists |
+| Administrator                  |   registers   |                         Nurses |
+>>>>>>> master
 | HealthcareCenter               |  administers  |                       Vaccines |
 | HealthcareCenter               | is associated |                            ARS |
 | HealthcareCenter               | is associated |                           ACES |
@@ -122,11 +138,18 @@ An association is a relationship between instances of objects that indicates a r
 | Nurse                          |    checks     |                  ReadyUserList |
 | Nurse                          |    reports    |               AdverseReactions |
 | Nurse                          |   registers   |             VaccinationDetails |
+<<<<<<< HEAD
 | Nurse                          |  forwards to  |                   RecoveryRoom |
 | Nurse                          |    checks     |        VaccinationInstructions |
 | SNS User                       |      has      |                 UserHealthInfo |
 | SNS User                       |   schedules   |           VaccineOnApplication |
 | SNS User                       |   requests    |      VaccineDigitalCertificate |
+=======
+| Nurse                          |     sends     |            SNSUserRecoveryRoom |
+| Nurse                          |    informs    |           SNSUserOfTypeVaccine |
+| SNS User                       |   schedules   |           VaccineOnApplication |
+| SNS User                       |   requests    |   EUCOVID-19DigitalCertificate |
+>>>>>>> master
 | SNS User                       |   schedules   |      VaccineAtHealthcareCenter |
 | VaccineType                    |      has      |                        Vaccine |
 | Lot number                     |      has      |                        Vaccine |
@@ -144,7 +167,11 @@ An association is a relationship between instances of objects that indicates a r
 | Receptionist                   |     sends     |             SNSUserWaitingRoom |
 | System                         |     sends     |  RecoveryPeriodEndNotification |
 | System                         |   verifies    |   PossibilityOfUserVaccination |
+<<<<<<< HEAD
 | System                         |     sends     |          SMSVaccineAppointment |
+=======
+| System                         |     sends     |        VaccinationInstructions |
+>>>>>>> master
 
 ## Domain Model
 
