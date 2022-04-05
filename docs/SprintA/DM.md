@@ -95,7 +95,7 @@ An association is a relationship between instances of objects that indicates a r
 - **_A_** ... **_B_**
 
 | Concept (A)                    |  Association  |                   Concept (B) |
-| ------------------------------ | :-----------: | ----------------------------: |
+| :----------------------------- | :-----------: | ----------------------------: |
 | Administrator                  |  configures   |                   VaccineType |
 | Administrator                  |  configures   |                       Vaccine |
 | Administrator                  |    manages    |             VaccinationCenter |
@@ -127,9 +127,8 @@ An association is a relationship between instances of objects that indicates a r
 | SNS User                       |   schedules   |                       Vaccine |
 | SNS User                       |   requests    |     VaccineDigitalCertificate |
 | Vaccine                        |      has      |                   VaccineType |
-| TypeVaccine                    |      has      |                     Age group |
-| Age group                      |      has      |         SpecificNumberOfDoses |
-| TimeIntervalDoses              |      has      |           SpecificVaccineType |
+| Vaccine                        |      has      |                AgeGroupDosage |
+| TimeIntervalDoses              |      has      |                   VaccineType |
 | Slot                           |      has      |               MaximumDuration |
 | Slot                           |      has      |               MaximumVaccines |
 | VaccinationCertificate         |      has      |                       Vaccine |
