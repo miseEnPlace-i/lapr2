@@ -94,27 +94,27 @@ An association is a relationship between instances of objects that indicates a r
 - **_A_** ... **_B_**
 - **_A_** ... **_B_**
 
-| Concept (A) | Association | Concept (B) |
-| ----------- | :---------: | ----------: |
-| CenterAdministrator | configures | VaccineType |
-| CenterAdministrator | configures | Vaccine |
-| CenterAdministrator | manages | CommunityMassVaccinationCenter |
-| CenterAdministrator | manages | Employees |
-| CommunityMassVaccinationCenter | administers | Vaccines |
-| CommunityMassVaccinationCenter | has | CenterCoordinator |
-| DGSAdministrator | registers | SNSUser |
-| DGSAdministrator | registers | CommunityMassVaccinationCenter |
-| DGSAdministrator | registers | CenterCoordinator |
-| DGSAdministrator | registers | Receptionists |
-| DGSAdministrator | registers | Nurses |
-| HealthcareCenter | administers | Vaccines |
-| HealthcareCenter | is associated | ARS |
-| HealthcareCenter | is associated | ACES |
-| Nurse | emits | VaccinationCertificate |
-| SNS User | schedule | Vaccine |
-| VaccineType | has | Vaccine |
-| ... | ... | ... |
-| ... | ... | ... |
+| Concept (A)                    |  Association  |                    Concept (B) |
+| ------------------------------ | :-----------: | -----------------------------: |
+| CenterAdministrator            |  configures   |                    VaccineType |
+| CenterAdministrator            |  configures   |                        Vaccine |
+| CenterAdministrator            |    manages    | CommunityMassVaccinationCenter |
+| CenterAdministrator            |    manages    |                      Employees |
+| CommunityMassVaccinationCenter |  administers  |                       Vaccines |
+| CommunityMassVaccinationCenter |      has      |              CenterCoordinator |
+| DGSAdministrator               |   registers   |                        SNSUser |
+| DGSAdministrator               |   registers   | CommunityMassVaccinationCenter |
+| DGSAdministrator               |   registers   |              CenterCoordinator |
+| DGSAdministrator               |   registers   |                  Receptionists |
+| DGSAdministrator               |   registers   |                         Nurses |
+| HealthcareCenter               |  administers  |                       Vaccines |
+| HealthcareCenter               | is associated |                            ARS |
+| HealthcareCenter               | is associated |                           ACES |
+| Nurse                          |     emits     |         VaccinationCertificate |
+| SNS User                       |   schedule    |                        Vaccine |
+| VaccineType                    |      has      |                        Vaccine |
+| ...                            |      ...      |                            ... |
+| ...                            |      ...      |                            ... |
 
 ## Domain Model
 
