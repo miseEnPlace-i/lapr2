@@ -6,18 +6,17 @@
 
 | Category       | Description                                                                                                                                                          |
 | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Certification  | Provide a service to deliver a vaccination certificate.                                                                                                              |
-| Registration   | Provides a service to set up the registration of all the people related to the company.                                                                              |
-| Sending SMS    | Provide a service to deliver a SMS with informations of the vaccine appointment to the SNS user.                                                                     |
-| User status    | Provide a service to check user´s health information.                                                                                                                |
-| Analysing      | Provide crucial data for the vaccination process analysis.                                                                                                           |
-| Audit          | If the user information is correct, the receptionist acknowledges the system that the user is ready to take the vaccine.                                             |
-| Scheduling     | Provide a service to allow SNS users to schedule a vaccine and obtain a vaccination certificate.                                                                     |
-| Persistence    | The application will use object serialization to ensure data persistence between two runs of the application.                                                        |
-| Authentication | Those who wish to use the application must be authenticated with a password.                                                                                         |
-| Communication  | The user may also authorize the DGS to send a SMS message with information about the scheduled appointment.                                                          |
-| Reporting      | The JaCoCo plugin will be used to generate the coverage report.                                                                                                      |
-| Security       | All user who wish to use the application will be authenticated wit a password holding seven alphanumeric characters, including three capital letters and two digits. |
+| Registration   | " Any Administrator uses the application to register centers, SNS users, center coordinators, receptionists, and nurses enrolled in the vaccination process. "       |
+| Sending SMS    | " The SNS user may also authorize the DGS to send a SMS message with information about the scheduled appointment "                                                   |
+| User status    | " The nurse checks the user info and health conditions in the system and in accordance with the scheduled vaccine type, and the SNS user vaccination history(...) "  |
+| Analysing      | " The Center Coordinator wants to monitor the vaccination process, to see statistics and charts, to evaluate the performance of the vaccination process(...). "      |
+| Audit          | " If the information is correct, the receptionist acknowledges the system that the user is ready to take the vaccine. "                                           |
+| Scheduling     | " (...) to allow SNS users to schedule a vaccine and obtain a vaccination certificate. "                                                                     |
+| Persistence    | " The application will use object serialization to ensure data persistence between two runs of the application. "                                                       |
+| Authentication | " All those who wish to use the application must be authenticated with a password. "                                                                                  |
+| Communication  | " The user may also authorize the DGS to send a SMS message with information about the scheduled appointment. "                                                      |
+| Reporting      | " The JaCoCo plugin should be used to generate the coverage report. "                                                                                                  |
+| Security       | " All those who wish to use the application must be authenticated with a password holding seven alphanumeric characters, including three capital letters and two digits. " |
 
 ## Usability
 
@@ -25,12 +24,10 @@
 
 | Category                        | Description                                                                                                                                                          |
 | :------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Accessibility                   | If the user authorizes the sending of the SMS, the application will send an SMS message when the vaccination event is scheduled and registered in the system.        |
-| Interface aesthetics and design | The application graphical interface will be simple, intuitive and consistent developed in JavaFX 11.                                                                 |
-| Help                            | Service to provide the user help on the application.                                                                                                                 |
-| Documentation                   | The application will have a user manual.                                                                                                                             |
-| Consistency                     | All user who wish to use the application will be authenticated wit a password holding seven alphanumeric characters, including three capital letters and two digits. |
-| User data                       | Only nurses will be allowed to access all user´s health data.                                                                                                        |
+| Interface aesthetics and design | " The application graphical interface is to be developed in JavaFX 11. "                                                                                             |
+| Documentation                   | " The user manual must be delivered with the application. "                                                                                                          |
+| Consistency                     | " All those who wish to use the application must be authenticated with a password holding seven alphanumeric characters, including three capital letters and two digits. " |
+| User data                       | " Only the nurses are allowed to access all user’s health data. "                                                                                                      |
 
 ## Reliability
 
@@ -38,8 +35,8 @@
 
 | Category                | Description                                                                                                                    |
 | :---------------------- | :----------------------------------------------------------------------------------------------------------------------------- |
-| Accuracy                | The worst-case time complexity analysis of the algorithms should be properly documented in the user manual of the application. |
-| Possibility of recovery | The application will use object serialization to ensure data persistence between two runs of the application.                  |
+| Accuracy                | " The worst-case time complexity analysis of the algorithms should be properly documented in the user manual of the application. "|
+| Possibility of recovery | " The application should use object serialization to ensure data persistence between two runs of the application. "            |
 
 ## Performance
 
@@ -47,7 +44,7 @@
 
 | Category      | Description                                                                                                                                           |
 | :------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Response time | The implemented algorithm should be analyzed in terms of its worst-case time complexity, and it should be compared to a benchmark algorithm provided. |
+| Response time | " The implemented algorithm should be analyzed in terms of its worst-case time complexity, and it should be compared to a benchmark algorithm provided. " |
 
 ## Supportability
 
@@ -55,9 +52,9 @@
 
 | Category        | Description                                                                                                                                                                                                                                             |
 | :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Configurability | The application will support both Portuguese and English languages, at least.                                                                                                                                                                           |
-| Testability     | The application will implement unit tests for all methods, except for methods that implement Input/Output operations. The unit tests will be implemented using the JUnit 5 framework. The JaCoCo plugin should be used to generate the coverage report. |
-| Localizability  | The application will be administered by the portuguese General Health Direction (DGS)                                                                                                                                                                   |
+| Configurability | " The application must support, at least, the Portuguese and the English languages. "                                                                                                                                                                       |
+| Testability     | " The development team must implement unit tests for all methods, except for methods that implement Input/Output operations. The unit tests should be implemented using the JUnit 5 framework. " |
+| Localizability  | " DGS is a state-funded Portuguese healthcare system that wants an application to manage the vaccination process in Portugal (...) "                                                                                                                    |
 
 ## +
 
