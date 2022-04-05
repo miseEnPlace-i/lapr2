@@ -96,10 +96,10 @@ An association is a relationship between instances of objects that indicates a r
 
 | Concept (A)                    |  Association  |                    Concept (B) |
 | ------------------------------ | :-----------: | -----------------------------: |
-| CenterAdministrator            |  configures   |                    VaccineType |
-| CenterAdministrator            |  configures   |                        Vaccine |
-| CenterAdministrator            |    manages    | CommunityMassVaccinationCenter |
-| CenterAdministrator            |    manages    |                      Employees |
+| Administrator                  |  configures   |                    VaccineType |
+| Administrator                  |  configures   |                        Vaccine |
+| Administrator                  |    manages    | CommunityMassVaccinationCenter |
+| Administrator                  |    manages    |                      Employees |
 | CenterCoordinator              |   analyses    |                          Stats |
 | CenterCoordinator              |   evaluates   |                    Performance |
 | CenterCoordinator              |   generates   |                        Reports |
@@ -107,11 +107,11 @@ An association is a relationship between instances of objects that indicates a r
 | CommunityMassVaccinationCenter |  administers  |                       Vaccines |
 | CommunityMassVaccinationCenter |      has      |              CenterCoordinator |
 | DGS                            |     sends     |          SMSVaccineAppointment |
-| DGSAdministrator               |   registers   |                        SNSUser |
-| DGSAdministrator               |   registers   | CommunityMassVaccinationCenter |
-| DGSAdministrator               |   registers   |              CenterCoordinator |
-| DGSAdministrator               |   registers   |                  Receptionists |
-| DGSAdministrator               |   registers   |                         Nurses |
+| Administrator                  |   registers   |                        SNSUser |
+| Administrator                  |   registers   | CommunityMassVaccinationCenter |
+| Administrator                  |   registers   |              CenterCoordinator |
+| Administrator                  |   registers   |                  Receptionists |
+| Administrator                  |   registers   |                         Nurses |
 | HealthcareCenter               |  administers  |                       Vaccines |
 | HealthcareCenter               | is associated |                            ARS |
 | HealthcareCenter               | is associated |                           ACES |
@@ -120,7 +120,6 @@ An association is a relationship between instances of objects that indicates a r
 | Nurse                          |    checks     |                    ListSNSUser |
 | Nurse                          |    reports    |               AdverseReactions |
 | Nurse                          |   registers   |             VaccinationDetails |
-| Nurse                          |   schedules   |                        Vaccine |
 | Nurse                          |     sends     |            SNSUserRecoveryRoom |
 | Nurse                          |    informs    |           SNSUserOfTypeVaccine |
 | SNS User                       |   schedules   |           VaccineOnApplication |
@@ -138,6 +137,7 @@ An association is a relationship between instances of objects that indicates a r
 | Receptionist                   |   registers   |                   UserArrivals |
 | Receptionist                   |   verifies    |                VaccineSchedule |
 | Receptionist                   |   confirms    |                      UserReady |
+| Receptionist                   |   schedules   |                        Vaccine |
 | Receptionist                   |     sends     |             SNSUserWaitingRoom |
 | System                         |     sends     |  RecoveryPeriodEndNotification |
 | System                         |   verifies    |   PossibilityOfUserVaccination |
