@@ -4,8 +4,6 @@ The construction process of the domain model is based on the client specificatio
 
 ## Rationale to identify domain conceptual classes
 
-To identify domain conceptual classes, start by making a list of candidate conceptual classes inspired by the list of categories suggested in the book "Applying UML and Patterns: An Introduction to Object-Oriented Analysis and Design and Iterative Development".
-
 ### _Conceptual Class Category List_
 
 **Business Transactions**
@@ -62,7 +60,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Other External/Collaborating Systems**
 
-- DGS; SMSSender; Slots;
+- DGS; SMSSender;
 
 **Records of finance, work, contracts, legamatters**
 
@@ -77,22 +75,6 @@ To identify domain conceptual classes, start by making a list of candidate conce
 - MedicalHistory
 
 ## **Rationale to identify associations between conceptual classes**
-
-An association is a relationship between instances of objects that indicates a relevant connection and that is worth of remembering, or it is derivable from the List of Common Associations:
-
-- **_Vaccine_** has a **_VaccineType_**
-- **_HealthCareCenter_** belongs to a **_ARS_**
-- **_HealthCareCenter_** belongs to a **_ACES_**
-- **_CommunityMassVaccinationCenter_** is associated with an **_OngoingOutbreak_**
-- **_CommunityMassVaccinationCenter_** has some **_VaccineTypes_** assigned
-- **_SNSUser_** owns a **_MedicalHistory_**
-- Each **_CommunityMassVaccinationCenter_** has a **_CenterCoordinator_**
-- **_A_** ... **_B_**
-- **_A_** ... **_B_**
-- **_A_** ... **_B_**
-- **_A_** ... **_B_**
-- **_A_** ... **_B_**
-- **_A_** ... **_B_**
 
 | Concept (A)                    |  Association  |                   Concept (B) |
 | :----------------------------- | :-----------: | ----------------------------: |
@@ -129,8 +111,6 @@ An association is a relationship between instances of objects that indicates a r
 | Vaccine                        |      has      |                   VaccineType |
 | Vaccine                        |      has      |                AgeGroupDosage |
 | TimeIntervalDoses              |      has      |                   VaccineType |
-| Slot                           |      has      |               MaximumDuration |
-| Slot                           |      has      |               MaximumVaccines |
 | VaccinationCertificate         |      has      |                       Vaccine |
 | Receptionist                   |     is a      |                      Employee |
 | Receptionist                   |   registers   |                   UserArrival |
@@ -139,13 +119,8 @@ An association is a relationship between instances of objects that indicates a r
 | Receptionist                   |   schedules   |                       Vaccine |
 | Receptionist                   |     sends     |            SNSUserWaitingRoom |
 | System                         |     sends     | RecoveryPeriodEndNotification |
-| System                         |   verifies    |  PossibilityOfUserVaccination |
 | System                         |     sends     |         SMSVaccineAppointment |
 
 ## Domain Model
-
-**Do NOT forget to identify concepts attributes too.**
-
-**Insert below the Domain Model Diagram in a SVG format**
 
 ![DM.svg](DM.svg)

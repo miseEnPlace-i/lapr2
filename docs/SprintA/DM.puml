@@ -1,11 +1,25 @@
 @startuml
+
 hide methods
 left to right direction
 skinparam classAttributeIconSize 0
 
-class Administrator {}
-
 class CommunityMassVaccinationCenter {}
+
+class HealthCareCenter {}
+
+class VaccinationCenter {
+  + name
+  + address
+  + phone
+  + email
+  + fax
+  + website
+  + openingHours
+  + closingHours
+  + slotDuration
+  + nOfVaccinesPerSlot
+}
 
 class Vaccine {}
 
@@ -17,11 +31,55 @@ class VaccineType {
 
 class DGS {}
 
-class HealthCareSystems {}
-
 class SNSUser {}
 
-Vaccine "*" --> "1" VaccineType : has
+class Administrator {}
 
+class Employee {}
 
+class Nurse {}
+
+class Receptionist {}
+
+class CenterCoordinator {}
+
+class Appointment {
+  + date
+}
+
+class System {}
+
+class AGES {}
+
+class ARS {}
+
+Vaccine "*" <-- "1" VaccineType : has
+
+Employee <|-- Nurse
+Employee <|-- Receptionist
+Employee <|-- CenterCoordinator
+
+VaccinationCenter <|-- CommunityMassVaccinationCenter
+VaccinationCenter <|-- HealthCareCenter
+
+VaccinationCenter "1" --> "1" CenterCoordinator : has
+
+HealthCareCenter "*" --> "1" AGES : belongs to
+HealthCareCenter "*" --> "1" ARS : belongs to
+
+Appointment "1" --> "1" VaccinationCenter : is held in
+Appointment "1" --> "1" SNSUser  
+Appointment "1" --> "1" Vaccine 
+
+Receptionist "1" --> "*" ReadyUsersList : manages
+Receptionist "1" --> "*" ArrivedUsersList : manages
+
+ReadyUsersList "1" <-- "*" SNSUser : is composed by
+ArrivedUsersList "1" <-- "*" SNSUser : is composed by
+RecoveringUsersList "1" <-- "*" SNSUser : is composed by
+
+ReadyUsersList "*" <-- "1" Nurse : checks
+RecoveringUsersList "*" <-- "1" Nurse : manages
+
+Administrator "1" <-- "*" Employee : registers
 @enduml
