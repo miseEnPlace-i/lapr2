@@ -10,7 +10,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Business Transactions**
 
-- a
+- VaccinationProcess
 
 **Transaction Line Items**
 
