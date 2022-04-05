@@ -28,10 +28,8 @@ rectangle System {
   usecase "UC16. Configure type of vaccines" as UC16
   usecase "UC17. Configure vaccines" as UC17
   usecase "UC18. Register and manage vaccination centers" as UC18
-  usecase "UC19. Register and manage nurses" as UC19
-  usecase "UC20. Register and manage receptionists" as UC20
-  usecase "UC21. Register and manage center coordinators" as UC21
-  usecase "UC22. Register new SNS User" as UC22
+  usecase "UC19. Register and manage employees" as UC19
+  usecase "UC20. Register new SNS User" as UC20
 }
 
 user -- UC01
@@ -54,7 +52,5 @@ admin -- UC17
 admin -- UC18
 admin -- UC19
 admin -- UC20
-admin -- UC21
-admin -- UC22
 
 @enduml

@@ -33,6 +33,8 @@ class DGS {}
 
 class SNSUser {}
 
+class HealthInformation {}
+
 class Administrator {}
 
 class Employee {}
@@ -45,6 +47,13 @@ class CenterCoordinator {}
 
 class Appointment {
   + date
+}
+
+class AdministrationProccess {
+  + ageGroup
+  + dosage
+  + nOfDoses
+  + intervalBetweenDoses
 }
 
 class System {}
@@ -68,18 +77,33 @@ HealthCareCenter "*" --> "1" AGES : belongs to
 HealthCareCenter "*" --> "1" ARS : belongs to
 
 Appointment "1" --> "1" VaccinationCenter : is held in
-Appointment "1" --> "1" SNSUser  
-Appointment "1" --> "1" Vaccine 
+Appointment "1" --> "1" Vaccine : has a specefic
+Appointment "*" <-- "1" Nurse : is assigned to
 
 Receptionist "1" --> "*" ReadyUsersList : manages
 Receptionist "1" --> "*" ArrivedUsersList : manages
 
-ReadyUsersList "1" <-- "*" SNSUser : is composed by
-ArrivedUsersList "1" <-- "*" SNSUser : is composed by
-RecoveringUsersList "1" <-- "*" SNSUser : is composed by
+ReadyUsersList "1" --> "*" SNSUser : is composed by
+ArrivedUsersList "1" --> "*" SNSUser : is composed by
+RecoveringUsersList "1" --> "*" SNSUser : is composed by
 
 ReadyUsersList "*" <-- "1" Nurse : checks
 RecoveringUsersList "*" <-- "1" Nurse : manages
 
-Administrator "1" <-- "*" Employee : registers
+Administrator "1" --> "*" Employee : registers
+Administrator "1" --> "*" VaccinationCenter : registers
+Administrator "1" --> "*" VaccineType : manages
+Administrator "1" --> "*" Vaccine : manages
+
+VaccinationProcess <-- DGS : manages
+VaccinationProcess <-- SNSUser : is part of
+
+SNSUser "*" --> "1" Appointment : schedules
+SNSUser "1" --> "1" HealthInformation : has
+
+Vaccine "1" --> "*" AdministrationProccess : has
+
+System --> SMS : sends
+SNSUser <-- SMS : receives
+
 @enduml
