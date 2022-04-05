@@ -94,84 +94,54 @@ An association is a relationship between instances of objects that indicates a r
 - **_A_** ... **_B_**
 - **_A_** ... **_B_**
 
-| Concept (A)                    |  Association  |                    Concept (B) |
-| ------------------------------ | :-----------: | -----------------------------: |
-| Administrator                  |  configures   |                    VaccineType |
-| Administrator                  |  configures   |                        Vaccine |
-| Administrator                  |    manages    | CommunityMassVaccinationCenter |
-<<<<<<< HEAD
-| Administrator                  |    manages    |                   Receptionist |
-| Administrator                  |    manages    |                          Nurse |
-| Administrator                  |   registers   |                        SNSUser |
-| Administrator                  |   registers   | CommunityMassVaccinationCenter |
-| Administrator                  |   registers   |              CenterCoordinator |
-| Administrator                  |   registers   |                   Receptionist |
-| Administrator                  |   registers   |                          Nurse |
-| CenterCoordinator              |   generates   |                   CenterReport |
-| CenterCoordinator              |   analyses    |                   CenterReport |
-| CommunityMassVaccinationCenter |  administers  |                       Vaccines |
-| CommunityMassVaccinationCenter |      has      |              CenterCoordinator |
-| CommunityMassVaccinationCenter |      has      |                   CenterReport |
-=======
-| Administrator                  |    manages    |                      Employees |
-| CenterCoordinator              |   analyses    |                          Stats |
-| CenterCoordinator              |   evaluates   |                    Performance |
-| CenterCoordinator              |   generates   |                        Reports |
-| CenterCoordinator              |   analyses    |                   OtherCenters |
-| CommunityMassVaccinationCenter |  administers  |                       Vaccines |
-| CommunityMassVaccinationCenter |      has      |              CenterCoordinator |
-| DGS                            |     sends     |          SMSVaccineAppointment |
-| Administrator                  |   registers   |                        SNSUser |
-| Administrator                  |   registers   | CommunityMassVaccinationCenter |
-| Administrator                  |   registers   |              CenterCoordinator |
-| Administrator                  |   registers   |                  Receptionists |
-| Administrator                  |   registers   |                         Nurses |
->>>>>>> master
-| HealthcareCenter               |  administers  |                       Vaccines |
-| HealthcareCenter               | is associated |                            ARS |
-| HealthcareCenter               | is associated |                           ACES |
-| Appointment                    | is associated |                        SNSUser |
-| Appointment                    | is associated |                          Nurse |
-| Appointment                    | is associated |                 VaccineDetails |
-| Nurse                          |     emits     |      VaccineDigitalCertificate |
-| Nurse                          |    checks     |                 UserHealthInfo |
-| Nurse                          |    checks     |                  ReadyUserList |
-| Nurse                          |    reports    |               AdverseReactions |
-| Nurse                          |   registers   |             VaccinationDetails |
-<<<<<<< HEAD
-| Nurse                          |  forwards to  |                   RecoveryRoom |
-| Nurse                          |    checks     |        VaccinationInstructions |
-| SNS User                       |      has      |                 UserHealthInfo |
-| SNS User                       |   schedules   |           VaccineOnApplication |
-| SNS User                       |   requests    |      VaccineDigitalCertificate |
-=======
-| Nurse                          |     sends     |            SNSUserRecoveryRoom |
-| Nurse                          |    informs    |           SNSUserOfTypeVaccine |
-| SNS User                       |   schedules   |           VaccineOnApplication |
-| SNS User                       |   requests    |   EUCOVID-19DigitalCertificate |
->>>>>>> master
-| SNS User                       |   schedules   |      VaccineAtHealthcareCenter |
-| VaccineType                    |      has      |                        Vaccine |
-| Lot number                     |      has      |                        Vaccine |
-| Dosage                         |      has      |                    VaccineType |
-| Age group                      |      has      |                    TypeVaccine |
-| Age group                      |      has      |          SpecificNumberOfDoses |
-| TimeIntervalDoses              |      has      |            SpecificVaccineType |
-| Slot                           |      has      |                MaximumDuration |
-| Slot                           |      has      |                MaximumVaccines |
-| VaccinationCertificate         |      has      |                        Vaccine |
-| Receptionist                   |   registers   |                   UserArrivals |
-| Receptionist                   |   verifies    |                VaccineSchedule |
-| Receptionist                   |   confirms    |                      UserReady |
-| Receptionist                   |   schedules   |                        Vaccine |
-| Receptionist                   |     sends     |             SNSUserWaitingRoom |
-| System                         |     sends     |  RecoveryPeriodEndNotification |
-| System                         |   verifies    |   PossibilityOfUserVaccination |
-<<<<<<< HEAD
-| System                         |     sends     |          SMSVaccineAppointment |
-=======
-| System                         |     sends     |        VaccinationInstructions |
->>>>>>> master
+| Concept (A)                    |  Association  |                   Concept (B) |
+| ------------------------------ | :-----------: | ----------------------------: |
+| Administrator                  |  configures   |                   VaccineType |
+| Administrator                  |  configures   |                       Vaccine |
+| Administrator                  |    manages    |             VaccinationCenter |
+| Administrator                  |    manages    |                      Employee |
+| Administrator                  |   registers   |                       SNSUser |
+| Administrator                  |   registers   |             VaccinationCenter |
+| Administrator                  |   registers   |                      Employee |
+| CenterCoordinator              |   generates   |                  CenterReport |
+| CenterCoordinator              |   analyses    |                  CenterReport |
+| VaccinationCenter              |  administers  |                      Vaccines |
+| CommunityMassVaccinationCenter |     is a      |             VaccinationCenter |
+| CommunityMassVaccinationCenter |      has      |             CenterCoordinator |
+| CommunityMassVaccinationCenter |      has      |                  CenterReport |
+| HealthcareCenter               |     is a      |             VaccinationCenter |
+| HealthcareCenter               | is associated |                           ARS |
+| HealthcareCenter               | is associated |                          ACES |
+| Appointment                    | is associated |                       SNSUser |
+| Appointment                    | is associated |                         Nurse |
+| Appointment                    | is associated |                VaccineDetails |
+| Nurse                          |     is a      |                      Employee |
+| Nurse                          |     emits     |     VaccineDigitalCertificate |
+| Nurse                          |    checks     |                UserHealthInfo |
+| Nurse                          |    checks     |                 ReadyUserList |
+| Nurse                          |    reports    |              AdverseReactions |
+| Nurse                          |   registers   |            VaccinationDetails |
+| Nurse                          |  forwards to  |                  RecoveryRoom |
+| Nurse                          |    checks     |       VaccinationInstructions |
+| SNS User                       |      has      |                UserHealthInfo |
+| SNS User                       |   schedules   |                       Vaccine |
+| SNS User                       |   requests    |     VaccineDigitalCertificate |
+| Vaccine                        |      has      |                   VaccineType |
+| TypeVaccine                    |      has      |                     Age group |
+| Age group                      |      has      |         SpecificNumberOfDoses |
+| TimeIntervalDoses              |      has      |           SpecificVaccineType |
+| Slot                           |      has      |               MaximumDuration |
+| Slot                           |      has      |               MaximumVaccines |
+| VaccinationCertificate         |      has      |                       Vaccine |
+| Receptionist                   |     is a      |                      Employee |
+| Receptionist                   |   registers   |                   UserArrival |
+| Receptionist                   |   verifies    |               VaccineSchedule |
+| Receptionist                   |    manages    |                 UserReadyList |
+| Receptionist                   |   schedules   |                       Vaccine |
+| Receptionist                   |     sends     |            SNSUserWaitingRoom |
+| System                         |     sends     | RecoveryPeriodEndNotification |
+| System                         |   verifies    |  PossibilityOfUserVaccination |
+| System                         |     sends     |         SMSVaccineAppointment |
 
 ## Domain Model
 
