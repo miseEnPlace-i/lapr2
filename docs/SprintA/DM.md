@@ -10,7 +10,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Business Transactions**
 
-- a
+- VaccinationProcess
 
 **Transaction Line Items**
 
@@ -22,7 +22,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Transaction Records**
 
-- VaccineAdministration; VaccinationScheduling; RegisterVaccine; RegisterNurse; RegisterReceptionist; CertificateIssuance;
+- VaccineAdministration; VaccinationScheduling; RegisterVaccine; RegisterNurse; RegisterReceptionist; CertificateIssuance; UserArrival; AdverseReaction;
 
 **Roles of People or Organizations**
 
@@ -30,7 +30,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Places**
 
-- CommunityMassVaccinationCenter; HealthCareCenter; WaitingRoom;
+- CommunityMassVaccinationCenter; HealthCareCenter; WaitingRoom; RecoveryRoom;
 
 **Noteworthy Events**
 
@@ -62,7 +62,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Other External/Collaborating Systems**
 
-- DGS; SMSSender
+- DGS; SMSSender; Slots;
 
 **Records of finance, work, contracts, legamatters**
 
@@ -94,27 +94,54 @@ An association is a relationship between instances of objects that indicates a r
 - **_A_** ... **_B_**
 - **_A_** ... **_B_**
 
-| Concept (A) | Association | Concept (B) |
-| ----------- | :---------: | ----------: |
-| CenterAdministrator | configures | VaccineType |
-| CenterAdministrator | configures | Vaccine |
-| CenterAdministrator | manages | CommunityMassVaccinationCenter |
-| CenterAdministrator | manages | Employees |
-| CommunityMassVaccinationCenter | administers | Vaccines |
-| CommunityMassVaccinationCenter | has | CenterCoordinator |
-| DGSAdministrator | registers | SNSUser |
-| DGSAdministrator | registers | CommunityMassVaccinationCenter |
-| DGSAdministrator | registers | CenterCoordinator |
-| DGSAdministrator | registers | Receptionists |
-| DGSAdministrator | registers | Nurses |
-| HealthcareCenter | administers | Vaccines |
-| HealthcareCenter | is associated | ARS |
-| HealthcareCenter | is associated | ACES |
-| Nurse | emits | VaccinationCertificate |
-| SNS User | schedule | Vaccine |
-| VaccineType | has | Vaccine |
-| ... | ... | ... |
-| ... | ... | ... |
+| Concept (A)                    |  Association  |                    Concept (B) |
+| ------------------------------ | :-----------: | -----------------------------: |
+| Administrator                  |  configures   |                    VaccineType |
+| Administrator                  |  configures   |                        Vaccine |
+| Administrator                  |    manages    | CommunityMassVaccinationCenter |
+| Administrator                  |    manages    |                      Employees |
+| CenterCoordinator              |   analyses    |                          Stats |
+| CenterCoordinator              |   evaluates   |                    Performance |
+| CenterCoordinator              |   generates   |                        Reports |
+| CenterCoordinator              |   analyses    |                   OtherCenters |
+| CommunityMassVaccinationCenter |  administers  |                       Vaccines |
+| CommunityMassVaccinationCenter |      has      |              CenterCoordinator |
+| DGS                            |     sends     |          SMSVaccineAppointment |
+| Administrator                  |   registers   |                        SNSUser |
+| Administrator                  |   registers   | CommunityMassVaccinationCenter |
+| Administrator                  |   registers   |              CenterCoordinator |
+| Administrator                  |   registers   |                  Receptionists |
+| Administrator                  |   registers   |                         Nurses |
+| HealthcareCenter               |  administers  |                       Vaccines |
+| HealthcareCenter               | is associated |                            ARS |
+| HealthcareCenter               | is associated |                           ACES |
+| Nurse                          |     emits     |         VaccinationCertificate |
+| Nurse                          |    checks     |                 UserHealthInfo |
+| Nurse                          |    checks     |                    ListSNSUser |
+| Nurse                          |    reports    |               AdverseReactions |
+| Nurse                          |   registers   |             VaccinationDetails |
+| Nurse                          |     sends     |            SNSUserRecoveryRoom |
+| Nurse                          |    informs    |           SNSUserOfTypeVaccine |
+| SNS User                       |   schedules   |           VaccineOnApplication |
+| SNS User                       |   requests    |   EUCOVID-19DigitalCertificate |
+| SNS User                       |   schedules   |      VaccineAtHealthcareCenter |
+| VaccineType                    |      has      |                        Vaccine |
+| Lot number                     |      has      |                        Vaccine |
+| Dosage                         |      has      |                    VaccineType |
+| Age group                      |      has      |                    TypeVaccine |
+| Age group                      |      has      |          SpecificNumberOfDoses |
+| TimeIntervalDoses              |      has      |            SpecificVaccineType |
+| Slot                           |      has      |                MaximumDuration |
+| Slot                           |      has      |                MaximumVaccines |
+| VaccinationCertificate         |      has      |                        Vaccine |
+| Receptionist                   |   registers   |                   UserArrivals |
+| Receptionist                   |   verifies    |                VaccineSchedule |
+| Receptionist                   |   confirms    |                      UserReady |
+| Receptionist                   |   schedules   |                        Vaccine |
+| Receptionist                   |     sends     |             SNSUserWaitingRoom |
+| System                         |     sends     |  RecoveryPeriodEndNotification |
+| System                         |   verifies    |   PossibilityOfUserVaccination |
+| System                         |     sends     |        VaccinationInstructions |
 
 ## Domain Model
 
