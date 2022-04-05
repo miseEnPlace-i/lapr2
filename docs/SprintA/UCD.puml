@@ -34,27 +34,27 @@ rectangle System {
   usecase "UC22. Register new SNS User" as UC22
 }
 
-user --> UC01
-user --> UC02
-dgs --> UC03
-recept --> UC04
-nurse --> UC05
-nurse --> UC06
-nurse --> UC07
-nurse --> UC08
-nurse --> UC09
-recept --> UC10
-recept --> UC11
-recept --> UC12
-coordinator --> UC13
-coordinator --> UC14
-coordinator --> UC15
-admin --> UC16
-admin --> UC17
-admin --> UC18
-admin --> UC19
-admin --> UC20
-admin --> UC21
-admin --> UC22
+user -- UC01
+user -- UC02
+dgs -- UC03
+recept -- UC04
+nurse -- UC05
+nurse -- UC06
+nurse -- UC07
+nurse -- UC08
+nurse -- UC09
+recept -- UC10
+recept -- UC11
+recept -- UC12
+coordinator -- UC13
+coordinator -- UC14
+coordinator -- UC15
+admin -- UC16
+admin -- UC17
+admin -- UC18
+admin -- UC19
+admin -- UC20
+admin -- UC21
+admin -- UC22
 
 @enduml
