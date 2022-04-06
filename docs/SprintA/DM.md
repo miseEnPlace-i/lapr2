@@ -16,7 +16,7 @@ The construction process of the domain model is based on the client specificatio
 
 **Product/Service related to a Transaction or Transaction Line Item**
 
-- Vaccine
+- Vaccine; VaccinationCertificate
 
 **Transaction Records**
 
@@ -24,7 +24,7 @@ The construction process of the domain model is based on the client specificatio
 
 **Roles of People or Organizations**
 
-- Nurse; Coordinator; Receptionist; Administrator; SNSUser;
+- Nurse; Coordinator; Receptionist; Administrator;
 
 **Places**
 
@@ -32,7 +32,7 @@ The construction process of the domain model is based on the client specificatio
 
 **Noteworthy Events**
 
-- RegisterSNSUserArrival; VaccinationScheduling; ScheduleConfirmation;VaccinationAppointment; VaccinationAdministration; UserWaitingInRecoveryRoom; LeaveVaccinationCenter; CertificateIssuance; CheckUserMedicalHistory
+- RegisterSNSUserArrival; VaccinationScheduling; ScheduleConfirmation; VaccinationAppointment; VaccinationAdministration; UserWaitingInRecoveryRoom; LeaveVaccinationCenter; CertificateIssuance; CheckUserMedicalHistory
 
 **Physical Objects**
 
@@ -76,50 +76,50 @@ The construction process of the domain model is based on the client specificatio
 
 ## **Rationale to identify associations between conceptual classes**
 
-| Concept (A)                    |  Association  |                   Concept (B) |
-| :----------------------------- | :-----------: | ----------------------------: |
-| Administrator                  |  configures   |                   VaccineType |
-| Administrator                  |  configures   |                       Vaccine |
-| Administrator                  |    manages    |             VaccinationCenter |
-| Administrator                  |    manages    |                      Employee |
-| Administrator                  |   registers   |                       SNSUser |
-| Administrator                  |   registers   |             VaccinationCenter |
-| Administrator                  |   registers   |                      Employee |
-| CenterCoordinator              |   generates   |                  CenterReport |
-| CenterCoordinator              |   analyses    |                  CenterReport |
-| VaccinationCenter              |  administers  |                      Vaccines |
-| CommunityMassVaccinationCenter |     is a      |             VaccinationCenter |
-| CommunityMassVaccinationCenter |      has      |             CenterCoordinator |
-| CommunityMassVaccinationCenter |      has      |                  CenterReport |
-| HealthcareCenter               |     is a      |             VaccinationCenter |
-| HealthcareCenter               | is associated |                           ARS |
-| HealthcareCenter               | is associated |                          ACES |
-| Appointment                    | is associated |                       SNSUser |
-| Appointment                    | is associated |                         Nurse |
-| Appointment                    | is associated |                VaccineDetails |
-| Nurse                          |     is a      |                      Employee |
-| Nurse                          |     emits     |     VaccineDigitalCertificate |
-| Nurse                          |    checks     |                UserHealthInfo |
-| Nurse                          |    checks     |                 ReadyUserList |
-| Nurse                          |    reports    |              AdverseReactions |
-| Nurse                          |   registers   |            VaccinationDetails |
-| Nurse                          |  forwards to  |                  RecoveryRoom |
-| Nurse                          |    checks     |       VaccinationInstructions |
-| SNS User                       |      has      |                UserHealthInfo |
-| SNS User                       |   schedules   |                       Vaccine |
-| SNS User                       |   requests    |     VaccineDigitalCertificate |
-| Vaccine                        |      has      |                   VaccineType |
-| Vaccine                        |      has      |                AgeGroupDosage |
-| TimeIntervalDoses              |      has      |                   VaccineType |
-| VaccinationCertificate         |      has      |                       Vaccine |
-| Receptionist                   |     is a      |                      Employee |
-| Receptionist                   |   registers   |                   UserArrival |
-| Receptionist                   |   verifies    |               VaccineSchedule |
-| Receptionist                   |    manages    |                 UserReadyList |
-| Receptionist                   |   schedules   |                       Vaccine |
-| Receptionist                   |     sends     |            SNSUserWaitingRoom |
-| System                         |     sends     | RecoveryPeriodEndNotification |
-| System                         |     sends     |         SMSVaccineAppointment |
+| Concept (A)                    |   Association    |                   Concept (B) |
+| :----------------------------- | :--------------: | ----------------------------: |
+| Administrator                  |    configures    |                   VaccineType |
+| Administrator                  |    configures    |                       Vaccine |
+| Administrator                  |     manages      |             VaccinationCenter |
+| Administrator                  |     manages      |                      Employee |
+| Administrator                  |    registers     |                       SNSUser |
+| Administrator                  |    registers     |             VaccinationCenter |
+| Administrator                  |    registers     |                      Employee |
+| CenterCoordinator              |    generates     |                  CenterReport |
+| CenterCoordinator              |     analyses     |                  CenterReport |
+| VaccinationCenter              |   administers    |                      Vaccines |
+| CommunityMassVaccinationCenter |       is a       |             VaccinationCenter |
+| CommunityMassVaccinationCenter |       has        |             CenterCoordinator |
+| CommunityMassVaccinationCenter |       has        |                  CenterReport |
+| HealthcareCenter               |       is a       |             VaccinationCenter |
+| HealthcareCenter               |  is associated   |                           ARS |
+| HealthcareCenter               |  is associated   |                          ACES |
+| Appointment                    |  is associated   |                       SNSUser |
+| Appointment                    |  is associated   |                         Nurse |
+| Appointment                    |  is associated   |                VaccineDetails |
+| Nurse                          |       is a       |                      Employee |
+| Nurse                          |      emits       |     VaccineDigitalCertificate |
+| Nurse                          |      checks      |                UserHealthInfo |
+| Nurse                          |      checks      |                 ReadyUserList |
+| Nurse                          |     reports      |              AdverseReactions |
+| Nurse                          |    registers     |            VaccinationDetails |
+| Nurse                          | forwards user to |                  RecoveryRoom |
+| Nurse                          |      checks      |       VaccinationInstructions |
+| SNS User                       |       has        |                UserHealthInfo |
+| SNS User                       |    schedules     |                       Vaccine |
+| SNS User                       |     requests     |     VaccineDigitalCertificate |
+| Vaccine                        |       has        |                   VaccineType |
+| Vaccine                        |       has        |                AgeGroupDosage |
+| TimeIntervalDoses              |       has        |                   VaccineType |
+| VaccinationCertificate         |       has        |                       Vaccine |
+| Receptionist                   |       is a       |                      Employee |
+| Receptionist                   |    registers     |                   UserArrival |
+| Receptionist                   |     verifies     |               VaccineSchedule |
+| Receptionist                   |     manages      |                 UserReadyList |
+| Receptionist                   |    schedules     |                       Vaccine |
+| Receptionist                   | forwards user to |                   WaitingRoom |
+| System                         |      sends       | RecoveryPeriodEndNotification |
+| System                         |      sends       |         SMSVaccineAppointment |
 
 ## Domain Model
 
