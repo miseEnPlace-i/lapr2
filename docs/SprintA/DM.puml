@@ -56,13 +56,11 @@ class AdministrationProccess {
   + intervalBetweenDoses
 }
 
-class System {}
-
 class AGES {}
 
 class ARS {}
 
-Vaccine "*" -- "1" VaccineType : has >
+Vaccine "*" -- "1" VaccineType : has <
 
 Employee <|-- Nurse
 Employee <|-- Receptionist
@@ -78,7 +76,6 @@ HealthCareCenter "*" -- "1" ARS : belongs to >
 
 Appointment "1" -- "1" VaccinationCenter : is held in >
 Appointment "1" -- "1" Vaccine : has a specefic >
-Appointment "*" -- "1" Nurse : is assigned to <
 
 Receptionist "1" -- "*" ReadyUsersList : manages >
 Receptionist "1" -- "*" ArrivedUsersList : manages >
@@ -98,12 +95,16 @@ Administrator "1" -- "*" Vaccine : manages >
 VaccinationProcess -- DGS : manages <
 VaccinationProcess -- SNSUser : is part of <
 
-SNSUser "*" -- "1" Appointment : schedules >
+SNSUser "1" -- "*" Appointment : schedules >
 SNSUser "1" -- "1" HealthInformation : has >
 
-Vaccine "1" -- "*" AdministrationProccess : has >
+Vaccine "1" -- "1..*" AdministrationProccess : has >
 
-System -- SMS : sends >
-SNSUser -- SMS : receives <
+SNSUser "1" -- "*" SMSConfirmation : receives >
+
+HealthCareCenter "1" -- "*" OtherMedicalServices : provides >
+
+SNSUser "1" -- "*" VaccinationCertificate : issues >
+VaccinationCertificate "1" -- "1" Vaccine : corresponds >
 
 @enduml
