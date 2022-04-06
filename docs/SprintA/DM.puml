@@ -9,24 +9,24 @@ class CommunityMassVaccinationCenter {}
 class HealthCareCenter {}
 
 class VaccinationCenter {
-  + name
-  + address
-  + phone
-  + email
-  + fax
-  + website
-  + openingHours
-  + closingHours
-  + slotDuration
-  + nOfVaccinesPerSlot
+  name
+  address
+  phone
+  email
+  fax
+  website
+  openingHours
+  closingHours
+  slotDuration
+  nOfVaccinesPerSlot
 }
 
 class Vaccine {}
 
 class VaccineType {
-    + id
-    + designation
-    + whoid
+  id
+  designation
+  whoid
 }
 
 class SNSUser {}
@@ -44,14 +44,14 @@ class Receptionist {}
 class CenterCoordinator {}
 
 class Appointment {
-  + date
+  date
 }
 
 class AdministrationProccess {
-  + ageGroup
-  + dosage
-  + nOfDoses
-  + intervalBetweenDoses
+  ageGroup
+  dosage
+  nOfDoses
+  intervalBetweenDoses
 }
 
 class AGES {}
@@ -67,42 +67,50 @@ Employee <|-- CenterCoordinator
 VaccinationCenter <|-- CommunityMassVaccinationCenter
 VaccinationCenter <|-- HealthCareCenter
 
-VaccinationCenter "1" -- "1" CenterCoordinator : has >
+VaccinationCenter "1" -- "1" CenterCoordinator : has 
 
 HealthCareCenter "*" -- "1" AGES : belongs to > 
 HealthCareCenter "*" -- "1" ARS : belongs to >
 
 Appointment "1" -- "1" VaccinationCenter : is held in >
-Appointment "1" -- "1" Vaccine : has a specefic >
-Appointment "1" -- "1" SMSConfirmation : triggers >
+Appointment "1" -- "1" Vaccine : has a specefic 
+Appointment "1" -- "1" SMSConfirmation : triggers 
 
 Receptionist "1" -- "*" ReadyUsersList : manages >
 Receptionist "1" -- "*" ArrivedUsersList : manages >
 
-ReadyUsersList "1" -- "*" SNSUser : is composed by >
-ArrivedUsersList "1" -- "*" SNSUser : is composed by > 
-RecoveringUsersList "1" -- "*" SNSUser : is composed by >
+ReadyUsersList "1" -- "*" SNSUser : is composed by 
+ArrivedUsersList "1" -- "*" SNSUser : is composed by 
+RecoveringUsersList "1" -- "*" SNSUser : is composed by 
 
 ReadyUsersList "*" -- "1" Nurse : checks <
 RecoveringUsersList "*" -- "1" Nurse : manages <
 
 Administrator "1" -- "*" Employee : registers >
-Administrator "1" -- "*" VaccinationCenter : registers >
-Administrator "1" -- "*" VaccineType : manages >
-Administrator "1" -- "*" Vaccine : manages >
+Administrator "1" -- "*" VaccinationCenter : registers 
+Administrator "1" -- "*" VaccineType : manages 
+Administrator "1" -- "*" Vaccine : manages 
 
-SNSUser "1" -- "*" Appointment : schedules >
+SNSUser "1" -- "*" Appointment : schedules 
 SNSUser "1" -- "1" HealthInformation : has >
 
-Vaccine "1" -- "1..*" AdministrationProccess : has >
+Vaccine "1" -- "1..*" AdministrationProccess : has
 
 SNSUser "1" -- "*" SMSConfirmation : receives >
 
-HealthCareCenter "1" -- "*" OtherMedicalServices : provides >
+HealthCareCenter "1" -- "*" OtherMedicalService : provides 
 
-SNSUser "1" -- "*" VaccinationCertificate : requests >
-VaccinationCertificate "1" -- "1" Vaccine : corresponds >
+SNSUser "1" -- "*" VaccinationCertificate : requests
+
+VaccinationCertificate "1" -- "1" Vaccine : corresponds 
+DGS "1" -- "*" VaccinationCertificate : emmits
 
 Receptionist "0,1" -- "1" Appointment : schedules
+
+Nurse "1" -- "*" AdverseReaction : reports >
+Nurse "1" -- "*" HealthInformation : checks 
+
+VaccinationCenter "1" -- "1" VaccinationReport : has >
+CenterCoordinator "1" -- "*" VaccinationReport : analyses
 
 @enduml
