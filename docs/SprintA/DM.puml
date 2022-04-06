@@ -29,8 +29,6 @@ class VaccineType {
     + whoid
 }
 
-class DGS {}
-
 class SNSUser {}
 
 class HealthInformation {}
@@ -76,6 +74,7 @@ HealthCareCenter "*" -- "1" ARS : belongs to >
 
 Appointment "1" -- "1" VaccinationCenter : is held in >
 Appointment "1" -- "1" Vaccine : has a specefic >
+Appointment "1" -- "1" SMSConfirmation : triggers >
 
 Receptionist "1" -- "*" ReadyUsersList : manages >
 Receptionist "1" -- "*" ArrivedUsersList : manages >
@@ -92,9 +91,6 @@ Administrator "1" -- "*" VaccinationCenter : registers >
 Administrator "1" -- "*" VaccineType : manages >
 Administrator "1" -- "*" Vaccine : manages >
 
-VaccinationProcess -- DGS : manages <
-VaccinationProcess -- SNSUser : is part of <
-
 SNSUser "1" -- "*" Appointment : schedules >
 SNSUser "1" -- "1" HealthInformation : has >
 
@@ -104,7 +100,9 @@ SNSUser "1" -- "*" SMSConfirmation : receives >
 
 HealthCareCenter "1" -- "*" OtherMedicalServices : provides >
 
-SNSUser "1" -- "*" VaccinationCertificate : issues >
+SNSUser "1" -- "*" VaccinationCertificate : requests >
 VaccinationCertificate "1" -- "1" Vaccine : corresponds >
+
+Receptionist "0,1" -- "1" Appointment : schedules
 
 @enduml
