@@ -87,6 +87,8 @@ The construction process of the domain model is based on the client specificatio
 | Administrator                  |    registers     |                      Employee |
 | CenterCoordinator              |    generates     |                  CenterReport |
 | CenterCoordinator              |     analyses     |                  CenterReport |
+| CenterCoordinator              |     manages      |                      Employee |
+| VaccinationCenter              |       has        |             CenterCoordinator |
 | VaccinationCenter              |   administers    |                      Vaccines |
 | CommunityMassVaccinationCenter |       is a       |             VaccinationCenter |
 | CommunityMassVaccinationCenter |       has        |             CenterCoordinator |
@@ -97,12 +99,15 @@ The construction process of the domain model is based on the client specificatio
 | Appointment                    |  is associated   |                       SNSUser |
 | Appointment                    |  is associated   |                         Nurse |
 | Appointment                    |  is associated   |                VaccineDetails |
+| Appointment                    |  is associated   |                  Receptionist |
+| Appointment                    |  has a specific  |                       Vaccine |
 | Nurse                          |       is a       |                      Employee |
 | Nurse                          |      emits       |     VaccineDigitalCertificate |
 | Nurse                          |      checks      |                UserHealthInfo |
 | Nurse                          |      checks      |                 ReadyUserList |
 | Nurse                          |     reports      |              AdverseReactions |
 | Nurse                          |    registers     |            VaccinationDetails |
+| Nurse                          |     manages      |           RecoveringUsersList |
 | Nurse                          | forwards user to |                  RecoveryRoom |
 | Nurse                          |      checks      |       VaccinationInstructions |
 | SNS User                       |       has        |                UserHealthInfo |
@@ -113,13 +118,14 @@ The construction process of the domain model is based on the client specificatio
 | TimeIntervalDoses              |       has        |                   VaccineType |
 | VaccinationCertificate         |       has        |                       Vaccine |
 | Receptionist                   |       is a       |                      Employee |
-| Receptionist                   |    registers     |                   UserArrival |
+| Receptionist                   |     manages      |                   UserArrival |
 | Receptionist                   |     verifies     |               VaccineSchedule |
 | Receptionist                   |     manages      |                 UserReadyList |
 | Receptionist                   |    schedules     |                       Vaccine |
 | Receptionist                   | forwards user to |                   WaitingRoom |
 | System                         |      sends       | RecoveryPeriodEndNotification |
 | System                         |      sends       |         SMSVaccineAppointment |
+| System                         |      emmits      |         VaccinationCertifcate |
 
 ## Domain Model
 
