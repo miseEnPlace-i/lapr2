@@ -8,7 +8,7 @@ actor "Receptionist" as recept
 actor "Administrator" as admin
 actor "Center Coordinator" as coordinator
 actor "<< system >> SMS Sender" as dgs
-actor "<< system >> MAIL Sender" as dgsMail
+actor "<< system >> EMAIL Sender" as dgsMail
 
 rectangle System {
   usecase "UC01. Schedule a vaccine" as UC01

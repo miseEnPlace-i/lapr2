@@ -1,7 +1,5 @@
 # OO Analysis
 
-The construction process of the domain model is based on the client specifications, especially the nouns (for _concepts_) and verbs (for _relations_) used.
-
 ## Rationale to identify domain conceptual classes
 
 ### _Conceptual Class Category List_
@@ -77,18 +75,17 @@ The construction process of the domain model is based on the client specificatio
 | Administrator                  |    registers     |                       SNSUser |
 | Administrator                  |    registers     |             VaccinationCenter |
 | Administrator                  |    registers     |                      Employee |
+| Appointment                    |  is associated   |                       SNSUser |
+| Appointment                    |  has a specific  |                       Vaccine |
 | CenterCoordinator              |    generates     |                  CenterReport |
 | CenterCoordinator              |     analyses     |                  CenterReport |
-| VaccinationCenter              |       has        |             CenterCoordinator |
-| VaccinationCenter              |   administers    |                      Vaccines |
 | CommunityMassVaccinationCenter |       is a       |             VaccinationCenter |
 | CommunityMassVaccinationCenter |       has        |             CenterCoordinator |
 | CommunityMassVaccinationCenter |       has        |                  CenterReport |
+| Email                          |       is a       |                  Notification |
 | HealthcareCenter               |       is a       |             VaccinationCenter |
 | HealthcareCenter               |  is associated   |                           ARS |
 | HealthcareCenter               |  is associated   |                          ACES |
-| Appointment                    |  is associated   |                       SNSUser |
-| Appointment                    |  has a specific  |                       Vaccine |
 | Nurse                          |      is an       |                      Employee |
 | Nurse                          |      emits       |     VaccineDigitalCertificate |
 | Nurse                          |      checks      |                UserHealthInfo |
@@ -98,23 +95,24 @@ The construction process of the domain model is based on the client specificatio
 | Nurse                          |     manages      |           RecoveringUsersList |
 | Nurse                          | forwards user to |                  RecoveryRoom |
 | Nurse                          |      checks      |         AdministrationProcess |
-| SNS User                       |       has        |                UserHealthInfo |
-| SNS User                       |    schedules     |                   Appointment |
-| SNS User                       |     requests     |            VaccineCertificate |
-| Vaccine                        |       has        |                   VaccineType |
-| Vaccine                        |       has        |         AdministrationProcess |
-| VaccineCertificate             |       has        |                       Vaccine |
 | Receptionist                   |      is an       |                      Employee |
 | Receptionist                   |    registers     |                   UserArrival |
 | Receptionist                   |     verifies     |               VaccineSchedule |
 | Receptionist                   |     manages      |                 UserReadyList |
 | Receptionist                   |    schedules     |                   Appointment |
 | Receptionist                   | forwards user to |                   WaitingRoom |
+| SMS                            |       is a       |                  Notification |
+| SNS User                       |       has        |                UserHealthInfo |
+| SNS User                       |    schedules     |                   Appointment |
+| SNS User                       |     requests     |            VaccineCertificate |
 | System                         |      sends       | RecoveryPeriodEndNotification |
 | System                         |      sends       |            AppointmentDetails |
 | System                         |      emits       |            VaccineCertificate |
-| SMS                            |       is a       |                  Notification |
-| Email                          |       is a       |                  Notification |
+| Vaccine                        |       has        |                   VaccineType |
+| Vaccine                        |       has        |         AdministrationProcess |
+| VaccineCertificate             |       has        |                       Vaccine |
+| VaccinationCenter              |       has        |             CenterCoordinator |
+| VaccinationCenter              |   administers    |                      Vaccines |
 
 ## Domain Model
 
