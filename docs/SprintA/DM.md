@@ -8,31 +8,27 @@ The construction process of the domain model is based on the client specificatio
 
 **Business Transactions**
 
-- VaccinationProcess
-
-**Transaction Line Items**
-
-- VaccineType
+- VaccinationScheduling
 
 **Product/Service related to a Transaction or Transaction Line Item**
 
-- Vaccine; VaccinationCertificate
+- Vaccine; VaccineType; VaccinationCertificate
 
 **Transaction Records**
 
-- VaccineAdministration; VaccinationScheduling; RegisterVaccine; RegisterNurse; RegisterReceptionist; CertificateIssuance; UserArrival; AdverseReaction;
+- VaccinationCertificate
 
 **Roles of People or Organizations**
 
-- Nurse; Coordinator; Receptionist; Administrator;
+- Nurse; Center Coordinator; Receptionist; Administrator
 
 **Places**
 
-- CommunityMassVaccinationCenter; HealthCareCenter; WaitingRoom; RecoveryRoom;
+- CommunityMassVaccinationCenter; HealthCareCenter; WaitingRoom; RecoveryRoom
 
 **Noteworthy Events**
 
-- RegisterSNSUserArrival; VaccinationScheduling; ScheduleConfirmation; VaccinationAppointment; VaccinationAdministration; UserWaitingInRecoveryRoom; LeaveVaccinationCenter; CertificateIssuance; CheckUserMedicalHistory
+- RegisterSNSUserArrival; VaccinationScheduling; ScheduleConfirmation; VaccinationAppointment; LeaveVaccinationCenter; CertificateIssuance; CheckUserMedicalHistory
 
 **Physical Objects**
 
@@ -40,7 +36,7 @@ The construction process of the domain model is based on the client specificatio
 
 **Descriptions of Things**
 
-- VaccineType; OngoingOutbreak
+- VaccineType; OngoingOutbreak; VaccineAdministrationProcess
 
 **Catalogs**
 
@@ -60,15 +56,11 @@ The construction process of the domain model is based on the client specificatio
 
 **Other External/Collaborating Systems**
 
-- DGS; SMSSender;
+- DGS; SMSSender; EmailSender
 
 **Records of finance, work, contracts, legamatters**
 
 - Statistics; Charts; Report; VaccinationCertificate; SMSAuthorization
-
-**Financial Instruments**
-
-- ***
 
 **Documents mentioned/used to perform some work**
 
@@ -97,7 +89,7 @@ The construction process of the domain model is based on the client specificatio
 | HealthcareCenter               |  is associated   |                          ACES |
 | Appointment                    |  is associated   |                       SNSUser |
 | Appointment                    |  has a specific  |                       Vaccine |
-| Nurse                          |       is a       |                      Employee |
+| Nurse                          |      is an       |                      Employee |
 | Nurse                          |      emits       |     VaccineDigitalCertificate |
 | Nurse                          |      checks      |                UserHealthInfo |
 | Nurse                          |      checks      |                 ReadyUserList |
@@ -105,23 +97,24 @@ The construction process of the domain model is based on the client specificatio
 | Nurse                          |    registers     |            VaccinationDetails |
 | Nurse                          |     manages      |           RecoveringUsersList |
 | Nurse                          | forwards user to |                  RecoveryRoom |
-| Nurse                          |      checks      |       VaccinationInstructions |
+| Nurse                          |      checks      |         AdministrationProcess |
 | SNS User                       |       has        |                UserHealthInfo |
-| SNS User                       |    schedules     |                       Vaccine |
-| SNS User                       |     requests     |     VaccineDigitalCertificate |
+| SNS User                       |    schedules     |                   Appointment |
+| SNS User                       |     requests     |            VaccineCertificate |
 | Vaccine                        |       has        |                   VaccineType |
-| Vaccine                        |       has        |                AgeGroupDosage |
-| TimeIntervalDoses              |       has        |                   VaccineType |
-| VaccinationCertificate         |       has        |                       Vaccine |
-| Receptionist                   |       is a       |                      Employee |
+| Vaccine                        |       has        |         AdministrationProcess |
+| VaccineCertificate             |       has        |                       Vaccine |
+| Receptionist                   |      is an       |                      Employee |
 | Receptionist                   |    registers     |                   UserArrival |
 | Receptionist                   |     verifies     |               VaccineSchedule |
 | Receptionist                   |     manages      |                 UserReadyList |
-| Receptionist                   |    schedules     |                       Vaccine |
+| Receptionist                   |    schedules     |                   Appointment |
 | Receptionist                   | forwards user to |                   WaitingRoom |
 | System                         |      sends       | RecoveryPeriodEndNotification |
-| System                         |      sends       |         SMSVaccineAppointment |
-| System                         |      emmits      |         VaccinationCertifcate |
+| System                         |      sends       |            AppointmentDetails |
+| System                         |      emits       |            VaccineCertificate |
+| SMS                            |       is a       |                  Notification |
+| Email                          |       is a       |                  Notification |
 
 ## Domain Model
 
