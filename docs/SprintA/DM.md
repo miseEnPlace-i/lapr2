@@ -56,7 +56,7 @@
 
 - DGS; SMSSender; EmailSender
 
-**Records of finance, work, contracts, legamatters**
+**Records of finance, work, contracts, legal matters**
 
 - Statistics; Charts; Report; VaccinationCertificate; SMSAuthorization
 
