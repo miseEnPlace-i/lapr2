@@ -13,30 +13,32 @@ actor "<< system >> EMAIL Sender" as dgsEmail
 rectangle System {
   usecase "UC01. Schedule a vaccine" as UC01
   usecase "UC02. Request the vaccine certificate issuance" as UC02
-  usecase "UC03. Send a SMS with appointment details to SNS User" as UC03
-  usecase "UC04. Check the list of SNS Users that are ready to take the vaccine" as UC05
-  usecase "UC05. Check user's health information" as UC06
-  usecase "UC06. Issue vaccine certificate" as UC07
-  usecase "UC07. Report adverse reactions during recovery period" as UC08
-  usecase "UC08. Register SNS User's vaccination details" as UC09
-  usecase "UC09. Register the arrival of a SNS User" as UC10
-  usecase "UC10. Confirm vaccination appointment for a given SNS user" as UC11
-  usecase "UC11. Register that a given SNS User is ready to take the vaccine" as UC12
-  usecase "UC12. View centers' statistics and charts" as UC13
-  usecase "UC13. Generate a center report" as UC14
-  usecase "UC14. Analyse other center vaccination data" as UC15
-  usecase "UC15. Configure type of vaccine" as UC16
-  usecase "UC16. Configure vaccine" as UC17
-  usecase "UC17. Register and manage vaccination center" as UC18
-  usecase "UC18. Register and manage employee" as UC19
-  usecase "UC19. Register new SNS User" as UC20
-  usecase "UC20  Notify SNS user that the recovery period has ended" as UC21
+  usecase "UC03. Register new SNS User" as UC20
+  usecase "UC04. Send a SMS with appointment details to SNS User" as UC03
+  usecase "UC05. Check the list of SNS Users that are ready to take the vaccine" as UC05
+  usecase "UC06. Check user's health information" as UC06
+  usecase "UC07. Issue vaccine certificate" as UC07
+  usecase "UC08. Report adverse reactions during recovery period" as UC08
+  usecase "UC09. Register and manage vaccination center" as UC18
+  usecase "UC10. Register and manage employee" as UC19
+  usecase "UC11. Check list of Employees" as UC22
+  usecase "UC12. Configure type of vaccine" as UC16
+  usecase "UC13. Configure vaccine and its administration process" as UC17
+  usecase "UC14. Confirm vaccination appointment for a given SNS user" as UC11
+  usecase "UC15. Register the arrival of a SNS User" as UC10
+  usecase "UC16. Register that a given SNS User is ready to take the vaccine" as UC12
+  usecase "UC17. Register SNS User's vaccination details" as UC09
+  usecase "UC18. View centers' statistics and charts" as UC13
+  usecase "UC19. Generate a center report" as UC14
+  usecase "UC20. Analyse other center vaccination data" as UC15
+  usecase "UC21. Notify SNS user that the recovery period has ended" as UC21
 }
 
 user -- UC01
 user -- UC02
 dgs -- UC03
 recept -- UC01
+recept -- UC20
 nurse -- UC05
 nurse -- UC06
 nurse -- UC07
@@ -52,7 +54,7 @@ admin -- UC16
 admin -- UC17
 admin -- UC18
 admin -- UC19
-admin -- UC20
+admin -- UC22
 dgs -- UC21
 dgsEmail -- UC21
 
