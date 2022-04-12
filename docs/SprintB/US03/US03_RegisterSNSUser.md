@@ -1,42 +1,38 @@
-# US 006 - To create a Task 
+# US 03 - Register a new SNS user
+
 
 ## 1. Requirements Engineering
 
 
 ### 1.1. User Story Description
 
-
 _"As a receptionist, I want to register a SNS User."_
-
 
 
 ### 1.2. Customer Specifications and Clarifications 
 
-
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost as well as the its classifying task category. 
+> A SNS User is a person who is registered in the system.
 
+> A SNS User must have an email, a password, a name, a birthdate as well as a SNS number.
 
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
-
+> Any Administrator uses the application to register SNS users.
 
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** Accordingly to our project description, the person allowed to register a SNS User is the Administrator. When the receptionist registers a SNS User, does he register the SNS user in the application or his arrival?
 >  
-> **Answer:** Duration is estimated in days.
+> **Answer:** —
 
--
-
-> **Question:** Monetary data is expressed in any particular currency?
->  
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POTs (virtual currency internal to the platform).
+> **Question:** What information should the receptionist ask the SNS user to insert in the application?
+> 
+> **Answer:** —
 
 
 ### 1.3. Acceptance Criteria
-
+<!-- TODO -->
 
 * **AC1:** All required fiels must be filled in.
 * **AC2:** Task reference must have at least 5 alphanumeric chars.
@@ -45,47 +41,56 @@ _"As a receptionist, I want to register a SNS User."_
 
 ### 1.4. Found out Dependencies
 
-
-* There is a dependency to "US003 Create a task category" since at least a task category must exist to classify the task being created.
+* No dependencies were found.
 
 
 ### 1.5 Input and Output Data
 
-
 **Input Data:**
+<!-- TODO -->
 
 * Typed data:
-	* a reference, 
+    * a name
+    * an email
+    * a phone number
+    * a password
+    * a birthdate
+    <!-- * SNS Number? -->
+	<!-- * a reference, 
 	* a designation, 
 	* an informal description
 	* a technical description
 	* an estimated duration
-	* an estimated cost
+	* an estimated cost -->
 	
 * Selected data:
 	* Classifying task category 
 
 
 **Output Data:**
+<!-- TODO -->
 
 * List of existing task categories
 * (In)Success of the operation
+
 
 ### 1.6. System Sequence Diagram (SSD)
 
 **Alternative 1**
 
-![US006_SSD](US006_SSD.svg)
+![US03_SSD](US03_SSD.svg)
 
 
 **Alternative 2**
 
-![US006_SSD_v2](US006_SSD_v2.svg)
+![US03_SSD_v2](US03_SSD_v2.svg)
 
 
 **Other alternatives might exist.**
 
+
 ### 1.7 Other Relevant Remarks
+<!-- TODO -->
 
 * The created task stays in a "not published" state in order to distinguish from "published" tasks.
 
@@ -94,7 +99,7 @@ _"As a receptionist, I want to register a SNS User."_
 
 ### 2.1. Relevant Domain Model Excerpt 
 
-![US006_MD](US006_MD.svg)
+![US03_MD](US03_MD.svg)
 
 ### 2.2. Other Remarks
 
@@ -107,24 +112,24 @@ n/a
 
 **SSD - Alternative 1 is adopted.**
 
-| Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
-|:-------------  |:--------------------- |:------------|:---------------------------- |
-| Step 1  		 |	... interacting with the actor? | CreateTaskUI   |  Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.           |
-| 			  		 |	... coordinating the US? | CreateTaskController | Controller                             |
-| 			  		 |	... instantiating a new Task? | Organization   | Creator (Rule 1): in the DM Organization has a Task.   |
-| 			  		 | ... knowing the user using the system?  | UserSession  | IE: cf. A&A component documentation.  |
-| 			  		 |	... knowing to which organization the user belongs to? | Platform  | IE: has registed all Organizations |
-| 			  		 |							 | Organization   | IE: knows/has its own Employees|
-| 			  		 |							 | Employee  | IE: knows its own data (e.g. email) |
-| Step 2  		 |							 |             |                              |
-| Step 3  		 |	...saving the inputted data? | Task  | IE: object created in step 1 has its own data.  |
-| Step 4  		 |	...knowing the task categories to show? | Platform  | IE: Task Categories are defined by the Platform. |
-| Step 5  		 |	... saving the selected category? | Task  | IE: object created in step 1 is classified in one Category.  |
-| Step 6  		 |							 |             |                              |              
-| Step 7  		 |	... validating all data (local validation)? | Task | IE: owns its data.| 
-| 			  		 |	... validating all data (global validation)? | Organization | IE: knows all its tasks.| 
-| 			  		 |	... saving the created task? | Organization | IE: owns all its tasks.| 
-| Step 8  		 |	... informing operation success?| CreateTaskUI  | IE: is responsible for user interactions.  | 
+| Interaction ID | Question: Which class is responsible for...            | Answer               | Justification (with patterns)                                                                                 |
+| :------------- | :----------------------------------------------------- | :------------------- | :------------------------------------------------------------------------------------------------------------ |
+| Step 1         | ... interacting with the actor?                        | CreateTaskUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+|                | ... coordinating the US?                               | CreateTaskController | Controller                                                                                                    |
+|                | ... instantiating a new Task?                          | Organization         | Creator (Rule 1): in the DM Organization has a Task.                                                          |
+|                | ... knowing the user using the system?                 | UserSession          | IE: cf. A&A component documentation.                                                                          |
+|                | ... knowing to which organization the user belongs to? | Platform             | IE: has registed all Organizations                                                                            |
+|                |                                                        | Organization         | IE: knows/has its own Employees                                                                               |
+|                |                                                        | Employee             | IE: knows its own data (e.g. email)                                                                           |
+| Step 2         |                                                        |                      |                                                                                                               |
+| Step 3         | ...saving the inputted data?                           | Task                 | IE: object created in step 1 has its own data.                                                                |
+| Step 4         | ...knowing the task categories to show?                | Platform             | IE: Task Categories are defined by the Platform.                                                              |
+| Step 5         | ... saving the selected category?                      | Task                 | IE: object created in step 1 is classified in one Category.                                                   |
+| Step 6         |                                                        |                      |                                                                                                               |
+| Step 7         | ... validating all data (local validation)?            | Task                 | IE: owns its data.                                                                                            |
+|                | ... validating all data (global validation)?           | Organization         | IE: knows all its tasks.                                                                                      |
+|                | ... saving the created task?                           | Organization         | IE: owns all its tasks.                                                                                       |
+| Step 8         | ... informing operation success?                       | CreateTaskUI         | IE: is responsible for user interactions.                                                                     |
 
 ### Systematization ##
 
@@ -144,17 +149,17 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 **Alternative 1**
 
-![US006_SD](US006_SD.svg)
+![US03_SD](US03_SD.svg)
 
 **Alternative 2**
 
-![US006_SD](US006_SD_v2.svg)
+![US03_SD](US03_SD_v2.svg)
 
 ## 3.3. Class Diagram (CD)
 
 **From alternative 1**
 
-![US006_CD](US006_CD.svg)
+![US03_CD](US03_CD.svg)
 
 # 4. Tests 
 
@@ -183,32 +188,31 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ## Class CreateTaskController 
 
-		public boolean createTask(String ref, String designation, String informalDesc, 
-			String technicalDesc, Integer duration, Double cost, Integer catId)() {
+	public boolean createTask(String ref, String designation, String informalDesc, 
+		String technicalDesc, Integer duration, Double cost, Integer catId)() {
+	
+		Category cat = this.platform.getCategoryById(catId);
 		
-			Category cat = this.platform.getCategoryById(catId);
-			
-			Organization org;
-			// ... (omitted)
-			
-			this.task = org.createTask(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
-			
-			return (this.task != null);
-		}
+		Organization org;
+		// ... (omitted)
+		
+		this.task = org.createTask(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
+		
+		return (this.task != null);
+	}
 
 
 ## Class Organization
 
 
-		public Task createTask(String ref, String designation, String informalDesc, 
-			String technicalDesc, Integer duration, Double cost, Category cat)() {
-		
-	
-			Task task = new Task(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
-			if (this.validateTask(task))
-				return task;
-			return null;
-		}
+	public Task createTask(String ref, String designation, String informalDesc, 
+		String technicalDesc, Integer duration, Double cost, Category cat)() {
+
+		Task task = new Task(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
+		if (this.validateTask(task))
+			return task;
+		return null;
+	}
 
 
 
