@@ -24,9 +24,10 @@ Throughout the project's development period, the distribution of _tasks / requir
 | Use Case Diagram (UCD)      | [all](SprintA/UCD.md)         | [all](SprintB/UCD.md)         | [all](SprintC/UCD.md)         | [all](SprintD/UCD.md)         |
 | Supplementary Specification | [all](SprintA/FURPS.md)       | [all](SprintB/FURPS.md)       | [all](SprintC/FURPS.md)       | [all](SprintD/FURPS.md)       |
 | Domain Model                | [all](SprintA/DM.md)          | [all](SprintB/DM.md)          | [all](SprintC/DM.md)          | [all](SprintD/DM.md)          |
-| US 001 (SDP Activities)     | [1210001](SprintA/US001.md)   |                               |                               |                               |
-| US 002 (SDP Activities)     | [1210002](SprintA/US002.md)   |                               |                               |                               |
-| US 003 (SDP Activities)     | [1210003](SprintA/US003.md)   |                               |                               |                               |
-| US 004 (SDP Activities)     | [1210004](SprintA/US004.md)   |                               |                               |                               |
+| US 03 (SDP Activities)      |                               | [1211285](SprintB/US03.md)    |                               |                               |
+| US 09 (SDP Activities)      |                               | [1211299](SprintB/US09.md)    |                               |                               |
+| US 10 (SDP Activities)      |                               | [1211288](SprintB/US10.md)    |                               |                               |
+| US 11 (SDP Activities)      |                               | [1211289](SprintB/US11.md)    |                               |                               |
+| US 12 (SDP Activities)      |                               | [all](SprintB/US12.md)        |                               |                               |
+| US 13 (SDP Activities)      |                               | [1211277](SprintB/US13.md)    |                               |                               |
 | ...                         | ...                           | ...                           | ...                           | ...                           |
-| US 326 (SDP Activities)     |                               |                               |                               | [1210004](SprintA/US326.md)   |
