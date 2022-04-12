@@ -6,7 +6,7 @@
 ### 1.1. User Story Description
 
 
-As an organization employee, I want to create a new task in order to be further published.
+_"As a receptionist, I want to register a SNS User."_
 
 
 
