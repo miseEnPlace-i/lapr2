@@ -21,13 +21,11 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 
 **From the client clarifications:**
 
-> **Question:** Is there any specification about the phone number, fax number, website address, opening and closing hours, slot duration and maximum number of vaccines?
+> **Question:** Is there any specification about the phone number,address, fax number, website address, opening and closing hours, slot duration and maximum number of vaccines?
 >  
 > **Answer:** ?
 
--
-
-> **Question:** 
+> **Question:** When there is no ongoing outbreak, are this centers out of service or is another type of vaccine selected?
 >  
 > **Answer:** ?
 
@@ -51,12 +49,12 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 
 * Typed data:
 	* an name;
-	* a number;
+	* an address;
+	* a phone number;
 	* a fax number;
 	* website address;
-	* opening hours;
-	* closing hours;
-	* slot duration
+	* opening and closing hours;
+	* slot duration;
 	* maximum vaccines per slot. 
 	
 * Selected data:
@@ -123,13 +121,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ## 3.2. Sequence Diagram (SD)
 
-**Alternative 1**
-
-![US006_SD](US006_SD.svg)
-
-**Alternative 2**
-
-![US006_SD](US006_SD_v2.svg)
+![US09_SD](SD/US09_SD.svg)
 
 ## 3.3. Class Diagram (CD)
 
