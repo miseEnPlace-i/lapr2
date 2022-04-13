@@ -27,7 +27,7 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 
 > **Question:** When there is no ongoing outbreak, are this centers out of service or is another type of vaccine selected?
 >  
-> **Answer:** ?
+> **Answer:** "This centers are closed when there is no outbreak."
 
 
 ### 1.3. Acceptance Criteria
@@ -118,17 +118,15 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ## 3.3. Class Diagram (CD)
 
-**From alternative 1**
-
-![US006_CD](US006_CD.svg)
+![US09_CD](CD/US09_CD.svg)
 
 # 4. Tests 
 
-**Test 1:** Check that it is not possible to create an instance of the Task class with null values. 
+**Test 1:** Check that it is not possible to create an instance of the VaccinationCenter class without the parameter address. 
 
 	@Test(expected = IllegalArgumentException.class)
 		public void ensureNullIsNotAllowed() {
-		Task instance = new Task(null, null, null, null, null, null, null);
+		VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", null, 221010101,"vacinacaoporto@gmail.com", +351-122-123123123, "www.centrovacinaoporto.com", 5,10);
 	}
 	
 
