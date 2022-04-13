@@ -91,24 +91,23 @@ Not found.
 
 According to the taken rationale, the conceptual classes promoted to software classes are:
 
-- Organization
-- Platform
-- Task
+- Employee
+- Role
 
 Other software classes (i.e. Pure Fabrication) identified:
 
-- CreateTaskUI
-- CreateTaskController
+- ListEmployeeUI
+- ListEmployeeController
 
 ## 3.2. Sequence Diagram (SD)
 
 **Alternative 1**
 
-![US006_SD](US006_SD.svg)
+![US11_SD](SD/US11_SD.svg)
 
 **Alternative 2**
 
-![US006_SD](US006_SD_v2.svg)
+![US11_SD](SD/US11_SD_v2.svg)
 
 ## 3.3. Class Diagram (CD)
 

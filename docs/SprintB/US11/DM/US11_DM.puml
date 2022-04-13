@@ -5,17 +5,24 @@ skinparam classAttributeIconSize 0
 class Administrator {}
 
 class Employee {
-  - role
 }
 
 class Company {
   - designation
 }
 
-Administrator "1" -- "*" Employee : creates >
-Administrator "1" -- "*" Employee : lists >
+class Role {
+  - id
+  - description
+}
 
-Company "1" -- "*" Administrator : knows >
-Company "1" -- "*" Employee : knows >
+Administrator "1" -- "*" Employee : creates >
+Administrator "1" -- "*" Employee : lists 
+
+Company "1" -- "*" Administrator : knows  >
+Company "1" -- "*" Employee : knows 
+
+Employee "*" -- "1" Role : has
+Company "1" -- "*" Role : knows
 
 @enduml
