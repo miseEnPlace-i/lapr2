@@ -1,72 +1,42 @@
 @startuml
 skinparam classAttributeIconSize 0
 
-class ApplicationPOT
-{
-  +static getInstance()
-  +getCurrentSession()
+class User {
+  - String name
+  - String email
+  - String pwd
 }
 
-class UserSession
-{
-  +getUserEmail()
+class Employee {
+  +Employee(name,email,pwd,role)
 }
 
-class Task {
-  -String reference
-  -String designation
-  -String informalDescription
-  -String technicalDescription
-  -Integer duration
-  -Double cost
-  +Task(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
-}
-
-class Category {
+class Role {
   -String id
   -String description
+
+  +Role(id,description)
 }
 
-class Organization {
-  -String name
-  -String VatNumber
-  -String website
-  -String phone
-  -String email
-  +Organization(name, VatNumber, webSite, phone, email, postalAddress, manager)
-  +createTask(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
-  +saveTask(task)
-  -addTask(task)
-  -validateTask(task)
-}
-
-class Platform {
+class Company {
   -String designation
-  +getCategories()
-  +getCategoryById(catId)
-  +getOrganizationByUserEmail(email)
+  +Company(designation)
+  -validateRole(role)
 }
 
-class CreateTaskController {
-  +getCategories()
-  +createTask(ref,designation,informalDesc,technicalDesc,duration,cost,categoryId)
-  +saveTask()
+class ListEmployeeController {
+  +getRoles()
+  +listEmployeesByRoleId(roleId)
 }
 
-class CreateTaskUI {
+class ListEmployeeUI {}
 
-}
+ListEmployeeUI ..> ListEmployeeController
+ListEmployeeController ..> Employee
+ListEmployeeController ..> Company
+Employee "*" --* "1" Role
+Company "1" --> "*" Employee : employees
 
-CreateTaskUI ..> CreateTaskController
-CreateTaskController ..> Platform
-CreateTaskController ..> Category
-CreateTaskController ..> Task
-CreateTaskController ..> Organization
-CreateTaskController ..> ApplicationPOT
-CreateTaskController ..> UserSession
-Task "*" -> "1" Category : classified in
-Platform "1" --> "*" Category : defines
-Organization "1" --> "*" Task : owns
-
+User <|-- Employee 
 
 @enduml
