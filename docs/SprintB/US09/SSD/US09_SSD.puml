@@ -5,7 +5,7 @@ actor "Administrator" as Administrator
 activate Administrator
 Administrator -> ":System" : asks to create a new vaccination center
 activate ":System"
-":System" --> Administrator : requests data (name, address, phone number, e-mail address, fax number, website address, slot duration, maximum vaccines per slot)
+":System" --> Administrator : requests data (name, address, phone number, e-mail address, fax number, website address, opening and closing hours, slot duration, maximum vaccines per slot)
 deactivate ":System"
 
 Administrator -> ":System" : types requested data

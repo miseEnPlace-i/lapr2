@@ -57,10 +57,6 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 	* slot duration;
 	* maximum vaccines per slot. 
 	
-* Selected data:
-	* --
-
-
 **Output Data:**
 
 * (In)Success of the operation.
@@ -76,8 +72,7 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 
 ### 1.7 Other Relevant Remarks
 
-* --
-
+* Not found.
 
 ## 2. OO Analysis
 
@@ -88,7 +83,6 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 ### 2.2. Other Remarks
 
 * Not found.
-
 
 ## 3. Design - User Story Realization 
 
@@ -109,14 +103,13 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
- * Organization
- * Platform
- * Task
+ * VaccinationCenter
+ * Administrator
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
- * CreateTaskUI  
- * CreateTaskController
+ * CreateVaccinationCenterUI  
+ * CreateVaccinationCenterController
 
 
 ## 3.2. Sequence Diagram (SD)
