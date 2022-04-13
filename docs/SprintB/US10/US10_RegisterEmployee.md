@@ -1,4 +1,4 @@
-# US 006 - To create a Task 
+# US 10 - Register an Employee 
 
 ## 1. Requirements Engineering
 
@@ -6,7 +6,7 @@
 ### 1.1. User Story Description
 
 
-_"As an Administrator, I want to register an Employee."_
+_"As an administrator, I want to register an Employee."_
 
 
 
@@ -15,38 +15,35 @@ _"As an Administrator, I want to register an Employee."_
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost as well as the its classifying task category. 
+>	"[...] employees enrolled in the vaccination process are almost the same in each kind of vaccination center". 
 
 
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+>	"[...] receptionists and nurses registered in the application will work in the vaccination process. As the allocation of receptionists and nurses to vaccination centers might be complex, by now, the system might assume that receptionists and nurses can work on any vaccination center."
+
+> 	"Any Administrator uses the application to register [...] center coordinators, receptionists, and nurses enrolled in the vaccination process."
 
 
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** Which information should the administrator know about the employees, in order to register them in the system?
 >  
-> **Answer:** Duration is estimated in days.
+> **Answer:** _Still waiting for clarification._
 
--
-
-> **Question:** Monetary data is expressed in any particular currency?
->  
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POTs (virtual currency internal to the platform).
 
 
 ### 1.3. Acceptance Criteria
 
 
-* **AC1:** All required fiels must be filled in.
-* **AC2:** Task reference must have at least 5 alphanumeric chars.
-* **AC3:** When creating a task with an already existing reference, the system must reject such operation and the user must have the change to modify the typed reference.
+* **AC1:** All required fiels must be filled in. (?)
+* **AC2:** The password created must contain seven alphanumeric characters, including three capital letters and two digits.
+* **AC3:** Each user mmust have a single role defined in the system.
 
 
 ### 1.4. Found out Dependencies
 
 
-* There is a dependency to "US003 Create a task category" since at least a task category must exist to classify the task being created.
+* There is a dependency to "USXX Create an user role" since at least an user role must exist to classify the employee being created.
 
 
 ### 1.5 Input and Output Data
@@ -55,46 +52,38 @@ _"As an Administrator, I want to register an Employee."_
 **Input Data:**
 
 * Typed data:
-	* a reference, 
-	* a designation, 
-	* an informal description
-	* a technical description
-	* an estimated duration
-	* an estimated cost
+	* name
+	* email
+	* password
+	* ...
 	
 * Selected data:
-	* Classifying task category 
+	* user role 
 
 
 **Output Data:**
 
-* List of existing task categories
+* List of existing user roles
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
 **Alternative 1**
 
-![US006_SSD](US006_SSD.svg)
-
-
-**Alternative 2**
-
-![US006_SSD_v2](US006_SSD_v2.svg)
-
+![US10_SSD](ssd/US10_SSD.svg)
 
 **Other alternatives might exist.**
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
+n/a
 
 
 ## 2. OO Analysis
 
 ### 2.1. Relevant Domain Model Excerpt 
 
-![US006_MD](US006_MD.svg)
+![US10_DM](US10_DM.svg)
 
 ### 2.2. Other Remarks
 
@@ -107,24 +96,12 @@ n/a
 
 **SSD - Alternative 1 is adopted.**
 
-| Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
-|:-------------  |:--------------------- |:------------|:---------------------------- |
-| Step 1  		 |	... interacting with the actor? | CreateTaskUI   |  Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.           |
-| 			  		 |	... coordinating the US? | CreateTaskController | Controller                             |
-| 			  		 |	... instantiating a new Task? | Organization   | Creator (Rule 1): in the DM Organization has a Task.   |
-| 			  		 | ... knowing the user using the system?  | UserSession  | IE: cf. A&A component documentation.  |
-| 			  		 |	... knowing to which organization the user belongs to? | Platform  | IE: has registed all Organizations |
-| 			  		 |							 | Organization   | IE: knows/has its own Employees|
-| 			  		 |							 | Employee  | IE: knows its own data (e.g. email) |
-| Step 2  		 |							 |             |                              |
-| Step 3  		 |	...saving the inputted data? | Task  | IE: object created in step 1 has its own data.  |
-| Step 4  		 |	...knowing the task categories to show? | Platform  | IE: Task Categories are defined by the Platform. |
-| Step 5  		 |	... saving the selected category? | Task  | IE: object created in step 1 is classified in one Category.  |
-| Step 6  		 |							 |             |                              |              
-| Step 7  		 |	... validating all data (local validation)? | Task | IE: owns its data.| 
-| 			  		 |	... validating all data (global validation)? | Organization | IE: knows all its tasks.| 
-| 			  		 |	... saving the created task? | Organization | IE: owns all its tasks.| 
-| Step 8  		 |	... informing operation success?| CreateTaskUI  | IE: is responsible for user interactions.  | 
+| Interaction ID                                       | Question: Which class is responsible for... | Answer   | Justification (with patterns)                 |
+| :--------------------------------------------------- | :------------------------------------------ | :------- | :-------------------------------------------- |
+| Step 1: asks to register a new empolyee              | ...instantiating a new empolyee             | Company  | (?)                                           |
+| Step 2: requests data (name, email, password, etc)   | n/a                                         | n/a      | n/a                                           |
+| Step 3: types requested data                         | ...saving the input data?                   | Employee | IE: object created in step 1 has its own data |
+| Step 4: shows user roles list and asks to select one |
 
 ### Systematization ##
 
