@@ -1,4 +1,4 @@
-# US 006 - To create a Task 
+# US 12 - Specify a new vaccine and its administration process
 
 ## 1. Requirements Engineering
 
@@ -15,38 +15,49 @@ _"As an Administrator, I intend to specify a new vaccine and its administation p
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost as well as the its classifying task category. 
+>	An Administrator is responsible for properly configuring and managing the core information (e.g.:
+type of vaccines, vaccines, vaccination centers, employees) required for this application [...]
 
+>   [...] several vaccines might exist, each one demanding a distinct administration process.
 
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+>   The vaccine administration process comprises (i) one or more age groups (e.g.: 5 to 12 years old, 13 to 18 years
+old, greater than 18 years old), and (ii) per age group, the doses to be administered (e.g.: 1, 2, 3), the
+vaccine dosage (e.g.: 30 ml), and the time interval regarding the previously administered dose.
 
+>    [...]  between doses (e.g.: between the 1st and 2nd doses) the
+dosage to be administered might vary as well as the time interval elapsing between two consecutive
+doses (e.g.: between the 1st and 2nd doses 21 days might be required, while between the 2nd and the
+3rd doses 6 months might be required).
+
+>   [...] for each type of vaccine, several vaccines might exist,
 
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+TODO
+
+> **Question:** 
 >  
-> **Answer:** Duration is estimated in days.
+> **Answer:** 
 
 -
 
-> **Question:** Monetary data is expressed in any particular currency?
+> **Question:** 
 >  
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POTs (virtual currency internal to the platform).
+> **Answer:** 
 
 
 ### 1.3. Acceptance Criteria
 
-
 * **AC1:** All required fiels must be filled in.
-* **AC2:** Task reference must have at least 5 alphanumeric chars.
-* **AC3:** When creating a task with an already existing reference, the system must reject such operation and the user must have the change to modify the typed reference.
+* **AC2:** The age group intervals limits, the dosage, the time between doses and the number of doses must be positive.
+* **AC3:** When creating a vaccine with an already existing designation, the system must reject such operation and the user must have the chance to modify the typed designation.
 
 
 ### 1.4. Found out Dependencies
 
 
-* There is a dependency to "US003 Create a task category" since at least a task category must exist to classify the task being created.
+* There is a dependency to "US12 - Specify a new Vaccine Type" since at least a vaccine type must exist to classify new vaccine being created.
 
 
 ### 1.5 Input and Output Data
@@ -54,22 +65,20 @@ _"As an Administrator, I intend to specify a new vaccine and its administation p
 
 **Input Data:**
 
-* Typed data:
-	* a reference, 
-	* a designation, 
-	* an informal description
-	* a technical description
-	* an estimated duration
-	* an estimated cost
-	
-* Selected data:
-	* Classifying task category 
+- Typed data:
+  - Vaccine designation
+  - Age group interval limits
+  - Dosage
+  - Number of doses
+  - Time interval limits between doses
+- Selected data:
+  - Vaccine type
 
 
 **Output Data:**
 
-* List of existing task categories
-* (In)Success of the operation
+- (In)Success of the operation
+
 
 ### 1.6. System Sequence Diagram (SSD)
 
