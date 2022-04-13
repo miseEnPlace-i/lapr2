@@ -70,7 +70,7 @@ _"As a receptionist, I want to register a SNS User."_
 **Output Data:**
 <!-- TODO -->
 
-* List of existing task categories
+* Information 
 * (In)Success of the operation
 
 
@@ -135,14 +135,13 @@ n/a
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
- * Organization
- * Platform
- * Task
+ * SNSUser
+ * Employee
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
- * CreateTaskUI  
- * CreateTaskController
+ * CreateSNSUserUI  
+ * CreateSNSUserController
 
 
 ## 3.2. Sequence Diagram (SD)
@@ -218,9 +217,11 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 6. Integration and Demo 
 
-* A new option on the Employee menu options was added.
+* A new SNS User is created into the system.
 
-* Some demo purposes some tasks are bootstrapped while system starts.
+<!-- * A new option on the Employee menu options was added. -->
+
+<!-- * Some demo purposes some tasks are bootstrapped while system starts. -->
 
 
 # 7. Observations
