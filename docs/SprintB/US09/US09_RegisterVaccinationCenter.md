@@ -1,4 +1,4 @@
-# US 09 - Register a vaccination center  
+# US 09 - Register a vaccination center to respond to a certain pandemic 
 
 ## 1. Requirements Engineering
 
@@ -21,7 +21,7 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 
 **From the client clarifications:**
 
-> **Question:** Is there any specification about the phone number,address, fax number, website address, opening and closing hours, slot duration and maximum number of vaccines?
+> **Question:** Is there any specification about the name, phone number,address, fax number, website address, opening and closing hours, slot duration and maximum number of vaccines?
 >  
 > **Answer:** ?
 
@@ -32,14 +32,14 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 
 ### 1.3. Acceptance Criteria
 
-
-* **AC1:** __
+* **AC1:** --
+* **AC2:** Opening and closing hours non existent.
 
 
 ### 1.4. Found out Dependencies
 
 
-* No dependencies were found.
+* Not found.
 
 
 ### 1.5 Input and Output Data
@@ -63,7 +63,6 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 
 ### 1.6. System Sequence Diagram (SSD)
 
-**Alternative 1**
 
 ![US09_SSD](SSD/US09_SSD.svg)
 
@@ -87,8 +86,6 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 ## 3. Design - User Story Realization 
 
 ### 3.1. Rationale
-
-**SSD - Alternative 1 is adopted.**
 
 | Interaction ID                                                                                                                           | Question: Which class is responsible for...     | Answer            | Justification (with patterns)                              |
 | :--------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------- | :---------------- | :--------------------------------------------------------- |
