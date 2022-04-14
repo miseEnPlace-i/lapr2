@@ -121,24 +121,30 @@ Other software classes (i.e. Pure Fabrication) identified:
 ![US09_CD](CD/US09_CD.svg)
 
 # 4. Tests 
-
+// Test without 1 parameter address (String)
+// Test without 1 parameter phone number (int)
+// Test without any parameter
+// ---
 **Test 1:** Check that it is not possible to create an instance of the VaccinationCenter class without the parameter address. 
 
 	@Test(expected = IllegalArgumentException.class)
 		public void ensureNullIsNotAllowed() {
-		VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", null, 221010101,"vacinacaoporto@gmail.com", +351-122-123123123, "www.centrovacinaoporto.com", 5,10);
+		VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida", 221010101,"vacinacaoporto@gmail.com", +351-122-123123123, "www.centrovacinaoporto.com", "8:00-19:00", 5, 10);
 	}
 	
-
-**Test 2:** Check that it is not possible to create an instance of the Task class with a reference containing less than five chars - AC2. 
+**Test 2:** Check that it is not possible to create an instance of the VaccinationCenter class without the parameter slot duration.
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureReferenceMeetsAC2() {
-		Category cat = new Category(10, "Category 10");
-		
-		Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
+		public void ensureIntegerParameterIsNotNull() {
+		VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida", 221010101,"vacinacaoporto@gmail.com", +351-122-123123123, "www.centrovacinaoporto.com", "8:00-19:00", 0, 10);
 	}
 
+**Test 3** Check that it is not possible to create an instance of the VaccinationCenter class without any parameter.
+	
+	@Test(expected = IllegalArgumentException.class)
+		public void ensureEveryParameterIsNotNul() {
+			VaccinationCenter center = new VaccinationCenter(null,null,0,null,0,null,null,0,0);
+		}
 
 *It is also recommended to organize this content by subsections.* 
 
