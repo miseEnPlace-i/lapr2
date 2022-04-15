@@ -43,7 +43,7 @@ _"As an administrator, I want to register an Employee."_
 ### 1.4. Found out Dependencies
 
 
-* There is a dependency to "USXX Create an user role" since at least an user role must exist to classify the employee being created.
+* There is a dependency to "USXX - Create an user role" since at least one user role must exist to classify the employee being created.
 
 
 ### 1.5 Input and Output Data
@@ -96,42 +96,41 @@ n/a
 
 **SSD - Alternative 1 is adopted.**
 
-| Interaction ID                                       | Question: Which class is responsible for... | Answer   | Justification (with patterns)                 |
-| :--------------------------------------------------- | :------------------------------------------ | :------- | :-------------------------------------------- |
-| Step 1: asks to register a new empolyee              | ...instantiating a new empolyee             | Company  | (?)                                           |
-| Step 2: requests data (name, email, password, etc)   | n/a                                         | n/a      | n/a                                           |
-| Step 3: types requested data                         | ...saving the input data?                   | Employee | IE: object created in step 1 has its own data |
-| Step 4: shows user roles list and asks to select one |
+| Interaction ID                                       | Question: Which class is responsible for... | Answer   | Justification (with patterns)             |
+| :--------------------------------------------------- | :------------------------------------------ | :------- | :---------------------------------------- |
+| Step 1: asks to register a new empolyee              | ...instantiating a new empolyee             | Company  | (?)                                       |
+| Step 2: requests data (name, email, password, etc)   | n/a                                         | n/a      | n/a                                       |
+| Step 3: types requested data                         | ...saving the input data?                   | Employee | object created in step 1 has its own data |
+| Step 4: shows user roles list and asks to select one |                                             |          |                                           |
+| Step 5: selects a user role                          |                                             |          |                                           |
+| Step 6: shows all data and requests confirmation     |                                             |          |                                           |
+| Step 7: confirms the data                            |                                             |          |                                           |
+| Step 8: informs operation success                    |                                             |          |                                           |
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
- * Organization
- * Platform
- * Task
+ * Employee
+ * Company
+ * ...
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
- * CreateTaskUI  
- * CreateTaskController
+ * ...
 
 
 ## 3.2. Sequence Diagram (SD)
 
 **Alternative 1**
 
-![US006_SD](US006_SD.svg)
-
-**Alternative 2**
-
-![US006_SD](US006_SD_v2.svg)
+![US10_SD](US10_SD.svg)
 
 ## 3.3. Class Diagram (CD)
 
 **From alternative 1**
 
-![US006_CD](US006_CD.svg)
+![US10_CD](US10_CD.svg)
 
 # 4. Tests 
 
