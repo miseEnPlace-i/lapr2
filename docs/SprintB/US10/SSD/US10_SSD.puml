@@ -10,10 +10,10 @@ deactivate ":System"
 
 admin -> ":System" : types requested data
 activate ":System"
-":System" --> OE : shows user roles list and asks to select one
+":System" --> admin : shows user roles list and asks to select one
 deactivate ":System"
 
-OE -> ":System" : selects a user role
+admin -> ":System" : selects a user role
 activate ":System"
 ":System" --> admin : shows all data and requests confirmation
 deactivate ":System"
