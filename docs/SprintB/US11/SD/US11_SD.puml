@@ -6,7 +6,7 @@ actor "Administrator" as ADM
 participant ":ListEmployeeUI" as UI
 participant ":ListEmployeeController" as CTRL
 participant "comp\n:Company" as COMP
-participant "lsEmp:List<Employee>" as LST
+participant "lsEmp\n:List<Employee>" as LST
 participant "emp:Employee" as EMP
 
 activate ADM
@@ -38,15 +38,15 @@ loop for each employee
   activate EMP
     COMP -> EMP: e=hasRole(roleId)
     EMP --> COMP: true/false
+  deactivate EMP
     alt e==true
         COMP -> LST: add(employee)
       activate LST
-      deactivate LST
     end
-  deactivate EMP
 end
 
 LST --> CTRL: lsEmp
+deactivate LST
 CTRL --> UI: lsEmp
 
 deactivate COMP
