@@ -6,7 +6,6 @@ actor "Administrator" as ADM
 participant ":ListEmployeeUI" as UI
 participant ":ListEmployeeController" as CTRL
 participant "comp\n:Company" as COMP
-participant "lsEmp\n:List<Employee>" as LST
 participant "emp:Employee" as EMP
 
 activate ADM
@@ -32,6 +31,7 @@ activate CTRL
 
 activate COMP
 CTRL -> COMP: employees=getEmployeesByRoleId(roleId)
+create "lsEmp\n:List<Employee>" as LST
 COMP --> LST
 
 loop for each employee
