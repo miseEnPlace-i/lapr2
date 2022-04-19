@@ -10,11 +10,6 @@ deactivate ":System"
 
 Admin -> ":System" : selects a role
 activate ":System"
-":System" --> Admin : shows all data and requests confirmation
-deactivate ":System"
-
-Admin -> ":System" : confirms the data
-activate ":System"
 ":System" --> Admin : informs operation success and list all employees for given role
 deactivate ":System"
 

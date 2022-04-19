@@ -5,16 +5,15 @@ actor "Administrator" as ADM
 
 participant ":ListEmployeeUI" as UI
 participant ":ListEmployeeController" as CTRL
-participant "role\n:Role" as ROLE
 participant "comp\n:Company" as COMP
+participant "lsEmp:List<Employee>" as LST
+participant "emp:Employee" as EMP
 
 activate ADM
 ADM -> UI : asks to list employees for given role
 activate UI
-UI --> ADM : shows roles list and ask to select one
 activate CTRL
 UI -> CTRL : roleList=getEmployeeRoles()
-deactivate UI
 
 CTRL -> COMP : roleList=getEmployeeRoles()
 activate COMP
@@ -22,28 +21,39 @@ activate COMP
 deactivate COMP
 deactivate CTRL
 
+UI --> ADM : shows roles list and ask to select one
+deactivate UI
+
 ADM -> UI : selects an employee role
 activate UI
 
 UI -> CTRL : role=getEmployeeRoleById(roleId)
 activate CTRL
 
-CTRL -> ROLE: role=getRoleById(roleId)
-activate ROLE
-
-ROLE --> ROLE: validate(roleId)
 activate COMP
-deactivate ROLE
-CTRL --> COMP: employees=getEmployeesByRole(roleId)
+CTRL -> COMP: employees=getEmployeesByRoleId(roleId)
+COMP --> LST
 
-CTRL --> UI: result
+loop for each employee
+  activate EMP
+    COMP -> EMP: e=hasRole(roleId)
+    EMP --> COMP: true/false
+    alt e==true
+        COMP -> LST: add(employee)
+      activate LST
+      deactivate LST
+    end
+  deactivate EMP
+end
+
+LST --> CTRL: lsEmp
+CTRL --> UI: lsEmp
 
 deactivate COMP
 deactivate CTRL
 UI --> ADM : informs operation success
 UI --> ADM: shows the list of employees
 deactivate UI
-
 
 deactivate UI
 deactivate CTRL

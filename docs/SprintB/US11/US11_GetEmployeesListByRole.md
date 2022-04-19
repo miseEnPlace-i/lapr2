@@ -162,6 +162,6 @@ _It is also recommended to organize this content by subsections._
 
 # 7. Observations
 
-Platform and Organization classes are getting too many responsibilities due to IE pattern and, therefore, they are becoming huge and harder to maintain.
+Company class is getting too many responsibilities due to IE pattern and, therefore, is becoming huge and harder to maintain.
 
 Is there any way to avoid this to happen?
