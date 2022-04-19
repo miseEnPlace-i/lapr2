@@ -72,7 +72,7 @@ VaccinationCenter "1" -- "1" CenterCoordinator : has
 HealthCareCenter "*" -- "1" AGES : belongs to > 
 HealthCareCenter "*" -- "1" ARS : belongs to 
 
-Appointment "1" -- "1" VaccinationCenter : is held in >
+Appointment "*" -- "1" VaccinationCenter : is held in >
 Appointment "1" -- "1" Vaccine : has a specefic 
 Appointment "1" -- "1" Notification : triggers 
 
@@ -98,12 +98,10 @@ Vaccine "1" -- "1..*" AdministrationProccess : has >
 
 SNSUser "1" -- "*" Notification : receives >
 
-HealthCareCenter "1" -- "*" OtherMedicalService : provides 
-
 SNSUser "1" -- "*" VaccinationCertificate : requests
 
 VaccinationCertificate "1" -- "1" Vaccine : corresponds >
-DGS "1" -- "*" VaccinationCertificate : emmits
+Company "1" -- "*" VaccinationCertificate : emmits >
 
 Receptionist "0,1" -- "1" Appointment : schedules
 
@@ -118,5 +116,7 @@ Nurse "1" -- "*" AdministrationProccess : checks
 
 Notification <|-- SMS
 Notification <|-- Email
+
+AdverseReaction "0,1" -- "1" Appointment : has <
 
 @enduml

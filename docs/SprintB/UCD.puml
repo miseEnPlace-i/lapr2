@@ -7,8 +7,7 @@ actor "Nurse" as nurse
 actor "Receptionist" as recept
 actor "Administrator" as admin
 actor "Center Coordinator" as coordinator
-actor "<< system >> SMS Sender" as dgs
-actor "<< system >> EMAIL Sender" as dgsEmail
+actor "<< system >> Sender" as system
 
 rectangle System {
   usecase "UC01. Schedule a vaccine" as UC01
@@ -36,7 +35,7 @@ rectangle System {
 
 user -- UC01
 user -- UC02
-dgs -- UC03
+system -- UC03
 recept -- UC01
 nurse -- UC05
 nurse -- UC06
@@ -55,7 +54,6 @@ admin -- UC18
 admin -- UC19
 admin -- UC22
 admin -- UC20
-dgs -- UC21
-dgsEmail -- UC21
+system -- UC21
 
 @enduml
