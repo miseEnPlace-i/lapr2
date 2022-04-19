@@ -96,23 +96,23 @@ n/a
 
 **SSD - Alternative 1 is adopted.**
 
-| Interaction ID                                       | Question: Which class is responsible for... | Answer   | Justification (with patterns)             |
-| :--------------------------------------------------- | :------------------------------------------ | :------- | :---------------------------------------- |
-| Step 1: asks to register a new empolyee              | ...instantiating a new empolyee             | Company  | (?)                                       |
-| Step 2: requests data (name, email, password, etc)   | n/a                                         | n/a      | n/a                                       |
-| Step 3: types requested data                         | ...saving the input data?                   | Employee | object created in step 1 has its own data |
-| Step 4: shows user roles list and asks to select one |                                             |          |                                           |
-| Step 5: selects a user role                          |                                             |          |                                           |
-| Step 6: shows all data and requests confirmation     |                                             |          |                                           |
-| Step 7: confirms the data                            |                                             |          |                                           |
-| Step 8: informs operation success                    |                                             |          |                                           |
+| Interaction ID                                       | Question: Which class is responsible for... | Answer   | Justification (with patterns)                 |
+| :--------------------------------------------------- | :------------------------------------------ | :------- | :-------------------------------------------- |
+| Step 1: asks to register a new employee              | ...instantiating a new employee             | Company  | (?)                                           |
+| Step 2: requests data (name, email, password, etc)   | n/a                                         | n/a      | n/a                                           |
+| Step 3: types requested data                         | ...saving the input data?                   | Employee | IE: object created in step 1 has its own data |
+| Step 4: shows user roles list and asks to select one |                                             |          |                                               |
+| Step 5: selects a user role                          |                                             |          |                                               |
+| Step 6: shows all data and requests confirmation     |                                             |          |                                               |
+| Step 7: confirms the data                            |                                             |          |                                               |
+| Step 8: informs operation success                    | ...informing operation success?             | UI       | IE: responsible for user interaction          |
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
  * Employee
- * Company
+ * Company (?)
  * ...
 
 Other software classes (i.e. Pure Fabrication) identified: 
