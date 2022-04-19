@@ -1,19 +1,19 @@
 @startuml
 autonumber
-actor "Organization Employee" as OE
+actor "Administrator" as OE
 
 activate OE
-OE -> ":System" : asks to create a new task
+OE -> ":System" : asks to create a new vaccine
 activate ":System"
-":System" --> OE : requests data (reference, designation,  informal \n description, technical description, duration, cost)
+":System" --> OE : requests data (designation, age groups interval limits, number of dosages, dosages, time interval limits between doses)
 deactivate ":System"
 
 OE -> ":System" : types requested data
 activate ":System"
-":System" --> OE : shows task categories list and ask to select one
+":System" --> OE : shows task vaccine types list and ask to select one
 deactivate ":System"
 
-OE -> ":System" : selects a task category
+OE -> ":System" : selects a task vaccine type
 activate ":System"
 ":System" --> OE : shows all data and requests confirmation
 deactivate ":System"

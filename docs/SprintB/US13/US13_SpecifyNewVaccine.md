@@ -70,7 +70,7 @@ TODO
   - Age group interval limits
   - Dosage
   - Number of doses
-  - Time interval limits between doses
+  - Time interval between doses
 - Selected data:
   - Vaccine type
 
@@ -84,20 +84,14 @@ TODO
 
 **Alternative 1**
 
-![US006_SSD](US006_SSD.svg)
-
-
-**Alternative 2**
-
-![US006_SSD_v2](US006_SSD_v2.svg)
+![US13_SSD](SSD/US13_SSD.svg)
 
 
 **Other alternatives might exist.**
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
-
+* Not found
 
 ## 2. OO Analysis
 
