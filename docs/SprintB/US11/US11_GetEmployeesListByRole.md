@@ -14,15 +14,9 @@ _"As an Administrator, I want to get a list of Employees with a given function/r
 
 > "[...] each vaccination center has one coordinator."
 
-**From the client clarifications:**
-
-> **Question:** ?
->
-> **Answer:** ?
-
 ### 1.3. Acceptance Criteria
 
-- **ACX:** ?
+- **AC1: The selected role must be valid**
 
 ### 1.4. Found out Dependencies
 
@@ -68,14 +62,13 @@ Not found.
 
 ### 3.1. Rationale
 
-| Interaction ID                                                  | Question: Which class is responsible for... | Answer  | Justification (with patterns)        |
-| :-------------------------------------------------------------- | :------------------------------------------ | :------ | :----------------------------------- |
-| Ask to list employees for a given role                          | ... ?                                       | ?       | ?                                    |
-| Show roles list and ask to select one                           | ... listing all roles?                      | Company | IE: knows all the existing roles     |
-| Select role                                                     | n/a                                         | ?       | ?                                    |
-| Shows all data and requests confirmation                        | ... ?                                       | ?       | ?                                    |
-| Confirm data                                                    | ... ?                                       | ?       | ?                                    |
-| Informs operation success and list all employees for given role | ... informing operation success?            | UI      | IE: responsible for user interaction |
+| Interaction ID                                                  | Question: Which class is responsible for... | Answer   | Justification (with patterns)                                                                                 |
+| :-------------------------------------------------------------- | :------------------------------------------ | :------- | :------------------------------------------------------------------------------------------------------------ |
+| Ask to list employees for a given role                          | ... displaying the screen to the user       | UI       | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+| Show roles list and ask to select one                           | ... listing all roles?                      | Company  | IE: knows all the existing roles                                                                              |
+| Select role                                                     | n/a                                         | n/a      | n/a                                                                                                           |
+| Generate employees list for a given role                        | ... knowing the employee role               | Employee | IE: knows it's attributes                                                                                     |
+| Informs operation success and list all employees for given role | ... informing operation success?            | UI       | IE: responsible for user interaction                                                                          |
 
 ### Systematization
 
@@ -107,23 +100,19 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 4. Tests
 
-**Test 1:** Check that it is not possible to create an instance of the Task class with null values.
+**Test 1:** Check that it is not possible to list employees with null Role.
 
     @Test(expected = IllegalArgumentException.class)
     	public void ensureNullIsNotAllowed() {
-    	Task instance = new Task(null, null, null, null, null, null, null);
+    	List empList = listEmployeesWithRole(null);
     }
 
-**Test 2:** Check that it is not possible to create an instance of the Task class with a reference containing less than five chars - AC2.
+**Test 2:** Check that it is not possible to list employees with non existing role.
 
     @Test(expected = IllegalArgumentException.class)
-    	public void ensureReferenceMeetsAC2() {
-    	Category cat = new Category(10, "Category 10");
-
-    	Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
+    	public void ensureReferenceMeetsAC1() {
+    	List empList = getEmployeesWithRole("NotValidRole");
     }
-
-_It is also recommended to organize this content by subsections._
 
 # 5. Construction (Implementation)
 

@@ -9,6 +9,8 @@ class User {
 
 class Employee {
   +Employee(name,email,pwd,role)
+
+  +isRole(roleId)
 }
 
 class Role {
@@ -21,12 +23,13 @@ class Role {
 class Company {
   -String designation
   +Company(designation)
-  -validateRole(role)
+
+  +getEmployeesByRoleId(roleId)
 }
 
 class ListEmployeeController {
   +getRoles()
-  +listEmployeesByRoleId(roleId)
+  +getEmployeesByRoleId(roleId)
 }
 
 class ListEmployeeUI {}
@@ -34,7 +37,7 @@ class ListEmployeeUI {}
 ListEmployeeUI ..> ListEmployeeController
 ListEmployeeController ..> Employee
 ListEmployeeController ..> Company
-Employee "*" --* "1" Role
+Employee "*" --> "1" Role : has
 Company "1" --> "*" Employee : employees
 
 User <|-- Employee 
