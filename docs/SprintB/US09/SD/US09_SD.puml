@@ -9,17 +9,25 @@ participant "comp\n:Company" as COMP
 activate ADM
 ADM -> UI : asks to create a new vaccination center
 activate UI
-UI --> ADM : requests data (name, address, phone number, e-mail address, fax number, website address, slot duration, maximum vaccines per slot)
+UI --> ADM : requests data (name,address,phoneNumber,emailAddress,faxNumber,websiteAddress,openingAndClosingHours,slotDuration,maximumVaccinesPerSlot)
 deactivate UI
 
 ADM -> UI : types requested data
 activate UI
 
-UI -> CTRL : center=setVaccinationCenter()
+UI -> CTRL : createVaccinationCenter(name,address,phoneNumber,emailAddress,faxNumber,websiteAddress,openingAndClosingHours,slotDuration,maximumVaccinesPerSlot)
 activate CTRL
 
-CTRL-> COMP : center=setVaccinationCenter()
+CTRL-> COMP : center=createVaccinationCenter(name,address,phoneNumber,emailAddress,faxNumber,websiteAddress,openingAndClosingHours,slotDuration,maximumVaccinesPerSlot)
 activate COMP
+
+create "center: VaccinationCenter" as CENTER
+COMP -> CENTER : create(name,address,phoneNumber,emailAddress,faxNumber,websiteAddress,openingAndClosingHours,slotDuration,maximumVaccinesPerSlot)
+deactivate COMP
+
+CTRL-> COMP : validateVaccinationCenter(center)
+activate COMP
+deactivate COMP
 
 UI --> ADM: shows all data and requests confirmation
 deactivate COMP
@@ -28,11 +36,14 @@ deactivate UI
 
 ADM -> UI : confirms the vaccinationCenter data
 activate UI
-UI -> CTRL : saveVaccinationCenter(center)
+UI -> CTRL : saveVaccinationCenter()
 activate CTRL
 
 CTRL -> COMP : saveVaccinationCenter(center)
 activate COMP
+
+COMP -> COMP : validateVaccinationCenter(center)
+COMP -> COMP : addVaccinationCenter(center)
 
 UI --> ADM : informs operation success
 deactivate COMP

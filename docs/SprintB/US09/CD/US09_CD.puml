@@ -5,6 +5,7 @@ class VaccinationCenter {
   - name String
   - address String
   - phoneNumber int
+  - emailAddress String
   - faxNumber int
   - websiteAddress String
   - openingAndClosingHours String
