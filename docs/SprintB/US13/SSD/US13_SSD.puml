@@ -10,10 +10,10 @@ deactivate ":System"
 
 OE -> ":System" : types requested data
 activate ":System"
-":System" --> OE : shows task vaccine types list and ask to select one
+":System" --> OE : shows vaccine types list and ask to select one
 deactivate ":System"
 
-OE -> ":System" : selects a task vaccine type
+OE -> ":System" : selects a vaccine type
 activate ":System"
 ":System" --> OE : shows all data and requests confirmation
 deactivate ":System"
