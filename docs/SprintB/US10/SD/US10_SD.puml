@@ -1,6 +1,6 @@
 @startuml US10_SD
 autonumber
-'hide footbox
+' hide footbox
 actor "Admininistrator" as admin
 
 participant ":CreateEmployeeUi" as empUi
@@ -45,7 +45,10 @@ empController -> comp: employee=createEmployee(name, email, password, role)
 activate comp
 
 comp --> emp**: create(name, email, password, role)
-comp -> comp: validateEmployee(employee)
+deactivate comp
+empController -> comp: validateEmployee(employee)
+
+activate comp
 empController --> empUi: result
 empUi --> admin: shows all data and requests confirmation
 deactivate comp
