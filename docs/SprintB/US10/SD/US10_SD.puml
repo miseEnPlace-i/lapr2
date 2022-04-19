@@ -23,7 +23,7 @@ activate empController
 
 empController -> comp : roleList=getEmployeeRoles()
 activate comp
-' |||
+|||
 deactivate comp
 deactivate empController
 
@@ -36,16 +36,17 @@ activate empUi
 empUi -> empController : createEmployee(name, email, password, roleId)
 activate empController
 
-empController -> comp : role=getRoleById(roleId)
-activate comp
-' |||
-deactivate comp
+empController -> role : role=getRoleById(roleId)
+activate role
+|||
+deactivate role
 
 empController -> comp: employee=createEmployee(name, email, password, role)
 activate comp
 
 comp --> emp**: create(name, email, password, role)
 comp -> comp: validateEmployee(employee)
+empController --> empUi: result
 empUi --> admin: shows all data and requests confirmation
 deactivate comp
 deactivate empController
@@ -53,19 +54,21 @@ deactivate empUi
 
 admin -> empUi : confirms the data
 activate empUi
-empUi -> empController : saveTask()
+empUi -> empController : saveEmployee()
 activate empController
 
-empController -> ORG : saveTask(task)
-activate ORG
+empController -> comp : saveEmployee(employee)
+activate comp
 
-ORG -> ORG: validateTask(task)
-ORG -> ORG: addTask(task)
+comp -> comp: validateEmployee(employee)
+|||
+comp -> comp: addEmployee(employee)
+|||
 
 empController --> empUi: result
 
 empUi --> admin : informs operation success
-deactivate ORG
+deactivate comp
 deactivate empController
 deactivate empUi
 
