@@ -18,23 +18,24 @@ rectangle System {
   usecase "UC06. Check user's health information" as UC06
   usecase "UC07. Issue vaccine certificate" as UC07
   usecase "UC08. Report adverse reactions during recovery period" as UC08
-  usecase "UC09. Register and manage vaccination center" as UC18
-  usecase "UC10. Register and manage employee" as UC19
+  usecase "UC09. Register vaccination center" as UC18
+  usecase "UC10. Register employee" as UC19 
   usecase "UC11. Check list of Employees" as UC22
-  usecase "UC12. Configure type of vaccine" as UC16
-  usecase "UC13. Configure vaccine and its administration process" as UC17
-  usecase "UC14. Confirm vaccination appointment for a given SNS user" as UC11
-  usecase "UC03. Register the arrival of a SNS User" as UC10
+  usecase "UC12. Register type of vaccine" as UC16
+  usecase "UC13. Register vaccine and its administration process" as UC17
   usecase "UC16. Register that a given SNS User is ready to take the vaccine" as UC12
   usecase "UC17. Register SNS User's vaccination details" as UC09
   usecase "UC18. View centers' statistics and charts" as UC13
   usecase "UC19. Generate a center report" as UC14
   usecase "UC20. Analyse other center vaccination data" as UC15
   usecase "UC21. Notify SNS user that the recovery period has ended" as UC21
+  usecase "UC22. Manage vaccination center" as UC22
+  usecase "UC23. Manage employee" as UC23
 }
 
 user -- UC01
 user -- UC02
+user -- UC06
 system -- UC03
 recept -- UC01
 nurse -- UC05
@@ -42,8 +43,6 @@ nurse -- UC06
 nurse -- UC07
 nurse -- UC08
 nurse -- UC09
-recept -- UC10
-recept -- UC11
 recept -- UC12
 coordinator -- UC13
 coordinator -- UC14
@@ -55,5 +54,7 @@ admin -- UC19
 admin -- UC22
 admin -- UC20
 system -- UC21
+admin -- UC22
+admin -- UC23
 
 @enduml
