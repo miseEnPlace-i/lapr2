@@ -58,6 +58,11 @@ class AGES {}
 
 class ARS {}
 
+class IntervalBetweenDoses {}
+
+IntervalBetweenDoses "1" -- "1" Vaccine : has <
+IntervalBetweenDoses "1" -- "1" Appointment : is associated >
+
 Vaccine "*" -- "1" VaccineType : has <
 
 Employee <|-- Nurse
