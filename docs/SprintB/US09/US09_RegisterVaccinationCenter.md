@@ -14,6 +14,8 @@ _"As an administrator, I want to register a vaccination center to respond to a c
 >	"[...] vaccination centers are facilities specifically created to administer vaccines of a single type as
 response to an ongoing disease outbreak (e.g.: Covid-19)."
 
+> "Each vaccination center has a Center Coordinator [...]"
+
 >	"[...] vaccination centers are characterized by a name, an address, a phone number, an e-mail address, a
 fax number, a website address, opening and closing hours, slot duration (e.g.: 5 minutes) and the
 maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slot)." 
@@ -32,14 +34,14 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** --
-* **AC2:** Opening and closing hours non existent.
+* **AC1:** Each center mush have one Center Coordinator.
+* **AC2:** --
 
 
 ### 1.4. Found out Dependencies
 
 
-* Not found.
+* There is a dependency to "US10 - Register an Employee	" since at least one Center Coordinator must be designated to a Vaccination Center for it to be created.
 
 
 ### 1.5 Input and Output Data
@@ -50,12 +52,14 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 * Typed data:
 	* an name;
 	* an address;
+	* email address
 	* a phone number;
 	* a fax number;
 	* website address;
 	* opening and closing hours;
 	* slot duration;
-	* maximum vaccines per slot. 
+	* maximum vaccines per slot; 
+	* center coordinator.
 	
 **Output Data:**
 
@@ -87,14 +91,14 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 
 ### 3.1. Rationale
 
-| Interaction ID                                                                                                                           | Question: Which class is responsible for...     | Answer            | Justification (with patterns)                              |
-| :--------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------- | :---------------- | :--------------------------------------------------------- |
-| Step 1: starts creating a new vaccination center                                                                                         | ... instantiating a new Vaccination center?     | Company           | --                                                         |
-| Step 2: request data(name, address, phone number, e-mail address, fax number, website address, slot duration, maximum vaccines per slot) | n/a                                             | n/a               | n/a                                                        |
-| Step 3: types requested data                                                                                                             | ... saving the inputted data?                   | VaccinationCenter | IE: object created in step 1 has its own data.             |
-| Step 4: shows the data and requests a confirmation                                                                                       | ... validating the data introduced?             | Company           | IE: Task Categories are defined by the Platform.           |
-| Step 5: confirms the data                                                                                                                | ... saving the new created Vaccination Center?  | Company           | IE: holds every information about the vaccination process. |
-| Step 6: informs operation success                                                                                                        | ... informing that the operation was a success? | UI                | IE: responsible for user interaction.                      |
+| Interaction ID                                                                                                                                                             | Question: Which class is responsible for...     | Answer            | Justification (with patterns)                              |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------- | :---------------- | :--------------------------------------------------------- |
+| Step 1: starts creating a new vaccination center                                                                                                                           | ... instantiating a new Vaccination center?     | Company           | --                                                         |
+| Step 2: request data(name, address,email address, phone number, e-mail address, fax number, website address, slot duration, maximum vaccines per slot, center coordinator) | n/a                                             | n/a               | n/a                                                        |
+| Step 3: types requested data                                                                                                                                               | ... saving the inputted data?                   | VaccinationCenter | IE: object created in step 1 has its own data.             |
+| Step 4: shows the data and requests a confirmation                                                                                                                         | ... validating the data introduced?             | Company           | IE: Task Categories are defined by the Platform.           |
+| Step 5: confirms the data                                                                                                                                                  | ... saving the new created Vaccination Center?  | Company           | IE: holds every information about the vaccination process. |
+| Step 6: informs operation success                                                                                                                                          | ... informing that the operation was a success? | UI                | IE: responsible for user interaction.                      |
 
 ### Systematization ##
 
