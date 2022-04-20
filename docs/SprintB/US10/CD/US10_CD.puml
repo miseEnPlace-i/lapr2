@@ -3,9 +3,12 @@ skinparam classAttributeIconSize 0
 
 class Employee {
   -String name
+  -String address
+  -String phone number
   -String email
+  -String citizen number
   -String password
-  +Employee(name, email, password)
+  +Employee(name, address, phone number, email, citizen card number, password)
 }
 
 class Role {
@@ -19,7 +22,7 @@ class Company {
   -String designation
   +Organization(designation)
   +getEmployeeRoles()
-  +createEmployee(name, email, password, role)
+  +createEmployee(name, address, phone number, email, citizen card number, password, role)
   +validateEmployee(employee)
   +saveEmployee(employee)
   -addEmployee(employee)
@@ -27,7 +30,7 @@ class Company {
 
 class CreateEmployeeController {
   +getEmployeeRoles()
-  +createEmployee(name, email, password, roleId)
+  +createEmployee(name, address, phone number, email, citizen card number, password, roleId)
   +saveEmployee()
 }
 
