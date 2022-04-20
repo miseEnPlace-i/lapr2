@@ -11,12 +11,15 @@ class Administrator {
 
 class Role {
   -id
+  -description
 }
 
 class Employee {
   -name
+  -address
+  -phone number
   -email
-  -password
+  -citizen card number
 }
 
 Company "1" -- "*" Administrator : knows >
