@@ -17,6 +17,7 @@ _"As an administrator, I want to register an Employee."_
 
 >	"[...] employees enrolled in the vaccination process are almost the same in each kind of vaccination center". 
 
+>	"Each vaccination center has a Center Coordinator [...]"
 
 >	"[...] receptionists and nurses registered in the application will work in the vaccination process. As the allocation of receptionists and nurses to vaccination centers might be complex, by now, the system might assume that receptionists and nurses can work on any vaccination center."
 
@@ -28,16 +29,15 @@ _"As an administrator, I want to register an Employee."_
 
 > **Question:** Which information should the administrator know about the employees, in order to register them in the system?
 >  
-> **Answer:** _Still waiting for clarification._
-
+> **Answer:** _"Every Employee has only one role (Coordinator, Receptionist, Nurse). Employee attributes: Id (automatic), name, address, phone number, e-mail and Citizen Card number. All attributes are mandatory"._
 
 
 ### 1.3. Acceptance Criteria
 
 
-* **AC1:** All required fiels must be filled in. (?)
+* **AC1:** All required fields must be filled in. (All attributes of the employee are required).
 * **AC2:** The password created must contain seven alphanumeric characters, including three capital letters and two digits.
-* **AC3:** Each user mmust have a single role defined in the system.
+* **AC3:** Each user must have a single role defined in the system.
 
 
 ### 1.4. Found out Dependencies
@@ -53,9 +53,11 @@ _"As an administrator, I want to register an Employee."_
 
 * Typed data:
 	* name
+	* adress
+	* phone number
 	* email
-	* password
-	* ...
+	* citizen card number
+	* password (? - not sure if it is automaticly generated)
 	
 * Selected data:
 	* user role 
