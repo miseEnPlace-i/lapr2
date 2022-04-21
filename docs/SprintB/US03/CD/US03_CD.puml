@@ -7,63 +7,37 @@ class ApplicationPOT
   +getCurrentSession()
 }
 
-class UserSession
-{
-  +getUserEmail()
-}
-
-class Task {
-  -String reference
-  -String designation
-  -String informalDescription
-  -String technicalDescription
-  -Integer duration
-  -Double cost
+class SNSUser {
+  -String SNSNumber
+  -String name
+  -Date birthDate
+  -Integer phoneNumber
+  -String email
   +Task(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
 }
 
-class Category {
-  -String id
-  -String description
-}
-
-class Organization {
-  -String name
-  -String VatNumber
-  -String website
-  -String phone
-  -String email
-  +Organization(name, VatNumber, webSite, phone, email, postalAddress, manager)
-  +createTask(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
-  +saveTask(task)
-  -addTask(task)
-  -validateTask(task)
-}
-
-class Platform {
+class Company {
   -String designation
-  +getCategories()
-  +getCategoryById(catId)
-  +getOrganizationByUserEmail(email)
+  +validateUser(user)
 }
 
-class CreateTaskController {
-  +getCategories()
-  +createTask(ref,designation,informalDesc,technicalDesc,duration,cost,categoryId)
+class RegisterSNSUserController {
+  +getUsers()
+  +getUser(userId)
+  +createUser(snsNumber, name, email, birthDate, phoneNumber)
   +saveTask()
 }
 
-class CreateTaskUI {
-
+class RegisterSNSUserUI {
 }
 
-CreateTaskUI ..> CreateTaskController
-CreateTaskController ..> Platform
-CreateTaskController ..> Category
-CreateTaskController ..> Task
-CreateTaskController ..> Organization
-CreateTaskController ..> ApplicationPOT
-CreateTaskController ..> UserSession
+RegisterSNSUserUI ..> RegisterSNSUserController
+RegisterSNSUserController ..> Platform
+RegisterSNSUserController ..> Category
+RegisterSNSUserController ..> Task
+RegisterSNSUserController ..> Organization
+RegisterSNSUserController ..> ApplicationPOT
+RegisterSNSUserController ..> UserSession
 Task "*" -> "1" Category : classified in
 Platform "1" --> "*" Category : defines
 Organization "1" --> "*" Task : owns
