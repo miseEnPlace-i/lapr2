@@ -35,7 +35,7 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 ### 1.3. Acceptance Criteria
 
 * **AC1:** Each center mush have one Center Coordinator.
-* **AC2:** --
+* **AC2:** All required fields must be filled in.
 
 
 ### 1.4. Found out Dependencies
@@ -58,9 +58,10 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 	* website address;
 	* opening and closing hours;
 	* slot duration;
-	* maximum vaccines per slot; 
-	* center coordinator.
-	
+	* maximum vaccines per slot. 
+* Selected data:
+    * center coordinator.	
+  
 **Output Data:**
 
 * (In)Success of the operation.
