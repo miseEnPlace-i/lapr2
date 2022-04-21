@@ -45,23 +45,25 @@ class CenterCoordinator {}
 
 class Appointment {
   date
+  doseNumber
 }
 
 class AdministrationProccess {
   ageGroup
-  dosage
   nOfDoses
-  intervalBetweenDoses
 }
 
 class AGES {}
 
 class ARS {}
 
-class IntervalBetweenDoses {}
+class IntervalBetweenDoses {
+  dosage
+  timeToNextDose
+  doseNumber
+}
 
-IntervalBetweenDoses "1" -- "1" Vaccine : has <
-IntervalBetweenDoses "1" -- "1" Appointment : is associated >
+IntervalBetweenDoses "1" -- "1" AdministrationProccess : has <
 
 Vaccine "*" -- "1" VaccineType : has <
 
@@ -108,7 +110,7 @@ SNSUser "1" -- "*" VaccinationCertificate : requests >
 VaccinationCertificate "1" -- "1" Vaccine : corresponds >
 Company "1" -- "*" VaccinationCertificate : emmits >
 
-Receptionist "0,1" -- "1" Appointment : schedules <
+Receptionist "0,1" -- "1" Appointment : schedules >
 
 Nurse "1" -- "*" AdverseReaction : reports >
 Nurse "1" -- "*" HealthInformation : checks >
@@ -117,11 +119,11 @@ VaccinationCenter "1" -- "1" VaccinationReport : has >
 CenterCoordinator "1" -- "*" VaccinationReport : analyses >
 CenterCoordinator "1" -- "*" VaccinationReport : generates >
 
-Nurse "1" -- "*" AdministrationProccess : checks <
+Nurse "1" -- "*" AdministrationProccess : checks >
 
 Notification <|-- SMS
 Notification <|-- Email
 
-AdverseReaction "0,1" -- "1" Appointment : has <
+AdverseReaction "*" -- "1" Appointment : has <
 
 @enduml
