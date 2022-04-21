@@ -50,21 +50,14 @@ _"As a receptionist, I want to register a SNS User."_
 <!-- TODO -->
 
 * Typed data:
+    * SNS number
     * a name
     * an email
     * a phone number
-    * a password
     * a birthdate
-    <!-- * SNS Number? -->
-	<!-- * a reference, 
-	* a designation, 
-	* an informal description
-	* a technical description
-	* an estimated duration
-	* an estimated cost -->
 	
 * Selected data:
-	* Classifying task category 
+	* n/a
 
 
 **Output Data:**
@@ -162,21 +155,21 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 4. Tests 
 
-**Test 1:** Check that it is not possible to create an instance of the Task class with null values. 
+**Test 1:** Check that it is not possible to create an instance of the SNSUser class with null values. 
 
 	@Test(expected = IllegalArgumentException.class)
 		public void ensureNullIsNotAllowed() {
-		Task instance = new Task(null, null, null, null, null, null, null);
+		SNSUser instance = new SNSUser(null, null, null, null, null);
 	}
 	
 
-**Test 2:** Check that it is not possible to create an instance of the Task class with a reference containing less than five chars - AC2. 
+**Test 2:** Check that it is not possible to create an instance of the SNSUser class with an SNS number containing more than 9 digits. 
 
 	@Test(expected = IllegalArgumentException.class)
 		public void ensureReferenceMeetsAC2() {
-		Category cat = new Category(10, "Category 10");
-		
-		Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
+		Date birthDate = new Date();
+
+		SNSUser instance = new SNSUser("12345678901", "Nome", "email@example.com", "+351910000000", birthDate);
 	}
 
 
