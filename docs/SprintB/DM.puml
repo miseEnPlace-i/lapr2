@@ -11,6 +11,7 @@ class HealthCareCenter {}
 class VaccinationCenter {
   name
   address
+  emailAddress
   phone
   email
   fax
