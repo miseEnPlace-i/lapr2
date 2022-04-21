@@ -62,13 +62,16 @@ Not found.
 
 ### 3.1. Rationale
 
-| Interaction ID                                                  | Question: Which class is responsible for... | Answer   | Justification (with patterns)                                                                                 |
-| :-------------------------------------------------------------- | :------------------------------------------ | :------- | :------------------------------------------------------------------------------------------------------------ |
-| Ask to list employees for a given role                          | ... displaying the screen to the user       | UI       | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| Show roles list and ask to select one                           | ... listing all roles?                      | Company  | IE: knows all the existing roles                                                                              |
-| Select role                                                     | n/a                                         | n/a      | n/a                                                                                                           |
-| Generate employees list for a given role                        | ... knowing the employee role               | Employee | IE: knows it's attributes                                                                                     |
-| Informs operation success and list all employees for given role | ... informing operation success?            | UI       | IE: responsible for user interaction                                                                          |
+| Interaction ID                         | Question: Which class is responsible for... | Answer | Justification (with patterns)                                                                                 |
+| :------------------------------------- | :------------------------------------------ | :----- | :------------------------------------------------------------------------------------------------------------ |
+| Ask to list employees for a given role | ... displaying the screen to the user       | UI     | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+
+| Show roles list and ask to sele
+
+ct one | ... listing all roles? | Company | IE: knows all the existing roles |
+| Select role | n/a | n/a | n/a |
+| Generate employees list for a given role | ... knowing the employee role | Employee | IE: knows it's attributes |
+| Informs operation success and list all employees for given role | ... informing operation success? | UI | IE: responsible for user interaction |
 
 ### Systematization
 

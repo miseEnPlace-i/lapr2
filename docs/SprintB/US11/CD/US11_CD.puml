@@ -36,10 +36,10 @@ ListEmployeeController ..> Employee
 ListEmployeeController ..> Company
 Company "1" --> "*" Employee : employees
 
-User <|-- Employee 
+User <|.. Employee 
 
-Employee <|-- Nurse
-Employee <|-- Receptionist
-Employee <|-- CenterCoordinator
+Employee <|.. Nurse
+Employee <|.. Receptionist
+Employee <|.. CenterCoordinator
 
 @enduml
