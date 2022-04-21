@@ -98,29 +98,29 @@ n/a
 
 **SSD - Alternative 1 is adopted.**
 
-| Interaction ID                                       | Question: Which class is responsible for... | Answer   | Justification (with patterns)                 |
-| :--------------------------------------------------- | :------------------------------------------ | :------- | :-------------------------------------------- |
-| Step 1: asks to register a new employee              | ...instantiating a new employee             | Company  | (?)                                           |
-| Step 2: requests data (name, email, password, etc)   | n/a                                         | n/a      | n/a                                           |
-| Step 3: types requested data                         | ...saving the input data?                   | Employee | IE: object created in step 1 has its own data |
-| Step 4: shows user roles list and asks to select one |                                             |          |                                               |
-| Step 5: selects a user role                          |                                             |          |                                               |
-| Step 6: shows all data and requests confirmation     |                                             |          |                                               |
-| Step 7: confirms the data                            |                                             |          |                                               |
-| Step 8: informs operation success                    | ...informing operation success?             | UI       | IE: responsible for user interaction          |
+| Interaction ID                                       | Question: Which class is responsible for...            | Answer           | Justification (with patterns)                           |
+| :--------------------------------------------------- | :----------------------------------------------------- | :--------------- | :------------------------------------------------------ |
+| Step 1: asks to register a new employee              | ...instantiating a new employee                        | Company          | --                                                      |
+| Step 2: requests data (name, email, password, etc)   | n/a                                                    | n/a              | n/a                                                     |
+| Step 3: types requested data                         | ...saving the input data?                              | Employee         | IE: object created in step 1 has its own data           |
+| Step 4: shows user roles list and asks to select one | ...knowing the user roles to show?                     | Company          | IE: user roles are defined by the company               |
+| Step 5: selects a user role                          | ...saving the selected role?                           | Employee         | IE: object created in step 1 is classified in one role. |
+| Step 6: shows all data and requests confirmation     | ...validating the data introduced (local validation)?  | Employee         | IE: owns its data                                       |
+| Step 6: shows all data and requests confirmation     | ...validating the data introduced (global validation)? | Company          | IE: knows all its employees                             |
+| Step 7: confirms the data                            | ...saving the created employee?                        | Company          | IE: holds every information about the employees         |
+| Step 8: informs operation success                    | ...informing operation success?                        | CreateEmployeeUI | IE: responsible for user interaction                    |
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
  * Employee
- * Company (?)
- * ...
+ * Company
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
- * ...
-
+ * CreateEmployeeUI
+ * CreateEmployeeController
 
 ## 3.2. Sequence Diagram (SD)
 
@@ -134,27 +134,55 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ![US10_CD](US10_CD.svg)
 
-# 4. Tests 
+# 4. Tests
 
-**Test 1:** Check that it is not possible to create an instance of the Task class with null values. 
+## Instantiate objects with null values
+
+**Test 1:** Check that it is not possible to create an instance of the Receptionist/Nurse/Center Coordinator class with null values. 
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Task instance = new Task(null, null, null, null, null, null, null);
+	public void ensureNullIsNotAllowed() {
+		Receptionist instance = new Receptionist(null, null, null, null, null, null);
 	}
-	
 
-**Test 2:** Check that it is not possible to create an instance of the Task class with a reference containing less than five chars - AC2. 
+The test above applies to the classes: 
+
+ * Receptionist
+ * Nurse
+ * CenterCoordinator
+
+## AC1 - Instantiate objects with empty values
+
+**Test 2:** Check that it is not possible to create an instance of the Receptionist/Nurse/Center Coordinator class with empty values. 
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureReferenceMeetsAC2() {
-		Category cat = new Category(10, "Category 10");
+	public void ensureEmptyIsNotAllowed() {
+		Receptionist instance = new Receptionist("", "", "", "", "", "");
+	}
+
+The test above applies to the classes: 
+
+ * Receptionist
+ * Nurse
+ * CenterCoordinator
+
+## AC2 - Instatiate objects with invalid password
+
+**Test 3:** Check that it is not possible to create an instance of the Receptionist/Nurse/Center Coordinator class with an invalid password. 
+
+	@Test(expected = IllegalArgumentException.class)
+	public void ensureValidPassword() {
+		String password = "1234";
 		
-		Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
+		Receptionist instance = new Receptionist("Joana Maria", "Av. da Liberdade", "+351916478865", "joanamaria@gmail.com", "30356786", password);
 	}
 
+The test above applies to the classes: 
 
-*It is also recommended to organize this content by subsections.* 
+ * Receptionist
+ * Nurse
+ * CenterCoordinator
+
 
 # 5. Construction (Implementation)
 
