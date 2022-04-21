@@ -1,4 +1,4 @@
-@startuml
+@startuml Sequence Diagram
 autonumber
 'hide footbox
 actor "Receptionist" as RECEPT
