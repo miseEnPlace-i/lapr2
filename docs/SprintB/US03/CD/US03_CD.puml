@@ -1,46 +1,62 @@
 @startuml
 skinparam classAttributeIconSize 0
 
-class ApplicationPOT
-{
-  +static getInstance()
-  +getCurrentSession()
-}
-
-class SNSUser {
-  -String SNSNumber
-  -String name
-  -Date birthDate
-  -Integer phoneNumber
-  -String email
-  +Task(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
+class ApplicationPOT {
+  + static getInstance()
+  + getCurrentSession()
 }
 
 class Company {
-  -String designation
-  +validateUser(user)
+  - String designation
+  + validateUser(user)
+}
+
+class Platform {
+  - String designation
+  + getUsers()
+  + getUserByEmail(email)
 }
 
 class RegisterSNSUserController {
-  +getUsers()
-  +getUser(userId)
-  +createUser(snsNumber, name, email, birthDate, phoneNumber)
-  +saveTask()
+  + getUsers()
+  + getUser(userId)
+  + createUser(snsNumber, name, email, birthDate, phoneNumber)
 }
 
-class RegisterSNSUserUI {
+class RegisterSNSUserUI { }
+
+class SNSUser {
+  - String SNSNumber
+  - String name
+  - Date birthDate
+  - Integer phoneNumber
+  - String email
+  + SNSUser(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
 }
+
+class User {
+  - String name
+  - String email
+  - String pwd
+}
+
+class UserSession {
+  + getUserEmail()
+}
+
+RegisterSNSUserController ..> ApplicationPOT
+RegisterSNSUserController ..> Category
+RegisterSNSUserController ..> Company
+RegisterSNSUserController ..> Platform
+RegisterSNSUserController ..> SNSUser
+RegisterSNSUserController ..> UserSession
 
 RegisterSNSUserUI ..> RegisterSNSUserController
-RegisterSNSUserController ..> Platform
-RegisterSNSUserController ..> Category
-RegisterSNSUserController ..> Task
-RegisterSNSUserController ..> Organization
-RegisterSNSUserController ..> ApplicationPOT
-RegisterSNSUserController ..> UserSession
+
+SNSUser ..> User
+
 Task "*" -> "1" Category : classified in
 Platform "1" --> "*" Category : defines
 Organization "1" --> "*" Task : owns
-
 
 @enduml
