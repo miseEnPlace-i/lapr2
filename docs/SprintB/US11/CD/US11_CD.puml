@@ -1,7 +1,9 @@
 @startuml
 skinparam classAttributeIconSize 0
 
-class User {
+hide RoleId methods
+
+interface User {
   - String name
   - String email
   - String pwd
@@ -26,9 +28,18 @@ class ListEmployeeController {
 
 class ListEmployeeUI {}
 
+enum RoleId {
+  NURSE
+  RECEPTIONIST
+  CENTER_COORDINATOR
+  ADMINISTRATOR
+  SNS_USER
+}
+
 ListEmployeeUI ..> ListEmployeeController
 ListEmployeeController ..> Employee
 ListEmployeeController ..> Company
+
 Company "1" --> "*" Employee : employees
 
 User <|.. Employee 
