@@ -8,14 +8,16 @@ class Employee {
   -String email
   -String citizen number
   -String password
-  +Employee(name, address, phone number, email, citizen card number, password)
+  +Employee(name, address, phone number, email, citizen card number, password, role)
 }
 
-class Role {
-  -String id
-  -String description
-  +Role(id,description)
-  +getRoleById(id)
+class Receptionist {  
+}
+
+class Nurse {
+}
+
+class CenterCoordinator {
 }
 
 class Company {
@@ -25,6 +27,7 @@ class Company {
   +createEmployee(name, address, phone number, email, citizen card number, password, role)
   +validateEmployee(employee)
   +saveEmployee(employee)
+  +getRoleById(id)
   -addEmployee(employee)
 }
 
@@ -41,6 +44,8 @@ CreateEmployeeUI ..> CreateEmployeeController
 CreateEmployeeController ..> Employee
 CreateEmployeeController ..> Company
 Company ..> Employee
-Employee "*" --* "1" Role
+Employee <|-- Receptionist
+Employee <|-- Nurse
+Employee <|-- CenterCoordinator
 
 @enduml
