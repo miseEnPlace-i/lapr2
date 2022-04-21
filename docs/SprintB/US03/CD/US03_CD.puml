@@ -9,18 +9,12 @@ class ApplicationPOT {
 class Company {
   - String designation
   + validateUser(user)
-}
-
-class Platform {
-  - String designation
-  + getUsers()
-  + getUserByEmail(email)
+  + createUser(snsNumber, name, email, birthDate, phoneNumber)
 }
 
 class RegisterSNSUserController {
   + getUsers()
   + getUser(userId)
-  + createUser(snsNumber, name, email, birthDate, phoneNumber)
 }
 
 class RegisterSNSUserUI { }
@@ -40,23 +34,17 @@ class User {
   - String pwd
 }
 
-class UserSession {
-  + getUserEmail()
-}
+' class UserSession {
+'   + getUserEmail()
+' }
 
 RegisterSNSUserController ..> ApplicationPOT
-RegisterSNSUserController ..> Category
 RegisterSNSUserController ..> Company
-RegisterSNSUserController ..> Platform
 RegisterSNSUserController ..> SNSUser
-RegisterSNSUserController ..> UserSession
+' RegisterSNSUserController ..> UserSession
 
 RegisterSNSUserUI ..> RegisterSNSUserController
 
 SNSUser ..> User
-
-Task "*" -> "1" Category : classified in
-Platform "1" --> "*" Category : defines
-Organization "1" --> "*" Task : owns
 
 @enduml
