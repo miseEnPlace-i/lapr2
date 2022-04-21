@@ -88,10 +88,6 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ![US11_SD](SD/US11_SD.svg)
 
-**Alternative 2**
-
-![US11_SD](SD/US11_SD_v2.svg)
-
 ## 3.3. Class Diagram (CD)
 
 **From alternative 1**
@@ -104,14 +100,14 @@ Other software classes (i.e. Pure Fabrication) identified:
 
     @Test(expected = IllegalArgumentException.class)
     	public void ensureNullIsNotAllowed() {
-    	List empList = listEmployeesWithRole(null);
+    	List empList = listEmployeesByRole(null);
     }
 
 **Test 2:** Check that it is not possible to list employees with non existing role.
 
     @Test(expected = IllegalArgumentException.class)
     	public void ensureReferenceMeetsAC1() {
-    	List empList = getEmployeesWithRole("NotValidRole");
+    	List empList = getEmployeesByRole("NotValidRole");
     }
 
 # 5. Construction (Implementation)

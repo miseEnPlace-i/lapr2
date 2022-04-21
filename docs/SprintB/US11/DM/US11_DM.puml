@@ -11,18 +11,14 @@ class Company {
   - designation
 }
 
-class Role {
-  - id
-  - description
-}
-
 Administrator "1" -- "*" Employee : creates >
 Administrator "1" -- "*" Employee : lists 
 
 Company "1" -- "*" Administrator : knows  >
 Company "1" -- "*" Employee : knows 
 
-Employee "*" -- "1" Role : has
-Company "1" -- "*" Role : knows
+Employee <|-- Nurse
+Employee <|-- CenterCoordinator
+Employee <|-- Receptionist
 
 @enduml

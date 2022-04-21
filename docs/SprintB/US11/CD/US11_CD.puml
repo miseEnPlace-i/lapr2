@@ -9,37 +9,37 @@ class User {
 
 class Employee {
   +Employee(name,email,pwd,role)
-
-  +isRole(roleId)
-}
-
-class Role {
-  -String id
-  -String description
-
-  +Role(id,description)
 }
 
 class Company {
   -String designation
   +Company(designation)
 
-  +getEmployeesByRoleId(roleId)
+  +getEmployeesByRole(role)
 }
 
 class ListEmployeeController {
   +getRoles()
-  +getEmployeesByRoleId(roleId)
+  +getEmployeesByRole(role)
 }
 
 class ListEmployeeUI {}
 
+class Nurse {}
+
+class Receptionist {}
+
+class CenterCoordinator {}
+
 ListEmployeeUI ..> ListEmployeeController
 ListEmployeeController ..> Employee
 ListEmployeeController ..> Company
-Employee "*" --> "1" Role : has
 Company "1" --> "*" Employee : employees
 
 User <|-- Employee 
+
+Employee <|-- Nurse
+Employee <|-- Receptionist
+Employee <|-- CenterCoordinator
 
 @enduml
