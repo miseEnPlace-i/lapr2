@@ -11,14 +11,15 @@ class Company {
   - designation
 }
 
+enum RoleId {}
+
 Administrator "1" -- "*" Employee : creates >
 Administrator "1" -- "*" Employee : lists 
 
 Company "1" -- "*" Administrator : knows  >
 Company "1" -- "*" Employee : knows 
 
-Employee <|-- Nurse
-Employee <|-- CenterCoordinator
-Employee <|-- Receptionist
+Company "1" -- "*" RoleId : knows
+Employee "*" -- "1" RoleId : has
 
 @enduml

@@ -26,17 +26,17 @@ deactivate UI
 ADM -> UI : selects an employee role
 activate UI
 
-UI -> CTRL : getEmployeesByRole(role)
+UI -> CTRL : getEmployeesByRoleId(roleId)
 activate CTRL
 
 activate COMP
-CTRL -> COMP: getEmployeesByRole(role)
+CTRL -> COMP: getEmployeesByRoleId(roleId)
 create "lstEmp\n:List<Employee>" as LST
 COMP --> LST
 
 loop for each employee
   activate EMP
-    COMP -> EMP: e instanceof role
+    COMP -> EMP: e=employee.roleId == roleId
     EMP --> COMP: true/false
   deactivate EMP
     alt e==true

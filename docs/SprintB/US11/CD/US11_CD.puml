@@ -5,31 +5,26 @@ class User {
   - String name
   - String email
   - String pwd
+  - String roleId
 }
 
 class Employee {
-  +Employee(name,email,pwd,role)
+  +Employee(name,email,pwd,roleId)
 }
 
 class Company {
   -String designation
   +Company(designation)
 
-  +getEmployeesByRole(role)
+  +getEmployeesByRoleId(roleId)
 }
 
 class ListEmployeeController {
   +getRoles()
-  +getEmployeesByRole(role)
+  +getEmployeesByRoleId(role)
 }
 
 class ListEmployeeUI {}
-
-class Nurse {}
-
-class Receptionist {}
-
-class CenterCoordinator {}
 
 ListEmployeeUI ..> ListEmployeeController
 ListEmployeeController ..> Employee
@@ -37,9 +32,5 @@ ListEmployeeController ..> Company
 Company "1" --> "*" Employee : employees
 
 User <|.. Employee 
-
-Employee <|.. Nurse
-Employee <|.. Receptionist
-Employee <|.. CenterCoordinator
 
 @enduml
