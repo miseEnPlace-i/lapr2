@@ -9,9 +9,13 @@ class Company {
 class Administrator {
 }
 
-class Role {
-  -id
-  -description
+class Receptionist {  
+}
+
+class Nurse {
+}
+
+class CenterCoordinator {
 }
 
 class Employee {
@@ -23,9 +27,10 @@ class Employee {
 }
 
 Company "1" -- "*" Administrator : knows >
-Company "1" -- "*" Role : knows >
 Company "1" -- "*" Employee : knows >
 Administrator "1" -- "*" Employee : registers >
-Employee "*" -- "1" Role : has >
+Employee <|-- Receptionist
+Employee <|-- Nurse
+Employee <|-- CenterCoordinator
 
 @enduml
