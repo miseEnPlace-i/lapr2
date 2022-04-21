@@ -5,7 +5,6 @@ actor "Admininistrator" as admin
 
 participant ":CreateEmployeeUi" as empUi
 participant ":CreateEmployeeController" as empController
-participant "role\n:Role" as role
 participant "comp\n:Company" as comp
 participant ":Employee" as emp
 
@@ -36,10 +35,10 @@ activate empUi
 empUi -> empController : createEmployee(name, address, phone number, email, citizen card number, password, roleId)
 activate empController
 
-empController -> role : role=getRoleById(roleId)
-activate role
+empController -> comp : role=getRoleById(roleId)
+activate comp
 |||
-deactivate role
+deactivate comp
 
 empController -> comp: employee=createEmployee(name, address, phone number, email, citizen card number, password, role)
 activate comp
