@@ -34,9 +34,23 @@ _"As a receptionist, I want to register a SNS User."_
 ### 1.3. Acceptance Criteria
 <!-- TODO -->
 
-* **AC1:** All required fiels must be filled in.
-* **AC2:** Task reference must have at least 5 alphanumeric chars.
-* **AC3:** When creating a task with an already existing reference, the system must reject such operation and the user must have the change to modify the typed reference.
+* **AC01:** All required fiels must be filled in.
+* **AC02:** When creating a User with an already existing reference, the system must reject such operation and the user must have the change to modify the typed reference.
+* **AC03:** SNS number must have 9 digits.
+<!-- ? QUESTION -->
+* **AC04:** Birth day must have the format: DD/MM/YYYY. A SNS User should not have more than 150 years of age.
+<!-- ? QUESTION -->
+* **AC05:** Sex options: Male/Female/Other.
+<!-- ? QUESTION - also ask for every other property -->
+* **AC06:** Phone number must have 11 digits.
+<!-- ? QUESTION -->
+* **AC07:** E-mail address must have 11 digits and validation must use a regular expression.
+* **AC08:** The password should be randomly generated. It should have 7 alphanumeric characters, 3 of them being upper case and 2 of them must be digits.
+<!-- ? QUESTION -->
+* **AC09:** All input fields are required except sex.
+<!-- ? QUESTION -->
+* **AC10:** The user receives an e-mail informing that the registration was successful and that he can start to use the system. The e-mail includes the user password. All the e-mail messages should be written to a file with the name emailAndSMSMessages.txt.
+
 
 
 ### 1.4. Found out Dependencies
@@ -51,19 +65,18 @@ _"As a receptionist, I want to register a SNS User."_
 
 * Typed data:
     * SNS number
-    * a name
-    * an email
-    * a phone number
-    * a birthdate
+    * Name
+    * Birthdate
+    * Sex
+    * Phone number
+    * Email
 	
 * Selected data:
 	* n/a
 
 
 **Output Data:**
-<!-- TODO -->
 
-* Information 
 * (In)Success of the operation
 
 
@@ -85,7 +98,7 @@ _"As a receptionist, I want to register a SNS User."_
 ### 1.7 Other Relevant Remarks
 <!-- TODO -->
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
+* There are similarities between this user story and the US10 regarding the need to generate a password for the user account.
 
 
 ## 2. OO Analysis
@@ -105,36 +118,43 @@ n/a
 
 **SSD - Alternative 1 is adopted.**
 
-| Interaction ID | Question: Which class is responsible for...            | Answer               | Justification (with patterns)                                                                                 |
-| :------------- | :----------------------------------------------------- | :------------------- | :------------------------------------------------------------------------------------------------------------ |
-| Step 1         | ... interacting with the actor?                        | CreateTaskUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-|                | ... coordinating the US?                               | CreateTaskController | Controller                                                                                                    |
-|                | ... instantiating a new Task?                          | Organization         | Creator (Rule 1): in the DM Organization has a Task.                                                          |
-|                | ... knowing the user using the system?                 | UserSession          | IE: cf. A&A component documentation.                                                                          |
-|                | ... knowing to which organization the user belongs to? | Platform             | IE: has registed all Organizations                                                                            |
-|                |                                                        | Organization         | IE: knows/has its own Employees                                                                               |
-|                |                                                        | Employee             | IE: knows its own data (e.g. email)                                                                           |
-| Step 2         |                                                        |                      |                                                                                                               |
-| Step 3         | ...saving the inputted data?                           | Task                 | IE: object created in step 1 has its own data.                                                                |
-| Step 4         | ...knowing the task categories to show?                | Platform             | IE: Task Categories are defined by the Platform.                                                              |
-| Step 5         | ... saving the selected category?                      | Task                 | IE: object created in step 1 is classified in one Category.                                                   |
-| Step 6         |                                                        |                      |                                                                                                               |
-| Step 7         | ... validating all data (local validation)?            | Task                 | IE: owns its data.                                                                                            |
-|                | ... validating all data (global validation)?           | Organization         | IE: knows all its tasks.                                                                                      |
-|                | ... saving the created task?                           | Organization         | IE: owns all its tasks.                                                                                       |
-| Step 8         | ... informing operation success?                       | CreateTaskUI         | IE: is responsible for user interactions.                                                                     |
+| Interaction ID | Question: Which class is responsible for...            | Answer                    | Justification (with patterns)                                                                                     |
+| :------------- | :----------------------------------------------------- | :------------------------ | :---------------------------------------------------------------------------------------------------------------- |
+| Step 1         | ... interacting with the actor?                        | RegisterSNSUserUI         | **Pure Fabrication:** there is no reason to assign this responsibility to any existing class in the Domain Model. |
+|                | ... coordinating the US?                               | RegisterSNSUserController | **Controller**                                                                                                    |
+|                | ... instantiating a new Task?                          | Organization              | **Creator (Rule 1):** in the DM Organization has a Task.                                                          |
+|                | ... knowing the user using the system?                 | UserSession               | IE: cf. A&A component documentation.                                                                              |
+|                | ... knowing to which organization the user belongs to? | Platform                  | IE: has registed all Organizations                                                                                |
+|                |                                                        | Organization              | IE: knows/has its own Employees                                                                                   |
+|                |                                                        | Employee                  | IE: knows its own data (e.g. email)                                                                               |
+| Step 2         |                                                        |                           |                                                                                                                   |
+| Step 3         | ...saving the inputted data?                           | Task                      | IE: object created in step 1 has its own data.                                                                    |
+| Step 4         | ...knowing the task categories to show?                | Platform                  | IE: Task Categories are defined by the Platform.                                                                  |
+| Step 5         | ... saving the selected category?                      | Task                      | IE: object created in step 1 is classified in one Category.                                                       |
+| Step 6         |                                                        |                           |                                                                                                                   |
+| Step 7         | ... validating all data (local validation)?            | Task                      | IE: owns its data.                                                                                                |
+|                | ... validating all data (global validation)?           | Organization              | IE: knows all its tasks.                                                                                          |
+|                | ... saving the created task?                           | Organization              | IE: owns all its tasks.                                                                                           |
+| Step 8         | ... informing operation success?                       | CreateTaskUI              | IE: is responsible for user interactions.                                                                         |
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
- * SNSUser
  * Employee
+ * SNSUser
+ * User
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
  * CreateSNSUserUI  
  * CreateSNSUserController
+ * **PasswordGenerator**
+ * **EmailNotificationSender**
+
+Other software classes of external systems/components:
+
+ * AuthFacade
 
 
 ## 3.2. Sequence Diagram (SD)

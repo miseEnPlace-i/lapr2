@@ -5,23 +5,25 @@ actor "Receptionist" as RECEPT
 
 participant ":RegisterSNSUserUI" as UI
 participant ":RegisterSNSUserController" as CTRL
-participant "app\n:ApplicationPOT" as APP
+' participant "app\n:ApplicationPOT" as APP
 ' participant ":Platform" as PLAT
 participant "comp\n:Company" as COMP
+participant "auth\n:AuthFacade" as AUTH
 
 activate RECEPT
-RECEPT -> UI : asks to register a new SNS User
+RECEPT -> UI : starts to register a new SNS User
 activate UI
-UI --> RECEPT : requests the data (SNSNumber, name, birthDate, phoneNumber, email)
+UI --> RECEPT : requests data (SNSNumber, name, birthDate, sex, phoneNumber, email)
 deactivate UI
 
 RECEPT -> UI : types requested data
 activate UI
 
+UI --> CTRL : createUser(userData)
 activate CTRL
-UI --> CTRL : snsUser = addNewSNSUser()
-activate APP
-CTRL --> APP : snsUser = addNewSNSUser()
+
+activate COMP
+CTRL --> COMP : user = createUser(userData)
 deactivate UI
 
 

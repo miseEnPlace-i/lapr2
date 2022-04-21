@@ -10,6 +10,7 @@ class SNSUser {
   - SNSNumber
   - name
   - birthDate
+  - sex
   - phoneNumber
   - email
 }
@@ -27,6 +28,6 @@ class User {
 Receptionist "1" -- "*" SNSUser : registers >
 Company "1" -- "*" Receptionist : knows >
 Company "1" -- "*" SNSUser : knows >
-SNSUser <|-- User
+SNSUser "0..1" -- "1" User : becomes >
 
 @enduml
