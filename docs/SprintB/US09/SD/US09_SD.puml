@@ -15,11 +15,14 @@ deactivate UI
 ADM -> UI : types requested data
 activate UI
 
-UI -> CTRL : createVaccinationCenter(name,address,phoneNumber,emailAddress,faxNumber,websiteAddress,openingAndClosingHours,slotDuration,maximumVaccinesPerSlot)
+UI -> CTRL : centerCoordinator=getCoordinatorRoleList()
 activate CTRL
 
-CTRL-> COMP : center=createVaccinationCenter(name,address,phoneNumber,emailAddress,faxNumber,websiteAddress,openingAndClosingHours,slotDuration,maximumVaccinesPerSlot)
+CTRL-> COMP : centerCoordinator=getCoordinatorRoleList()
 activate COMP
+
+UI -> ADM : shows all available center coordinators and asks to select one
+deactivate UI
 
 create "center: VaccinationCenter" as CENTER
 COMP -> CENTER : create(name,address,phoneNumber,emailAddress,faxNumber,websiteAddress,openingAndClosingHours,slotDuration,maximumVaccinesPerSlot)
