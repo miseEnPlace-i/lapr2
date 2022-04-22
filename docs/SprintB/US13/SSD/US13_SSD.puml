@@ -14,6 +14,9 @@ activate ":System"
 deactivate ":System"
 
 OE -> ":System" : selects a vaccine type
+activate ":System"
+":System" --> OE : informs that is ready to move on to the administration processes
+deactivate ":System"
 
 
 loop for each administration process
@@ -22,14 +25,20 @@ loop for each administration process
     ":System" --> OE : requests data (min age, max age, number of doses)
     deactivate ":System"
     OE -> ":System" : types requested data
-    
-loop for each dose
-    OE -> ":System" : asks to create a new dosage information for the administration process
     activate ":System"
-    ":System" --> OE : requests data (dosage, time to next dose)
+    ":System" --> OE : informs that is ready to move on to the dose information
     deactivate ":System"
-    OE -> ":System" : types requested data
-end
+    
+    loop for each dose
+        OE -> ":System" : asks to add dose information to the administration process
+        activate ":System"
+        ":System" --> OE : requests data (dosage, time to next dose)
+        deactivate ":System"
+        OE -> ":System" : types requested data
+        activate ":System"
+        ":System" --> OE : informs dose information creation sucess
+        deactivate ":System"
+    end
 
 end
 
