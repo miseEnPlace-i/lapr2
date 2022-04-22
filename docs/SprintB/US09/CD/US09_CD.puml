@@ -22,6 +22,7 @@ class Company {
   +createVaccinationCenter(name,address,phoneNumber,faxNumber,websiteAddress,openingAndClosingHours,slotDuration,maximumVaccinesPerSlot)
   +validateVaccinatonCenter(center)
   +saveVaccinationCenter(VaccinationCenter)
+  +addVaccinationCenter(center)
 }
 
 class VaccinationCenterController {
