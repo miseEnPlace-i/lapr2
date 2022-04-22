@@ -67,7 +67,7 @@ _"As a receptionist, I want to register a SNS User."_
     * SNS number
     * Name
     * Birthdate
-    * Sex
+    * Gender
     * Phone number
     * Email
 	

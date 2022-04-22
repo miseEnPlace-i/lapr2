@@ -10,7 +10,7 @@ class SNSUser {
   - SNSNumber
   - name
   - birthDate
-  - sex
+  - gender
   - phoneNumber
   - email
 }
@@ -23,6 +23,7 @@ class User {
   - name
   - email
   - pwd
+  - role
 }
 
 Receptionist "1" -- "*" SNSUser : registers >

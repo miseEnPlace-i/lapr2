@@ -23,15 +23,17 @@ class SNSUser {
   - String SNSNumber
   - String name
   - Date birthDate
+  - Char gender
   - Integer phoneNumber
   - String email
   + SNSUser(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
 }
 
-class User {
+interface User {
   - String name
   - String email
   - String pwd
+  - String role
 }
 
 ' class UserSession {
