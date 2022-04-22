@@ -38,6 +38,9 @@ _"As an administrator, I want to register an Employee."_
 * **AC1:** All required fields must be filled in. (All attributes of the employee are required).
 * **AC2:** The password created must contain seven alphanumeric characters, including three capital letters and two digits.
 * **AC3:** Each user must have a single role defined in the system.
+* **AC4:** The email inserted must be valid, verified using a regular expression.
+* **AC5:** The phone number inserted must be valid, containing only numbers, and the length must be exactly 9 characters.
+* **AC6:** The Citizen Card number inserted must be valid, containing only numbers, and the length must be exactly 8 characters.
 
 
 ### 1.4. Found out Dependencies
@@ -56,8 +59,8 @@ _"As an administrator, I want to register an Employee."_
 	* adress
 	* phone number
 	* email
-	* citizen card number
-	* password (? - not sure if it is automaticly generated)
+	* Citizen Card number
+	* password (? - not sure if it is automatically generated)
 	
 * Selected data:
 	* user role 
@@ -74,7 +77,7 @@ _"As an administrator, I want to register an Employee."_
 
 ![US10_SSD](ssd/US10_SSD.svg)
 
-**Other alternatives might exist.**
+Other alternatives might exist, such as asking the user role before inserting the employee's data.
 
 ### 1.7 Other Relevant Remarks
 
@@ -138,51 +141,83 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ## Instantiate objects with null values
 
-**Test 1:** Check that it is not possible to create an instance of the Receptionist/Nurse/Center Coordinator class with null values. 
+**Test 1:** Check that it is not possible to create an instance of the Employee class with null values. 
 
 	@Test(expected = IllegalArgumentException.class)
 	public void ensureNullIsNotAllowed() {
-		Receptionist instance = new Receptionist(null, null, null, null, null, null);
+		Employee instance = new Employee(null, null, null, null, null, null, null);
 	}
 
-The test above applies to the classes: 
+## Instantiate objects with empty values (AC1)
 
- * Receptionist
- * Nurse
- * CenterCoordinator
-
-## AC1 - Instantiate objects with empty values
-
-**Test 2:** Check that it is not possible to create an instance of the Receptionist/Nurse/Center Coordinator class with empty values. 
+**Test 2:** Check that it is not possible to create an instance of the Employee class with empty values. 
 
 	@Test(expected = IllegalArgumentException.class)
 	public void ensureEmptyIsNotAllowed() {
-		Receptionist instance = new Receptionist("", "", "", "", "", "");
+		Employee instance = new Employee("", "", "", "", "", "", "");
 	}
 
-The test above applies to the classes: 
+## Instatiate objects with invalid password (AC2)
 
- * Receptionist
- * Nurse
- * CenterCoordinator
-
-## AC2 - Instatiate objects with invalid password
-
-**Test 3:** Check that it is not possible to create an instance of the Receptionist/Nurse/Center Coordinator class with an invalid password. 
+**Test 3:** Check that it is not possible to create an instance of the Employee class with an invalid password, which has a valid length, but invalid characters. 
 
 	@Test(expected = IllegalArgumentException.class)
-	public void ensureValidPassword() {
-		String password = "1234";
+	public void ensureValidPasswordWithValidChars() {
+		String invalidPassword = "joana12";
 		
-		Receptionist instance = new Receptionist("Joana Maria", "Av. da Liberdade", "+351916478865", "joanamaria@gmail.com", "30356786", password);
+		Employee instance = new Employee("Joana Maria", "Av. da Liberdade", "+351916478865", "joanamaria@gmail.com", 30356786, invalidPassword, "Nurse");
 	}
 
-The test above applies to the classes: 
+**Test 4:** Check that it is not possible to create an instance of the Employee class with an invalid password, which has a valid characters, but invalid length. 
 
- * Receptionist
- * Nurse
- * CenterCoordinator
+	@Test(expected = IllegalArgumentException.class)
+	public void ensureValidPasswordWithValidLength() {
+		String invalidPassword = "JOAna123455667";
+		
+		Employee instance = new Employee("Joana Maria", "Av. da Liberdade", "+351916478865", "joanamaria@gmail.com", 30356786, invalidPassword, "Nurse");
+	}
 
+## Instatiate objects with invalid email (AC4)
+
+**Test 5:** Check that it is not possible to create an instance of the Employee class with an invalid email. 
+
+	@Test(expected = IllegalArgumentException.class)
+	public void ensureValidEmail() {
+		String invalidEmail = "joana";
+		
+		Employee instance = new Employee("Joana Maria", "Av. da Liberdade", "+351916478865", invalidEmail, 30356786, "JOAna12", "Nurse");
+	}
+
+## Instatiate objects with invalid phone number (AC5)
+
+**Test 6:** Check that it is not possible to create an instance of the Employee class with an invalid phone number, which contains an invalid length. 
+
+	@Test(expected = IllegalArgumentException.class)
+	public void ensureValidPhoneNumberWithValidLength() {
+		String invalidPhoneNumber = "+3519164788687897845";
+		
+		Employee instance = new Employee("Joana Maria", "Av. da Liberdade", invalidPhoneNumber, "joanamaria@gmail.com", 30356786, "JOAna12", "Nurse");
+	}
+
+**Test 7:** Check that it is not possible to create an instance of the Employee class with an invalid phone number, which contains letters. 
+
+	@Test(expected = IllegalArgumentException.class)
+	public void ensureValidPhoneNumberWithoutLetters() {
+		String invalidPhoneNumber = "+3519164foe";
+		
+		Employee instance = new Employee("Joana Maria", "Av. da Liberdade", invalidPhoneNumber, "joanamaria@gmail.com", 30356786, "JOAna12", "Nurse");
+	}
+
+## Instatiate objects with invalid Citizen Card number (AC6)
+
+**Test 8:** Check that it is not possible to create an instance of the Employee class with an invalid Citizen Card number. 
+
+	@Test(expected = IllegalArgumentException.class)
+	public void ensureValidCCNumber() {
+		int invalidCCNumber = "3030398578392200";
+		
+		Employee instance = new Employee("Joana Maria", "Av. da Liberdade", "+351916478865", "joanamaria@gmail.com", invalidCCNumber, "JOAna12", "Nurse");
+	}
 
 # 5. Construction (Implementation)
 
