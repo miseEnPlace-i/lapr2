@@ -5,7 +5,7 @@ actor "Administrator" as OE
 activate OE
 OE -> ":System" : asks to create a new vaccine
 activate ":System"
-":System" --> OE : requests data (designation, age groups interval limits, number of dosages, dosages, time interval limits between doses)
+":System" --> OE : requests data (designation, number of administration processes)
 deactivate ":System"
 
 OE -> ":System" : types requested data
@@ -14,10 +14,27 @@ activate ":System"
 deactivate ":System"
 
 OE -> ":System" : selects a vaccine type
-activate ":System"
+
+
+loop for each administration process
+    OE -> ":System" : asks to create a new administration process for the vaccine
+    activate ":System"
+    ":System" --> OE : requests data (min age, max age, number of doses)
+    deactivate ":System"
+    OE -> ":System" : types requested data
+    
+loop for each dose
+    OE -> ":System" : asks to create a new dosage information for the administration process
+    activate ":System"
+    ":System" --> OE : requests data (dosage, time to next dose)
+    deactivate ":System"
+    OE -> ":System" : types requested data
+end
+
+end
+
 ":System" --> OE : shows all data and requests confirmation
 deactivate ":System"
-
 OE -> ":System" : confirms the data
 activate ":System"
 ":System" --> OE : informs operation success
