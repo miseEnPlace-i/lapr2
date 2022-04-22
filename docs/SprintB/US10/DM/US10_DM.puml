@@ -9,28 +9,18 @@ class Company {
 class Administrator {
 }
 
-class Receptionist {  
-}
-
-class Nurse {
-}
-
-class CenterCoordinator {
-}
-
 class Employee {
   -name
-  -address
   -phone number
   -email
+  -password
+  -address
   -citizen card number
+  -role
 }
 
 Company "1" -- "*" Administrator : knows >
 Company "1" -- "*" Employee : knows >
 Administrator "1" -- "*" Employee : registers >
-Employee <|-- Receptionist
-Employee <|-- Nurse
-Employee <|-- CenterCoordinator
 
 @enduml

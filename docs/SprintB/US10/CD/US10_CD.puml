@@ -2,22 +2,18 @@
 skinparam classAttributeIconSize 0
 
 class Employee {
-  -String name
   -String address
-  -String phone number
-  -String email
   -String citizen number
-  -String password
   +Employee(name, address, phone number, email, citizen card number, password, role)
 }
 
-class Receptionist {  
-}
-
-class Nurse {
-}
-
-class CenterCoordinator {
+interface User {  
+  -String name
+  -String phone number
+  -String email
+  -String password
+  -String role
+  +User(name, phone number, email, password, role)
 }
 
 class Company {
@@ -44,8 +40,6 @@ CreateEmployeeUI ..> CreateEmployeeController
 CreateEmployeeController ..> Employee
 CreateEmployeeController ..> Company
 Company ..> Employee
-Employee <|-- Receptionist
-Employee <|-- Nurse
-Employee <|-- CenterCoordinator
+User <|.. Employee 
 
 @enduml
