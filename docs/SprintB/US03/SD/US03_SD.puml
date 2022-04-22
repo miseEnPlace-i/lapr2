@@ -8,6 +8,7 @@ participant ":RegisterSNSUserController" as CTRL
 ' participant "app\n:ApplicationPOT" as APP
 ' participant ":Platform" as PLAT
 participant "comp\n:Company" as COMP
+participant "user\n:User" as USER
 participant "auth\n:AuthFacade" as AUTH
 
 activate RECEPT
@@ -22,13 +23,43 @@ activate UI
 UI --> CTRL : createUser(userData)
 activate CTRL
 
-activate COMP
 CTRL --> COMP : user = createUser(userData)
+activate COMP
+deactivate COMP
+
+CTRL --> COMP : validateUser(user)
+activate COMP
+
+COMP --> USER : email = getEmail(user)
+activate USER
+deactivate USER
+
+COMP --> AUTH : existsUser(email)
+activate AUTH
+deactivate AUTH
+
+COMP --> COMP : checkDuplicates(user)
+activate COMP
+deactivate COMP
+
+deactivate COMP
+deactivate CTRL
+
+UI --> RECEPT : shows data and asks for confirmation
 deactivate UI
 
+RECEPT --> UI : confirms the data
+activate UI
+
+UI --> CTRL : saveUser(user)
+activate CTRL
 
 
 
+deactivate CTRL
+
+UI --> RECEPT : informs operation success
+deactivate UI
 
 deactivate RECEPT
 
