@@ -21,16 +21,35 @@ activate CTRL
 CTRL-> COMP : centerCoordinator=getCoordinatorRoleList()
 activate COMP
 
-UI -> ADM : shows all available center coordinators and asks to select one
-deactivate UI
+CTRL --> UI : result
+deactivate CTRL
 
-create "center: VaccinationCenter" as CENTER
+UI --> ADM : shows all available center coordinators and asks to select one
+deactivate UI
+deactivate COMP
+
+ADM -> UI : selects one Center Coordinator
+activate UI
+
+UI -> CTRL : createVaccinationCenter(name,address,phoneNumber,emailAddress,faxNumber,websiteAddress,openingAndClosingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
+activate CTRL
+
+CTRL -> COMP : coordiantor=getCenterCoordinator(coordinator)
+activate COMP
+deactivate COMP
+
+CTRL -> COMP: center=createVaccinationCenter(name,address,phoneNumber,emailAddress,faxNumber,websiteAddress,openingAndClosingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
+activate COMP
+deactivate COMP
+
+CTRL -> COMP: validateVaccinationCenter(center)
+activate COMP
+
+create "center\n:VaccinationCenter" as CENTER
 COMP -> CENTER : create(name,address,phoneNumber,emailAddress,faxNumber,websiteAddress,openingAndClosingHours,slotDuration,maximumVaccinesPerSlot)
 deactivate COMP
 
-CTRL-> COMP : validateVaccinationCenter(center)
-activate COMP
-deactivate COMP
+CTRL --> UI : result
 
 UI --> ADM: shows all data and requests confirmation
 deactivate COMP
@@ -47,6 +66,8 @@ activate COMP
 
 COMP -> COMP : validateVaccinationCenter(center)
 COMP -> COMP : addVaccinationCenter(center)
+
+CTRL --> UI : result
 
 UI --> ADM : informs operation success
 deactivate COMP
