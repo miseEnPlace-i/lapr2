@@ -28,7 +28,7 @@ UI --> ADM : shows all available center coordinators and asks to select one
 deactivate UI
 deactivate COMP
 
-ADM -> UI : selects one Center Coordinator
+ADM -> UI : selects one center coordinator
 activate UI
 
 UI -> CTRL : createVaccinationCenter(name,address,phoneNumber,emailAddress,faxNumber,websiteAddress,openingAndClosingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
@@ -46,7 +46,7 @@ CTRL -> COMP: validateVaccinationCenter(center)
 activate COMP
 
 create "center\n:VaccinationCenter" as CENTER
-COMP -> CENTER : create(name,address,phoneNumber,emailAddress,faxNumber,websiteAddress,openingAndClosingHours,slotDuration,maximumVaccinesPerSlot)
+COMP -> CENTER : create(name,address,phoneNumber,emailAddress,faxNumber,websiteAddress,openingAndClosingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
 deactivate COMP
 
 CTRL --> UI : result
