@@ -11,8 +11,9 @@ class VaccinationCenter {
   - openingAndClosingHours String
   - slotDuration int
   - maximumVaccinesPerSlot int
+  - coordinator COORDINATOR
   ---
- +VaccinationCenter(name,address,phoneNumber,faxNumber,websiteAddress,openingAndClosingHours,slotDuration,maximumVaccinesPerSlot)
+ +VaccinationCenter(name,address,phoneNumber,faxNumber,websiteAddress,openingAndClosingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
 }
 
 
@@ -21,7 +22,7 @@ class Company {
   ---
   +createVaccinationCenter(name,address,phoneNumber,faxNumber,websiteAddress,openingAndClosingHours,slotDuration,maximumVaccinesPerSlot)
   +validateVaccinatonCenter(center)
-  +saveVaccinationCenter(VaccinationCenter)
+  +saveVaccinationCenter(center)
   +addVaccinationCenter(center)
 }
 
