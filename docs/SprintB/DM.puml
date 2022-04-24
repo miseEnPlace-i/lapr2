@@ -58,13 +58,13 @@ class AGES {}
 
 class ARS {}
 
-class IntervalBetweenDoses {
+class DoseInformation {
   dosage
   timeToNextDose
   doseNumber
 }
 
-IntervalBetweenDoses "1" -- "1" AdministrationProccess : has <
+DoseInformation "1" -- "1" AdministrationProccess : has <
 
 Vaccine "*" -- "1" VaccineType : has <
 
