@@ -112,22 +112,30 @@ n/a
 
 | Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
 |:-------------  |:--------------------- |:------------|:---------------------------- |
-| Step 1  		 |	... interacting with the actor? | CreateTaskUI   |  Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.           |
-| 			  		 |	... coordinating the US? | CreateTaskController | Controller                             |
-| 			  		 |	... instantiating a new Task? | Organization   | Creator (Rule 1): in the DM Organization has a Task.   |
-| 			  		 | ... knowing the user using the system?  | UserSession  | IE: cf. A&A component documentation.  |
-| 			  		 |	... knowing to which organization the user belongs to? | Platform  | IE: has registed all Organizations |
-| 			  		 |							 | Organization   | IE: knows/has its own Employees|
-| 			  		 |							 | Employee  | IE: knows its own data (e.g. email) |
-| Step 2  		 |							 |             |                              |
-| Step 3  		 |	...saving the inputted data? | Task  | IE: object created in step 1 has its own data.  |
-| Step 4  		 |	...knowing the task categories to show? | Platform  | IE: Task Categories are defined by the Platform. |
-| Step 5  		 |	... saving the selected category? | Task  | IE: object created in step 1 is classified in one Category.  |
-| Step 6  		 |							 |             |                              |              
-| Step 7  		 |	... validating all data (local validation)? | Task | IE: owns its data.| 
-| 			  		 |	... validating all data (global validation)? | Organization | IE: knows all its tasks.| 
-| 			  		 |	... saving the created task? | Organization | IE: owns all its tasks.| 
-| Step 8  		 |	... informing operation success?| CreateTaskUI  | IE: is responsible for user interactions.  | 
+| Step 1 		 |	... displaying the screen to the user? | UI   |  Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.           |
+| Step 2 		 |	... request data?(designation, number of different age groups) | UI | Responsible for user interactions.                            |
+| Step 3  		 |	... instantiating a new vaccine? | Company   | Knows all vaccines.   |
+| 			  	 |  ... validating data?(locally)  | Vaccine  | Owns the data.  |
+| 			  	 |  ... validating data?(globally)  | Companny  | Knows all data (e.g. make sure it doesnt have the same name as other vaccine).  |
+| Step 4		 |	... list all vaccine types?	| Company	| Knows all vaccine types. |
+| Step 5		 |  ... save the selected vaccine type?	| Vaccine | Object created in step 3 is classified in one vaccine type. |
+| Step 6		 |  ... inform the  current state of the process | UI | Responsible for user interactions. |
+| step 7 ||||
+| Step 8 		 |	... request data?(min age, max age, number of dosage) | UI | Responsible for user interactions.                |
+| Step 9		 |	... instantiating a new adminsitration process	| Company	| Knows all administration process. |
+|				 |	... validating data? |	AdminsitrationProcess	| Owns the data. |
+| Step 10		 |  ... inform the  current state of the process | UI | Same as step 6.	|
+| step 11 ||||
+| Step 12 		 |	... request data?(dosage, time to next dosage) | UI | Responsible for user interactions.                  |
+| Step 13		 |	... instantiating a new dose information	| Company	| Knows all doses information. |
+|				 |	... validating data? |	DoseInformation	| Owns the data. |
+| Step 14		 |  ... inform the  current state of the process | UI | Same as step 6.	|
+| Step 15		 |  ... show all the data and request confirmation?	|	UI	|  Responsible for user interactions.	|
+| Step 16 ||||
+| Step 17		 |  ... informing operation sucess?	|	UI	|  Responsible for user interactions.	|
+
+
+
 
 ### Systematization ##
 

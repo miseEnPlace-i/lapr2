@@ -5,7 +5,7 @@ actor "Administrator" as OE
 activate OE
 OE -> ":System" : asks to create a new vaccine
 activate ":System"
-":System" --> OE : requests data (designation, number of administration processes)
+":System" --> OE : requests data (designation, number of different age groups)
 deactivate ":System"
 
 OE -> ":System" : types requested data
@@ -14,11 +14,6 @@ activate ":System"
 deactivate ":System"
 
 OE -> ":System" : selects a vaccine type
-activate ":System"
-":System" --> OE : requests data(number of different age groups)
-deactivate ":System"
-
-OE -> ":System" : types requested data
 activate ":System"
 ":System" --> OE : informs that is ready to move on to the administration processes specification
 deactivate ":System"
