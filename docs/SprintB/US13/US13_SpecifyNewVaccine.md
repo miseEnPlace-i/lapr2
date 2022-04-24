@@ -97,7 +97,7 @@ TODO
 
 ### 2.1. Relevant Domain Model Excerpt 
 
-![US006_MD](US006_MD.svg)
+![US13_MD](DM/US13_DM.svg)
 
 ### 2.2. Other Remarks
 

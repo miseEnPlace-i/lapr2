@@ -24,7 +24,7 @@ activate ":System"
 deactivate ":System"
 
 
-loop for each administration process
+loop for each age group
     OE -> ":System" : asks to create a new administration process for the vaccine
     activate ":System"
     ":System" --> OE : requests data (min age, max age, number of doses)
