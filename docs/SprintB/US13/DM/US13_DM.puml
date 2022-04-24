@@ -12,28 +12,33 @@ class Vaccine {
 }
 
 class VaccineType {
-  - code
-  - designation
-  - whoid
+  -code
+  -designation
+  -whoid
 }
 
-class Administrator {
+class AdministrationProccess {
+  -AgeGroupMaximumLimit
+  -AgeGroupMinimumLimit
+  -NumberOfDoses
 }
 
-class Administratoin Process {
-  - Age group maximum limit
-  - Age group minimum limit
-  - Number of doses
+class DosesInformation {
+  -doseNumber
+  -dosage
+  -timeIntervalToNextDose
 }
 
-class Doses Information {
-  - dose number
-  - dosage
-  - time interval to next dose
-}
+class Administrator {}
 
-Company "1" -- "*" Vaccine : knows
-Company "1" -- "*" VaccineType : knows
-
+Company "1" -- "*" Vaccine : knows >
+Company "1" -- "*" VaccineType : knows >
+Company "1" -- "*" AdministrationProccess : knows >
+Company "1" -- "*" DosesInformation : knows >
+Company "1" -- "*" Administrator : knows >
+Administrator "1" -- "*" Vaccine : specifies >
+Vaccine "1" -- "*" AdministrationProccess : has >
+Vaccine "1" -- "1" VaccineType : has >
+AdministrationProccess "1" -- "*" DosesInformation : knows >
 
 @enduml
