@@ -54,7 +54,13 @@ activate UI
 UI --> CTRL : saveUser(user)
 activate CTRL
 
+CTRL --> COMP : validateUser(user)
+activate COMP
+deactivate COMP
 
+CTRL --> USER : saveUser(user)
+activate USER
+deactivate USER
 
 deactivate CTRL
 
