@@ -10,6 +10,7 @@ participant ":RegisterSNSUserController" as CTRL
 participant "comp\n:Company" as COMP
 participant "user\n:User" as USER
 participant "auth\n:AuthFacade" as AUTH
+participant "lstSnsU\n:List<SNSUser>" as LIST
 
 activate RECEPT
 RECEPT -> UI : starts to register a new SNS User
@@ -60,6 +61,11 @@ deactivate COMP
 
 CTRL --> USER : saveUser(user)
 activate USER
+
+USER --> LIST : add(user)
+activate LIST
+deactivate LIST
+
 deactivate USER
 
 deactivate CTRL

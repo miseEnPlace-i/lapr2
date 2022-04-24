@@ -33,12 +33,22 @@ interface User {
   - String name
   - String email
   - String pwd
-  - String role
+  - String roleId
+}
+
+enum RoleId {
+  NURSE
+  RECEPTIONIST
+  CENTER_COORDINATOR
+  ADMINISTRATOR
+  SNS_USER
 }
 
 ' class UserSession {
 '   + getUserEmail()
 ' }
+
+Company ..> SNSUser
 
 RegisterSNSUserController ..> ApplicationPOT
 RegisterSNSUserController ..> Company
