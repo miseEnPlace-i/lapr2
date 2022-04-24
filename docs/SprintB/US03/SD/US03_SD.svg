@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="346px" preserveAspectRatio="none" style="width:1100px;height:346px;background:#FFFFFF;" version="1.1" viewBox="0 0 1100 346" width="1100px" zoomAndPan="magnify"><defs><filter height="300%" id="fj9hri3tazrzd" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" filter="url(#fj9hri3tazrzd)" height="143.7578" style="stroke:#A80036;stroke-width:1.0;" width="10" x="42" y="99.6094"/><rect fill="#FFFFFF" filter="url(#fj9hri3tazrzd)" height="30.3516" style="stroke:#A80036;stroke-width:1.0;" width="10" x="499" y="121.9609"/><rect fill="#FFFFFF" filter="url(#fj9hri3tazrzd)" height="60.7031" style="stroke:#A80036;stroke-width:1.0;" width="10" x="499" y="182.6641"/><rect fill="#FFFFFF" filter="url(#fj9hri3tazrzd)" height="69.7031" style="stroke:#A80036;stroke-width:1.0;" width="10" x="716" y="182.6641"/><rect fill="#FFFFFF" filter="url(#fj9hri3tazrzd)" height="39.3516" style="stroke:#A80036;stroke-width:1.0;" width="10" x="933" y="213.0156"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="47" x2="47" y1="89.6094" y2="261.3672"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="503.5" x2="503.5" y1="89.6094" y2="261.3672"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="720.5" x2="720.5" y1="89.6094" y2="261.3672"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="938" x2="938" y1="89.6094" y2="261.3672"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1049" x2="1049" y1="89.6094" y2="261.3672"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78" x="5" y="86.5332">Receptionist</text><ellipse cx="47" cy="15" fill="#FEFECE" filter="url(#fj9hri3tazrzd)" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M47,23 L47,50 M34,31 L60,31 M47,50 L34,65 M47,50 L60,65 " fill="none" filter="url(#fj9hri3tazrzd)" style="stroke:#A80036;stroke-width:2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78" x="5" y="274.9004">Receptionist</text><ellipse cx="47" cy="287.9766" fill="#FEFECE" filter="url(#fj9hri3tazrzd)" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M47,295.9766 L47,322.9766 M34,303.9766 L60,303.9766 M47,322.9766 L34,337.9766 M47,322.9766 L60,337.9766 " fill="none" filter="url(#fj9hri3tazrzd)" style="stroke:#A80036;stroke-width:2.0;"/><rect fill="#FEFECE" filter="url(#fj9hri3tazrzd)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="139" x="432.5" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="125" x="439.5" y="74.5332">:RegisterSNSUserUI</text><rect fill="#FEFECE" filter="url(#fj9hri3tazrzd)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="139" x="432.5" y="260.3672"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="125" x="439.5" y="281.9004">:RegisterSNSUserUI</text><rect fill="#FEFECE" filter="url(#fj9hri3tazrzd)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="189" x="624.5" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="175" x="631.5" y="74.5332">:RegisterSNSUserController</text><rect fill="#FEFECE" filter="url(#fj9hri3tazrzd)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="189" x="624.5" y="260.3672"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="175" x="631.5" y="281.9004">:RegisterSNSUserController</text><rect fill="#FEFECE" filter="url(#fj9hri3tazrzd)" height="49.2188" style="stroke:#A80036;stroke-width:1.5;" width="116" x="878" y="35.3906"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="24" x="924" y="56.9238">app</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="102" x="885" y="74.5332">:ApplicationPOT</text><rect fill="#FEFECE" filter="url(#fj9hri3tazrzd)" height="49.2188" style="stroke:#A80036;stroke-width:1.5;" width="116" x="878" y="260.3672"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="24" x="924" y="281.9004">app</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="102" x="885" y="299.5098">:ApplicationPOT</text><rect fill="#FEFECE" filter="url(#fj9hri3tazrzd)" height="49.2188" style="stroke:#A80036;stroke-width:1.5;" width="78" x="1008" y="35.3906"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="34" x="1030" y="56.9238">comp</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="64" x="1015" y="74.5332">:Company</text><rect fill="#FEFECE" filter="url(#fj9hri3tazrzd)" height="49.2188" style="stroke:#A80036;stroke-width:1.5;" width="78" x="1008" y="260.3672"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="34" x="1030" y="281.9004">comp</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="64" x="1015" y="299.5098">:Company</text><rect fill="#FFFFFF" filter="url(#fj9hri3tazrzd)" height="143.7578" style="stroke:#A80036;stroke-width:1.0;" width="10" x="42" y="99.6094"/><rect fill="#FFFFFF" filter="url(#fj9hri3tazrzd)" height="30.3516" style="stroke:#A80036;stroke-width:1.0;" width="10" x="499" y="121.9609"/><rect fill="#FFFFFF" filter="url(#fj9hri3tazrzd)" height="60.7031" style="stroke:#A80036;stroke-width:1.0;" width="10" x="499" y="182.6641"/><rect fill="#FFFFFF" filter="url(#fj9hri3tazrzd)" height="69.7031" style="stroke:#A80036;stroke-width:1.0;" width="10" x="716" y="182.6641"/><rect fill="#FFFFFF" filter="url(#fj9hri3tazrzd)" height="39.3516" style="stroke:#A80036;stroke-width:1.0;" width="10" x="933" y="213.0156"/><polygon fill="#A80036" points="487,117.9609,497,121.9609,487,125.9609,491,121.9609" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="52" x2="493" y1="121.9609" y2="121.9609"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="59" y="117.1045">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="190" x="70" y="117.1045">asks to register a new SNS User</text><polygon fill="#A80036" points="63,148.3125,53,152.3125,63,156.3125,59,152.3125" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="57" x2="503" y1="152.3125" y2="152.3125"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="69" y="147.4561">2</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="412" x="80" y="147.4561">requests the data (SNSNumber, name, birthDate, phoneNumber, email)</text><polygon fill="#A80036" points="487,178.6641,497,182.6641,487,186.6641,491,182.6641" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="52" x2="493" y1="182.6641" y2="182.6641"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="59" y="177.8076">3</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="122" x="70" y="177.8076">types requested data</text><polygon fill="#A80036" points="704,209.0156,714,213.0156,704,217.0156,708,213.0156" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="509" x2="710" y1="213.0156" y2="213.0156"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="516" y="208.1592">4</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="172" x="527" y="208.1592">snsUser = addNewSNSUser()</text><polygon fill="#A80036" points="921,239.3672,931,243.3672,921,247.3672,925,243.3672" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="726" x2="927" y1="243.3672" y2="243.3672"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="733" y="238.5107">5</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="172" x="744" y="238.5107">snsUser = addNewSNSUser()</text><!--MD5=[ee2a8e3a67827188a27fdd9c4d80f18f]
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="822px" preserveAspectRatio="none" style="width:1330px;height:822px;background:#FFFFFF;" version="1.1" viewBox="0 0 1330 822" width="1330px" zoomAndPan="magnify"><defs><filter height="300%" id="f15jje12nxaefl" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" filter="url(#f15jje12nxaefl)" height="621.9922" style="stroke:#A80036;stroke-width:1.0;" width="10" x="46.5" y="98.2969"/><rect fill="#FFFFFF" filter="url(#f15jje12nxaefl)" height="29.1328" style="stroke:#A80036;stroke-width:1.0;" width="10" x="562.5" y="119.4297"/><rect fill="#FFFFFF" filter="url(#f15jje12nxaefl)" height="336.9297" style="stroke:#A80036;stroke-width:1.0;" width="10" x="562.5" y="177.6953"/><rect fill="#FFFFFF" filter="url(#f15jje12nxaefl)" height="176.5313" style="stroke:#A80036;stroke-width:1.0;" width="10" x="562.5" y="543.7578"/><rect fill="#FFFFFF" filter="url(#f15jje12nxaefl)" height="271.6641" style="stroke:#A80036;stroke-width:1.0;" width="10" x="753.5" y="206.8281"/><rect fill="#FFFFFF" filter="url(#f15jje12nxaefl)" height="118.2656" style="stroke:#A80036;stroke-width:1.0;" width="10" x="753.5" y="572.8906"/><rect fill="#FFFFFF" filter="url(#f15jje12nxaefl)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="982.5" y="235.9609"/><rect fill="#FFFFFF" filter="url(#f15jje12nxaefl)" height="183.3984" style="stroke:#A80036;stroke-width:1.0;" width="10" x="982.5" y="295.0938"/><rect fill="#FFFFFF" filter="url(#f15jje12nxaefl)" height="28" style="stroke:#A80036;stroke-width:1.0;" width="10" x="987.5" y="450.4922"/><rect fill="#FFFFFF" filter="url(#f15jje12nxaefl)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="982.5" y="602.0234"/><rect fill="#FFFFFF" filter="url(#f15jje12nxaefl)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1172.5" y="324.2266"/><rect fill="#FFFFFF" filter="url(#f15jje12nxaefl)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1172.5" y="661.1563"/><rect fill="#FFFFFF" filter="url(#f15jje12nxaefl)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1262.5" y="383.3594"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="51" x2="51" y1="88.2969" y2="738.2891"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="567.5" x2="567.5" y1="88.2969" y2="738.2891"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="758.5" x2="758.5" y1="88.2969" y2="738.2891"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="987.5" x2="987.5" y1="88.2969" y2="738.2891"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1177" x2="1177" y1="88.2969" y2="738.2891"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1267" x2="1267" y1="88.2969" y2="738.2891"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="87" x="5" y="84.9951">Receptionist</text><ellipse cx="51.5" cy="15" fill="#FEFECE" filter="url(#f15jje12nxaefl)" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M51.5,23 L51.5,50 M38.5,31 L64.5,31 M51.5,50 L38.5,65 M51.5,50 L64.5,65 " fill="none" filter="url(#f15jje12nxaefl)" style="stroke:#A80036;stroke-width:2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="87" x="5" y="750.2842">Receptionist</text><ellipse cx="51.5" cy="763.5859" fill="#FEFECE" filter="url(#f15jje12nxaefl)" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M51.5,771.5859 L51.5,798.5859 M38.5,779.5859 L64.5,779.5859 M51.5,798.5859 L38.5,813.5859 M51.5,798.5859 L64.5,813.5859 " fill="none" filter="url(#f15jje12nxaefl)" style="stroke:#A80036;stroke-width:2.0;"/><rect fill="#FEFECE" filter="url(#f15jje12nxaefl)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="150" x="490.5" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="136" x="497.5" y="72.9951">:RegisterSNSUserUI</text><rect fill="#FEFECE" filter="url(#f15jje12nxaefl)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="150" x="490.5" y="737.2891"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="136" x="497.5" y="757.2842">:RegisterSNSUserUI</text><rect fill="#FEFECE" filter="url(#f15jje12nxaefl)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="204" x="654.5" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="190" x="661.5" y="72.9951">:RegisterSNSUserController</text><rect fill="#FEFECE" filter="url(#f15jje12nxaefl)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="204" x="654.5" y="737.2891"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="190" x="661.5" y="757.2842">:RegisterSNSUserController</text><rect fill="#FEFECE" filter="url(#f15jje12nxaefl)" height="46.5938" style="stroke:#A80036;stroke-width:1.5;" width="84" x="943.5" y="36.7031"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="39" x="966" y="56.6982">comp</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70" x="950.5" y="72.9951">:Company</text><rect fill="#FEFECE" filter="url(#f15jje12nxaefl)" height="46.5938" style="stroke:#A80036;stroke-width:1.5;" width="84" x="943.5" y="737.2891"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="39" x="966" y="757.2842">comp</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70" x="950.5" y="773.5811">:Company</text><rect fill="#FEFECE" filter="url(#f15jje12nxaefl)" height="46.5938" style="stroke:#A80036;stroke-width:1.5;" width="51" x="1150" y="36.7031"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="31" x="1160" y="56.6982">user</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="37" x="1157" y="72.9951">:User</text><rect fill="#FEFECE" filter="url(#f15jje12nxaefl)" height="46.5938" style="stroke:#A80036;stroke-width:1.5;" width="51" x="1150" y="737.2891"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="31" x="1160" y="757.2842">user</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="37" x="1157" y="773.5811">:User</text><rect fill="#FEFECE" filter="url(#f15jje12nxaefl)" height="46.5938" style="stroke:#A80036;stroke-width:1.5;" width="101" x="1215" y="36.7031"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="31" x="1250" y="56.6982">auth</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="87" x="1222" y="72.9951">:AuthFacade</text><rect fill="#FEFECE" filter="url(#f15jje12nxaefl)" height="46.5938" style="stroke:#A80036;stroke-width:1.5;" width="101" x="1215" y="737.2891"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="31" x="1250" y="757.2842">auth</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="87" x="1222" y="773.5811">:AuthFacade</text><rect fill="#FFFFFF" filter="url(#f15jje12nxaefl)" height="621.9922" style="stroke:#A80036;stroke-width:1.0;" width="10" x="46.5" y="98.2969"/><rect fill="#FFFFFF" filter="url(#f15jje12nxaefl)" height="29.1328" style="stroke:#A80036;stroke-width:1.0;" width="10" x="562.5" y="119.4297"/><rect fill="#FFFFFF" filter="url(#f15jje12nxaefl)" height="336.9297" style="stroke:#A80036;stroke-width:1.0;" width="10" x="562.5" y="177.6953"/><rect fill="#FFFFFF" filter="url(#f15jje12nxaefl)" height="176.5313" style="stroke:#A80036;stroke-width:1.0;" width="10" x="562.5" y="543.7578"/><rect fill="#FFFFFF" filter="url(#f15jje12nxaefl)" height="271.6641" style="stroke:#A80036;stroke-width:1.0;" width="10" x="753.5" y="206.8281"/><rect fill="#FFFFFF" filter="url(#f15jje12nxaefl)" height="118.2656" style="stroke:#A80036;stroke-width:1.0;" width="10" x="753.5" y="572.8906"/><rect fill="#FFFFFF" filter="url(#f15jje12nxaefl)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="982.5" y="235.9609"/><rect fill="#FFFFFF" filter="url(#f15jje12nxaefl)" height="183.3984" style="stroke:#A80036;stroke-width:1.0;" width="10" x="982.5" y="295.0938"/><rect fill="#FFFFFF" filter="url(#f15jje12nxaefl)" height="28" style="stroke:#A80036;stroke-width:1.0;" width="10" x="987.5" y="450.4922"/><rect fill="#FFFFFF" filter="url(#f15jje12nxaefl)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="982.5" y="602.0234"/><rect fill="#FFFFFF" filter="url(#f15jje12nxaefl)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1172.5" y="324.2266"/><rect fill="#FFFFFF" filter="url(#f15jje12nxaefl)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1172.5" y="661.1563"/><rect fill="#FFFFFF" filter="url(#f15jje12nxaefl)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1262.5" y="383.3594"/><polygon fill="#A80036" points="550.5,115.4297,560.5,119.4297,550.5,123.4297,554.5,119.4297" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="56.5" x2="556.5" y1="119.4297" y2="119.4297"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="63.5" y="114.3638">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="214" x="76.5" y="114.3638">starts to register a new SNS User</text><polygon fill="#A80036" points="67.5,144.5625,57.5,148.5625,67.5,152.5625,63.5,148.5625" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="61.5" x2="566.5" y1="148.5625" y2="148.5625"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="73.5" y="143.4966">2</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="469" x="86.5" y="143.4966">requests data (SNSNumber, name, birthDate, sex, phoneNumber, email)</text><polygon fill="#A80036" points="550.5,173.6953,560.5,177.6953,550.5,181.6953,554.5,177.6953" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="56.5" x2="556.5" y1="177.6953" y2="177.6953"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="63.5" y="172.6294">3</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="137" x="76.5" y="172.6294">types requested data</text><polygon fill="#A80036" points="741.5,202.8281,751.5,206.8281,741.5,210.8281,745.5,206.8281" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="572.5" x2="747.5" y1="206.8281" y2="206.8281"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="579.5" y="201.7622">4</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="140" x="592.5" y="201.7622">createUser(userData)</text><polygon fill="#A80036" points="970.5,231.9609,980.5,235.9609,970.5,239.9609,974.5,235.9609" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="763.5" x2="976.5" y1="235.9609" y2="235.9609"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="770.5" y="230.895">5</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="187" x="783.5" y="230.895">user = createUser(userData)</text><polygon fill="#A80036" points="970.5,291.0938,980.5,295.0938,970.5,299.0938,974.5,295.0938" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="763.5" x2="976.5" y1="295.0938" y2="295.0938"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="770.5" y="290.0278">6</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="118" x="783.5" y="290.0278">validateUser(user)</text><polygon fill="#A80036" points="1160.5,320.2266,1170.5,324.2266,1160.5,328.2266,1164.5,324.2266" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="992.5" x2="1166.5" y1="324.2266" y2="324.2266"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="999.5" y="319.1606">7</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="148" x="1012.5" y="319.1606">email = getEmail(user)</text><polygon fill="#A80036" points="1250.5,379.3594,1260.5,383.3594,1250.5,387.3594,1254.5,383.3594" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="992.5" x2="1256.5" y1="383.3594" y2="383.3594"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="999.5" y="378.2935">8</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="112" x="1012.5" y="378.2935">existsUser(email)</text><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="997.5" x2="1039.5" y1="442.4922" y2="442.4922"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="1039.5" x2="1039.5" y1="442.4922" y2="455.4922"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="998.5" x2="1039.5" y1="455.4922" y2="455.4922"/><polygon fill="#A80036" points="1008.5,451.4922,998.5,455.4922,1008.5,459.4922,1004.5,455.4922" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="1004.5" y="437.4263">9</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="142" x="1017.5" y="437.4263">checkDuplicates(user)</text><polygon fill="#A80036" points="67.5,510.625,57.5,514.625,67.5,518.625,63.5,514.625" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="61.5" x2="566.5" y1="514.625" y2="514.625"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="73.5" y="509.5591">10</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="238" x="95.5" y="509.5591">shows data and asks for confirmation</text><polygon fill="#A80036" points="550.5,539.7578,560.5,543.7578,550.5,547.7578,554.5,543.7578" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="56.5" x2="556.5" y1="543.7578" y2="543.7578"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="63.5" y="538.6919">11</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="113" x="85.5" y="538.6919">confirms the data</text><polygon fill="#A80036" points="741.5,568.8906,751.5,572.8906,741.5,576.8906,745.5,572.8906" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="572.5" x2="747.5" y1="572.8906" y2="572.8906"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="579.5" y="567.8247">12</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="98" x="601.5" y="567.8247">saveUser(user)</text><polygon fill="#A80036" points="970.5,598.0234,980.5,602.0234,970.5,606.0234,974.5,602.0234" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="763.5" x2="976.5" y1="602.0234" y2="602.0234"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="770.5" y="596.9575">13</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="118" x="792.5" y="596.9575">validateUser(user)</text><polygon fill="#A80036" points="1160.5,657.1563,1170.5,661.1563,1160.5,665.1563,1164.5,661.1563" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="763.5" x2="1166.5" y1="661.1563" y2="661.1563"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="770.5" y="656.0903">14</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="98" x="792.5" y="656.0903">saveUser(user)</text><polygon fill="#A80036" points="62.5,716.2891,52.5,720.2891,62.5,724.2891,58.5,720.2891" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="56.5" x2="566.5" y1="720.2891" y2="720.2891"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="68.5" y="715.2231">15</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="168" x="90.5" y="715.2231">informs operation success</text><!--MD5=[91b09675b515cc8a63caffef3b022a7c]
 @startuml Sequence Diagram
 autonumber
 'hide footbox
@@ -6,28 +6,67 @@ actor "Receptionist" as RECEPT
 
 participant ":RegisterSNSUserUI" as UI
 participant ":RegisterSNSUserController" as CTRL
-participant "app\n:ApplicationPOT" as APP
+' participant "app\n:ApplicationPOT" as APP
 ' participant ":Platform" as PLAT
 participant "comp\n:Company" as COMP
+participant "user\n:User" as USER
+participant "auth\n:AuthFacade" as AUTH
 
 activate RECEPT
-RECEPT -> UI : asks to register a new SNS User
+RECEPT -> UI : starts to register a new SNS User
 activate UI
-UI - -> RECEPT : requests the data (SNSNumber, name, birthDate, phoneNumber, email)
+UI - -> RECEPT : requests data (SNSNumber, name, birthDate, sex, phoneNumber, email)
 deactivate UI
 
 RECEPT -> UI : types requested data
 activate UI
 
+UI - -> CTRL : createUser(userData)
 activate CTRL
-UI - -> CTRL : snsUser = addNewSNSUser()
-activate APP
-CTRL - -> APP : snsUser = addNewSNSUser()
+
+CTRL - -> COMP : user = createUser(userData)
+activate COMP
+deactivate COMP
+
+CTRL - -> COMP : validateUser(user)
+activate COMP
+
+COMP - -> USER : email = getEmail(user)
+activate USER
+deactivate USER
+
+COMP - -> AUTH : existsUser(email)
+activate AUTH
+deactivate AUTH
+
+COMP - -> COMP : checkDuplicates(user)
+activate COMP
+deactivate COMP
+
+deactivate COMP
+deactivate CTRL
+
+UI - -> RECEPT : shows data and asks for confirmation
 deactivate UI
 
+RECEPT - -> UI : confirms the data
+activate UI
 
+UI - -> CTRL : saveUser(user)
+activate CTRL
 
+CTRL - -> COMP : validateUser(user)
+activate COMP
+deactivate COMP
 
+CTRL - -> USER : saveUser(user)
+activate USER
+deactivate USER
+
+deactivate CTRL
+
+UI - -> RECEPT : informs operation success
+deactivate UI
 
 deactivate RECEPT
 
@@ -39,27 +78,65 @@ actor "Receptionist" as RECEPT
 
 participant ":RegisterSNSUserUI" as UI
 participant ":RegisterSNSUserController" as CTRL
-participant "app\n:ApplicationPOT" as APP
 participant "comp\n:Company" as COMP
+participant "user\n:User" as USER
+participant "auth\n:AuthFacade" as AUTH
 
 activate RECEPT
-RECEPT -> UI : asks to register a new SNS User
+RECEPT -> UI : starts to register a new SNS User
 activate UI
-UI - -> RECEPT : requests the data (SNSNumber, name, birthDate, phoneNumber, email)
+UI - -> RECEPT : requests data (SNSNumber, name, birthDate, sex, phoneNumber, email)
 deactivate UI
 
 RECEPT -> UI : types requested data
 activate UI
 
+UI - -> CTRL : createUser(userData)
 activate CTRL
-UI - -> CTRL : snsUser = addNewSNSUser()
-activate APP
-CTRL - -> APP : snsUser = addNewSNSUser()
+
+CTRL - -> COMP : user = createUser(userData)
+activate COMP
+deactivate COMP
+
+CTRL - -> COMP : validateUser(user)
+activate COMP
+
+COMP - -> USER : email = getEmail(user)
+activate USER
+deactivate USER
+
+COMP - -> AUTH : existsUser(email)
+activate AUTH
+deactivate AUTH
+
+COMP - -> COMP : checkDuplicates(user)
+activate COMP
+deactivate COMP
+
+deactivate COMP
+deactivate CTRL
+
+UI - -> RECEPT : shows data and asks for confirmation
 deactivate UI
 
+RECEPT - -> UI : confirms the data
+activate UI
 
+UI - -> CTRL : saveUser(user)
+activate CTRL
 
+CTRL - -> COMP : validateUser(user)
+activate COMP
+deactivate COMP
 
+CTRL - -> USER : saveUser(user)
+activate USER
+deactivate USER
+
+deactivate CTRL
+
+UI - -> RECEPT : informs operation success
+deactivate UI
 
 deactivate RECEPT
 
@@ -67,9 +144,9 @@ deactivate RECEPT
 
 PlantUML version 1.2022.0(Tue Jan 11 16:16:42 WET 2022)
 (GPL source distribution)
-Java Runtime: Java(TM) SE Runtime Environment
-JVM: Java HotSpot(TM) 64-Bit Server VM
-Default Encoding: Cp1252
-Language: pt
-Country: PT
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
 --></g></svg>
