@@ -67,10 +67,6 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 
 ![US09_SSD](SSD/US09_SSD.svg)
 
-**Another alternative**
-
-![US09_SSD](SSD/US09_SSD_V2.svg)
-
 ### 1.7 Other Relevant Remarks
 
 * Not found.
@@ -116,7 +112,13 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ## 3.2. Sequence Diagram (SD)
 
+### Alternative 1
+
 ![US09_SD](SD/US09_SD.svg)
+
+### Alternative 2
+
+![US09_SD](SD/US09_SD_V2.svg)
 
 ## 3.3. Class Diagram (CD)
 
