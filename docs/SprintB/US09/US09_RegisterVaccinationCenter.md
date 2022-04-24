@@ -67,8 +67,9 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 
 ![US09_SSD](SSD/US09_SSD.svg)
 
+**Another alternative**
 
-**Other alternatives might exist.**
+![US09_SSD](SSD/US09_SSD_V2.svg)
 
 ### 1.7 Other Relevant Remarks
 
@@ -124,8 +125,9 @@ Other software classes (i.e. Pure Fabrication) identified:
 # 4. Tests 
 // Test without 1 parameter address (String)
 // Test without 1 parameter phone number (int)
-// Test without any parameter
+// Test with null values
 // ---
+
 **Test 1:** Check that it is not possible to create an instance of the VaccinationCenter class without the parameter address. 
 
 	@Test(expected = IllegalArgumentException.class)
@@ -140,11 +142,11 @@ Other software classes (i.e. Pure Fabrication) identified:
 		VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida", 221010101,"vacinacaoporto@gmail.com", +351-122-123123123, "www.centrovacinaoporto.com", "8:00-19:00", 0, 10);
 	}
 
-**Test 3** Check that it is not possible to create an instance of the VaccinationCenter class without any parameter.
+**Test 3** Check that it is not possible to create an instance of the VaccinationCenter class with null values.
 	
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureEveryParameterIsNotNul() {
-			VaccinationCenter center = new VaccinationCenter(null,null,0,null,0,null,null,0,0);
+		public void ensureReferenceMeetsAC2() {
+			VaccinationCenter center = new VaccinationCenter(null,null,null,null,null,null,null,null,null);
 		}
 
 
@@ -153,7 +155,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ## Class CreateTaskController 
 
-		public boolean createTask(String ref, String designation, String informalDesc, 
+		public boolean VaccinationCenterController(String ref, String designation, String informalDesc, 
 			String technicalDesc, Integer duration, Double cost, Integer catId)() {
 		
 			Category cat = this.platform.getCategoryById(catId);
@@ -170,7 +172,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 ## Class Organization
 
 
-		public Task createTask(String ref, String designation, String informalDesc, 
+		public Task VaccinationCenter(String ref, String designation, String informalDesc, 
 			String technicalDesc, Integer duration, Double cost, Category cat)() {
 		
 	
@@ -194,8 +196,3 @@ Other software classes (i.e. Pure Fabrication) identified:
 Platform and Organization classes are getting too many responsibilities due to IE pattern and, therefore, they are becoming huge and harder to maintain. 
 
 Is there any way to avoid this to happen?
-
-
-
-
-
