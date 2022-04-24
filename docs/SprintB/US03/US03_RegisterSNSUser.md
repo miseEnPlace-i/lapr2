@@ -52,7 +52,6 @@ _"As a receptionist, I want to register a SNS User."_
 * **AC10:** The user receives an e-mail informing that the registration was successful and that he can start to use the system. The e-mail includes the user password. All the e-mail messages should be written to a file with the name emailAndSMSMessages.txt.
 
 
-
 ### 1.4. Found out Dependencies
 
 * No dependencies were found.
@@ -84,12 +83,12 @@ _"As a receptionist, I want to register a SNS User."_
 
 **Alternative 1**
 
-![US03_SSD](US03_SSD.svg)
+![US03_SSD](SSD/US03_SSD.svg)
 
 
-**Alternative 2**
+<!-- **Alternative 2**
 
-![US03_SSD_v2](US03_SSD_v2.svg)
+![US03_SSD_v2](US03_SSD_v2.svg) -->
 
 
 **Other alternatives might exist.**
@@ -105,7 +104,7 @@ _"As a receptionist, I want to register a SNS User."_
 
 ### 2.1. Relevant Domain Model Excerpt 
 
-![US03_MD](US03_MD.svg)
+![US03_MD](DM/US03_DM.svg)
 
 ### 2.2. Other Remarks
 
@@ -161,17 +160,17 @@ Other software classes of external systems/components:
 
 **Alternative 1**
 
-![US03_SD](US03_SD.svg)
+![US03_SD](SD/US03_SD.svg)
 
-**Alternative 2**
+<!-- **Alternative 2**
 
-![US03_SD](US03_SD_v2.svg)
+![US03_SD](US03_SD_v2.svg) -->
 
 ## 3.3. Class Diagram (CD)
 
 **From alternative 1**
 
-![US03_CD](US03_CD.svg)
+![US03_CD](CD/US03_CD.svg)
 
 # 4. Tests 
 
@@ -238,6 +237,7 @@ Other software classes of external systems/components:
 
 
 # 7. Observations
+<!-- TODO -->
 
 Platform and Organization classes are getting too many responsibilities due to IE pattern and, therefore, they are becoming huge and harder to maintain. 
 
