@@ -33,12 +33,10 @@ class Administrator {}
 
 Company "1" -- "*" Vaccine : knows >
 Company "1" -- "*" VaccineType : knows >
-Company "1" -- "*" AdministrationProccess : knows >
-Company "1" -- "*" DosesInformation : knows >
 Company "1" -- "*" Administrator : knows >
 Administrator "1" -- "*" Vaccine : specifies >
 Vaccine "1" -- "*" AdministrationProccess : has >
 Vaccine "1" -- "1" VaccineType : has >
-AdministrationProccess "1" -- "*" DosesInformation : knows >
+AdministrationProccess "1" -- "*" DosesInformation : has >
 
 @enduml

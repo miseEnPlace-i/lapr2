@@ -1,18 +1,15 @@
 @startuml
 autonumber
 'hide footbox
-actor "Organization Employee" as ADM
+actor "Administrator" as ADM
 
-participant ":CreateTaskUI" as UI
-participant ":CreateTaskController" as CTRL
-participant "ApplicationPOT" as _APP
-participant "app\n:ApplicationPOT" as APP
-participant "session\n:UserSession" as SESSAO
-participant ":Platform" as PLAT
-participant "org\n:Organization" as ORG
-participant "task\n:Task" as TAREFA
-participant "cat\n:Category" as CAT
-participant "lc\n:List<Category>" as LIST_CAT
+participant ":CreateVaccineUI" as UI
+participant ":CreateVaccineController" as CTRL
+participant "Company" as COMP
+participant "vac : Vaccine" as VAC
+participant "vacT : VaccineTypes" as VACT
+participant "adminProc : AdministrationProcess" as AP
+participant "DoseInfo : DoseInformation" as DI
 
 activate ADM
 ADM -> UI : asks to create a new task
