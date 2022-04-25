@@ -18,16 +18,16 @@ class Company {
   - designation
 }
 
-class User {
-  - name
-  - email
-  - pwd
-  - role
-}
+' class User {
+'   - name
+'   - email
+'   - pwd
+'   - role
+' }
 
 Receptionist "1" -- "*" SNSUser : registers >
 Company "1" -- "*" Receptionist : knows >
 Company "1" -- "*" SNSUser : knows >
-SNSUser "0..1" -- "1" User : becomes >
+' SNSUser "0..1" -- "1" User : becomes >
 
 @enduml

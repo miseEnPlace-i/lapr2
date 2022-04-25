@@ -5,12 +5,10 @@ actor "Receptionist" as RECEPT
 
 participant ":RegisterSNSUserUI" as UI
 participant ":RegisterSNSUserController" as CTRL
-' participant "app\n:ApplicationPOT" as APP
-' participant ":Platform" as PLAT
 participant "comp\n:Company" as COMP
 participant "user\n:User" as USER
 participant "auth\n:AuthFacade" as AUTH
-participant "lstSnsU\n:List<SNSUser>" as LIST
+' participant "lstSnsU\n:List<SNSUser>" as LIST
 
 activate RECEPT
 RECEPT -> UI : starts to register a new SNS User
@@ -21,7 +19,7 @@ deactivate UI
 RECEPT -> UI : types requested data
 activate UI
 
-UI --> CTRL : createUser(userData)
+UI --> CTRL : user = createUser(userData)
 activate CTRL
 
 CTRL --> COMP : user = createUser(userData)
@@ -43,7 +41,12 @@ COMP --> COMP : checkDuplicates(user)
 activate COMP
 deactivate COMP
 
+CTRL <-- COMP : result
+
 deactivate COMP
+
+UI <-- CTRL : result
+
 deactivate CTRL
 
 UI --> RECEPT : shows data and asks for confirmation
@@ -55,18 +58,22 @@ activate UI
 UI --> CTRL : saveUser(user)
 activate CTRL
 
-CTRL --> COMP : validateUser(user)
+CTRL --> COMP : saveUser(user)
+activate COMP
+
+COMP --> COMP : validateUser(user)
 activate COMP
 deactivate COMP
 
-CTRL --> USER : saveUser(user)
-activate USER
+COMP --> COMP : addUser(user)
+activate COMP
+deactivate COMP
 
-USER --> LIST : add(user)
-activate LIST
-deactivate LIST
+CTRL <-- COMP : result
 
-deactivate USER
+deactivate COMP
+
+UI <-- CTRL : result
 
 deactivate CTRL
 

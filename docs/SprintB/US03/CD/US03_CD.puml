@@ -36,19 +36,11 @@ interface User {
   - String roleId
 }
 
-enum RoleId {
-  NURSE
-  RECEPTIONIST
-  CENTER_COORDINATOR
-  ADMINISTRATOR
-  SNS_USER
-}
-
 ' class UserSession {
 '   + getUserEmail()
 ' }
 
-Company ..> SNSUser
+Company "1" --> "*" SNSUser : knows
 
 RegisterSNSUserController ..> ApplicationPOT
 RegisterSNSUserController ..> Company
@@ -57,6 +49,6 @@ RegisterSNSUserController ..> SNSUser
 
 RegisterSNSUserUI ..> RegisterSNSUserController
 
-SNSUser ..> User
+SNSUser --|> User
 
 @enduml

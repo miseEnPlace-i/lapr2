@@ -34,7 +34,7 @@ _"As a receptionist, I want to register a SNS User."_
 ### 1.3. Acceptance Criteria
 <!-- TODO -->
 
-* **AC01:** All required fiels must be filled in.
+* **AC01:** All required fields must be filled in.
 * **AC02:** When creating a User with an already existing reference, the system must reject such operation and the user must have the change to modify the typed reference.
 * **AC03:** SNS number must have 9 digits.
 <!-- ? QUESTION -->
@@ -85,10 +85,6 @@ _"As a receptionist, I want to register a SNS User."_
 
 ![US03_SSD](SSD/US03_SSD.svg)
 
-
-<!-- **Alternative 2**
-
-![US03_SSD_v2](US03_SSD_v2.svg) -->
 
 
 **Other alternatives might exist.**
@@ -142,11 +138,10 @@ According to the taken rationale, the conceptual classes promoted to software cl
 
  * Employee
  * SNSUser
- * User
 
-Other software classes (i.e. Pure Fabrication) identified: 
+Other software classes (i.e. Pure Fabrication) identified:
 
- * CreateSNSUserUI  
+ * CreateSNSUserUI
  * CreateSNSUserController
  * **PasswordGenerator**
  * **EmailNotificationSender**
@@ -162,9 +157,6 @@ Other software classes of external systems/components:
 
 ![US03_SD](SD/US03_SD.svg)
 
-<!-- **Alternative 2**
-
-![US03_SD](US03_SD_v2.svg) -->
 
 ## 3.3. Class Diagram (CD)
 
