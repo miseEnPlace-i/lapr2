@@ -45,6 +45,11 @@ activate UI
 
         deactivate COMP
 
+        CTRL -> COMP : validateVaccine(vac)
+        activate COMP 
+            COMP -> COMP : checkDuplicatedDesignation(designation)
+        deactivate COMP
+
     deactivate CTRL
 UI --> ADM : informs that is ready to move on to the administration processes specification
 deactivate UI
@@ -54,11 +59,26 @@ loop for each age group
 
     ADM -> UI : asks to create a new administration process for the vaccine
     activate UI
-    UI --> ADM : requests data (min age, max age, number of doses)
+    UI --> ADM : requests data (minAge, maxAge, numberOfDoses)
     deactivate UI
 
     ADM -> UI : types requested data
     activate UI
+        UI -> CTRL : adminProc = creatAdminProc(minAge, maxAge, numberOfDoses)
+        activate CTRL
+
+            CTRL -> COMP : adminProc = creatAdminProc(minAge, maxAge, numberOfDoses)
+            activate COMP 
+
+                COMP -> AP ** : creat(designation, numberAgeGroups, vacType)
+
+            deactivate COMP
+
+            CTRL -> COMP : validateAdminProc(adminProc)
+            activate COMP 
+            deactivate COMP
+
+        deactivate CTRL
     UI --> ADM : informs that is ready to move on to the dose information
     deactivate UI
 
@@ -66,23 +86,46 @@ loop for each age group
 
         ADM -> UI : asks to add dose information to the administration process
         activate UI
-        UI --> ADM : informs that is ready to move on to the dose information
+        UI --> ADM : requests data (dosage, timeToNextDose)
         deactivate UI
-        
         ADM -> UI : types requested data
         activate UI
+            UI -> CTRL : doseInfo = creatDoseInfo(dosage, timeToNextDose)
+                activate CTRL
+                CTRL -> COMP : doseInfo = creatDoseInfo(dosage, timeToNextDose)
+                activate COMP 
+
+                    COMP -> DI ** : creat(dosage, timeToNextDose)
+
+                deactivate COMP
+
+                CTRL -> COMP : validateDoseInfo(doseInfo)
+                activate COMP 
+                deactivate COMP
+
+                deactivate CTRL
         UI --> ADM : informs dose information specification sucess
         deactivate UI
-        
     end
-
 end
-
+ADM -> UI : asks to confirm all data
+activate UI
 UI --> ADM : shows all data and requests confirmation
 deactivate UI
 
 ADM -> UI : confirms the data
 activate UI
+UI -> CTRL : saveVaccine()
+    activate CTRL
+
+        CTRL -> COMP :  saveVaccine(vac)
+        activate COMP 
+            COMP -> COMP : validateVaccine(vac)
+            COMP -> COMP : addVaccine(vac)
+            COMP --> CTRL : result
+        deactivate COMP
+        CTRL --> UI : result
+    deactivate CTRL
 UI --> ADM : informs operation success
 deactivate UI
 
