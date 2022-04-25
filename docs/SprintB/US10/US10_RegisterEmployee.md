@@ -9,7 +9,6 @@
 _"As an administrator, I want to register an Employee."_
 
 
-
 ### 1.2. Customer Specifications and Clarifications 
 
 
@@ -23,13 +22,15 @@ _"As an administrator, I want to register an Employee."_
 
 > 	"Any Administrator uses the application to register [...] center coordinators, receptionists, and nurses enrolled in the vaccination process."
 
-
-
 **From the client clarifications:**
 
 > **Question:** Which information should the administrator know about the employees, in order to register them in the system?
 >  
-> **Answer:** _"Every Employee has only one role (Coordinator, Receptionist, Nurse). Employee attributes: Id (automatic), name, address, phone number, e-mail and Citizen Card number. All attributes are mandatory"._
+> **Answer:** _"Every Employee has only one role (Coordinator, Receptionist, Nurse). Employee attributes: Id (automatic), name, address, phone number, e-mail and Citizen Card number. All attributes are mandatory."_
+
+> **Question:** How should the password be generated? Can the administrator choose the password?
+
+> **Answer:** _"The password should be randomly generated."_
 
 
 ### 1.3. Acceptance Criteria
@@ -60,11 +61,9 @@ _"As an administrator, I want to register an Employee."_
 	* phone number
 	* email
 	* Citizen Card number
-	* password (? - not sure if it is automatically generated)
-	
+
 * Selected data:
 	* user role 
-
 
 **Output Data:**
 
