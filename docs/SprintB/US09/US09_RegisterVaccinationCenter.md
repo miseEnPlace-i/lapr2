@@ -66,8 +66,13 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 
 ### 1.6. System Sequence Diagram (SSD)
 
+**Alternative 1**
 
 ![US09_SSD](SSD/US09_SSD.svg)
+
+**Alternative 2**
+
+![US09_SSD](SSD/US09_SSD_V2.svg)
 
 ### 1.7 Other Relevant Remarks
 
