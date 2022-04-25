@@ -20,13 +20,13 @@ class RegisterSNSUserController {
 class RegisterSNSUserUI { }
 
 class SNSUser {
-  - String SNSNumber
+  - String snsNumber
   - String name
   - Date birthDate
   - Char gender
-  - Integer phoneNumber
+  - String phoneNumber
   - String email
-  + SNSUser(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
+  + SNSUser(snsNumber, name, birthDate, gender, phoneNumber, email)
 }
 
 interface User {

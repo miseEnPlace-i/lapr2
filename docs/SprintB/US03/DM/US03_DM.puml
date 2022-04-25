@@ -3,11 +3,10 @@ hide methods
 left to right direction
 skinparam classAttributeIconSize 0
 
-class Receptionist {
-}
+class Receptionist { }
 
 class SNSUser {
-  - SNSNumber
+  - snsNumber
   - name
   - birthDate
   - gender
