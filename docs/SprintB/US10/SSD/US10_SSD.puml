@@ -5,7 +5,7 @@ actor "Administrator" as admin
 activate admin
 admin -> ":System" : asks to register a new empolyee
 activate ":System"
-":System" --> admin : requests data (name, address, phone number, email, citizen card number, PASSWORD??)
+":System" --> admin : requests data (name, address, phone number, email, citizen card number)
 deactivate ":System"
 
 admin -> ":System" : types requested data
