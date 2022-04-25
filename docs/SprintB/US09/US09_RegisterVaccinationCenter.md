@@ -32,6 +32,7 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 
 * **AC1:** Each center mush have one Center Coordinator.
 * **AC2:** All required fields must be filled in.
+* **AC3:** When creating a new Vaccination Center, validate that there isn´t already one existing with the same references.
 
 
 ### 1.4. Found out Dependencies
