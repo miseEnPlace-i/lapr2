@@ -114,27 +114,27 @@ n/a
 | Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
 |:-------------  |:--------------------- |:------------|:---------------------------- |
 | Step 1 		 |	... displaying the screen to the user? | CreateVaccineUI   |  Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.           |
-|	| ... coordinating the US	| CreateVaccineController	| Controller 	|
-| Step 2 		 |	... request data?(designation, number of different age groups) | CreateVaccineUI | Responsible for user interactions.                            |
-| Step 3  		 |	... instantiating a new vaccine? | Company   | Knows all vaccines.   |
-| 			  	 |  ... validating data?(locally)  | Vaccine  | Owns the data.  |
-| 			  	 |  ... validating data?(globally)  | Companny  | Knows all data (e.g. make sure it doesnt have the same name as other vaccine).  |
-| Step 4		 |	... list all vaccine types?	| Company	| Knows all vaccine types. |
-| Step 5		 |  ... save the selected vaccine type?	| Vaccine | Object created in step 3 is classified in one vaccine type. |
-| Step 6		 |  ... inform the  current state of the process | CreateVaccineUI | Responsible for user interactions. |
+|	| ... coordinating the US	| CreateVaccineController	| Pure Fabrication: Controller 	|
+| Step 2 		 |	... request data?(designation, number of different age groups) | CreateVaccineUI | IE: Responsible for user interactions.                            |
+| Step 3  		 |	... instantiating a new vaccine? | Company   | IE: Knows all vaccines.   |
+| 			  	 |  ... validating data?(locally)  | Vaccine  | IE: Owns the data.  |
+| 			  	 |  ... validating data?(globally)  | Companny  | IE: Knows all data (e.g. make sure it doesnt have the same name as other vaccine).  |
+| Step 4		 |	... list all vaccine types?	| Company	| IE: Knows all vaccine types. |
+| Step 5		 |  ... save the selected vaccine type?	| Vaccine | IE: Object created in step 3 is classified in one vaccine type. |
+| Step 6		 |  ... inform the  current state of the process | CreateVaccineUI | Pure Fabrication: Responsible for user interactions. |
 | step 7 ||||
-| Step 8 		 |	... request data?(min age, max age, number of dosage) | CreateVaccineUI | Responsible for user interactions.                |
-| Step 9		 |	... instantiating a new adminsitration process	| Company	| Knows all administration process. |
-|				 |	... validating data? |	AdminsitrationProcess	| Owns the data. |
-| Step 10		 |  ... inform the  current state of the process | CreateVaccineUI | Same as step 6.	|
+| Step 8 		 |	... request data?(min age, max age, number of dosage) | CreateVaccineUI | Pure Fabrication: Responsible for user interactions.                |
+| Step 9		 |	... instantiating a new adminsitration process	| Company	| Creator: Knows all administration process. |
+|				 |	... validating data? |	AdminsitrationProcess	| IE: Owns the data. |
+| Step 10		 |  ... inform the  current state of the process | CreateVaccineUI | Pure Fabrication: Same as step 6.	|
 | step 11 ||||
-| Step 12 		 |	... request data?(dosage, time to next dosage) | CreateVaccineUI | Responsible for user interactions.                  |
-| Step 13		 |	... instantiating a new dose information	| Company	| Knows all doses information. |
-|				 |	... validating data? |	DoseInformation	| Owns the data. |
-| Step 14		 |  ... inform the  current state of the process | CreateVaccineUI | Same as step 6.	|
-| Step 15		 |  ... show all the data and request confirmation?	|	CreateVaccineUI	|  Responsible for user interactions.	|
+| Step 12 		 |	... request data?(dosage, time to next dosage) | CreateVaccineUI | Pure Fabrication: Responsible for user interactions.                  |
+| Step 13		 |	... instantiating a new dose information	| Company	| Creator: Knows all doses information. |
+|				 |	... validating data? |	DoseInformation	| IE: Owns the data. |
+| Step 14		 |  ... inform the  current state of the process | CreateVaccineUI | Pure Fabrication: Same as step 6.	|
+| Step 15		 |  ... show all the data and request confirmation?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
 | Step 16 ||||
-| Step 17		 |  ... informing operation sucess?	|	CreateVaccineUI	|  Responsible for user interactions.	|
+| Step 17		 |  ... informing operation sucess?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
 
 
 
@@ -145,7 +145,7 @@ According to the taken rationale, the conceptual classes promoted to software cl
 
  * Company
  * Vaccine
- * VaccineTypes
+ * VaccineType
  * AdministrationProcess
  * DoseInformation
 
