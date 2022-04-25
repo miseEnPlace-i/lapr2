@@ -37,8 +37,9 @@ doses (e.g.: between the 1st and 2nd doses 21 days might be required, while betw
 TODO
 
 > **Question:** 
->  
+>   As to the interval between doses, what time format are we to use?
 > **Answer:** 
+	Number of days.
 
 -
 
