@@ -11,7 +11,7 @@ participant ":Employee" as emp
 activate admin
 admin -> empUi : asks to create a new employee
 activate empUi
-empUi --> admin : requests data (name, address, phone number, email, citizen card number, PASSWORD??)
+empUi --> admin : requests data (name, address, phone number, email, citizen card number)
 deactivate empUi
 
 admin -> empUi : types requested data
@@ -32,7 +32,7 @@ deactivate empUi
 admin -> empUi : selects a user role
 activate empUi
 
-empUi -> empController : createEmployee(name, address, phone number, email, citizen card number, password, roleId)
+empUi -> empController : createEmployee(name, address, phone number, email, citizen card number, roleId)
 activate empController
 
 empController -> comp : role=getRoleById(roleId)
@@ -40,10 +40,10 @@ activate comp
 |||
 deactivate comp
 
-empController -> comp: employee=createEmployee(name, address, phone number, email, citizen card number, password, role)
+empController -> comp: employee=createEmployee(name, address, phone number, email, citizen card number, role)
 activate comp
 
-comp --> emp**: create(name, address, phone number, email, citizen card number, password, role)
+comp --> emp**: create(name, address, phone number, email, citizen card number, role)
 deactivate comp
 empController -> comp: validateEmployee(employee)
 
