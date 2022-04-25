@@ -4,32 +4,34 @@ skinparam classAttributeIconSize 0
 class VaccinationCenter {
   - name String
   - address String
-  - phoneNumber int
   - emailAddress String
+  - phoneNumber int
   - faxNumber int
   - websiteAddress String
-  - openingAndClosingHours String
+  - openingHours String
+  - closingHours String
   - slotDuration int
   - maximumVaccinesPerSlot int
-  - coordinator COORDINATOR
+  - coordinator EMPLOYEE
   ---
- +VaccinationCenter(name,address,phoneNumber,faxNumber,websiteAddress,openingAndClosingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
+ +VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
 }
 
 
 class Company {
   -designation String
   ---
-  +createVaccinationCenter(name,address,phoneNumber,faxNumber,websiteAddress,openingAndClosingHours,slotDuration,maximumVaccinesPerSlot)
+  +createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot)
   +validateVaccinatonCenter(center)
   +saveVaccinationCenter(center)
-  +addVaccinationCenter(center)
+  -addVaccinationCenter(center)
+  +getEmployeeByRoleId()
 }
 
 class VaccinationCenterController {
   ---
-  +createVaccinationCenter()
-  +saveVaccinationCenter()
+  +createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot)
+  +saveVaccinationCenter(center)
 }
 
 class VaccinationCenterUI {}
