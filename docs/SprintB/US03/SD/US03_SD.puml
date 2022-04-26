@@ -5,13 +5,12 @@ actor "Receptionist" as RECEPT
 
 participant ":RegisterSNSUserUI" as UI
 participant ":RegisterSNSUserController" as CTRL
-participant "store\n:UserStore" as STORE
+participant "store\n:SNSUserStore" as STORE
 participant "comp\n:Company" as COMP
-participant "user\n:User" as USER
+participant "suser\n:SNSUser" as SUSER
 participant ":PasswordGenerator" as PWDGEN
 participant ":EmailSender" as EMAIL
 participant "auth\n:AuthFacade" as AUTH
-' participant "lstSnsU\n:List<SNSUser>" as LIST
 
 activate RECEPT
 RECEPT -> UI : starts to register a new SNS User
@@ -22,26 +21,26 @@ deactivate UI
 RECEPT -> UI : types requested data
 activate UI
 
-UI --> CTRL : user = createUser(userData)
+UI --> CTRL : snsUser = createSNSUser(snsUserData)
 activate CTRL
 
-CTRL --> COMP : store = getUserStore()
+CTRL --> COMP : store = getSNSUserStore()
 activate COMP
 deactivate COMP
 
-CTRL --> STORE : user = createUser()
+CTRL --> STORE : snsUser = createSNSUser()
 activate STORE
 
-STORE --> USER** : createUser()
+STORE --> SUSER** : createSNSUser()
 
 deactivate STORE
 
-CTRL --> STORE : validateUser(user)
+CTRL --> STORE : validateSNSUser(snsUser)
 activate STORE
 
-STORE --> USER : email = getEmail(user)
-activate USER
-deactivate USER
+STORE --> SUSER : email = getEmail(snsUser)
+activate SUSER
+deactivate SUSER
 
 STORE --> COMP : auth = getAuthFacade()
 activate COMP
@@ -51,7 +50,7 @@ STORE --> AUTH : existsUser(email)
 activate AUTH
 deactivate AUTH
 
-STORE --> STORE : checkDuplicates(user)
+STORE --> STORE : checkDuplicates(snsUser)
 activate STORE
 deactivate STORE
 
@@ -65,23 +64,23 @@ deactivate UI
 RECEPT --> UI : confirms the data
 activate UI
 
-UI --> CTRL : saveUser()
+UI --> CTRL : saveSNSUser()
 activate CTRL
 
-CTRL --> STORE : saveUser(user)
+CTRL --> STORE : saveSNSUser(snsUser)
 activate STORE
 
-STORE --> STORE : validateUser(user)
+STORE --> STORE : validateSNSUser(snsUser)
 activate STORE
 deactivate STORE
 
-STORE --> USER : name = user.getName()
-activate USER
-deactivate USER
+STORE --> SUSER : name = snsUser.getName()
+activate SUSER
+deactivate SUSER
 
-STORE --> USER : email = user.getEmail()
-activate USER
-deactivate USER
+STORE --> SUSER : email = snsUser.getEmail()
+activate SUSER
+deactivate SUSER
 
 STORE --> PWDGEN : pwd = generatePwd()
 activate PWDGEN
@@ -94,6 +93,10 @@ deactivate COMP
 STORE --> AUTH : addUser(name, email, pwd, "SNS_USER")
 activate AUTH
 deactivate AUTH
+
+STORE --> STORE : addSNSUser(snsUser)
+activate STORE
+deactivate STORE
 
 STORE --> EMAIL : sendPasswordEmail(email, pwd)
 activate EMAIL
