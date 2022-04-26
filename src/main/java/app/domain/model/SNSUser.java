@@ -25,6 +25,16 @@ public class SNSUser {
     // SNS User email
     private String email;
 
+    /**
+     * Constructor for SNSUser.
+     * 
+     * @param snsNumber
+     * @param name
+     * @param birthDay
+     * @param gender
+     * @param phoneNumber
+     * @param email
+     */
     public SNSUser(String snsNumber, String name, Date birthDay, char gender, String phoneNumber, String email) {
         validateAge(birthDay);
 
