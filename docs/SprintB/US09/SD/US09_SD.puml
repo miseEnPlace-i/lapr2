@@ -15,8 +15,6 @@ activate CTRL
 
 CTRL-> COMP : type=getCenterTypeList()
 activate COMP
-
-CTRL --> UI : list of center types
 deactivate CTRL
 deactivate COMP
 
@@ -32,8 +30,6 @@ activate CTRL
 CTRL -> COMP : coordinator=getEmployeeByRoleId(coodinatorId)
 activate COMP
 deactivate COMP
-
-CTRL --> UI : list of coordinators
 deactivate CTRL
 
 UI --> ADM : shows all available center coordinators and asks to select one
@@ -60,8 +56,6 @@ deactivate COMP
 
 CTRL -> COMP: validateVaccinationCenter(center)
 activate COMP
-
-CTRL --> UI : center created
 deactivate CTRL
 
 UI --> ADM: shows all data and requests confirmation
@@ -79,8 +73,6 @@ activate COMP
 
 COMP -> COMP : validateVaccinationCenter(center)
 COMP -> COMP : addVaccinationCenter(center)
-
-CTRL --> UI : result
 
 UI --> ADM : informs operation success
 deactivate COMP
