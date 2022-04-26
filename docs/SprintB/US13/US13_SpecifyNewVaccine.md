@@ -114,6 +114,7 @@ n/a
 
 ### 3.1. Rationale
 
+TODO : review, implement stores and lists
 **SSD - Alternative 2 is adopted.**
 
 | Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
