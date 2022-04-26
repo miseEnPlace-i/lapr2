@@ -10,14 +10,8 @@ deactivate ":System"
 
 OE -> ":System" : types requested data
 activate ":System"
-":System" --> OE : shows vaccine types list and ask to select one
-deactivate ":System"
-
-OE -> ":System" : selects a vaccine type
-activate ":System"
 ":System" --> OE : informs that is ready to move on to the administration processes specification
 deactivate ":System"
-
 
 loop for each age group
     OE -> ":System" : asks to create a new administration process for the vaccine
@@ -50,6 +44,8 @@ loop for each age group
 
 end
 
+OE -> ":System" : asks to confirm all data
+activate ":System"
 ":System" --> OE : shows all data and requests confirmation
 deactivate ":System"
 OE -> ":System" : confirms the data
