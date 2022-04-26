@@ -8,6 +8,8 @@ participant ":RegisterSNSUserController" as CTRL
 participant "comp\n:Company" as COMP
 participant "store\n:UserStore" as STORE
 participant "user\n:User" as USER
+participant ":PasswordGenerator" as PWDGEN
+participant ":EmailSender" as EMAIL
 participant "auth\n:AuthFacade" as AUTH
 ' participant "lstSnsU\n:List<SNSUser>" as LIST
 
@@ -59,22 +61,37 @@ deactivate UI
 RECEPT --> UI : confirms the data
 activate UI
 
-UI --> CTRL : saveUser(user)
+UI --> CTRL : saveUser()
 activate CTRL
 
-CTRL --> COMP : saveUser(user)
-activate COMP
+CTRL --> STORE : saveUser(user)
+activate STORE
 
-COMP --> COMP : validateUser(user)
-activate COMP
-deactivate COMP
+STORE --> STORE : validateUser(user)
+activate STORE
+deactivate STORE
 
-COMP --> COMP : addUser(user)
-activate COMP
-deactivate COMP
+STORE --> USER : name = user.getName()
+activate USER
+deactivate USER
 
-deactivate COMP
+STORE --> USER : email = user.getEmail()
+activate USER
+deactivate USER
 
+STORE --> PWDGEN : pwd = generatePwd()
+activate PWDGEN
+deactivate PWDGEN
+
+STORE --> AUTH : addUser(name, email, pwd, "SNS_USER")
+activate AUTH
+deactivate AUTH
+
+STORE --> EMAIL : sendEmail(email, pwd)
+activate EMAIL
+deactivate EMAIL
+
+deactivate STORE
 deactivate CTRL
 
 UI --> RECEPT : informs operation success
