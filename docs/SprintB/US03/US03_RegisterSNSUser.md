@@ -15,7 +15,7 @@ _"As a receptionist, I want to register a SNS User."_
 
 > A SNS User is a person who is registered in the system.
 
-> A SNS User must have an email, a password, a name, a birthdate as well as a SNS number.
+> A SNS User must have an email, a password, a name, a birthday as well as a SNS number.
 
 > Any Administrator uses the application to register SNS users.
 
@@ -66,7 +66,7 @@ _"As a receptionist, I want to register a SNS User."_
     * Citizen Card number
     * SNS number
     * Name
-    * Birthdate
+    * Birthday
     * Phone number
     * Email
 	
@@ -170,9 +170,9 @@ Other software classes of external systems/components:
 
 	@Test(expected = IllegalArgumentException.class)
 		public void ensureReferenceMeetsAC2() {
-		Date birthDate = new Date();
+		Date birthDay = new Date();
 
-		SNSUser instance = new SNSUser("12345678901", "Nome", "email@example.com", "+351910000000", birthDate);
+		SNSUser instance = new SNSUser("12345678901", "Nome", "email@example.com", "+351910000000", birthDay);
 	}
 
 

@@ -15,7 +15,7 @@ public class SNSUserTest {
     public void testNullArguments() {
         String snsNumber = null;
         String name = null;
-        Date birthDate = null;
+        Date birthDay = null;
     }
 
     /**
@@ -24,17 +24,17 @@ public class SNSUserTest {
      * @throws Exception
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testInvalidBirthDate() {
+    public void testInvalidBirthDay() {
         String snsNumber = "123456789";
         String name = "Teste";
         char gender = 'm';
         String phoneNumber = "+351900000000";
         String email = "example@example.com";
 
-        Date birthDate = new Date();
-        birthDate.setYear(birthDate.getYear() - 151);
+        Date birthDay = new Date();
+        birthDay.setYear(birthDay.getYear() - 151);
 
-        SNSUser user = new SNSUser(snsNumber, name, birthDate, gender, phoneNumber, email);
+        SNSUser user = new SNSUser(snsNumber, name, birthDay, gender, phoneNumber, email);
     }
 
     /**
@@ -43,16 +43,16 @@ public class SNSUserTest {
      * @throws Exception
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testInvalidFutureBirthDate() {
+    public void testInvalidFutureBirthDay() {
         String snsNumber = "123456789";
         String name = "Teste";
         char gender = 'm';
         String phoneNumber = "+351900000000";
         String email = "example@example.com";
 
-        Date birthDate = new Date();
-        birthDate.setYear(birthDate.getYear() + 1);
+        Date birthDay = new Date();
+        birthDay.setYear(birthDay.getYear() + 1);
 
-        SNSUser user = new SNSUser(snsNumber, name, birthDate, gender, phoneNumber, email);
+        SNSUser user = new SNSUser(snsNumber, name, birthDay, gender, phoneNumber, email);
     }
 }
