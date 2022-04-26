@@ -12,6 +12,12 @@ deactivate ":System"
 Administrator -> ":System" : selects a center coordinator
 activate ":System"
 
+":System" --> Administrator : shows all available center types
+deactivate ":System"
+
+Administrator -> ":System" : selects a center type
+activate ":System"
+
 ":System" --> Administrator : requests data (name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot)
 deactivate ":System"
 
