@@ -25,6 +25,7 @@ public class SNSUserTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidBirthDay() {
+        String citizenCard = "123456789";
         String snsNumber = "123456789";
         String name = "Teste";
         char gender = 'm';
@@ -32,9 +33,10 @@ public class SNSUserTest {
         String email = "example@example.com";
 
         Date birthDay = new Date();
+        // TODO: using deprecated Date method, use Calendar instead
         birthDay.setYear(birthDay.getYear() - 151);
 
-        SNSUser user = new SNSUser(snsNumber, name, birthDay, gender, phoneNumber, email);
+        SNSUser user = new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email);
     }
 
     /**
@@ -44,6 +46,7 @@ public class SNSUserTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidFutureBirthDay() {
+        String citizenCard = "123456789";
         String snsNumber = "123456789";
         String name = "Teste";
         char gender = 'm';
@@ -51,8 +54,9 @@ public class SNSUserTest {
         String email = "example@example.com";
 
         Date birthDay = new Date();
+        // TODO: using deprecated Date method, use Calendar instead
         birthDay.setYear(birthDay.getYear() + 1);
 
-        SNSUser user = new SNSUser(snsNumber, name, birthDay, gender, phoneNumber, email);
+        SNSUser user = new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email);
     }
 }

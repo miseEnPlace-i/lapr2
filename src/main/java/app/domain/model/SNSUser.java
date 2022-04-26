@@ -35,7 +35,7 @@ public class SNSUser {
      * @param phoneNumber
      * @param email
      */
-    public SNSUser(String snsNumber, String name, Date birthDay, char gender, String phoneNumber, String email) {
+    public SNSUser(String citizenCard, String snsNumber, String name, Date birthDay, char gender, String phoneNumber, String email) {
         validateAge(birthDay);
 
         this.snsNumber = snsNumber;
@@ -44,6 +44,11 @@ public class SNSUser {
         this.gender = gender;
         this.phoneNumber = phoneNumber;
         this.email = email;
+    }
+
+    // TODO: Getters
+    public String getEmail() {
+        return email;
     }
 
     /**

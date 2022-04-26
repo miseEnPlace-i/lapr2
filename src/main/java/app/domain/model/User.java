@@ -1,5 +1,10 @@
 package app.domain.model;
 
+/**
+ * 
+ * @author Ricardo Moreira <1211285@isep.ipp.pt>
+ * @author ADD YOUR NAME AND EMAIL <121XXXX@isep.ipp.pt>
+ */
 public class User {
 
     // User name

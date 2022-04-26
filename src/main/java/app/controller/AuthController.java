@@ -12,32 +12,26 @@ public class AuthController {
 
     private App app;
 
-    public AuthController()
-    {
+    public AuthController() {
         this.app = App.getInstance();
     }
 
-    public boolean doLogin(String email, String pwd)
-    {
+    public boolean doLogin(String email, String pwd) {
         try {
             return this.app.doLogin(email, pwd);
-        } catch(IllegalArgumentException ex)
-        {
+        } catch (IllegalArgumentException ex) {
             return false;
         }
     }
 
-    public List<UserRoleDTO> getUserRoles()
-    {
-        if (this.app.getCurrentUserSession().isLoggedIn())
-        {
+    public List<UserRoleDTO> getUserRoles() {
+        if (this.app.getCurrentUserSession().isLoggedIn()) {
             return this.app.getCurrentUserSession().getUserRoles();
         }
         return null;
     }
 
-    public void doLogout()
-    {
+    public void doLogout() {
         this.app.doLogout();
     }
 }
