@@ -6,6 +6,7 @@ skinparam classAttributeIconSize 0
 class Receptionist { }
 
 class SNSUser {
+  - citizenCard
   - snsNumber
   - name
   - birthDate

@@ -1,32 +1,46 @@
 @startuml Class Diagram
 skinparam classAttributeIconSize 0
 
-class ApplicationPOT {
-  + static getInstance()
-  + getCurrentSession()
+' class ApplicationPOT {
+'   + static getInstance()
+'   + getCurrentSession()
+' }
+
+class AuthFacade {
+  + existsUser()
+  + addUserWithRole()
+  + getUser()
+  + getUsers()
 }
 
 class Company {
   - String designation
-  + validateUser(user)
+  + getAuthFacade()
+  + getDesignation()
   + createUser(snsNumber, name, email, birthDate, phoneNumber)
+  + validateUser(user)
+}
+
+class Receptionist {
+
 }
 
 class RegisterSNSUserController {
-  + getUsers()
-  + getUser(userId)
+  + createSNSUser(snsNumber, name, birthDate, gender, phoneNumber, email)
+  + saveSNSUser(user)
 }
 
 class RegisterSNSUserUI { }
 
 class SNSUser {
+  - String citizenCard
   - String snsNumber
   - String name
   - Date birthDate
   - Char gender
   - String phoneNumber
   - String email
-  + SNSUser(snsNumber, name, birthDate, gender, phoneNumber, email)
+  + SNSUser(citizenCard, snsNumber, name, birthDate, gender, phoneNumber, email)
 }
 
 interface User {
@@ -40,10 +54,14 @@ interface User {
 '   + getUserEmail()
 ' }
 
-Company "1" --> "*" SNSUser : knows
+AuthFacade ..> User
 
-RegisterSNSUserController ..> ApplicationPOT
+Company "1" --> "*" SNSUser : knows
+Company ..> AuthFacade
+
+' RegisterSNSUserController ..> ApplicationPOT
 RegisterSNSUserController ..> Company
+RegisterSNSUserController ..> Receptionist
 RegisterSNSUserController ..> SNSUser
 ' RegisterSNSUserController ..> UserSession
 

@@ -6,6 +6,7 @@ actor "Receptionist" as RECEPT
 participant ":RegisterSNSUserUI" as UI
 participant ":RegisterSNSUserController" as CTRL
 participant "comp\n:Company" as COMP
+' participant "store\n:UserStore" as STORE
 participant "user\n:User" as USER
 participant "auth\n:AuthFacade" as AUTH
 ' participant "lstSnsU\n:List<SNSUser>" as LIST
@@ -37,15 +38,11 @@ COMP --> AUTH : existsUser(email)
 activate AUTH
 deactivate AUTH
 
-COMP --> COMP : checkDuplicates(user)
-activate COMP
-deactivate COMP
-
-CTRL <-- COMP : result
+' COMP --> COMP : checkDuplicates(user)
+' activate COMP
+' deactivate COMP
 
 deactivate COMP
-
-UI <-- CTRL : result
 
 deactivate CTRL
 
@@ -69,11 +66,7 @@ COMP --> COMP : addUser(user)
 activate COMP
 deactivate COMP
 
-CTRL <-- COMP : result
-
 deactivate COMP
-
-UI <-- CTRL : result
 
 deactivate CTRL
 
