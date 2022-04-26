@@ -36,11 +36,11 @@ _"As a receptionist, I want to register a SNS User."_
 
 * **AC01:** All required fields must be filled in.
 * **AC02:** When creating a User with an already existing reference, the system must reject such operation and the user must have the change to modify the typed reference.
-* **AC03:** SNS number must have 9 digits.
 <!-- ? QUESTION -->
+* **AC03:** SNS number must have 9 digits.
 * **AC04:** Birth day must have the format: DD/MM/YYYY. A SNS User should not have more than 150 years of age.
 <!-- ? QUESTION -->
-* **AC05:** Sex options: Male/Female/Other.
+* **AC05:** Sex options: Male/Female.
 <!-- ? QUESTION - also ask for every other property -->
 * **AC06:** Phone number must have 11 digits.
 <!-- ? QUESTION -->
@@ -63,15 +63,15 @@ _"As a receptionist, I want to register a SNS User."_
 <!-- TODO -->
 
 * Typed data:
+    * Citizen Card number
     * SNS number
     * Name
     * Birthdate
-    * Gender
     * Phone number
     * Email
 	
 * Selected data:
-	* n/a
+    * Gender
 
 
 **Output Data:**
@@ -113,24 +113,16 @@ n/a
 
 **SSD - Alternative 1 is adopted.**
 
-| Interaction ID | Question: Which class is responsible for...            | Answer                    | Justification (with patterns)                                                                                     |
-| :------------- | :----------------------------------------------------- | :------------------------ | :---------------------------------------------------------------------------------------------------------------- |
-| Step 1         | ... interacting with the actor?                        | RegisterSNSUserUI         | **Pure Fabrication:** there is no reason to assign this responsibility to any existing class in the Domain Model. |
-|                | ... coordinating the US?                               | RegisterSNSUserController | **Controller**                                                                                                    |
-|                | ... instantiating a new Task?                          | Organization              | **Creator (Rule 1):** in the DM Organization has a Task.                                                          |
-|                | ... knowing the user using the system?                 | UserSession               | IE: cf. A&A component documentation.                                                                              |
-|                | ... knowing to which organization the user belongs to? | Platform                  | IE: has registed all Organizations                                                                                |
-|                |                                                        | Organization              | IE: knows/has its own Employees                                                                                   |
-|                |                                                        | Employee                  | IE: knows its own data (e.g. email)                                                                               |
-| Step 2         |                                                        |                           |                                                                                                                   |
-| Step 3         | ...saving the inputted data?                           | Task                      | IE: object created in step 1 has its own data.                                                                    |
-| Step 4         | ...knowing the task categories to show?                | Platform                  | IE: Task Categories are defined by the Platform.                                                                  |
-| Step 5         | ... saving the selected category?                      | Task                      | IE: object created in step 1 is classified in one Category.                                                       |
-| Step 6         |                                                        |                           |                                                                                                                   |
-| Step 7         | ... validating all data (local validation)?            | Task                      | IE: owns its data.                                                                                                |
-|                | ... validating all data (global validation)?           | Organization              | IE: knows all its tasks.                                                                                          |
-|                | ... saving the created task?                           | Organization              | IE: owns all its tasks.                                                                                           |
-| Step 8         | ... informing operation success?                       | CreateTaskUI              | IE: is responsible for user interactions.                                                                         |
+| Interaction ID                               | Question: Which class is responsible for... | Answer                    | Justification (with patterns)                                                                                     |
+| :------------------------------------------- | :------------------------------------------ | :------------------------ | :---------------------------------------------------------------------------------------------------------------- |
+| Step 1: register SNS User                    | ... registering a new SNS User?             | RegisterSNSUserUI         | **Pure Fabrication:** there is no reason to assign this responsibility to any existing class in the Domain Model. |
+|                                              | ... coordinating the US?                    | RegisterSNSUserController | **Controller**                                                                                                    |
+|                                              | ... instantiating a new SNS User?           | Company                   | **Creator (Rule 1):**                                                                                             |
+| Step 2: requests data                        | n/a                                         |                           |                                                                                                                   |
+| Step 3: types the requested data             | ... saving the inputted data?               | User                      | IE: object created in step 1 has its own data.                                                                    |
+| Step 4: shows data and asks for confirmation | ... saving the selected category?           | User                      | IE: object created in step 1 has one gender.                                                                      |
+| Step 5: confirms the data                    | ... saving the user?                        | Company                   | IE: owns all users.                                                                                               |
+| Step 6: informs operation success            | ... informing operation success?            | RegisterSNSUserUI         | IE: is responsible for user interactions.                                                                         |
 
 ### Systematization ##
 
