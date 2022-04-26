@@ -9,47 +9,60 @@ participant "comp\n:Company" as COMP
 activate ADM
 ADM -> UI : asks to create a new vaccination center
 activate UI
-UI --> ADM : requests data (name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot)
-deactivate UI
 
-ADM -> UI : types requested data
-activate UI
-
-UI -> CTRL : coordinator=getEmployeeByRoleId()
+UI -> CTRL : type=getCenterTypeList()
 activate CTRL
 
-CTRL-> COMP : coordinator=getEmployeeByRoleId()
+CTRL-> COMP : type=getCenterTypeList()
 activate COMP
+
+CTRL --> UI : list of center types
+deactivate CTRL
+deactivate COMP
+
+UI --> ADM : shows all available center type
+deactivate UI
+
+ADM -> UI : selects one center type
+activate UI
+
+UI -> CTRL : coordinator=getEmployeeByRoleId(coodinatorId)
+activate CTRL
+
+CTRL -> COMP : coordinator=getEmployeeByRoleId(coodinatorId)
+activate COMP
+deactivate COMP
 
 CTRL --> UI : list of coordinators
 deactivate CTRL
 
 UI --> ADM : shows all available center coordinators and asks to select one
 deactivate UI
-deactivate COMP
 
 ADM -> UI : selects one center coordinator
+activate UI
+
+UI --> ADM : requests data (name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot)
+deactivate UI
+
+ADM -> UI : types requested data
 activate UI
 
 UI -> CTRL : center=createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
 activate CTRL
 
-CTRL -> COMP : coordiantor=getEmployeeByRoleId(coodinatorId)
+CTRL-> COMP : center=createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
 activate COMP
-deactivate COMP
 
-CTRL -> COMP: center=createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
-activate COMP
+create "center\n:VaccinationCenter" as CENTER
+COMP -> CENTER : create(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
 deactivate COMP
 
 CTRL -> COMP: validateVaccinationCenter(center)
 activate COMP
 
-create "center\n:VaccinationCenter" as CENTER
-COMP -> CENTER : create(name,address,phoneNumber,emailAddress,faxNumber,websiteAddress,openingAndClosingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
-deactivate COMP
-
 CTRL --> UI : center created
+deactivate CTRL
 
 UI --> ADM: shows all data and requests confirmation
 deactivate COMP
@@ -67,7 +80,7 @@ activate COMP
 COMP -> COMP : validateVaccinationCenter(center)
 COMP -> COMP : addVaccinationCenter(center)
 
-CTRL --> UI : center validated and added to the data base
+CTRL --> UI : result
 
 UI --> ADM : informs operation success
 deactivate COMP
