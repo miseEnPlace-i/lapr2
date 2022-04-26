@@ -33,7 +33,7 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 * **AC1:** Each center mush have one Center Coordinator.
 * **AC2:** All required fields must be filled in.
 * **AC3:** When creating a new Vaccination Center, validate that there isn´t already one existing with the same references.
-
+* **AC4:** Each center must be or HealthCare Center or Community Mass Vaccination Center.
 
 ### 1.4. Found out Dependencies
 
@@ -58,10 +58,12 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 	* slot duration;
 	* maximum vaccines per slot. 
 * Selected data:
-    * center coordinator.	
+    * center coordinator;
+    * center type.	
   
 **Output Data:**
 * List of existing center coordinators;
+* List of center types;
 * (In)Success of the operation.
 
 ### 1.6. System Sequence Diagram (SSD)
