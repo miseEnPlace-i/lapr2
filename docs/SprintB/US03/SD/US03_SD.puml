@@ -6,7 +6,7 @@ actor "Receptionist" as RECEPT
 participant ":RegisterSNSUserUI" as UI
 participant ":RegisterSNSUserController" as CTRL
 participant "comp\n:Company" as COMP
-' participant "store\n:UserStore" as STORE
+participant "store\n:UserStore" as STORE
 participant "user\n:User" as USER
 participant "auth\n:AuthFacade" as AUTH
 ' participant "lstSnsU\n:List<SNSUser>" as LIST
@@ -14,7 +14,7 @@ participant "auth\n:AuthFacade" as AUTH
 activate RECEPT
 RECEPT -> UI : starts to register a new SNS User
 activate UI
-UI --> RECEPT : requests data (SNSNumber, name, birthDate, sex, phoneNumber, email)
+UI --> RECEPT : requests data (citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email)
 deactivate UI
 
 RECEPT -> UI : types requested data
@@ -23,31 +23,38 @@ activate UI
 UI --> CTRL : user = createUser(userData)
 activate CTRL
 
-CTRL --> COMP : user = createUser(userData)
+CTRL --> COMP : store = getUserStore()
 activate COMP
 deactivate COMP
 
-CTRL --> COMP : validateUser(user)
-activate COMP
+CTRL --> STORE : user = createUser()
+activate STORE
 
-COMP --> USER : email = getEmail(user)
+STORE --> USER** : createUser()
+
+deactivate STORE
+
+CTRL --> STORE : validateUser(user)
+activate STORE
+
+STORE --> USER : email = getEmail(user)
 activate USER
 deactivate USER
 
-COMP --> AUTH : existsUser(email)
+STORE --> AUTH : existsUser(email)
 activate AUTH
 deactivate AUTH
 
-' COMP --> COMP : checkDuplicates(user)
-' activate COMP
-' deactivate COMP
+STORE --> STORE : checkDuplicates(user)
+activate STORE
+deactivate STORE
 
-deactivate COMP
-
+deactivate STORE
 deactivate CTRL
 
 UI --> RECEPT : shows data and asks for confirmation
 deactivate UI
+
 
 RECEPT --> UI : confirms the data
 activate UI

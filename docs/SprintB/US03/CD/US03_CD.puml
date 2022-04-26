@@ -17,7 +17,7 @@ class Company {
   - String designation
   + getAuthFacade()
   + getDesignation()
-  + createUser(snsNumber, name, email, birthDate, phoneNumber)
+  + createUser(snsNumber, name, email, birthDay, phoneNumber)
   + validateUser(user)
 }
 
@@ -26,7 +26,7 @@ class Receptionist {
 }
 
 class RegisterSNSUserController {
-  + createSNSUser(snsNumber, name, birthDate, gender, phoneNumber, email)
+  + createSNSUser(snsNumber, name, birthDay, gender, phoneNumber, email)
   + saveSNSUser(user)
 }
 
@@ -36,19 +36,21 @@ class SNSUser {
   - String citizenCard
   - String snsNumber
   - String name
-  - Date birthDate
+  - Date birthDay
   - Char gender
   - String phoneNumber
   - String email
-  + SNSUser(citizenCard, snsNumber, name, birthDate, gender, phoneNumber, email)
+  + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email)
 }
 
-interface User {
+class User {
   - String name
   - String email
   - String pwd
   - String roleId
 }
+
+class UserStore { }
 
 ' class UserSession {
 '   + getUserEmail()
