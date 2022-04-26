@@ -110,7 +110,7 @@ n/a
 
 ### 3.1. Rationale
 
-**SSD - Alternative 1 is adopted.**
+**SSD - Alternative 2 is adopted.**
 
 | Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
 |:-------------  |:--------------------- |:------------|:---------------------------- |
@@ -127,15 +127,19 @@ n/a
 | Step 8 		 |	... request data?(min age, max age, number of dosage) | CreateVaccineUI | Pure Fabrication: Responsible for user interactions.                |
 | Step 9		 |	... instantiating a new adminsitration process	| Company	| Creator: Knows all administration process. |
 |				 |	... validating data? |	AdminsitrationProcess	| IE: Owns the data. |
-| Step 10		 |  ... inform the  current state of the process | CreateVaccineUI | Pure Fabrication: Same as step 6.	|
+| Step 10		 |  ... show all the data and request confirmation?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
 | step 11 ||||
-| Step 12 		 |	... request data?(dosage, time to next dosage) | CreateVaccineUI | Pure Fabrication: Responsible for user interactions.                  |
-| Step 13		 |	... instantiating a new dose information	| Company	| Creator: Knows all doses information. |
+| Step 12		 |  ... inform operation sucess? | CreateVaccineUI | Pure Fabrication: Responsible for user interactions.	|
+| step 13 ||||
+| Step 14 		 |	... request data?(dosage, time to next dosage) | CreateVaccineUI | Pure Fabrication: Responsible for user interactions.                  |
+| Step 16		 |	... instantiating a new dose information	| Company	| Creator: Knows all doses information. |
 |				 |	... validating data? |	DoseInformation	| IE: Owns the data. |
-| Step 14		 |  ... inform the  current state of the process | CreateVaccineUI | Pure Fabrication: Same as step 6.	|
-| Step 15		 |  ... show all the data and request confirmation?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
-| Step 16 ||||
-| Step 17		 |  ... informing operation sucess?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
+| Step 17		 |  ... show all the data and request confirmation?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
+| step 18 ||||
+| Step 19		 |  ... inform operation sucess? | CreateVaccineUI | Pure Fabrication: Responsible for user interactions.	|
+| Step 19		 |  ... show all the data and request confirmation?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
+| Step 20 ||||
+| Step 21		 |  ... informing operation sucess?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
 
 
 
@@ -159,15 +163,13 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ## 3.2. Sequence Diagram (SD)
 
-**Alternative 1**
+**Alternative 2**
 
 ![US13_SD](SD/US13_SD.svg)
 
-**Other alternatives might exist.**
-
 ## 3.3. Class Diagram (CD)
 
-**From alternative 1**
+**From alternative 2**
 
 ![US006_CD](US006_CD.svg)
 

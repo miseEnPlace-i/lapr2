@@ -7,9 +7,9 @@ participant ":CreateVaccineUI" as UI
 participant ":CreateVaccineController" as CTRL
 participant "Company" as COMP
 participant "vac : Vaccine" as VAC
-participant "vacT : VaccineTypes" as VACT
 participant "adminProc : AdministrationProcess" as AP
 participant "DoseInfo : DoseInformation" as DI
+participant "vacT : VaccineType" as VACT
 
 activate ADM
 

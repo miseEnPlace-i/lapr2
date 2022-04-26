@@ -1,94 +1,134 @@
 @startuml
 autonumber
 'hide footbox
-actor "Organization Employee" as ADM
+actor "Administrator" as ADM
 
-participant ":CreateTaskUI" as UI
-participant ":CreateTaskController" as CTRL
-participant "ApplicationPOT" as _APP
-participant "app\n:ApplicationPOT" as APP
-participant "session\n:UserSession" as SESSAO
-participant ":Platform" as PLAT
-participant "org\n:Organization" as ORG
-participant "task\n:Task" as TAREFA
-participant "cat\n:Category" as CAT
-participant "lc\n:List<Category>" as LIST_CAT
+participant ":CreateVaccineUI" as UI
+participant ":CreateVaccineController" as CTRL
+participant "Company" as COMP
+participant "vac : Vaccine" as VAC
+participant "adminProc : AdministrationProcess" as AP
+participant "DoseInfo : DoseInformation" as DI
+participant "vacT : VaccineType" as VACT
 
 activate ADM
-ADM -> UI : asks to create a new task
+
+ADM -> UI : asks to create a new vaccine
 activate UI
-UI --> ADM : requests data (reference, designation,  informal \n description, technical description, duration, cost)
+UI --> ADM :  requests data (designation, number of different age groups)
 deactivate UI
 
 ADM -> UI : types requested data
 activate UI
+    UI -> CTRL : vacTypeList = getVacTypeList()
+    activate CTRL
 
-UI -> CTRL : lc=getTaskCategories()
-activate CTRL
-
-CTRL -> PLAT : lc=getTaskCategories()
-activate PLAT
-|||
-deactivate PLAT
-deactivate CTRL
-
-UI --> ADM : shows task categories list and ask to select one
-deactivate PLAT
+        CTRL -> COMP : vacTypeList = getVacTypeList()
+        activate COMP 
+        |||
+        COMP --> CTRL : vacTypeList
+        deactivate COMP
+        CTRL --> UI : vacTypeList
+    deactivate CTRL
+UI --> ADM : shows vaccine types list and ask to select one
 deactivate UI
 
-ADM -> UI : selects a task category
+ADM -> UI : selects a vaccine type
 activate UI
+    UI -> CTRL : vac = createVaccine(designation, numberAgeGroups, vacType)
+    activate CTRL
 
-UI --> ADM: shows all data and requests confirmation
-deactivate ORG
-deactivate PLAT
-deactivate CTRL
+        CTRL -> COMP : vac = createVaccine(designation, numberAgeGroups, vacType)
+        activate COMP 
+
+            COMP -> VAC ** : create(designation, numberAgeGroups, vacType)
+
+        deactivate COMP
+
+        CTRL -> COMP : validateVaccine(vac)
+        activate COMP 
+            COMP -> COMP : checkDuplicatedDesignation(designation)
+        deactivate COMP
+
+    deactivate CTRL
+UI --> ADM : informs that is ready to move on to the administration processes specification
+deactivate UI
+
+
+loop for each age group
+
+    ADM -> UI : asks to create a new administration process for the vaccine
+    activate UI
+    UI --> ADM : requests data (minAge, maxAge, numberOfDoses)
+    deactivate UI
+
+    ADM -> UI : types requested data
+    activate UI
+        UI -> CTRL : adminProc = createAdminProc(minAge, maxAge, numberOfDoses)
+        activate CTRL
+
+            CTRL -> COMP : adminProc = createAdminProc(minAge, maxAge, numberOfDoses)
+            activate COMP 
+
+                COMP -> AP ** : create(designation, numberAgeGroups, vacType)
+
+            deactivate COMP
+
+            CTRL -> COMP : validateAdminProc(adminProc)
+            activate COMP 
+            deactivate COMP
+
+        deactivate CTRL
+    UI --> ADM : informs that is ready to move on to the dose information
+    deactivate UI
+
+    loop for each dose
+
+        ADM -> UI : asks to add dose information to the administration process
+        activate UI
+        UI --> ADM : requests data (dosage, timeToNextDose)
+        deactivate UI
+        ADM -> UI : types requested data
+        activate UI
+            UI -> CTRL : doseInfo = createDoseInfo(dosage, timeToNextDose)
+                activate CTRL
+                CTRL -> COMP : doseInfo = createDoseInfo(dosage, timeToNextDose)
+                activate COMP 
+
+                    COMP -> DI ** : create(dosage, timeToNextDose)
+
+                deactivate COMP
+
+                CTRL -> COMP : validateDoseInfo(doseInfo)
+                activate COMP 
+                deactivate COMP
+
+                deactivate CTRL
+        UI --> ADM : informs dose information specification sucess
+        deactivate UI
+    end
+end
+ADM -> UI : asks to confirm all data
+activate UI
+UI --> ADM : shows all data and requests confirmation
 deactivate UI
 
 ADM -> UI : confirms the data
 activate UI
+UI -> CTRL : saveVaccine()
+    activate CTRL
 
-UI -> CTRL : createTask(ref,designation,informalDesc,technicalDesc,duration,cost,categoryId)
-activate CTRL
-
-CTRL -> PLAT : cat=getCategoryById(categoryId)
-activate PLAT
-|||
-deactivate PLAT
-
-CTRL -> _APP: app = getInstance()
-activate _APP
-|||
-deactivate _APP
-
-CTRL -> APP: session = getCurrentSession()
-activate APP
-|||
-deactivate APP
-
-CTRL -> SESSAO: email = getUserEmail()
-activate SESSAO
-|||
-deactivate SESSAO
-
-CTRL -> PLAT: org = getOrganizationByUserEmail(email)
-activate PLAT
-|||
-deactivate PLAT
-
-CTRL -> ORG: task=createAndSaveTask(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
-activate ORG
-ORG --> TAREFA**: create(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
-ORG -> ORG: validateTask(task)
-ORG -> ORG: addTask(task)
-
-CTRL --> UI: result
-
+        CTRL -> COMP :  saveVaccine(vac)
+        activate COMP 
+            COMP -> COMP : validateVaccine(vac)
+            COMP -> COMP : addVaccine(vac)
+            COMP --> CTRL : result
+        deactivate COMP
+        CTRL --> UI : result
+    deactivate CTRL
 UI --> ADM : informs operation success
-deactivate ORG
-deactivate CTRL
 deactivate UI
 
 deactivate ADM
 
-@enduml
+@enduml 
