@@ -88,6 +88,10 @@ TODO
 
 ![US13_SSD](SSD/US13_SSD.svg)
 
+**Alternative 2**
+
+![US13_SSD_v2](SSD/US13_SSD_v2.svg)
+
 
 **Other alternatives might exist.**
 
