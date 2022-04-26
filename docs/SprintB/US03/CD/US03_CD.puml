@@ -7,9 +7,9 @@ skinparam classAttributeIconSize 0
 ' }
 
 class AuthFacade {
-  + existsUser()
-  + addUserWithRole()
-  + getUser()
+  + existsUser(email)
+  + addUserWithRole(name, email, pwd, roleId)
+  + getUser(email)
   + getUsers()
 }
 
@@ -21,9 +21,7 @@ class Company {
   + validateUser(user)
 }
 
-class Receptionist {
-
-}
+' class Receptionist { }
 
 class RegisterSNSUserController {
   + createSNSUser(snsNumber, name, birthDay, gender, phoneNumber, email)
@@ -50,25 +48,42 @@ class User {
   - String roleId
 }
 
-class UserStore { }
+class UserStore {
+  + createUser(name, email, pwd, roleId)
+  + validateUser(user)
+  + saveUser(user)
+  + checkDuplicates(user)
+}
 
-' class UserSession {
-'   + getUserEmail()
-' }
+class PasswordGenerator {
+  + generatePassword()
+}
 
-AuthFacade ..> User
+class EmailSender {
+  + sendPasswordEmail(email, pwd)
+}
+
+
+' AuthFacade ..> User
 
 Company "1" --> "*" SNSUser : knows
-Company ..> AuthFacade
+' Company ..> AuthFacade
 
 ' RegisterSNSUserController ..> ApplicationPOT
 RegisterSNSUserController ..> Company
-RegisterSNSUserController ..> Receptionist
-RegisterSNSUserController ..> SNSUser
+' RegisterSNSUserController ..> Receptionist
+' RegisterSNSUserController ..> SNSUser
+RegisterSNSUserController ..> UserStore
 ' RegisterSNSUserController ..> UserSession
 
 RegisterSNSUserUI ..> RegisterSNSUserController
 
 SNSUser --|> User
+
+UserStore ..> User
+UserStore ..> Company
+UserStore ..> AuthFacade
+UserStore ..> PasswordGenerator
+UserStore ..> EmailSender
 
 @enduml

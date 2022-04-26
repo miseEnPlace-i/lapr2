@@ -95,7 +95,7 @@ STORE --> AUTH : addUser(name, email, pwd, "SNS_USER")
 activate AUTH
 deactivate AUTH
 
-STORE --> EMAIL : sendEmail(email, pwd)
+STORE --> EMAIL : sendPasswordEmail(email, pwd)
 activate EMAIL
 deactivate EMAIL
 
