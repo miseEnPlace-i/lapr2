@@ -15,7 +15,7 @@ participant "auth\n:AuthFacade" as AUTH
 activate RECEPT
 RECEPT -> UI : starts to register a new SNS User
 activate UI
-UI --> RECEPT : requests data (citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email)
+UI --> RECEPT : requests data (citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
 deactivate UI
 
 RECEPT -> UI : types requested data
@@ -90,7 +90,7 @@ STORE --> COMP : auth = getAuthFacade()
 activate COMP
 deactivate COMP
 
-STORE --> AUTH : addUser(name, email, pwd, "SNS_USER")
+STORE --> AUTH : addUserWithRole(name, email, pwd, "SNS_USER")
 activate AUTH
 deactivate AUTH
 

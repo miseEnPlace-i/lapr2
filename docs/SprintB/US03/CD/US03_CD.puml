@@ -38,7 +38,8 @@ class SNSUser {
   - Char gender
   - String phoneNumber
   - String email
-  + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email)
+  - String address
+  + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
 }
 
 class User {

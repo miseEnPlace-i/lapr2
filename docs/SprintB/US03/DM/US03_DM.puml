@@ -13,6 +13,7 @@ class SNSUser {
   - gender
   - phoneNumber
   - email
+  - address
 }
 
 class Company {
