@@ -21,11 +21,22 @@ class VaccinationCenter {
 class Company {
   -designation String
   ---
+  +getDesignation()
   +createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot)
   +validateVaccinatonCenter(center)
   +saveVaccinationCenter(center)
-  -addVaccinationCenter(center)
   +getEmployeeByRoleId()
+}
+
+class VaccinationCenterStore {
+---
++validateVaccinatonCenter()
++saveVaccinationCenter(center)
+-addVaccinationCenter(center)
+}
+
+class EmployeeStore {
++getEmployeeByRoleId()
 }
 
 class VaccinationCenterController {
@@ -40,5 +51,7 @@ VaccinationCenterUI ..> VaccinationCenterController
 VaccinationCenterController ..> Company
 Company "1" --> "*" VaccinationCenter : belongs to <
 VaccinationCenterController ..> VaccinationCenter
+Company ..> VaccinationCenterStore
+Company ..> EmployeeStore
 
 @enduml
