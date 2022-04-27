@@ -60,9 +60,12 @@ public class App {
     }
 
     private void bootstrap() {
+        // Added Receptionist user role & a test user with Receptionist role for testing purposes
         this.authFacade.addUserRole(Constants.ROLE_ADMIN, Constants.ROLE_ADMIN);
+        this.authFacade.addUserRole(Constants.ROLE_RECEPTIONIST, Constants.ROLE_RECEPTIONIST);
 
         this.authFacade.addUserWithRole("Main Administrator", "admin@lei.sem2.pt", "123456", Constants.ROLE_ADMIN);
+        this.authFacade.addUserWithRole("Test Receptionist", "receptionist@lei.sem2.pt", "123456", Constants.ROLE_RECEPTIONIST);
     }
 
     // Extracted from

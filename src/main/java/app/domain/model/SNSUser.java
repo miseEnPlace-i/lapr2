@@ -25,6 +25,9 @@ public class SNSUser {
     // SNS User email
     private String email;
 
+    // SNS User address
+    private String address;
+
     /**
      * Constructor for SNSUser.
      * 
@@ -49,6 +52,23 @@ public class SNSUser {
     // TODO: Getters
     public String getEmail() {
         return email;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (obj == this) return true;
+        if (!(obj instanceof SNSUser)) return false;
+
+        SNSUser other = (SNSUser) obj;
+
+        // Fields email, phone number, citizen card & SNS number should be unique for each SNS User
+        if (this.email.equals(other.email)) return true;
+        if (this.phoneNumber.equals(other.phoneNumber)) return true;
+        if (this.citizenCard.equals(other.phoneNumber)) return true;
+        if (this.snsNumber.equals(other.phoneNumber)) return true;
+
+        return false;
     }
 
     /**

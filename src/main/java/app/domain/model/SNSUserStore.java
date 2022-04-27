@@ -5,23 +5,43 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import app.controller.App;
+import pt.isep.lei.esoft.auth.AuthFacade;
+
 /**
  * 
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
-public class SNSUserStore {
+public class SNSUserStore implements IStore {
 
     // User List
     private List<SNSUser> snsUsers;
+
+    // Auth Facade
+    private AuthFacade authFacade;
 
     /**
      * Constructor for SNSUserStore.
      */
     public SNSUserStore() {
         this.snsUsers = new ArrayList<SNSUser>();
+        this.authFacade = App.getInstance().getCompany().getAuthFacade();
     }
 
-    public SNSUser createSNSUser(String citizenCard, String snsNumber, String name, String birthDayStr, char gender, String phoneNumber, String email) {
+    /**
+     * Creates an SNS User instance.
+     * 
+     * @param citizenCard
+     * @param snsNumber
+     * @param name
+     * @param birthDayStr
+     * @param gender
+     * @param phoneNumber
+     * @param email
+     * @return SNSUser
+     */
+    public SNSUser createSNSUser(String citizenCard, String snsNumber, String name, String birthDayStr, char gender,
+            String phoneNumber, String email) {
         // TODO: improve this code (código desenrasca)
         String[] fields = birthDayStr.split("/");
 
@@ -34,12 +54,23 @@ public class SNSUserStore {
         return snsUser;
     }
 
-    public void validateUser(SNSUser snsUser) {
+    /**
+     * Checks if there are duplicates.
+     * 
+     * @param snsUser
+     */
+    public void validateSNSUser(SNSUser snsUser) {
         // get the SNS User email
         String email = snsUser.getEmail();
 
-        // get an instance of AuthFacade to check if the email is already in use
-        // TODO
+        // check with AuthFacade if the email is already in use
+        boolean existsUser = this.authFacade.existsUser(email);
+
+        if (existsUser) {
+            throw new IllegalArgumentException("Email already in use");
+        }
+
+        checkDuplicates(snsUser);
     }
 
     /**
@@ -47,10 +78,18 @@ public class SNSUserStore {
      * 
      * @param user
      */
-    public void saveUser(SNSUser snsUser1) {
-        snsUsers.add(snsUser1);
+    public void saveSNSUser(SNSUser snsUser) {
+        snsUsers.add(snsUser);
     }
 
-    public void checkDuplicates() {
+    /**
+     * Checks if there are duplicates in the store.
+     * 
+     * @param snsUser
+     */
+    public void checkDuplicates(SNSUser snsUser) {
+        if (snsUsers.contains(snsUser)) {
+            throw new IllegalArgumentException("Duplicate SNS User");
+        }
     }
 }
