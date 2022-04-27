@@ -1,7 +1,7 @@
 @startuml
 skinparam classAttributeIconSize 0
 
-interface User {
+class User {
   - String name
   - String email
   - String pwd
@@ -9,23 +9,49 @@ interface User {
 }
 
 class Employee {
-  +Employee(name,email,pwd,roleId)
+  -String id
+  -String name
+  -String email
+  -String pwd
+  -String phone
+  -String address
+  -int citizenCardNumber
+  -String roleId
+  
+  +Employee(name,email,pwd,phone,address,citizenCardNumber,roleId)
 }
 
 class Company {
   -String designation
   +Company(designation)
 
-  +getEmployeesByRoleId()
+  +getAuthFacade()
+}
+
+class AuthFacade {
+  +existsRole(role)
+  +getUserRoles()
+  +getUsersWithRole(roleId)
 }
 
 class EmployeeStore {
-  +getEmployeesByRoleId(roleId)
+  +existsRole(role)
+  +getEmployeeRoles()
+  +getEmployeesWithRole(roleId)
 }
 
 class ListEmployeeController {
   +getRoles()
   +getEmployeesByRoleId(role)
+}
+
+class UserRoles {
+  -String id
+  -String description
+}
+
+class UserRolesStore {
+
 }
 
 class ListEmployeeUI {}
@@ -34,7 +60,16 @@ ListEmployeeUI ..> ListEmployeeController
 ListEmployeeController ..> Employee
 ListEmployeeController ..> Company
 
+Company ..> AuthFacade
+Company ..> EmployeeStore
+EmployeeStore -> AuthFacade : uses
+Employee "*" -- "1" EmployeeStore : stores <
 Company "1" --> "*" Employee : employees
+
+UserRolesStore "1" -- "*" UserRoles : stores >
+Company ..> UserRolesStore
+
+User "1" -- "*" UserRoles : has >
 
 User <|.. Employee 
 

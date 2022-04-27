@@ -6,6 +6,8 @@ actor "Administrator" as ADM
 participant ":ListEmployeeUI" as UI
 participant ":ListEmployeeController" as CTRL
 participant "comp\n:Company" as COMP
+participant "employeeStore\n:EmployeeStore" as EMPS
+participant "authFacade\n:AuthFacade" as AUTH
 participant "emp:Employee" as EMP
 
 activate ADM
@@ -13,11 +15,14 @@ ADM -> UI : asks to list employees for given role
 activate UI
 activate CTRL
 UI -> CTRL : roleList=getEmployeeRoles()
-
-CTRL -> COMP : roleList=getEmployeeRoles()
+CTRL -> COMP : authFacade=getAuthFacade()
 activate COMP
-|||
 deactivate COMP
+
+CTRL -> AUTH : roleList=getUserRoles()
+activate AUTH
+|||
+deactivate AUTH
 deactivate CTRL
 
 UI --> ADM : shows roles list and ask to select one
