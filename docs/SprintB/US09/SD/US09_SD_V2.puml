@@ -5,6 +5,8 @@ actor "Administrator" as ADM
 participant ":VaccinationCenterUI" as UI
 participant ":VaccinationCenterController" as CTRL
 participant "comp\n:Company" as COMP
+participant "store\n:VaccinationCenterStore" as VACSTORE
+participant "store\n:Employee" as EMP
 
 activate ADM
 ADM -> UI : asks to create a new vaccination center
@@ -15,6 +17,11 @@ activate CTRL
 
 CTRL -> COMP : coordinator=getEmployeeByRoleId(coodinatorId)
 activate COMP
+
+COMP -> EMP : coordinator=getEmployeeByRoleId(coodinatorId)
+activate EMP
+deactivate EMP
+deactivate COMP
 
 UI --> ADM : shows all available center coordinators and asks to select one
 deactivate UI
@@ -53,8 +60,12 @@ create "center\n:VaccinationCenter" as CENTER
 COMP -> CENTER : create(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
 deactivate COMP
 
-CTRL -> COMP: validateVaccinationCenter(center)
+CTRL -> COMP : validateVaccinationCenter(center)
 activate COMP
+
+COMP -> VACSTORE : validateVaccinationCenter(center)
+activate VACSTORE
+deactivate VACSTORE
 
 UI --> ADM: shows all data and requests confirmation
 deactivate COMP
@@ -69,8 +80,15 @@ activate CTRL
 CTRL -> COMP : saveVaccinationCenter(center)
 activate COMP
 
-COMP -> COMP : validateVaccinationCenter(center)
-COMP -> COMP : addVaccinationCenter(center)
+COMP -> VACSTORE : saveVaccinationCenter(center)
+activate VACSTORE
+
+VACSTORE -> VACSTORE : validateVaccinationCenter(center)
+activate VACSTORE
+deactivate VACSTORE
+VACSTORE -> VACSTORE : addVaccinationCenter(center)
+activate VACSTORE
+deactivate VACSTORE
 
 UI --> ADM : informs operation success
 deactivate COMP
