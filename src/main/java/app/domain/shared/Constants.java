@@ -11,6 +11,8 @@ package app.domain.shared;
  */
 public class Constants {
     public static final String ROLE_ADMIN = "ADMINISTRATOR";
+    public static final String ROLE_COORDINATOR = "COORDINATOR";
+    public static final String ROLE_NURSE = "NURSE";
     public static final String ROLE_RECEPTIONIST = "RECEPTIONIST";
     public static final String ROLE_SNS_USER = "SNS_USER";
 
