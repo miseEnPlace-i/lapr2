@@ -29,6 +29,13 @@ _"As a receptionist, I want to register a SNS User."_
 >
 > **Answer:** —
 
+> **Question:** Regarding US3: "As a receptionist, I want to register an SNS User". What are the necessary components in order to register an SNS User?
+> 
+> **Answer:** The attributes that should be used to describe a SNS user are: Name, Address, Sex, Phone Number, E-mail, Birth Date, SNS User Number and Citizen Card Number.
+>             The Sex attribute is optional. All other fields are required.
+>             The E-mail, Phone Number, Citizen Card Number and SNS User Number should be unique for each SNS user. 
+
+
 ### 1.3. Acceptance Criteria
 
 <!-- TODO -->

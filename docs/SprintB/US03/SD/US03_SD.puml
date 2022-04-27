@@ -86,9 +86,9 @@ STORE --> PWDGEN : pwd = generatePwd()
 activate PWDGEN
 deactivate PWDGEN
 
-STORE --> COMP : auth = getAuthFacade()
-activate COMP
-deactivate COMP
+' STORE --> COMP : auth = getAuthFacade()
+' activate COMP
+' deactivate COMP
 
 STORE --> AUTH : addUserWithRole(name, email, pwd, "SNS_USER")
 activate AUTH
