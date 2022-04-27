@@ -70,9 +70,9 @@ activate CTRL
 CTRL --> STORE : saveSNSUser(snsUser)
 activate STORE
 
-STORE --> STORE : validateSNSUser(snsUser)
-activate STORE
-deactivate STORE
+' STORE --> STORE : validateSNSUser(snsUser)
+' activate STORE
+' deactivate STORE
 
 STORE --> SUSER : name = snsUser.getName()
 activate SUSER

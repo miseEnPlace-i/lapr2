@@ -6,7 +6,10 @@ import java.util.Date;
 import java.util.List;
 
 import app.controller.App;
+import app.domain.shared.Constants;
 import pt.isep.lei.esoft.auth.AuthFacade;
+import pt.isep.lei.esoft.auth.domain.model.Email;
+import pt.isep.lei.esoft.auth.domain.model.Password;
 
 /**
  * 
@@ -38,10 +41,11 @@ public class SNSUserStore implements IStore {
      * @param gender
      * @param phoneNumber
      * @param email
+     * @param address
      * @return SNSUser
      */
     public SNSUser createSNSUser(String citizenCard, String snsNumber, String name, String birthDayStr, char gender,
-            String phoneNumber, String email) {
+            String phoneNumber, String email, String address) {
         // TODO: improve this code (código desenrasca)
         String[] fields = birthDayStr.split("/");
 
@@ -50,7 +54,7 @@ public class SNSUserStore implements IStore {
 
         Date birthDay = calendar.getTime();
 
-        SNSUser snsUser = new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email);
+        SNSUser snsUser = new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
         return snsUser;
     }
 
@@ -79,7 +83,17 @@ public class SNSUserStore implements IStore {
      * @param user
      */
     public void saveSNSUser(SNSUser snsUser) {
+        String name = snsUser.getName();
+        String email = snsUser.getEmail();
+        // TODO: generate password
+        String pwd = "123456";
+
+        authFacade.addUserWithRole(name, email, pwd, Constants.ROLE_SNS_USER);
+
         snsUsers.add(snsUser);
+
+        // TODO: send password email
+
     }
 
     /**

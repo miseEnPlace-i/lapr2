@@ -2,6 +2,11 @@ package app.domain.model;
 
 import java.util.Date;
 
+/**
+ * SNSUser model class.
+ * 
+ * @author Ricardo Moreira <1211285@isep.ipp.pt>
+ */
 public class SNSUser {
 
     // Citizen Card
@@ -38,7 +43,7 @@ public class SNSUser {
      * @param phoneNumber
      * @param email
      */
-    public SNSUser(String citizenCard, String snsNumber, String name, Date birthDay, char gender, String phoneNumber, String email) {
+    public SNSUser(String citizenCard, String snsNumber, String name, Date birthDay, char gender, String phoneNumber, String email, String address) {
         validateAge(birthDay);
 
         this.snsNumber = snsNumber;
@@ -47,11 +52,40 @@ public class SNSUser {
         this.gender = gender;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.address = address;
     }
 
-    // TODO: Getters
+    // Getters
+    public String getCitizenCard() {
+        return citizenCard;
+    }
+
+    public String getSnsNumber() {
+        return snsNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     public String getEmail() {
         return email;
+    }
+
+    public char getGender() {
+        return gender;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public Date getBirthDay() {
+        return birthDay;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     @Override
