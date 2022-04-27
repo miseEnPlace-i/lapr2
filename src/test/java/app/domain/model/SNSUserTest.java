@@ -2,6 +2,7 @@ package app.domain.model;
 
 import org.junit.Test;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class SNSUserTest {
@@ -16,6 +17,8 @@ public class SNSUserTest {
         String snsNumber = null;
         String name = null;
         Date birthDay = null;
+        // new SNSUser(null, null, null, null, null, null, null, null);
+
     }
 
     /**
@@ -31,12 +34,12 @@ public class SNSUserTest {
         char gender = 'm';
         String phoneNumber = "+351900000000";
         String email = "example@example.com";
+        String address = "Test Address 101";
 
-        Date birthDay = new Date();
-        // TODO: using deprecated Date method, use Calendar instead
-        birthDay.setYear(birthDay.getYear() - 151);
+        Calendar birthDay = Calendar.getInstance();
+        birthDay.add(Calendar.YEAR, -151);
 
-        SNSUser user = new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email);
+        new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
     }
 
     /**
@@ -52,11 +55,11 @@ public class SNSUserTest {
         char gender = 'm';
         String phoneNumber = "+351900000000";
         String email = "example@example.com";
+        String address = "Test Address 101";
 
-        Date birthDay = new Date();
-        // TODO: using deprecated Date method, use Calendar instead
-        birthDay.setYear(birthDay.getYear() + 1);
+        Calendar birthDay = Calendar.getInstance();
+        birthDay.add(Calendar.YEAR, 1);
 
-        SNSUser user = new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email);
+        new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
     }
 }

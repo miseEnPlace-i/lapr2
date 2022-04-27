@@ -21,11 +21,12 @@ public class RegisterSNSUserUI implements Runnable {
     }
 
     public void run() {
-        SNSUser snsUser = insertSNSUserData();
-        boolean confirmed = confirmData(snsUser);
+        insertSNSUserData();
+        boolean confirmed = confirmData();
 
         if (confirmed) {
-            ctrl.saveSNSUser(snsUser);
+            ctrl.saveSNSUser();
+            System.out.println("SNS User successfully registered!");
         }
     }
 
@@ -33,9 +34,10 @@ public class RegisterSNSUserUI implements Runnable {
      * 
      * @return
      */
-    private SNSUser insertSNSUserData() {
+    private void insertSNSUserData() {
         System.out.println("\nRegister SNS User UI:");
 
+        // TODO: catch exceptions that might occur
         String citizenCard = Utils.readLineFromConsole("Citizen Card: ");
         String snsNumber = Utils.readLineFromConsole("SNS Number: ");
         String name = Utils.readLineFromConsole("Name: ");
@@ -46,28 +48,28 @@ public class RegisterSNSUserUI implements Runnable {
         char gender = 'm';
 
         // select gender
-        List<String> genders = new ArrayList<String>();
-        genders.add("m");
-        genders.add("f");
-        Object input = Utils.showAndSelectOne(genders, "Select a gender: ");
-        String inputStr = (String) input;
-        gender = inputStr.charAt(0);
+        boolean flag = false;
+        List<String> validGenders = new ArrayList<String>();
+        validGenders.add("m");
+        validGenders.add("f");
 
-        SNSUser instance = ctrl.createSNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email,
-                address);
-        return instance;
+        do {
+            String input = Utils.readLineFromConsole("Select a gender (M/F): ");
+            if (validGenders.contains(input)) {
+                gender = input.charAt(0);
+                flag = true;
+            } else {
+                System.out.println("\nInvalid gender.");
+            }
+        } while (!flag);
+
+        ctrl.createSNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
     }
 
-    private boolean confirmData(SNSUser snsUser) {
+    private boolean confirmData() {
         System.out.println("Please confirm the data below.\n");
-        System.out.printf("Citizen Card: %s\n", snsUser.getCitizenCard());
-        System.out.printf("SNS Number: %s\n", snsUser.getSnsNumber());
-        System.out.printf("Name: %s\n", snsUser.getName());
-        System.out.printf("Gender: %s\n", snsUser.getGender());
-        System.out.printf("Birthday: %s\n", snsUser.getBirthDay());
-        System.out.printf("Phone Number: %s\n", snsUser.getPhoneNumber());
-        System.out.printf("Email: %s\n", snsUser.getEmail());
-        System.out.printf("Address: %s\n", snsUser.getAddress());
+        String stringifiedSNSUser = ctrl.stringifySNSUser();
+        System.out.println(stringifiedSNSUser);
 
         System.out.print("\nIs this information correct? (y/n): ");
 

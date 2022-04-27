@@ -19,6 +19,7 @@ _"As a receptionist, I want to register a SNS User."_
 > When the SNS user arrives at the vaccination center, a receptionist registers the arrival of the user to take the respective vaccine.
 
 **From the client clarifications:**
+
 <!-- TODO: update questions - check forum -->
 
 > **Question:** Accordingly to our project description, the person allowed to register a SNS User is the Administrator. When the receptionist registers a SNS User, does he register the SNS user in the application or his arrival?
@@ -30,11 +31,10 @@ _"As a receptionist, I want to register a SNS User."_
 > **Answer:** —
 
 > **Question:** Regarding US3: "As a receptionist, I want to register an SNS User". What are the necessary components in order to register an SNS User?
-> 
+>
 > **Answer:** The attributes that should be used to describe a SNS user are: Name, Address, Sex, Phone Number, E-mail, Birth Date, SNS User Number and Citizen Card Number.
->             The Sex attribute is optional. All other fields are required.
->             The E-mail, Phone Number, Citizen Card Number and SNS User Number should be unique for each SNS user. 
-
+> The Sex attribute is optional. All other fields are required.
+> The E-mail, Phone Number, Citizen Card Number and SNS User Number should be unique for each SNS user.
 
 ### 1.3. Acceptance Criteria
 
@@ -43,19 +43,18 @@ _"As a receptionist, I want to register a SNS User."_
 -   **AC01:** All required fields must be filled in.
 -   **AC02:** When creating a User with an already existing reference, the system must reject such operation and the user must have the change to modify the typed reference.
 <!-- ? QUESTION -->
--   **AC03:** SNS number must have 9 digits.
 -   **AC04:** Birth day must have the format: DD/MM/YYYY. A SNS User should not have more than 150 years of age.
-<!-- ? QUESTION -->
+-   **AC06:** Citizen card numbers should follow the portuguese format (8 digits, 1 control digit and 2 chars + 1 digit)
+-   **AC03:** SNS number must have 9 digits.
+-   **AC06:** Phone numbers should follow the portuguese format ("+351" + 9 digits).
+-   **AC07:** Email address must be validated using a regular expression.
 -   **AC05:** Gender options: Male/Female.
-<!-- ? QUESTION - also ask for every other property -->
--   **AC06:** Phone number must have 11 digits.
-<!-- ? QUESTION -->
--   **AC07:** E-mail address must have 11 digits and validation must use a regular expression.
 -   **AC08:** The password should be randomly generated. It should have 7 alphanumeric characters, 3 of them being upper case and 2 of them must be digits.
-<!-- ? QUESTION -->
 -   **AC09:** All input fields are required except gender.
-<!-- ? QUESTION -->
--   **AC10:** The user receives an e-mail informing that the registration was successful and that he can start to use the system. The e-mail includes the user password. All the e-mail messages should be written to a file with the name emailAndSMSMessages.txt.
+-   **AC10:** The email, phone number, citizen card number and SNS User number must be unique for each SNS User.
+    <!-- ? QUESTION -->
+    <!-- -   **AC10:** The user receives an e-mail informing that the registration was successful and that he can start to use the system. The e-mail includes the user password. All the e-mail messages should be written to a file with the name emailAndSMSMessages.txt. -->
+-
 
 ### 1.4. Found out Dependencies
 

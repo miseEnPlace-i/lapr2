@@ -1,21 +1,21 @@
-package app.domain.model;
+package app.domain.model.store;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-import app.controller.App;
+import app.domain.model.CalendarUtils;
+import app.domain.model.SNSUser;
 import app.domain.shared.Constants;
+import app.domain.shared.EmailSender;
+import app.domain.shared.PasswordGenerator;
 import pt.isep.lei.esoft.auth.AuthFacade;
-import pt.isep.lei.esoft.auth.domain.model.Email;
-import pt.isep.lei.esoft.auth.domain.model.Password;
 
 /**
  * 
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
-public class SNSUserStore implements IStore {
+public class SNSUserStore {
 
     // User List
     private List<SNSUser> snsUsers;
@@ -26,33 +26,33 @@ public class SNSUserStore implements IStore {
     /**
      * Constructor for SNSUserStore.
      */
-    public SNSUserStore() {
+    public SNSUserStore(AuthFacade authFacade) {
         this.snsUsers = new ArrayList<SNSUser>();
-        this.authFacade = App.getInstance().getCompany().getAuthFacade();
+        this.authFacade = authFacade;
     }
 
     /**
      * Creates an SNS User instance.
      * 
-     * @param citizenCard
-     * @param snsNumber
-     * @param name
-     * @param birthDayStr
-     * @param gender
-     * @param phoneNumber
-     * @param email
-     * @param address
+     * @param citizenCard the citizen card of the SNS User.
+     * @param snsNumber   the SNS Number of the SNS User.
+     * @param name        the name of the SNS User.
+     * @param birthDayStr the birth day as a string of the SNS User.
+     * @param gender      the SNS User gender
+     * @param phoneNumber SNS User phone number
+     * @param email       SNS User email
+     * @param address     SNS User address
      * @return SNSUser
      */
     public SNSUser createSNSUser(String citizenCard, String snsNumber, String name, String birthDayStr, char gender,
             String phoneNumber, String email, String address) {
-        // TODO: improve this code (código desenrasca)
-        String[] fields = birthDayStr.split("/");
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Integer.parseInt(fields[2]), Integer.parseInt(fields[1]) - 1, Integer.parseInt(fields[0]));
-
-        Date birthDay = calendar.getTime();
+        Calendar birthDay;
+        try {
+            birthDay = CalendarUtils.parse(birthDayStr);
+        } catch (Exception e) {
+            // TODO: handle exception
+            return null;
+        }
 
         SNSUser snsUser = new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
         return snsUser;
@@ -64,6 +64,10 @@ public class SNSUserStore implements IStore {
      * @param snsUser
      */
     public void validateSNSUser(SNSUser snsUser) {
+        if (snsUser == null) {
+            throw new Error("SNS User is null");
+        }
+
         // get the SNS User email
         String email = snsUser.getEmail();
 
@@ -85,15 +89,14 @@ public class SNSUserStore implements IStore {
     public void saveSNSUser(SNSUser snsUser) {
         String name = snsUser.getName();
         String email = snsUser.getEmail();
-        // TODO: generate password
-        String pwd = "123456";
+        String pwd = PasswordGenerator.generatePwd();
 
         authFacade.addUserWithRole(name, email, pwd, Constants.ROLE_SNS_USER);
 
         snsUsers.add(snsUser);
 
         // TODO: send password email
-
+        // EmailSender emailSender = new EmailSender();
     }
 
     /**
