@@ -86,6 +86,7 @@
 | HealthcareCenter               |       is a       |             VaccinationCenter |
 | HealthcareCenter               |  is associated   |                           ARS |
 | HealthcareCenter               |  is associated   |                          ACES |
+| IntervalBetweenDoses           |  is associated   |                   Appointment |
 | Nurse                          |      is an       |                      Employee |
 | Nurse                          |      emits       |     VaccineDigitalCertificate |
 | Nurse                          |      checks      |                UserHealthInfo |
@@ -110,6 +111,7 @@
 | System                         |      emits       |            VaccineCertificate |
 | Vaccine                        |       has        |                   VaccineType |
 | Vaccine                        |       has        |         AdministrationProcess |
+| Vaccine                        |       has        |          IntervalBetweenDoses |
 | VaccineCertificate             |       has        |                       Vaccine |
 | VaccinationCenter              |       has        |             CenterCoordinator |
 | VaccinationCenter              |   administers    |                      Vaccines |
