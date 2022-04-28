@@ -2,58 +2,59 @@
 skinparam classAttributeIconSize 0
 
 class VaccinationCenter {
-  - name String
-  - address String
-  - emailAddress String
-  - phoneNumber int
-  - faxNumber int
-  - websiteAddress String
-  - openingHours String
-  - closingHours String
-  - slotDuration int
-  - maximumVaccinesPerSlot int
-  - coordinator EMPLOYEE
+  - name: String
+  - address: String
+  - emailAddress: String
+  - phoneNumber: int
+  - faxNumber: int
+  - websiteAddress: String
+  - openingHours: String
+  - closingHours: String
+  - slotDuration: int
+  - maximumVaccinesPerSlot: int
+  - coordinator: EMPLOYEE
+  - typeId: int
   ---
- +VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
+ +VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator,typeId)
 }
 
 
 class Company {
-  -designation String
+  -designation: String
   ---
   +getDesignation()
-  +createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot)
-  +validateVaccinatonCenter(center)
-  +saveVaccinationCenter(center)
-  +getEmployeeByRoleId()
+  +getEmployeeStore()
+  +getVaccinationCenterStore()
 }
 
 class VaccinationCenterStore {
 ---
-+validateVaccinatonCenter()
++createVaccinationCenter(centerData,coordinator)
++validateVaccinatonCenter(center)
 +saveVaccinationCenter(center)
 -addVaccinationCenter(center)
 }
 
 class Employee {
-  -String id
-  -String name
-  -String email
-  -String phone
-  -String address
-  -int citizenCardNumber
-  -String roleId
-  
+  -id: String 
+  -name: String 
+  -email: String 
+  -phone: String 
+  -address: String 
+  -citizenCardNumber: int 
+  -roleId: String 
+  ---
   +Employee(name,email,phone,address,citizenCardNumber,roleId)
 }
 
 class EmployeeStore {
-  +getEmployeesByRoleId()
-  +getEmployeeById()
+  +getEmployeeById(id)
 }
 
 class VaccinationCenterController {
   ---
+  +getCoordinators()
+  +selectCoordinator(id)
   +createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot)
   +saveVaccinationCenter(center)
 }
