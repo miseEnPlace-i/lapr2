@@ -76,7 +76,7 @@ _"As an administrator, I want to register an Employee."_
 
 ![US10_SSD](ssd/US10_SSD.svg)
 
-Other alternatives might exist, such as asking the user role before inserting the employee's data.
+Other alternatives might exist.
 
 ### 1.7 Other Relevant Remarks
 
@@ -103,10 +103,10 @@ n/a
 | Interaction ID                                       | Question: Which class is responsible for...            | Answer           | Justification (with patterns)                           |
 | :--------------------------------------------------- | :----------------------------------------------------- | :--------------- | :------------------------------------------------------ |
 | Step 1: asks to register a new employee              | ...instantiating a new employee                        | Company          | --                                                      |
-| Step 2: requests data (name, email, password, etc)   | n/a                                                    | n/a              | n/a                                                     |
-| Step 3: types requested data                         | ...saving the input data?                              | Employee         | IE: object created in step 1 has its own data           |
-| Step 4: shows user roles list and asks to select one | ...knowing the user roles to show?                     | Company          | IE: user roles are defined by the company               |
-| Step 5: selects a user role                          | ...saving the selected role?                           | Employee         | IE: object created in step 1 is classified in one role. |
+| Step 2: shows user roles list and asks to select one | ...knowing the user roles to show?                     | Company          | IE: user roles are defined by the company               |
+| Step 3: selects a user role                          | ...saving the selected role?                           | Employee         | IE: object created in step 1 is classified in one role. |
+| Step 4: requests data (name, email, password, etc)   | n/a                                                    | n/a              | n/a                                                     |
+| Step 5: types requested data                         | ...saving the input data?                              | Employee         | IE: object created in step 1 has its own data           |
 | Step 6: shows all data and requests confirmation     | ...validating the data introduced (local validation)?  | Employee         | IE: owns its data                                       |
 | Step 6: shows all data and requests confirmation     | ...validating the data introduced (global validation)? | Company          | IE: knows all its employees                             |
 | Step 7: confirms the data                            | ...saving the created employee?                        | Company          | IE: holds every information about the employees         |
