@@ -1,72 +1,66 @@
 @startuml
 skinparam classAttributeIconSize 0
 
-class ApplicationPOT
-{
-  +static getInstance()
-  +getCurrentSession()
-}
-
-class UserSession
-{
-  +getUserEmail()
-}
-
-class Task {
-  -String reference
-  -String designation
-  -String informalDescription
-  -String technicalDescription
-  -Integer duration
-  -Double cost
-  +Task(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
-}
-
-class Category {
-  -String id
-  -String description
-}
-
-class Organization {
-  -String name
-  -String VatNumber
-  -String website
-  -String phone
-  -String email
-  +Organization(name, VatNumber, webSite, phone, email, postalAddress, manager)
-  +createTask(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
-  +saveTask(task)
-  -addTask(task)
-  -validateTask(task)
-}
-
-class Platform {
-  -String designation
-  +getCategories()
-  +getCategoryById(catId)
-  +getOrganizationByUserEmail(email)
-}
-
-class CreateTaskController {
-  +getCategories()
-  +createTask(ref,designation,informalDesc,technicalDesc,duration,cost,categoryId)
-  +saveTask()
-}
-
-class CreateTaskUI {
+class CreateVaccineUI{
 
 }
 
-CreateTaskUI ..> CreateTaskController
-CreateTaskController ..> Platform
-CreateTaskController ..> Category
-CreateTaskController ..> Task
-CreateTaskController ..> Organization
-CreateTaskController ..> ApplicationPOT
-CreateTaskController ..> UserSession
-Task "*" -> "1" Category : classified in
-Platform "1" --> "*" Category : defines
-Organization "1" --> "*" Task : owns
+class CreateVaccineController{
 
+}
+
+class Company{
+    -designation : String
+}
+
+class VaccineTypeStore{
+
+}
+
+class VaccineStore{
+
+}
+
+class Vaccine{
+    -designation : String
+    -numberOfAgeGroups : int
+}
+
+class VaccineType{
+    -code : int
+    -description : String
+    -tecnhology : String
+}
+
+class AdminProc{
+    -numberOfDoses : int
+    -minAge : int
+    -maxAge : int
+}
+
+class AdminProcList{
+
+}
+
+class DoseInfo{
+    -dosage : int
+    -timeToNextDose : int
+}
+
+class DoseInfoList{
+
+}
+
+CreateVaccineUI ..> CreateVaccineController
+CreateVaccineController ..> VaccineStore
+CreateVaccineController ..> VaccineTypeStore
+CreateVaccineController ..> Company
+VaccineStore ..> Company
+VaccineTypeStore ..> Company
+Company -> Vaccine
+Vaccine -> AdminProcList
+AdminProcList -> AdminProc
+AdminProc -> DoseInfoList
+DoseInfoList -> DoseInfo
 
 @enduml

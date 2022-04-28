@@ -68,7 +68,6 @@ TODO
 
 * Typed data:
   - Vaccine designation
-  - Vaccine Code
   - Age group interval limits
   - Dosage
   - Number of doses
