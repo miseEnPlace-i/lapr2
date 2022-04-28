@@ -67,16 +67,14 @@ public class RegisterSNSUserUI implements Runnable {
     }
 
     private boolean confirmData() {
-        System.out.println("Please confirm the data below.\n");
+        System.out.println("\nPlease confirm the data below.\n");
         String stringifiedSNSUser = ctrl.stringifySNSUser();
         System.out.println(stringifiedSNSUser);
-
-        System.out.print("\nIs this information correct? (y/n): ");
 
         List<String> options = new ArrayList<String>();
         options.add("y");
         options.add("n");
-        Object input = Utils.showAndSelectOne(options, "Select a gender: ");
+        Object input = Utils.showAndSelectOne(options, "Is this information correct? (y/n):  ");
         String inputStr = (String) input;
 
         return inputStr.equals("y");
