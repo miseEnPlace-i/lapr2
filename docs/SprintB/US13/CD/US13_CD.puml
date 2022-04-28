@@ -78,10 +78,11 @@ CreateVaccineController ..> VaccineTypeStore
 CreateVaccineController ..> Company
 VaccineStore ..> Company
 VaccineTypeStore ..> Company
-Company -> Vaccine
-Vaccine -> AdminProcList
-AdminProcList -> AdminProc
-AdminProc -> DoseInfoList
-DoseInfoList -> DoseInfo
+VaccineTypeStore "1" -> "*" Vaccine : stores
+Company "1" -> "*" Vaccine : knows
+Vaccine "1" -> "1" AdminProcList : has
+AdminProcList "1" -> "*" AdminProc : has
+AdminProc "1" -> "1" DoseInfoList : has
+DoseInfoList "1" -> "*" DoseInfo : has
 
 @enduml
