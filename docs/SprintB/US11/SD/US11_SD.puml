@@ -10,7 +10,6 @@ participant "employeeStore\n:EmployeeStore" as EMPS
 participant "authFacade\n:AuthFacade" as AUTH
 participant "emp:Employee" as EMP
 
-
 activate ADM
 ADM -> UI : asks to list employees for given role
 activate UI
