@@ -35,8 +35,21 @@ class VaccinationCenterStore {
 -addVaccinationCenter(center)
 }
 
+class Employee {
+  -String id
+  -String name
+  -String email
+  -String phone
+  -String address
+  -int citizenCardNumber
+  -String roleId
+  
+  +Employee(name,email,phone,address,citizenCardNumber,roleId)
+}
+
 class EmployeeStore {
-+getEmployeeByRoleId()
+  +getEmployeesByRoleId()
+  +getEmployeeById()
 }
 
 class VaccinationCenterController {
@@ -53,5 +66,6 @@ Company "1" --> "*" VaccinationCenter : belongs to <
 VaccinationCenterController ..> VaccinationCenter
 Company ..> VaccinationCenterStore
 Company ..> EmployeeStore
+EmployeeStore "1" --> "*" Employee : stores
 
 @enduml
