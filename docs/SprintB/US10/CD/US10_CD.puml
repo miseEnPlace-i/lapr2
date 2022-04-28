@@ -1,46 +1,87 @@
 @startuml US10_CD
 skinparam classAttributeIconSize 0
 
-class Employee {
-  -String address
-  -String citizen number
-  +Employee(name, address, phone number, email, citizen card number, role)
-}
-
-interface User {  
-  -String name
-  -String phone number
-  -String email
-  -String password
-  -String role
-  +User(name, phone number, email, role)
-  -GeneratePassword()
-}
-
-class Company {
-  -String designation
-  +Organization(designation)
-  +getEmployeeRoles()
-  +createEmployee(name, address, phone number, email, citizen card number, role)
-  +validateEmployee(employee)
-  +saveEmployee(employee)
-  +getRoleById(id)
-  -addEmployee(employee)
+class CreateEmployeeUI {
 }
 
 class CreateEmployeeController {
   +getEmployeeRoles()
-  +createEmployee(name, address, phone number, email, citizen card number, roleId)
+  +createEmployee(name, address, phoneNumber, email, citizenCardNumber, roleId)
   +saveEmployee()
 }
 
-class CreateEmployeeUI {
+class Company {
+  -designation: String
+  +Company(designation)
+  +getDesignation()
+  +getAuthFacade()
+  +getEmployeeStore()
+}
+
+class EmployeeStore {
+  +createEmployee(name, address, phoneNumber, email, citizenCardNumber, roleId)
+  +validateEmployee(employee)
+  +saveEmployee(employee)
+}
+
+class Employee {
+  -id: String
+  -address: String
+  -phoneNumber: String
+  -citizenCardNumber: int
+  +Employee(id, name, address, phoneNumber, email, citizenCardNumber, roleId)
+  +getId()
+  +getName()
+  +getAddress()
+  +getPhoneNumber()
+  +getEmail()
+  +getCitizenCardNumber()
+  +getPassword()
+  +getRoleId()
+}
+
+class AuthFacade {
+  +getUserRoles()
+  +existsUser(email)
+  +addUserWithRole(name, email, password, roleId)
+}
+
+class PasswordGenerator {
+  +generatePassword()
+}
+
+class EmailSender {
+  +sendPasswordEmail(email, password)
+}
+
+class User {
+  -name: String
+  -email: String
+  -password: String
+  -roleId: String
+}
+
+class UserRole {
+  -id: String
+  -description: String
 }
 
 CreateEmployeeUI ..> CreateEmployeeController
-CreateEmployeeController ..> Employee
+
+CreateEmployeeController ..> EmployeeStore
 CreateEmployeeController ..> Company
-Company ..> Employee
-User <|.. Employee 
+CreateEmployeeController ..> AuthFacade
+
+EmployeeStore ..> AuthFacade
+EmployeeStore ..> PasswordGenerator
+EmployeeStore ..> EmailSender
+EmployeeStore -- Employee : stores >
+
+Company -- AuthFacade : knows >
+Company -- EmployeeStore : knows >
+
+Employee --|> User
+
+User "*" -- "1" UserRole : has >
 
 @enduml
