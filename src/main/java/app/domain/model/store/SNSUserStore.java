@@ -67,7 +67,7 @@ public class SNSUserStore {
         if (snsUser == null) {
             throw new Error("SNS User is null");
         }
-
+        
         // get the SNS User email
         String email = snsUser.getEmail();
 
