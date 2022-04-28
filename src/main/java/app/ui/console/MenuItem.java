@@ -13,8 +13,7 @@ public class MenuItem {
     private String description;
     private Runnable ui;
 
-    public MenuItem(String description,  Runnable ui)
-    {
+    public MenuItem(String description, Runnable ui) {
         if (StringUtils.isBlank(description))
             throw new IllegalArgumentException("MenuItem description cannot be null or empty.");
         if (Objects.isNull(ui))
@@ -24,18 +23,15 @@ public class MenuItem {
         this.ui = ui;
     }
 
-    public void run()
-    {
+    public void run() {
         this.ui.run();
     }
 
-    public boolean hasDescription(String description)
-    {
+    public boolean hasDescription(String description) {
         return this.description.equals(description);
     }
 
-    public String toString()
-    {
+    public String toString() {
         return this.description;
     }
 

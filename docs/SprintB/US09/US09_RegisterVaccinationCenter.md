@@ -1,52 +1,45 @@
-# US 006 - To create a Task 
+# US 09 - Register a vaccination center to respond to a certain pandemic 
 
 ## 1. Requirements Engineering
 
-
 ### 1.1. User Story Description
 
-
 _"As an administrator, I want to register a vaccination center to respond to a certain pandemic."_
-
-
 
 ### 1.2. Customer Specifications and Clarifications 
 
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost as well as the its classifying task category. 
+>	"[...] vaccination centers are facilities specifically created to administer vaccines of a single type as
+response to an ongoing disease outbreak (e.g.: Covid-19)."
 
-
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
-
+>	"[...] vaccination centers are characterized by a name, an address, a phone number, an e-mail address, a
+fax number, a website address, opening and closing hours, slot duration (e.g.: 5 minutes) and the
+maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slot)." 
 
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** Is there any specification about the name, phone number,address, fax number, website address, opening and closing hours, slot duration and maximum number of vaccines?
 >  
-> **Answer:** Duration is estimated in days.
+> **Answer:** ?
 
--
-
-> **Question:** Monetary data is expressed in any particular currency?
+> **Question:** When there is no ongoing outbreak, are this centers out of service or is another type of vaccine selected?
 >  
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POTs (virtual currency internal to the platform).
+> **Answer:** "This centers are closed when there is no outbreak."
 
 
 ### 1.3. Acceptance Criteria
 
-
-* **AC1:** All required fiels must be filled in.
-* **AC2:** Task reference must have at least 5 alphanumeric chars.
-* **AC3:** When creating a task with an already existing reference, the system must reject such operation and the user must have the change to modify the typed reference.
+* **AC1:** --
+* **AC2:** Opening and closing hours non existent.
 
 
 ### 1.4. Found out Dependencies
 
 
-* There is a dependency to "US003 Create a task category" since at least a task category must exist to classify the task being created.
+* Not found.
 
 
 ### 1.5 Input and Output Data
@@ -55,126 +48,100 @@ _"As an administrator, I want to register a vaccination center to respond to a c
 **Input Data:**
 
 * Typed data:
-	* a reference, 
-	* a designation, 
-	* an informal description
-	* a technical description
-	* an estimated duration
-	* an estimated cost
+	* an name;
+	* an address;
+	* a phone number;
+	* a fax number;
+	* website address;
+	* opening and closing hours;
+	* slot duration;
+	* maximum vaccines per slot. 
 	
-* Selected data:
-	* Classifying task category 
-
-
 **Output Data:**
 
-* List of existing task categories
-* (In)Success of the operation
+* (In)Success of the operation.
 
 ### 1.6. System Sequence Diagram (SSD)
 
-**Alternative 1**
 
-![US006_SSD](US006_SSD.svg)
-
-
-**Alternative 2**
-
-![US006_SSD_v2](US006_SSD_v2.svg)
+![US09_SSD](SSD/US09_SSD.svg)
 
 
 **Other alternatives might exist.**
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
-
+* Not found.
 
 ## 2. OO Analysis
 
 ### 2.1. Relevant Domain Model Excerpt 
 
-![US006_MD](US006_MD.svg)
+![US09_MD](DM/US09_DM.svg)
 
 ### 2.2. Other Remarks
 
-n/a
-
+* Not found.
 
 ## 3. Design - User Story Realization 
 
 ### 3.1. Rationale
 
-**SSD - Alternative 1 is adopted.**
-
-| Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
-|:-------------  |:--------------------- |:------------|:---------------------------- |
-| Step 1  		 |	... interacting with the actor? | CreateTaskUI   |  Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.           |
-| 			  		 |	... coordinating the US? | CreateTaskController | Controller                             |
-| 			  		 |	... instantiating a new Task? | Organization   | Creator (Rule 1): in the DM Organization has a Task.   |
-| 			  		 | ... knowing the user using the system?  | UserSession  | IE: cf. A&A component documentation.  |
-| 			  		 |	... knowing to which organization the user belongs to? | Platform  | IE: has registed all Organizations |
-| 			  		 |							 | Organization   | IE: knows/has its own Employees|
-| 			  		 |							 | Employee  | IE: knows its own data (e.g. email) |
-| Step 2  		 |							 |             |                              |
-| Step 3  		 |	...saving the inputted data? | Task  | IE: object created in step 1 has its own data.  |
-| Step 4  		 |	...knowing the task categories to show? | Platform  | IE: Task Categories are defined by the Platform. |
-| Step 5  		 |	... saving the selected category? | Task  | IE: object created in step 1 is classified in one Category.  |
-| Step 6  		 |							 |             |                              |              
-| Step 7  		 |	... validating all data (local validation)? | Task | IE: owns its data.| 
-| 			  		 |	... validating all data (global validation)? | Organization | IE: knows all its tasks.| 
-| 			  		 |	... saving the created task? | Organization | IE: owns all its tasks.| 
-| Step 8  		 |	... informing operation success?| CreateTaskUI  | IE: is responsible for user interactions.  | 
+| Interaction ID                                                                                                                           | Question: Which class is responsible for...     | Answer            | Justification (with patterns)                              |
+| :--------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------- | :---------------- | :--------------------------------------------------------- |
+| Step 1: starts creating a new vaccination center                                                                                         | ... instantiating a new Vaccination center?     | Company           | --                                                         |
+| Step 2: request data(name, address, phone number, e-mail address, fax number, website address, slot duration, maximum vaccines per slot) | n/a                                             | n/a               | n/a                                                        |
+| Step 3: types requested data                                                                                                             | ... saving the inputted data?                   | VaccinationCenter | IE: object created in step 1 has its own data.             |
+| Step 4: shows the data and requests a confirmation                                                                                       | ... validating the data introduced?             | Company           | IE: Task Categories are defined by the Platform.           |
+| Step 5: confirms the data                                                                                                                | ... saving the new created Vaccination Center?  | Company           | IE: holds every information about the vaccination process. |
+| Step 6: informs operation success                                                                                                        | ... informing that the operation was a success? | UI                | IE: responsible for user interaction.                      |
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
- * Organization
- * Platform
- * Task
+ * VaccinationCenter
+ * Administrator
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
- * CreateTaskUI  
- * CreateTaskController
+ * CreateVaccinationCenterUI  
+ * CreateVaccinationCenterController
 
 
 ## 3.2. Sequence Diagram (SD)
 
-**Alternative 1**
-
-![US006_SD](US006_SD.svg)
-
-**Alternative 2**
-
-![US006_SD](US006_SD_v2.svg)
+![US09_SD](SD/US09_SD.svg)
 
 ## 3.3. Class Diagram (CD)
 
-**From alternative 1**
-
-![US006_CD](US006_CD.svg)
+![US09_CD](CD/US09_CD.svg)
 
 # 4. Tests 
-
-**Test 1:** Check that it is not possible to create an instance of the Task class with null values. 
+// Test without 1 parameter address (String)
+// Test without 1 parameter phone number (int)
+// Test without any parameter
+// ---
+**Test 1:** Check that it is not possible to create an instance of the VaccinationCenter class without the parameter address. 
 
 	@Test(expected = IllegalArgumentException.class)
 		public void ensureNullIsNotAllowed() {
-		Task instance = new Task(null, null, null, null, null, null, null);
+		VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida", 221010101,"vacinacaoporto@gmail.com", +351-122-123123123, "www.centrovacinaoporto.com", "8:00-19:00", 5, 10);
 	}
 	
-
-**Test 2:** Check that it is not possible to create an instance of the Task class with a reference containing less than five chars - AC2. 
+**Test 2:** Check that it is not possible to create an instance of the VaccinationCenter class without the parameter slot duration.
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureReferenceMeetsAC2() {
-		Category cat = new Category(10, "Category 10");
-		
-		Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
+		public void ensureIntegerParameterIsNotNull() {
+		VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida", 221010101,"vacinacaoporto@gmail.com", +351-122-123123123, "www.centrovacinaoporto.com", "8:00-19:00", 0, 10);
 	}
 
+**Test 3** Check that it is not possible to create an instance of the VaccinationCenter class without any parameter.
+	
+	@Test(expected = IllegalArgumentException.class)
+		public void ensureEveryParameterIsNotNul() {
+			VaccinationCenter center = new VaccinationCenter(null,null,0,null,0,null,null,0,0);
+		}
 
 *It is also recommended to organize this content by subsections.* 
 
