@@ -25,7 +25,7 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 
 > **Question:** Is there any specification about the name, phone number,email address, address, fax number, website address, opening and closing hours, slot duration and maximum number of vaccines?
 >  
-> **Answer:** ?
+> **Answer:** During Sprint B I will not introduce attribute rules/formats other than the ones that I already introduced (in this forum or in the project description). Please study the concepts and define appropriate formats for the attributes.
 
 
 ### 1.3. Acceptance Criteria
