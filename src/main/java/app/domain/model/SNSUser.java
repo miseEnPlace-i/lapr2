@@ -46,8 +46,7 @@ public class SNSUser {
      * @param phoneNumber
      * @param email
      */
-    public SNSUser(String citizenCard, String snsNumber, String name, Calendar birthDay, char gender,
-            String phoneNumber, String email, String address) {
+    public SNSUser(String citizenCard, String snsNumber, String name, Calendar birthDay, char gender, String phoneNumber, String email, String address) {
         validateAge(birthDay);
 
         this.citizenCard = citizenCard;
@@ -95,32 +94,24 @@ public class SNSUser {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null)
-            return false;
-        if (obj == this)
-            return true;
-        if (!(obj instanceof SNSUser))
-            return false;
+        if (obj == null) return false;
+        if (obj == this) return true;
+        if (!(obj instanceof SNSUser)) return false;
 
         SNSUser other = (SNSUser) obj;
 
         // Fields email, phone number, citizen card & SNS number should be unique for
         // each SNS User
-        if (this.email.equals(other.email))
-            return true;
-        if (this.phoneNumber.equals(other.phoneNumber))
-            return true;
-        if (this.citizenCard.equals(other.citizenCard))
-            return true;
-        if (this.snsNumber.equals(other.snsNumber))
-            return true;
+        if (this.email.equals(other.email)) return true;
+        if (this.phoneNumber.equals(other.phoneNumber)) return true;
+        if (this.citizenCard.equals(other.citizenCard)) return true;
+        if (this.snsNumber.equals(other.snsNumber)) return true;
 
         return false;
     }
 
     /**
-     * Validates the age given a birthday.
-     * Throws IllegalArgumentException.
+     * Validates the age given a birthday. Throws IllegalArgumentException.
      * 
      * @param birthDay
      */

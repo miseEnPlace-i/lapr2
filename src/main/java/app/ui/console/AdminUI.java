@@ -11,8 +11,7 @@ import java.util.List;
  */
 
 public class AdminUI implements Runnable {
-    public AdminUI() {
-    }
+    public AdminUI() {}
 
     public void run() {
         List<MenuItem> options = new ArrayList<MenuItem>();

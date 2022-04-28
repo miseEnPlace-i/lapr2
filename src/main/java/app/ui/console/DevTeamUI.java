@@ -12,8 +12,7 @@ package app.ui.console;
  */
 public class DevTeamUI implements Runnable {
 
-    public DevTeamUI() {
-    }
+    public DevTeamUI() {}
 
     public void run() {
         System.out.println("\n");
