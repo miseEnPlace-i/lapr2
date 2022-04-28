@@ -29,7 +29,7 @@ public class ListEmployeesByRoleController {
    * @param role
    * @return Employee List with Roles
    */
-  public void listEmployeesByRole(String roleId) {
-    store.getEmployeesByRole(roleId);
+  public void listEmployeesWithRole(String roleId) {
+    store.getEmployeesWithRole(roleId);
   }
 }

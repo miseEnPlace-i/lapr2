@@ -31,13 +31,13 @@ deactivate UI
 ADM -> UI : selects an employee role
 activate UI
 
-UI -> CTRL : getEmployeesByRoleId(roleId)
+UI -> CTRL : getEmployeesWithRole(roleId)
 activate CTRL
 
 CTRL -> COMP: getEmployeeStore()
 activate COMP
 deactivate COMP
-CTRL -> EMPS: getEmployeesByRoleId(roleId)
+CTRL -> EMPS: getEmployeesWithRole(roleId)
 activate EMPS
 deactivate EMPS
 EMPS -> AUTH: existsRole(roleId)

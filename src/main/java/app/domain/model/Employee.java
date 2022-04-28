@@ -6,6 +6,7 @@ package app.domain.model;
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 public class Employee {
+  int id = 0;
   String name = "";
   String phoneNumber = "";
   String email = "";
@@ -25,6 +26,7 @@ public class Employee {
    */
   public Employee(String name, String phoneNumber, String email, String address, String citizenCard,
       String roleId) {
+    this.id = 123456789;
     // TODO
   }
 

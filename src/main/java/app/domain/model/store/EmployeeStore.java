@@ -44,7 +44,7 @@ public class EmployeeStore {
    * @param roleId the role id to be searched
    * @return a List of employees with that given role
    */
-  public List<Employee> getEmployeesByRole(String roleId) {
+  public List<Employee> getEmployeesWithRole(String roleId) {
     if (!authFacade.existsRole(roleId)) {
       throw new IllegalArgumentException("Role does not exist");
     }

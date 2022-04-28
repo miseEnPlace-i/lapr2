@@ -12,13 +12,12 @@ class Employee {
   -String id
   -String name
   -String email
-  -String pwd
   -String phone
   -String address
   -int citizenCardNumber
   -String roleId
   
-  +Employee(name,email,pwd,phone,address,citizenCardNumber,roleId)
+  +Employee(name,email,phone,address,citizenCardNumber,roleId)
 }
 
 class Company {
@@ -35,8 +34,6 @@ class AuthFacade {
 }
 
 class EmployeeStore {
-  +existsRole(role)
-  +getEmployeeRoles()
   +getEmployeesWithRole(roleId)
 }
 
@@ -67,10 +64,9 @@ Employee "*" -- "1" EmployeeStore : stores <
 Company "1" --> "*" Employee : knows >
 
 UserRolesStore "1" -- "*" UserRole : stores >
-Company ..> UserRolesStore
-
+AuthFacade ..> UserRolesStore
 User "1" -- "*" UserRole : has >
 
-User <|.. Employee 
+User <|-- Employee 
 
 @enduml
