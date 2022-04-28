@@ -11,11 +11,11 @@ class Administrator {
 
 class Employee {
   -name
-  -phone number
+  -phoneNumber
   -email
   -password
   -address
-  -citizen card number
+  -citizenCardNumber
   -role
 }
 
