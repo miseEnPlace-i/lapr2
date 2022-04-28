@@ -77,7 +77,7 @@ loop for each age group
             CTRL -> VAC : adminProc = createAdminProc(minAge, maxAge, numberOfDoses)
             activate VAC
 
-                VAC -> AP ** : create(designation, numberAgeGroups, vacType)
+                VAC -> AP ** : create(minAge, maxAge, numberOfDoses)
 
             deactivate VAC
 
