@@ -72,10 +72,6 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 
 ![US09_SSD](SSD/US09_SSD.svg)
 
-**Alternative 2**
-
-![US09_SSD](SSD/US09_SSD_V2.svg)
-
 ### 1.7 Other Relevant Remarks
 
 * There are similarities between this user story and the US11 regarding the method getEmployeeByRoleId() which is used to get center coordinators.
@@ -143,14 +139,14 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 	@Test(expected = IllegalArgumentException.class)
 		public void ensureNullIsNotAllowed() {
-		VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida", 221010101,"vacinacaoporto@gmail.com", +351-122-123123123, "www.centrovacinaoporto.com", "8:00-19:00", 5, 10);
+		VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto",null, "vacinacaoporto@gmail.com", 221010101, 122123123, "www.centrovacinaoporto.com", "8:00", "19:00", 5, 10);
 	}
 	
 **Test 2:** Check that it is not possible to create an instance of the VaccinationCenter class without the parameter slot duration.
 
 	@Test(expected = IllegalArgumentException.class)
 		public void ensureIntegerParameterIsNotNull() {
-		VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida", 221010101,"vacinacaoporto@gmail.com", +351-122-123123123, "www.centrovacinaoporto.com", "8:00-19:00", 0, 10);
+		VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida","vacinacaoporto@gmail.com", 221010101, 122123123, "www.centrovacinaoporto.com", "8:00", "19:00", 0, 10);
 	}
 
 **Test 3** Check that it is not possible to create an instance of the VaccinationCenter class with null values.
