@@ -45,7 +45,7 @@ class ListEmployeeController {
   +getEmployeesByRoleId(role)
 }
 
-class UserRoles {
+class UserRole {
   -String id
   -String description
 }
@@ -64,12 +64,12 @@ Company ..> AuthFacade
 Company ..> EmployeeStore
 EmployeeStore -> AuthFacade : uses
 Employee "*" -- "1" EmployeeStore : stores <
-Company "1" --> "*" Employee : employees
+Company "1" --> "*" Employee : knows >
 
-UserRolesStore "1" -- "*" UserRoles : stores >
+UserRolesStore "1" -- "*" UserRole : stores >
 Company ..> UserRolesStore
 
-User "1" -- "*" UserRoles : has >
+User "1" -- "*" UserRole : has >
 
 User <|.. Employee 
 

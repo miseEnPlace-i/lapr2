@@ -10,6 +10,7 @@ participant "employeeStore\n:EmployeeStore" as EMPS
 participant "authFacade\n:AuthFacade" as AUTH
 participant "emp:Employee" as EMP
 
+
 activate ADM
 ADM -> UI : asks to list employees for given role
 activate UI
@@ -34,24 +35,28 @@ activate UI
 UI -> CTRL : getEmployeesByRoleId(roleId)
 activate CTRL
 
+CTRL -> COMP: getEmployeeStore()
 activate COMP
-CTRL -> COMP: getEmployeesByRoleId(roleId)
+deactivate COMP
+CTRL -> EMPS: getEmployeesByRoleId(roleId)
+activate EMPS
+deactivate EMPS
 create "lstEmp\n:List<Employee>" as LST
-COMP --> LST
+EMPS --> LST
 
 loop for each employee
+    EMPS -> EMP: e=employee.roleId == roleId
   activate EMP
-    COMP -> EMP: e=employee.roleId == roleId
-    EMP --> COMP: true/false
+    EMP --> EMPS: true/false
   deactivate EMP
     alt e==true
-        COMP -> LST: add(employee)
+        EMPS -> LST: add(employee)
       activate LST
+    |||
+    deactivate LST
     end
 end
 
-COMP --> CTRL: lstEmp
-deactivate LST
 CTRL --> UI: lstEmp
 
 deactivate COMP
@@ -63,5 +68,7 @@ deactivate UI
 deactivate UI
 deactivate CTRL
 deactivate ADM
+
+participant "roleList:\nList<UserRole>"
 
 @enduml

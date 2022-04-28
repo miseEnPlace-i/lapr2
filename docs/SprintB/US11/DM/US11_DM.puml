@@ -11,7 +11,6 @@ class Company {
   - designation
 }
 
-Administrator "1" -- "*" Employee : creates >
 Administrator "1" -- "*" Employee : lists 
 
 Company "1" -- "*" Administrator : knows  >
