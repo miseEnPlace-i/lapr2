@@ -1,92 +1,191 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="667px" preserveAspectRatio="none" style="width:1223px;height:667px;background:#FFFFFF;" version="1.1" viewBox="0 0 1223 667" width="1223px" zoomAndPan="magnify"><defs><filter height="300%" id="f1fvbacftr5tq4" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[e45a4727c47b726c25e081782e8bc183]
-class ApplicationPOT--><rect codeLine="3" fill="#FEFECE" filter="url(#f1fvbacftr5tq4)" height="73.6094" id="ApplicationPOT" style="stroke:#A80036;stroke-width:1.5;" width="136" x="600.5" y="314"/><ellipse cx="620.45" cy="330" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M623.4188,335.6406 Q622.8406,335.9375 622.2,336.0781 Q621.5594,336.2344 620.8563,336.2344 Q618.3563,336.2344 617.0281,334.5938 Q615.7156,332.9375 615.7156,329.8125 Q615.7156,326.6875 617.0281,325.0313 Q618.3563,323.375 620.8563,323.375 Q621.5594,323.375 622.2,323.5313 Q622.8563,323.6875 623.4188,323.9844 L623.4188,326.7031 Q622.7938,326.125 622.2,325.8594 Q621.6063,325.5781 620.9813,325.5781 Q619.6375,325.5781 618.95,326.6563 Q618.2625,327.7188 618.2625,329.8125 Q618.2625,331.9063 618.95,332.9844 Q619.6375,334.0469 620.9813,334.0469 Q621.6063,334.0469 622.2,333.7813 Q622.7938,333.5 623.4188,332.9219 L623.4188,335.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="93" x="635.55" y="334.1543">ApplicationPOT</text><line style="stroke:#A80036;stroke-width:1.5;" x1="601.5" x2="735.5" y1="346" y2="346"/><line style="stroke:#A80036;stroke-width:1.5;" x1="601.5" x2="735.5" y1="354" y2="354"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="118" x="606.5" y="368.2104">+static getInstance()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="124" x="606.5" y="381.0151">+getCurrentSession()</text><!--MD5=[c5b08e60048ef1bcd788d24cf324082e]
-class UserSession--><rect codeLine="9" fill="#FEFECE" filter="url(#f1fvbacftr5tq4)" height="60.8047" id="UserSession" style="stroke:#A80036;stroke-width:1.5;" width="110" x="771.5" y="320.5"/><ellipse cx="786.5" cy="336.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M789.4688,342.1406 Q788.8906,342.4375 788.25,342.5781 Q787.6094,342.7344 786.9063,342.7344 Q784.4063,342.7344 783.0781,341.0938 Q781.7656,339.4375 781.7656,336.3125 Q781.7656,333.1875 783.0781,331.5313 Q784.4063,329.875 786.9063,329.875 Q787.6094,329.875 788.25,330.0313 Q788.9063,330.1875 789.4688,330.4844 L789.4688,333.2031 Q788.8438,332.625 788.25,332.3594 Q787.6563,332.0781 787.0313,332.0781 Q785.6875,332.0781 785,333.1563 Q784.3125,334.2188 784.3125,336.3125 Q784.3125,338.4063 785,339.4844 Q785.6875,340.5469 787.0313,340.5469 Q787.6563,340.5469 788.25,340.2813 Q788.8438,340 789.4688,339.4219 L789.4688,342.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="78" x="800.5" y="340.6543">UserSession</text><line style="stroke:#A80036;stroke-width:1.5;" x1="772.5" x2="880.5" y1="352.5" y2="352.5"/><line style="stroke:#A80036;stroke-width:1.5;" x1="772.5" x2="880.5" y1="360.5" y2="360.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="93" x="777.5" y="374.7104">+getUserEmail()</text><!--MD5=[b34797a66dc35cbf1d65f7e3ca75530e]
-class Task--><rect codeLine="14" fill="#FEFECE" filter="url(#f1fvbacftr5tq4)" height="137.6328" id="Task" style="stroke:#A80036;stroke-width:1.5;" width="403" x="346" y="516"/><ellipse cx="528.75" cy="532" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M531.7188,537.6406 Q531.1406,537.9375 530.5,538.0781 Q529.8594,538.2344 529.1563,538.2344 Q526.6563,538.2344 525.3281,536.5938 Q524.0156,534.9375 524.0156,531.8125 Q524.0156,528.6875 525.3281,527.0313 Q526.6563,525.375 529.1563,525.375 Q529.8594,525.375 530.5,525.5313 Q531.1563,525.6875 531.7188,525.9844 L531.7188,528.7031 Q531.0938,528.125 530.5,527.8594 Q529.9063,527.5781 529.2813,527.5781 Q527.9375,527.5781 527.25,528.6563 Q526.5625,529.7188 526.5625,531.8125 Q526.5625,533.9063 527.25,534.9844 Q527.9375,536.0469 529.2813,536.0469 Q529.9063,536.0469 530.5,535.7813 Q531.0938,535.5 531.7188,534.9219 L531.7188,537.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="29" x="549.25" y="536.1543">Task</text><line style="stroke:#A80036;stroke-width:1.5;" x1="347" x2="748" y1="548" y2="548"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="97" x="352" y="562.2104">-String reference</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="108" x="352" y="575.0151">-String designation</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="153" x="352" y="587.8198">-String informalDescription</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="156" x="352" y="600.6245">-String technicalDescription</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="95" x="352" y="613.4292">-Integer duration</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="71" x="352" y="626.2339">-Double cost</text><line style="stroke:#A80036;stroke-width:1.5;" x1="347" x2="748" y1="632.8281" y2="632.8281"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="391" x="352" y="647.0386">+Task(ref,designation,informalDesc,technicalDesc,duration,cost,cat)</text><!--MD5=[a96594a83e2ecdc78cbf17c2ddf01934]
-class Category--><rect codeLine="24" fill="#FEFECE" filter="url(#f1fvbacftr5tq4)" height="73.6094" id="Category" style="stroke:#A80036;stroke-width:1.5;" width="117" x="876" y="548"/><ellipse cx="904.05" cy="564" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M907.0188,569.6406 Q906.4406,569.9375 905.8,570.0781 Q905.1594,570.2344 904.4563,570.2344 Q901.9563,570.2344 900.6281,568.5938 Q899.3156,566.9375 899.3156,563.8125 Q899.3156,560.6875 900.6281,559.0313 Q901.9563,557.375 904.4563,557.375 Q905.1594,557.375 905.8,557.5313 Q906.4563,557.6875 907.0188,557.9844 L907.0188,560.7031 Q906.3938,560.125 905.8,559.8594 Q905.2063,559.5781 904.5813,559.5781 Q903.2375,559.5781 902.55,560.6563 Q901.8625,561.7188 901.8625,563.8125 Q901.8625,565.9063 902.55,566.9844 Q903.2375,568.0469 904.5813,568.0469 Q905.2063,568.0469 905.8,567.7813 Q906.3938,567.5 907.0188,566.9219 L907.0188,569.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="56" x="920.95" y="568.1543">Category</text><line style="stroke:#A80036;stroke-width:1.5;" x1="877" x2="992" y1="580" y2="580"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="52" x="882" y="594.2104">-String id</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="105" x="882" y="607.0151">-String description</text><line style="stroke:#A80036;stroke-width:1.5;" x1="877" x2="992" y1="613.6094" y2="613.6094"/><!--MD5=[86c7c362de55a38b660185a1328fe18d]
-class Organization--><rect codeLine="29" fill="#FEFECE" filter="url(#f1fvbacftr5tq4)" height="176.0469" id="Organization" style="stroke:#A80036;stroke-width:1.5;" width="487" x="7" y="263"/><ellipse cx="207.25" cy="279" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M210.2188,284.6406 Q209.6406,284.9375 209,285.0781 Q208.3594,285.2344 207.6563,285.2344 Q205.1563,285.2344 203.8281,283.5938 Q202.5156,281.9375 202.5156,278.8125 Q202.5156,275.6875 203.8281,274.0313 Q205.1563,272.375 207.6563,272.375 Q208.3594,272.375 209,272.5313 Q209.6563,272.6875 210.2188,272.9844 L210.2188,275.7031 Q209.5938,275.125 209,274.8594 Q208.4063,274.5781 207.7813,274.5781 Q206.4375,274.5781 205.75,275.6563 Q205.0625,276.7188 205.0625,278.8125 Q205.0625,280.9063 205.75,281.9844 Q206.4375,283.0469 207.7813,283.0469 Q208.4063,283.0469 209,282.7813 Q209.5938,282.5 210.2188,281.9219 L210.2188,284.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="78" x="227.75" y="283.1543">Organization</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="493" y1="295" y2="295"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="74" x="13" y="309.2104">-String name</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="105" x="13" y="322.0151">-String VatNumber</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="86" x="13" y="334.8198">-String website</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="77" x="13" y="347.6245">-String phone</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="73" x="13" y="360.4292">-String email</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="493" y1="367.0234" y2="367.0234"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="475" x="13" y="381.2339">+Organization(name, VatNumber, webSite, phone, email, postalAddress, manager)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="427" x="13" y="394.0386">+createTask(ref,designation,informalDesc,technicalDesc,duration,cost,cat)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="95" x="13" y="406.8433">+saveTask(task)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="84" x="13" y="419.6479">-addTask(task)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="107" x="13" y="432.4526">-validateTask(task)</text><!--MD5=[99b8db98afdc2c8404e39242ef4c1e65]
-class Platform--><rect codeLine="42" fill="#FEFECE" filter="url(#f1fvbacftr5tq4)" height="99.2188" id="Platform" style="stroke:#A80036;stroke-width:1.5;" width="221" x="988" y="301.5"/><ellipse cx="1068.25" cy="317.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1071.2188,323.1406 Q1070.6406,323.4375 1070,323.5781 Q1069.3594,323.7344 1068.6563,323.7344 Q1066.1563,323.7344 1064.8281,322.0938 Q1063.5156,320.4375 1063.5156,317.3125 Q1063.5156,314.1875 1064.8281,312.5313 Q1066.1563,310.875 1068.6563,310.875 Q1069.3594,310.875 1070,311.0313 Q1070.6563,311.1875 1071.2188,311.4844 L1071.2188,314.2031 Q1070.5938,313.625 1070,313.3594 Q1069.4063,313.0781 1068.7813,313.0781 Q1067.4375,313.0781 1066.75,314.1563 Q1066.0625,315.2188 1066.0625,317.3125 Q1066.0625,319.4063 1066.75,320.4844 Q1067.4375,321.5469 1068.7813,321.5469 Q1069.4063,321.5469 1070,321.2813 Q1070.5938,321 1071.2188,320.4219 L1071.2188,323.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="52" x="1088.75" y="321.6543">Platform</text><line style="stroke:#A80036;stroke-width:1.5;" x1="989" x2="1208" y1="333.5" y2="333.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="108" x="994" y="347.7104">-String designation</text><line style="stroke:#A80036;stroke-width:1.5;" x1="989" x2="1208" y1="354.3047" y2="354.3047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="97" x="994" y="368.5151">+getCategories()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="137" x="994" y="381.3198">+getCategoryById(catId)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="209" x="994" y="394.1245">+getOrganizationByUserEmail(email)</text><!--MD5=[51de5e7b448e98e1f71289edad994864]
-class CreateTaskController--><rect codeLine="49" fill="#FEFECE" filter="url(#f1fvbacftr5tq4)" height="86.4141" id="CreateTaskController" style="stroke:#A80036;stroke-width:1.5;" width="481" x="507" y="116"/><ellipse cx="677.25" cy="132" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M680.2188,137.6406 Q679.6406,137.9375 679,138.0781 Q678.3594,138.2344 677.6563,138.2344 Q675.1563,138.2344 673.8281,136.5938 Q672.5156,134.9375 672.5156,131.8125 Q672.5156,128.6875 673.8281,127.0313 Q675.1563,125.375 677.6563,125.375 Q678.3594,125.375 679,125.5313 Q679.6563,125.6875 680.2188,125.9844 L680.2188,128.7031 Q679.5938,128.125 679,127.8594 Q678.4063,127.5781 677.7813,127.5781 Q676.4375,127.5781 675.75,128.6563 Q675.0625,129.7188 675.0625,131.8125 Q675.0625,133.9063 675.75,134.9844 Q676.4375,136.0469 677.7813,136.0469 Q678.4063,136.0469 679,135.7813 Q679.5938,135.5 680.2188,134.9219 L680.2188,137.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="132" x="697.75" y="136.1543">CreateTaskController</text><line style="stroke:#A80036;stroke-width:1.5;" x1="508" x2="987" y1="148" y2="148"/><line style="stroke:#A80036;stroke-width:1.5;" x1="508" x2="987" y1="156" y2="156"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="97" x="513" y="170.2104">+getCategories()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="469" x="513" y="183.0151">+createTask(ref,designation,informalDesc,technicalDesc,duration,cost,categoryId)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="71" x="513" y="195.8198">+saveTask()</text><!--MD5=[788566af22260aef45bcb38e0a2dd266]
-class CreateTaskUI--><rect codeLine="55" fill="#FEFECE" filter="url(#f1fvbacftr5tq4)" height="48" id="CreateTaskUI" style="stroke:#A80036;stroke-width:1.5;" width="115" x="690" y="7"/><ellipse cx="705" cy="23" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M707.9688,28.6406 Q707.3906,28.9375 706.75,29.0781 Q706.1094,29.2344 705.4063,29.2344 Q702.9063,29.2344 701.5781,27.5938 Q700.2656,25.9375 700.2656,22.8125 Q700.2656,19.6875 701.5781,18.0313 Q702.9063,16.375 705.4063,16.375 Q706.1094,16.375 706.75,16.5313 Q707.4063,16.6875 707.9688,16.9844 L707.9688,19.7031 Q707.3438,19.125 706.75,18.8594 Q706.1563,18.5781 705.5313,18.5781 Q704.1875,18.5781 703.5,19.6563 Q702.8125,20.7188 702.8125,22.8125 Q702.8125,24.9063 703.5,25.9844 Q704.1875,27.0469 705.5313,27.0469 Q706.1563,27.0469 706.75,26.7813 Q707.3438,26.5 707.9688,25.9219 L707.9688,28.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="83" x="719" y="27.1543">CreateTaskUI</text><line style="stroke:#A80036;stroke-width:1.5;" x1="691" x2="804" y1="39" y2="39"/><line style="stroke:#A80036;stroke-width:1.5;" x1="691" x2="804" y1="47" y2="47"/><!--MD5=[3c2021faa4730756a46abeb810188647]
-link CreateTaskUI to CreateTaskController--><path codeLine="59" d="M747.5,55.11 C747.5,70.63 747.5,91.64 747.5,110.63 " fill="none" id="CreateTaskUI-to-CreateTaskController" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="747.5,115.92,751.5,106.92,747.5,110.92,743.5,106.92,747.5,115.92" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[a4ec584e3b37d2304c777b6ab65750ce]
-link CreateTaskController to Platform--><path codeLine="60" d="M896.2,202.08 C918.37,210.67 940.48,220.62 960.5,232 C991.72,249.74 1022.48,275.05 1047,297.69 " fill="none" id="CreateTaskController-to-Platform" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="1050.89,301.3,1047.0234,292.2419,1047.2286,297.895,1041.5754,298.1002,1050.89,301.3" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[31449856cc093f06f4035ee47ec0212f]
-link CreateTaskController to Category--><path codeLine="61" d="M836.89,202.24 C861.01,217.95 884.54,238.15 899.5,263 C952.51,351.06 947.54,477.63 940.45,542.39 " fill="none" id="CreateTaskController-to-Category" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="939.85,547.7,944.8543,539.2173,940.4226,542.7329,936.907,538.3011,939.85,547.7" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[20b3b25e5af19bf6c808e25d197bf54a]
-link CreateTaskController to Task--><path codeLine="62" d="M648.43,202.08 C623.02,217.57 598.39,237.69 582.5,263 C535.72,337.5 533.14,441.27 538.15,510.44 " fill="none" id="CreateTaskController-to-Task" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="538.55,515.77,541.8439,506.4883,538.1643,510.7849,533.8677,507.1053,538.55,515.77" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[7aee0bd92f6f97dbf4948ad9a4aaba5c]
-link CreateTaskController to Organization--><path codeLine="63" d="M607.79,202.05 C579.06,211.38 549.16,221.6 521.5,232 C497.75,240.93 473.06,250.81 448.68,260.95 " fill="none" id="CreateTaskController-to-Organization" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="443.81,262.98,453.6564,263.2,448.4233,261.0519,450.5714,255.8187,443.81,262.98" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[9b9d7a7f0bb222cdf729bdcb120f1330]
-link CreateTaskController to ApplicationPOT--><path codeLine="64" d="M729.97,202.17 C716.76,233.92 698.76,277.23 685.65,308.75 " fill="none" id="CreateTaskController-to-ApplicationPOT" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="683.59,313.71,690.7513,306.9486,685.5181,309.0967,683.37,303.8636,683.59,313.71" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[d36bb5b89fee6244034c385565d7ff7b]
-link CreateTaskController to UserSession--><path codeLine="65" d="M765.03,202.17 C779.19,236.21 798.86,283.51 812.1,315.36 " fill="none" id="CreateTaskController-to-UserSession" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="814.17,320.34,814.4159,310.4942,812.254,315.7217,807.0266,313.5598,814.17,320.34" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[85b93ec21fe3232efb6e895d06aa0361]
-link Task to Category--><path codeLine="66" d="M749.22,585 C793.28,585 836.77,585 870.53,585 " fill="none" id="Task-to-Category" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="875.86,585,866.86,581,870.86,585,866.86,589,875.86,585" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="73" x="776" y="578.0669">classified in</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="757.2364" y="581.7837">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="859.8343" y="581.1395">1</text><!--MD5=[703fa85125a481a8c2c7961b0558245b]
-link Platform to Category--><path codeLine="67" d="M1064.12,400.63 C1034.12,443.07 991.12,503.91 963,543.68 " fill="none" id="Platform-to-Category" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="959.99,547.94,968.4577,542.9103,962.8813,543.8607,961.9309,538.2843,959.99,547.94" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="46" x="1012.5" y="482.0669">defines</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="1050.7228" y="420.7248">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="957.0444" y="536.8394">*</text><!--MD5=[4078351e3988aa35b1504a42837f2ab1]
-link Organization to Task--><path codeLine="68" d="M361.94,439.05 C392.97,463.29 426.31,489.33 456.05,512.56 " fill="none" id="Organization-to-Task" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="460.03,515.68,455.4077,506.9832,456.0925,512.5985,450.4772,513.2832,460.03,515.68" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="32" x="418.5" y="482.0669">owns</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="362.8374" y="459.0332">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="443.6487" y="504.8506">*</text><!--MD5=[7816d8de100ac5fea7bbe7b209eb09d1]
-@startuml
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="963px" preserveAspectRatio="none" style="width:1059px;height:963px;background:#FFFFFF;" version="1.1" viewBox="0 0 1059 963" width="1059px" zoomAndPan="magnify"><defs><filter height="300%" id="f9sg573nch3xi" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[8ae808d068a8995f06b9b3ec51357f0b]
+class AuthFacade--><rect codeLine="8" fill="#FEFECE" filter="url(#f9sg573nch3xi)" height="103.3438" id="AuthFacade" style="stroke:#A80036;stroke-width:1.5;" width="225" x="358.5" y="424"/><ellipse cx="434.25" cy="440" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M437.0156,435.875 Q437.1719,435.6563 437.3594,435.5469 Q437.5469,435.4375 437.7656,435.4375 Q438.1406,435.4375 438.375,435.7031 Q438.6094,435.9531 438.6094,436.5625 L438.6094,438.0156 Q438.6094,438.625 438.375,438.8906 Q438.1406,439.1563 437.7656,439.1563 Q437.4219,439.1563 437.2188,438.9531 Q437.0156,438.7656 436.9063,438.25 Q436.8594,437.8906 436.6719,437.7031 Q436.3438,437.3281 435.7344,437.1094 Q435.125,436.8906 434.5,436.8906 Q433.7344,436.8906 433.0938,437.2188 Q432.4688,437.5469 431.9688,438.2969 Q431.4844,439.0469 431.4844,440.0781 L431.4844,441.1719 Q431.4844,442.4063 432.375,443.2344 Q433.2656,444.0469 434.8594,444.0469 Q435.7969,444.0469 436.4531,443.7969 Q436.8438,443.6406 437.2656,443.2031 Q437.5313,442.9375 437.6719,442.8594 Q437.8281,442.7813 438.0313,442.7813 Q438.3594,442.7813 438.6094,443.0469 Q438.875,443.2969 438.875,443.6406 Q438.875,443.9844 438.5313,444.3906 Q438.0313,444.9688 437.2344,445.2969 Q436.1563,445.75 434.8594,445.75 Q433.3438,445.75 432.1406,445.125 Q431.1563,444.625 430.4688,443.5625 Q429.7813,442.4844 429.7813,441.2031 L429.7813,440.0469 Q429.7813,438.7188 430.3906,437.5781 Q431.0156,436.4219 432.1094,435.8125 Q433.2031,435.1875 434.4375,435.1875 Q435.1719,435.1875 435.8125,435.3594 Q436.4688,435.5156 437.0156,435.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="65" x="454.75" y="444.9102">AuthFacade</text><line style="stroke:#A80036;stroke-width:1.5;" x1="359.5" x2="582.5" y1="456" y2="456"/><line style="stroke:#A80036;stroke-width:1.5;" x1="359.5" x2="582.5" y1="464" y2="464"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="90" x="364.5" y="479.4189">+existsUser(email)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="213" x="364.5" y="493.2549">+addUserWithRole(name, email, pwd, roleId)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="76" x="364.5" y="507.0908">+getUser(email)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="58" x="364.5" y="520.9268">+getUsers()</text><!--MD5=[02e4b9b7573f1156f41e60aa5b4e25a4]
+class Company--><rect codeLine="15" fill="#FEFECE" filter="url(#f9sg573nch3xi)" height="117.1797" id="Company" style="stroke:#A80036;stroke-width:1.5;" width="316" x="7" y="417"/><ellipse cx="134.25" cy="433" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M137.0156,428.875 Q137.1719,428.6563 137.3594,428.5469 Q137.5469,428.4375 137.7656,428.4375 Q138.1406,428.4375 138.375,428.7031 Q138.6094,428.9531 138.6094,429.5625 L138.6094,431.0156 Q138.6094,431.625 138.375,431.8906 Q138.1406,432.1563 137.7656,432.1563 Q137.4219,432.1563 137.2188,431.9531 Q137.0156,431.7656 136.9063,431.25 Q136.8594,430.8906 136.6719,430.7031 Q136.3438,430.3281 135.7344,430.1094 Q135.125,429.8906 134.5,429.8906 Q133.7344,429.8906 133.0938,430.2188 Q132.4688,430.5469 131.9688,431.2969 Q131.4844,432.0469 131.4844,433.0781 L131.4844,434.1719 Q131.4844,435.4063 132.375,436.2344 Q133.2656,437.0469 134.8594,437.0469 Q135.7969,437.0469 136.4531,436.7969 Q136.8438,436.6406 137.2656,436.2031 Q137.5313,435.9375 137.6719,435.8594 Q137.8281,435.7813 138.0313,435.7813 Q138.3594,435.7813 138.6094,436.0469 Q138.875,436.2969 138.875,436.6406 Q138.875,436.9844 138.5313,437.3906 Q138.0313,437.9688 137.2344,438.2969 Q136.1563,438.75 134.8594,438.75 Q133.3438,438.75 132.1406,438.125 Q131.1563,437.625 130.4688,436.5625 Q129.7813,435.4844 129.7813,434.2031 L129.7813,433.0469 Q129.7813,431.7188 130.3906,430.5781 Q131.0156,429.4219 132.1094,428.8125 Q133.2031,428.1875 134.4375,428.1875 Q135.1719,428.1875 135.8125,428.3594 Q136.4688,428.5156 137.0156,428.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="53" x="154.75" y="437.9102">Company</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="322" y1="449" y2="449"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="90" x="13" y="464.4189">-String designation</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="322" y1="470.8359" y2="470.8359"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="88" x="13" y="486.2549">+getAuthFacade()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="85" x="13" y="500.0908">+getDesignation()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="304" x="13" y="513.9268">+createUser(snsNumber, name, email, birthDay, phoneNumber)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="96" x="13" y="527.7627">+validateUser(user)</text><!--MD5=[be89e96fded54ba83d4eaa5710b97d82]
+class RegisterSNSUserController--><rect codeLine="25" fill="#FEFECE" filter="url(#f9sg573nch3xi)" height="75.6719" id="RegisterSNSUserController" style="stroke:#A80036;stroke-width:1.5;" width="377" x="52.5" y="116"/><ellipse cx="160.25" cy="132" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M163.0156,127.875 Q163.1719,127.6563 163.3594,127.5469 Q163.5469,127.4375 163.7656,127.4375 Q164.1406,127.4375 164.375,127.7031 Q164.6094,127.9531 164.6094,128.5625 L164.6094,130.0156 Q164.6094,130.625 164.375,130.8906 Q164.1406,131.1563 163.7656,131.1563 Q163.4219,131.1563 163.2188,130.9531 Q163.0156,130.7656 162.9063,130.25 Q162.8594,129.8906 162.6719,129.7031 Q162.3438,129.3281 161.7344,129.1094 Q161.125,128.8906 160.5,128.8906 Q159.7344,128.8906 159.0938,129.2188 Q158.4688,129.5469 157.9688,130.2969 Q157.4844,131.0469 157.4844,132.0781 L157.4844,133.1719 Q157.4844,134.4063 158.375,135.2344 Q159.2656,136.0469 160.8594,136.0469 Q161.7969,136.0469 162.4531,135.7969 Q162.8438,135.6406 163.2656,135.2031 Q163.5313,134.9375 163.6719,134.8594 Q163.8281,134.7813 164.0313,134.7813 Q164.3594,134.7813 164.6094,135.0469 Q164.875,135.2969 164.875,135.6406 Q164.875,135.9844 164.5313,136.3906 Q164.0313,136.9688 163.2344,137.2969 Q162.1563,137.75 160.8594,137.75 Q159.3438,137.75 158.1406,137.125 Q157.1563,136.625 156.4688,135.5625 Q155.7813,134.4844 155.7813,133.2031 L155.7813,132.0469 Q155.7813,130.7188 156.3906,129.5781 Q157.0156,128.4219 158.1094,127.8125 Q159.2031,127.1875 160.4375,127.1875 Q161.1719,127.1875 161.8125,127.3594 Q162.4688,127.5156 163.0156,127.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="153" x="180.75" y="136.9102">RegisterSNSUserController</text><line style="stroke:#A80036;stroke-width:1.5;" x1="53.5" x2="428.5" y1="148" y2="148"/><line style="stroke:#A80036;stroke-width:1.5;" x1="53.5" x2="428.5" y1="156" y2="156"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="365" x="58.5" y="171.4189">+createSNSUser(snsNumber, name, birthDay, gender, phoneNumber, email)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="104" x="58.5" y="185.2549">+saveSNSUser(user)</text><!--MD5=[e51f1aa3cba897edd46f2fedbd5a5cd6]
+class RegisterSNSUserUI--><rect codeLine="30" fill="#FEFECE" filter="url(#f9sg573nch3xi)" height="48" id="RegisterSNSUserUI" style="stroke:#A80036;stroke-width:1.5;" width="143" x="169.5" y="7"/><ellipse cx="184.5" cy="23" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M187.2656,18.875 Q187.4219,18.6563 187.6094,18.5469 Q187.7969,18.4375 188.0156,18.4375 Q188.3906,18.4375 188.625,18.7031 Q188.8594,18.9531 188.8594,19.5625 L188.8594,21.0156 Q188.8594,21.625 188.625,21.8906 Q188.3906,22.1563 188.0156,22.1563 Q187.6719,22.1563 187.4688,21.9531 Q187.2656,21.7656 187.1563,21.25 Q187.1094,20.8906 186.9219,20.7031 Q186.5938,20.3281 185.9844,20.1094 Q185.375,19.8906 184.75,19.8906 Q183.9844,19.8906 183.3438,20.2188 Q182.7188,20.5469 182.2188,21.2969 Q181.7344,22.0469 181.7344,23.0781 L181.7344,24.1719 Q181.7344,25.4063 182.625,26.2344 Q183.5156,27.0469 185.1094,27.0469 Q186.0469,27.0469 186.7031,26.7969 Q187.0938,26.6406 187.5156,26.2031 Q187.7813,25.9375 187.9219,25.8594 Q188.0781,25.7813 188.2813,25.7813 Q188.6094,25.7813 188.8594,26.0469 Q189.125,26.2969 189.125,26.6406 Q189.125,26.9844 188.7813,27.3906 Q188.2813,27.9688 187.4844,28.2969 Q186.4063,28.75 185.1094,28.75 Q183.5938,28.75 182.3906,28.125 Q181.4063,27.625 180.7188,26.5625 Q180.0313,25.4844 180.0313,24.2031 L180.0313,23.0469 Q180.0313,21.7188 180.6406,20.5781 Q181.2656,19.4219 182.3594,18.8125 Q183.4531,18.1875 184.6875,18.1875 Q185.4219,18.1875 186.0625,18.3594 Q186.7188,18.5156 187.2656,18.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="111" x="198.5" y="27.9102">RegisterSNSUserUI</text><line style="stroke:#A80036;stroke-width:1.5;" x1="170.5" x2="311.5" y1="39" y2="39"/><line style="stroke:#A80036;stroke-width:1.5;" x1="170.5" x2="311.5" y1="47" y2="47"/><!--MD5=[72be06cc7ae02ccc98efe28a50e62246]
+class SNSUser--><rect codeLine="32" fill="#FEFECE" filter="url(#f9sg573nch3xi)" height="172.5234" id="SNSUser" style="stroke:#A80036;stroke-width:1.5;" width="452" x="84" y="612"/><ellipse cx="279.75" cy="628" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M282.5156,623.875 Q282.6719,623.6563 282.8594,623.5469 Q283.0469,623.4375 283.2656,623.4375 Q283.6406,623.4375 283.875,623.7031 Q284.1094,623.9531 284.1094,624.5625 L284.1094,626.0156 Q284.1094,626.625 283.875,626.8906 Q283.6406,627.1563 283.2656,627.1563 Q282.9219,627.1563 282.7188,626.9531 Q282.5156,626.7656 282.4063,626.25 Q282.3594,625.8906 282.1719,625.7031 Q281.8438,625.3281 281.2344,625.1094 Q280.625,624.8906 280,624.8906 Q279.2344,624.8906 278.5938,625.2188 Q277.9688,625.5469 277.4688,626.2969 Q276.9844,627.0469 276.9844,628.0781 L276.9844,629.1719 Q276.9844,630.4063 277.875,631.2344 Q278.7656,632.0469 280.3594,632.0469 Q281.2969,632.0469 281.9531,631.7969 Q282.3438,631.6406 282.7656,631.2031 Q283.0313,630.9375 283.1719,630.8594 Q283.3281,630.7813 283.5313,630.7813 Q283.8594,630.7813 284.1094,631.0469 Q284.375,631.2969 284.375,631.6406 Q284.375,631.9844 284.0313,632.3906 Q283.5313,632.9688 282.7344,633.2969 Q281.6563,633.75 280.3594,633.75 Q278.8438,633.75 277.6406,633.125 Q276.6563,632.625 275.9688,631.5625 Q275.2813,630.4844 275.2813,629.2031 L275.2813,628.0469 Q275.2813,626.7188 275.8906,625.5781 Q276.5156,624.4219 277.6094,623.8125 Q278.7031,623.1875 279.9375,623.1875 Q280.6719,623.1875 281.3125,623.3594 Q281.9688,623.5156 282.5156,623.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="52" x="300.25" y="632.9102">SNSUser</text><line style="stroke:#A80036;stroke-width:1.5;" x1="85" x2="535" y1="644" y2="644"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="89" x="90" y="659.4189">-String citizenCard</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="90" x="90" y="673.2549">-String snsNumber</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="61" x="90" y="687.0908">-String name</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="69" x="90" y="700.9268">-Date birthDay</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="64" x="90" y="714.7627">-Char gender</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="102" x="90" y="728.5986">-String phoneNumber</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="59" x="90" y="742.4346">-String email</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="75" x="90" y="756.2705">-String address</text><line style="stroke:#A80036;stroke-width:1.5;" x1="85" x2="535" y1="762.6875" y2="762.6875"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="440" x="90" y="778.1064">+SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)</text><!--MD5=[3fd616f346a44cd59a91eb10b19e157c]
+class User--><rect codeLine="44" fill="#FEFECE" filter="url(#f9sg573nch3xi)" height="103.3438" id="User" style="stroke:#A80036;stroke-width:1.5;" width="73" x="460.5" y="846"/><ellipse cx="481.8" cy="862" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M484.5656,857.875 Q484.7219,857.6563 484.9094,857.5469 Q485.0969,857.4375 485.3156,857.4375 Q485.6906,857.4375 485.925,857.7031 Q486.1594,857.9531 486.1594,858.5625 L486.1594,860.0156 Q486.1594,860.625 485.925,860.8906 Q485.6906,861.1563 485.3156,861.1563 Q484.9719,861.1563 484.7688,860.9531 Q484.5656,860.7656 484.4563,860.25 Q484.4094,859.8906 484.2219,859.7031 Q483.8938,859.3281 483.2844,859.1094 Q482.675,858.8906 482.05,858.8906 Q481.2844,858.8906 480.6438,859.2188 Q480.0188,859.5469 479.5188,860.2969 Q479.0344,861.0469 479.0344,862.0781 L479.0344,863.1719 Q479.0344,864.4063 479.925,865.2344 Q480.8156,866.0469 482.4094,866.0469 Q483.3469,866.0469 484.0031,865.7969 Q484.3938,865.6406 484.8156,865.2031 Q485.0813,864.9375 485.2219,864.8594 Q485.3781,864.7813 485.5813,864.7813 Q485.9094,864.7813 486.1594,865.0469 Q486.425,865.2969 486.425,865.6406 Q486.425,865.9844 486.0813,866.3906 Q485.5813,866.9688 484.7844,867.2969 Q483.7063,867.75 482.4094,867.75 Q480.8938,867.75 479.6906,867.125 Q478.7063,866.625 478.0188,865.5625 Q477.3313,864.4844 477.3313,863.2031 L477.3313,862.0469 Q477.3313,860.7188 477.9406,859.5781 Q478.5656,858.4219 479.6594,857.8125 Q480.7531,857.1875 481.9875,857.1875 Q482.7219,857.1875 483.3625,857.3594 Q484.0188,857.5156 484.5656,857.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="27" x="497.2" y="866.9102">User</text><line style="stroke:#A80036;stroke-width:1.5;" x1="461.5" x2="532.5" y1="878" y2="878"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="61" x="466.5" y="893.4189">-String name</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="59" x="466.5" y="907.2549">-String email</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="57" x="466.5" y="921.0908">-String pwd</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="61" x="466.5" y="934.9268">-String roleId</text><line style="stroke:#A80036;stroke-width:1.5;" x1="461.5" x2="532.5" y1="941.3438" y2="941.3438"/><!--MD5=[93af8b4494db78ec46e98fad8955a5aa]
+class UserStore--><rect codeLine="51" fill="#FEFECE" filter="url(#f9sg573nch3xi)" height="103.3438" id="UserStore" style="stroke:#A80036;stroke-width:1.5;" width="196" x="456" y="253"/><ellipse cx="521.75" cy="269" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M524.5156,264.875 Q524.6719,264.6563 524.8594,264.5469 Q525.0469,264.4375 525.2656,264.4375 Q525.6406,264.4375 525.875,264.7031 Q526.1094,264.9531 526.1094,265.5625 L526.1094,267.0156 Q526.1094,267.625 525.875,267.8906 Q525.6406,268.1563 525.2656,268.1563 Q524.9219,268.1563 524.7188,267.9531 Q524.5156,267.7656 524.4063,267.25 Q524.3594,266.8906 524.1719,266.7031 Q523.8438,266.3281 523.2344,266.1094 Q522.625,265.8906 522,265.8906 Q521.2344,265.8906 520.5938,266.2188 Q519.9688,266.5469 519.4688,267.2969 Q518.9844,268.0469 518.9844,269.0781 L518.9844,270.1719 Q518.9844,271.4063 519.875,272.2344 Q520.7656,273.0469 522.3594,273.0469 Q523.2969,273.0469 523.9531,272.7969 Q524.3438,272.6406 524.7656,272.2031 Q525.0313,271.9375 525.1719,271.8594 Q525.3281,271.7813 525.5313,271.7813 Q525.8594,271.7813 526.1094,272.0469 Q526.375,272.2969 526.375,272.6406 Q526.375,272.9844 526.0313,273.3906 Q525.5313,273.9688 524.7344,274.2969 Q523.6563,274.75 522.3594,274.75 Q520.8438,274.75 519.6406,274.125 Q518.6563,273.625 517.9688,272.5625 Q517.2813,271.4844 517.2813,270.2031 L517.2813,269.0469 Q517.2813,267.7188 517.8906,266.5781 Q518.5156,265.4219 519.6094,264.8125 Q520.7031,264.1875 521.9375,264.1875 Q522.6719,264.1875 523.3125,264.3594 Q523.9688,264.5156 524.5156,264.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="56" x="542.25" y="273.9102">UserStore</text><line style="stroke:#A80036;stroke-width:1.5;" x1="457" x2="651" y1="285" y2="285"/><line style="stroke:#A80036;stroke-width:1.5;" x1="457" x2="651" y1="293" y2="293"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="184" x="462" y="308.4189">+createUser(name, email, pwd, roleId)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="96" x="462" y="322.2549">+validateUser(user)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="83" x="462" y="336.0908">+saveUser(user)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="115" x="462" y="349.9268">+checkDuplicates(user)</text><!--MD5=[9a2889027d1a5f59ee05c53124f224f8]
+class PasswordGenerator--><rect codeLine="58" fill="#FEFECE" filter="url(#f9sg573nch3xi)" height="61.8359" id="PasswordGenerator" style="stroke:#A80036;stroke-width:1.5;" width="143" x="690.5" y="444.5"/><ellipse cx="705.5" cy="460.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M708.2656,456.375 Q708.4219,456.1563 708.6094,456.0469 Q708.7969,455.9375 709.0156,455.9375 Q709.3906,455.9375 709.625,456.2031 Q709.8594,456.4531 709.8594,457.0625 L709.8594,458.5156 Q709.8594,459.125 709.625,459.3906 Q709.3906,459.6563 709.0156,459.6563 Q708.6719,459.6563 708.4688,459.4531 Q708.2656,459.2656 708.1563,458.75 Q708.1094,458.3906 707.9219,458.2031 Q707.5938,457.8281 706.9844,457.6094 Q706.375,457.3906 705.75,457.3906 Q704.9844,457.3906 704.3438,457.7188 Q703.7188,458.0469 703.2188,458.7969 Q702.7344,459.5469 702.7344,460.5781 L702.7344,461.6719 Q702.7344,462.9063 703.625,463.7344 Q704.5156,464.5469 706.1094,464.5469 Q707.0469,464.5469 707.7031,464.2969 Q708.0938,464.1406 708.5156,463.7031 Q708.7813,463.4375 708.9219,463.3594 Q709.0781,463.2813 709.2813,463.2813 Q709.6094,463.2813 709.8594,463.5469 Q710.125,463.7969 710.125,464.1406 Q710.125,464.4844 709.7813,464.8906 Q709.2813,465.4688 708.4844,465.7969 Q707.4063,466.25 706.1094,466.25 Q704.5938,466.25 703.3906,465.625 Q702.4063,465.125 701.7188,464.0625 Q701.0313,462.9844 701.0313,461.7031 L701.0313,460.5469 Q701.0313,459.2188 701.6406,458.0781 Q702.2656,456.9219 703.3594,456.3125 Q704.4531,455.6875 705.6875,455.6875 Q706.4219,455.6875 707.0625,455.8594 Q707.7188,456.0156 708.2656,456.375 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="111" x="719.5" y="465.4102">PasswordGenerator</text><line style="stroke:#A80036;stroke-width:1.5;" x1="691.5" x2="832.5" y1="476.5" y2="476.5"/><line style="stroke:#A80036;stroke-width:1.5;" x1="691.5" x2="832.5" y1="484.5" y2="484.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="107" x="696.5" y="499.9189">+generatePassword()</text><!--MD5=[dbd744789a27dfb7a38205596e031569]
+class EmailSender--><rect codeLine="62" fill="#FEFECE" filter="url(#f9sg573nch3xi)" height="61.8359" id="EmailSender" style="stroke:#A80036;stroke-width:1.5;" width="176" x="869" y="444.5"/><ellipse cx="916.75" cy="460.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M919.5156,456.375 Q919.6719,456.1563 919.8594,456.0469 Q920.0469,455.9375 920.2656,455.9375 Q920.6406,455.9375 920.875,456.2031 Q921.1094,456.4531 921.1094,457.0625 L921.1094,458.5156 Q921.1094,459.125 920.875,459.3906 Q920.6406,459.6563 920.2656,459.6563 Q919.9219,459.6563 919.7188,459.4531 Q919.5156,459.2656 919.4063,458.75 Q919.3594,458.3906 919.1719,458.2031 Q918.8438,457.8281 918.2344,457.6094 Q917.625,457.3906 917,457.3906 Q916.2344,457.3906 915.5938,457.7188 Q914.9688,458.0469 914.4688,458.7969 Q913.9844,459.5469 913.9844,460.5781 L913.9844,461.6719 Q913.9844,462.9063 914.875,463.7344 Q915.7656,464.5469 917.3594,464.5469 Q918.2969,464.5469 918.9531,464.2969 Q919.3438,464.1406 919.7656,463.7031 Q920.0313,463.4375 920.1719,463.3594 Q920.3281,463.2813 920.5313,463.2813 Q920.8594,463.2813 921.1094,463.5469 Q921.375,463.7969 921.375,464.1406 Q921.375,464.4844 921.0313,464.8906 Q920.5313,465.4688 919.7344,465.7969 Q918.6563,466.25 917.3594,466.25 Q915.8438,466.25 914.6406,465.625 Q913.6563,465.125 912.9688,464.0625 Q912.2813,462.9844 912.2813,461.7031 L912.2813,460.5469 Q912.2813,459.2188 912.8906,458.0781 Q913.5156,456.9219 914.6094,456.3125 Q915.7031,455.6875 916.9375,455.6875 Q917.6719,455.6875 918.3125,455.8594 Q918.9688,456.0156 919.5156,456.375 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="72" x="937.25" y="465.4102">EmailSender</text><line style="stroke:#A80036;stroke-width:1.5;" x1="870" x2="1044" y1="476.5" y2="476.5"/><line style="stroke:#A80036;stroke-width:1.5;" x1="870" x2="1044" y1="484.5" y2="484.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="164" x="875" y="499.9189">+sendPasswordEmail(email, pwd)</text><!--MD5=[1a8aa2b864b87f860d28abceaa28b7a5]
+link Company to SNSUser--><path codeLine="69" d="M202.91,534.28 C217.58,556.64 234.73,582.77 250.94,607.49 " fill="none" id="Company-to-SNSUser" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="253.75,611.76,252.1628,602.0399,251.0095,607.5779,245.4715,606.4246,253.75,611.76" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="37" x="235" y="578.4951">knows</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="199.8887" y="555.5065">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="243.7012" y="601.149">*</text><!--MD5=[438f3eafa26f7112fe5a933ad6336f95]
+link RegisterSNSUserController to Company--><path codeLine="73" d="M232.13,192.28 C219.31,246.18 195.43,346.58 179.88,411.95 " fill="none" id="RegisterSNSUserController-to-Company" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="178.68,416.99,184.6568,409.162,179.8387,412.1261,176.8746,407.308,178.68,416.99" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[0bcaa71e02c8efafcfe6caf7b265febc]
+link RegisterSNSUserController to UserStore--><path codeLine="76" d="M319.18,192.09 C359.1,211.03 408.18,234.32 451.13,254.69 " fill="none" id="RegisterSNSUserController-to-UserStore" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="455.8,256.91,449.3757,249.4449,451.2804,254.7714,445.9539,256.6762,455.8,256.91" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[7bf6f1c174ef2382ab748189587a16d6]
+link RegisterSNSUserUI to RegisterSNSUserController--><path codeLine="79" d="M241,55.04 C241,70.71 241,91.91 241,110.58 " fill="none" id="RegisterSNSUserUI-to-RegisterSNSUserController" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="241,115.77,245,106.77,241,110.77,237,106.77,241,115.77" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[f51b69263ffc056cc84c9ec54d5aea1b]
+link SNSUser to User--><path codeLine="81" d="M391.21,785.05 C409.98,804.82 429.42,825.31 446.44,843.24 " fill="none" id="SNSUser-to-User" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="451.7,838.61,460.4,857.94,441.55,848.25,451.7,838.61" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[d1e0f6ecc4becbdb384d024f9b519f21]
+link UserStore to User--><path codeLine="83" d="M580.33,356.03 C588.67,374.68 596.82,396.31 601,417 C633.68,578.67 606.01,628.81 553,785 C546.6,803.84 537.59,823.52 528.66,841.01 " fill="none" id="UserStore-to-User" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="526.14,845.88,533.8298,839.7264,528.4387,841.4397,526.7254,836.0486,526.14,845.88" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[373daf46d70a53d867ce2fe5ee3cfdcc]
+link UserStore to Company--><path codeLine="84" d="M455.84,348.15 C409.4,368.32 353.15,392.76 302.54,414.74 " fill="none" id="UserStore-to-Company" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="297.66,416.86,307.5086,416.9285,302.2431,414.8612,304.3105,409.5956,297.66,416.86" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[ba7dd478e85e34f49ef47dc01dd33991]
+link UserStore to AuthFacade--><path codeLine="85" d="M529.1,356.21 C519.33,376.09 508.1,398.97 498.12,419.27 " fill="none" id="UserStore-to-AuthFacade" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="495.89,423.83,503.4444,417.5109,498.0917,419.3408,496.2617,413.9882,495.89,423.83" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[82a2d9b6609403e36ff4aafc102fce7a]
+link UserStore to PasswordGenerator--><path codeLine="86" d="M624.51,356.08 C637.48,365.8 650.77,376.06 663,386 C684.28,403.31 707.17,423.65 725.57,440.46 " fill="none" id="UserStore-to-PasswordGenerator" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="729.67,444.21,725.729,435.184,725.9807,440.8353,720.3294,441.0869,729.67,444.21" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[858114a5b303a6d92f6fc3cb104da910]
+link UserStore to EmailSender--><path codeLine="87" d="M652.02,338.46 C710.58,359.1 785.99,387.33 851,417 C867.37,424.47 884.69,433.4 900.48,441.97 " fill="none" id="UserStore-to-EmailSender" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="904.89,444.38,898.9151,436.5506,900.5038,441.9797,895.0746,443.5685,904.89,444.38" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[e1f1fcbbd1718f3183760817cb894915]
+@startuml Class Diagram
 skinparam classAttributeIconSize 0
 
-class ApplicationPOT
-{
-  +static getInstance()
-  +getCurrentSession()
+' class ApplicationPOT {
+'   + static getInstance()
+'   + getCurrentSession()
+' }
+
+class AuthFacade {
+  + existsUser(email)
+  + addUserWithRole(name, email, pwd, roleId)
+  + getUser(email)
+  + getUsers()
 }
 
-class UserSession
-{
-  +getUserEmail()
+class Company {
+  - String designation
+  + getAuthFacade()
+  + getDesignation()
+  + createUser(snsNumber, name, email, birthDay, phoneNumber)
+  + validateUser(user)
 }
 
-class Task {
-  -String reference
-  -String designation
-  -String informalDescription
-  -String technicalDescription
-  -Integer duration
-  -Double cost
-  +Task(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
+' class Receptionist { }
+
+class RegisterSNSUserController {
+  + createSNSUser(snsNumber, name, birthDay, gender, phoneNumber, email)
+  + saveSNSUser(user)
 }
 
-class Category {
-  -String id
-  -String description
+class RegisterSNSUserUI { }
+
+class SNSUser {
+  - String citizenCard
+  - String snsNumber
+  - String name
+  - Date birthDay
+  - Char gender
+  - String phoneNumber
+  - String email
+  - String address
+  + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
 }
 
-class Organization {
-  -String name
-  -String VatNumber
-  -String website
-  -String phone
-  -String email
-  +Organization(name, VatNumber, webSite, phone, email, postalAddress, manager)
-  +createTask(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
-  +saveTask(task)
-  -addTask(task)
-  -validateTask(task)
+class User {
+  - String name
+  - String email
+  - String pwd
+  - String roleId
 }
 
-class Platform {
-  -String designation
-  +getCategories()
-  +getCategoryById(catId)
-  +getOrganizationByUserEmail(email)
+class UserStore {
+  + createUser(name, email, pwd, roleId)
+  + validateUser(user)
+  + saveUser(user)
+  + checkDuplicates(user)
 }
 
-class CreateTaskController {
-  +getCategories()
-  +createTask(ref,designation,informalDesc,technicalDesc,duration,cost,categoryId)
-  +saveTask()
+class PasswordGenerator {
+  + generatePassword()
 }
 
-class CreateTaskUI {
-
+class EmailSender {
+  + sendPasswordEmail(email, pwd)
 }
 
-CreateTaskUI ..> CreateTaskController
-CreateTaskController ..> Platform
-CreateTaskController ..> Category
-CreateTaskController ..> Task
-CreateTaskController ..> Organization
-CreateTaskController ..> ApplicationPOT
-CreateTaskController ..> UserSession
-Task "*" -> "1" Category : classified in
-Platform "1" - -> "*" Category : defines
-Organization "1" - -> "*" Task : owns
 
+' AuthFacade ..> User
+
+Company "1" - -> "*" SNSUser : knows
+' Company ..> AuthFacade
+
+' RegisterSNSUserController ..> ApplicationPOT
+RegisterSNSUserController ..> Company
+' RegisterSNSUserController ..> Receptionist
+' RegisterSNSUserController ..> SNSUser
+RegisterSNSUserController ..> UserStore
+' RegisterSNSUserController ..> UserSession
+
+RegisterSNSUserUI ..> RegisterSNSUserController
+
+SNSUser - -|> User
+
+UserStore ..> User
+UserStore ..> Company
+UserStore ..> AuthFacade
+UserStore ..> PasswordGenerator
+UserStore ..> EmailSender
+
+@enduml
+
+@startuml Class Diagram
+skinparam classAttributeIconSize 0
+
+
+class AuthFacade {
+  + existsUser(email)
+  + addUserWithRole(name, email, pwd, roleId)
+  + getUser(email)
+  + getUsers()
+}
+
+class Company {
+  - String designation
+  + getAuthFacade()
+  + getDesignation()
+  + createUser(snsNumber, name, email, birthDay, phoneNumber)
+  + validateUser(user)
+}
+
+
+class RegisterSNSUserController {
+  + createSNSUser(snsNumber, name, birthDay, gender, phoneNumber, email)
+  + saveSNSUser(user)
+}
+
+class RegisterSNSUserUI { }
+
+class SNSUser {
+  - String citizenCard
+  - String snsNumber
+  - String name
+  - Date birthDay
+  - Char gender
+  - String phoneNumber
+  - String email
+  - String address
+  + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
+}
+
+class User {
+  - String name
+  - String email
+  - String pwd
+  - String roleId
+}
+
+class UserStore {
+  + createUser(name, email, pwd, roleId)
+  + validateUser(user)
+  + saveUser(user)
+  + checkDuplicates(user)
+}
+
+class PasswordGenerator {
+  + generatePassword()
+}
+
+class EmailSender {
+  + sendPasswordEmail(email, pwd)
+}
+
+
+
+Company "1" - -> "*" SNSUser : knows
+
+RegisterSNSUserController ..> Company
+RegisterSNSUserController ..> UserStore
+
+RegisterSNSUserUI ..> RegisterSNSUserController
+
+SNSUser - -|> User
+
+UserStore ..> User
+UserStore ..> Company
+UserStore ..> AuthFacade
+UserStore ..> PasswordGenerator
+UserStore ..> EmailSender
 
 @enduml
 
@@ -94,7 +193,7 @@ PlantUML version 1.2022.0(Tue Jan 11 16:16:42 WET 2022)
 (GPL source distribution)
 Java Runtime: Java(TM) SE Runtime Environment
 JVM: Java HotSpot(TM) 64-Bit Server VM
-Default Encoding: UTF-8
-Language: en
-Country: US
+Default Encoding: Cp1252
+Language: pt
+Country: PT
 --></g></svg>
