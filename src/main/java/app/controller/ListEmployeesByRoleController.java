@@ -1,13 +1,14 @@
 package app.controller;
 
+import java.util.List;
 import app.domain.model.Company;
-import app.domain.model.Employee;
 import app.domain.model.store.EmployeeStore;
+import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
 
 /**
  * Register SNS User Controller
  * 
- * @author Ricardo Moreira <1211285@isep.ipp.pt>
+ * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 public class ListEmployeesByRoleController {
   private App app;
@@ -31,5 +32,9 @@ public class ListEmployeesByRoleController {
    */
   public void listEmployeesWithRole(String roleId) {
     store.getEmployeesWithRole(roleId);
+  }
+
+  public List<UserRoleDTO> getEmployeeRoles() {
+    return this.company.getAuthFacade().getUserRoles();
   }
 }

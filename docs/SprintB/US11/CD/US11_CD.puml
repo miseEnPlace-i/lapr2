@@ -2,35 +2,35 @@
 skinparam classAttributeIconSize 0
 
 class User {
-  - String name
-  - String email
-  - String pwd
-  - String roleId
+  -name: String
+  -email: String
+  -pwd: String
+  -roleId: String
 }
 
 class Employee {
-  -String id
-  -String name
-  -String email
-  -String phone
-  -String address
+  -id: String
+  -name: String
+  -email: String
+  -phone: String
+  -address: String
   -int citizenCardNumber
-  -String roleId
+  -roleId: String
   
   +Employee(name,email,phone,address,citizenCardNumber,roleId)
 }
 
 class Company {
-  -String designation
+  -designation: String
   +Company(designation)
 
-  +getAuthFacade()
+  + AuthFacade getAuthFacade()
 }
 
 class AuthFacade {
-  +existsRole(role)
+  +existsRole(String roleId)
   +getUserRoles()
-  +getUsersWithRole(roleId)
+  +getUsersWithRole(String roleId)
 }
 
 class EmployeeStore {
@@ -42,13 +42,9 @@ class ListEmployeeController {
   +getEmployeesByRoleId(role)
 }
 
-class UserRole {
-  -String id
-  -String description
-}
-
-class UserRolesStore {
-
+class EmployeeRole {
+  -id: String
+  -description: String
 }
 
 class ListEmployeeUI {}
@@ -59,13 +55,12 @@ ListEmployeeController ..> Company
 
 Company ..> AuthFacade
 Company ..> EmployeeStore
-EmployeeStore -> AuthFacade : uses
 Employee "*" -- "1" EmployeeStore : stores <
 Company "1" --> "*" Employee : knows >
 
-UserRolesStore "1" -- "*" UserRole : stores >
-AuthFacade ..> UserRolesStore
-User "1" -- "*" UserRole : has >
+EmployeeRolesStore "1" -- "*" EmployeeRole : stores >
+Company ..> EmployeeRolesStore
+Employee "1" -- "*" EmployeeRole : has >
 
 User <|-- Employee 
 

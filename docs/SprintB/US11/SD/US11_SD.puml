@@ -7,7 +7,7 @@ participant ":ListEmployeeUI" as UI
 participant ":ListEmployeeController" as CTRL
 participant "comp\n:Company" as COMP
 participant "employeeStore\n:EmployeeStore" as EMPS
-participant "authFacade\n:AuthFacade" as AUTH
+participant "roleStore\n:RoleStore" as ROLES
 participant "emp:Employee" as EMP
 
 activate ADM
@@ -15,14 +15,14 @@ ADM -> UI : asks to list employees for given role
 activate UI
 activate CTRL
 UI -> CTRL : roleList=getEmployeeRoles()
-CTRL -> COMP : authFacade=getAuthFacade()
+CTRL -> COMP : roleStore=getEmployeeRoleStore()
 activate COMP
 deactivate COMP
 
-CTRL -> AUTH : roleList=getUserRoles()
-activate AUTH
+CTRL -> ROLES : roleList=getUserRoles()
+activate ROLES
 |||
-deactivate AUTH
+deactivate ROLES
 deactivate CTRL
 
 UI --> ADM : shows roles list and ask to select one
@@ -40,9 +40,9 @@ deactivate COMP
 CTRL -> EMPS: getEmployeesWithRole(roleId)
 activate EMPS
 deactivate EMPS
-EMPS -> AUTH: existsRole(roleId)
-activate AUTH
-deactivate AUTH
+EMPS -> ROLES: existsRole(roleId)
+activate ROLES
+deactivate ROLES
 create "lstEmp\n:List<Employee>" as LST
 EMPS --> LST
 
