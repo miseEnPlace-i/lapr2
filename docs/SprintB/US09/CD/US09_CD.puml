@@ -1,72 +1,40 @@
-@startuml
+@startuml US09_CD
 skinparam classAttributeIconSize 0
 
-class ApplicationPOT
-{
-  +static getInstance()
-  +getCurrentSession()
+class VaccinationCenter {
+  - name String
+  - address String
+  - phoneNumber int
+  - emailAddress String
+  - faxNumber int
+  - websiteAddress String
+  - openingAndClosingHours String
+  - slotDuration int
+  - maximumVaccinesPerSlot int
+  ---
+ +VaccinationCenter(name,address,phoneNumber,faxNumber,websiteAddress,openingAndClosingHours,slotDuration,maximumVaccinesPerSlot)
 }
 
-class UserSession
-{
-  +getUserEmail()
+
+class Company {
+  -designation String
+  ---
+  +createVaccinationCenter(name,address,phoneNumber,faxNumber,websiteAddress,openingAndClosingHours,slotDuration,maximumVaccinesPerSlot)
+  +validateVaccinatonCenter(center)
+  +saveVaccinationCenter(VaccinationCenter)
 }
 
-class Task {
-  -String reference
-  -String designation
-  -String informalDescription
-  -String technicalDescription
-  -Integer duration
-  -Double cost
-  +Task(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
+class VaccinationCenterController {
+  ---
+  +createVaccinationCenter()
+  +saveVaccinationCenter()
 }
 
-class Category {
-  -String id
-  -String description
-}
+class VaccinationCenterUI {}
 
-class Organization {
-  -String name
-  -String VatNumber
-  -String website
-  -String phone
-  -String email
-  +Organization(name, VatNumber, webSite, phone, email, postalAddress, manager)
-  +createTask(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
-  +saveTask(task)
-  -addTask(task)
-  -validateTask(task)
-}
-
-class Platform {
-  -String designation
-  +getCategories()
-  +getCategoryById(catId)
-  +getOrganizationByUserEmail(email)
-}
-
-class CreateTaskController {
-  +getCategories()
-  +createTask(ref,designation,informalDesc,technicalDesc,duration,cost,categoryId)
-  +saveTask()
-}
-
-class CreateTaskUI {
-
-}
-
-CreateTaskUI ..> CreateTaskController
-CreateTaskController ..> Platform
-CreateTaskController ..> Category
-CreateTaskController ..> Task
-CreateTaskController ..> Organization
-CreateTaskController ..> ApplicationPOT
-CreateTaskController ..> UserSession
-Task "*" -> "1" Category : classified in
-Platform "1" --> "*" Category : defines
-Organization "1" --> "*" Task : owns
-
+VaccinationCenterUI ..> VaccinationCenterController
+VaccinationCenterController ..> Company
+Company "1" --> "*" VaccinationCenter : belongs to <
+VaccinationCenterController ..> VaccinationCenter
 
 @enduml
