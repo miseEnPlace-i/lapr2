@@ -3,22 +3,33 @@ package app.domain.model;
 import pt.isep.lei.esoft.auth.AuthFacade;
 import org.apache.commons.lang3.StringUtils;
 
+import app.domain.model.store.SNSUserStore;
+
 /**
- *
+ * 
+ * 
  * @author Paulo Maio <pam@isep.ipp.pt>
+ * @author André Barros <1211299@isep.ipp.pt>
+ * @author Carlos Lopes <1211277@isep.ipp.pt>
+ * @author Ricardo Moreira <1211285@isep.ipp.pt>
+ * @author Tomás Lopes <1211289@isep.ipp.pt>
+ * @author Tomás Russo <1211288@isep.ipp.pt>
  */
 public class Company {
 
     private String designation;
     private AuthFacade authFacade;
 
-    public Company(String designation)
-    {
+    private SNSUserStore snsUserStore;
+
+    public Company(String designation) {
         if (StringUtils.isBlank(designation))
             throw new IllegalArgumentException("Designation cannot be blank.");
 
         this.designation = designation;
         this.authFacade = new AuthFacade();
+
+        this.snsUserStore = new SNSUserStore(this.authFacade);
     }
 
     public String getDesignation() {
@@ -27,5 +38,9 @@ public class Company {
 
     public AuthFacade getAuthFacade() {
         return authFacade;
+    }
+
+    public SNSUserStore getSNSUserStore() {
+        return this.snsUserStore;
     }
 }
