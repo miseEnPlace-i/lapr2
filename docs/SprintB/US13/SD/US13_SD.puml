@@ -46,8 +46,8 @@ activate UI
         CTRL -> VAC_ST : vac = createVaccine(designation, numberAgeGroups, vacType)
         activate VAC_ST 
             VAC_ST -> VAC ** : create(designation, numberAgeGroups, vacType)
-            VAC -> AP_LST **  : create()
-            AP_LST -> DI_LST ** : create()
+            VAC -> AP_LST ** 
+            AP_LST -> DI_LST **
         deactivate VAC_ST
 
         CTRL -> VAC_ST : validateVaccine(vac)
