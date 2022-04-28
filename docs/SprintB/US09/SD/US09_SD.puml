@@ -7,41 +7,10 @@ participant ":VaccinationCenterController" as CTRL
 participant "comp\n:Company" as COMP
 participant "store\n:VaccinationCenterStore" as VACSTORE
 participant "store\n:Employee" as EMP
+participant "center\n:VaccinationCenter" as CENTER
 
 activate ADM
 ADM -> UI : asks to create a new vaccination center
-activate UI
-
-UI -> CTRL : type=getCenterTypeList()
-activate CTRL
-
-CTRL-> COMP : type=getCenterTypeList()
-activate COMP
-deactivate CTRL
-deactivate COMP
-
-UI --> ADM : shows all available center type
-deactivate UI
-
-ADM -> UI : selects one center type
-activate UI
-
-UI -> CTRL : coordinator=getEmployeeByRoleId(coodinatorId)
-activate CTRL
-
-CTRL -> COMP : coordinator=getEmployeeByRoleId(coodinatorId)
-activate COMP
-deactivate CTRL
-
-COMP -> EMP : coordinator=getEmployeeByRoleId(coordinatorId)
-activate EMP
-deactivate EMP
-deactivate COMP
-
-UI --> ADM : shows all available center coordinators and asks to select one
-deactivate UI
-
-ADM -> UI : selects one center coordinator
 activate UI
 
 UI --> ADM : requests data (name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot)
@@ -50,26 +19,62 @@ deactivate UI
 ADM -> UI : types requested data
 activate UI
 
-UI -> CTRL : center=createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
+UI -> CTRL : createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot)
 activate CTRL
 
-CTRL-> COMP : center=createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
+CTRL -> COMP : vacStore = getVaccinationCenterStore()
 activate COMP
-
-create "center\n:VaccinationCenter" as CENTER
-COMP -> CENTER : create(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
 deactivate COMP
 
-CTRL -> COMP : validateVaccinationCenter(center)
-activate COMP
-deactivate CTRL
+CTRL -> VACSTORE : center=createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot)
+activate VACSTORE
 
-COMP -> VACSTORE : validateVaccinationCenter(center)
+VACSTORE -> CENTER** : create(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
+deactivate VACSTORE
+
+CTRL -> VACSTORE : validateVaccinationCenter(center)
 activate VACSTORE
 deactivate VACSTORE
 
-UI --> ADM: shows all data and requests confirmation
+deactivate CTRL
+
+UI --> CTRL : coordinators=getCoordinators()
+activate CTRL
+
+CTRL --> COMP : empStore=getEmployeeStore()
+activate COMP
 deactivate COMP
+
+CTRL --> EMP : coordinator=getCoordinators()
+activate EMP
+deactivate EMP
+
+UI --> ADM : shows all available center coordinators and asks to select one
+deactivate UI
+
+UI -> CTRL : coordinator=getEmployeeByRoleId(coodinatorId)
+activate CTRL
+
+CTRL -> EMP : coordinator=getEmployeeByRoleId(coodinatorId)
+activate EMP
+deactivate CTRL
+deactivate EMP
+
+ADM -> UI : selects one center coordinator
+activate UI
+
+UI -> CTRL : center=createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
+activate CTRL
+
+CTRL-> VACSTORE : center=createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
+activate VACSTORE
+
+
+
+
+
+UI --> ADM: shows all data and requests confirmation
+deactivate VACSTORE
 deactivate CTRL
 deactivate UI
 
@@ -78,10 +83,7 @@ activate UI
 UI -> CTRL : saveVaccinationCenter(center)
 activate CTRL
 
-CTRL -> COMP : saveVaccinationCenter(center)
-activate COMP
-
-COMP -> VACSTORE : saveVaccinationCenter(center)
+CTRL -> VACSTORE : saveVaccinationCenter(center)
 activate VACSTORE
 
 VACSTORE -> VACSTORE : validateVaccinationCenter(center)
