@@ -45,6 +45,10 @@ public class EmployeeStore {
    * @return a List of employees with that given role
    */
   public List<Employee> getEmployeesByRole(String roleId) {
+    if (!authFacade.existsRole(roleId)) {
+      throw new IllegalArgumentException("Role does not exist");
+    }
+
     List<Employee> lstEmp = new ArrayList<>();
 
     for (Employee employee : employees)

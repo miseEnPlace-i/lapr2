@@ -41,6 +41,9 @@ deactivate COMP
 CTRL -> EMPS: getEmployeesByRoleId(roleId)
 activate EMPS
 deactivate EMPS
+EMPS -> AUTH: existsRole(roleId)
+activate AUTH
+deactivate AUTH
 create "lstEmp\n:List<Employee>" as LST
 EMPS --> LST
 

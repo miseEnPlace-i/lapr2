@@ -30,6 +30,6 @@ public class ListEmployeesByRoleController {
    * @return Employee List with Roles
    */
   public void listEmployeesByRole(String roleId) {
-    // TODO
+    store.getEmployeesByRole(roleId);
   }
 }
