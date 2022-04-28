@@ -2,7 +2,7 @@ package app.domain.model;
 
 import pt.isep.lei.esoft.auth.AuthFacade;
 import org.apache.commons.lang3.StringUtils;
-
+import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.SNSUserStore;
 
@@ -21,6 +21,7 @@ public class Company {
 
   private SNSUserStore snsUserStore;
   private EmployeeStore employeeStore;
+  private EmployeeRoleStore employeeRoleStore;
 
   public Company(String designation) {
     if (StringUtils.isBlank(designation))
@@ -30,7 +31,8 @@ public class Company {
     this.authFacade = new AuthFacade();
 
     this.snsUserStore = new SNSUserStore(this.authFacade);
-    this.employeeStore = new EmployeeStore(this.authFacade);
+    this.employeeRoleStore = new EmployeeRoleStore(this.authFacade);
+    this.employeeStore = new EmployeeStore(this.authFacade, this.employeeRoleStore);
   }
 
   public String getDesignation() {
@@ -47,5 +49,9 @@ public class Company {
 
   public EmployeeStore getEmployeeStore() {
     return this.employeeStore;
+  }
+
+  public EmployeeRoleStore getEmployeeRoleStore() {
+    return this.employeeRoleStore;
   }
 }

@@ -1,6 +1,7 @@
 package app.controller;
 
 import app.domain.model.Company;
+import app.domain.model.store.EmployeeRoleStore;
 import app.domain.shared.Constants;
 import pt.isep.lei.esoft.auth.AuthFacade;
 import pt.isep.lei.esoft.auth.UserSession;
@@ -17,11 +18,14 @@ public class App {
 
   private Company company;
   private AuthFacade authFacade;
+  private EmployeeRoleStore employeeRoleList;
 
   private App() {
     Properties props = getProperties();
     this.company = new Company(props.getProperty(Constants.PARAMS_COMPANY_DESIGNATION));
     this.authFacade = this.company.getAuthFacade();
+    this.employeeRoleList = this.company.getEmployeeRoleStore();
+
     bootstrap();
   }
 
@@ -62,7 +66,7 @@ public class App {
     // Added Receptionist user role & a test user with Receptionist role for testing
     // purposes
     this.authFacade.addUserRole(Constants.ROLE_ADMIN, Constants.ROLE_ADMIN);
-    this.authFacade.addUserRole(Constants.ROLE_RECEPTIONIST, Constants.ROLE_RECEPTIONIST);
+    this.employeeRoleList.addEmployeeRole(Constants.ROLE_RECEPTIONIST, Constants.ROLE_RECEPTIONIST);
 
     this.authFacade.addUserWithRole("Main Administrator", "admin@lei.sem2.pt", "123456",
         Constants.ROLE_ADMIN);

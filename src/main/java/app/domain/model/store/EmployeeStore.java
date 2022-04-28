@@ -12,14 +12,14 @@ import pt.isep.lei.esoft.auth.AuthFacade;
 public class EmployeeStore {
   private List<Employee> employees;
 
-  private AuthFacade authFacade;
+  private EmployeeRoleStore roleStore;
 
   /**
    * Constructor for EmployeeStore.
    */
-  public EmployeeStore(AuthFacade authFacade) {
+  public EmployeeStore(AuthFacade authFacade, EmployeeRoleStore roleStore) {
     this.employees = new ArrayList<Employee>();
-    this.authFacade = authFacade;
+    this.roleStore = roleStore;
   }
 
   /**
@@ -45,7 +45,8 @@ public class EmployeeStore {
    * @return a List of employees with that given role
    */
   public List<Employee> getEmployeesWithRole(String roleId) {
-    if (!authFacade.existsRole(roleId)) {
+    if (roleId == null) throw new IllegalArgumentException("Role id cannot be null");
+    if (!roleStore.existsRole(roleId)) {
       throw new IllegalArgumentException("Role does not exist");
     }
 
