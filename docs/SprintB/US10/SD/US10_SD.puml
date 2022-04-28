@@ -5,73 +5,100 @@ actor "Admininistrator" as admin
 
 participant ":CreateEmployeeUi" as empUi
 participant ":CreateEmployeeController" as empController
-participant "comp\n:Company" as comp
+participant ":Company" as comp
+participant ":EmployeeStore" as empStore
 participant ":Employee" as emp
+participant ":AuthFacade" as authFacade
+participant ":PasswordGenerator" as passGen
+participant  ":EmailSender" as emailSend
 
 activate admin
+
 admin -> empUi : asks to create a new employee
+
 activate empUi
-empUi --> admin : requests data (name, address, phone number, email, citizen card number)
-deactivate empUi
-
-admin -> empUi : types requested data
-activate empUi
-
-empUi -> empController : roleList=getEmployeeRoles()
-activate empController
-
-empController -> comp : roleList=getEmployeeRoles()
-activate comp
-|||
-deactivate comp
-deactivate empController
-
-empUi --> admin : shows user roles list and asks to select one
+    empUi -> empController : userRoles = getEmployeeRoles()
+    activate empController
+        empController -> comp : authFacade = getAuthFacade()
+        activate comp
+        deactivate comp
+        empController -> authFacade : userRoles = getUserRoles()
+        activate authFacade
+        deactivate authFacade
+    deactivate empController
+    empUi --> admin : shows user roles list and asks to select one
 deactivate empUi
 
 admin -> empUi : selects a user role
+
 activate empUi
-
-empUi -> empController : createEmployee(name, address, phone number, email, citizen card number, roleId)
-activate empController
-
-empController -> comp : role=getRoleById(roleId)
-activate comp
-|||
-deactivate comp
-
-empController -> comp: employee=createEmployee(name, address, phone number, email, citizen card number, role)
-activate comp
-
-comp --> emp**: create(name, address, phone number, email, citizen card number, role)
-deactivate comp
-empController -> comp: validateEmployee(employee)
-
-activate comp
-empController --> empUi: result
-empUi --> admin: shows all data and requests confirmation
-deactivate comp
-deactivate empController
+    empUi --> admin : requests data (name, address, phoneNumber, email, citizenCardNumber)
 deactivate empUi
 
-admin -> empUi : confirms the data
+admin -> empUi : types requested data
+
 activate empUi
-empUi -> empController : saveEmployee()
-activate empController
+    empUi -> empController : employee = createEmployee(employeeData)
+    note right
+        To save space, employeeData is the 
+        same as "name, address, phoneNumber, 
+        email, citizenCardNumber, roleId"
+    end note
+    activate empController
+        empController -> comp : empStore = getEmployeeStore()
+        activate comp
+        deactivate comp
+        empController -> empStore : employee = createEmployee(employeeData)
+        activate empStore
+            empStore -> emp** : createEmployee(employeeData)
+        deactivate empStore
+        empController -> empStore : validateEmployee(employee)
+        activate empStore
+            empStore -> emp : email = getEmail(employee)
+            activate emp
+            deactivate emp
+            empStore -> authFacade : existsUser(email)
+            activate authFacade
+            deactivate authFacade
+            empStore -> empStore : checkDuplicates(employee)
+            activate empStore
+            deactivate empStore
+        deactivate empStore
+    deactivate empController
+    empUi --> admin : shows all data and requests confirmation
+deactivate empUi
+            
+admin -> empUi : confirms the data
 
-empController -> comp : saveEmployee(employee)
-activate comp
-
-comp -> comp: validateEmployee(employee)
-|||
-comp -> comp: addEmployee(employee)
-|||
-
-empController --> empUi: result
-
-empUi --> admin : informs operation success
-deactivate comp
-deactivate empController
+activate empUi
+    empUi -> empController : saveEmployee()
+    activate empController
+        empController -> empStore : saveEmployee(employee)
+        activate empStore
+            empStore -> emp : name = getName(employee)
+            activate emp
+            deactivate emp
+            empStore -> emp : email = getEmail(employee)
+            activate emp
+            deactivate emp
+            empStore -> emp : roleId = getRoleId(employee)
+            activate emp
+            deactivate emp
+            empStore -> passGen : password = generatePassword()
+            activate passGen
+            deactivate passGen
+            empStore -> authFacade : addUserWithRole(name, email, password, roleId)
+            activate authFacade
+            deactivate authFacade
+            empStore -> empStore : addEmployee(employee)
+            activate empStore
+            deactivate empStore
+            empStore -> emailSend : sendPasswordEmail(email, password)
+            activate emailSend
+            deactivate emailSend
+        deactivate empStore
+    deactivate empController
+    empUi --> admin : informs operation success
 deactivate empUi
 
 deactivate admin
