@@ -8,22 +8,16 @@ activate Administrator
 Administrator -> ":System" : asks to create a new vaccination center
 activate ":System"
 
-":System" --> Administrator : shows all available center types
+":System" --> Administrator : requests data (name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot)
 deactivate ":System"
 
-Administrator -> ":System" : selects a center type
+Administrator -> ":System" : types requested data
 activate ":System"
 
 ":System" --> Administrator : shows all available center coordinators and asks to select one
 deactivate ":System"
 
 Administrator -> ":System" : selects a center coordinator
-activate ":System"
-
-":System" --> Administrator : requests data (name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot)
-deactivate ":System"
-
-Administrator -> ":System" : types requested data
 activate ":System"
 
 ":System" --> Administrator : shows all data and requests confirmation
