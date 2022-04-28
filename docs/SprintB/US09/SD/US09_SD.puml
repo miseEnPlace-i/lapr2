@@ -20,31 +20,7 @@ deactivate UI
 ADM -> UI : types requested data
 activate UI
 
-note right
-    to save space, centerData refers to 
-    name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot
-end note
-
-UI -> CTRL : createVaccinationCenter(centerData)
-activate CTRL
-
-CTRL -> COMP : vacStore = getVaccinationCenterStore()
-activate COMP
-deactivate COMP
-
-CTRL -> VACSTORE : center=createVaccinationCenter(centerData)
-activate VACSTORE
-
-VACSTORE -> CENTER** : create(centerData)
-deactivate VACSTORE
-
-CTRL -> VACSTORE : validateVaccinationCenter(center)
-activate VACSTORE
-deactivate VACSTORE
-
-deactivate CTRL
-
-UI --> CTRL : coordinators=getCoordinators()
+UI --> CTRL : getCoordinators()
 activate CTRL
 
 CTRL --> COMP : empStore=getEmployeeStore()
@@ -73,7 +49,7 @@ activate CTRL
 CTRL -> EMPSTORE: selectCoordinator(id)
 activate EMPSTORE
 
-EMPSTORE -> LSTEMP: getEmployeeById(id)
+EMPSTORE -> LSTEMP: getEmployeesById(id)
 activate LSTEMP
 deactivate LSTEMP
 
@@ -81,6 +57,27 @@ EMPSTORE --> CTRL : coordinator selected
 deactivate EMPSTORE
 
 CTRL --> UI : coordinator selected
+deactivate CTRL
+
+note right
+    to save space, centerData refers to 
+    name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot
+end note
+
+UI -> CTRL : createVaccinationCenter(centerData,coordinator)
+activate CTRL
+
+CTRL -> COMP : vacStore = getVaccinationCenterStore()
+activate COMP
+deactivate COMP
+
+CTRL -> VACSTORE : center=createVaccinationCenter(centerData,coordinator)
+activate VACSTORE
+
+VACSTORE -> CENTER** : create(centerData,coordinator)
+deactivate VACSTORE
+
+deactivate CTRL
 
 UI --> ADM: shows all data and requests confirmation
 deactivate VACSTORE
