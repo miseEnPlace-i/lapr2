@@ -21,7 +21,7 @@ public class EmailSender {
      * @param name     the user name.
      * @param password the password to send.
      */
-    public static void sendEmail(String email, String name, String password) {
+    public static void sendPasswordEmail(String email, String name, String password) {
         // TODO
     }
 
