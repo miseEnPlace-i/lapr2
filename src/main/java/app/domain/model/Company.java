@@ -23,8 +23,7 @@ public class Company {
     private SNSUserStore snsUserStore;
 
     public Company(String designation) {
-        if (StringUtils.isBlank(designation))
-            throw new IllegalArgumentException("Designation cannot be blank.");
+        if (StringUtils.isBlank(designation)) throw new IllegalArgumentException("Designation cannot be blank.");
 
         this.designation = designation;
         this.authFacade = new AuthFacade();

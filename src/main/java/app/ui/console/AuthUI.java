@@ -81,11 +81,9 @@ public class AuthUI implements Runnable {
         while (it.hasNext() && !found) {
             MenuItem item = it.next();
             found = item.hasDescription(role.getDescription());
-            if (found)
-                item.run();
+            if (found) item.run();
         }
-        if (!found)
-            System.out.println("There is no UI for users with role '" + role.getDescription() + "'");
+        if (!found) System.out.println("There is no UI for users with role '" + role.getDescription() + "'");
     }
 
     private UserRoleDTO selectsRole(List<UserRoleDTO> roles) {

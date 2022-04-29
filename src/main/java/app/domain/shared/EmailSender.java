@@ -11,14 +11,13 @@ package app.domain.shared;
  */
 public class EmailSender {
 
-    public EmailSender() {
-    }
+    public EmailSender() {}
 
     /**
      * Sends an email with the password to the user.
      * 
-     * @param email    the email to send the password to.
-     * @param name     the user name.
+     * @param email the email to send the password to.
+     * @param name the user name.
      * @param password the password to send.
      */
     public static void sendEmail(String email, String name, String password) {
@@ -28,7 +27,7 @@ public class EmailSender {
     /**
      * Sends an email notifying the user about his vaccination schedule.
      * 
-     * @param 
+     * @param
      */
     public static void sendVaccinationScheduleEmail() {
         // TODO
