@@ -16,6 +16,7 @@ class Company {
   +getDesignation()
   +getAuthFacade()
   +getEmployeeStore()
+  +getRoleStore()
 }
 
 class EmployeeStore {
@@ -40,8 +41,11 @@ class Employee {
   +getRoleId()
 }
 
+class RoleStore {
+  +getEmployeeRoles()
+}
+
 class AuthFacade {
-  +getUserRoles()
   +existsUser(email)
   +addUserWithRole(name, email, password, roleId)
 }
@@ -71,6 +75,7 @@ RegisterEmployeeUI ..> RegisterEmployeeController
 RegisterEmployeeController ..> EmployeeStore
 RegisterEmployeeController ..> Company
 RegisterEmployeeController ..> AuthFacade
+RegisterEmployeeController ..> RoleStore
 
 EmployeeStore ..> AuthFacade
 EmployeeStore ..> PasswordGenerator
@@ -79,6 +84,7 @@ EmployeeStore -- Employee : stores >
 
 Company -- AuthFacade : knows >
 Company -- EmployeeStore : knows >
+Company -- RoleStore : knows >
 
 Employee --|> User
 
