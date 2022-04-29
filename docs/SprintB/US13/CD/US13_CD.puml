@@ -35,6 +35,7 @@ class VaccineStore{
 class Vaccine{
     -designation : String
     -numberOfAgeGroups : int
+    -brand : String
 
     +create(designation, numberAgeGroups, vacType)
     +createAdminProc(minAge, maxAge, numberOfDoses)
@@ -77,10 +78,12 @@ CreateVaccineController ..> VaccineStore
 CreateVaccineController ..> VaccineTypeStore
 CreateVaccineController ..> Company
 VaccineStore ..> Company
+VaccineStore "1" -> "*" Vaccine : stores
 VaccineTypeStore ..> Company
-VaccineTypeStore "1" -> "*" Vaccine : stores
+VaccineTypeStore "1" -> "*" VaccineType : stores
 Company "1" -> "*" Vaccine : knows
 Vaccine "1" -> "1" AdminProcList : has
+Vaccine "1" -> "1" VaccineType : has
 AdminProcList "1" -> "*" AdminProc : has
 AdminProc "1" -> "1" DoseInfoList : has
 DoseInfoList "1" -> "*" DoseInfo : has

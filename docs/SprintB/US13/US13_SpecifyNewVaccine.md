@@ -34,7 +34,6 @@ doses (e.g.: between the 1st and 2nd doses 21 days might be required, while betw
 
 **From the client clarifications:**
 
-TODO
 
 > **Question:** 
 >   As to the interval between doses, what time format are we to use?
@@ -44,8 +43,9 @@ TODO
 -
 
 > **Question:** 
->  
+>  Which attributes does the Vaccine have (besides the ones refering to the Vaccine Type)?
 > **Answer:** 
+   Each vaccine has the following attributes: Id, Name, Brand, Vaccine Type, Age Group, Dose Number, Vaccine Dosage and Time Since Last Dose.
 
 
 ### 1.3. Acceptance Criteria
@@ -67,7 +67,9 @@ TODO
 **Input Data:**
 
 * Typed data:
+  - Vaccine ID
   - Vaccine designation
+  - Vaccine brand
   - Age group interval limits
   - Dosage
   - Number of doses
@@ -120,7 +122,7 @@ TODO : review, implement stores and lists
 |:-------------  |:--------------------- |:------------|:---------------------------- |
 | Step 1 		 |	... displaying the screen to the user? | CreateVaccineUI   |  Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.           |
 |	| ... coordinating the US	| CreateVaccineController	| Pure Fabrication: Controller 	|
-| Step 2 		 |	... request data?(designation, number of different age groups) | CreateVaccineUI | IE: Responsible for user interactions.                            |
+| Step 2 		 |	... request data? | CreateVaccineUI | IE: Responsible for user interactions.                            |
 | Step 3  		 |	... instantiating a new vaccine? | Company   | IE: Knows all vaccines.   |
 | 			  	 |  ... validating data?(locally)  | Vaccine  | IE: Owns the data.  |
 | 			  	 |  ... validating data?(globally)  | Companny  | IE: Knows all data (e.g. make sure it doesnt have the same name as other vaccine).  |
@@ -128,22 +130,21 @@ TODO : review, implement stores and lists
 | Step 5		 |  ... save the selected vaccine type?	| Vaccine | IE: Object created in step 3 is classified in one vaccine type. |
 | Step 6		 |  ... inform the  current state of the process | CreateVaccineUI | Pure Fabrication: Responsible for user interactions. |
 | step 7 ||||
-| Step 8 		 |	... request data?(min age, max age, number of dosage) | CreateVaccineUI | Pure Fabrication: Responsible for user interactions.                |
+| Step 8 		 |	... request data?| CreateVaccineUI | Pure Fabrication: Responsible for user interactions.                |
 | Step 9		 |	... instantiating a new adminsitration process	| Company	| Creator: Knows all administration process. |
 |				 |	... validating data? |	AdminsitrationProcess	| IE: Owns the data. |
 | Step 10		 |  ... show all the data and request confirmation?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
 | step 11 ||||
 | Step 12		 |  ... inform operation sucess? | CreateVaccineUI | Pure Fabrication: Responsible for user interactions.	|
 | step 13 ||||
-| Step 14 		 |	... request data?(dosage, time to next dosage) | CreateVaccineUI | Pure Fabrication: Responsible for user interactions.                  |
-| Step 16		 |	... instantiating a new dose information	| Company	| Creator: Knows all doses information. |
+| Step 14 		 |	... request data? | CreateVaccineUI | Pure Fabrication: Responsible for user interactions.                  |
+| Step 15		 |	... instantiating a new dose information	| Company	| Creator: Knows all doses information. |
 |				 |	... validating data? |	DoseInformation	| IE: Owns the data. |
-| Step 17		 |  ... show all the data and request confirmation?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
-| step 18 ||||
-| Step 19		 |  ... inform operation sucess? | CreateVaccineUI | Pure Fabrication: Responsible for user interactions.	|
-| Step 19		 |  ... show all the data and request confirmation?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
-| Step 20 ||||
-| Step 21		 |  ... informing operation sucess?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
+| Step 16		 |  ... show all the data and request confirmation?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
+| step 17 ||||
+| Step 18		 |  ... show all the data and request confirmation?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
+| Step 19 ||||
+| Step 20		 |  ... informing operation sucess?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
 
 
 

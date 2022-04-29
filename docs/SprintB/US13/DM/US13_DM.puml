@@ -9,6 +9,8 @@ class Company {
 
 class Vaccine {
   -designation
+  -id
+  -brand 
 }
 
 class VaccineType {
