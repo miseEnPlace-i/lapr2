@@ -92,26 +92,25 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 
 #### From the alternative 1
 
-| Interaction ID                                                                                                                                      | Question: Which class is responsible for...     | Answer            | Justification (with patterns)                              |
-| :-------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------- | :---------------- | :--------------------------------------------------------- |
-| Step 1: starts creating a new vaccination center                                                                                                    | ... instantiating a new Vaccination center?     | Company           | Creator: R1/2                                              |
-| Step 2: shows all available center types                                                                                                            | ... listing all the center types                | Company           | IE: knows all the existing center types                    |
-| Step 3: selects a center type                                                                                                                       | n/a                                             | n/a               | n/a                                                        |
-| Step 4: shows all available center coordinators and asks to select one                                                                              | ... listing all the center coordinators         | Company           | IE: knows all the existing center coordinators.            |
-| Step 5: selects a center coordinator                                                                                                                | n/a                                             | n/a               | n/a                                                        |
-| Step 6: request data(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration, maximumVaccinesPerSlot) | n/a                                             | n/a               | n/a                                                        |
-| Step 7: types requested data                                                                                                                        | ... saving the inputted data?                   | VaccinationCenter | IE: object created in step 1 has its own data.             |
-| Step 8: shows all the data and requests a confirmation                                                                                              | ... validating the data introduced?             | Company           | IE: holds every information about centers.                 |
-|                                                                                                                                                     | ... validating the data introduced?             | VaccinationCenter | IE: knows its own data.                                    |
-| Step 9: confirms the data                                                                                                                           | ... saving the new created Vaccination Center?  | Company           | IE: holds every information about the vaccination process. |
-| Step 10: informs operation success                                                                                                                  | ... informing that the operation was a success? | UI                | IE: responsible for user interaction.                      |
+| Interaction ID                                                                                                                                      | Question: Which class is responsible for...     | Answer                 | Justification (with patterns)                              |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------- | :--------------------- | :--------------------------------------------------------- |
+| Step 1: starts creating a new vaccination center                                                                                                    | ... instantiating a new Vaccination center?     | VaccinationCenterStore | Creator: R1/2                                              |
+| Step 2: request data(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration, maximumVaccinesPerSlot) | n/a                                             | n/a                    | n/a                                                        |
+| Step 3: types requested data                                                                                                                        | ... saving the inputted data?                   | VaccinationCenter      | IE: object created in step 1 has its own data.             |
+| Step 4: shows all center coordinators and asks to select one                                                                                        | ... listing all the center coordinators?        | EmployeeStore          | IE: knows all the existing center coordinators.            |
+| Step 5: selects a center coordinator                                                                                                                | n/a                                             | n/a                    | n/a                                                        |
+| Step 8: shows all the data and requests a confirmation                                                                                              | ... validating the data introduced?             | VaccinationCenterStore | IE: holds every information about centers.                 |
+|                                                                                                                                                     | ... check for duplicates?                       | VaccinationCenterStore | IE: knows its own data.                                    |
+| Step 9: confirms the data                                                                                                                           | ... saving the new created Vaccination Center?  | VaccinationCenterStore | IE: holds every information about the vaccination centers. |
+| Step 10: informs operation success                                                                                                                  | ... informing that the operation was a success? | UI                     | IE: responsible for user interaction.                      |
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
  * VaccinationCenter
- * Company
+ * VaccinationCenterStore
+ * EmployeeStore
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
