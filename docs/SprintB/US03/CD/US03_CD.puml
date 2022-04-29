@@ -26,11 +26,9 @@ class RegisterSNSUserUI { }
 class SNSUser {
   - String citizenCard
   - String snsNumber
-  - String name
   - Date birthDay
   - Char gender
   - String phoneNumber
-  - String email
   - String address
   + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
 }
