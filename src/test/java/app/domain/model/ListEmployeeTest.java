@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
-import app.domain.shared.Constants;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
 public class ListEmployeeTest {
@@ -18,7 +17,7 @@ public class ListEmployeeTest {
     EmployeeRoleStore roleStore = new EmployeeRoleStore(authFacade);
     this.employeeStore = new EmployeeStore(authFacade, roleStore);
 
-    roleStore.addEmployeeRole(Constants.ROLE_RECEPTIONIST, Constants.ROLE_RECEPTIONIST);
+    roleStore.addEmployeeRole("TEST_ROLE", "Test description");
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -28,13 +27,13 @@ public class ListEmployeeTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testNonExistingRole() {
-    List<Employee> result = employeeStore.getEmployeesWithRole(Constants.ROLE_COORDINATOR);
+    List<Employee> result = employeeStore.getEmployeesWithRole("INVALID_ROLE");
     assert (result != null);
   }
 
   @Test
   public void testExistingRole() {
-    List<Employee> result = employeeStore.getEmployeesWithRole(Constants.ROLE_RECEPTIONIST);
+    List<Employee> result = employeeStore.getEmployeesWithRole("TEST_ROLE");
     assert (result != null);
   }
 }
