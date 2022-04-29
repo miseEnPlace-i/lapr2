@@ -9,10 +9,10 @@ participant "Company" as COMP
 participant "vacTSt : VaccineTypeStore" as VACT_ST
 participant "vacSt : VaccineStore" as VAC_ST
 participant "vac : Vaccine" as VAC
-participant "adminProc : AdminProc" as AP
 participant "adminPLst : AdminProcList" as AP_LST
-participant "doseInfo : DoseInfo" as DI
+participant "adminProc : AdminProc" as AP
 participant "doseInfoLst : DoseInfoList" as DI_LST
+participant "doseInfo : DoseInfo" as DI
 
 activate ADM
 
@@ -73,14 +73,14 @@ loop for each age group
     activate UI
         UI -> CTRL : adminProc = createAdminProc(minAge, maxAge, numberOfDoses)
         activate CTRL
-
             CTRL -> VAC : adminProc = createAdminProc(minAge, maxAge, numberOfDoses)
             activate VAC
+                VAC -> AP_LST : adminProc = createAdminProc(minAge, maxAge, numberOfDoses)
+                activate AP_LST
+                AP_LST -> AP ** : create(minAge, maxAge, numberOfDoses)
 
-                VAC -> AP ** : create(minAge, maxAge, numberOfDoses)
-
+            deactivate AP_LST
             deactivate VAC
-
             CTRL -> VAC : validateAdminProc(adminProc)
             activate VAC
             deactivate VAC
@@ -111,11 +111,11 @@ loop for each age group
                 activate CTRL
                 CTRL -> AP : doseInfo = createDoseInfo(dosage, TimeSinceLastDose)
                 activate AP
-
-                    AP -> DI ** : create(dosage, TimeSinceLastDose)
-
+                AP -> DI_LST : doseInfo = createDoseInfo(dosage, TimeSinceLastDose)
+                activate DI_LST
+                    DI_LST -> DI ** : create(dosage, TimeSinceLastDose)
+                deactivate DI_LST
                 deactivate AP
-
                 CTRL -> AP : validateDoseInfo(doseInfo)
                 activate AP 
                 deactivate AP
