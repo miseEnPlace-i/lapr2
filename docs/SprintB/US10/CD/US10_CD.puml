@@ -16,7 +16,7 @@ class Company {
   +getDesignation()
   +getAuthFacade()
   +getEmployeeStore()
-  +getRoleStore()
+  +getEmployeeRoleStore()
 }
 
 class EmployeeStore {
@@ -41,7 +41,7 @@ class Employee {
   +getRoleId()
 }
 
-class RoleStore {
+class EmployeeRoleStore {
   +getEmployeeRoles()
 }
 
@@ -65,29 +65,30 @@ class User {
   -roleId: String
 }
 
-class UserRole {
+class EmployeeRole {
   -id: String
   -description: String
 }
 
 RegisterEmployeeUI ..> RegisterEmployeeController
 
-RegisterEmployeeController ..> EmployeeStore
+' RegisterEmployeeController ..> EmployeeStore
 RegisterEmployeeController ..> Company
-RegisterEmployeeController ..> AuthFacade
-RegisterEmployeeController ..> RoleStore
+' RegisterEmployeeController ..> AuthFacade
+' RegisterEmployeeController ..> EmployeeRoleStore
 
-EmployeeStore ..> AuthFacade
+' EmployeeStore ..> AuthFacade
 EmployeeStore ..> PasswordGenerator
 EmployeeStore ..> EmailSender
 EmployeeStore -- Employee : stores >
 
-Company -- AuthFacade : knows >
-Company -- EmployeeStore : knows >
-Company -- RoleStore : knows >
+Company ..> AuthFacade
+Company ..> EmployeeStore
+Company ..> EmployeeRoleStore
 
 Employee --|> User
+Employee "*" -- "1" EmployeeRole : has >
 
-User "*" -- "*" UserRole : has >
+EmployeeRoleStore -- EmployeeRole : stores >
 
 @enduml

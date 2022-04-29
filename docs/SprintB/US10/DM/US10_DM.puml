@@ -16,7 +16,7 @@ class Employee {
   -password
   -address
   -citizenCardNumber
-  -role
+  -roleId
 }
 
 Company "1" -- "*" Administrator : knows >
