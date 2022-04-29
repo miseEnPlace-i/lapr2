@@ -14,6 +14,14 @@ _"As an Administrator, I want to get a list of Employees with a given function/r
 
 > "[...] each vaccination center has one coordinator."
 
+**From Client Clarifications**
+
+> "The application should present all Employee attributes."
+
+> "For now I just want to get a list of employees without considering the order of presentation."
+
+> "The Administrator should select a given role and all employees associated with the selected role should be listed."
+
 ### 1.3. Acceptance Criteria
 
 - **AC1: The selected role must be defined in the constants class**
@@ -62,21 +70,23 @@ Not found.
 
 ### 3.1. Rationale
 
-| Interaction ID                                                  | Question: Which class is responsible for... | Answer   | Justification (with patterns)                                                                                 |
-| :-------------------------------------------------------------- | :------------------------------------------ | :------- | :------------------------------------------------------------------------------------------------------------ |
-| Ask to list employees for a given role                          | ... displaying the screen to the user       | UI       | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| Show roles list and ask to select one                           | ... listing all roles?                      | Company  | IE: knows all the existing roles                                                                              |
-| Select role                                                     | n/a                                         | n/a      | n/a                                                                                                           |
-| Generate employees list for a given role                        | ... knowing all the employees               | Company  | IE: knows all the existing employees                                                                          |
-|                                                                 | ... filtering by role                       | Employee | IE: knows it's attributes                                                                                     |
-| Informs operation success and list all employees for given role | ... informing operation success?            | UI       | IE: responsible for user interaction                                                                          |
+| Interaction ID                                                  | Question: Which class is responsible for... | Answer            | Justification (with patterns)                                                                                 |
+| :-------------------------------------------------------------- | :------------------------------------------ | :---------------- | :------------------------------------------------------------------------------------------------------------ |
+| Ask to list employees for a given role                          | ... displaying the screen to the user       | UI                | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+| Show roles list and ask to select one                           | ... listing all roles?                      | EmployeeRoleStore | IE: knows all the existing roles                                                                              |
+| Select role                                                     | n/a                                         | n/a               | n/a                                                                                                           |
+| Generate employees list for a given role                        | ... knowing all the employees               | EmployeeStore     | IE: knows all the existing employees                                                                          |
+|                                                                 | ... filtering by role                       | Employee          | IE: knows it's attributes                                                                                     |
+| Informs operation success and list all employees for given role | ... informing operation success?            | UI                | IE: responsible for user interaction                                                                          |
 
 ### Systematization
 
 According to the taken rationale, the conceptual classes promoted to software classes are:
 
 - Employee
-- Role
+- EmployeeStore
+- EmployeeRoleStore
+- UserRole
 
 Other software classes (i.e. Pure Fabrication) identified:
 
@@ -113,32 +123,26 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 5. Construction (Implementation)
 
-## Class CreateTaskController
+## Class ListEmployeesByRoleController
 
-    	public boolean createTask(String ref, String designation, String informalDesc,
-    		String technicalDesc, Integer duration, Double cost, Integer catId)() {
+    public List<Employee> listEmployeesWithRole(String roleId) {
+      return employeeStore.getEmployeesWithRole(roleId);
+    }
 
-    		Category cat = this.platform.getCategoryById(catId);
+## Employee Store
 
-    		Organization org;
-    		// ... (omitted)
+    public List<Employee> getEmployeesWithRole(String roleId) {
+      if (roleId == null) throw new IllegalArgumentException("Role id cannot be null");
+      if (!roleStore.existsRole(roleId)) throw new IllegalArgumentException("Role does not exist");
 
-    		this.task = org.createTask(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
+      List<Employee> lstEmp = new ArrayList<>();
 
-    		return (this.task != null);
-    	}
+      for (Employee employee : employees)
+        if (employee.hasRoleId(roleId)) lstEmp.add(employee);
 
-## Class Organization
+      return lstEmp;
 
-    	public Task createTask(String ref, String designation, String informalDesc,
-    		String technicalDesc, Integer duration, Double cost, Category cat)() {
-
-
-    		Task task = new Task(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
-    		if (this.validateTask(task))
-    			return task;
-    		return null;
-    	}
+}
 
 # 6. Integration and Demo
 
@@ -148,6 +152,6 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 7. Observations
 
-Company class is getting too many responsibilities due to IE pattern and, therefore, is becoming huge and harder to maintain.
+There is no class relation between Employee and User to enforce both to exist in the first place in the code.
 
-Is there any way to avoid this to happen?
+The relation between them is made by corresponding e-mail (unique attribute in both)

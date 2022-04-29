@@ -2,6 +2,7 @@ package app.controller;
 
 import java.util.List;
 import app.domain.model.Company;
+import app.domain.model.Employee;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
 import pt.isep.lei.esoft.auth.domain.model.UserRole;
@@ -18,7 +19,7 @@ public class ListEmployeesByRoleController {
   private EmployeeRoleStore rolesStore;
 
   /**
-   * Constructor for ListEmployeesByRole.
+   * Constructor for ListEmployeesByRole
    */
   public ListEmployeesByRoleController() {
     this.app = App.getInstance();
@@ -33,10 +34,13 @@ public class ListEmployeesByRoleController {
    * @param role
    * @return Employee List with Roles
    */
-  public void listEmployeesWithRole(String roleId) {
-    employeeStore.getEmployeesWithRole(roleId);
+  public List<Employee> listEmployeesWithRole(String roleId) {
+    return employeeStore.getEmployeesWithRole(roleId);
   }
 
+  /**
+   * @return all the existing employee roles
+   */
   public List<UserRole> getEmployeeRoles() {
     return rolesStore.getRoles();
   }
