@@ -123,20 +123,20 @@ TODO : review, implement stores and lists
 | Step 1 		 |	... displaying the screen to the user? | CreateVaccineUI   |  Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.           |
 |	| ... coordinating the US	| CreateVaccineController	| Pure Fabrication: Controller 	|
 | Step 2 		 |	... request data? | CreateVaccineUI | IE: Responsible for user interactions.                            |
-| Step 3  		 |	... instantiating a new vaccine? | VaccineStore   | Creator: Knows all vaccines.   |
+| Step 3  		 |	... instantiating a new vaccine? | VaccineStore   | Creator: R1/2.   |
 | 			  	 |  ... validating data?(locally)  | Vaccine  | IE: Owns the data.  |
 | 			  	 |  ... validating data?(globally)  | VaccineStore  | IE: Knows all data (e.g. make sure it doesnt have the same name as other vaccine).  |
 | Step 4		 |  ... inform the  current state of the process | CreateVaccineUI | Pure Fabrication: Responsible for user interactions. |
 | Step 5		 |  |||
 | Step 6 		 |	... request data?| CreateVaccineUI | Pure Fabrication: Responsible for user interactions.                |
-| Step 7		 |	... instantiating a new adminsitration process	| AdminsitrationProcess	| Creator: Owns the data. |
+| Step 7		 |	... instantiating a new adminsitration process	| AdminProcList	| Creator: R1. |
 |				 |	... validating data? |	AdminsitrationProcess	| IE: Owns the data. |
 | Step 8		 |  ... show all the data and request confirmation?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
 | step 9 | ... add the administration process| AdminProcList | IE: stores administration processes|
 | Step 10		 |  ... inform operation sucess? | CreateVaccineUI | Pure Fabrication: Responsible for user interactions.	|
 | step 11 ||||
 | Step 12 		 |	... request data? | CreateVaccineUI | Pure Fabrication: Responsible for user interactions.                  |
-| Step 13		 |	... instantiating a new dose information	| DoseInfo	| Creator: Owns the data |
+| Step 13		 |	... instantiating a new dose information	| DoseInfoList	| Creator: R1 |
 |				 |	... validating data? |	DoseInfo	| IE: Owns the data. |
 | Step 14		 |  ... show all the data and request confirmation?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
 | step 15 | ... add the dose information| DoseInfoList | IE: Stores dose informations|
