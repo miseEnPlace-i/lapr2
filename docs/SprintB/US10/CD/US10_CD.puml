@@ -42,7 +42,7 @@ class Employee {
 }
 
 class EmployeeRoleStore {
-  +getEmployeeRoles()
+  +getRoles()
 }
 
 class AuthFacade {

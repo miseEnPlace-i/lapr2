@@ -23,7 +23,7 @@ activate empUi
         empController -> comp : roleStore = getRoleStore()
         activate comp
         deactivate comp
-        empController -> roleStore : employeeRoles = getEmployeeRoles()
+        empController -> roleStore : employeeRoles = getRoles()
         activate roleStore
         deactivate roleStore
     deactivate empController
