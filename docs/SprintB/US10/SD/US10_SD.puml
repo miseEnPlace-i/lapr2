@@ -9,7 +9,7 @@ participant ":Company" as comp
 participant ":EmployeeStore" as empStore
 participant ":Employee" as emp
 participant ":AuthFacade" as authFacade
-participant ":RoleStore" as roleStore
+participant ":EmployeeRoleStore" as roleStore
 participant ":PasswordGenerator" as passGen
 participant  ":EmailSender" as emailSend
 
