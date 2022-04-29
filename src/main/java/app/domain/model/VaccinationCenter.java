@@ -119,4 +119,8 @@ public class VaccinationCenter {
         return "";
     }
 
+    public Employee getCoordinator() {
+        return null;
+    }
+
 }
