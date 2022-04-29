@@ -1,10 +1,10 @@
 @startuml US10_CD
 skinparam classAttributeIconSize 0
 
-class CreateEmployeeUI {
+class RegisterEmployeeUI {
 }
 
-class CreateEmployeeController {
+class RegisterEmployeeController {
   +getEmployeeRoles()
   +createEmployee(name, address, phoneNumber, email, citizenCardNumber, roleId)
   +saveEmployee()
@@ -66,11 +66,11 @@ class UserRole {
   -description: String
 }
 
-CreateEmployeeUI ..> CreateEmployeeController
+RegisterEmployeeUI ..> RegisterEmployeeController
 
-CreateEmployeeController ..> EmployeeStore
-CreateEmployeeController ..> Company
-CreateEmployeeController ..> AuthFacade
+RegisterEmployeeController ..> EmployeeStore
+RegisterEmployeeController ..> Company
+RegisterEmployeeController ..> AuthFacade
 
 EmployeeStore ..> AuthFacade
 EmployeeStore ..> PasswordGenerator
