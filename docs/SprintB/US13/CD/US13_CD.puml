@@ -54,7 +54,7 @@ class AdminProc{
     -maxAge : int
 
     +create(minAge, maxAge, numberOfDoses)
-    +createDoseInfo(dosage, timeToNextDose)
+    +createDoseInfo(dosage, timeSinceLastDose)
     +validateDoseInfo(doseInfo)
 }
 
