@@ -32,6 +32,7 @@ class VaccinationCenterStore {
 +createVaccinationCenter(centerData,coordinator)
 +validateVaccinatonCenter(center)
 +saveVaccinationCenter(center)
++checkDuplicates(center)
 -addVaccinationCenter(center)
 }
 
@@ -48,13 +49,12 @@ class Employee {
 }
 
 class EmployeeStore {
-  +getEmployeeById(id)
+  +getEmployeesWithRole(id)
 }
 
 class VaccinationCenterController {
   ---
   +getCoordinators()
-  +selectCoordinator(id)
   +createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot)
   +saveVaccinationCenter(center)
 }
@@ -64,9 +64,9 @@ class VaccinationCenterUI {}
 VaccinationCenterUI ..> VaccinationCenterController
 VaccinationCenterController ..> Company
 Company "1" --> "*" VaccinationCenter : belongs to <
-VaccinationCenterController ..> VaccinationCenter
 Company ..> VaccinationCenterStore
 Company ..> EmployeeStore
-EmployeeStore "1" --> "*" Employee : stores
+EmployeeStore "1" --> "*" Employee : stores >
+Company "1" --> "*" Employee : knows >
 
 @enduml
