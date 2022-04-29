@@ -20,7 +20,7 @@ admin -> empUi : asks to create a new employee
 activate empUi
     empUi -> empController : employeeRoles = getEmployeeRoles()
     activate empController
-        empController -> comp : roleStore = getEmployeeRoleStore()
+        empController -> comp : roleStore = getRoleStore()
         activate comp
         deactivate comp
         empController -> roleStore : employeeRoles = getEmployeeRoles()
@@ -53,6 +53,9 @@ activate empUi
         activate empStore
             empStore -> emp** : createEmployee(employeeData)
         deactivate empStore
+        empController -> comp : authFacade = getAuthFacade()
+        activate comp
+        deactivate comp
         empController -> empStore : validateEmployee(employee)
         activate empStore
             empStore -> emp : email = getEmail(employee)
