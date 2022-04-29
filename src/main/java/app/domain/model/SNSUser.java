@@ -129,6 +129,12 @@ public class SNSUser {
         }
     }
 
+    // TODO: validations
+    // private static void validateCitizenCard() {}
+    // private static void validateSNSNumber() {}
+    // private static void validatePhoneNumber() {}
+    // private static void validateEmail() {}
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

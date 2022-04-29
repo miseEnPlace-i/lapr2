@@ -82,7 +82,7 @@ public class SNSUserStore {
     }
 
     /**
-     * Inserts a SNS User object to the list.
+     * Inserts a SNS User object to the list and adds a User to the AuthFacade.
      * 
      * @param user
      */
