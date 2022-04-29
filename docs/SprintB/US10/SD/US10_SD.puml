@@ -3,8 +3,8 @@ autonumber
 ' hide footbox
 actor "Admininistrator" as admin
 
-participant ":CreateEmployeeUi" as empUi
-participant ":CreateEmployeeController" as empController
+participant ":RegisterEmployeeUi" as empUi
+participant ":RegisterEmployeeController" as empController
 participant ":Company" as comp
 participant ":EmployeeStore" as empStore
 participant ":Employee" as emp
