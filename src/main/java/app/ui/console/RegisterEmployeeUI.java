@@ -6,6 +6,6 @@ package app.ui.console;
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
 
-public class CreateEmployeeUI {
+public class RegisterEmployeeUI {
     
 }
