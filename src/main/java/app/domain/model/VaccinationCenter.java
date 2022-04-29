@@ -21,27 +21,26 @@ public class VaccinationCenter {
     /**
      * Constructor for Vaccination Center
      * 
-     * @param name         the vaccination center name
-     * @param address      the vaccination center address
+     * @param name the vaccination center name
+     * @param address the vaccination center address
      * @param emailAddress the vaccination center email address
-     * @param phoneNum     the vaccination center phone number
-     * @param faxNum       the vaccination center fax number
-     * @param webAddress   the vaccination center web address
+     * @param phoneNum the vaccination center phone number
+     * @param faxNum the vaccination center fax number
+     * @param webAddress the vaccination center web address
      * @param openingHours the vaccination center opening hours
      * @param closingHours the vaccination center closing hours
      * @param slotDuration the vaccination center slot duration
-     * @param maxVacSlot   the vaccination center maximum vaccines per slot
-     * 
+     * @param maxVacSlot the vaccination center maximum vaccines per slot
      */
-    public VaccinationCenter(String name, String address, String emailAddress, int phoneNum, int faxNum,
-            String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot) {
+
+    public VaccinationCenter(String name, String address, String emailAddress, int phoneNum,
+            int faxNum, String webAddress, String openingHours, String closingHours,
+            int slotDuration, int maxVacSlot, Employee coordinator) {
         // TO DO
     }
 
-    public VaccinationCenter(String name, String address, String emailAddress, int phoneNum, int faxNum,
-            String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot,
-            String coordinator) {
-        // TO DO
+    public boolean equals(Object obj) {
+        return false;
     }
 
     // Getters
