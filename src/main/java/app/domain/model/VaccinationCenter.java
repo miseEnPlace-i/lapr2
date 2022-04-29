@@ -1,5 +1,7 @@
 package app.domain.model;
 
+import java.security.Policy;
+
 /**
  * Vaccination Center class
  * 
@@ -17,6 +19,7 @@ public class VaccinationCenter {
     private String closingHours = "";
     private int slotDuration = 0;
     private int maxVacSlot = 0;
+    private Employee coordinator;
 
     /**
      * Constructor for Vaccination Center
@@ -36,7 +39,17 @@ public class VaccinationCenter {
     public VaccinationCenter(String name, String address, String emailAddress, int phoneNum,
             int faxNum, String webAddress, String openingHours, String closingHours,
             int slotDuration, int maxVacSlot, Employee coordinator) {
-        // TO DO
+        this.name = name;
+        this.address = address;
+        this.emailAddress = emailAddress;
+        this.phoneNum = phoneNum;
+        this.faxNum = faxNum;
+        this.webAddress = webAddress;
+        this.openingHours = openingHours;
+        this.closingHours = closingHours;
+        this.slotDuration = slotDuration;
+        this.maxVacSlot = maxVacSlot;
+        this.coordinator = coordinator;
     }
 
     public boolean equals(Object obj) {
@@ -121,6 +134,12 @@ public class VaccinationCenter {
 
     public Employee getCoordinator() {
         return null;
+    }
+
+    public static void validateCenterName(String name) {
+        if (!name.matches("*[0-9]*.")) {
+            throw new IllegalArgumentException("Name not valid");
+        }
     }
 
 }

@@ -24,7 +24,7 @@ public class Employee {
    * @param citizenCard the employee citizenCard
    * @param roleId the employee roleId
    */
-  public Employee(String name, String phoneNumber, String email, String address, String citizenCard,
+  public Employee(String name, int phoneNumber, String email, String address, int citizenCard,
       String roleId) {
     this.id = 123456789;
     // TODO

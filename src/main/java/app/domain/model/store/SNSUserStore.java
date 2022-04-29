@@ -12,7 +12,6 @@ import app.domain.shared.PasswordGenerator;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
 /**
- * 
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 public class SNSUserStore {
@@ -35,17 +34,17 @@ public class SNSUserStore {
      * Creates an SNS User instance.
      * 
      * @param citizenCard the citizen card of the SNS User.
-     * @param snsNumber   the SNS Number of the SNS User.
-     * @param name        the name of the SNS User.
+     * @param snsNumber the SNS Number of the SNS User.
+     * @param name the name of the SNS User.
      * @param birthDayStr the birth day as a string of the SNS User.
-     * @param gender      the SNS User gender
+     * @param gender the SNS User gender
      * @param phoneNumber SNS User phone number
-     * @param email       SNS User email
-     * @param address     SNS User address
+     * @param email SNS User email
+     * @param address SNS User address
      * @return SNSUser
      */
-    public SNSUser createSNSUser(String citizenCard, String snsNumber, String name, String birthDayStr, char gender,
-            String phoneNumber, String email, String address) {
+    public SNSUser createSNSUser(String citizenCard, String snsNumber, String name,
+            String birthDayStr, char gender, String phoneNumber, String email, String address) {
         Calendar birthDay;
         try {
             birthDay = CalendarUtils.parse(birthDayStr);
@@ -54,7 +53,8 @@ public class SNSUserStore {
             return null;
         }
 
-        SNSUser snsUser = new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
+        SNSUser snsUser = new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber,
+                email, address);
         return snsUser;
     }
 
@@ -67,7 +67,7 @@ public class SNSUserStore {
         if (snsUser == null) {
             throw new Error("SNS User is null");
         }
-        
+
         // get the SNS User email
         String email = snsUser.getEmail();
 
