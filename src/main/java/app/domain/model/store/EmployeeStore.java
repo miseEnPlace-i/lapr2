@@ -2,16 +2,15 @@ package app.domain.model.store;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import app.domain.model.Employee;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
 /**
  * @author Tomás Lopes <1211289@isep.ipp.pt>
+ * @author Tomás Russo <1211288@isep.ipp.pt>
  */
 public class EmployeeStore {
   private List<Employee> employees;
-
   private EmployeeRoleStore roleStore;
 
   /**
@@ -56,5 +55,41 @@ public class EmployeeStore {
       if (employee.getRoleId().equals(roleId)) lstEmp.add(employee);
 
     return lstEmp;
+  }
+
+  /**
+   * Checks if there are duplicates.
+   * 
+   * @param employee the employee to be checked
+   */
+  public void validateEmployee(Employee employee) {
+    // TODO: implement this method
+  }
+
+  /**
+   * Inserts an employee into the store.
+   * 
+   * @param employee the employee to be inserted
+   */
+  public void saveEmployee(Employee employee) {
+    // TODO: implement this method
+  }
+
+  /**
+   * Checks if there are duplicates in the store.
+   * 
+   * @param employee the employee to be checked
+   */
+  public void checkDuplicates(Employee employee) {
+    // TODO: implement this method
+  }
+
+  /**
+   * Adds an employee to the store.
+   * 
+   * @param employee the employee to be added
+   */
+  public void addEmployee(Employee employee) {	
+    // TODO: implement this method
   }
 }

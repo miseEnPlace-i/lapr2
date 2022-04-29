@@ -97,7 +97,7 @@ activate empUi
             empStore -> empStore : addEmployee(employee)
             activate empStore
             deactivate empStore
-            empStore -> emailSend : sendPasswordEmail(email, password)
+            empStore -> emailSend : sendPasswordEmail(email, name, password)
             activate emailSend
             deactivate emailSend
         deactivate empStore
