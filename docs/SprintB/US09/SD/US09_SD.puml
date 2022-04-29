@@ -28,12 +28,8 @@ deactivate COMP
 
 CTRL --> EMPSTORE : coordinators=getEmployeesByRoleId("COORDINATOR")
 activate EMPSTORE
-
-EMPSTORE --> CTRL : lstCoordinator
-deactivate EMPSTORE
-
-CTRL --> UI : lstCoordinator
 deactivate CTRL
+deactivate EMPSTORE
 
 UI --> ADM : shows all center coordinators and asks to select one
 deactivate UI
