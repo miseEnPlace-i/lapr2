@@ -82,6 +82,6 @@ Company -- EmployeeStore : knows >
 
 Employee --|> User
 
-User "*" -- "1" UserRole : has >
+User "*" -- "*" UserRole : has >
 
 @enduml
