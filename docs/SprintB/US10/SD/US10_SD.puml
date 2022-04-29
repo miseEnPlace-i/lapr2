@@ -9,6 +9,7 @@ participant ":Company" as comp
 participant ":EmployeeStore" as empStore
 participant ":Employee" as emp
 participant ":AuthFacade" as authFacade
+participant ":RoleStore" as roleStore
 participant ":PasswordGenerator" as passGen
 participant  ":EmailSender" as emailSend
 
@@ -17,14 +18,14 @@ activate admin
 admin -> empUi : asks to create a new employee
 
 activate empUi
-    empUi -> empController : userRoles = getEmployeeRoles()
+    empUi -> empController : employeeRoles = getEmployeeRoles()
     activate empController
-        empController -> comp : authFacade = getAuthFacade()
+        empController -> comp : roleStore = getEmployeeRoleStore()
         activate comp
         deactivate comp
-        empController -> authFacade : userRoles = getUserRoles()
-        activate authFacade
-        deactivate authFacade
+        empController -> roleStore : employeeRoles = getEmployeeRoles()
+        activate roleStore
+        deactivate roleStore
     deactivate empController
     empUi --> admin : shows user roles list and asks to select one
 deactivate empUi
