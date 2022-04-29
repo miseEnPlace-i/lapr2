@@ -1,7 +1,8 @@
 package app.domain.model;
 
 import org.junit.Test;
-
+import app.domain.shared.PasswordGenerator;
+import pt.isep.lei.esoft.auth.domain.model.Password;
 import java.util.Calendar;
 import java.util.Date;
 

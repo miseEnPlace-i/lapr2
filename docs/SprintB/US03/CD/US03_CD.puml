@@ -64,7 +64,8 @@ RegisterSNSUserController ..> Company
 
 RegisterSNSUserUI ..> RegisterSNSUserController
 
-SNSUser --|> User
+' SNSUser --|> User
+SNSUser ..> User
 
 SNSUserStore --> AuthFacade : uses
 SNSUserStore --> PasswordGenerator : uses 

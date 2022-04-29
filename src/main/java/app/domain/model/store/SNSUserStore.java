@@ -10,6 +10,7 @@ import app.domain.shared.Constants;
 import app.domain.shared.EmailSender;
 import app.domain.shared.PasswordGenerator;
 import pt.isep.lei.esoft.auth.AuthFacade;
+import pt.isep.lei.esoft.auth.domain.model.Password;
 
 /**
  * 
@@ -35,17 +36,16 @@ public class SNSUserStore {
      * Creates an SNS User instance.
      * 
      * @param citizenCard the citizen card of the SNS User.
-     * @param snsNumber   the SNS Number of the SNS User.
-     * @param name        the name of the SNS User.
+     * @param snsNumber the SNS Number of the SNS User.
+     * @param name the name of the SNS User.
      * @param birthDayStr the birth day as a string of the SNS User.
-     * @param gender      the SNS User gender
+     * @param gender the SNS User gender
      * @param phoneNumber SNS User phone number
-     * @param email       SNS User email
-     * @param address     SNS User address
+     * @param email SNS User email
+     * @param address SNS User address
      * @return SNSUser
      */
-    public SNSUser createSNSUser(String citizenCard, String snsNumber, String name, String birthDayStr, char gender,
-            String phoneNumber, String email, String address) {
+    public SNSUser createSNSUser(String citizenCard, String snsNumber, String name, String birthDayStr, char gender, String phoneNumber, String email, String address) {
         Calendar birthDay;
         try {
             birthDay = CalendarUtils.parse(birthDayStr);
@@ -86,7 +86,7 @@ public class SNSUserStore {
      * 
      * @param user
      */
-    public void saveSNSUser(SNSUser snsUser) {
+    public boolean saveSNSUser(SNSUser snsUser) {
         String name = snsUser.getName();
         String email = snsUser.getEmail();
         String pwd = PasswordGenerator.generatePwd();
@@ -97,6 +97,9 @@ public class SNSUserStore {
 
         // TODO: send password email
         // EmailSender emailSender = new EmailSender();
+        // emailSender.sendPasswordEmail(email, pwdStr);
+
+        return true;
     }
 
     /**
