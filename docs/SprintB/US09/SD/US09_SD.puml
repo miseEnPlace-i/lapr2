@@ -8,7 +8,6 @@ participant "comp\n:Company" as COMP
 participant "vacStore\n:VaccinationCenterStore" as VACSTORE
 participant "empStore\n:EmployeeStore" as EMPSTORE
 participant "center\n:VaccinationCenter" as CENTER
-participant "lstEmp\n:List<Coordinator>" as LSTEMP
 
 activate ADM 
 ADM -> UI : asks to create a new vaccination center
@@ -30,7 +29,6 @@ deactivate COMP
 CTRL --> EMPSTORE : coordinators=getEmployeesByRoleId("COORDINATOR")
 activate EMPSTORE
 
-EMPSTORE --> LSTEMP** 
 EMPSTORE --> CTRL : lstCoordinator
 deactivate EMPSTORE
 
@@ -42,22 +40,6 @@ deactivate UI
 
 ADM -> UI : selects one center coordinator
 activate UI
-
-UI -> CTRL : selectCoordinator(id)
-activate CTRL
-
-CTRL -> EMPSTORE: selectCoordinator(id)
-activate EMPSTORE
-
-EMPSTORE -> LSTEMP: getEmployeesById(id)
-activate LSTEMP
-deactivate LSTEMP
-
-EMPSTORE --> CTRL : coordinator selected
-deactivate EMPSTORE
-
-CTRL --> UI : coordinator selected
-deactivate CTRL
 
 note right
     to save space, centerData refers to 
@@ -77,7 +59,12 @@ activate VACSTORE
 VACSTORE -> CENTER** : create(centerData,coordinator)
 deactivate VACSTORE
 
-deactivate CTRL
+CTRL -> VACSTORE : validateVaccinationCenter(center)
+activate VACSTORE
+
+VACSTORE -> VACSTORE : checkDuplicates(center)
+activate VACSTORE
+deactivate VACSTORE
 
 UI --> ADM: shows all data and requests confirmation
 deactivate VACSTORE
@@ -92,9 +79,7 @@ activate CTRL
 CTRL -> VACSTORE : saveVaccinationCenter(center)
 activate VACSTORE
 
-VACSTORE -> VACSTORE : validateVaccinationCenter(center)
-activate VACSTORE
-deactivate VACSTORE
+
 
 VACSTORE -> VACSTORE : addVaccinationCenter(center)
 activate VACSTORE
