@@ -2,7 +2,6 @@ package app.domain.model.store;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import app.domain.model.Employee;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
@@ -10,6 +9,7 @@ import pt.isep.lei.esoft.auth.AuthFacade;
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 public class EmployeeStore {
+  private AuthFacade authFacade;
   private List<Employee> employees;
 
   private EmployeeRoleStore roleStore;
@@ -18,6 +18,7 @@ public class EmployeeStore {
    * Constructor for EmployeeStore.
    */
   public EmployeeStore(AuthFacade authFacade, EmployeeRoleStore roleStore) {
+    this.authFacade = authFacade;
     this.employees = new ArrayList<Employee>();
     this.roleStore = roleStore;
   }
@@ -37,7 +38,13 @@ public class EmployeeStore {
     // TODO verifications
 
     Employee employee = new Employee(name, phoneNumber, email, address, citizenCard, roleId);
+
     return employee;
+  }
+
+  public boolean saveUser() {
+    // authFacade.addUserWithRole(name, email, "pwd", roleId);
+    return false;
   }
 
   /**
@@ -46,9 +53,7 @@ public class EmployeeStore {
    */
   public List<Employee> getEmployeesWithRole(String roleId) {
     if (roleId == null) throw new IllegalArgumentException("Role id cannot be null");
-    if (!roleStore.existsRole(roleId)) {
-      throw new IllegalArgumentException("Role does not exist");
-    }
+    if (!roleStore.existsRole(roleId)) throw new IllegalArgumentException("Role does not exist");
 
     List<Employee> lstEmp = new ArrayList<>();
 
@@ -57,4 +62,5 @@ public class EmployeeStore {
 
     return lstEmp;
   }
+
 }

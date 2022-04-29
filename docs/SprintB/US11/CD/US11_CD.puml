@@ -10,12 +10,9 @@ class User {
 
 class Employee {
   -id: String
-  -name: String
-  -email: String
   -phone: String
   -address: String
   -int citizenCardNumber
-  -roleId: String
   
   +Employee(name,email,phone,address,citizenCardNumber,roleId)
 }
@@ -24,7 +21,9 @@ class Company {
   -designation: String
   +Company(designation)
 
-  + AuthFacade getAuthFacade()
+  +getAuthFacade()
+  +getEmployeeStore()
+  +getEmployeeRoleStore()
 }
 
 class AuthFacade {
@@ -34,6 +33,7 @@ class AuthFacade {
 }
 
 class EmployeeStore {
+  +createEmployee(name,phoneNumber,email,address,citizenCard,roleId)
   +getEmployeesWithRole(roleId)
 }
 
@@ -49,8 +49,13 @@ class EmployeeRole {
 
 class ListEmployeeUI {}
 
+class EmployeeRolesStore {
+  +addEmployeeRole(id,description)
+  +getRoles()
+  +existsRole(id)
+}
+
 ListEmployeeUI ..> ListEmployeeController
-ListEmployeeController ..> Employee
 ListEmployeeController ..> Company
 
 Company ..> AuthFacade

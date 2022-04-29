@@ -7,7 +7,7 @@ participant ":ListEmployeeUI" as UI
 participant ":ListEmployeeController" as CTRL
 participant "comp\n:Company" as COMP
 participant "employeeStore\n:EmployeeStore" as EMPS
-participant "roleStore\n:RoleStore" as ROLES
+participant "employeeRoleStore\n:EmployeeRoleStore" as ROLES
 participant "emp:Employee" as EMP
 
 activate ADM
@@ -19,7 +19,7 @@ CTRL -> COMP : roleStore=getEmployeeRoleStore()
 activate COMP
 deactivate COMP
 
-CTRL -> ROLES : roleList=getUserRoles()
+CTRL -> ROLES : roleList=getEmployeeRoles()
 activate ROLES
 |||
 deactivate ROLES

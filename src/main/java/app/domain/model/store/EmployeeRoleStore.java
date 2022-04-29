@@ -2,7 +2,6 @@ package app.domain.model.store;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import pt.isep.lei.esoft.auth.AuthFacade;
 import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
@@ -30,6 +29,7 @@ public class EmployeeRoleStore {
    */
   public UserRole addEmployeeRole(String id, String description) {
     if (authFacade.existsRole(id)) throw new IllegalArgumentException("Role already exists");
+    if (existsRole(id)) throw new IllegalArgumentException("Role already exists");
 
     authFacade.addUserRole(id, description);
 
@@ -44,6 +44,9 @@ public class EmployeeRoleStore {
   }
 
   public boolean existsRole(String id) {
-    return authFacade.existsRole(id);
+    for (UserRole userRole : roles)
+      if (userRole.getId().equals(id)) return true;
+
+    return false;
   }
 }
