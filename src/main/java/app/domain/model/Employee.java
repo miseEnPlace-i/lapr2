@@ -1,11 +1,15 @@
 package app.domain.model;
 
+import pt.isep.lei.esoft.auth.domain.model.Email;
+import pt.isep.lei.esoft.auth.domain.model.Password;
+import pt.isep.lei.esoft.auth.domain.model.User;
+
 /**
  * Employee model class.
  * 
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
-public class Employee {
+public class Employee extends User {
   int id = 0;
   String name = "";
   String phoneNumber = "";
@@ -26,7 +30,10 @@ public class Employee {
    */
   public Employee(String name, String phoneNumber, String email, String address, String citizenCard,
       String roleId) {
+    super(new Email(email), new Password("pwd"), name);
+
     this.id = 123456789;
+
     // TODO
   }
 
