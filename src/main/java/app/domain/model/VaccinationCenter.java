@@ -11,7 +11,7 @@ import java.security.Policy;
 public class VaccinationCenter {
     private String name = "";
     private String address = "";
-    private String emailAddress = "";
+    private String email = "";
     private int phoneNum = 0;
     private int faxNum = 0;
     private String webAddress = "";
@@ -36,12 +36,26 @@ public class VaccinationCenter {
      * @param maxVacSlot the vaccination center maximum vaccines per slot
      */
 
-    public VaccinationCenter(String name, String address, String emailAddress, int phoneNum,
-            int faxNum, String webAddress, String openingHours, String closingHours,
-            int slotDuration, int maxVacSlot, Employee coordinator) {
+    public VaccinationCenter(String name, String address, String email, int phoneNum, int faxNum,
+            String webAddress, String openingHours, String closingHours, int slotDuration,
+            int maxVacSlot, Employee coordinator) {
+
+        validateCenterName(name);
+        validateAddress(address);
+        validateEmail(email);
+        validatePhoneNumber(String.valueOf(phoneNum));
+        validateFaxNumber(String.valueOf(faxNum));
+        validateWebsite(webAddress);
+        validateOpeningHours(openingHours);
+        validateClosingHours(closingHours);
+        validateSlotDuration(slotDuration);
+        validateMaxVacPerSlot(maxVacSlot);
+        validateCoordinator(coordinator);
+
+
         this.name = name;
         this.address = address;
-        this.emailAddress = emailAddress;
+        this.email = email;
         this.phoneNum = phoneNum;
         this.faxNum = faxNum;
         this.webAddress = webAddress;
@@ -75,7 +89,7 @@ public class VaccinationCenter {
      * @return String return the emailAddress
      */
     public String getEmailAddress() {
-        return emailAddress;
+        return email;
     }
 
     /**
@@ -136,10 +150,67 @@ public class VaccinationCenter {
         return null;
     }
 
-    public static void validateCenterName(String name) {
-        if (!name.matches("*[0-9]*.")) {
+    private static void validateCenterName(String name) {
+        if (!name.matches("^.+$")) {
             throw new IllegalArgumentException("Name not valid");
         }
     }
 
+    private static void validateAddress(String address) {
+        // should not be empty
+        // regex: ^.+$
+        if (!address.matches("^.+$")) {
+            throw new IllegalArgumentException("Address is not valid");
+        }
+    }
+
+    private static void validateEmail(String email) {
+        // regex:
+        // ^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$
+        if (!email.matches(
+                "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")) {
+            throw new IllegalArgumentException("Email is not valid");
+        }
+    }
+
+    private static void validatePhoneNumber(String phoneNumber) {
+        // should have a + prefix
+        // regex +\d{3} \d{9}
+        if (!phoneNumber.matches("^\\+\\d{3} \\d{9}$")) {
+            throw new IllegalArgumentException("Phone Number is not valid");
+        }
+    }
+
+    private static void validateFaxNumber(String faxNumber) {
+        // maximum 12 char (+351 (3) - area code (2) - local number (6 to 7))
+        // should have a prefix +351
+        if (!faxNumber.matches("^\\+\\d{351} \\d{9}$") && faxNumber.length() < 12
+                || faxNumber.length() < 11) {
+            throw new IllegalArgumentException("Fax number is not valid");
+        }
+    }
+
+    private static void validateWebsite(String website) {
+        // TODO
+    }
+
+    private static void validateOpeningHours(String openHours) {
+        // TODO
+    }
+
+    private static void validateClosingHours(String closHours) {
+        // TODO
+    }
+
+    private static void validateSlotDuration(int slotDur) {
+        // TODO
+    }
+
+    private static void validateMaxVacPerSlot(int maxVac) {
+        // TODO
+    }
+
+    private static void validateCoordinator(Employee coordEmployee) {
+        // TODO
+    }
 }
