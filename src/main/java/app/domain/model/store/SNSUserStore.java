@@ -8,7 +8,6 @@ import java.util.List;
 import app.domain.model.CalendarUtils;
 import app.domain.model.SNSUser;
 import app.domain.shared.Constants;
-import app.domain.shared.EmailSender;
 import app.domain.shared.PasswordGenerator;
 import pt.isep.lei.esoft.auth.AuthFacade;
 

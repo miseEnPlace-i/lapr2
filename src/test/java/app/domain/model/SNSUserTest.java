@@ -1,8 +1,6 @@
 package app.domain.model;
 
 import org.junit.Test;
-import app.domain.shared.PasswordGenerator;
-import pt.isep.lei.esoft.auth.domain.model.Password;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -15,11 +13,10 @@ public class SNSUserTest {
    */
   @Test
   public void testNullArguments() {
-    String snsNumber = null;
-    String name = null;
-    Date birthDay = null;
+    // String snsNumber = null;
+    // String name = null;
+    // Date birthDay = null;
     // new SNSUser(null, null, null, null, null, null, null, null);
-
   }
 
   /**

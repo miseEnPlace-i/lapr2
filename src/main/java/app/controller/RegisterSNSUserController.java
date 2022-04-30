@@ -38,7 +38,6 @@ public class RegisterSNSUserController {
    * @param phoneNumber
    * @param email
    * @param address
-   * @return SNSUser
    */
   public void createSNSUser(String citizenCard, String snsNumber, String name, String birthDay, char gender, String phoneNumber, String email, String address) throws IllegalArgumentException, ParseException {
     // create an instance of an SNS User

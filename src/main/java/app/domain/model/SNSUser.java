@@ -135,7 +135,6 @@ public class SNSUser {
     }
   }
 
-  // TODO: validations
   private static void validateCitizenCard(String citizenCard) {
     // should follow the portuguese format
     // dddddddd d XXd (d - digit; X - letter)
