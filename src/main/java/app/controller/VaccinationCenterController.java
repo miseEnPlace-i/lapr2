@@ -1,9 +1,12 @@
 package app.controller;
 
+import java.util.List;
 import app.domain.model.Company;
 import app.domain.model.Employee;
 import app.domain.model.VaccinationCenter;
+import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.VaccinationCenterStore;
+import app.domain.shared.Constants;
 
 public class VaccinationCenterController {
     private App app;
@@ -31,5 +34,9 @@ public class VaccinationCenterController {
 
     public void saveVaccinationCenter() {
         vacStore.saveVaccinationCenter(center);
+    }
+
+    public List<Employee> getCoordinators() {
+        return EmployeeStore.getEmployeesWithRole(Constants.ROLE_COORDINATOR);
     }
 }
