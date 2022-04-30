@@ -74,7 +74,7 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 
 ### 1.7 Other Relevant Remarks
 
-* There are similarities between this user story and the US11 regarding the method getEmployeeByRoleId() which is used to get center coordinators.
+* There are similarities between this user story and the US11 regarding the method getEmployeesWithRole() which is used to get center coordinators.
 
 ## 2. OO Analysis
 
@@ -129,17 +129,20 @@ Other software classes (i.e. Pure Fabrication) identified:
 ![US09_CD](CD/US09_CD.svg)
 
 # 4. Tests 
-// Test without 1 parameter address (String)
+// Test with an empty name (String)
 // Test without 1 parameter phone number (int)
 // Test with null values
 // ---
 
-**Test 1:** Check that it is not possible to create an instance of the VaccinationCenter class without the parameter address. 
+**Test 1:** Check that it is not possible to create an instance of the VaccinationCenter class with an empty name. 
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto",null, "vacinacaoporto@gmail.com", 221010101, 122123123, "www.centrovacinaoporto.com", "8:00", "19:00", 5, 10);
-	}
+        public void ensureNullIsNotAllowed() {
+                Employee coordinator = new Employee("name", 123123, "email", "address", 123123,
+                                Constants.ROLE_COORDINATOR);
+
+                VaccinationCenter center = new VaccinationCenter("", "Rua João Almeida", "vacinacaoporto@gmail.com", 221010101, 1221231231, "www.centrovacinaoporto.com", "8:00", "19:00", 5, 10, coordinator);
+        }
 	
 **Test 2:** Check that it is not possible to create an instance of the VaccinationCenter class without the parameter slot duration.
 
