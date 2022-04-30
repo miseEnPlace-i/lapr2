@@ -26,7 +26,7 @@ CTRL --> COMP : empStore=getEmployeeStore()
 activate COMP
 deactivate COMP
 
-CTRL --> EMPSTORE : coordinators=getEmployeesByRoleId("COORDINATOR")
+CTRL --> EMPSTORE : coordinators=getEmployeesWithRole(Constants.ROLE_COORDINATOR)
 activate EMPSTORE
 deactivate CTRL
 deactivate EMPSTORE
@@ -74,8 +74,6 @@ activate CTRL
 
 CTRL -> VACSTORE : saveVaccinationCenter(center)
 activate VACSTORE
-
-
 
 VACSTORE -> VACSTORE : addVaccinationCenter(center)
 activate VACSTORE
