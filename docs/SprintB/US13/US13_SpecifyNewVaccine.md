@@ -1,4 +1,4 @@
-# US 006 - To create a Task 
+# US 12 - Specify a new vaccine and its administration process
 
 ## 1. Requirements Engineering
 
@@ -15,38 +15,52 @@ _"As an Administrator, I intend to specify a new vaccine and its administation p
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost as well as the its classifying task category. 
+>	An Administrator is responsible for properly configuring and managing the core information (e.g.:
+type of vaccines, vaccines, vaccination centers, employees) required for this application [...]
 
+>   [...] several vaccines might exist, each one demanding a distinct administration process.
 
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+>   The vaccine administration process comprises (i) one or more age groups (e.g.: 5 to 12 years old, 13 to 18 years
+old, greater than 18 years old), and (ii) per age group, the doses to be administered (e.g.: 1, 2, 3), the
+vaccine dosage (e.g.: 30 ml), and the time interval regarding the previously administered dose.
 
+>    [...]  between doses (e.g.: between the 1st and 2nd doses) the
+dosage to be administered might vary as well as the time interval elapsing between two consecutive
+doses (e.g.: between the 1st and 2nd doses 21 days might be required, while between the 2nd and the
+3rd doses 6 months might be required).
+
+>   [...] for each type of vaccine, several vaccines might exist,
 
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
->  
-> **Answer:** Duration is estimated in days.
+
+> **Question:** 
+>   As to the interval between doses, what time format are we to use?
+> **Answer:** 
+	Number of days.
 
 -
 
-> **Question:** Monetary data is expressed in any particular currency?
->  
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POTs (virtual currency internal to the platform).
+> **Question:** 
+>  Which attributes does the Vaccine have (besides the ones refering to the Vaccine Type)?
+> **Answer:** 
+   Each vaccine has the following attributes: Id, Name, Brand, Vaccine Type, Age Group, Dose Number, Vaccine Dosage and Time Since Last Dose.
 
 
 ### 1.3. Acceptance Criteria
 
-
-* **AC1:** All required fiels must be filled in.
-* **AC2:** Task reference must have at least 5 alphanumeric chars.
-* **AC3:** When creating a task with an already existing reference, the system must reject such operation and the user must have the change to modify the typed reference.
+* **AC1:** All required fiedls must be filled in.
+* **AC2:** When creating a vaccine, the vaccine type must existe.
+* **AC3:** The age group intervals limits, the dosage, the time since last dose and the number of doses must be positive integers.
+* **AC4** In the age gorup interval, the minimum age must be smaller than the maximum age.
+* **AC5:** When creating a vaccine with an already existing designation, the system must reject such operation and the user must have the chance to modify the typed designation.
 
 
 ### 1.4. Found out Dependencies
 
 
-* There is a dependency to "US003 Create a task category" since at least a task category must exist to classify the task being created.
+* There is a dependency to "US12 - Specify a new Vaccine Type" since at least a vaccine type must exist to classify new vaccine being created.
 
 
 ### 1.5 Input and Output Data
@@ -55,46 +69,44 @@ _"As an Administrator, I intend to specify a new vaccine and its administation p
 **Input Data:**
 
 * Typed data:
-	* a reference, 
-	* a designation, 
-	* an informal description
-	* a technical description
-	* an estimated duration
-	* an estimated cost
-	
+  - Vaccine ID
+  - Vaccine designation
+  - Vaccine brand
+  - Age group interval limits
+  - Dosage
+  - Number of doses
+  - Time interval between doses
 * Selected data:
-	* Classifying task category 
+  - Vaccine type
 
 
 **Output Data:**
 
-* List of existing task categories
-* (In)Success of the operation
+- (In)Success of the operation
+
 
 ### 1.6. System Sequence Diagram (SSD)
 
 **Alternative 1**
 
-![US006_SSD](US006_SSD.svg)
-
+![US13_SSD](SSD/US13_SSD.svg)
 
 **Alternative 2**
 
-![US006_SSD_v2](US006_SSD_v2.svg)
+![US13_SSD_v2](SSD/US13_SSD_v2.svg)
 
 
 **Other alternatives might exist.**
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
-
+* Not found
 
 ## 2. OO Analysis
 
 ### 2.1. Relevant Domain Model Excerpt 
 
-![US006_MD](US006_MD.svg)
+![US13_MD](DM/US13_DM.svg)
 
 ### 2.2. Other Remarks
 
@@ -105,125 +117,174 @@ n/a
 
 ### 3.1. Rationale
 
-**SSD - Alternative 1 is adopted.**
+TODO : review, implement stores and lists
+**SSD - Alternative 2 is adopted.**
 
 | Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
 |:-------------  |:--------------------- |:------------|:---------------------------- |
-| Step 1  		 |	... interacting with the actor? | CreateTaskUI   |  Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.           |
-| 			  		 |	... coordinating the US? | CreateTaskController | Controller                             |
-| 			  		 |	... instantiating a new Task? | Organization   | Creator (Rule 1): in the DM Organization has a Task.   |
-| 			  		 | ... knowing the user using the system?  | UserSession  | IE: cf. A&A component documentation.  |
-| 			  		 |	... knowing to which organization the user belongs to? | Platform  | IE: has registed all Organizations |
-| 			  		 |							 | Organization   | IE: knows/has its own Employees|
-| 			  		 |							 | Employee  | IE: knows its own data (e.g. email) |
-| Step 2  		 |							 |             |                              |
-| Step 3  		 |	...saving the inputted data? | Task  | IE: object created in step 1 has its own data.  |
-| Step 4  		 |	...knowing the task categories to show? | Platform  | IE: Task Categories are defined by the Platform. |
-| Step 5  		 |	... saving the selected category? | Task  | IE: object created in step 1 is classified in one Category.  |
-| Step 6  		 |							 |             |                              |              
-| Step 7  		 |	... validating all data (local validation)? | Task | IE: owns its data.| 
-| 			  		 |	... validating all data (global validation)? | Organization | IE: knows all its tasks.| 
-| 			  		 |	... saving the created task? | Organization | IE: owns all its tasks.| 
-| Step 8  		 |	... informing operation success?| CreateTaskUI  | IE: is responsible for user interactions.  | 
+| Step 1 		 |	... displaying the screen to the user? | CreateVaccineUI   |  Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.           |
+|	| ... coordinating the US	| CreateVaccineController	| Pure Fabrication: Controller 	|
+| Step 2 		 |	... request data? | CreateVaccineUI | IE: Responsible for user interactions.                            |
+| Step 3  		 |	... instantiating a new vaccine? | VaccineStore   | Creator: R1/2.   |
+| 			  	 |  ... validating data?(locally)  | Vaccine  | IE: Owns the data.  |
+| 			  	 |  ... validating data?(globally)  | VaccineStore  | IE: Knows all data (e.g. make sure it doesnt have the same name as other vaccine).  |
+| Step 4		 |  ... inform the  current state of the process | CreateVaccineUI | Pure Fabrication: Responsible for user interactions. |
+| Step 5		 |  |||
+| Step 6 		 |	... request data?| CreateVaccineUI | Pure Fabrication: Responsible for user interactions.                |
+| Step 7		 |	... instantiating a new adminsitration process	| AdminProcList	| Creator: R1. |
+|				 |	... validating data? |	AdminsitrationProcess	| IE: Owns the data. |
+| Step 8		 |  ... show all the data and request confirmation?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
+| step 9 | ... add the administration process| AdminProcList | IE: stores administration processes|
+| Step 10		 |  ... inform operation sucess? | CreateVaccineUI | Pure Fabrication: Responsible for user interactions.	|
+| step 11 ||||
+| Step 12 		 |	... request data? | CreateVaccineUI | Pure Fabrication: Responsible for user interactions.                  |
+| Step 13		 |	... instantiating a new dose information	| DoseInfoList	| Creator: R1 |
+|				 |	... validating data? |	DoseInfo	| IE: Owns the data. |
+| Step 14		 |  ... show all the data and request confirmation?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
+| step 15 | ... add the dose information| DoseInfoList | IE: Stores dose informations|
+| Step 16		 |  ... informing operation sucess?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
+| Step 17 ||||
+| Step 18		 |  ... show all the data and request confirmation?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
+| Step 19 | ...store the final result of the vaccine | VaccineStore| IE: Stores all vaccines|
+| Step 20		 |  ... informing operation sucess?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
+
+
+
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
- * Organization
- * Platform
- * Task
+ * Company
+ * Vaccine
+ * VaccineType
+ * AdministrationProcess
+ * DoseInformation
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
- * CreateTaskUI  
- * CreateTaskController
+ * CreateVaccineUI
+ * CreateVaccineController  
+
 
 
 ## 3.2. Sequence Diagram (SD)
 
-**Alternative 1**
-
-![US006_SD](US006_SD.svg)
-
 **Alternative 2**
 
-![US006_SD](US006_SD_v2.svg)
+![US13_SD](SD/US13_SD.svg)
 
 ## 3.3. Class Diagram (CD)
 
-**From alternative 1**
+**From alternative 2**
 
 ![US006_CD](US006_CD.svg)
 
 # 4. Tests 
 
-**Test 1:** Check that it is not possible to create an instance of the Task class with null values. 
+* Vaccine
+
+**Test 1:** Check that it is not possible to create an instance of the Vaccine class with null values. 
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Task instance = new Task(null, null, null, null, null, null, null);
+		public void NullVacArguments() {
+		Vaccine instance = new Vaccine(null, null, null, null);
 	}
 	
 
-**Test 2:** Check that it is not possible to create an instance of the Task class with a reference containing less than five chars - AC2. 
+**Test 2:** Check that it is not possible to create an instance of the Vaccine class with empty values. 
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureReferenceMeetsAC2() {
-		Category cat = new Category(10, "Category 10");
-		
-		Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
+		public void EmptyVacAgrumets() {
+		Vaccine instance = new Vaccine("", "", "", "");
+	}
+	
+
+**Test 3:** Check that it is not possible to create an instance of the Vaccine class with a vaccine type id that does not exist. 
+
+	@Test(expected = IllegalArgumentException.class)
+		public void VacNonExistingVacType() {
+		Vaccine instance = new Vaccine("Pfizer–BioNTech COVID-19", "Pfizer", "vac1", "Not existing vacTypeID");
+	}
+
+* Administration Process
+
+**Test 4:** Check that it is not possible to add an administration process with null values.
+
+	@Test(expected = IllegalArgumentException.class)
+		public void NullAdminProcArguments() {
+		AdminProcess adminProcess = new AdminProcess(0, 0, 0);
+	}
+
+**Test 5:** Check that it is not possible to add an administration process with negative time interval values.
+
+	@Test(expected = IllegalArgumentException.class)
+		public void NegativeAdminProcArguments() {
+		AdminProcess adminProcess = new AdminProcess(-10, -5, 3);
 	}
 
 
-*It is also recommended to organize this content by subsections.* 
+**Test 6:** Check that it is not possible to add an administration process with a max age smaller than the min age values.
+
+	@Test(expected = IllegalArgumentException.class)
+		public void MaxAgeBiggerThanMinAge() {
+		AdminProcess adminProcess = new AdminProcess(18, 2, 3);
+	}
+
+* Dose Information
+  
+**Test 7:** Check that it is not possible to add a dose information with null values.
+
+	@Test(expected = IllegalArgumentException.class)
+		public void NullDoseInfoArguments() {
+		DoseInfo doseInfo = new DoseInfo(0, 0);
+	}
+
+
+**Test 8:** Check that it is not possible to add a dose information with negative time interval values.
+
+	@Test(expected = IllegalArgumentException.class)
+		public void NegativeDoseInfoArguments() {
+		DoseInfo doseInfo = new DoseInfo(-10, -5);
+	}
+
 
 # 5. Construction (Implementation)
 
 
-## Class CreateTaskController 
+## Class CreateVaccineController 
 
-		public boolean createTask(String ref, String designation, String informalDesc, 
-			String technicalDesc, Integer duration, Double cost, Integer catId)() {
 		
-			Category cat = this.platform.getCategoryById(catId);
-			
-			Organization org;
-			// ... (omitted)
-			
-			this.task = org.createTask(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
-			
-			return (this.task != null);
+	public class CreateVaccineController {
+		private App app;
+		private Company company;
+		private VaccineStore vaccineStore;
+		private VaccineTypeStore vaccineTypeStore;
+
+		/**
+		* Constructor for CreateVaccineController
+		*/
+		public CreateVaccineController() {
+			this.app = App.getInstance();
+			this.company = this.app.getCompany();
+			this.vaccineStore = this.company.getVaccineStore();
+			this.vaccineTypeStore = this.company.getVaccineTypeStore();
 		}
 
+		...
 
-## Class Organization
-
-
-		public Task createTask(String ref, String designation, String informalDesc, 
-			String technicalDesc, Integer duration, Double cost, Category cat)() {
-		
-	
-			Task task = new Task(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
-			if (this.validateTask(task))
-				return task;
-			return null;
-		}
-
+	}
 
 
 # 6. Integration and Demo 
 
-* A new option on the Employee menu options was added.
+* A new option on the Vaccine menu options was added.
 
-* Some demo purposes some tasks are bootstrapped while system starts.
 
 
 # 7. Observations
 
-Platform and Organization classes are getting too many responsibilities due to IE pattern and, therefore, they are becoming huge and harder to maintain. 
-
-Is there any way to avoid this to happen?
+No observations were found.
 
 
 
