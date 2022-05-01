@@ -102,7 +102,7 @@ n/a
 
 | Interaction ID                                       | Question: Which class is responsible for...            | Answer             | Justification (with patterns)                           |
 | :--------------------------------------------------- | :----------------------------------------------------- | :----------------- | :------------------------------------------------------ |
-| Step 1: asks to register a new employee              | ...instantiating a new employee                        | ??                 | --                                                      |
+| Step 1: asks to register a new employee              | ...instantiating a new employee                        | EmployeeStore      | Creator: knows all its employees                        |
 | Step 2: shows user roles list and asks to select one | ...knowing the user roles to show?                     | EmployeeRoleStore  | IE: knows all employee roles                            |
 | Step 3: selects a user role                          | ...saving the selected role?                           | Employee           | IE: object created in step 1 is classified in one role. |
 | Step 4: requests data (name, email, password, etc)   | n/a                                                    | n/a                | n/a                                                     |
