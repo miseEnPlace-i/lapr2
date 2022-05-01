@@ -68,5 +68,8 @@ Company ..> VaccinationCenterStore
 Company ..> EmployeeStore
 EmployeeStore "1" --> "*" Employee : stores >
 Company "1" --> "*" Employee : knows >
+VaccinationCenterController ..> VaccinationCenterStore
+VaccinationCenterController ..> EmployeeStore
+VaccinationCenterStore "1" --> "*" VaccinationCenter : stores >
 
 @enduml
