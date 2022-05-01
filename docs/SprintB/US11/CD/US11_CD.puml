@@ -15,10 +15,13 @@ class Employee {
   -int citizenCardNumber
   
   +Employee(name,email,phone,address,citizenCardNumber,roleId)
+
+  +hasRoleId(roleId)
 }
 
 class Company {
   -designation: String
+  
   +Company(designation)
 
   +getAuthFacade()
@@ -34,6 +37,7 @@ class AuthFacade {
 
 class EmployeeStore {
   +createEmployee(name,phoneNumber,email,address,citizenCard,roleId)
+  +saveEmployee(employee)
   +getEmployeesWithRole(roleId)
 }
 
@@ -67,6 +71,6 @@ EmployeeRolesStore "1" -- "*" EmployeeRole : stores >
 Company ..> EmployeeRolesStore
 Employee "1" -- "*" EmployeeRole : has >
 
-User <|-- Employee 
+User -- Employee : corresponds to <
 
 @enduml

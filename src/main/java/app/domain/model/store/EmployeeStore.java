@@ -42,7 +42,7 @@ public class EmployeeStore {
     return employee;
   }
 
-  public boolean saveUser() {
+  public boolean saveEmployee() {
     // authFacade.addUserWithRole(name, email, "pwd", roleId);
     return false;
   }
@@ -58,9 +58,8 @@ public class EmployeeStore {
     List<Employee> lstEmp = new ArrayList<>();
 
     for (Employee employee : employees)
-      if (employee.getRoleId().equals(roleId)) lstEmp.add(employee);
+      if (employee.hasRoleId(roleId)) lstEmp.add(employee);
 
     return lstEmp;
   }
-
 }

@@ -47,7 +47,7 @@ create "lstEmp\n:List<Employee>" as LST
 EMPS --> LST
 
 loop for each employee
-    EMPS -> EMP: e=employee.roleId == roleId
+    EMPS -> EMP: e=employee.hasRoleId(roleId)
   activate EMP
     EMP --> EMPS: true/false
   deactivate EMP

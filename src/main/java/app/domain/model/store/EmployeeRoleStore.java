@@ -39,10 +39,17 @@ public class EmployeeRoleStore {
     return role;
   }
 
+  /**
+   * @return List of all Employee Roles
+   */
   public List<UserRole> getRoles() {
     return roles;
   }
 
+  /**
+   * @param id the employee role id
+   * @return true if the role exists and false otherwise
+   */
   public boolean existsRole(String id) {
     for (UserRole userRole : roles)
       if (userRole.getId().equals(id)) return true;
