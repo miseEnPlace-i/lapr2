@@ -34,7 +34,7 @@ public class EmployeeStore {
    * @param roleId the employee roleId
    */
   public Employee createEmployee(String name, String phoneNumber, String email, String address,
-      int citizenCard, String roleId) {
+      String citizenCard, String roleId) {
     // TODO verifications
 
     Employee employee = new Employee(name, phoneNumber, email, address, citizenCard, roleId);
