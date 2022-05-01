@@ -1,15 +1,15 @@
 package app.controller;
 
-import app.domain.model.Company;
-import app.domain.model.store.EmployeeRoleStore;
-import app.domain.shared.Constants;
-import pt.isep.lei.esoft.auth.AuthFacade;
-import pt.isep.lei.esoft.auth.UserSession;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import app.domain.model.Company;
+import app.domain.model.store.EmployeeRoleStore;
+import app.domain.model.store.EmployeeStore;
+import app.domain.shared.Constants;
+import pt.isep.lei.esoft.auth.AuthFacade;
+import pt.isep.lei.esoft.auth.UserSession;
 
 /**
  * @author Paulo Maio <pam@isep.ipp.pt>
@@ -18,13 +18,15 @@ public class App {
 
   private Company company;
   private AuthFacade authFacade;
-  private EmployeeRoleStore employeeRoleList;
+  private EmployeeStore employeeStore;
+  private EmployeeRoleStore employeeRoleStore;
 
   private App() {
     Properties props = getProperties();
     this.company = new Company(props.getProperty(Constants.PARAMS_COMPANY_DESIGNATION));
     this.authFacade = this.company.getAuthFacade();
-    this.employeeRoleList = this.company.getEmployeeRoleStore();
+    this.employeeStore = this.company.getEmployeeStore();
+    this.employeeRoleStore = this.company.getEmployeeRoleStore();
 
     bootstrap();
   }
@@ -66,12 +68,13 @@ public class App {
     // Added Receptionist user role & a test user with Receptionist role for testing
     // purposes
     this.authFacade.addUserRole(Constants.ROLE_ADMIN, Constants.ROLE_ADMIN);
-    this.employeeRoleList.addEmployeeRole(Constants.ROLE_RECEPTIONIST, Constants.ROLE_RECEPTIONIST);
+    this.employeeRoleStore.addEmployeeRole(Constants.ROLE_RECEPTIONIST, Constants.ROLE_RECEPTIONIST);
+    this.employeeRoleStore.addEmployeeRole(Constants.ROLE_NURSE, Constants.ROLE_NURSE);
 
-    this.authFacade.addUserWithRole("Main Administrator", "admin@lei.sem2.pt", "123456",
-        Constants.ROLE_ADMIN);
-    this.authFacade.addUserWithRole("Test Receptionist", "receptionist@lei.sem2.pt", "123456",
-        Constants.ROLE_RECEPTIONIST);
+    this.authFacade.addUserWithRole("Main Administrator", "admin@lei.sem2.pt", "123456", Constants.ROLE_ADMIN);
+    this.authFacade.addUserWithRole("Test Administrator", "admin@admin.pt", "123456", Constants.ROLE_ADMIN);
+
+    this.employeeStore.addEmployee("Name", "phoneNumber", "email", "address", "citizenCard", Constants.ROLE_RECEPTIONIST);
   }
 
   // Extracted from

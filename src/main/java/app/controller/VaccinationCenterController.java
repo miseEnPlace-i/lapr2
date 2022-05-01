@@ -9,34 +9,32 @@ import app.domain.model.store.VaccinationCenterStore;
 import app.domain.shared.Constants;
 
 public class VaccinationCenterController {
-    private App app;
-    private Company company;
-    private VaccinationCenter center;
-    private VaccinationCenterStore vacStore;
+  private App app;
+  private Company company;
+  private EmployeeStore employeeStore;
+  private VaccinationCenter center;
+  private VaccinationCenterStore vacStore;
 
-    public VaccinationCenterController() {
-        this.app = App.getInstance();
-        this.company = this.app.getCompany();
-        this.vacStore = this.company.getVaccinationCenterStore();
-        this.center = null;
-    }
+  public VaccinationCenterController() {
+    this.app = App.getInstance();
+    this.company = this.app.getCompany();
+    this.employeeStore = this.company.getEmployeeStore();
+    this.vacStore = this.company.getVaccinationCenterStore();
+    this.center = null;
+  }
 
-    public void createVaccinationCenter(String name, String address, String emailAddress,
-            int phoneNum, int faxNum, String webAddress, String openingHours, String closingHours,
-            int slotDuration, int maxVacSlot, Employee coordinator) {
+  public void createVaccinationCenter(String name, String address, String emailAddress, int phoneNum, int faxNum, String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot, Employee coordinator) {
 
-        this.center = vacStore.createVaccinationCenter(name, address, emailAddress, phoneNum,
-                faxNum, webAddress, openingHours, closingHours, slotDuration, maxVacSlot,
-                coordinator);
+    this.center = vacStore.createVaccinationCenter(name, address, emailAddress, phoneNum, faxNum, webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
 
-        vacStore.validateVaccinationCenter(center);
-    }
+    vacStore.validateVaccinationCenter(center);
+  }
 
-    public void saveVaccinationCenter() {
-        vacStore.saveVaccinationCenter(center);
-    }
+  public void saveVaccinationCenter() {
+    vacStore.saveVaccinationCenter(center);
+  }
 
-    public List<Employee> getCoordinators() {
-        return EmployeeStore.getEmployeesWithRole(Constants.ROLE_COORDINATOR);
-    }
+  public List<Employee> getCoordinators() {
+    return employeeStore.getEmployeesWithRole(Constants.ROLE_COORDINATOR);
+  }
 }

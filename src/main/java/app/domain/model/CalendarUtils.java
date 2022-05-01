@@ -5,21 +5,16 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
- * The CalendarUtils class. It provides an easy way to
- * automatically parse a string, for example in dd/MM/yyyy format, to a Calendar
- * instance, as well as methods to calculate the age for a User.
+ * The CalendarUtils class. It provides an easy way to automatically parse a string, for example in dd/MM/yyyy format,
+ * to a Calendar instance, as well as methods to calculate the age for a User.
  * 
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 public class CalendarUtils {
 
     // From https://regexland.com/regex-dates/
-    private static final String[][] VALID_FORMATS = {
-            { "yyyy/MM/dd", "^\\d{4}/(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])$" },
-            { "dd/MM/yyyy", "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$" },
-            { "yyyy-MM-dd", "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$" },
-            { "dd-MM-yyyy", "^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-\\d{4}$" },
-    };
+    private static final String[][] VALID_FORMATS = {{"yyyy/MM/dd", "^\\d{4}/(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])$"}, {"dd/MM/yyyy", "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$"},
+            {"yyyy-MM-dd", "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"}, {"dd-MM-yyyy", "^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-\\d{4}$"},};
 
     /**
      * Parse a String.

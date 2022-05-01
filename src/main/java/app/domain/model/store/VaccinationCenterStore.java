@@ -7,54 +7,47 @@ import app.domain.model.VaccinationCenter;
 
 public class VaccinationCenterStore {
 
-    // Vaccination Centers list
-    private List<VaccinationCenter> vacCenters;
+  // Vaccination Centers list
+  private List<VaccinationCenter> vacCenters;
 
-    public VaccinationCenterStore() {
-        this.vacCenters = new ArrayList<VaccinationCenter>();
+  public VaccinationCenterStore() {
+    this.vacCenters = new ArrayList<VaccinationCenter>();
+  }
+
+  public VaccinationCenter createVaccinationCenter(String name, String address, String emailAddress, int phoneNum, int faxNum, String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot,
+      Employee coordinator) {
+
+    // TO DO
+    try {
+    } catch (Exception e) {
     }
 
-    public VaccinationCenter createVaccinationCenter(String name, String address,
-            String emailAddress, int phoneNum, int faxNum, String webAddress, String openingHours,
-            String closingHours, int slotDuration, int maxVacSlot, Employee coordinator) {
+    // VaccinationCenter center = new VaccinationCenter(name, address, emailAddress, phoneNum, faxNum, webAddress,
+    // openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
+    return null;
+  }
 
-        // TO DO
-        try {
-        } catch (Exception e) {
-        }
-
-        VaccinationCenter center =
-                new VaccinationCenter(name, address, emailAddress, phoneNum, faxNum, webAddress,
-                        openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
-        return center;
+  public void validateVaccinationCenter(VaccinationCenter center) {
+    if (center == null) {
+      throw new Error("Vaccination center is null");
     }
+    checkDuplicates(center);
+  }
 
-    public void validateVaccinationCenter(VaccinationCenter center) {
-        if (center == null) {
-            throw new Error("Vaccination center is null");
-        }
-        checkDuplicates(center);
+  public void checkDuplicates(VaccinationCenter center) {
+    if (vacCenters.contains(center)) {
+      throw new IllegalArgumentException("Duplicate Vaccination Center");
     }
+  }
 
-    public void checkDuplicates(VaccinationCenter center) {
-        if (vacCenters.contains(center)) {
-            throw new IllegalArgumentException("Duplicate Vaccination Center");
-        }
-    }
-
-    public void saveVaccinationCenter(VaccinationCenter center) {
-        String name = center.getName();
-        String address = center.getAddress();
-        String email = center.getEmailAddress();
-        int phoneNum = center.getPhoneNum();
-        int faxNum = center.getFaxNum();
-        String website = center.getWebAddress();
-        String openHours = center.getOpeningHours();
-        String cloHours = center.getClosingHours();
-        int slotDuration = center.getSlotDuration();
-        int maxVacSlot = center.getMaxVacSlot();
-        Employee coordinator = center.getCoordinator();
+  public void saveVaccinationCenter(VaccinationCenter center) {
+    /*
+     * String name = center.getName(); String address = center.getAddress(); String email = center.getEmailAddress(); int
+     * phoneNum = center.getPhoneNum(); int faxNum = center.getFaxNum(); String website = center.getWebAddress(); String
+     * openHours = center.getOpeningHours(); String cloHours = center.getClosingHours(); int slotDuration =
+     * center.getSlotDuration(); int maxVacSlot = center.getMaxVacSlot(); Employee coordinator = center.getCoordinator();
+     */
 
 
-    }
+  }
 }

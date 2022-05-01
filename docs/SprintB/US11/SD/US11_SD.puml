@@ -7,19 +7,19 @@ participant ":ListEmployeeUI" as UI
 participant ":ListEmployeeController" as CTRL
 participant "comp\n:Company" as COMP
 participant "employeeStore\n:EmployeeStore" as EMPS
-participant "roleStore\n:RoleStore" as ROLES
+participant "employeeRoleStore\n:EmployeeRoleStore" as ROLES
 participant "emp:Employee" as EMP
 
 activate ADM
 ADM -> UI : asks to list employees for given role
 activate UI
 activate CTRL
-UI -> CTRL : roleList=getEmployeeRoles()
+UI -> CTRL : emnployeeRoles=getEmployeeRoles()
 CTRL -> COMP : roleStore=getEmployeeRoleStore()
 activate COMP
 deactivate COMP
 
-CTRL -> ROLES : roleList=getUserRoles()
+CTRL -> ROLES : roleList=getEmployeeRoles()
 activate ROLES
 |||
 deactivate ROLES
@@ -47,7 +47,7 @@ create "lstEmp\n:List<Employee>" as LST
 EMPS --> LST
 
 loop for each employee
-    EMPS -> EMP: e=employee.roleId == roleId
+    EMPS -> EMP: e=employee.hasRoleId(roleId)
   activate EMP
     EMP --> EMPS: true/false
   deactivate EMP
