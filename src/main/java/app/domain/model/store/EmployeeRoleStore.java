@@ -40,6 +40,8 @@ public class EmployeeRoleStore {
   }
 
   /**
+   * Gets a list of all roles.
+   * 
    * @return List of all Employee Roles
    */
   public List<UserRole> getRoles() {
@@ -47,6 +49,8 @@ public class EmployeeRoleStore {
   }
 
   /**
+   * checks id a given role exists.
+   * 
    * @param id the employee role id
    * @return true if the role exists and false otherwise
    */
