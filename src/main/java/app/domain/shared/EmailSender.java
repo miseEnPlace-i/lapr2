@@ -11,6 +11,9 @@ package app.domain.shared;
  */
 public class EmailSender {
 
+    /**
+     * Constructor for EmailSender.
+     */
     public EmailSender() {}
 
     /**
