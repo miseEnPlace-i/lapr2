@@ -42,16 +42,15 @@ _"As a receptionist, I want to register a SNS User."_
 
 -   **AC01:** All required fields must be filled in.
 -   **AC02:** When creating a User with an already existing reference, the system must reject such operation and the user must have the change to modify the typed reference.
-<!-- ? QUESTION -->
--   **AC04:** Birth day must have the format: DD/MM/YYYY. A SNS User should not have more than 150 years of age.
--   **AC06:** Citizen card numbers should follow the portuguese format (8 digits, 1 control digit and 2 chars + 1 digit)
--   **AC03:** SNS number must have 9 digits.
+-   **AC03:** Birth day must have the format: DD/MM/YYYY. A SNS User should not have more than 150 years of age.
+-   **AC04:** Citizen card numbers should follow the portuguese format (8 digits, 1 control digit and 2 chars + 1 digit)
+-   **AC05:** SNS number must have 9 digits.
 -   **AC06:** Phone numbers should follow the portuguese format ("+351" + 9 digits).
 -   **AC07:** Email address must be validated using a regular expression.
--   **AC05:** Gender options: Male/Female.
--   **AC08:** The password should be randomly generated. It should have 7 alphanumeric characters, 3 of them being upper case and 2 of them must be digits.
--   **AC09:** All input fields are required except gender.
--   **AC10:** The email, phone number, citizen card number and SNS User number must be unique for each SNS User.
+-   **AC08:** Gender options: Male/Female.
+-   **AC09:** The password should be randomly generated. It should have 7 alphanumeric characters, 3 of them being upper case and 2 of them must be digits.
+-   **AC10:** All input fields are required except gender.
+-   **AC11:** The email, phone number, citizen card number and SNS User number must be unique for each SNS User.
     <!-- ? QUESTION -->
     <!-- -   **AC10:** The user receives an e-mail informing that the registration was successful and that he can start to use the system. The e-mail includes the user password. All the e-mail messages should be written to a file with the name emailAndSMSMessages.txt. -->
 -
@@ -113,11 +112,11 @@ n/a
 | :------------------------------------------- | :------------------------------------------ | :------------------------ | :---------------------------------------------------------------------------------------------------------------- |
 | Step 1: register SNS User                    | ... registering a new SNS User?             | RegisterSNSUserUI         | **Pure Fabrication:** there is no reason to assign this responsibility to any existing class in the Domain Model. |
 |                                              | ... coordinating the US?                    | RegisterSNSUserController | **Controller**                                                                                                    |
-|                                              | ... instantiating a new SNS User?           | Company                   | **Creator (Rule 1):**                                                                                             |
+|                                              | ... instantiating a new SNS User?           | SNSUserStore              | **Creator (Rule 1)**                                                                                              |
 | Step 2: requests data                        | n/a                                         |                           |                                                                                                                   |
 | Step 3: types the requested data             | ... saving the inputted data?               | User                      | IE: object created in step 1 has its own data.                                                                    |
-| Step 4: shows data and asks for confirmation | ... saving the selected category?           | User                      | IE: object created in step 1 has one gender.                                                                      |
-| Step 5: confirms the data                    | ... saving the user?                        | Company                   | IE: owns all users.                                                                                               |
+| Step 4: shows data and asks for confirmation |                                             | User                      | IE: object created in step 1 has one gender.                                                                      |
+| Step 5: confirms the data                    | ... saving the user?                        | SNSUserStore              | IE: owns all users.                                                                                               |
 | Step 6: informs operation success            | ... informing operation success?            | RegisterSNSUserUI         | IE: is responsible for user interactions.                                                                         |
 
 ### Systematization
