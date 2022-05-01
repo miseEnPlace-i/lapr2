@@ -50,6 +50,6 @@ public class ListEmployeesByRoleUI implements Runnable {
    * @param employeeRoles the list of employee roles
    */
   private List<Employee> getEmployeesWithRole(String roleId) {
-    return ctrl.listEmployeesWithRole(roleId);
+    return ctrl.getEmployeesWithRole(roleId);
   }
 }
