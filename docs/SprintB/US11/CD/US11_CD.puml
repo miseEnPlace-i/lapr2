@@ -39,7 +39,7 @@ class AuthFacade {
 }
 
 class EmployeeStore {
-  +createEmployee(name,phoneNumber,email,address,citizenCard,roleId)
+  +addEmployee(name,phoneNumber,email,address,citizenCard,roleId)
   +saveEmployee(employee)
   +getEmployeesWithRole(roleId)
 }
