@@ -96,10 +96,10 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 | Step 3: types requested data                                                                                                                        | ... saving the inputted data?                   | VaccinationCenter      | IE: object created in step 1 has its own data.             |
 | Step 4: shows all center coordinators and asks to select one                                                                                        | ... listing all the center coordinators?        | EmployeeStore          | IE: knows all the existing center coordinators.            |
 | Step 5: selects a center coordinator                                                                                                                | n/a                                             | n/a                    | n/a                                                        |
-| Step 8: shows all the data and requests a confirmation                                                                                              | ... validating the data introduced?             | VaccinationCenterStore | IE: holds every information about centers.                 |
+| Step 6: shows all the data and requests a confirmation                                                                                              | ... validating the data introduced?             | VaccinationCenterStore | IE: holds every information about centers.                 |
 |                                                                                                                                                     | ... check for duplicates?                       | VaccinationCenterStore | IE: knows its own data.                                    |
-| Step 9: confirms the data                                                                                                                           | ... saving the new created Vaccination Center?  | VaccinationCenterStore | IE: holds every information about the vaccination centers. |
-| Step 10: informs operation success                                                                                                                  | ... informing that the operation was a success? | UI                     | IE: responsible for user interaction.                      |
+| Step 7: confirms the data                                                                                                                           | ... saving the new created Vaccination Center?  | VaccinationCenterStore | IE: holds every information about the vaccination centers. |
+| Step 8: informs operation success                                                                                                                   | ... informing that the operation was a success? | UI                     | IE: responsible for user interaction.                      |
 
 ### Systematization ##
 
@@ -208,12 +208,30 @@ Other software classes (i.e. Pure Fabrication) identified:
     		return center;
  		 }
 
+## Class VaccinationCenter
+
+
+		 public VaccinationCenter(String name, String address, String email, String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot, Employee coordinator) {
+
+    			setName(name);
+				setAddress(address);
+				setEmail(email);
+				setPhoneNum(phoneNum);
+				setFaxNum(faxNum);
+				setWebAddress(webAddress);
+				setOpeningHours(openingHours);
+				setClosingHours(closingHours);
+				setSlotDuration(slotDuration);
+				setMaxVacSlot(maxVacSlot);
+				setCoordinator(coordinator);
+			}
+
 
 
 # 6. Integration and Demo 
 
-* (Information not available yet.)
+* (Information not available yet).
 
 # 7. Observations
 
- There is class relation between Employee and VaccinationCenter because it needs to exist at least one coordinator in the first place in the code.
+ There is a class relation between Employee and VaccinationCenter because it needs to exist at least one coordinator to register the Vaccination Center.
