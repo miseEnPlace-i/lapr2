@@ -1,9 +1,5 @@
 package app.domain.model;
 
-import java.util.Objects;
-
-import org.apache.commons.lang3.Validate;
-
 /**
  * Vaccination Center class
  * 
@@ -42,224 +38,129 @@ public class VaccinationCenter {
             String webAddress, String openingHours, String closingHours, int slotDuration,
             int maxVacSlot, Employee coordinator) {
 
-        validateCenterName(name);
-        validateAddress(address);
-        validateEmail(email);
-        validatePhoneNumber(phoneNum);
-        validateFaxNumber(faxNum);
-        validateWebsite(webAddress);
-        validateOpeningHours(openingHours);
-        validateClosingHours(closingHours);
-        validateSlotDuration(slotDuration);
-        validateMaxVacPerSlot(maxVacSlot);
-        validateCoordinator(coordinator);
-
-        this.name = name;
-        this.address = address;
-        this.email = email;
-        this.phoneNum = phoneNum;
-        this.faxNum = faxNum;
-        this.webAddress = webAddress;
-        this.openingHours = openingHours;
-        this.closingHours = closingHours;
-        this.slotDuration = slotDuration;
-        this.maxVacSlot = maxVacSlot;
-        this.coordinator = coordinator;
-    }
-
-    public VaccinationCenter(Object name, Object address, Object email, Object phoneNum, Object faxNum,
-            Object webAddress, Object openingHours, Object closingHours, Object slotDur, Object maxVac,
-            Object coordinator) {
-
-        validateCenterName((String) (name));
-        validateAddress((String) (address));
-        validateEmail((String) (email));
-        validatePhoneNumber((String) (phoneNum));
-        validateFaxNumber((String) (faxNum));
-        validateWebsite((String) webAddress);
-        validateOpeningHours((String) openingHours);
-        validateClosingHours((String) closingHours);
-        validateSlotDuration(slotDuration);
-        validateMaxVacPerSlot(maxVacSlot);
-        validateCoordinator((Employee) coordinator);
-
-        this.name = (String) name;
-        this.address = (String) address;
-        this.email = (String) email;
-        this.phoneNum = (String) phoneNum;
-        this.faxNum = (String) faxNum;
-        this.webAddress = (String) webAddress;
-        this.openingHours = (String) openingHours;
-        this.closingHours = (String) closingHours;
-        this.slotDuration = (int) slotDur;
-        this.maxVacSlot = (int) maxVac;
-        this.coordinator = (Employee) coordinator;
-    }
-
-    public boolean equals(Object obj) {
-        return false;
-    }
-
-    // Getters
-    /**
-     * @return String return the name
-     */
-    public String getName() {
-        return name;
+        setName(name);
+        setAddress(address);
+        setEmail(email);
+        setPhoneNum(phoneNum);
+        setFaxNum(faxNum);
+        setWebAddress(webAddress);
+        setOpeningHours(openingHours);
+        setClosingHours(closingHours);
+        setSlotDuration(slotDuration);
+        setMaxVacSlot(maxVacSlot);
+        setCoordinator(coordinator);
     }
 
     /**
-     * @return String return the address
+     * @param name the name to set
      */
-    public String getAddress() {
-        return address;
-    }
-
-    /**
-     * @return String return the emailAddress
-     */
-    public String getEmailAddress() {
-        return email;
-    }
-
-    /**
-     * @return String return the phoneNum
-     */
-    public String getPhoneNum() {
-        return phoneNum;
-    }
-
-    /**
-     * @return String return the faxNum
-     */
-    public String getFaxNum() {
-        return faxNum;
-    }
-
-    /**
-     * @return String return the webAddress
-     */
-    public String getWebAddress() {
-        return webAddress;
-    }
-
-    /**
-     * @return String return the openingHours
-     */
-    public String getOpeningHours() {
-        return openingHours;
-    }
-
-    /**
-     * @return String return the closingHours
-     */
-    public String getClosingHours() {
-        return closingHours;
-    }
-
-    /**
-     * @return int return the slotDuration
-     */
-    public int getSlotDuration() {
-        return slotDuration;
-    }
-
-    /**
-     * @return int return the maxVacSlot
-     */
-    public int getMaxVacSlot() {
-        return maxVacSlot;
-    }
-
-    public String toString() {
-        // TO DO
-        return "";
-    }
-
-    public Employee getCoordinator() {
-        return null;
-    }
-
-    private static void validateCenterName(String name) {
-        if (name == null || !name.matches(".*\\S+.*")) {
-            throw new IllegalArgumentException("Name not valid");
+    private void setName(String name) {
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Name is not valid");
         }
+        this.name = name;
     }
 
-    private static void validateAddress(String address) {
-        // should not be empty
-        // regex: ^.+$
-        if (address == null || !address.matches("^.+$")) {
+    /**
+     * @param address the address to set
+     */
+    private void setAddress(String address) {
+        if (address == null || address.isEmpty()) {
             throw new IllegalArgumentException("Address is not valid");
         }
+        this.address = address;
     }
 
-    private static void validateEmail(String email) {
-        // regex:
-        // ^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$
-        if (email == null || !email.matches(
+    /**
+     * @param email the email to set
+     */
+    private void setEmail(String email) {
+        if (email == null || email.isEmpty() || !email.matches(
                 "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")) {
             throw new IllegalArgumentException("Email is not valid");
         }
+        this.email = email;
     }
 
-    private static void validatePhoneNumber(String phoneNumber) {
-        // should have a + prefix
-        // regex +\d{3} \d{9}
-        if (phoneNumber == null || !phoneNumber.matches("^\\+\\d{3} \\d{9}$")) {
-            throw new IllegalArgumentException("Phone Number is not valid");
+    /**
+     * @param phoneNum the phoneNum to set
+     */
+    private void setPhoneNum(String phoneNum) {
+        if (phoneNum == null || phoneNum.isEmpty() || !phoneNum.matches("^\\+\\d{3} \\d{9}$")) {
+            throw new IllegalArgumentException("Phone number is not valid");
         }
+        this.phoneNum = phoneNum;
     }
 
-    private static void validateFaxNumber(String faxNumber) {
-        // maximum 12 char (+351 (3) - area code (2) - local number (6 to 7))
-        // should have a prefix +351
-        if (faxNumber == null || !faxNumber.matches("^\\+\\d{351} \\d{9}$") || faxNumber.length() < 12
-                || faxNumber.length() < 11) {
+    /**
+     * @param faxNum the faxNum to set
+     */
+    private void setFaxNum(String faxNum) {
+        if (faxNum == null || faxNum.isEmpty() || !faxNum.matches("^\\+\\d{3} \\d{12}$")) {
             throw new IllegalArgumentException("Fax number is not valid");
         }
+        this.faxNum = faxNum;
     }
 
-    private static void validateWebsite(String website) {
-        // TODO
-        if (website == null) {
-            throw new IllegalArgumentException("Website address invalid");
+    /**
+     * @param webAddress the webAddress to set
+     */
+    private void setWebAddress(String webAddress) {
+        if (webAddress == null || webAddress.isEmpty() || !webAddress
+                .matches("^(https:\\/\\/|https:\\/\\/)?(www.)?([a-zA-Z0-9]+).[a-zA-Z0-9]*.[a-z]{3}.?([a-z]+)?$")) {
+            throw new IllegalArgumentException("Website address is not valid");
         }
+        this.webAddress = webAddress;
     }
 
-    private static void validateOpeningHours(String openHours) {
-        // TODO
-        if (openHours == null) {
-            throw new IllegalArgumentException("Opening hours invalid");
+    /**
+     * @param openingHours the openingHours to set
+     */
+    private void setOpeningHours(String openingHours) {
+        if (openingHours == null || openingHours.isEmpty()) {
+            throw new IllegalArgumentException("Opening hours is not valid");
         }
+        this.openingHours = openingHours;
     }
 
-    private static void validateClosingHours(String closHours) {
-        // TODO
-        if (closHours == null) {
-            throw new IllegalArgumentException("Closing hours invalid");
+    /**
+     * @param closingHours the closingHours to set
+     */
+    private void setClosingHours(String closingHours) {
+        if (closingHours == null || closingHours.isEmpty()) {
+            throw new IllegalArgumentException("Closing hours is not valid");
         }
+        this.closingHours = closingHours;
     }
 
-    private static void validateSlotDuration(int slotDur) {
-        // TODO
-
-        if (slotDur == 0) {
-            throw new IllegalArgumentException();
+    /**
+     * @param slotDuration the slotDuration to set
+     */
+    private void setSlotDuration(int slotDuration) {
+        if (slotDuration == 0) {
+            throw new IllegalArgumentException("Slot duration is not valid");
         }
+        this.slotDuration = slotDuration;
     }
 
-    private static void validateMaxVacPerSlot(int maxVac) {
-        // TODO
-        if (maxVac == 0) {
-            throw new IllegalArgumentException();
+    /**
+     * @param maxVacSlot the maxVacSlot to set
+     */
+    private void setMaxVacSlot(int maxVacSlot) {
+        if (maxVacSlot == 0) {
+            throw new IllegalArgumentException("Maximum number of vaccines per slot is not valid");
         }
+        this.maxVacSlot = maxVacSlot;
     }
 
-    private static void validateCoordinator(Employee coordEmployee) {
-        // TODO
-        if (coordEmployee == null) {
-            throw new IllegalArgumentException("Coordinator invalid");
+    /**
+     * @param coordinator the coordinator to set
+     */
+    private void setCoordinator(Employee coordinator) {
+        if (coordinator == null) {
+            throw new IllegalArgumentException("Coordinator is not valid");
         }
+        this.coordinator = coordinator;
     }
+
 }
