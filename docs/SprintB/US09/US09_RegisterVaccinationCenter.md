@@ -186,7 +186,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ## Class VaccinationCenterController 
 
-		public void createVaccinationCenter(String name, String address, String emailAddress, int phoneNum, int faxNum, String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot, Employee coordinator) {
+		public void createVaccinationCenter(String name, String address, String emailAddress, String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot, Employee coordinator) {
 
     			this.center = vacStore.createVaccinationCenter(name, address, emailAddress, phoneNum, faxNum, webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
 
