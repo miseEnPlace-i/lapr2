@@ -145,7 +145,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 	@Test(expected = IllegalArgumentException.class)
 	public void ensureNullIsNotAllowed() {
-		Employee instance = new Employee(null, null, null, null, null, null, null);
+		Employee instance = new Employee(null, null, null, null, null, null);
 	}
 
 ## Instantiate objects with empty values (AC1)
@@ -154,69 +154,49 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 	@Test(expected = IllegalArgumentException.class)
 	public void ensureEmptyIsNotAllowed() {
-		Employee instance = new Employee("", "", "", "", "", "", "");
-	}
-
-## Instatiate objects with invalid password (AC2)
-
-**Test 3:** Check that it is not possible to create an instance of the Employee class with an invalid password, which has a valid length, but invalid characters. 
-
-	@Test(expected = IllegalArgumentException.class)
-	public void ensureValidPasswordWithValidChars() {
-		String invalidPassword = "joana12";
-		
-		Employee instance = new Employee("Joana Maria", "Av. da Liberdade", "+351916478865", "joanamaria@gmail.com", 30356786, invalidPassword, "Nurse");
-	}
-
-**Test 4:** Check that it is not possible to create an instance of the Employee class with an invalid password, which has a valid characters, but invalid length. 
-
-	@Test(expected = IllegalArgumentException.class)
-	public void ensureValidPasswordWithValidLength() {
-		String invalidPassword = "JOAna123455667";
-		
-		Employee instance = new Employee("Joana Maria", "Av. da Liberdade", "+351916478865", "joanamaria@gmail.com", 30356786, invalidPassword, "Nurse");
+		Employee instance = new Employee("", "", "", "", "", "");
 	}
 
 ## Instatiate objects with invalid email (AC4)
 
-**Test 5:** Check that it is not possible to create an instance of the Employee class with an invalid email. 
+**Test 3:** Check that it is not possible to create an instance of the Employee class with an invalid email. 
 
 	@Test(expected = IllegalArgumentException.class)
 	public void ensureValidEmail() {
 		String invalidEmail = "joana";
 		
-		Employee instance = new Employee("Joana Maria", "Av. da Liberdade", "+351916478865", invalidEmail, 30356786, "JOAna12", "Nurse");
+		Employee instance = new Employee("Joana Maria", "Av. da Liberdade", "+351916478865", invalidEmail, "30365258 4 ZZ0", "Nurse");
 	}
 
 ## Instatiate objects with invalid phone number (AC5)
 
-**Test 6:** Check that it is not possible to create an instance of the Employee class with an invalid phone number, which contains an invalid length. 
+**Test 4:** Check that it is not possible to create an instance of the Employee class with an invalid phone number, which contains an invalid length. 
 
 	@Test(expected = IllegalArgumentException.class)
 	public void ensureValidPhoneNumberWithValidLength() {
 		String invalidPhoneNumber = "+3519164788687897845";
 		
-		Employee instance = new Employee("Joana Maria", "Av. da Liberdade", invalidPhoneNumber, "joanamaria@gmail.com", 30356786, "JOAna12", "Nurse");
+		Employee instance = new Employee("Joana Maria", "Av. da Liberdade", invalidPhoneNumber, "joanamaria@gmail.com", "30365258 4 ZZ0", "Nurse");
 	}
 
-**Test 7:** Check that it is not possible to create an instance of the Employee class with an invalid phone number, which contains letters. 
+**Test 5:** Check that it is not possible to create an instance of the Employee class with an invalid phone number, which contains letters. 
 
 	@Test(expected = IllegalArgumentException.class)
 	public void ensureValidPhoneNumberWithoutLetters() {
 		String invalidPhoneNumber = "+3519164foe";
 		
-		Employee instance = new Employee("Joana Maria", "Av. da Liberdade", invalidPhoneNumber, "joanamaria@gmail.com", 30356786, "JOAna12", "Nurse");
+		Employee instance = new Employee("Joana Maria", "Av. da Liberdade", invalidPhoneNumber, "joanamaria@gmail.com", "30365258 4 ZZ0", "Nurse");
 	}
 
 ## Instatiate objects with invalid Citizen Card number (AC6)
 
-**Test 8:** Check that it is not possible to create an instance of the Employee class with an invalid Citizen Card number. 
+**Test 6:** Check that it is not possible to create an instance of the Employee class with an invalid Citizen Card number. 
 
 	@Test(expected = IllegalArgumentException.class)
 	public void ensureValidCCNumber() {
 		int invalidCCNumber = "3030398578392200";
 		
-		Employee instance = new Employee("Joana Maria", "Av. da Liberdade", "+351916478865", "joanamaria@gmail.com", invalidCCNumber, "JOAna12", "Nurse");
+		Employee instance = new Employee("Joana Maria", "Av. da Liberdade", "+351916478865", "joanamaria@gmail.com", invalidCCNumber, "Nurse");
 	}
 
 # 5. Construction (Implementation)
@@ -264,8 +244,3 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 There is no class relation between Employee and User to enforce both to exist in the first place in the code.
 The relation between them is made by corresponding e-mail (unique attribute in both).
-
-
-
-
-
