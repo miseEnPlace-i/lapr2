@@ -102,14 +102,14 @@ n/a
 
 | Interaction ID                                       | Question: Which class is responsible for...            | Answer             | Justification (with patterns)                           |
 | :--------------------------------------------------- | :----------------------------------------------------- | :----------------- | :------------------------------------------------------ |
-| Step 1: asks to register a new employee              | ...instantiating a new employee                        | Company            | --                                                      |
-| Step 2: shows user roles list and asks to select one | ...knowing the user roles to show?                     | Company            | IE: user roles are defined by the company               |
+| Step 1: asks to register a new employee              | ...instantiating a new employee                        | ??                 | --                                                      |
+| Step 2: shows user roles list and asks to select one | ...knowing the user roles to show?                     | EmployeeRoleStore  | IE: knows all employee roles                            |
 | Step 3: selects a user role                          | ...saving the selected role?                           | Employee           | IE: object created in step 1 is classified in one role. |
 | Step 4: requests data (name, email, password, etc)   | n/a                                                    | n/a                | n/a                                                     |
 | Step 5: types requested data                         | ...saving the input data?                              | Employee           | IE: object created in step 1 has its own data           |
 | Step 6: shows all data and requests confirmation     | ...validating the data introduced (local validation)?  | Employee           | IE: owns its data                                       |
-| Step 6: shows all data and requests confirmation     | ...validating the data introduced (global validation)? | Company            | IE: knows all its employees                             |
-| Step 7: confirms the data                            | ...saving the created employee?                        | Company            | IE: holds every information about the employees         |
+| Step 6: shows all data and requests confirmation     | ...validating the data introduced (global validation)? | EmployeeStore      | IE: knows all its employees                             |
+| Step 7: confirms the data                            | ...saving the created employee?                        | EmployeeStore      | IE: holds every information about the employees         |
 | Step 8: informs operation success                    | ...informing operation success?                        | RegisterEmployeeUI | IE: responsible for user interaction                    |
 
 ### Systematization ##
@@ -117,7 +117,8 @@ n/a
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
  * Employee
- * Company
+ * EmployeeStore
+ * EmployeeRoleStore
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
@@ -261,9 +262,8 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 7. Observations
 
-Platform and Organization classes are getting too many responsibilities due to IE pattern and, therefore, they are becoming huge and harder to maintain. 
-
-Is there any way to avoid this to happen?
+There is no class relation between Employee and User to enforce both to exist in the first place in the code.
+The relation between them is made by corresponding e-mail (unique attribute in both).
 
 
 

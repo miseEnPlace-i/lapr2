@@ -86,7 +86,7 @@ Company ..> AuthFacade
 Company ..> EmployeeStore
 Company ..> EmployeeRoleStore
 
-Employee --|> User
+Employee -- User : corresponds to >
 Employee "*" -- "1" EmployeeRole : has >
 
 EmployeeRoleStore -- EmployeeRole : stores >

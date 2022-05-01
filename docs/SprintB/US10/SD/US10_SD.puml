@@ -20,10 +20,10 @@ admin -> empUi : asks to create a new employee
 activate empUi
     empUi -> empController : employeeRoles = getEmployeeRoles()
     activate empController
-        empController -> comp : roleStore = getRoleStore()
+        empController -> comp : roleStore = getEmployeeRoleStore()
         activate comp
         deactivate comp
-        empController -> roleStore : employeeRoles = getRoles()
+        empController -> roleStore : employeeRoles = getEmployeeRoles()
         activate roleStore
         deactivate roleStore
     deactivate empController
