@@ -33,8 +33,7 @@ public class EmployeeStore {
    * @param citizenCard the employee citizenCard
    * @param roleId the employee roleId
    */
-  public Employee createEmployee(String name, String phoneNumber, String email, String address,
-      String citizenCard, String roleId) {
+  public Employee createEmployee(String name, String phoneNumber, String email, String address, String citizenCard, String roleId) {
     // TODO verifications
 
     Employee employee = new Employee(name, phoneNumber, email, address, citizenCard, roleId);
@@ -59,6 +58,7 @@ public class EmployeeStore {
 
     for (Employee employee : employees)
       if (employee.hasRoleId(roleId)) lstEmp.add(employee);
+
 
     return lstEmp;
   }

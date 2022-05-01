@@ -34,7 +34,7 @@ public class ListEmployeesByRoleController {
    * @param role
    * @return Employee List with Roles
    */
-  public List<Employee> listEmployeesWithRole(String roleId) {
+  public List<Employee> getEmployeesWithRole(String roleId) {
     return employeeStore.getEmployeesWithRole(roleId);
   }
 

@@ -74,6 +74,9 @@ EmployeeRolesStore "1" -- "*" EmployeeRole : stores >
 Company ..> EmployeeRolesStore
 Employee "1" -- "*" EmployeeRole : has >
 
+ListEmployeeController ..> EmployeeStore
+ListEmployeeController ..> EmployeeRoleStore
+
 User -- Employee : corresponds to <
 
 @enduml

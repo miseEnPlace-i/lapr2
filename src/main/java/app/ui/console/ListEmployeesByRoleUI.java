@@ -2,6 +2,7 @@ package app.ui.console;
 
 import java.util.List;
 import app.controller.ListEmployeesByRoleController;
+import app.domain.model.Employee;
 import app.ui.console.utils.Utils;
 import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
@@ -25,8 +26,13 @@ public class ListEmployeesByRoleUI implements Runnable {
 
     displayEmployeeRoles(employeeRoles);
 
-    selectEmployeeRole(employeeRoles);
+    int roleIndex = Utils.selectsIndex(employeeRoles);
 
+    UserRole role = employeeRoles.get(roleIndex);
+
+    List<Employee> employees = getEmployeesWithRole(role.getId());
+
+    Utils.showList(employees, role.getDescription());
   }
 
   /**
@@ -43,9 +49,7 @@ public class ListEmployeesByRoleUI implements Runnable {
    * 
    * @param employeeRoles the list of employee roles
    */
-  private void selectEmployeeRole(List<UserRole> employeeRoles) {
-    int roleIndex = Utils.selectsIndex(employeeRoles);
-
-    ctrl.listEmployeesWithRole(employeeRoles.get(roleIndex).getId());
+  private List<Employee> getEmployeesWithRole(String roleId) {
+    return ctrl.getEmployeesWithRole(roleId);
   }
 }
