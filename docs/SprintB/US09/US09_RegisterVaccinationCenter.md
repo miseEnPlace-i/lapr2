@@ -14,6 +14,8 @@ _"As an administrator, I want to register a vaccination center to respond to a c
 >	"[...] vaccination centers are facilities specifically created to administer vaccines of a single type as
 response to an ongoing disease outbreak (e.g.: Covid-19)."
 
+> "Each vaccination center has a Center Coordinator [...]"
+
 >	"[...] vaccination centers are characterized by a name, an address, a phone number, an e-mail address, a
 fax number, a website address, opening and closing hours, slot duration (e.g.: 5 minutes) and the
 maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slot)." 
@@ -21,25 +23,22 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 
 **From the client clarifications:**
 
-> **Question:** Is there any specification about the name, phone number,address, fax number, website address, opening and closing hours, slot duration and maximum number of vaccines?
+> **Question:** Is there any specification about the name, phone number,email address, address, fax number, website address, opening and closing hours, slot duration and maximum number of vaccines?
 >  
-> **Answer:** ?
-
-> **Question:** When there is no ongoing outbreak, are this centers out of service or is another type of vaccine selected?
->  
-> **Answer:** "This centers are closed when there is no outbreak."
+> **Answer:** During Sprint B I will not introduce attribute rules/formats other than the ones that I already introduced (in this forum or in the project description). Please study the concepts and define appropriate formats for the attributes.
 
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** --
-* **AC2:** Opening and closing hours non existent.
-
+* **AC1:** Each center mush have one Center Coordinator.
+* **AC2:** All required fields must be filled in.
+* **AC3:** When creating a new Vaccination Center, validate that there isn´t already one existing with the same references.
+* **AC4:** Each center must be or HealthCare Center or Community Mass Vaccination Center.
 
 ### 1.4. Found out Dependencies
 
 
-* Not found.
+* There is a dependency to "US10 - Register an Employee	" since at least one Center Coordinator must be designated to a Vaccination Center for it to be created.
 
 
 ### 1.5 Input and Output Data
@@ -50,28 +49,32 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 * Typed data:
 	* an name;
 	* an address;
+	* email address
 	* a phone number;
 	* a fax number;
 	* website address;
-	* opening and closing hours;
+	* opening hours;
+	* closing hours;
 	* slot duration;
 	* maximum vaccines per slot. 
-	
+* Selected data:
+    * center coordinator;
+    * center type.	
+  
 **Output Data:**
-
+* List of existing center coordinators;
+* List of center types;
 * (In)Success of the operation.
 
 ### 1.6. System Sequence Diagram (SSD)
 
+**Alternative 1**
 
 ![US09_SSD](SSD/US09_SSD.svg)
 
-
-**Other alternatives might exist.**
-
 ### 1.7 Other Relevant Remarks
 
-* Not found.
+* There are similarities between this user story and the US11 regarding the method getEmployeesWithRole() which is used to get center coordinators.
 
 ## 2. OO Analysis
 
@@ -87,21 +90,27 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 
 ### 3.1. Rationale
 
-| Interaction ID                                                                                                                           | Question: Which class is responsible for...     | Answer            | Justification (with patterns)                              |
-| :--------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------- | :---------------- | :--------------------------------------------------------- |
-| Step 1: starts creating a new vaccination center                                                                                         | ... instantiating a new Vaccination center?     | Company           | --                                                         |
-| Step 2: request data(name, address, phone number, e-mail address, fax number, website address, slot duration, maximum vaccines per slot) | n/a                                             | n/a               | n/a                                                        |
-| Step 3: types requested data                                                                                                             | ... saving the inputted data?                   | VaccinationCenter | IE: object created in step 1 has its own data.             |
-| Step 4: shows the data and requests a confirmation                                                                                       | ... validating the data introduced?             | Company           | IE: Task Categories are defined by the Platform.           |
-| Step 5: confirms the data                                                                                                                | ... saving the new created Vaccination Center?  | Company           | IE: holds every information about the vaccination process. |
-| Step 6: informs operation success                                                                                                        | ... informing that the operation was a success? | UI                | IE: responsible for user interaction.                      |
+#### From the alternative 1
+
+| Interaction ID                                                                                                                                      | Question: Which class is responsible for...     | Answer                 | Justification (with patterns)                              |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------- | :--------------------- | :--------------------------------------------------------- |
+| Step 1: starts creating a new vaccination center                                                                                                    | ... instantiating a new Vaccination center?     | VaccinationCenterStore | Creator: R1/2                                              |
+| Step 2: request data(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration, maximumVaccinesPerSlot) | n/a                                             | n/a                    | n/a                                                        |
+| Step 3: types requested data                                                                                                                        | ... saving the inputted data?                   | VaccinationCenter      | IE: object created in step 1 has its own data.             |
+| Step 4: shows all center coordinators and asks to select one                                                                                        | ... listing all the center coordinators?        | EmployeeStore          | IE: knows all the existing center coordinators.            |
+| Step 5: selects a center coordinator                                                                                                                | n/a                                             | n/a                    | n/a                                                        |
+| Step 8: shows all the data and requests a confirmation                                                                                              | ... validating the data introduced?             | VaccinationCenterStore | IE: holds every information about centers.                 |
+|                                                                                                                                                     | ... check for duplicates?                       | VaccinationCenterStore | IE: knows its own data.                                    |
+| Step 9: confirms the data                                                                                                                           | ... saving the new created Vaccination Center?  | VaccinationCenterStore | IE: holds every information about the vaccination centers. |
+| Step 10: informs operation success                                                                                                                  | ... informing that the operation was a success? | UI                     | IE: responsible for user interaction.                      |
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
  * VaccinationCenter
- * Administrator
+ * VaccinationCenterStore
+ * EmployeeStore
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
@@ -111,6 +120,8 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ## 3.2. Sequence Diagram (SD)
 
+### From alternative 1
+
 ![US09_SD](SD/US09_SD.svg)
 
 ## 3.3. Class Diagram (CD)
@@ -118,39 +129,42 @@ Other software classes (i.e. Pure Fabrication) identified:
 ![US09_CD](CD/US09_CD.svg)
 
 # 4. Tests 
-// Test without 1 parameter address (String)
+// Test with an empty name (String)
 // Test without 1 parameter phone number (int)
-// Test without any parameter
+// Test with null values
 // ---
-**Test 1:** Check that it is not possible to create an instance of the VaccinationCenter class without the parameter address. 
+
+**Test 1:** Check that it is not possible to create an instance of the VaccinationCenter class with an empty name. 
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida", 221010101,"vacinacaoporto@gmail.com", +351-122-123123123, "www.centrovacinaoporto.com", "8:00-19:00", 5, 10);
-	}
+        public void ensureNullIsNotAllowed() {
+                Employee coordinator = new Employee("name", 123123, "email", "address", 123123,
+                                Constants.ROLE_COORDINATOR);
+
+                VaccinationCenter center = new VaccinationCenter("", "Rua João Almeida", "vacinacaoporto@gmail.com", 221010101, 1221231231, "www.centrovacinaoporto.com", "8:00", "19:00", 5, 10, coordinator);
+        }
 	
 **Test 2:** Check that it is not possible to create an instance of the VaccinationCenter class without the parameter slot duration.
 
 	@Test(expected = IllegalArgumentException.class)
 		public void ensureIntegerParameterIsNotNull() {
-		VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida", 221010101,"vacinacaoporto@gmail.com", +351-122-123123123, "www.centrovacinaoporto.com", "8:00-19:00", 0, 10);
+		VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida","vacinacaoporto@gmail.com", 221010101, 122123123, "www.centrovacinaoporto.com", "8:00", "19:00", 0, 10);
 	}
 
-**Test 3** Check that it is not possible to create an instance of the VaccinationCenter class without any parameter.
+**Test 3** Check that it is not possible to create an instance of the VaccinationCenter class with null values.
 	
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureEveryParameterIsNotNul() {
-			VaccinationCenter center = new VaccinationCenter(null,null,0,null,0,null,null,0,0);
+		public void ensureReferenceMeetsAC2() {
+			VaccinationCenter center = new VaccinationCenter(null,null,null,null,null,null,null,null,null);
 		}
 
-*It is also recommended to organize this content by subsections.* 
 
 # 5. Construction (Implementation)
 
 
 ## Class CreateTaskController 
 
-		public boolean createTask(String ref, String designation, String informalDesc, 
+		public boolean VaccinationCenterController(String ref, String designation, String informalDesc, 
 			String technicalDesc, Integer duration, Double cost, Integer catId)() {
 		
 			Category cat = this.platform.getCategoryById(catId);
@@ -167,7 +181,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 ## Class Organization
 
 
-		public Task createTask(String ref, String designation, String informalDesc, 
+		public Task VaccinationCenter(String ref, String designation, String informalDesc, 
 			String technicalDesc, Integer duration, Double cost, Category cat)() {
 		
 	
@@ -191,8 +205,3 @@ Other software classes (i.e. Pure Fabrication) identified:
 Platform and Organization classes are getting too many responsibilities due to IE pattern and, therefore, they are becoming huge and harder to maintain. 
 
 Is there any way to avoid this to happen?
-
-
-
-
-

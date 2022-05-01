@@ -9,19 +9,24 @@ class Company {
 class VaccinationCenter {
   -name
   -address
-  -phone number
-  -fax number
-  -e-mail address
-  -website address
-  -opening and closing hours
-  -slot duration
-  -maximum vaccines per slot
+  -emailAddress
+  -phoneNumber
+  -faxNumber
+  -websiteAddress
+  -openingHours  
+  -closingHours
+  -slotDuration
+  -maximumVaccinesPerSlot
 }
 
 class Administrator {
-
 }
+
+class CenterCoordinator {
+}
+
 Company "1" -- "*" Administrator : knows >
-Administrator "1" -- "*" VaccinationCenter : creates 
+Administrator "1" -- "*" VaccinationCenter : creates > 
 VaccinationCenter "*" -- "1" Company : belongs to >
+CenterCoordinator "1" -- "1" VaccinationCenter : has >
 @enduml

@@ -12,7 +12,6 @@ import app.domain.shared.PasswordGenerator;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
 /**
- * 
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 public class SNSUserStore {

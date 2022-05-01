@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.SNSUserStore;
+import app.domain.model.store.VaccinationCenterStore;
 
 /**
  * @author Paulo Maio <pam@isep.ipp.pt>
@@ -22,6 +23,7 @@ public class Company {
   private SNSUserStore snsUserStore;
   private EmployeeStore employeeStore;
   private EmployeeRoleStore employeeRoleStore;
+  private VaccinationCenterStore vaccinationCenterStore;
 
   /**
    * Company constructor.
@@ -82,5 +84,9 @@ public class Company {
    */
   public EmployeeRoleStore getEmployeeRoleStore() {
     return this.employeeRoleStore;
+  }
+
+  public VaccinationCenterStore getVaccinationCenterStore() {
+    return this.vaccinationCenterStore;
   }
 }

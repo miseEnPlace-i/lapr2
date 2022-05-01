@@ -10,9 +10,12 @@ class User {
 
 class Employee {
   -id: String
+  -name: String
+  -email: String
   -phone: String
   -address: String
   -citizenCardNumber: String
+  -roleId: String
   
   +Employee(name,email,phone,address,citizenCardNumber,roleId)
 
