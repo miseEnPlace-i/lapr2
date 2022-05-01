@@ -1,10 +1,10 @@
 package app.ui.console;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import app.controller.RegisterSNSUserController;
-import app.domain.model.SNSUser;
 import app.ui.console.utils.Utils;
 
 /**
@@ -21,7 +21,12 @@ public class RegisterSNSUserUI implements Runnable {
   }
 
   public void run() {
-    insertSNSUserData();
+    try {
+      insertSNSUserData();
+    } catch (Exception e) {
+      System.out.println(String.format("Error: %s\n", e.getMessage()));
+    }
+
     boolean confirmed = confirmData();
 
     if (confirmed) {
@@ -30,13 +35,9 @@ public class RegisterSNSUserUI implements Runnable {
     }
   }
 
-  /**
-   * @return
-   */
-  private void insertSNSUserData() {
+  private void insertSNSUserData() throws IllegalArgumentException, ParseException {
     System.out.println("\nRegister SNS User UI:");
 
-    // TODO: catch exceptions that might occur
     String citizenCard = Utils.readLineFromConsole("Citizen Card: ");
     String snsNumber = Utils.readLineFromConsole("SNS Number: ");
     String name = Utils.readLineFromConsole("Name: ");
