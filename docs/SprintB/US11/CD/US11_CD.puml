@@ -21,6 +21,9 @@ class Employee {
 
 class Company {
   -designation: String
+  -authFacade: AuthFacade
+  -employeeStore: EmployeeStore
+  -employeeRoleStore: EmployeeRoleStore
   
   +Company(designation)
 
