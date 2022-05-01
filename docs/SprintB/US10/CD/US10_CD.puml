@@ -72,10 +72,10 @@ class EmployeeRole {
 
 RegisterEmployeeUI ..> RegisterEmployeeController
 
-' RegisterEmployeeController ..> EmployeeStore
+RegisterEmployeeController ..> EmployeeStore
 RegisterEmployeeController ..> Company
 ' RegisterEmployeeController ..> AuthFacade
-' RegisterEmployeeController ..> EmployeeRoleStore
+RegisterEmployeeController ..> EmployeeRoleStore
 
 ' EmployeeStore ..> AuthFacade
 EmployeeStore ..> PasswordGenerator
