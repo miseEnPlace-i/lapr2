@@ -34,7 +34,7 @@ public class EmployeeStore {
    * @param roleId the employee roleId
    */
   public Employee createEmployee(String name, String phoneNumber, String email, String address,
-      String citizenCard, String roleId) {
+      int citizenCard, String roleId) {
     // TODO verifications
 
     Employee employee = new Employee(name, phoneNumber, email, address, citizenCard, roleId);
@@ -42,13 +42,10 @@ public class EmployeeStore {
     return employee;
   }
 
-  public boolean saveEmployee() {
-    // authFacade.addUserWithRole(name, email, "pwd", roleId);
-    return false;
-  }
-
   /**
-   * @param roleId the role id to be searched
+   * Gets all employees with a given role.
+   * 
+   * @param roleId the employee roleId
    * @return a List of employees with that given role
    */
   public List<Employee> getEmployeesWithRole(String roleId) {
