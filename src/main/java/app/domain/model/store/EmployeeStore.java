@@ -33,8 +33,7 @@ public class EmployeeStore {
    * @param citizenCard the employee citizenCard
    * @param roleId the employee roleId
    */
-  public Employee createEmployee(String name, String phoneNumber, String email, String address,
-      String citizenCard, String roleId) {
+  public Employee addEmployee(String name, String phoneNumber, String email, String address, String citizenCard, String roleId) {
     // TODO verifications
 
     Employee employee = new Employee(name, phoneNumber, email, address, citizenCard, roleId);
@@ -75,6 +74,8 @@ public class EmployeeStore {
    * @param employee the employee to be inserted
    */
   public void saveEmployee(Employee employee) {
+    // password = generatePassword();
+    // authFacade.addUserWithRole(employee.getName(), employee.getEmail(), password, employee.getRoleId());
     // TODO: implement this method
   }
 
@@ -84,15 +85,6 @@ public class EmployeeStore {
    * @param employee the employee to be checked
    */
   public void checkDuplicates(Employee employee) {
-    // TODO: implement this method
-  }
-
-  /**
-   * Adds an employee to the store.
-   * 
-   * @param employee the employee to be added
-   */
-  public void addEmployee(Employee employee) {	
     // TODO: implement this method
   }
 }

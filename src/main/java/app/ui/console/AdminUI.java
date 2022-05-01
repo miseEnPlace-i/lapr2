@@ -1,9 +1,8 @@
 package app.ui.console;
 
-import app.ui.console.utils.Utils;
-
 import java.util.ArrayList;
 import java.util.List;
+import app.ui.console.utils.Utils;
 
 /**
  *
@@ -15,7 +14,7 @@ public class AdminUI implements Runnable {
 
   public void run() {
     List<MenuItem> options = new ArrayList<MenuItem>();
-    options.add(new MenuItem("Option A ", new ShowTextUI("You have chosen Option A.")));
+    options.add(new MenuItem("List Employees By Role", new ListEmployeesByRoleUI()));
     options.add(new MenuItem("Option B ", new ShowTextUI("You have chosen Option B.")));
     options.add(new MenuItem("Option C ", new ShowTextUI("You have chosen Option C.")));
 

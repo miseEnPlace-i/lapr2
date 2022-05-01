@@ -12,7 +12,7 @@ class Employee {
   -id: String
   -phone: String
   -address: String
-  -int citizenCardNumber
+  -citizenCardNumber: String
   
   +Employee(name,email,phone,address,citizenCardNumber,roleId)
 
@@ -73,6 +73,9 @@ Company "1" --> "*" Employee : knows >
 EmployeeRolesStore "1" -- "*" EmployeeRole : stores >
 Company ..> EmployeeRolesStore
 Employee "1" -- "*" EmployeeRole : has >
+
+ListEmployeeController ..> EmployeeStore
+ListEmployeeController ..> EmployeeRoleStore
 
 User -- Employee : corresponds to <
 
