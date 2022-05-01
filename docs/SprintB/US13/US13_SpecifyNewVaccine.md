@@ -51,8 +51,10 @@ doses (e.g.: between the 1st and 2nd doses 21 days might be required, while betw
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fiedls must be filled in.
-* **AC2:** The age group intervals limits, the dosage, the time since last dose and the number of doses must be positive.
-* **AC3:** When creating a vaccine with an already existing designation, the system must reject such operation and the user must have the chance to modify the typed designation.
+* **AC2:** When creating a vaccine, the vaccine type must existe.
+* **AC3:** The age group intervals limits, the dosage, the time since last dose and the number of doses must be positive integers.
+* **AC4** In the age gorup interval, the minimum age must be smaller than the maximum age.
+* **AC5:** When creating a vaccine with an already existing designation, the system must reject such operation and the user must have the chance to modify the typed designation.
 
 
 ### 1.4. Found out Dependencies
@@ -180,11 +182,13 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 4. Tests 
 
+* Vaccine
+
 **Test 1:** Check that it is not possible to create an instance of the Vaccine class with null values. 
 
 	@Test(expected = IllegalArgumentException.class)
 		public void ensureNullIsNotAllowed() {
-		Vaccine instance = new Vaccine(null, null, null, null, null);
+		Vaccine instance = new Vaccine(null, null, null, null);
 	}
 	
 
@@ -192,11 +196,70 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 	@Test(expected = IllegalArgumentException.class)
 		public void ensureNullIsNotAllowed() {
-		Vaccine instance = new Vaccine("", "", "", "", "");
+		Vaccine instance = new Vaccine("", "", "", "");
+	}
+	
+
+**Test 3:** Check that it is not possible to create an instance of the Vaccine class with a vaccine type id that does not exist. 
+
+	@Test(expected = IllegalArgumentException.class)
+		public void ensureNullIsNotAllowed() {
+		Vaccine instance = new Vaccine("Pfizer–BioNTech COVID-19", "Pfizer", "vac1", "Not existing vacTypeID");
 	}
 
+* Administration Process
 
-*It is also recommended to organize this content by subsections.* 
+**Test 4:** Check that it is not possible to add an administration process with null values.
+
+	@Test(expected = IllegalArgumentException.class)
+		public void ensureNullIsNotAllowed() {
+		Vaccine.addAdminProc(null, null, null);
+	}
+
+**Test 5:** Check that it is not possible to add an administration process with negative time interval values.
+
+	@Test(expected = IllegalArgumentException.class)
+		public void ensureNullIsNotAllowed() {
+		Vaccine.addAdminProc(-10, -5, 3);
+	}
+
+**Test 6:** Check that it is not possible to add an administration process with non integer values.
+
+	@Test(expected = IllegalArgumentException.class)
+		public void ensureNullIsNotAllowed() {
+		Vaccine.addAdminProc("minAge", "maxAge", 0.13);
+	}
+
+**Test 7:** Check that it is not possible to add an administration process with a max age smaller than the min age values.
+
+	@Test(expected = IllegalArgumentException.class)
+		public void ensureNullIsNotAllowed() {
+		Vaccine.addAdminProc("18", "2", "3");
+	}
+
+* Dose Information
+  
+**Test 8:** Check that it is not possible to add a dose information with null values.
+
+	@Test(expected = IllegalArgumentException.class)
+		public void ensureNullIsNotAllowed() {
+		AdminProc.addDoseInfo(null, null);
+	}
+
+**Test 9:** Check that it is not possible to add a dose information with non integer values.
+
+	@Test(expected = IllegalArgumentException.class)
+		public void ensureNullIsNotAllowed() {
+		AdminProc.addDoseInfo("dosage", 0.10);
+	}
+
+**Test 10:** Check that it is not possible to add a dose information with negative time interval values.
+
+	@Test(expected = IllegalArgumentException.class)
+		public void ensureNullIsNotAllowed() {
+		AdminProc.addDoseInfo(-10, -5);
+	}
+
 
 # 5. Construction (Implementation)
 

@@ -34,8 +34,9 @@ class VaccineStore{
 
 class Vaccine{
     -designation : String
-    -numberOfAgeGroups : int
     -brand : String
+    -id : String
+    -vacTypeId : String
 
     +create(designation, numberAgeGroups, vacType)
     +createAdminProc(minAge, maxAge, numberOfDoses)
@@ -43,7 +44,7 @@ class Vaccine{
 }
 
 class VaccineType{
-    -code : int
+    -code : String
     -description : String
     -tecnhology : String
 }
