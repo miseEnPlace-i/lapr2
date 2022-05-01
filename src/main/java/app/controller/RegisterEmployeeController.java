@@ -36,7 +36,7 @@ public class RegisterEmployeeController {
      * @param citizenCardNumber the employee citizenCardNumber
      * @param roleId the employee roleId
      */
-    public void createEmployee(String name, String address, String phoneNumber, String email, String citizenCardNumber, String roleId) {
+    public void createEmployee(String name, String address, String phoneNumber, String email, int citizenCardNumber, String roleId) {
         // create an instance of an Employee
         this.employee = store.createEmployee(name, address, phoneNumber, email, citizenCardNumber, roleId);
 
