@@ -21,8 +21,8 @@ public class VaccinationCenterUI implements Runnable {
         String name = Utils.readLineFromConsole("Name: ");
         String address = Utils.readLineFromConsole("Address: ");
         String email = Utils.readLineFromConsole("Email: ");
-        int phone = Utils.readIntegerFromConsole("Phone Number: ");
-        int fax = Utils.readIntegerFromConsole("Fax Number: ");
+        String phone = Utils.readLineFromConsole("Phone Number: ");
+        String fax = Utils.readLineFromConsole("Fax Number: ");
         String website = Utils.readLineFromConsole("Website Address: ");
         String openHours = Utils.readLineFromConsole("Opening hours: ");
         String closHours = Utils.readLineFromConsole("Closing hours: ");
@@ -40,8 +40,7 @@ public class VaccinationCenterUI implements Runnable {
             coordinator = (Employee) Utils.showAndSelectOne(coordinators, "Coordinators");
         } while (!flag);
 
-        ctrl.createVaccinationCenter(name, address, email, phone, fax, website, openHours,
-                closHours, slotDur, maxVac, coordinator);
+        ctrl.createVaccinationCenter(name, address, email, phone, fax, website, openHours, closHours, slotDur, maxVac, coordinator);
     }
 
 

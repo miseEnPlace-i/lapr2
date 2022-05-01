@@ -74,7 +74,7 @@ _"As an administrator, I want to register an Employee."_
 
 **Alternative 1**
 
-![US10_SSD](ssd/US10_SSD.svg)
+![US10_SSD](SSD/US10_SSD.svg)
 
 Other alternatives might exist.
 
@@ -87,7 +87,7 @@ n/a
 
 ### 2.1. Relevant Domain Model Excerpt 
 
-![US10_DM](US10_DM.svg)
+![US10_DM](DM/US10_DM.svg)
 
 ### 2.2. Other Remarks
 
@@ -129,13 +129,13 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 **Alternative 1**
 
-![US10_SD](US10_SD.svg)
+![US10_SD](SD/US10_SD.svg)
 
 ## 3.3. Class Diagram (CD)
 
 **From alternative 1**
 
-![US10_CD](US10_CD.svg)
+![US10_CD](CD/US10_CD.svg)
 
 # 4. Tests
 
