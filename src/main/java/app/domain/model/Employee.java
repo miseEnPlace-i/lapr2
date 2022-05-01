@@ -24,8 +24,7 @@ public class Employee {
    * @param citizenCard the employee citizenCard
    * @param roleId the employee roleId
    */
-  public Employee(String name, String phoneNumber, String email, String address, String citizenCard,
-      String roleId) {
+  public Employee(String name, String phoneNumber, String email, String address, String citizenCard, String roleId) {
     this.id = 123456789;
 
     // TODO
@@ -43,7 +42,6 @@ public class Employee {
 
   @Override
   public String toString() {
-    // TODO
-    return "";
+    return String.format("%s", this.name);
   }
 }
