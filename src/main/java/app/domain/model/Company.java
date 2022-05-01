@@ -24,8 +24,7 @@ public class Company {
   private EmployeeRoleStore employeeRoleStore;
 
   public Company(String designation) {
-    if (StringUtils.isBlank(designation))
-      throw new IllegalArgumentException("Designation cannot be blank.");
+    if (StringUtils.isBlank(designation)) throw new IllegalArgumentException("Designation cannot be blank.");
 
     this.designation = designation;
     this.authFacade = new AuthFacade();

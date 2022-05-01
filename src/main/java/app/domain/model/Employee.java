@@ -27,11 +27,12 @@ public class Employee {
   public Employee(String name, String phoneNumber, String email, String address, String citizenCard,
       String roleId) {
     this.id = 123456789;
+
     // TODO
   }
 
-  public String getRoleId() {
-    return roleId;
+  public boolean hasRoleId(String roleId) {
+    return roleId.equals(this.roleId);
   }
 
   @Override

@@ -2,8 +2,10 @@ package app.controller;
 
 import java.util.List;
 import app.domain.model.Company;
+import app.domain.model.Employee;
+import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
-import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
+import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
 /**
  * Register SNS User Controller
@@ -13,15 +15,17 @@ import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
 public class ListEmployeesByRoleController {
   private App app;
   private Company company;
-  private EmployeeStore store;
+  private EmployeeStore employeeStore;
+  private EmployeeRoleStore rolesStore;
 
   /**
-   * Constructor for ListEmployeesByRole.
+   * Constructor for ListEmployeesByRole
    */
   public ListEmployeesByRoleController() {
     this.app = App.getInstance();
     this.company = this.app.getCompany();
-    this.store = this.company.getEmployeeStore();
+    this.employeeStore = this.company.getEmployeeStore();
+    this.rolesStore = this.company.getEmployeeRoleStore();
   }
 
   /**
@@ -30,11 +34,14 @@ public class ListEmployeesByRoleController {
    * @param role
    * @return Employee List with Roles
    */
-  public void listEmployeesWithRole(String roleId) {
-    store.getEmployeesWithRole(roleId);
+  public List<Employee> listEmployeesWithRole(String roleId) {
+    return employeeStore.getEmployeesWithRole(roleId);
   }
 
-  public List<UserRoleDTO> getEmployeeRoles() {
-    return this.company.getAuthFacade().getUserRoles();
+  /**
+   * @return all the existing employee roles
+   */
+  public List<UserRole> getEmployeeRoles() {
+    return rolesStore.getRoles();
   }
 }

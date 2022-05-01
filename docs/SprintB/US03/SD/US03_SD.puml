@@ -31,7 +31,7 @@ deactivate COMP
 CTRL --> STORE : snsUser = createSNSUser()
 activate STORE
 
-STORE --> SUSER** : createSNSUser()
+STORE --> SUSER** : create()
 
 deactivate STORE
 
