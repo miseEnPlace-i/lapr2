@@ -102,7 +102,7 @@ n/a
 
 | Interaction ID                                       | Question: Which class is responsible for...            | Answer             | Justification (with patterns)                           |
 | :--------------------------------------------------- | :----------------------------------------------------- | :----------------- | :------------------------------------------------------ |
-| Step 1: asks to register a new employee              | ...instantiating a new employee                        | ??                 | --                                                      |
+| Step 1: asks to register a new employee              | ...instantiating a new employee                        | EmployeeStore      | Creator: it contains all employee objects               |
 | Step 2: shows user roles list and asks to select one | ...knowing the user roles to show?                     | EmployeeRoleStore  | IE: knows all employee roles                            |
 | Step 3: selects a user role                          | ...saving the selected role?                           | Employee           | IE: object created in step 1 is classified in one role. |
 | Step 4: requests data (name, email, password, etc)   | n/a                                                    | n/a                | n/a                                                     |
@@ -202,42 +202,33 @@ Other software classes (i.e. Pure Fabrication) identified:
 # 5. Construction (Implementation)
 
 
-## Class CreateTaskController 
+## Class RegisterEmployeeController
 
-		public boolean createTask(String ref, String designation, String informalDesc, 
-			String technicalDesc, Integer duration, Double cost, Integer catId)() {
-		
-			Category cat = this.platform.getCategoryById(catId);
-			
-			Organization org;
-			// ... (omitted)
-			
-			this.task = org.createTask(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
-			
-			return (this.task != null);
-		}
+	public void createEmployee(String name, String address, String phoneNumber, String email, String citizenCardNumber, String roleId) {
+		// create an instance of an Employee
+		this.employee = store.addEmployee(name, address, phoneNumber, email, citizenCardNumber, roleId);
+
+		// validate the Employee
+		store.validateEmployee(employee);
+  	}
 
 
-## Class Organization
+## Class EmployeeStore
 
 
-		public Task createTask(String ref, String designation, String informalDesc, 
-			String technicalDesc, Integer duration, Double cost, Category cat)() {
-		
-	
-			Task task = new Task(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
-			if (this.validateTask(task))
-				return task;
-			return null;
-		}
+	public Employee addEmployee(String name, String phoneNumber, String email, String address, String citizenCard, String roleId) {
+		// create an instance of the Employee
+		Employee employee = new Employee(name, phoneNumber, email, address, citizenCard, roleId);
+
+		// return the instance of the Employee
+		return employee;
+  	}	
 
 
 
 # 6. Integration and Demo 
 
-* A new option on the Employee menu options was added.
-
-* Some demo purposes some tasks are bootstrapped while system starts.
+(Information not available yet.)
 
 
 # 7. Observations
