@@ -20,7 +20,7 @@ class Company {
 }
 
 class EmployeeStore {
-  +createEmployee(name, address, phoneNumber, email, citizenCardNumber, roleId)
+  +addEmployee(name, address, phoneNumber, email, citizenCardNumber, roleId)
   +validateEmployee(employee)
   +saveEmployee(employee)
 }
