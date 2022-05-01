@@ -23,6 +23,11 @@ public class Company {
   private EmployeeStore employeeStore;
   private EmployeeRoleStore employeeRoleStore;
 
+  /**
+   * Company constructor.
+   *
+   * @param designation the designation of the company
+   */
   public Company(String designation) {
     if (StringUtils.isBlank(designation)) throw new IllegalArgumentException("Designation cannot be blank.");
 
@@ -34,22 +39,47 @@ public class Company {
     this.employeeStore = new EmployeeStore(this.authFacade, this.employeeRoleStore);
   }
 
+  /**
+   * Gets the designation of the company.
+   *
+   * @return the designation of the company
+   */
   public String getDesignation() {
     return designation;
   }
 
+  /**
+   * Gets the AuthFacade.
+   *
+   * @return the AuthFacade
+   */
   public AuthFacade getAuthFacade() {
     return authFacade;
   }
 
+  /**
+   * Gets the SNSUserStore.
+   *
+   * @return the SNSUserStore
+   */
   public SNSUserStore getSNSUserStore() {
     return this.snsUserStore;
   }
 
+  /**
+   * Gets the EmployeeStore.
+   *
+   * @return the EmployeeStore
+   */
   public EmployeeStore getEmployeeStore() {
     return this.employeeStore;
   }
 
+  /**
+   * Gets the EmployeeRoleStore.
+   *
+   * @return the EmployeeRoleStore
+   */
   public EmployeeRoleStore getEmployeeRoleStore() {
     return this.employeeRoleStore;
   }

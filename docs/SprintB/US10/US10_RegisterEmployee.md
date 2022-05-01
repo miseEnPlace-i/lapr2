@@ -1,4 +1,4 @@
-# US 006 - To create a Task 
+# US 10 - Register an Employee 
 
 ## 1. Requirements Engineering
 
@@ -6,8 +6,7 @@
 ### 1.1. User Story Description
 
 
-_"As an Administrator, I want to register an Employee."_
-
+_"As an administrator, I want to register an Employee."_
 
 
 ### 1.2. Customer Specifications and Clarifications 
@@ -15,38 +14,40 @@ _"As an Administrator, I want to register an Employee."_
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost as well as the its classifying task category. 
+>	"[...] employees enrolled in the vaccination process are almost the same in each kind of vaccination center". 
 
+>	"Each vaccination center has a Center Coordinator [...]"
 
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+>	"[...] receptionists and nurses registered in the application will work in the vaccination process. As the allocation of receptionists and nurses to vaccination centers might be complex, by now, the system might assume that receptionists and nurses can work on any vaccination center."
 
-
+> 	"Any Administrator uses the application to register [...] center coordinators, receptionists, and nurses enrolled in the vaccination process."
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** Which information should the administrator know about the employees, in order to register them in the system?
 >  
-> **Answer:** Duration is estimated in days.
+> **Answer:** _"Every Employee has only one role (Coordinator, Receptionist, Nurse). Employee attributes: Id (automatic), name, address, phone number, e-mail and Citizen Card number. All attributes are mandatory."_
 
--
+> **Question:** How should the password be generated? Can the administrator choose the password?
 
-> **Question:** Monetary data is expressed in any particular currency?
->  
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POTs (virtual currency internal to the platform).
+> **Answer:** _"The password should be randomly generated."_
 
 
 ### 1.3. Acceptance Criteria
 
 
-* **AC1:** All required fiels must be filled in.
-* **AC2:** Task reference must have at least 5 alphanumeric chars.
-* **AC3:** When creating a task with an already existing reference, the system must reject such operation and the user must have the change to modify the typed reference.
+* **AC1:** All required fields must be filled in. (All attributes of the employee are required).
+* **AC2:** The password created must contain seven alphanumeric characters, including three capital letters and two digits.
+* **AC3:** Each user must have a single role defined in the system.
+* **AC4:** The email inserted must be valid, verified using a regular expression.
+* **AC5:** The phone number inserted must be valid, containing only numbers, and the length must be exactly 9 characters.
+* **AC6:** The Citizen Card number inserted must be valid, containing only numbers, and the length must be exactly 8 characters.
 
 
 ### 1.4. Found out Dependencies
 
 
-* There is a dependency to "US003 Create a task category" since at least a task category must exist to classify the task being created.
+* There is a dependency to "USXX - Create an user role" since at least one user role must exist to classify the employee being created.
 
 
 ### 1.5 Input and Output Data
@@ -55,46 +56,38 @@ _"As an Administrator, I want to register an Employee."_
 **Input Data:**
 
 * Typed data:
-	* a reference, 
-	* a designation, 
-	* an informal description
-	* a technical description
-	* an estimated duration
-	* an estimated cost
-	
-* Selected data:
-	* Classifying task category 
+	* name
+	* adress
+	* phone number
+	* email
+	* Citizen Card number
 
+* Selected data:
+	* user role 
 
 **Output Data:**
 
-* List of existing task categories
+* List of existing user roles
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
 **Alternative 1**
 
-![US006_SSD](US006_SSD.svg)
+![US10_SSD](ssd/US10_SSD.svg)
 
-
-**Alternative 2**
-
-![US006_SSD_v2](US006_SSD_v2.svg)
-
-
-**Other alternatives might exist.**
+Other alternatives might exist.
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
+n/a
 
 
 ## 2. OO Analysis
 
 ### 2.1. Relevant Domain Model Excerpt 
 
-![US006_MD](US006_MD.svg)
+![US10_DM](US10_DM.svg)
 
 ### 2.2. Other Remarks
 
@@ -107,76 +100,104 @@ n/a
 
 **SSD - Alternative 1 is adopted.**
 
-| Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
-|:-------------  |:--------------------- |:------------|:---------------------------- |
-| Step 1  		 |	... interacting with the actor? | CreateTaskUI   |  Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.           |
-| 			  		 |	... coordinating the US? | CreateTaskController | Controller                             |
-| 			  		 |	... instantiating a new Task? | Organization   | Creator (Rule 1): in the DM Organization has a Task.   |
-| 			  		 | ... knowing the user using the system?  | UserSession  | IE: cf. A&A component documentation.  |
-| 			  		 |	... knowing to which organization the user belongs to? | Platform  | IE: has registed all Organizations |
-| 			  		 |							 | Organization   | IE: knows/has its own Employees|
-| 			  		 |							 | Employee  | IE: knows its own data (e.g. email) |
-| Step 2  		 |							 |             |                              |
-| Step 3  		 |	...saving the inputted data? | Task  | IE: object created in step 1 has its own data.  |
-| Step 4  		 |	...knowing the task categories to show? | Platform  | IE: Task Categories are defined by the Platform. |
-| Step 5  		 |	... saving the selected category? | Task  | IE: object created in step 1 is classified in one Category.  |
-| Step 6  		 |							 |             |                              |              
-| Step 7  		 |	... validating all data (local validation)? | Task | IE: owns its data.| 
-| 			  		 |	... validating all data (global validation)? | Organization | IE: knows all its tasks.| 
-| 			  		 |	... saving the created task? | Organization | IE: owns all its tasks.| 
-| Step 8  		 |	... informing operation success?| CreateTaskUI  | IE: is responsible for user interactions.  | 
+| Interaction ID                                       | Question: Which class is responsible for...            | Answer             | Justification (with patterns)                           |
+| :--------------------------------------------------- | :----------------------------------------------------- | :----------------- | :------------------------------------------------------ |
+| Step 1: asks to register a new employee              | ...instantiating a new employee                        | ??                 | --                                                      |
+| Step 2: shows user roles list and asks to select one | ...knowing the user roles to show?                     | EmployeeRoleStore  | IE: knows all employee roles                            |
+| Step 3: selects a user role                          | ...saving the selected role?                           | Employee           | IE: object created in step 1 is classified in one role. |
+| Step 4: requests data (name, email, password, etc)   | n/a                                                    | n/a                | n/a                                                     |
+| Step 5: types requested data                         | ...saving the input data?                              | Employee           | IE: object created in step 1 has its own data           |
+| Step 6: shows all data and requests confirmation     | ...validating the data introduced (local validation)?  | Employee           | IE: owns its data                                       |
+| Step 6: shows all data and requests confirmation     | ...validating the data introduced (global validation)? | EmployeeStore      | IE: knows all its employees                             |
+| Step 7: confirms the data                            | ...saving the created employee?                        | EmployeeStore      | IE: holds every information about the employees         |
+| Step 8: informs operation success                    | ...informing operation success?                        | RegisterEmployeeUI | IE: responsible for user interaction                    |
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
- * Organization
- * Platform
- * Task
+ * Employee
+ * EmployeeStore
+ * EmployeeRoleStore
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
- * CreateTaskUI  
- * CreateTaskController
-
+ * RegisterEmployeeUI
+ * RegisterEmployeeController
 
 ## 3.2. Sequence Diagram (SD)
 
 **Alternative 1**
 
-![US006_SD](US006_SD.svg)
-
-**Alternative 2**
-
-![US006_SD](US006_SD_v2.svg)
+![US10_SD](US10_SD.svg)
 
 ## 3.3. Class Diagram (CD)
 
 **From alternative 1**
 
-![US006_CD](US006_CD.svg)
+![US10_CD](US10_CD.svg)
 
-# 4. Tests 
+# 4. Tests
 
-**Test 1:** Check that it is not possible to create an instance of the Task class with null values. 
+## Instantiate objects with null values
+
+**Test 1:** Check that it is not possible to create an instance of the Employee class with null values. 
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Task instance = new Task(null, null, null, null, null, null, null);
+	public void ensureNullIsNotAllowed() {
+		Employee instance = new Employee(null, null, null, null, null, null);
 	}
-	
 
-**Test 2:** Check that it is not possible to create an instance of the Task class with a reference containing less than five chars - AC2. 
+## Instantiate objects with empty values (AC1)
+
+**Test 2:** Check that it is not possible to create an instance of the Employee class with empty values. 
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureReferenceMeetsAC2() {
-		Category cat = new Category(10, "Category 10");
+	public void ensureEmptyIsNotAllowed() {
+		Employee instance = new Employee("", "", "", "", "", "");
+	}
+
+## Instatiate objects with invalid email (AC4)
+
+**Test 3:** Check that it is not possible to create an instance of the Employee class with an invalid email. 
+
+	@Test(expected = IllegalArgumentException.class)
+	public void ensureValidEmail() {
+		String invalidEmail = "joana";
 		
-		Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
+		Employee instance = new Employee("Joana Maria", "Av. da Liberdade", "+351916478865", invalidEmail, "30365258 4 ZZ0", "Nurse");
 	}
 
+## Instatiate objects with invalid phone number (AC5)
 
-*It is also recommended to organize this content by subsections.* 
+**Test 4:** Check that it is not possible to create an instance of the Employee class with an invalid phone number, which contains an invalid length. 
+
+	@Test(expected = IllegalArgumentException.class)
+	public void ensureValidPhoneNumberWithValidLength() {
+		String invalidPhoneNumber = "+3519164788687897845";
+		
+		Employee instance = new Employee("Joana Maria", "Av. da Liberdade", invalidPhoneNumber, "joanamaria@gmail.com", "30365258 4 ZZ0", "Nurse");
+	}
+
+**Test 5:** Check that it is not possible to create an instance of the Employee class with an invalid phone number, which contains letters. 
+
+	@Test(expected = IllegalArgumentException.class)
+	public void ensureValidPhoneNumberWithoutLetters() {
+		String invalidPhoneNumber = "+3519164foe";
+		
+		Employee instance = new Employee("Joana Maria", "Av. da Liberdade", invalidPhoneNumber, "joanamaria@gmail.com", "30365258 4 ZZ0", "Nurse");
+	}
+
+## Instatiate objects with invalid Citizen Card number (AC6)
+
+**Test 6:** Check that it is not possible to create an instance of the Employee class with an invalid Citizen Card number. 
+
+	@Test(expected = IllegalArgumentException.class)
+	public void ensureValidCCNumber() {
+		int invalidCCNumber = "3030398578392200";
+		
+		Employee instance = new Employee("Joana Maria", "Av. da Liberdade", "+351916478865", "joanamaria@gmail.com", invalidCCNumber, "Nurse");
+	}
 
 # 5. Construction (Implementation)
 
@@ -221,11 +242,5 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 7. Observations
 
-Platform and Organization classes are getting too many responsibilities due to IE pattern and, therefore, they are becoming huge and harder to maintain. 
-
-Is there any way to avoid this to happen?
-
-
-
-
-
+There is no class relation between Employee and User to enforce both to exist in the first place in the code.
+The relation between them is made by corresponding e-mail (unique attribute in both).

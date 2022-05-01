@@ -1,72 +1,94 @@
-@startuml
+@startuml US10_CD
 skinparam classAttributeIconSize 0
 
-class ApplicationPOT
-{
-  +static getInstance()
-  +getCurrentSession()
+class RegisterEmployeeUI {
 }
 
-class UserSession
-{
-  +getUserEmail()
+class RegisterEmployeeController {
+  +getEmployeeRoles()
+  +createEmployee(name, address, phoneNumber, email, citizenCardNumber, roleId)
+  +saveEmployee()
 }
 
-class Task {
-  -String reference
-  -String designation
-  -String informalDescription
-  -String technicalDescription
-  -Integer duration
-  -Double cost
-  +Task(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
+class Company {
+  -designation: String
+  +Company(designation)
+  +getDesignation()
+  +getAuthFacade()
+  +getEmployeeStore()
+  +getEmployeeRoleStore()
 }
 
-class Category {
-  -String id
-  -String description
+class EmployeeStore {
+  +createEmployee(name, address, phoneNumber, email, citizenCardNumber, roleId)
+  +validateEmployee(employee)
+  +saveEmployee(employee)
 }
 
-class Organization {
-  -String name
-  -String VatNumber
-  -String website
-  -String phone
-  -String email
-  +Organization(name, VatNumber, webSite, phone, email, postalAddress, manager)
-  +createTask(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
-  +saveTask(task)
-  -addTask(task)
-  -validateTask(task)
+class Employee {
+  -id: String
+  -address: String
+  -phoneNumber: String
+  -citizenCardNumber: String
+  +Employee(id, name, address, phoneNumber, email, citizenCardNumber, roleId)
+  +getId()
+  +getName()
+  +getAddress()
+  +getPhoneNumber()
+  +getEmail()
+  +getCitizenCardNumber()
+  +getPassword()
+  +getRoleId()
 }
 
-class Platform {
-  -String designation
-  +getCategories()
-  +getCategoryById(catId)
-  +getOrganizationByUserEmail(email)
+class EmployeeRoleStore {
+  +getRoles()
 }
 
-class CreateTaskController {
-  +getCategories()
-  +createTask(ref,designation,informalDesc,technicalDesc,duration,cost,categoryId)
-  +saveTask()
+class AuthFacade {
+  +existsUser(email)
+  +addUserWithRole(name, email, password, roleId)
 }
 
-class CreateTaskUI {
-
+class PasswordGenerator {
+  +generatePassword()
 }
 
-CreateTaskUI ..> CreateTaskController
-CreateTaskController ..> Platform
-CreateTaskController ..> Category
-CreateTaskController ..> Task
-CreateTaskController ..> Organization
-CreateTaskController ..> ApplicationPOT
-CreateTaskController ..> UserSession
-Task "*" -> "1" Category : classified in
-Platform "1" --> "*" Category : defines
-Organization "1" --> "*" Task : owns
+class EmailSender {
+  +sendPasswordEmail(email, password)
+}
 
+class User {
+  -name: String
+  -email: String
+  -password: String
+  -roleId: String
+}
+
+class EmployeeRole {
+  -id: String
+  -description: String
+}
+
+RegisterEmployeeUI ..> RegisterEmployeeController
+
+RegisterEmployeeController ..> EmployeeStore
+RegisterEmployeeController ..> Company
+' RegisterEmployeeController ..> AuthFacade
+RegisterEmployeeController ..> EmployeeRoleStore
+
+' EmployeeStore ..> AuthFacade
+EmployeeStore ..> PasswordGenerator
+EmployeeStore ..> EmailSender
+EmployeeStore -- Employee : stores >
+
+Company ..> AuthFacade
+Company ..> EmployeeStore
+Company ..> EmployeeRoleStore
+
+Employee -- User : corresponds to >
+Employee "*" -- "1" EmployeeRole : has >
+
+EmployeeRoleStore -- EmployeeRole : stores >
 
 @enduml
