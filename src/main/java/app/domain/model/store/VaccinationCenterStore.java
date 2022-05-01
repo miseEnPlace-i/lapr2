@@ -14,17 +14,15 @@ public class VaccinationCenterStore {
     this.vacCenters = new ArrayList<VaccinationCenter>();
   }
 
-  public VaccinationCenter createVaccinationCenter(String name, String address, String emailAddress, int phoneNum, int faxNum, String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot,
+  public VaccinationCenter createVaccinationCenter(String name, String address, String emailAddress, String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot,
       Employee coordinator) {
 
     // TO DO
     try {
     } catch (Exception e) {
     }
-
-    // VaccinationCenter center = new VaccinationCenter(name, address, emailAddress, phoneNum, faxNum, webAddress,
-    // openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
-    return null;
+    VaccinationCenter center = new VaccinationCenter(name, address, emailAddress, phoneNum, faxNum, webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
+    return center;
   }
 
   public void validateVaccinationCenter(VaccinationCenter center) {

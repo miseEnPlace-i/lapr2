@@ -1,7 +1,7 @@
 package app.domain.model;
 
 /**
- * Vaccination Center class
+ * Community Mass Vaccination Center class
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  */
@@ -20,7 +20,7 @@ public class VaccinationCenter {
   private Employee coordinator;
 
   /**
-   * Constructor for Vaccination Center
+   * Constructor for the Community Mass Vaccination Center
    * 
    * @param name the vaccination center name
    * @param address the vaccination center address
@@ -32,6 +32,7 @@ public class VaccinationCenter {
    * @param closingHours the vaccination center closing hours
    * @param slotDuration the vaccination center slot duration
    * @param maxVacSlot the vaccination center maximum vaccines per slot
+   * @param coordinator the vaccination center coordinator
    */
 
   public VaccinationCenter(String name, String address, String email, String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot, Employee coordinator) {
