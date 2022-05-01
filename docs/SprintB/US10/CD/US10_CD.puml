@@ -29,7 +29,7 @@ class Employee {
   -id: String
   -address: String
   -phoneNumber: String
-  -citizenCardNumber: int
+  -citizenCardNumber: String
   +Employee(id, name, address, phoneNumber, email, citizenCardNumber, roleId)
   +getId()
   +getName()
