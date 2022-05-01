@@ -32,20 +32,20 @@ activate UI
         |||
         deactivate COMP
     deactivate CTRL
-UI --> ADM :  requests data (designation, id, brand, numberOfAgeGroups) and shows vaccine types list to select one
+UI --> ADM :  requests data (designation, id, brand) and shows vaccine types list to select one
 deactivate UI
 
 ADM -> UI : types requested data
 activate UI
-    UI -> CTRL : vac = createVaccine(designation, brand, id, numberAgeGroups, vacTypeId)
+    UI -> CTRL : vac = createVaccine(designation, brand, id, vacTypeId)
     activate CTRL
 
         CTRL -> VACT_ST : vacType = getVacTypeId(vacTypeId)
         activate VACT_ST 
         deactivate VACT_ST
-        CTRL -> VAC_ST : vac = createVaccine(designation, brand, id, numberAgeGroups, vacType)
+        CTRL -> VAC_ST : vac = createVaccine(designation, brand, id, vacType)
         activate VAC_ST 
-            VAC_ST -> VAC ** : create(designation, brand, id, numberAgeGroups, vacType)
+            VAC_ST -> VAC ** : create(designation, brand, id, vacType)
             VAC -> AP_LST ** 
             AP_LST -> DI_LST **
         deactivate VAC_ST

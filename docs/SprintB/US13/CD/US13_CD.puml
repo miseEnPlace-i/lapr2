@@ -28,7 +28,7 @@ class VaccineTypeStore{
 }
 
 class VaccineStore{
-    +createVaccine(designation, numberAgeGroups, vacType)
+    +createVaccine(designation, id, brand, vacType)
     +validateVaccine(vac)
 }
 
