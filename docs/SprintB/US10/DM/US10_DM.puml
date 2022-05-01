@@ -1,56 +1,26 @@
-@startuml
+@startuml US10_DM
 hide methods
-left to right direction
 skinparam classAttributeIconSize 0
 
-
-class Platform {
+class Company {
   -designation
 }
 
-class Organization {
-  -name
-  -VatNumber
-  -website
-  -phoneNumber
-  -email
-}
-
-class Task {
-  -reference
-  -designation
-  -informalDesc
-  -technicalDesc
-  -duration
-  -cost
-}
-
-class Category {
-  -id
-  -description
+class Administrator {
 }
 
 class Employee {
   -name
-  -function
-  -phone
-  -email
-}
-
-class User {
-  -name
+  -phoneNumber
   -email
   -password
+  -address
+  -citizenCardNumber
+  -roleId
 }
 
-Platform "1" -- "*" Organization : has registered >
-Platform "1" -- "*" Category : defines >
-Organization "1" -- "1..*" Employee : has >
-Organization "1" -- "*" Task: owns >
-Task "*" -- "1" Employee: created by >
-Employee "0..1" -- "1" User: acts as >
-Task "*" -- "1" Category: classified as >
-
-
+Company "1" -- "*" Administrator : knows >
+Company "1" -- "*" Employee : knows >
+Administrator "1" -- "*" Employee : registers >
 
 @enduml

@@ -40,7 +40,7 @@ activate UI
     UI -> CTRL : vac = createVaccine(designation, brand, id, vacTypeId)
     activate CTRL
 
-        CTRL -> VACT_ST : vacType = getVacTypeId(vacTypeId)
+        CTRL -> VACT_ST : vacType = getVacTypeById(vacTypeId)
         activate VACT_ST 
         deactivate VACT_ST
         CTRL -> VAC_ST : vac = createVaccine(designation, brand, id, vacType)
@@ -81,9 +81,9 @@ loop for each age group
 
             deactivate AP_LST
             deactivate VAC
-            CTRL -> VAC : validateAdminProc(adminProc)
-            activate VAC
-            deactivate VAC
+            CTRL -> AP : validateAdminProc(adminProc)
+            activate AP
+            deactivate AP
 
         deactivate CTRL
     UI --> ADM : shows age group data and request confirmation
@@ -116,9 +116,9 @@ loop for each age group
                     DI_LST -> DI ** : create(dosage, TimeSinceLastDose)
                 deactivate DI_LST
                 deactivate AP
-                CTRL -> AP : validateDoseInfo(doseInfo)
-                activate AP 
-                deactivate AP
+                CTRL -> DI : validateDoseInfo(doseInfo)
+                activate DI 
+                deactivate DI
 
                 deactivate CTRL
          UI --> ADM : shows dose information data and request confirmation

@@ -187,7 +187,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 **Test 1:** Check that it is not possible to create an instance of the Vaccine class with null values. 
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
+		public void NullVacArguments() {
 		Vaccine instance = new Vaccine(null, null, null, null);
 	}
 	
@@ -195,7 +195,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 **Test 2:** Check that it is not possible to create an instance of the Vaccine class with empty values. 
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
+		public void EmptyVacAgrumets() {
 		Vaccine instance = new Vaccine("", "", "", "");
 	}
 	
@@ -203,7 +203,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 **Test 3:** Check that it is not possible to create an instance of the Vaccine class with a vaccine type id that does not exist. 
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
+		public void VacNonExistingVacType() {
 		Vaccine instance = new Vaccine("Pfizer–BioNTech COVID-19", "Pfizer", "vac1", "Not existing vacTypeID");
 	}
 
@@ -212,52 +212,40 @@ Other software classes (i.e. Pure Fabrication) identified:
 **Test 4:** Check that it is not possible to add an administration process with null values.
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Vaccine.addAdminProc(null, null, null);
+		public void NullAdminProcArguments() {
+		AdminProcess adminProcess = new AdminProcess(0, 0, 0);
 	}
 
 **Test 5:** Check that it is not possible to add an administration process with negative time interval values.
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Vaccine.addAdminProc(-10, -5, 3);
+		public void NegativeAdminProcArguments() {
+		AdminProcess adminProcess = new AdminProcess(-10, -5, 3);
 	}
 
-**Test 6:** Check that it is not possible to add an administration process with non integer values.
+
+**Test 6:** Check that it is not possible to add an administration process with a max age smaller than the min age values.
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Vaccine.addAdminProc("minAge", "maxAge", 0.13);
-	}
-
-**Test 7:** Check that it is not possible to add an administration process with a max age smaller than the min age values.
-
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Vaccine.addAdminProc("18", "2", "3");
+		public void MaxAgeBiggerThanMinAge() {
+		AdminProcess adminProcess = new AdminProcess(18, 2, 3);
 	}
 
 * Dose Information
   
-**Test 8:** Check that it is not possible to add a dose information with null values.
+**Test 7:** Check that it is not possible to add a dose information with null values.
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		AdminProc.addDoseInfo(null, null);
+		public void NullDoseInfoArguments() {
+		DoseInfo doseInfo = new DoseInfo(0, 0);
 	}
 
-**Test 9:** Check that it is not possible to add a dose information with non integer values.
+
+**Test 8:** Check that it is not possible to add a dose information with negative time interval values.
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		AdminProc.addDoseInfo("dosage", 0.10);
-	}
-
-**Test 10:** Check that it is not possible to add a dose information with negative time interval values.
-
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		AdminProc.addDoseInfo(-10, -5);
+		public void NegativeDoseInfoArguments() {
+		DoseInfo doseInfo = new DoseInfo(-10, -5);
 	}
 
 

@@ -1,72 +1,85 @@
 @startuml
 skinparam classAttributeIconSize 0
 
-class ApplicationPOT
-{
-  +static getInstance()
-  +getCurrentSession()
+class User {
+  -name: String
+  -email: String
+  -pwd: String
+  -roleId: String
 }
 
-class UserSession
-{
-  +getUserEmail()
+class Employee {
+  -id: String
+  -name: String
+  -email: String
+  -phone: String
+  -address: String
+  -citizenCardNumber: String
+  -roleId: String
+  
+  +Employee(name,email,phone,address,citizenCardNumber,roleId)
+
+  +hasRoleId(roleId)
 }
 
-class Task {
-  -String reference
-  -String designation
-  -String informalDescription
-  -String technicalDescription
-  -Integer duration
-  -Double cost
-  +Task(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
+class Company {
+  -designation: String
+  -authFacade: AuthFacade
+  -employeeStore: EmployeeStore
+  -employeeRoleStore: EmployeeRoleStore
+  
+  +Company(designation)
+
+  +getAuthFacade()
+  +getEmployeeStore()
+  +getEmployeeRoleStore()
 }
 
-class Category {
-  -String id
-  -String description
+class AuthFacade {
+  +existsRole(String roleId)
+  +getUserRoles()
+  +getUsersWithRole(String roleId)
 }
 
-class Organization {
-  -String name
-  -String VatNumber
-  -String website
-  -String phone
-  -String email
-  +Organization(name, VatNumber, webSite, phone, email, postalAddress, manager)
-  +createTask(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
-  +saveTask(task)
-  -addTask(task)
-  -validateTask(task)
+class EmployeeStore {
+  +addEmployee(name,phoneNumber,email,address,citizenCard,roleId)
+  +saveEmployee(employee)
+  +getEmployeesWithRole(roleId)
 }
 
-class Platform {
-  -String designation
-  +getCategories()
-  +getCategoryById(catId)
-  +getOrganizationByUserEmail(email)
+class ListEmployeeController {
+  +getRoles()
+  +getEmployeesByRoleId(role)
 }
 
-class CreateTaskController {
-  +getCategories()
-  +createTask(ref,designation,informalDesc,technicalDesc,duration,cost,categoryId)
-  +saveTask()
+class EmployeeRole {
+  -id: String
+  -description: String
 }
 
-class CreateTaskUI {
+class ListEmployeeUI {}
 
+class EmployeeRolesStore {
+  +addEmployeeRole(id,description)
+  +getRoles()
+  +existsRole(id)
 }
 
-CreateTaskUI ..> CreateTaskController
-CreateTaskController ..> Platform
-CreateTaskController ..> Category
-CreateTaskController ..> Task
-CreateTaskController ..> Organization
-CreateTaskController ..> ApplicationPOT
-CreateTaskController ..> UserSession
-Task "*" -> "1" Category : classified in
-Platform "1" --> "*" Category : defines
-Organization "1" --> "*" Task : owns
+ListEmployeeUI ..> ListEmployeeController
+ListEmployeeController ..> Company
 
+Company ..> AuthFacade
+Company ..> EmployeeStore
+Employee "*" -- "1" EmployeeStore : stores <
+Company "1" --> "*" Employee : knows >
+
+EmployeeRolesStore "1" -- "*" EmployeeRole : stores >
+Company ..> EmployeeRolesStore
+Employee "1" -- "*" EmployeeRole : has >
+
+ListEmployeeController ..> EmployeeStore
+ListEmployeeController ..> EmployeeRoleStore
+
+User -- Employee : corresponds to <
 
 @enduml

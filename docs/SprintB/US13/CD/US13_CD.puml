@@ -8,11 +8,11 @@ class CreateVaccineUI{
 class CreateVaccineController{
     +getVacTypes()
     +getVaccines()
-    +createVaccine(designation, numberAgeGroups, vacTypeId)
+    +createVaccine(designation, id, brand, vacTypeId)
     +createAdminProc(minAge, maxAge, numberOfDoses)
     +saveAdminProc()
     +createDoseInfo(dosage, timaToNextDose)
-    +safeDoseInfo
+    +saveDoseInfo()
     +saveVaccine()
 }
 
@@ -24,7 +24,7 @@ class Company{
 }
 
 class VaccineTypeStore{
-    +getVacTypeId(vacTypeId)
+    +getVacTypeById(vacTypeId)
 }
 
 class VaccineStore{
@@ -36,11 +36,10 @@ class Vaccine{
     -designation : String
     -brand : String
     -id : String
-    -vacTypeId : String
+    -vacType : VaccineType
 
-    +create(designation, numberAgeGroups, vacType)
+    +Vaccine(designation, id, brand, vacType)
     +createAdminProc(minAge, maxAge, numberOfDoses)
-    +validateAdminProc(adminProc)
 }
 
 class VaccineType{
@@ -49,14 +48,14 @@ class VaccineType{
     -tecnhology : String
 }
 
-class AdminProc{
+class AdminProccess{
     -numberOfDoses : int
     -minAge : int
     -maxAge : int
 
-    +create(minAge, maxAge, numberOfDoses)
+    +AdminProcess(minAge, maxAge, numberOfDoses)
     +createDoseInfo(dosage, timeSinceLastDose)
-    +validateDoseInfo(doseInfo)
+    +validateAdminProc(adminProc)
 }
 
 class AdminProcList{
@@ -67,7 +66,8 @@ class DoseInfo{
     -dosage : int
     -timeToNextDose : int
 
-    +creat(dosage, timeToNextDose)
+    +DoseInfo(dosage, timeToNextDose)
+    +validateDoseInfo(doseInfo)
 }
 
 class DoseInfoList{

@@ -2,32 +2,61 @@
 skinparam classAttributeIconSize 0
 
 class VaccinationCenter {
-  - name String
-  - address String
-  - phoneNumber int
-  - emailAddress String
-  - faxNumber int
-  - websiteAddress String
-  - openingAndClosingHours String
-  - slotDuration int
-  - maximumVaccinesPerSlot int
+  - name: String
+  - address: String
+  - emailAddress: String
+  - phoneNumber: int
+  - faxNumber: int
+  - websiteAddress: String
+  - openingHours: String
+  - closingHours: String
+  - slotDuration: int
+  - maximumVaccinesPerSlot: int
+  - coordinator: EMPLOYEE
+  - typeId: int
   ---
- +VaccinationCenter(name,address,phoneNumber,faxNumber,websiteAddress,openingAndClosingHours,slotDuration,maximumVaccinesPerSlot)
+ +VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator,typeId)
 }
 
 
 class Company {
-  -designation String
+  -designation: String
   ---
-  +createVaccinationCenter(name,address,phoneNumber,faxNumber,websiteAddress,openingAndClosingHours,slotDuration,maximumVaccinesPerSlot)
-  +validateVaccinatonCenter(center)
-  +saveVaccinationCenter(VaccinationCenter)
+  +getDesignation()
+  +getEmployeeStore()
+  +getVaccinationCenterStore()
+}
+
+class VaccinationCenterStore {
+---
++createVaccinationCenter(centerData,coordinator)
++validateVaccinatonCenter(center)
++saveVaccinationCenter(center)
++checkDuplicates(center)
+-addVaccinationCenter(center)
+}
+
+class Employee {
+  -id: String 
+  -name: String 
+  -email: String 
+  -phone: String 
+  -address: String 
+  -citizenCardNumber: int 
+  -roleId: String 
+  ---
+  +Employee(name,email,phone,address,citizenCardNumber,roleId)
+}
+
+class EmployeeStore {
+  +getEmployeesWithRole(id)
 }
 
 class VaccinationCenterController {
   ---
-  +createVaccinationCenter()
-  +saveVaccinationCenter()
+  +getCoordinators()
+  +createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot)
+  +saveVaccinationCenter(center)
 }
 
 class VaccinationCenterUI {}
@@ -35,6 +64,12 @@ class VaccinationCenterUI {}
 VaccinationCenterUI ..> VaccinationCenterController
 VaccinationCenterController ..> Company
 Company "1" --> "*" VaccinationCenter : belongs to <
-VaccinationCenterController ..> VaccinationCenter
+Company ..> VaccinationCenterStore
+Company ..> EmployeeStore
+EmployeeStore "1" --> "*" Employee : stores >
+Company "1" --> "*" Employee : knows >
+VaccinationCenterController ..> VaccinationCenterStore
+VaccinationCenterController ..> EmployeeStore
+VaccinationCenterStore "1" --> "*" VaccinationCenter : stores >
 
 @enduml

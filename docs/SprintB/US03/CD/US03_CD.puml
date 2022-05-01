@@ -1,11 +1,6 @@
 @startuml Class Diagram
 skinparam classAttributeIconSize 0
 
-' class ApplicationPOT {
-'   + static getInstance()
-'   + getCurrentSession()
-' }
-
 class AuthFacade {
   + existsUser(email)
   + addUserWithRole(name, email, pwd, roleId)
@@ -21,8 +16,6 @@ class Company {
   + validateUser(user)
 }
 
-' class Receptionist { }
-
 class RegisterSNSUserController {
   + createSNSUser(snsNumber, name, birthDay, gender, phoneNumber, email)
   + saveSNSUser(user)
@@ -33,11 +26,9 @@ class RegisterSNSUserUI { }
 class SNSUser {
   - String citizenCard
   - String snsNumber
-  - String name
   - Date birthDay
   - Char gender
   - String phoneNumber
-  - String email
   - String address
   + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
 }
@@ -49,7 +40,7 @@ class User {
   - String roleId
 }
 
-class UserStore {
+class SNSUserStore {
   + createUser(name, email, pwd, roleId)
   + validateUser(user)
   + saveUser(user)
@@ -65,26 +56,20 @@ class EmailSender {
 }
 
 
-' AuthFacade ..> User
-
+Company ..> SNSUserStore
+Company ..> AuthFacade
 Company "1" --> "*" SNSUser : knows
-' Company ..> AuthFacade
 
-' RegisterSNSUserController ..> ApplicationPOT
 RegisterSNSUserController ..> Company
-' RegisterSNSUserController ..> Receptionist
-' RegisterSNSUserController ..> SNSUser
-RegisterSNSUserController ..> UserStore
-' RegisterSNSUserController ..> UserSession
 
 RegisterSNSUserUI ..> RegisterSNSUserController
 
-SNSUser --|> User
+' SNSUser --|> User
+SNSUser ..> User
 
-UserStore ..> User
-UserStore ..> Company
-UserStore ..> AuthFacade
-UserStore ..> PasswordGenerator
-UserStore ..> EmailSender
+SNSUserStore --> AuthFacade : uses
+SNSUserStore --> PasswordGenerator : uses 
+SNSUserStore --> EmailSender : uses
+SNSUserStore ..> SNSUser
 
 @enduml
