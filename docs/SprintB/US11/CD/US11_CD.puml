@@ -12,7 +12,7 @@ class Employee {
   -id: String
   -phone: String
   -address: String
-  -int citizenCardNumber
+  -citizenCardNumber: String
   
   +Employee(name,email,phone,address,citizenCardNumber,roleId)
 
