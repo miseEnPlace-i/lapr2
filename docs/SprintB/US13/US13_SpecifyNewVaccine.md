@@ -252,49 +252,39 @@ Other software classes (i.e. Pure Fabrication) identified:
 # 5. Construction (Implementation)
 
 
-## Class CreateTaskController 
+## Class CreateVaccineController 
 
-		public boolean createTask(String ref, String designation, String informalDesc, 
-			String technicalDesc, Integer duration, Double cost, Integer catId)() {
 		
-			Category cat = this.platform.getCategoryById(catId);
-			
-			Organization org;
-			// ... (omitted)
-			
-			this.task = org.createTask(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
-			
-			return (this.task != null);
+	public class CreateVaccineController {
+		private App app;
+		private Company company;
+		private VaccineStore vaccineStore;
+		private VaccineTypeStore vaccineTypeStore;
+
+		/**
+		* Constructor for CreateVaccineController
+		*/
+		public CreateVaccineController() {
+			this.app = App.getInstance();
+			this.company = this.app.getCompany();
+			this.vaccineStore = this.company.getVaccineStore();
+			this.vaccineTypeStore = this.company.getVaccineTypeStore();
 		}
 
+		...
 
-## Class Organization
-
-
-		public Task createTask(String ref, String designation, String informalDesc, 
-			String technicalDesc, Integer duration, Double cost, Category cat)() {
-		
-	
-			Task task = new Task(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
-			if (this.validateTask(task))
-				return task;
-			return null;
-		}
-
+	}
 
 
 # 6. Integration and Demo 
 
-* A new option on the Employee menu options was added.
+* A new option on the Vaccine menu options was added.
 
-* Some demo purposes some tasks are bootstrapped while system starts.
 
 
 # 7. Observations
 
-Platform and Organization classes are getting too many responsibilities due to IE pattern and, therefore, they are becoming huge and harder to maintain. 
-
-Is there any way to avoid this to happen?
+No observations were found.
 
 
 
