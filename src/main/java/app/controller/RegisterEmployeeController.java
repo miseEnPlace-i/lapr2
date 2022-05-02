@@ -62,4 +62,13 @@ public class RegisterEmployeeController {
   public List<UserRole> getEmployeeRoles() {
     return roleStore.getRoles();
   }
+
+  /**
+   * Gets all the information about the employee.
+   * 
+   * @return the employee information
+   */
+  public String stringifyEmployee() {
+    return this.employee.toString();
+  }
 }
