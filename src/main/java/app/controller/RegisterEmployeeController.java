@@ -26,6 +26,7 @@ public class RegisterEmployeeController {
     this.app = App.getInstance();
     this.company = this.app.getCompany();
     this.store = this.company.getEmployeeStore();
+    this.roleStore = this.company.getEmployeeRoleStore();
     this.employee = null;
   }
 
