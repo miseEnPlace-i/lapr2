@@ -84,7 +84,7 @@ public class VaccinationCenter {
    * @param phoneNum the phoneNum to set
    */
   private void setPhoneNum(String phoneNum) {
-    if (phoneNum == null || phoneNum.isEmpty() || !phoneNum.matches("^\\+\\d{3} \\d{9}$")) {
+    if (phoneNum == null || phoneNum.isEmpty() || !phoneNum.matches("^(\\+\\d{1,3}(  )?)?((\\(\\d{1,3}\\))|\\d{1,3})[- .]?\\d{3,4}[- .]?\\d{4}$")) {
       throw new IllegalArgumentException("Phone number is not valid");
     }
     this.phoneNum = phoneNum;
