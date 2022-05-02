@@ -3,6 +3,7 @@ package app.domain.model.store;
 import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.Employee;
+import app.domain.shared.PasswordGenerator;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
 /**
@@ -33,9 +34,7 @@ public class EmployeeStore {
    * @param citizenCard the employee citizenCard
    * @param roleId the employee roleId
    */
-  public Employee addEmployee(String name, String phoneNumber, String email, String address, String citizenCard, String roleId) {
-    // TODO verifications
-
+  public Employee createEmployee(String name, String phoneNumber, String email, String address, String citizenCard, String roleId) {
     Employee employee = new Employee(name, phoneNumber, email, address, citizenCard, roleId);
 
     return employee;
