@@ -16,13 +16,14 @@ public class VaccinationCenterUI implements Runnable {
     private VaccinationCenterController ctrl;
 
 
-    public void insertVaccinationCenterData() {
-        // TODO: catch exceptions that might occur
+    private void insertVaccinationCenterData() {
+        System.out.println("\nRegister Vaccination Center: ");
+
         String name = Utils.readLineFromConsole("Name: ");
         String address = Utils.readLineFromConsole("Address: ");
         String email = Utils.readLineFromConsole("Email: ");
-        int phone = Utils.readIntegerFromConsole("Phone Number: ");
-        int fax = Utils.readIntegerFromConsole("Fax Number: ");
+        String phone = Utils.readLineFromConsole("Phone Number: ");
+        String fax = Utils.readLineFromConsole("Fax Number: ");
         String website = Utils.readLineFromConsole("Website Address: ");
         String openHours = Utils.readLineFromConsole("Opening hours: ");
         String closHours = Utils.readLineFromConsole("Closing hours: ");
@@ -47,8 +48,11 @@ public class VaccinationCenterUI implements Runnable {
 
     @Override
     public void run() {
-        // TODO Auto-generated method stub
-        insertVaccinationCenterData();
+        try {
+            insertVaccinationCenterData();
+        } catch (Exception e) {
+            System.out.println("Error");
+        }
         boolean confirmed = confirmData();
 
         if (confirmed) {
@@ -58,7 +62,7 @@ public class VaccinationCenterUI implements Runnable {
 
     }
 
-    public boolean confirmData() {
+    private boolean confirmData() {
         System.out.println("\nPlease confirm the data below.\n");
 
         List<String> options = new ArrayList<String>();
