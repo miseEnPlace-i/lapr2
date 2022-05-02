@@ -3,6 +3,7 @@ package app.domain.model;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import app.domain.shared.CalendarUtils;
 
 /**
  * Community Mass Vaccination Center class
