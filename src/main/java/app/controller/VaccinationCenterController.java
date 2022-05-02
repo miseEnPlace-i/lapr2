@@ -8,12 +8,20 @@ import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.VaccinationCenterStore;
 import app.domain.shared.Constants;
 
+/**
+ * Register Vaccination Center Controller
+ */
+
 public class VaccinationCenterController {
   private App app;
   private Company company;
   private EmployeeStore employeeStore;
   private VaccinationCenter center;
   private VaccinationCenterStore vacStore;
+
+  /**
+   * Constructor for VaccinationCenterController
+   */
 
   public VaccinationCenterController() {
     this.app = App.getInstance();
@@ -23,16 +31,43 @@ public class VaccinationCenterController {
     this.center = null;
   }
 
-  public void createVaccinationCenter(String name, String address, String emailAddress, String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot, Employee coordinator) {
+  /**
+   * Creates an Vaccination Center instance and validates it.
+   * 
+   * @param name
+   * @param address
+   * @param emailAddress
+   * @param phoneNum
+   * @param faxNum
+   * @param webAddress
+   * @param openingHours
+   * @param closingHours
+   * @param slotDuration
+   * @param maxVacSlot
+   * @param coordinator
+   */
 
-    this.center = vacStore.createVaccinationCenter(name, address, emailAddress, phoneNum, faxNum, webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
+  public void createVaccinationCenter(String name, String address, String emailAddress,
+      String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours,
+      int slotDuration, int maxVacSlot, Employee coordinator) {
+
+    this.center = vacStore.createVaccinationCenter(name, address, emailAddress, phoneNum, faxNum,
+        webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
 
     vacStore.validateVaccinationCenter(center);
   }
 
+  /**
+   * Saves Vaccination Center
+   */
+
   public void saveVaccinationCenter() {
     vacStore.saveVaccinationCenter(center);
   }
+
+  /**
+   * @return Gets list of all coordinators registered in the system
+   */
 
   public List<Employee> getCoordinators() {
     return employeeStore.getEmployeesWithRole(Constants.ROLE_COORDINATOR);
