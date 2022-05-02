@@ -5,25 +5,52 @@ import java.util.List;
 import app.domain.model.Employee;
 import app.domain.model.VaccinationCenter;
 
+/**
+ * @author André Barros <1211299@isep.ipp.pt>
+ */
+
 public class VaccinationCenterStore {
 
   // Vaccination Centers list
   private List<VaccinationCenter> vacCenters;
 
+  /**
+   * Constructor for VaccinationCenterStore
+   */
+
   public VaccinationCenterStore() {
     this.vacCenters = new ArrayList<VaccinationCenter>();
   }
 
+  /**
+   * Creates an Vaccination Center instance.
+   * 
+   * @param name
+   * @param address
+   * @param emailAddress
+   * @param phoneNum
+   * @param faxNum
+   * @param webAddress
+   * @param openingHours
+   * @param closingHours
+   * @param slotDuration
+   * @param maxVacSlot
+   * @param coordinator
+   * @return VaccinationCenter
+   */
+
   public VaccinationCenter createVaccinationCenter(String name, String address, String emailAddress, String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot,
       Employee coordinator) {
 
-    // TO DO
-    try {
-    } catch (Exception e) {
-    }
     VaccinationCenter center = new VaccinationCenter(name, address, emailAddress, phoneNum, faxNum, webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
     return center;
   }
+
+  /**
+   * Validates a Vaccination Center and calls the method checkDuplicates.
+   * 
+   * @param center
+   */
 
   public void validateVaccinationCenter(VaccinationCenter center) {
     if (center == null) {
@@ -32,20 +59,24 @@ public class VaccinationCenterStore {
     checkDuplicates(center);
   }
 
+  /**
+   * Check for duplicates.
+   * 
+   * @param center
+   */
+
   public void checkDuplicates(VaccinationCenter center) {
     if (vacCenters.contains(center)) {
       throw new IllegalArgumentException("Duplicate Vaccination Center");
     }
   }
 
+  /**
+   * Saves a Vaccination Center.
+   * 
+   * @param center
+   */
   public void saveVaccinationCenter(VaccinationCenter center) {
-    /*
-     * String name = center.getName(); String address = center.getAddress(); String email = center.getEmailAddress(); int
-     * phoneNum = center.getPhoneNum(); int faxNum = center.getFaxNum(); String website = center.getWebAddress(); String
-     * openHours = center.getOpeningHours(); String cloHours = center.getClosingHours(); int slotDuration =
-     * center.getSlotDuration(); int maxVacSlot = center.getMaxVacSlot(); Employee coordinator = center.getCoordinator();
-     */
-
-
+    vacCenters.add(center);
   }
 }
