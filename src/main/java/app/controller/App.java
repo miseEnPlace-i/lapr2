@@ -74,7 +74,7 @@ public class App {
     this.authFacade.addUserWithRole("Main Administrator", "admin@lei.sem2.pt", "123456", Constants.ROLE_ADMIN);
     this.authFacade.addUserWithRole("Test Administrator", "admin@admin.pt", "123456", Constants.ROLE_ADMIN);
 
-    this.employeeStore.addEmployee("Name", "phoneNumber", "email", "address", "citizenCard", Constants.ROLE_RECEPTIONIST);
+    this.employeeStore.createEmployee("Name", "phoneNumber", "email", "address", "citizenCard", Constants.ROLE_RECEPTIONIST);
   }
 
   // Extracted from
