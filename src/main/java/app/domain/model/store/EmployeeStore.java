@@ -64,7 +64,13 @@ public class EmployeeStore {
    * @param employee the employee to be checked
    */
   public void validateEmployee(Employee employee) {
-    // TODO: implement this method
+    if (employee == null) throw new IllegalArgumentException("Employee cannot be null");
+
+    String email = employee.getEmail();
+
+    if (this.authFacade.existsUser(email)) throw new IllegalArgumentException("Email already exists");
+
+    checkDuplicates(employee);
   }
 
   /**
@@ -73,9 +79,17 @@ public class EmployeeStore {
    * @param employee the employee to be inserted
    */
   public void saveEmployee(Employee employee) {
-    // password = generatePassword();
-    // authFacade.addUserWithRole(employee.getName(), employee.getEmail(), password, employee.getRoleId());
-    // TODO: implement this method
+    String name = employee.getName();
+    String email = employee.getEmail();
+    String roleId = employee.getRoleId();
+    String password = PasswordGenerator.generatePwd();
+
+    this.authFacade.addUserWithRole(name, email, password, roleId);
+
+    this.employees.add(employee);
+
+    // TODO: send password email
+    // this.emailSender.sendPasswordEmail(email, password);
   }
 
   /**
@@ -84,6 +98,6 @@ public class EmployeeStore {
    * @param employee the employee to be checked
    */
   public void checkDuplicates(Employee employee) {
-    // TODO: implement this method
+    if (employees.contains(employee)) throw new IllegalArgumentException("Duplicate employee found");
   }
 }
