@@ -1,6 +1,8 @@
 package app.ui.console;
 
 import java.util.List;
+import java.util.ArrayList;
+
 import app.controller.RegisterEmployeeController;
 import app.ui.console.utils.Utils;
 import pt.isep.lei.esoft.auth.domain.model.UserRole;
@@ -22,7 +24,22 @@ public class RegisterEmployeeUI implements Runnable {
     }
 
     public void run() {
-        // TODO: implement this method
+        System.out.println("\nRegister Employee UI:");
+
+        List<UserRole> employeeRoles = controller.getEmployeeRoles();
+        displayEmployeeRoles(employeeRoles);
+
+        UserRole role = selectEmployeeRole(employeeRoles);
+        String roleId = role.getId();
+
+        insertEmployeeData(roleId);
+
+        boolean confirmed = confirmData();
+
+        if (confirmed) {
+            controller.saveEmployee();
+            System.out.println("Employee successfully registered!");
+        }
     }
 
     /**
@@ -39,15 +56,23 @@ public class RegisterEmployeeUI implements Runnable {
      * 
      * @param employeeRoles the list of employee roles
      */
-    private void selectEmployeeRole(List<UserRole> employeeRoles) {
-        // TODO: implement this method
+    private UserRole selectEmployeeRole(List<UserRole> employeeRoles) {
+        int roleIndex = Utils.selectsIndex(employeeRoles);
+
+        return employeeRoles.get(roleIndex);
     }
 
     /**
      * Asks user to input employee data
      */
-    private void insertEmployeeData() {
-        // TODO: implement this method
+    private void insertEmployeeData(String roleId) {
+        String name = Utils.readLineFromConsole("Name: ");
+        String address = Utils.readLineFromConsole("Address: ");
+        String phoneNumber = Utils.readLineFromConsole("Phone Number: ");
+        String email = Utils.readLineFromConsole("Email: ");
+        String citizenCard = Utils.readLineFromConsole("Citizen Card Number: ");
+
+        controller.createEmployee(name, address, phoneNumber, email, citizenCard, roleId);
     }
 
     /**
@@ -56,7 +81,16 @@ public class RegisterEmployeeUI implements Runnable {
      * @return true if the user confirms, false otherwise
      */
     private boolean confirmData() {
-        // TODO : implement this method
-        return false;
+        System.out.println("\nPlease confirm the data below.\n");
+        String stringifiedEmployee = controller.stringifyEmployee();
+        System.out.println(stringifiedEmployee);
+
+        List<String> options = new ArrayList<String>();
+        options.add("y");
+        options.add("n");
+        Object input = Utils.showAndSelectOne(options, "Is this information correct? (y/n):  ");
+        String inputStr = (String) input;
+
+        return inputStr.equals("y");
     }
 }
