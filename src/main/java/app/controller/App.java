@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import app.domain.model.Company;
+import app.domain.model.Employee;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
 import app.domain.shared.Constants;
@@ -74,7 +75,8 @@ public class App {
     this.authFacade.addUserWithRole("Main Administrator", "admin@lei.sem2.pt", "123456", Constants.ROLE_ADMIN);
     this.authFacade.addUserWithRole("Test Administrator", "admin@admin.pt", "123456", Constants.ROLE_ADMIN);
 
-    this.employeeStore.addEmployee("Name", "phoneNumber", "email", "address", "citizenCard", Constants.ROLE_RECEPTIONIST);
+    Employee e = this.employeeStore.addEmployee("Name", "+351916919169", "teste@teste.com", "address", "123456789ZZ1", Constants.ROLE_RECEPTIONIST);
+    this.employeeStore.saveEmployee(e);
   }
 
   // Extracted from
