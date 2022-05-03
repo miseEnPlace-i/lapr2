@@ -24,8 +24,8 @@ public class SpecifyNewVaccineTypeController {
     this.vaccineTypeStore = this.company.getVaccineTypeStore();
   }
 
-  public VaccineType addVaccineType(String name, String description, String technology) {
-    this.vt = vaccineTypeStore.addVaccineType(name, description, technology);
+  public VaccineType addVaccineType(String code, String description, String technology) {
+    this.vt = vaccineTypeStore.addVaccineType(code, description, technology);
 
     return this.vt;
   }
