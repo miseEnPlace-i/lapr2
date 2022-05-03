@@ -1,5 +1,7 @@
 package app.domain.model;
 
+import app.domain.shared.CCFormatVerifier;
+
 /**
  * Employee model class.
  * 
@@ -200,10 +202,12 @@ public class Employee {
    * @throws IllegalArgumentException if the citizenCard is null, empty or not valid
    */
   private void setCitizenCard(String citizenCard) {
+    CCFormatVerifier formatVerifier = new CCFormatVerifier();
+
     if (citizenCard == null) throw new IllegalArgumentException("Citizen Card cannot be null");
     if (citizenCard.isEmpty()) throw new IllegalArgumentException("Citizen Card cannot be empty");
 
-    if (!citizenCard.matches("^\\d{7}[a-zA-Z]\\d{2}[a-zA-Z]$")) throw new IllegalArgumentException("Citizen Card is not valid");
+    if (!formatVerifier.validate(citizenCard)) throw new IllegalArgumentException("Citizen Card is not valid");
 
     this.citizenCard = citizenCard;
   }
