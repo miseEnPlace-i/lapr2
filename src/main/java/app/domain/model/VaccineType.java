@@ -53,7 +53,12 @@ public class VaccineType {
 
   @Override
   public String toString() {
-    // TODO
-    return "";
+    StringBuilder sb = new StringBuilder();
+    sb.append("Vaccine type specifications:\n");
+    sb.append(String.format("Code: %s\n", this.code));
+    sb.append(String.format("Description: %s\n", this.description));
+    sb.append(String.format("Technology: %s\n", this.technology));
+
+    return sb.toString();
   }
 }
