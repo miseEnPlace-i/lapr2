@@ -62,6 +62,11 @@ public class VaccinationCenterUI implements Runnable {
         do {
             Utils.readLineFromConsole("Select a employee from the list:\n");
             coordinator = (Employee) Utils.showAndSelectOne(coordinators, "Coordinators");
+            if (coordinators.contains(coordinator)) {
+                flag = true;
+            } else {
+                System.out.println("\nInvalid coordinator.");
+            }
         } while (!flag);
 
         ctrl.createVaccinationCenter(name, address, email, phone, fax, website, openHours, closHours, slotDur, maxVac, coordinator);
@@ -70,7 +75,7 @@ public class VaccinationCenterUI implements Runnable {
     /**
      * Confirms all the data
      * 
-     * @return return "y" if correct or "n" if incorrect
+     * @return return "true" if correct or "false" if incorrect
      */
 
     private boolean confirmData() {
