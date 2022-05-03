@@ -1,6 +1,6 @@
 package app.domain.model;
 
-import app.domain.shared.CCFormatVerifier;
+import app.service.CCFormatVerifier;
 
 /**
  * Employee model class.

@@ -3,7 +3,7 @@ package app.domain.model.store;
 import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.Employee;
-import app.domain.shared.PasswordGenerator;
+import app.service.PasswordGenerator;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
 /**

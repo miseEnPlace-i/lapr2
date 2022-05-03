@@ -1,5 +1,6 @@
 package app.ui.console;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import app.controller.RegisterEmployeeController;
@@ -12,8 +13,10 @@ import pt.isep.lei.esoft.auth.domain.model.UserRole;
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
 
-public class RegisterEmployeeUI implements Runnable {
+public class RegisterEmployeeUI implements Runnable, IRegisterUI {
   private RegisterEmployeeController controller;
+
+  private String roleId = "";
 
   /**
    * Constructor for RegisterEmployeeUI.
@@ -29,9 +32,13 @@ public class RegisterEmployeeUI implements Runnable {
     displayEmployeeRoles(employeeRoles);
 
     UserRole role = selectEmployeeRole(employeeRoles);
-    String roleId = role.getId();
+    this.roleId = role.getId();
 
-    insertEmployeeData(roleId);
+    try {
+      insertData();
+    } catch (Exception e) {
+      System.out.println(String.format("Error: %s\n", e.getMessage()));
+    }
 
     boolean confirmed = confirmData();
 
@@ -64,14 +71,15 @@ public class RegisterEmployeeUI implements Runnable {
   /**
    * Asks user to input employee data
    */
-  private void insertEmployeeData(String roleId) {
+  @Override
+  public void insertData() throws IllegalArgumentException, ParseException {
     String name = Utils.readLineFromConsole("Name: ");
     String address = Utils.readLineFromConsole("Address: ");
     String phoneNumber = Utils.readLineFromConsole("Phone Number: ");
     String email = Utils.readLineFromConsole("Email: ");
     String citizenCard = Utils.readLineFromConsole("Citizen Card Number: ");
 
-    controller.addEmployee(name, address, phoneNumber, email, citizenCard, roleId);
+    controller.addEmployee(name, address, phoneNumber, email, citizenCard, this.roleId);
   }
 
   /**
@@ -79,7 +87,8 @@ public class RegisterEmployeeUI implements Runnable {
    *
    * @return true if the user confirms, false otherwise
    */
-  private boolean confirmData() {
+  @Override
+  public boolean confirmData() {
     System.out.println("\nPlease confirm the data below.\n");
     String stringifiedEmployee = controller.stringifyEmployee();
     System.out.println(stringifiedEmployee);

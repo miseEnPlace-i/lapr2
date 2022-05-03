@@ -1,4 +1,4 @@
-package app.domain.shared;
+package app.service;
 
 /**
  * @author André Barros <1211299@isep.ipp.pt>

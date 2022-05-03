@@ -1,7 +1,7 @@
 package app.domain.model;
 
 import java.text.ParseException;
-import app.domain.shared.CalendarUtils;
+import app.service.CalendarUtils;
 
 /**
  * Vaccination Center class
