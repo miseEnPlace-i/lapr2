@@ -8,7 +8,7 @@ import app.domain.model.store.EmployeeStore;
 import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
 /**
- * Register SNS User Controller
+ * List Employees by Role Controller
  * 
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */

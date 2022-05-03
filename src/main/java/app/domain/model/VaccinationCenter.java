@@ -1,5 +1,8 @@
 package app.domain.model;
 
+import java.text.ParseException;
+import app.domain.shared.CalendarUtils;
+
 /**
  * Vaccination Center class
  * 
@@ -7,24 +10,24 @@ package app.domain.model;
  */
 
 public class VaccinationCenter {
-  private String name = "";
-  private String address = "";
-  private String email = "";
-  private String phoneNum = "";
-  private String faxNum = "";
-  private String webAddress = "";
-  private String openingHours = "";
-  private String closingHours = "";
-  private int slotDuration = 0;
-  private int maxVacSlot = 0;
+  private String name;
+  private String address;
+  private String email;
+  private String phoneNum;
+  private String faxNum;
+  private String webAddress;
+  private String openingHours;
+  private String closingHours;
+  private int slotDuration;
+  private int maxVacSlot;
   private Employee coordinator;
 
   /**
-   * Constructor for Vaccination Center
+   * Constructor for the Vaccination Center
    * 
    * @param name the vaccination center name
    * @param address the vaccination center address
-   * @param emailAddress the vaccination center email address
+   * @param email the vaccination center email address
    * @param phoneNum the vaccination center phone number
    * @param faxNum the vaccination center fax number
    * @param webAddress the vaccination center web address
@@ -32,6 +35,7 @@ public class VaccinationCenter {
    * @param closingHours the vaccination center closing hours
    * @param slotDuration the vaccination center slot duration
    * @param maxVacSlot the vaccination center maximum vaccines per slot
+   * @param coordinator the vaccination center coordinator
    */
 
   public VaccinationCenter(String name, String address, String email, String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot, Employee coordinator) {
@@ -50,7 +54,11 @@ public class VaccinationCenter {
   }
 
   /**
-   * @param name the name to set
+   * Sets the center name.
+   * 
+   * @param name the vaccination center name
+   * 
+   * @throws IllegalArgumentException if the name is null, empty or not valid.
    */
   private void setName(String name) {
     if (name == null || name.isEmpty()) {
@@ -60,7 +68,11 @@ public class VaccinationCenter {
   }
 
   /**
-   * @param address the address to set
+   * Sets the center address
+   * 
+   * @param address the vaccination center address
+   * 
+   * @throws IllegalArgumentException if the address is null, empty or not valid.
    */
   private void setAddress(String address) {
     if (address == null || address.isEmpty()) {
@@ -70,7 +82,11 @@ public class VaccinationCenter {
   }
 
   /**
-   * @param email the email to set
+   * Sets the center email.
+   * 
+   * @param email the vaccination center email address
+   * 
+   * @throws IllegalArgumentException if the email address is null, empty or not valid.
    */
   private void setEmail(String email) {
     if (email == null || email.isEmpty() || !email.matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")) {
@@ -80,17 +96,25 @@ public class VaccinationCenter {
   }
 
   /**
-   * @param phoneNum the phoneNum to set
+   * Sets the center phone number.
+   * 
+   * @param phoneNum the vaccination center phone number
+   * 
+   * @throws IllegalArgumentException if the phone number is null, empty or not valid.
    */
   private void setPhoneNum(String phoneNum) {
-    if (phoneNum == null || phoneNum.isEmpty() || !phoneNum.matches("^\\+\\d{3} \\d{9}$")) {
+    if (phoneNum == null || phoneNum.isEmpty() || !phoneNum.matches("^(\\+\\d{1,3}(  )?)?((\\(\\d{1,3}\\))|\\d{1,3})[- .]?\\d{3,4}[- .]?\\d{4}$")) {
       throw new IllegalArgumentException("Phone number is not valid");
     }
     this.phoneNum = phoneNum;
   }
 
   /**
-   * @param faxNum the faxNum to set
+   * Sets the center fax number.
+   * 
+   * @param faxNum the vaccination center fax number.
+   * 
+   * @throws IllegalArgumentException if the fax number is null, empty or not valid.
    */
   private void setFaxNum(String faxNum) {
     if (faxNum == null || faxNum.isEmpty() || !faxNum.matches("^\\+\\d{3} \\d{12}$")) {
@@ -100,7 +124,11 @@ public class VaccinationCenter {
   }
 
   /**
-   * @param webAddress the webAddress to set
+   * Sets the center website address.
+   * 
+   * @param webAddress the vaccination center website address.
+   * 
+   * @throws IllegalArgumentException if the website address is null, empty or not valid.
    */
   private void setWebAddress(String webAddress) {
     if (webAddress == null || webAddress.isEmpty() || !webAddress.matches("^(https:\\/\\/|https:\\/\\/)?(www.)?([a-zA-Z0-9]+).[a-zA-Z0-9]*.[a-z]{3}.?([a-z]+)?$")) {
@@ -110,47 +138,77 @@ public class VaccinationCenter {
   }
 
   /**
-   * @param openingHours the openingHours to set
+   * Sets the center opening hours.
+   * 
+   * @param openingHours the vaccination center opening hours.
+   * 
+   * @throws IllegalArgumentException if the opening hours are null, empty or not valid.
    */
+
   private void setOpeningHours(String openingHours) {
-    if (openingHours == null || openingHours.isEmpty()) {
+
+    try {
+      if (openingHours != null && !openingHours.isEmpty() && !CalendarUtils.parse(openingHours).before(closingHours)) {
+        this.openingHours = openingHours;
+      }
+    } catch (ParseException e) {
       throw new IllegalArgumentException("Opening hours is not valid");
     }
-    this.openingHours = openingHours;
   }
 
   /**
-   * @param closingHours the closingHours to set
+   * Sets the center closing hours.
+   * 
+   * @param closingHours the vaccination center closing hours.
+   * 
+   * @throws IllegalArgumentException if the closing hours are null, empty or not valid.
    */
+
   private void setClosingHours(String closingHours) {
-    if (closingHours == null || closingHours.isEmpty()) {
+
+    try {
+      if (closingHours != null && !closingHours.isEmpty() && !CalendarUtils.parse(closingHours).after(openingHours)) {
+        this.closingHours = closingHours;
+      }
+    } catch (ParseException e) {
       throw new IllegalArgumentException("Closing hours is not valid");
     }
-    this.closingHours = closingHours;
   }
 
   /**
-   * @param slotDuration the slotDuration to set
+   * Sets the center slot duration.
+   * 
+   * @param slotDuration the vaccination center slot duration.
+   * 
+   * @throws IllegalArgumentException if the slot duration is null or not valid.
    */
   private void setSlotDuration(int slotDuration) {
-    if (slotDuration == 0) {
+    if (slotDuration <= 0) {
       throw new IllegalArgumentException("Slot duration is not valid");
     }
     this.slotDuration = slotDuration;
   }
 
   /**
-   * @param maxVacSlot the maxVacSlot to set
+   * Sets the center maximum vaccines per slot.
+   * 
+   * @param maxVacSlot the vaccination center maximum vaccines per slot.
+   * 
+   * @throws IllegalArgumentException if the maximum vaccines per slot are null or not valid.
    */
   private void setMaxVacSlot(int maxVacSlot) {
-    if (maxVacSlot == 0) {
+    if (maxVacSlot <= 0) {
       throw new IllegalArgumentException("Maximum number of vaccines per slot is not valid");
     }
     this.maxVacSlot = maxVacSlot;
   }
 
   /**
-   * @param coordinator the coordinator to set
+   * Sets the center coordinator.
+   * 
+   * @param coordinator the vaccination center coordinator.
+   * 
+   * @throws IllegalArgumentException if the coordinator is null or not valid
    */
   private void setCoordinator(Employee coordinator) {
     if (coordinator == null) {
@@ -159,4 +217,25 @@ public class VaccinationCenter {
     this.coordinator = coordinator;
   }
 
+  /**
+   * Shows all vaccination center data
+   */
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("Vaccination Center data:\n");
+    sb.append(String.format("Name: %s\n", this.name));
+    sb.append(String.format("Address: %s\n", this.address));
+    sb.append(String.format("Email: %s\n", this.email));
+    sb.append(String.format("Phone number: %s\n", this.phoneNum));
+    sb.append(String.format("Fax number: %s\n", this.faxNum));
+    sb.append(String.format("Web address: %s\n", this.webAddress));
+    sb.append(String.format("Opening hours: %s\n", this.openingHours));
+    sb.append(String.format("Closing hours: %s\n", this.closingHours));
+    sb.append(String.format("Slot duration: %s\n", this.slotDuration));
+    sb.append(String.format("Maximum vaccines per slot: %s\n", this.maxVacSlot));
+    sb.append(String.format("Coordinator: %s\n", this.coordinator.getName()));
+
+    return sb.toString();
+  }
 }

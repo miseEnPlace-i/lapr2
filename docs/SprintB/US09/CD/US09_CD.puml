@@ -5,17 +5,16 @@ class VaccinationCenter {
   - name: String
   - address: String
   - emailAddress: String
-  - phoneNumber: int
-  - faxNumber: int
+  - phoneNumber: String
+  - faxNumber: String
   - websiteAddress: String
   - openingHours: String
   - closingHours: String
   - slotDuration: int
   - maximumVaccinesPerSlot: int
   - coordinator: EMPLOYEE
-  - typeId: int
   ---
- +VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator,typeId)
+ +VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
 }
 
 
@@ -55,7 +54,7 @@ class EmployeeStore {
 class VaccinationCenterController {
   ---
   +getCoordinators()
-  +createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot)
+  +createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
   +saveVaccinationCenter(center)
 }
 

@@ -1,6 +1,7 @@
 package app.domain.model;
 
 import java.util.Calendar;
+import app.domain.shared.CalendarUtils;
 
 /**
  * SNSUser model class.

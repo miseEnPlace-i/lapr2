@@ -33,7 +33,6 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 * **AC1:** Each center mush have one Center Coordinator.
 * **AC2:** All required fields must be filled in.
 * **AC3:** When creating a new Vaccination Center, validate that there isn´t already one existing with the same references.
-* **AC4:** Each center must be or HealthCare Center or Community Mass Vaccination Center.
 
 ### 1.4. Found out Dependencies
 
@@ -59,11 +58,9 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 	* maximum vaccines per slot. 
 * Selected data:
     * center coordinator;
-    * center type.	
   
 **Output Data:**
 * List of existing center coordinators;
-* List of center types;
 * (In)Success of the operation.
 
 ### 1.6. System Sequence Diagram (SSD)
@@ -99,10 +96,10 @@ maximum number of vaccines that can be given per slot (e.g.: 10 vaccines per slo
 | Step 3: types requested data                                                                                                                        | ... saving the inputted data?                   | VaccinationCenter      | IE: object created in step 1 has its own data.             |
 | Step 4: shows all center coordinators and asks to select one                                                                                        | ... listing all the center coordinators?        | EmployeeStore          | IE: knows all the existing center coordinators.            |
 | Step 5: selects a center coordinator                                                                                                                | n/a                                             | n/a                    | n/a                                                        |
-| Step 8: shows all the data and requests a confirmation                                                                                              | ... validating the data introduced?             | VaccinationCenterStore | IE: holds every information about centers.                 |
+| Step 6: shows all the data and requests a confirmation                                                                                              | ... validating the data introduced?             | VaccinationCenterStore | IE: holds every information about centers.                 |
 |                                                                                                                                                     | ... check for duplicates?                       | VaccinationCenterStore | IE: knows its own data.                                    |
-| Step 9: confirms the data                                                                                                                           | ... saving the new created Vaccination Center?  | VaccinationCenterStore | IE: holds every information about the vaccination centers. |
-| Step 10: informs operation success                                                                                                                  | ... informing that the operation was a success? | UI                     | IE: responsible for user interaction.                      |
+| Step 7: confirms the data                                                                                                                           | ... saving the new created Vaccination Center?  | VaccinationCenterStore | IE: holds every information about the vaccination centers. |
+| Step 8: informs operation success                                                                                                                   | ... informing that the operation was a success? | UI                     | IE: responsible for user interaction.                      |
 
 ### Systematization ##
 
@@ -129,79 +126,112 @@ Other software classes (i.e. Pure Fabrication) identified:
 ![US09_CD](CD/US09_CD.svg)
 
 # 4. Tests 
-// Test with an empty name (String)
-// Test without 1 parameter phone number (int)
-// Test with null values
-// ---
 
-**Test 1:** Check that it is not possible to create an instance of the VaccinationCenter class with an empty name. 
+**Test 1:** Check that it is not possible to create an instance of the VaccinationCenter class with null values. 
 
 	@Test(expected = IllegalArgumentException.class)
         public void ensureNullIsNotAllowed() {
-                Employee coordinator = new Employee("name", 123123, "email", "address", 123123,
-                                Constants.ROLE_COORDINATOR);
-
-                VaccinationCenter center = new VaccinationCenter("", "Rua João Almeida", "vacinacaoporto@gmail.com", 221010101, 1221231231, "www.centrovacinaoporto.com", "8:00", "19:00", 5, 10, coordinator);
+                VaccinationCenter center = new VaccinationCenter(null, null, null, null, null, null, null, null, 0,0, null);
         }
 	
-**Test 2:** Check that it is not possible to create an instance of the VaccinationCenter class without the parameter slot duration.
+**Test 2:** Check that it is not possible to create an instance of the VaccinationCenter class with empty values.
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureIntegerParameterIsNotNull() {
-		VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida","vacinacaoporto@gmail.com", 221010101, 122123123, "www.centrovacinaoporto.com", "8:00", "19:00", 0, 10);
-	}
+        public void ensureEmptyIsNotAllowed() {
 
-**Test 3** Check that it is not possible to create an instance of the VaccinationCenter class with null values.
+                Employee coordinator = new Employee("", "", "", "", "", "");
+
+                VaccinationCenter center = new VaccinationCenter("", "", "", "", "", "", "", "", 0, 0, coordinator);
+        }
+
+**Test 3:** Check that it is not possible to create a Vaccination Center with the email address invalid.
 	
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureReferenceMeetsAC2() {
-			VaccinationCenter center = new VaccinationCenter(null,null,null,null,null,null,null,null,null);
-		}
+        public void ensureEmailIsValid() {
+                Employee coordinator = new Employee"Joana", "+351916478865", "Rua almeida", "joanamaria@gmail.com", "30365258 4 ZZ0", Constants.ROLE_COORDINATOR);
+
+                VaccinationCenter center = new VaccinationCenter("Centro", "Rua João Almeida", "vacinacaoportoAgmail.com", "91919191", "+3511234567", "www.centrovacinaoporto.com", "8:00", "19:00", 5, 10, coordinator);
+        }
+
+**Test 4:** Check that it is not possible to create a Vaccination Center with the phone number invalid.
+
+		@Test(expected = IllegalArgumentException.class)
+        public void ensurePhoneNumberIsValid() {
+                Employee coordinator = new Employee("Joana", "+351916478865", "Rua almeida", "joanamaria@gmail.com", "30365258 4 ZZ0", Constants.ROLE_COORDINATOR);
+
+                VaccinationCenter center = new VaccinationCenter("Centro", "Rua João Almeida", "vacinacaoporto@gmail.com", "91919191", "+3511234567", "www.centrovacinaoporto.com", "8:00", "19:00", 5, 10, coordinator);
+        }
+
+**Test 5:** Check that it is not possible to create a Vaccination Center with the slot duration invalid.
+
+		@Test(expected = IllegalArgumentException.class)
+        public void ensureSlotDurationIsValid() {
+                Employee coordinator = new Employee("Joana", "+351916478865", "Rua almeida", "joanamaria@gmail.com", "30365258 4 ZZ0", Constants.ROLE_COORDINATOR);
+
+                VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida", "vacinacaoporto@gmail.com", "+351921010101", "+35111221222222", "www.centrovacinaoporto.com", "8:00", "19:00", "fff", 10, coordinator);
+        }
+		
+**Test 6:** Check that it is not possible to create a Vaccination Center with the maximum vaccines per slot invalid.
+
+		@Test(expected = IllegalArgumentException.class)
+        public void ensureMaxVacPerSlotIsValid() {
+                Employee coordinator = new Employee("Joana", "+351916478865", "Rua almeida", "joanamaria@gmail.com", "30365258 4 ZZ0", Constants.ROLE_COORDINATOR);
+
+                VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida", "vacinacaoporto@gmail.com", "+351921010101", "+35111221222222", "www.centrovacinaoporto.com", "8:00", "19:00", 10, "FF", coordinator);
+        }
 
 
 # 5. Construction (Implementation)
 
 
-## Class CreateTaskController 
+## Class VaccinationCenterController 
 
-		public boolean VaccinationCenterController(String ref, String designation, String informalDesc, 
-			String technicalDesc, Integer duration, Double cost, Integer catId)() {
-		
-			Category cat = this.platform.getCategoryById(catId);
-			
-			Organization org;
-			// ... (omitted)
-			
-			this.task = org.createTask(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
-			
-			return (this.task != null);
-		}
+		public void createVaccinationCenter(String name, String address, String emailAddress, String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot, Employee coordinator) {
+
+    			this.center = vacStore.createVaccinationCenter(name, address, emailAddress, phoneNum, faxNum, webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
+
+    			vacStore.validateVaccinationCenter(center);
+ 		 }
 
 
-## Class Organization
+## Class VaccinationCenterStore
 
 
-		public Task VaccinationCenter(String ref, String designation, String informalDesc, 
-			String technicalDesc, Integer duration, Double cost, Category cat)() {
-		
-	
-			Task task = new Task(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
-			if (this.validateTask(task))
-				return task;
-			return null;
-		}
+		public VaccinationCenter createVaccinationCenter(String name, String address, String emailAddress, String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot,
+      													Employee coordinator) {
+
+    		// TO DO
+    		try {
+    		} catch (Exception e) {
+    		}
+    		VaccinationCenter center = new VaccinationCenter(name, address, emailAddress, phoneNum, faxNum, webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
+    		return center;
+ 		 }
+
+## Class VaccinationCenter
+
+
+		 public VaccinationCenter(String name, String address, String email, String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot, Employee coordinator) {
+
+    			setName(name);
+				setAddress(address);
+				setEmail(email);
+				setPhoneNum(phoneNum);
+				setFaxNum(faxNum);
+				setWebAddress(webAddress);
+				setOpeningHours(openingHours);
+				setClosingHours(closingHours);
+				setSlotDuration(slotDuration);
+				setMaxVacSlot(maxVacSlot);
+				setCoordinator(coordinator);
+			}
 
 
 
 # 6. Integration and Demo 
 
-* A new option on the Employee menu options was added.
-
-* Some demo purposes some tasks are bootstrapped while system starts.
-
+* (Information not available yet).
 
 # 7. Observations
 
-Platform and Organization classes are getting too many responsibilities due to IE pattern and, therefore, they are becoming huge and harder to maintain. 
-
-Is there any way to avoid this to happen?
+ There is a class relation between Employee and VaccinationCenter because it needs to exist at least one coordinator to register the Vaccination Center.

@@ -1,5 +1,7 @@
 package app.domain.model;
 
+import app.domain.shared.CCFormatVerifier;
+
 /**
  * Employee model class.
  * 
@@ -7,6 +9,8 @@ package app.domain.model;
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
 public class Employee {
+  static int lastIdCreated = 0;
+
   int id = 0;
   String name = "";
   String phoneNumber = "";
@@ -26,17 +30,15 @@ public class Employee {
    * @param roleId the employee roleId
    */
   public Employee(String name, String phoneNumber, String email, String address, String citizenCard, String roleId) {
-    // int id = generateId();
+    int generatedId = generateId();
 
-    setId(123456789);
+    setId(generatedId);
     setName(name);
     setPhoneNumber(phoneNumber);
     setEmail(email);
     setAddress(address);
     setCitizenCard(citizenCard);
     setRoleId(roleId);
-
-    // TODO
   }
 
   /**
@@ -49,15 +51,41 @@ public class Employee {
     return roleId.equals(this.roleId);
   }
 
+  /**
+   * Checks if the employee is the same as the given employee.
+   * 
+   * @param employee the employee to compare
+   * 
+   * @return true if the employee is the same as the given employee, false otherwise
+   */
   @Override
   public boolean equals(Object obj) {
-    // TODO
-    return false;
+    if (obj == null) return false;
+    if (obj == this) return true;
+    if (!(obj instanceof Employee)) return false;
+
+    Employee other = (Employee) obj;
+
+    return this.id == other.id;
   }
 
+  /**
+   * Gets all the information about the employee.
+   * 
+   * @return the employee information
+   */
   @Override
   public String toString() {
-    return String.format("%s", this.name);
+    StringBuilder sb = new StringBuilder();
+    sb.append(String.format("ID: %s\n", this.id));
+    sb.append(String.format("Name: %s\n", this.name));
+    sb.append(String.format("Phone number: %s\n", this.phoneNumber));
+    sb.append(String.format("Email: %s\n", this.email));
+    sb.append(String.format("Address: %s\n", this.address));
+    sb.append(String.format("Citizen Card number: %s\n", this.citizenCard));
+    sb.append(String.format("Role: %s\n", this.roleId));
+
+    return sb.toString();
   }
 
   /**
@@ -88,12 +116,20 @@ public class Employee {
   }
 
   /**
+   * Generates a sequential id for the employee.
+   * 
+   * @return the generated id
+   */
+  private static int generateId() {
+    return ++lastIdCreated;
+  }
+
+  /**
    * Sets the employee id.
    * 
    * @param id the employee id
    */
   private void setId(int id) {
-    // TODO
     this.id = id;
   }
 
@@ -122,7 +158,7 @@ public class Employee {
     if (phoneNumber == null) throw new IllegalArgumentException("Phone number cannot be null");
     if (phoneNumber.isEmpty()) throw new IllegalArgumentException("Phone number cannot be empty");
 
-    if (!phoneNumber.matches("^\\+\\d{3} \\d{9}$")) throw new IllegalArgumentException("Phone Number is not valid");
+    if (!phoneNumber.matches("^(\\+\\d{1,3}( )?)?((\\(\\d{1,3}\\))|\\d{1,3})[- .]?\\d{3,4}[- .]?\\d{4}$")) throw new IllegalArgumentException("Phone Number is not valid");
 
     this.phoneNumber = phoneNumber;
   }
@@ -166,10 +202,12 @@ public class Employee {
    * @throws IllegalArgumentException if the citizenCard is null, empty or not valid
    */
   private void setCitizenCard(String citizenCard) {
+    CCFormatVerifier formatVerifier = new CCFormatVerifier();
+
     if (citizenCard == null) throw new IllegalArgumentException("Citizen Card cannot be null");
     if (citizenCard.isEmpty()) throw new IllegalArgumentException("Citizen Card cannot be empty");
 
-    if (!citizenCard.matches("^\\d{7}[a-zA-Z]\\d{2}[a-zA-Z]$")) throw new IllegalArgumentException("Citizen Card is not valid");
+    if (!formatVerifier.validate(citizenCard)) throw new IllegalArgumentException("Citizen Card is not valid");
 
     this.citizenCard = citizenCard;
   }

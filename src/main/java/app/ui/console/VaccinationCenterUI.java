@@ -15,14 +15,38 @@ import app.ui.console.utils.Utils;
 public class VaccinationCenterUI implements Runnable {
     private VaccinationCenterController ctrl;
 
+    /**
+     * Calls all the methods to successfully create a new Vaccination Center
+     */
 
-    public void insertVaccinationCenterData() {
-        // TODO: catch exceptions that might occur
+    @Override
+    public void run() {
+        try {
+            insertVaccinationCenterData();
+        } catch (Exception e) {
+            System.out.println("Error");
+        }
+        boolean confirmed = confirmData();
+
+        if (confirmed) {
+            ctrl.saveVaccinationCenter();
+            System.out.println("Vaccination Center successfully registered!");
+        }
+
+    }
+
+    /**
+     * UI to register a Vaccination Center
+     */
+
+    private void insertVaccinationCenterData() {
+        System.out.println("\nRegister Vaccination Center: ");
+
         String name = Utils.readLineFromConsole("Name: ");
         String address = Utils.readLineFromConsole("Address: ");
         String email = Utils.readLineFromConsole("Email: ");
-        int phone = Utils.readIntegerFromConsole("Phone Number: ");
-        int fax = Utils.readIntegerFromConsole("Fax Number: ");
+        String phone = Utils.readLineFromConsole("Phone Number: ");
+        String fax = Utils.readLineFromConsole("Fax Number: ");
         String website = Utils.readLineFromConsole("Website Address: ");
         String openHours = Utils.readLineFromConsole("Opening hours: ");
         String closHours = Utils.readLineFromConsole("Closing hours: ");
@@ -38,27 +62,23 @@ public class VaccinationCenterUI implements Runnable {
         do {
             Utils.readLineFromConsole("Select a employee from the list:\n");
             coordinator = (Employee) Utils.showAndSelectOne(coordinators, "Coordinators");
+            if (coordinators.contains(coordinator)) {
+                flag = true;
+            } else {
+                System.out.println("\nInvalid coordinator.");
+            }
         } while (!flag);
 
-        ctrl.createVaccinationCenter(name, address, email, phone, fax, website, openHours,
-                closHours, slotDur, maxVac, coordinator);
+        ctrl.createVaccinationCenter(name, address, email, phone, fax, website, openHours, closHours, slotDur, maxVac, coordinator);
     }
 
+    /**
+     * Confirms all the data
+     * 
+     * @return return "true" if correct or "false" if incorrect
+     */
 
-    @Override
-    public void run() {
-        // TODO Auto-generated method stub
-        insertVaccinationCenterData();
-        boolean confirmed = confirmData();
-
-        if (confirmed) {
-            ctrl.saveVaccinationCenter();
-            System.out.println("Vaccination Center successfully registered!");
-        }
-
-    }
-
-    public boolean confirmData() {
+    private boolean confirmData() {
         System.out.println("\nPlease confirm the data below.\n");
 
         List<String> options = new ArrayList<String>();
