@@ -1,20 +1,23 @@
 package app.controller;
 
+import java.util.List;
 import app.domain.model.Company;
 import app.domain.model.Employee;
+import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
+import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
 /**
  * Register SNS User Controller
  * 
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
-
 public class RegisterEmployeeController {
   private App app;
   private Company company;
   private Employee employee;
   private EmployeeStore store;
+  private EmployeeRoleStore roleStore;
 
   /**
    * Constructor for RegisterEmployeeController.
@@ -23,6 +26,7 @@ public class RegisterEmployeeController {
     this.app = App.getInstance();
     this.company = this.app.getCompany();
     this.store = this.company.getEmployeeStore();
+    this.roleStore = this.company.getEmployeeRoleStore();
     this.employee = null;
   }
 
@@ -56,8 +60,16 @@ public class RegisterEmployeeController {
    * 
    * @return String
    */
-  public String getEmployeeRoles() {
-    // TODO: implement this method
-    return null;
+  public List<UserRole> getEmployeeRoles() {
+    return roleStore.getRoles();
+  }
+
+  /**
+   * Gets all the information about the employee.
+   * 
+   * @return the employee information
+   */
+  public String stringifyEmployee() {
+    return this.employee.toString();
   }
 }
