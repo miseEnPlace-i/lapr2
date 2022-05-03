@@ -38,7 +38,7 @@ class Vaccine{
     -id : String
     -vacType : VaccineType
 
-    +Vaccine(designation, id, brand, vacType)
+    +Vaccine(designation, id, brand, vacTypeId)
     +createAdminProc(minAge, maxAge, numberOfDoses)
 }
 

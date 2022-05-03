@@ -16,7 +16,7 @@ public class VaccineTypeStore {
     this.vaccineTypes = new ArrayList<VaccineType>();
   }
 
-  public VaccineType getVaccineTypeById(String vaccineTypeId) {
+  public static VaccineType getVaccineTypeById(String vaccineTypeId) {
     // TODO
     return null;
   }
