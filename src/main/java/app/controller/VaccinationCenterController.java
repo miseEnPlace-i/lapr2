@@ -10,6 +10,8 @@ import app.domain.shared.Constants;
 
 /**
  * Register Vaccination Center Controller
+ * 
+ * @author André Barros <1211299@isep.ipp.pt>
  */
 
 public class VaccinationCenterController {
@@ -34,26 +36,25 @@ public class VaccinationCenterController {
   /**
    * Creates an Vaccination Center instance and validates it.
    * 
-   * @param name
-   * @param address
-   * @param emailAddress
-   * @param phoneNum
-   * @param faxNum
-   * @param webAddress
-   * @param openingHours
-   * @param closingHours
-   * @param slotDuration
-   * @param maxVacSlot
-   * @param coordinator
+   * @param name the vaccination center name
+   * @param address the vaccination center address
+   * @param emailAddress the vaccination center email address
+   * @param phoneNum the vaccination center phone number
+   * @param faxNum the vaccination center fax number
+   * @param webAddress the vaccination center website address
+   * @param openingHours the vaccination center opening hours
+   * @param closingHours the vaccination center closing hours
+   * @param slotDuration the vaccination center slot duration
+   * @param maxVacSlot the vaccination center maximum vaccines per slot
+   * @param coordinator the vaccination center coordinator
    */
 
-  public void createVaccinationCenter(String name, String address, String emailAddress,
-      String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours,
-      int slotDuration, int maxVacSlot, Employee coordinator) {
+  public void createVaccinationCenter(String name, String address, String emailAddress, String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot, Employee coordinator) {
 
-    this.center = vacStore.createVaccinationCenter(name, address, emailAddress, phoneNum, faxNum,
-        webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
+    // creates an vaccination center instance
+    this.center = vacStore.createVaccinationCenter(name, address, emailAddress, phoneNum, faxNum, webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
 
+    // validates the center
     vacStore.validateVaccinationCenter(center);
   }
 
