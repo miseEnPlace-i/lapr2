@@ -10,12 +10,18 @@ package app.domain.shared;
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
 public class Constants {
-    public static final String ROLE_ADMIN = "ADMINISTRATOR";
-    public static final String ROLE_COORDINATOR = "COORDINATOR";
-    public static final String ROLE_NURSE = "NURSE";
-    public static final String ROLE_RECEPTIONIST = "RECEPTIONIST";
-    public static final String ROLE_SNS_USER = "SNS_USER";
+  public static final String ROLE_ADMIN = "ADMINISTRATOR";
+  public static final String ROLE_COORDINATOR = "COORDINATOR";
+  public static final String ROLE_NURSE = "NURSE";
+  public static final String ROLE_RECEPTIONIST = "RECEPTIONIST";
+  public static final String ROLE_SNS_USER = "SNS_USER";
 
-    public static final String PARAMS_FILENAME = "config.properties";
-    public static final String PARAMS_COMPANY_DESIGNATION = "Company.Designation";
+  public static final String PARAMS_FILENAME = "config.properties";
+  public static final String PARAMS_COMPANY_DESIGNATION = "Company.Designation";
+
+  public static enum VaccineTechnology {
+    LIVE_ATTENUATED_TECHNOLOGY, INACTIVATED_TECHNOLOGY, SUBUNIT_TECHNOLOGY, TOXOID_TECHNOLOGY, VIRAL_VECTOR_TECHNOLOGY, M_RNA_TECHNOLOGY;
+  }
+
+  public static final byte VACCINE_TYPE_CODE_LENGTH = 5;
 }
