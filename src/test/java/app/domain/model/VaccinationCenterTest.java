@@ -86,4 +86,47 @@ public class VaccinationCenterTest {
 
                 VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida", "vacinacaoporto@gmail.com", "221010101", "1122123123", "ww.centrovacinaoporto.com", "8:00", "19:00", 0, 10, coordinator);
         }
+
+        /**
+         * Check that it is not possible to create a Vaccination Center with invalid opening hours (opening hours after closing
+         * hours)
+         * 
+         * @throws Exception
+         */
+
+        @Test(expected = IllegalArgumentException.class)
+        public void ensureOpenHoursIsCorrect() {
+                Employee coordinator = new Employee("Joana", "+351916478865", "Rua almeida", "joanamaria@gmail.com", "30365258 4 ZZ0", Constants.ROLE_COORDINATOR);
+
+                VaccinationCenter center =
+                                new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida", "vacinacaoporto@gmail.com", "+351912345678", "+35111221231223", "ww.centrovacinaoporto.com", "20:00", "19:00", 5, 10, coordinator);
+
+        }
+
+        /**
+         * Check that it is not possible to create a Vaccination Center with invalid closing hours (closing hours before opening
+         * hours)
+         * 
+         * @throws Exception
+         */
+
+        @Test(expected = IllegalArgumentException.class)
+        public void ensureClosHoursIsCorrect() {
+                Employee coordinator = new Employee("Joana", "+351916478865", "Rua almeida", "joanamaria@gmail.com", "30365258 4 ZZ0", Constants.ROLE_COORDINATOR);
+                new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida", "vacinacaoporto@gmail.com", "+351912345678", "+35111221231223", "ww.centrovacinaoporto.com", "20:00", "19:00", 5, 10, coordinator);
+
+        }
+
+        /**
+         * Check that it is possible to create a Vaccination Center with all valid parameters.
+         */
+        @Test
+        public void ensureItsPossibleToCreateVaccinationCenter() {
+
+
+                Employee coordinator = new Employee("Joana", "+351916478865", "joanamaria@gmail.com", "Rua almeida", "30365258 4 ZZ0", Constants.ROLE_COORDINATOR);
+                VaccinationCenter center =
+                                new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida", "vacinacaoporto@gmail.com", "+351912345678", "+35111221231223", "ww.centrovacinaoporto.com", "20:00", "19:00", 5, 10, coordinator);
+                assert (center != null);
+        }
 }

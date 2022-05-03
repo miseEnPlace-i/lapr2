@@ -15,6 +15,29 @@ import app.ui.console.utils.Utils;
 public class VaccinationCenterUI implements Runnable {
     private VaccinationCenterController ctrl;
 
+    /**
+     * Calls all the methods to successfully create a new Vaccination Center
+     */
+
+    @Override
+    public void run() {
+        try {
+            insertVaccinationCenterData();
+        } catch (Exception e) {
+            System.out.println("Error");
+        }
+        boolean confirmed = confirmData();
+
+        if (confirmed) {
+            ctrl.saveVaccinationCenter();
+            System.out.println("Vaccination Center successfully registered!");
+        }
+
+    }
+
+    /**
+     * UI to register a Vaccination Center
+     */
 
     private void insertVaccinationCenterData() {
         System.out.println("\nRegister Vaccination Center: ");
@@ -39,27 +62,21 @@ public class VaccinationCenterUI implements Runnable {
         do {
             Utils.readLineFromConsole("Select a employee from the list:\n");
             coordinator = (Employee) Utils.showAndSelectOne(coordinators, "Coordinators");
+            if (coordinators.contains(coordinator)) {
+                flag = true;
+            } else {
+                System.out.println("\nInvalid coordinator.");
+            }
         } while (!flag);
 
         ctrl.createVaccinationCenter(name, address, email, phone, fax, website, openHours, closHours, slotDur, maxVac, coordinator);
     }
 
-
-    @Override
-    public void run() {
-        try {
-            insertVaccinationCenterData();
-        } catch (Exception e) {
-            System.out.println("Error");
-        }
-        boolean confirmed = confirmData();
-
-        if (confirmed) {
-            ctrl.saveVaccinationCenter();
-            System.out.println("Vaccination Center successfully registered!");
-        }
-
-    }
+    /**
+     * Confirms all the data
+     * 
+     * @return return "true" if correct or "false" if incorrect
+     */
 
     private boolean confirmData() {
         System.out.println("\nPlease confirm the data below.\n");
