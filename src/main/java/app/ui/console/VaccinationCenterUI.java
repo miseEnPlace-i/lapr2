@@ -87,6 +87,8 @@ public class VaccinationCenterUI implements Runnable {
 
     private boolean confirmData() {
         System.out.println("\nPlease confirm the data below.\n");
+        String vaccinationCenterData = ctrl.toString();
+        System.out.println(vaccinationCenterData);
 
         List<String> options = new ArrayList<String>();
         options.add("y");
