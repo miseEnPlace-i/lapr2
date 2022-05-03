@@ -54,7 +54,11 @@ public class VaccinationCenter {
   }
 
   /**
-   * @param name the name to set to the Vaccination Center, if invalid throws exception
+   * Sets the center name.
+   * 
+   * @param name the vaccination center name
+   * 
+   * @throws IllegalArgumentException if the name is null, empty or not valid.
    */
   private void setName(String name) {
     if (name == null || name.isEmpty()) {
@@ -64,7 +68,11 @@ public class VaccinationCenter {
   }
 
   /**
-   * @param address the address to set to the Vaccination Center; if invalid throws exception
+   * Sets the center address
+   * 
+   * @param address the vaccination center address
+   * 
+   * @throws IllegalArgumentException if the address is null, empty or not valid.
    */
   private void setAddress(String address) {
     if (address == null || address.isEmpty()) {
@@ -74,7 +82,11 @@ public class VaccinationCenter {
   }
 
   /**
-   * @param email the email to set to the Vaccination Center; if invalid throws exception
+   * Sets the center email.
+   * 
+   * @param email the vaccination center email address
+   * 
+   * @throws IllegalArgumentException if the email address is null, empty or not valid.
    */
   private void setEmail(String email) {
     if (email == null || email.isEmpty() || !email.matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")) {
@@ -84,7 +96,11 @@ public class VaccinationCenter {
   }
 
   /**
-   * @param phoneNum the phoneNum to set to the Vaccination Center if invalid throws exception
+   * Sets the center phone number.
+   * 
+   * @param phoneNum the vaccination center phone number
+   * 
+   * @throws IllegalArgumentException if the phone number is null, empty or not valid.
    */
   private void setPhoneNum(String phoneNum) {
     if (phoneNum == null || phoneNum.isEmpty() || !phoneNum.matches("^(\\+\\d{1,3}(  )?)?((\\(\\d{1,3}\\))|\\d{1,3})[- .]?\\d{3,4}[- .]?\\d{4}$")) {
@@ -94,7 +110,11 @@ public class VaccinationCenter {
   }
 
   /**
-   * @param faxNum the faxNum to set to the Vaccination Center; if invalid throws exception
+   * Sets the center fax number.
+   * 
+   * @param faxNum the vaccination center fax number.
+   * 
+   * @throws IllegalArgumentException if the fax number is null, empty or not valid.
    */
   private void setFaxNum(String faxNum) {
     if (faxNum == null || faxNum.isEmpty() || !faxNum.matches("^\\+\\d{3} \\d{12}$")) {
@@ -104,7 +124,11 @@ public class VaccinationCenter {
   }
 
   /**
-   * @param webAddress the webAddress to set to the Vaccination Center; if invalid throws exception
+   * Sets the center website address.
+   * 
+   * @param webAddress the vaccination center website address.
+   * 
+   * @throws IllegalArgumentException if the website address is null, empty or not valid.
    */
   private void setWebAddress(String webAddress) {
     if (webAddress == null || webAddress.isEmpty() || !webAddress.matches("^(https:\\/\\/|https:\\/\\/)?(www.)?([a-zA-Z0-9]+).[a-zA-Z0-9]*.[a-z]{3}.?([a-z]+)?$")) {
@@ -114,8 +138,11 @@ public class VaccinationCenter {
   }
 
   /**
-   * @param openingHours the openingHours to set to the Vaccination Center; if invalid throws exception
-   * @throws IllegalArgumentException
+   * Sets the center opening hours.
+   * 
+   * @param openingHours the vaccination center opening hours.
+   * 
+   * @throws IllegalArgumentException if the opening hours are null, empty or not valid.
    */
 
   private void setOpeningHours(String openingHours) {
@@ -130,8 +157,11 @@ public class VaccinationCenter {
   }
 
   /**
-   * @param closingHours the closingHours to set to the Vaccination Center; if invalid throws exception
-   * @throws IllegalArgumentException
+   * Sets the center closing hours.
+   * 
+   * @param closingHours the vaccination center closing hours.
+   * 
+   * @throws IllegalArgumentException if the closing hours are null, empty or not valid.
    */
 
   private void setClosingHours(String closingHours) {
@@ -146,7 +176,11 @@ public class VaccinationCenter {
   }
 
   /**
-   * @param slotDuration the slotDuration to set to the Vaccination Center; if invalid throws exception
+   * Sets the center slot duration.
+   * 
+   * @param slotDuration the vaccination center slot duration.
+   * 
+   * @throws IllegalArgumentException if the slot duration is null or not valid.
    */
   private void setSlotDuration(int slotDuration) {
     if (slotDuration <= 0) {
@@ -156,7 +190,11 @@ public class VaccinationCenter {
   }
 
   /**
-   * @param maxVacSlot the maxVacSlot to set to the Vaccination Center; if invalid throws exception
+   * Sets the center maximum vaccines per slot.
+   * 
+   * @param maxVacSlot the vaccination center maximum vaccines per slot.
+   * 
+   * @throws IllegalArgumentException if the maximum vaccines per slot are null or not valid.
    */
   private void setMaxVacSlot(int maxVacSlot) {
     if (maxVacSlot <= 0) {
@@ -166,7 +204,11 @@ public class VaccinationCenter {
   }
 
   /**
-   * @param coordinator the coordinator to set to the Vaccination Center; if invalid throws exception
+   * Sets the center coordinator.
+   * 
+   * @param coordinator the vaccination center coordinator.
+   * 
+   * @throws IllegalArgumentException if the coordinator is null or not valid
    */
   private void setCoordinator(Employee coordinator) {
     if (coordinator == null) {
