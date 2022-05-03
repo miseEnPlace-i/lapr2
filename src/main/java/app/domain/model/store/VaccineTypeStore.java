@@ -28,6 +28,6 @@ public class VaccineTypeStore {
   }
 
   public boolean saveVaccineType(VaccineType vt) {
-    return vaccineTypes.add(vt);
+    return this.vaccineTypes.add(vt);
   }
 }
