@@ -13,6 +13,7 @@ public class SpecifyNewVaccineTypeController {
   private App app;
   private Company company;
   private VaccineTypeStore vaccineTypeStore;
+  private VaccineType vt;
 
   /**
    * Constructor for SpecifyNewVaccineTypeController
@@ -24,10 +25,12 @@ public class SpecifyNewVaccineTypeController {
   }
 
   public VaccineType addVaccineType(String name, String description, String technology) {
-    return vaccineTypeStore.addVaccineType(name, description, technology);
+    this.vt = vaccineTypeStore.addVaccineType(name, description, technology);
+
+    return this.vt;
   }
 
-  public boolean saveVaccineType(VaccineType vt) {
-    return vaccineTypeStore.saveVaccineType(vt);
+  public boolean saveVaccineType() {
+    return vaccineTypeStore.saveVaccineType(this.vt);
   }
 }

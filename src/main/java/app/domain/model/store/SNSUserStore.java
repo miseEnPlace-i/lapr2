@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import app.domain.model.SNSUser;
-import app.domain.shared.CalendarUtils;
 import app.domain.shared.Constants;
-import app.domain.shared.PasswordGenerator;
+import app.service.CalendarUtils;
+import app.service.PasswordGenerator;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
 /**

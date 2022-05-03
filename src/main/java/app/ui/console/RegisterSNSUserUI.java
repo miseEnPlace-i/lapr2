@@ -3,7 +3,6 @@ package app.ui.console;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-
 import app.controller.RegisterSNSUserController;
 import app.ui.console.utils.Utils;
 
@@ -13,7 +12,7 @@ import app.ui.console.utils.Utils;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 
-public class RegisterSNSUserUI implements Runnable {
+public class RegisterSNSUserUI implements Runnable, IRegisterUI {
   private RegisterSNSUserController ctrl;
 
   public RegisterSNSUserUI() {
@@ -22,7 +21,7 @@ public class RegisterSNSUserUI implements Runnable {
 
   public void run() {
     try {
-      insertSNSUserData();
+      insertData();
     } catch (Exception e) {
       System.out.println(String.format("Error: %s\n", e.getMessage()));
     }
@@ -35,7 +34,8 @@ public class RegisterSNSUserUI implements Runnable {
     }
   }
 
-  private void insertSNSUserData() throws IllegalArgumentException, ParseException {
+  @Override
+  public void insertData() throws IllegalArgumentException, ParseException {
     System.out.println("\nRegister SNS User UI:");
 
     String citizenCard = Utils.readLineFromConsole("Citizen Card: ");
@@ -66,7 +66,7 @@ public class RegisterSNSUserUI implements Runnable {
     ctrl.createSNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
   }
 
-  private boolean confirmData() {
+  public boolean confirmData() {
     System.out.println("\nPlease confirm the data below.\n");
     String stringifiedSNSUser = ctrl.stringifySNSUser();
     System.out.println(stringifiedSNSUser);

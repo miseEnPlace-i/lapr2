@@ -39,4 +39,21 @@ public class VaccineType {
 
     return false;
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == null) return false;
+    if (obj == this) return true;
+    if (!(obj instanceof VaccineType)) return false;
+
+    VaccineType other = (VaccineType) obj;
+
+    return this.code.equals(other.code);
+  }
+
+  @Override
+  public String toString() {
+    // TODO
+    return "";
+  }
 }
