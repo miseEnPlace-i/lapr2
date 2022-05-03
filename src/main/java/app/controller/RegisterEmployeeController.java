@@ -3,8 +3,8 @@ package app.controller;
 import java.util.List;
 import app.domain.model.Company;
 import app.domain.model.Employee;
-import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.EmployeeRoleStore;
+import app.domain.model.store.EmployeeStore;
 import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
 /**
@@ -42,7 +42,7 @@ public class RegisterEmployeeController {
    */
   public void createEmployee(String name, String address, String phoneNumber, String email, String citizenCardNumber, String roleId) {
     // create an instance of an Employee
-    this.employee = store.createEmployee(name, address, phoneNumber, email, citizenCardNumber, roleId);
+    this.employee = store.addEmployee(name, address, phoneNumber, email, citizenCardNumber, roleId);
 
     // validate the Employee
     store.validateEmployee(employee);
