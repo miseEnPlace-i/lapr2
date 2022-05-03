@@ -16,6 +16,13 @@ public class VaccinationCenterUI implements Runnable {
     private VaccinationCenterController ctrl;
 
     /**
+     * VaccinationCenterUI Constructor
+     */
+    public VaccinationCenterUI() {
+        ctrl = new VaccinationCenterController();
+    }
+
+    /**
      * Calls all the methods to successfully create a new Vaccination Center
      */
 
@@ -60,7 +67,7 @@ public class VaccinationCenterUI implements Runnable {
         coordinators = ctrl.getCoordinators();
 
         do {
-            Utils.readLineFromConsole("Select a employee from the list:\n");
+            System.out.println("\nSelect a employee from the list:\n");
             coordinator = (Employee) Utils.showAndSelectOne(coordinators, "Coordinators");
             if (coordinators.contains(coordinator)) {
                 flag = true;
