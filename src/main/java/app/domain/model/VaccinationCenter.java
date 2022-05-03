@@ -1,17 +1,16 @@
 package app.domain.model;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import app.domain.shared.CalendarUtils;
 
 /**
- * Community Mass Vaccination Center class
+ * Vaccination Center class
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  */
 
 public class VaccinationCenter {
+  private String name;
   private String address;
   private String email;
   private String phoneNum;
@@ -24,7 +23,7 @@ public class VaccinationCenter {
   private Employee coordinator;
 
   /**
-   * Constructor for the Community Mass Vaccination Center
+   * Constructor for the Vaccination Center
    * 
    * @param name the vaccination center name
    * @param address the vaccination center address
@@ -61,6 +60,7 @@ public class VaccinationCenter {
     if (name == null || name.isEmpty()) {
       throw new IllegalArgumentException("Name is not valid");
     }
+    this.name = name;
   }
 
   /**
@@ -121,7 +121,7 @@ public class VaccinationCenter {
   private void setOpeningHours(String openingHours) {
 
     try {
-      if (openingHours != null && !openingHours.isEmpty() && CalendarUtils.parse(openingHours).before(openingHours)) {
+      if (openingHours != null && !openingHours.isEmpty() && !CalendarUtils.parse(openingHours).before(closingHours)) {
         this.openingHours = openingHours;
       }
     } catch (ParseException e) {
@@ -137,7 +137,7 @@ public class VaccinationCenter {
   private void setClosingHours(String closingHours) {
 
     try {
-      if (closingHours != null && !closingHours.isEmpty() && CalendarUtils.parse(closingHours).after(openingHours)) {
+      if (closingHours != null && !closingHours.isEmpty() && !CalendarUtils.parse(closingHours).after(openingHours)) {
         this.closingHours = closingHours;
       }
     } catch (ParseException e) {
@@ -175,4 +175,25 @@ public class VaccinationCenter {
     this.coordinator = coordinator;
   }
 
+  /**
+   * Shows all vaccination center data
+   */
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("Vaccination Center data:\n");
+    sb.append(String.format("Name: %s\n", this.name));
+    sb.append(String.format("Address: %s\n", this.address));
+    sb.append(String.format("Email: %s\n", this.email));
+    sb.append(String.format("Phone number: %s\n", this.phoneNum));
+    sb.append(String.format("Fax number: %s\n", this.faxNum));
+    sb.append(String.format("Web address: %s\n", this.webAddress));
+    sb.append(String.format("Opening hours: %s\n", this.openingHours));
+    sb.append(String.format("Closing hours: %s\n", this.closingHours));
+    sb.append(String.format("Slot duration: %s\n", this.slotDuration));
+    sb.append(String.format("Maximum vaccines per slot: %s\n", this.maxVacSlot));
+    sb.append(String.format("Coordinator: %s\n", this.coordinator.getName()));
+
+    return sb.toString();
+  }
 }
