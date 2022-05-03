@@ -6,12 +6,23 @@ import java.util.List;
 import app.controller.SpecifyNewVaccineTypeController;
 import app.ui.console.utils.Utils;
 
+/**
+ * Specify new vaccine type
+ * 
+ * @author André Barros <1211299@isep.ipp.pt>
+ * @author Tomás Lopes <1211289@isep.ipp.pt>
+ */
+
 public class SpecifyNewVaccineTypeUI implements Runnable, IRegisterUI {
   private SpecifyNewVaccineTypeController ctrl;
 
   public SpecifyNewVaccineTypeUI() {
     ctrl = new SpecifyNewVaccineTypeController();
   }
+
+  /**
+   * Calls all the methods to successfully create a new vaccine type
+   */
 
   @Override
   public void run() {
@@ -29,6 +40,10 @@ public class SpecifyNewVaccineTypeUI implements Runnable, IRegisterUI {
     }
   }
 
+  /**
+   * Asks for the new vaccine type data
+   */
+
   @Override
   public void insertData() throws IllegalArgumentException, ParseException {
     System.out.println("\nRegister a new Vaccine type: ");
@@ -39,6 +54,12 @@ public class SpecifyNewVaccineTypeUI implements Runnable, IRegisterUI {
     ctrl.addVaccineType(code, designation, technology);
 
   }
+
+  /**
+   * Confirms all the data
+   * 
+   * @return return "true" if correct or "false" if incorrect
+   */
 
   @Override
   public boolean confirmData() {

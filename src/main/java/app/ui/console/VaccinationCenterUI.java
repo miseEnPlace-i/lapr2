@@ -12,7 +12,7 @@ import app.ui.console.utils.Utils;
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  */
-public class VaccinationCenterUI implements Runnable {
+public class VaccinationCenterUI implements Runnable, IRegisterUI {
     private VaccinationCenterController ctrl;
 
     /**
@@ -29,7 +29,7 @@ public class VaccinationCenterUI implements Runnable {
     @Override
     public void run() {
         try {
-            insertVaccinationCenterData();
+            insertData();
         } catch (Exception e) {
             System.out.println("Error");
         }
@@ -46,7 +46,8 @@ public class VaccinationCenterUI implements Runnable {
      * UI to register a Vaccination Center
      */
 
-    private void insertVaccinationCenterData() {
+    @Override
+    public void insertData() {
         System.out.println("\nRegister Vaccination Center: ");
 
         String name = Utils.readLineFromConsole("Name: ");
@@ -84,8 +85,8 @@ public class VaccinationCenterUI implements Runnable {
      * 
      * @return return "true" if correct or "false" if incorrect
      */
-
-    private boolean confirmData() {
+    @Override
+    public boolean confirmData() {
         System.out.println("\nPlease confirm the data below.\n");
         String vaccinationCenterData = ctrl.toString();
         System.out.println(vaccinationCenterData);
