@@ -114,4 +114,10 @@ public class VaccineType {
 
     return sb.toString();
   }
+
+  public boolean existsTypeId(String id) {
+    // TODO
+    return false;
+
+  }
 }
