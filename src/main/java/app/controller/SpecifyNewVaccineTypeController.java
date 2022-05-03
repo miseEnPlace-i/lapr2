@@ -9,6 +9,7 @@ import app.domain.model.store.VaccineTypeStore;
  * 
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
+
 public class SpecifyNewVaccineTypeController {
   private App app;
   private Company company;
@@ -18,11 +19,21 @@ public class SpecifyNewVaccineTypeController {
   /**
    * Constructor for SpecifyNewVaccineTypeController
    */
+
   public SpecifyNewVaccineTypeController() {
     this.app = App.getInstance();
     this.company = this.app.getCompany();
     this.vaccineTypeStore = this.company.getVaccineTypeStore();
   }
+
+  /**
+   * Method to add a new vaccine type to vaccine type list
+   * 
+   * @param code the vaccine type code
+   * @param description the vaccine type description
+   * @param technology the vaccine type technology
+   * @return vaccine type
+   */
 
   public VaccineType addVaccineType(String code, String description, String technology) {
     this.vt = vaccineTypeStore.addVaccineType(code, description, technology);
@@ -30,7 +41,12 @@ public class SpecifyNewVaccineTypeController {
     return this.vt;
   }
 
-  public boolean saveVaccineType() {
-    return vaccineTypeStore.saveVaccineType(this.vt);
+  /**
+   * Saves the new vaccine type
+   * 
+   */
+
+  public void saveVaccineType() {
+    vaccineTypeStore.saveVaccineType(this.vt);
   }
 }
