@@ -11,11 +11,10 @@ public class DoseInfoList {
     private List<DoseInfo> doseInfoList;
 
     public DoseInfoList(){
-        //TODO
         doseInfoList = new ArrayList<>();
     }
 
-    private void addDoseInfo(DoseInfo doseInfo){
-        //TODO
+    public void addDoseInfo(DoseInfo doseInfo){
+        doseInfoList.add(doseInfo);
     }
 }
