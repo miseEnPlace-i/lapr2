@@ -18,6 +18,7 @@ public class Vaccine {
         validateDesignation(designation);
         validateBrand(brand);
         validateId(id);
+        validateVacType(vacTypeId);
 
         this.designation = designation;
         this.brand = brand;
