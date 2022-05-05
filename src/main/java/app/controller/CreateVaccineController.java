@@ -41,9 +41,13 @@ public class CreateVaccineController {
     }
 
     public void createVaccine(String designation, String id, String brand, String vacTypeId) {
-        //TODO
+        VaccineType vacType = vaccineTypeStore.getVacTypeById(vacTypeId);
+        vaccineStore.createVaccine(designation, id, brand, vacType);
     }
 
+    public void saveVaccine() {
+        //TODO
+    }
 
     public void createAdminProc(int minAge, int maxAge, int numberOfDoses) {
         //TODO
@@ -61,9 +65,7 @@ public class CreateVaccineController {
         //TODO
     }
 
-    public void saveVaccine() {
-        //TODO
-    }
+
 
 
 }

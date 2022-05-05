@@ -64,9 +64,9 @@ class AdminProcList{
 
 class DoseInfo{
     -dosage : int
-    -timeToNextDose : int
+    -timeSinceLastDose : int
 
-    +DoseInfo(dosage, timeToNextDose)
+    +DoseInfo(dosage, timeSinceLastDose)
     +validateDoseInfo(doseInfo)
 }
 

@@ -5,14 +5,27 @@ package app.domain.model;
 */
 public class DoseInfo {
     private int dosage;
-    private int timeToNextDose;
+    private int timeSinceLastDose;
 
-    public DoseInfo(int dosage, int timeToNextDose){
-        //TODO
+    public DoseInfo( int dosage, int timeSinceLastDose){
+        validateDosage(dosage);
+        validateTimeSinceLastDose(timeSinceLastDose);
+
+        this.dosage = dosage;
+        this.timeSinceLastDose = timeSinceLastDose;
     }
+
+    public void validateDosage(int dosage){
+        if(dosage < 0){
+            throw new IllegalArgumentException("The dosage must be positive.");
+        }
+    }   
     
-    public boolean validateDoseInfo(DoseInfo doseInfo){
-        //TODO
-        return true;
-    }
+    public void validateTimeSinceLastDose(int timeSinceLastDose){
+        if(timeSinceLastDose < 0){
+            throw new IllegalArgumentException("The time since last dose must be positive.");
+        }
+    } 
+  
+    
 }
