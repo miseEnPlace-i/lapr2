@@ -1,7 +1,6 @@
 package app.domain.model;
 
 import app.domain.model.list.AdminProcList;
-import app.domain.model.store.VaccineTypeStore;
 
 /**
 * @author Carlos Lopes <1211277@isep.ipp.pt>
@@ -12,7 +11,43 @@ public class Vaccine {
     private String brand;
     private String id;
     private VaccineType vacType;
+    private AdminProcList adminProcList;
 
+    public Vaccine(String designation, String id, String brand, VaccineType vacType){
+        setBrand(brand);
+        setDesignation(designation);
+        setId(id);
+        setVacType(vacType);
+        adminProcList = new AdminProcList();
+    }
+
+    //VALIDATIONS
+    public void validateDesignation(String designation){
+        if(designation == "" || designation == null){
+            throw new IllegalArgumentException("Designation field is required.");
+        }
+    }
+
+    public void validateBrand(String brand){
+        if(brand == "" || brand == null){
+            throw new IllegalArgumentException("Brand field is required.");
+        }
+    }
+
+    public void validateId(String id){
+        if(id == "" || id == null){
+            throw new IllegalArgumentException("Id field is required.");
+        }
+    }
+
+    public void validateVacType(VaccineType vacType){
+        if(vacType == null){
+            throw new IllegalArgumentException("The vaccine type must exist.");
+        }
+    }
+
+
+    //GETTER & SETTERS
     public String getDesignation() {
         return this.designation;
     }
@@ -45,50 +80,19 @@ public class Vaccine {
     }
 
     public void setVacType(VaccineType vacType){
+        validateVacType(vacType);
         this.vacType = vacType;
     }
 
-    private AdminProcList adminProcList;
-
-    public Vaccine(String designation, String id, String brand, VaccineType vacType){
-        validateDesignation(designation);
-        validateBrand(brand);
-        validateId(id);
-
-        this.designation = designation;
-        this.brand = brand;
-        this.id = id;
-        this.vacType = vacType;
-    }
-
-    public void validateDesignation(String designation){
-        if(designation == "" || designation == null){
-            throw new IllegalArgumentException("Designation field is required.");
-        }
-    }
-
-    public void validateBrand(String brand){
-        if(brand == "" || brand == null){
-            throw new IllegalArgumentException("Brand field is required.");
-        }
-    }
-
-    public void validateId(String id){
-        if(id == "" || id == null){
-            throw new IllegalArgumentException("Id field is required.");
-        }
-    }
-
-    public void validateVacType(VaccineType vacType){
-        if(vacType == null){
-            throw new IllegalArgumentException("The vaccine type must exist.");
-        }
+    public AdminProcList getAdminProcList(){
+        return adminProcList;
     }
 
 
-    public void createAdminProc(int minAge, int maxAge, int numberOfDoses){
+    
+    public AdminProcess createAdminProc(int minAge, int maxAge, int numberOfDoses){
         AdminProcess ap = new AdminProcess(minAge, maxAge, numberOfDoses);
-        adminProcList.addAdminProc(ap);
+        return ap;
     }
 
     
