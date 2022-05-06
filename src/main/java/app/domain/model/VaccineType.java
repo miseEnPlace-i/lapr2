@@ -9,6 +9,10 @@ public class VaccineType {
     private String description;
     private String technology;
 
+    public VaccineType(){
+        //TODO
+    }
+
     public String getCode() {
         return this.code;
     }

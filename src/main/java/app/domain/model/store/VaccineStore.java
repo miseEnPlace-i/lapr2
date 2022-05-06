@@ -18,11 +18,14 @@ public class VaccineStore {
         this.vaccines = new ArrayList<Vaccine>();
     }
 
-    public void createVaccine(String designation, String id, String brand, VaccineType vacType){
+    public Vaccine createVaccine(String designation, String id, String brand, VaccineType vacType){
         Vaccine vac = new Vaccine(designation, id, brand, vacType);
-        vaccines.add(vac);
+        return vac;
     }
 
+    public void saveVaccine(Vaccine vac){
+        vaccines.add(vac);
+    }
     
     public boolean exist(String designation){
         for (Vaccine vac : vaccines)
