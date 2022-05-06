@@ -71,9 +71,15 @@ public class AdminProcess {
         }
     }
 
-    public void createDoseInfo(int dosage, int timeSinceLastDose){
+
+
+    public DoseInfo createDoseInfo(int dosage, int timeSinceLastDose){
         DoseInfo di = new DoseInfo(dosage, timeSinceLastDose);
-        doseInfoList.addDoseInfo(di);
+        return di;
+    }
+
+    public DoseInfoList getDoseInfoList(){
+        return doseInfoList;
     }
     
 }
