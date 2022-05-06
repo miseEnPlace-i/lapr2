@@ -1,8 +1,8 @@
 package app.domain.model;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.util.Calendar;
-import java.util.Date;
+import org.junit.Test;
 
 public class SNSUserTest {
 
@@ -59,5 +59,15 @@ public class SNSUserTest {
     birthDay.add(Calendar.YEAR, 1);
 
     new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
+  }
+
+  @Test
+  public void ensureIsPossibleToCreateSNSUser() {
+    Calendar c = Calendar.getInstance();
+    SNSUser instance = new SNSUser("123456789ZZ1", "123456789", "name", c, 'M', "+351123456789", "email@email.com", "address");
+
+    assert instance.getCitizenCard().equals("123456789ZZ1");
+    assert instance.getSnsNumber().equals("123456789");
+    assertNotNull(instance);
   }
 }

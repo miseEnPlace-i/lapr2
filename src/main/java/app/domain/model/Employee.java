@@ -158,7 +158,7 @@ public class Employee {
     if (phoneNumber == null) throw new IllegalArgumentException("Phone number cannot be null");
     if (phoneNumber.isEmpty()) throw new IllegalArgumentException("Phone number cannot be empty");
 
-    if (!phoneNumber.matches("^(\\+\\d{1,3}( )?)?((\\(\\d{1,3}\\))|\\d{1,3})[- .]?\\d{3,4}[- .]?\\d{4}$")) throw new IllegalArgumentException("Phone Number is not valid");
+    if (!phoneNumber.matches("^(\\+\\d{1,3}?)?((\\(\\d{1,3}\\))|\\d{1,3})[- .]?\\d{3,4}[- .]?\\d{4}$")) throw new IllegalArgumentException("Phone Number is not valid");
 
     this.phoneNumber = phoneNumber;
   }
