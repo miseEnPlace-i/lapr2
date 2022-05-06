@@ -13,8 +13,7 @@ import app.domain.shared.Constants;
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  */
-
-public class VaccinationCenterController {
+public class RegisterVaccinationCenterController {
   private App app;
   private Company company;
   private EmployeeStore employeeStore;
@@ -24,13 +23,11 @@ public class VaccinationCenterController {
   /**
    * Constructor for VaccinationCenterController
    */
-
-  public VaccinationCenterController() {
+  public RegisterVaccinationCenterController() {
     this.app = App.getInstance();
     this.company = this.app.getCompany();
     this.employeeStore = this.company.getEmployeeStore();
     this.vacStore = this.company.getVaccinationCenterStore();
-    this.center = null;
   }
 
   /**
@@ -48,7 +45,6 @@ public class VaccinationCenterController {
    * @param maxVacSlot the vaccination center maximum vaccines per slot
    * @param coordinator the vaccination center coordinator
    */
-
   public void createVaccinationCenter(String name, String address, String emailAddress, String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot, Employee coordinator) {
 
     // creates an vaccination center instance
@@ -61,16 +57,21 @@ public class VaccinationCenterController {
   /**
    * Saves Vaccination Center
    */
-
   public void saveVaccinationCenter() {
-    vacStore.saveVaccinationCenter(center);
+    vacStore.saveVaccinationCenter(this.center);
   }
 
   /**
    * @return Gets list of all coordinators registered in the system
    */
-
   public List<Employee> getCoordinators() {
     return employeeStore.getEmployeesWithRole(Constants.ROLE_COORDINATOR);
+  }
+
+  /**
+   * Returns the Vaccination Center data as a String.
+   */
+  public String stringifyCenter() {
+    return this.center.toString();
   }
 }

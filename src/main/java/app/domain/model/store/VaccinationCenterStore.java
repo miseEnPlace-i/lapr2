@@ -10,7 +10,6 @@ import app.domain.model.VaccinationCenter;
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  */
-
 public class VaccinationCenterStore {
 
   // Vaccination Centers list
@@ -19,7 +18,6 @@ public class VaccinationCenterStore {
   /**
    * Constructor for VaccinationCenterStore
    */
-
   public VaccinationCenterStore() {
     this.vacCenters = new ArrayList<VaccinationCenter>();
   }
@@ -40,7 +38,6 @@ public class VaccinationCenterStore {
    * @param coordinator the vaccination center coordinator
    * @return VaccinationCenter
    */
-
   public VaccinationCenter createVaccinationCenter(String name, String address, String emailAddress, String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot,
       Employee coordinator) {
 
@@ -53,7 +50,6 @@ public class VaccinationCenterStore {
    * 
    * @param center the vaccination center
    */
-
   public void validateVaccinationCenter(VaccinationCenter center) {
     if (center == null) {
       throw new Error("\nVaccination center is invalid.");
@@ -66,7 +62,6 @@ public class VaccinationCenterStore {
    * 
    * @param center the vaccination center
    */
-
   public void checkDuplicates(VaccinationCenter center) {
     if (vacCenters.contains(center)) {
       throw new IllegalArgumentException("\nDuplicated Vaccination Center.");
@@ -80,5 +75,9 @@ public class VaccinationCenterStore {
    */
   public void saveVaccinationCenter(VaccinationCenter center) {
     vacCenters.add(center);
+  }
+
+  public int size() {
+    return vacCenters.size();
   }
 }

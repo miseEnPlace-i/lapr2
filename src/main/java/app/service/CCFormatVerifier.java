@@ -5,6 +5,12 @@ package app.service;
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 public class CCFormatVerifier {
+
+  public CCFormatVerifier() {
+    // For now, only portuguese format is used but this constructor might be used in the future to specify the pretended
+    // format.
+  }
+
   public boolean validate(String cc) {
     int sum = 0;
     boolean secondDigit = false;
