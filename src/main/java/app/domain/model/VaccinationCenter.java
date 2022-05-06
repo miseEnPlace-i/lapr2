@@ -1,14 +1,10 @@
 package app.domain.model;
 
-import java.text.ParseException;
-import app.service.CalendarUtils;
-
 /**
  * Vaccination Center class
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  */
-
 public class VaccinationCenter {
   private String name;
   private String address;
@@ -37,7 +33,6 @@ public class VaccinationCenter {
    * @param maxVacSlot the vaccination center maximum vaccines per slot
    * @param coordinator the vaccination center coordinator
    */
-
   public VaccinationCenter(String name, String address, String email, String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot, Employee coordinator) {
 
     setName(name);
@@ -144,16 +139,15 @@ public class VaccinationCenter {
    * 
    * @throws IllegalArgumentException if the opening hours are null, empty or not valid.
    */
-
   private void setOpeningHours(String openingHours) {
+    String[] openHours = openingHours.split(":");
+    int hours = Integer.parseInt(openHours[0]);
+    int minutes = Integer.parseInt(openHours[1]);
 
-    try {
-      if (openingHours != null && !openingHours.isEmpty() && !CalendarUtils.parse(openingHours).before(closingHours)) {
-        this.openingHours = openingHours;
-      }
-    } catch (ParseException e) {
-      throw new IllegalArgumentException("Opening hours is not valid");
+    if (openingHours == null || openingHours.isEmpty() || hours < 0 || hours > 24 || minutes < 0 || minutes > 60) {
+      throw new IllegalArgumentException("Opening hours is not valid.");
     }
+    this.openingHours = openingHours;
   }
 
   /**
@@ -163,16 +157,15 @@ public class VaccinationCenter {
    * 
    * @throws IllegalArgumentException if the closing hours are null, empty or not valid.
    */
-
   private void setClosingHours(String closingHours) {
+    String[] closHours = closingHours.split(":");
+    int hours = Integer.parseInt(closHours[0]);
+    int minutes = Integer.parseInt(closHours[1]);
 
-    try {
-      if (closingHours != null && !closingHours.isEmpty() && !CalendarUtils.parse(closingHours).after(openingHours)) {
-        this.closingHours = closingHours;
-      }
-    } catch (ParseException e) {
-      throw new IllegalArgumentException("Closing hours is not valid");
+    if (closingHours == null || closingHours.isEmpty() || hours < 0 || hours > 24 || minutes < 0 || minutes > 60) {
+      throw new IllegalArgumentException("Closing hours is not valid.");
     }
+    this.closingHours = closingHours;
   }
 
   /**
