@@ -76,4 +76,8 @@ public class VaccinationCenterStore {
   public void saveVaccinationCenter(VaccinationCenter center) {
     vacCenters.add(center);
   }
+
+  public int size() {
+    return vacCenters.size();
+  }
 }
