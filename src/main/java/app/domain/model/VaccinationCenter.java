@@ -117,7 +117,7 @@ public class VaccinationCenter {
    * @throws IllegalArgumentException if the fax number is null, empty or not valid.
    */
   private void setFaxNum(String faxNum) {
-    if (faxNum == null || faxNum.isEmpty() || !faxNum.matches("^\\+\\d{3} \\d{12}$")) {
+    if (faxNum == null || faxNum.isEmpty() || !faxNum.matches("\\+[0-9]{1,3}-[0-9]{3}\\-[0-9]{7}")) {
       throw new IllegalArgumentException("Fax number is not valid");
     }
     this.faxNum = faxNum;

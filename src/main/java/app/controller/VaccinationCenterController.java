@@ -76,7 +76,7 @@ public class VaccinationCenterController {
   /**
    * Returns the Vaccination Center data as a String.
    */
-  public String toString() {
+  public String stringifyCenter() {
     return this.center.toString();
   }
 }
