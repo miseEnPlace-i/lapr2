@@ -10,7 +10,16 @@ public class AdminProcess {
     private int minAge;
     private int maxAge;
     private int numberOfDoses;
+    private DoseInfoList doseInfoList;
 
+
+    public AdminProcess(int minAge, int maxAge, int numberOfDoses){
+        setAgeInterval(minAge, maxAge);
+        setNumberOfDoses(numberOfDoses);
+        doseInfoList = new DoseInfoList();
+    }
+
+    //GETTERS AND SETTERS
     public int getMinAge() {
         return this.minAge;
     }
@@ -36,20 +45,8 @@ public class AdminProcess {
         this.numberOfDoses = numberOfDoses;
     }
 
-    private DoseInfoList doseInfoList;
 
-    public AdminProcess(int minAge, int maxAge, int numberOfDoses){
-        validateInterval(minAge, maxAge);
-        validateMaxAge(maxAge);
-        validateMinAge(minAge);
-        validateNumberOfDoses(numberOfDoses);
-
-        this.minAge = minAge;
-        this.maxAge = maxAge;
-        this.numberOfDoses = numberOfDoses;
-        doseInfoList = new DoseInfoList();
-    }
-
+    //VALIDATIONS
     public void validateMinAge(int minAge){
         if(minAge < 0){
             throw new IllegalArgumentException("The minimum age must be positive.");
