@@ -84,15 +84,23 @@ public class Vaccine {
         this.vacType = vacType;
     }
 
+
+    //GET  ADMINSTRATION PROCESS LIST
     public AdminProcList getAdminProcList(){
         return adminProcList;
     }
 
 
-    
+    //CREATE ADMINISTRATION PROCESS
     public AdminProcess createAdminProc(int minAge, int maxAge, int numberOfDoses){
         AdminProcess ap = new AdminProcess(minAge, maxAge, numberOfDoses);
         return ap;
+    }
+
+    //TO STRING
+    @Override
+    public String toString(){
+        return "Designation: " + this.designation + "\nBrand: " + this.brand + "\nId: " + this.id + "\nVaccine Type: " + this.vacType.getCode();
     }
 
     

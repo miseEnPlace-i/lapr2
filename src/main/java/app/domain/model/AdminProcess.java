@@ -72,14 +72,21 @@ public class AdminProcess {
     }
 
 
-
+    //CREATE DOSE INFO
     public DoseInfo createDoseInfo(int dosage, int timeSinceLastDose){
         DoseInfo di = new DoseInfo(dosage, timeSinceLastDose);
         return di;
     }
 
+    //GET LIST OF DOSE INFO
     public DoseInfoList getDoseInfoList(){
         return doseInfoList;
     }
     
+    //TO STRING
+    @Override
+    public String toString() {
+        return "Min age: " + this.minAge + "\nMax age: " + this.maxAge + "\nNumberOfDoses: " + this.numberOfDoses;
+    }
+
 }

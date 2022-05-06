@@ -47,5 +47,10 @@ public class DoseInfo {
         }
     } 
   
+    //TO STRING
+    @Override
+    public String toString() {
+        return "Dosage: " + this.dosage + "\nTime since last dose: " + this.timeSinceLastDose;
+    }
     
 }
