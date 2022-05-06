@@ -36,7 +36,7 @@ public class VaccinationCenterUI implements Runnable, IRegisterUI {
 
         if (confirmed) {
             ctrl.saveVaccinationCenter();
-            System.out.println("Vaccination Center successfully registered!");
+            System.out.println("\nVaccination Center successfully registered!");
         }
 
     }
