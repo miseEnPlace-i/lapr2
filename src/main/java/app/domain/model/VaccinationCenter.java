@@ -1,5 +1,8 @@
 package app.domain.model;
 
+import java.text.Normalizer.Form;
+import app.service.FormatVerifier;
+
 /**
  * Vaccination Center class
  * 
@@ -84,7 +87,7 @@ public class VaccinationCenter {
    * @throws IllegalArgumentException if the email address is null, empty or not valid.
    */
   private void setEmail(String email) {
-    if (email == null || email.isEmpty() || !email.matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")) {
+    if (email == null || email.isEmpty() || !FormatVerifier.validateEmail(email)) {
       throw new IllegalArgumentException("Email is not valid");
     }
     this.email = email;
@@ -98,7 +101,7 @@ public class VaccinationCenter {
    * @throws IllegalArgumentException if the phone number is null, empty or not valid.
    */
   private void setPhoneNum(String phoneNum) {
-    if (phoneNum == null || phoneNum.isEmpty() || !phoneNum.matches("\\+[0-9]{3}[0-9]{9}$")) {
+    if (phoneNum == null || phoneNum.isEmpty() || !FormatVerifier.validatePhoneNumber(phoneNum)) {
       throw new IllegalArgumentException("Phone number is not valid");
     }
     this.phoneNum = phoneNum;
@@ -112,7 +115,7 @@ public class VaccinationCenter {
    * @throws IllegalArgumentException if the fax number is null, empty or not valid.
    */
   private void setFaxNum(String faxNum) {
-    if (faxNum == null || faxNum.isEmpty() || !faxNum.matches("\\+[0-9]{1,3}-[0-9]{3}\\-[0-9]{7}")) {
+    if (faxNum == null || faxNum.isEmpty() || !FormatVerifier.validateFaxNumber(faxNum)) {
       throw new IllegalArgumentException("Fax number is not valid");
     }
     this.faxNum = faxNum;
@@ -126,7 +129,7 @@ public class VaccinationCenter {
    * @throws IllegalArgumentException if the website address is null, empty or not valid.
    */
   private void setWebAddress(String webAddress) {
-    if (webAddress == null || webAddress.isEmpty() || !webAddress.matches("^(https:\\/\\/|https:\\/\\/)?(www.)?([a-zA-Z0-9]+).[a-zA-Z0-9]*.[a-z]{3}.?([a-z]+)?$")) {
+    if (webAddress == null || webAddress.isEmpty() || !FormatVerifier.validateWebAddress(webAddress)) {
       throw new IllegalArgumentException("Website address is not valid");
     }
     this.webAddress = webAddress;
