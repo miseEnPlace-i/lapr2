@@ -1,6 +1,7 @@
 package app.domain.model;
 
 import java.util.Calendar;
+import app.service.CCFormatVerifier;
 import app.service.CalendarUtils;
 
 /**
@@ -137,12 +138,9 @@ public class SNSUser {
   }
 
   private static void validateCitizenCard(String citizenCard) {
-    // should follow the portuguese format
-    // dddddddd d XXd (d - digit; X - letter)
-    // regex: ^\d{7}[a-zA-Z]\d{2}[a-zA-Z]$
-    if (!citizenCard.matches("^\\d{7}[a-zA-Z]\\d{2}[a-zA-Z]$")) {
-      throw new IllegalArgumentException("Citizen Card is not valid");
-    }
+    CCFormatVerifier verifier = new CCFormatVerifier();
+
+    if (!verifier.validate(citizenCard)) throw new IllegalArgumentException("Citizen Card is not valid");
   }
 
   private static void validateSNSNumber(String snsNumber) {
@@ -164,7 +162,7 @@ public class SNSUser {
   private static void validatePhoneNumber(String phoneNumber) {
     // should have a + prefix
     // regex +\d{3} \d{9}
-    if (!phoneNumber.matches("^\\+\\d{3} \\d{9}$")) {
+    if (!phoneNumber.matches("^\\+\\d{3}\\d{9}$")) {
       throw new IllegalArgumentException("Phone Number is not valid");
     }
   }

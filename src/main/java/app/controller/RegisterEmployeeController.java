@@ -42,7 +42,7 @@ public class RegisterEmployeeController {
    */
   public void addEmployee(String name, String address, String phoneNumber, String email, String citizenCardNumber, String roleId) {
     // create an instance of an Employee
-    this.employee = store.addEmployee(name, address, phoneNumber, email, citizenCardNumber, roleId);
+    this.employee = store.addEmployee(name, phoneNumber, email, address, citizenCardNumber, roleId);
 
     // validate the Employee
     store.validateEmployee(employee);

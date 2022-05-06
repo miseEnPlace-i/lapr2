@@ -54,7 +54,7 @@ public class RegisterSNSUserUI implements Runnable, IRegisterUI {
     validGenders.add("f");
 
     do {
-      String input = Utils.readLineFromConsole("Select a gender (M/F): ");
+      String input = Utils.readLineFromConsole("Select a gender (M/F): ").toLowerCase();
       if (validGenders.contains(input)) {
         gender = input.charAt(0);
         flag = true;
