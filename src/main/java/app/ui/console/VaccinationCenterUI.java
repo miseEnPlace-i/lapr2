@@ -3,7 +3,7 @@ package app.ui.console;
 
 import java.util.ArrayList;
 import java.util.List;
-import app.controller.VaccinationCenterController;
+import app.controller.RegisterVaccinationCenterController;
 import app.domain.model.Employee;
 import app.ui.console.utils.Utils;
 
@@ -13,25 +13,24 @@ import app.ui.console.utils.Utils;
  * @author André Barros <1211299@isep.ipp.pt>
  */
 public class VaccinationCenterUI implements Runnable, IRegisterUI {
-    private VaccinationCenterController ctrl;
+    private RegisterVaccinationCenterController ctrl;
 
     /**
      * VaccinationCenterUI Constructor
      */
     public VaccinationCenterUI() {
-        ctrl = new VaccinationCenterController();
+        ctrl = new RegisterVaccinationCenterController();
     }
 
     /**
      * Calls all the methods to successfully create a new Vaccination Center
      */
-
     @Override
     public void run() {
         try {
             insertData();
         } catch (Exception e) {
-            System.out.println("Error");
+            System.out.println("Error: " + e);
         }
         boolean confirmed = confirmData();
 
