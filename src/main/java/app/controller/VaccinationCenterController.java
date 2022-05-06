@@ -30,7 +30,6 @@ public class VaccinationCenterController {
     this.company = this.app.getCompany();
     this.employeeStore = this.company.getEmployeeStore();
     this.vacStore = this.company.getVaccinationCenterStore();
-    this.center = null;
   }
 
   /**
@@ -63,7 +62,7 @@ public class VaccinationCenterController {
    */
 
   public void saveVaccinationCenter() {
-    vacStore.saveVaccinationCenter(center);
+    vacStore.saveVaccinationCenter(this.center);
   }
 
   /**
@@ -72,5 +71,12 @@ public class VaccinationCenterController {
 
   public List<Employee> getCoordinators() {
     return employeeStore.getEmployeesWithRole(Constants.ROLE_COORDINATOR);
+  }
+
+  /**
+   * Returns the Vaccination Center data as a String.
+   */
+  public String toString() {
+    return this.center.toString();
   }
 }

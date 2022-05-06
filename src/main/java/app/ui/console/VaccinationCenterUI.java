@@ -88,8 +88,8 @@ public class VaccinationCenterUI implements Runnable, IRegisterUI {
     @Override
     public boolean confirmData() {
         System.out.println("\nPlease confirm the data below.\n");
-        String vaccinationCenterData = ctrl.toString();
-        System.out.println(vaccinationCenterData);
+        String center = ctrl.toString();
+        System.out.println(center);
 
         List<String> options = new ArrayList<String>();
         options.add("y");
