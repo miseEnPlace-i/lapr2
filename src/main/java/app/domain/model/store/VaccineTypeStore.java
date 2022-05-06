@@ -23,6 +23,9 @@ public class VaccineTypeStore {
         return null;
     }
 
+    public List<VaccineType> getList(){
+        return vaccineTypes;
+    }
     
 
 }
