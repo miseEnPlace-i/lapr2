@@ -20,39 +20,39 @@ public class VaccineTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void NullVacArguments() {
-		Vaccine instance = new Vaccine(null, null, null, null);
+		new Vaccine(null, null, null, null);
 	}
 	
 
 	@Test(expected = IllegalArgumentException.class)
 	public void EmptyVacArguments() {
-		Vaccine instance = new Vaccine("", "", "", null);
+		new Vaccine("", "", "", null);
 	}
 	
 
 
 	@Test(expected = IllegalArgumentException.class)
 	public void VacNonExistingVacType() {
-		VaccineType notExistingVacT = new VaccineType();
-		Vaccine instance = new Vaccine("Pfizer–BioNTech COVID-19", "Pfizer", "vac1", notExistingVacT);
+		VaccineType notExistingVacT = null;
+		new Vaccine("Pfizer–BioNTech COVID-19", "Pfizer", "vac1", notExistingVacT);
 	}
 
 	// Administration Process
 
 	@Test(expected = IllegalArgumentException.class)
 	public void NullAdminProcArguments() {
-		AdminProcess adminProcess = new AdminProcess(0, 0, 0);
+		new AdminProcess(0, 0, 0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void NegativeAdminProcArguments() {
-		AdminProcess adminProcess = new AdminProcess(-10, -5, 3);
+		new AdminProcess(-10, -5, 3);
 	}
 
 
 	@Test(expected = IllegalArgumentException.class)
 	public void MaxAgeBiggerThanMinAge() {
-		AdminProcess adminProcess = new AdminProcess(18, 2, 3);
+		new AdminProcess(18, 2, 3);
 	}
 
 	// Dose Information
@@ -60,12 +60,12 @@ public class VaccineTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void NullDoseInfoArguments() {
-		DoseInfo doseInfo = new DoseInfo(0, 0);
+		new DoseInfo(0, 0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void NegativeDoseInfoArguments() {
-		DoseInfo doseInfo = new DoseInfo(-10, -5);
+		new DoseInfo(-10, -5);
 	}
 
     

@@ -36,13 +36,13 @@ public class DoseInfo {
 
     //VALIDATIONS
     public void validateDosage(int dosage){
-        if(dosage < 0){
+        if(dosage <= 0){
             throw new IllegalArgumentException("The dosage must be positive.");
         }
     }   
     
     public void validateTimeSinceLastDose(int timeSinceLastDose){
-        if(timeSinceLastDose < 0){
+        if(timeSinceLastDose <= 0){
             throw new IllegalArgumentException("The time since last dose must be positive.");
         }
     } 

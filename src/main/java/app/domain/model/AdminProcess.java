@@ -60,7 +60,7 @@ public class AdminProcess {
     }
 
     public void validateNumberOfDoses(int numberOfDoses){
-        if(numberOfDoses < 0){
+        if(numberOfDoses <= 0){
             throw new IllegalArgumentException("The number of doses must be positive.");
         }
     }

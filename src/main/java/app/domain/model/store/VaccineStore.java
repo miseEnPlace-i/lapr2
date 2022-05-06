@@ -2,7 +2,6 @@ package app.domain.model.store;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.text.StyledEditorKit.BoldAction;
 import app.domain.model.Vaccine;
 import app.domain.model.VaccineType;
 
