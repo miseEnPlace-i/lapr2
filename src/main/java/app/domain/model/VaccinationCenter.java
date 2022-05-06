@@ -98,7 +98,7 @@ public class VaccinationCenter {
    * @throws IllegalArgumentException if the phone number is null, empty or not valid.
    */
   private void setPhoneNum(String phoneNum) {
-    if (phoneNum == null || phoneNum.isEmpty() || !phoneNum.matches("^(\\+\\d{1,3}(  )?)?((\\(\\d{1,3}\\))|\\d{1,3})[- .]?\\d{3,4}[- .]?\\d{4}$")) {
+    if (phoneNum == null || phoneNum.isEmpty() || !phoneNum.matches("\\+[0-9]{3}[0-9]{9}$")) {
       throw new IllegalArgumentException("Phone number is not valid");
     }
     this.phoneNum = phoneNum;
