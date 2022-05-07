@@ -173,42 +173,31 @@ _It is also recommended to organize this content by subsections._
 
 ## Class CreateTaskController
 
-    public boolean createTask(String ref, String designation, String informalDesc,
-    	String technicalDesc, Integer duration, Double cost, Integer catId)() {
+    public void create(String citizenCard, String snsNumber, String name, String birthDay, char gender, String phoneNumber, String email, String address) throws IllegalArgumentException, ParseException {
+        // create an instance of an SNS User
+        this.snsUser = store.createSNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
 
-    	Category cat = this.platform.getCategoryById(catId);
-
-    	Organization org;
-    	// ... (omitted)
-
-    	this.task = org.createTask(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
-
-    	return (this.task != null);
+        // validate the SNS User
+        store.validateSNSUser(snsUser);
     }
 
 ## Class Organization
 
-    public Task createTask(String ref, String designation, String informalDesc,
-    	String technicalDesc, Integer duration, Double cost, Category cat)() {
+    public SNSUser createSNSUser(String citizenCard, String snsNumber, String name, String birthDayStr, char gender, String phoneNumber, String email, String address) throws IllegalArgumentException, ParseException {
+        Calendar birthDay;
+        birthDay = CalendarUtils.parse(birthDayStr);
 
-    	Task task = new Task(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
-    	if (this.validateTask(task))
-    		return task;
-    	return null;
+        SNSUser snsUser = new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
+
+        return snsUser;
     }
 
 # 6. Integration and Demo
 
 -   A new SNS User is created into the system.
 
-<!-- * A new option on the Employee menu options was added. -->
-
-<!-- * Some demo purposes some tasks are bootstrapped while system starts. -->
-
 # 7. Observations
 
 <!-- TODO -->
 
-Platform and Organization classes are getting too many responsibilities due to IE pattern and, therefore, they are becoming huge and harder to maintain.
-
-Is there any way to avoid this to happen?
+There is a relation between Employee and SNSUser because it needs to exist at least one Employee with the Receptionist role to register a SNS User.

@@ -104,4 +104,13 @@ public class SNSUserStore {
       throw new IllegalArgumentException("Duplicate SNS User");
     }
   }
+
+  /**
+   * Gets the size of the store.
+   * 
+   * @return int of number of SNS Users in the store.
+   */
+  public int size() {
+    return snsUsers.size();
+  }
 }
