@@ -12,12 +12,12 @@ public class AdminProcList {
     private List<AdminProcess> adminProcList;
 
     public AdminProcList(){
-        //TODO
         adminProcList = new ArrayList<>();
     }
 
-    private void addAdminProc(AdminProcess adminProc){
-        //TODO
+    public void addAdminProc(AdminProcess adminProc){
+        adminProcList.add(adminProc);
     }
+
 
 }

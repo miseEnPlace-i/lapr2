@@ -1,7 +1,6 @@
 package app.domain.model;
 
 import app.domain.model.list.AdminProcList;
-import app.domain.model.store.VaccineTypeStore;
 
 /**
  * @author Carlos Lopes <1211277@isep.ipp.pt>
@@ -14,17 +13,15 @@ public class Vaccine {
   private VaccineType vacType;
   private AdminProcList adminProcList;
 
-  public Vaccine(String designation, String id, String brand, String vacTypeId) {
-    validateDesignation(designation);
-    validateBrand(brand);
-    validateId(id);
-
-    this.designation = designation;
-    this.brand = brand;
-    this.id = id;
-    this.vacType = VaccineTypeStore.getVaccineTypeById(vacTypeId);
+  public Vaccine(String designation, String id, String brand, VaccineType vacType) {
+    setBrand(brand);
+    setDesignation(designation);
+    setId(id);
+    setVacType(vacType);
+    adminProcList = new AdminProcList();
   }
 
+  // VALIDATIONS
   public void validateDesignation(String designation) {
     if (designation == "" || designation == null) {
       throw new IllegalArgumentException("Designation field is required.");
@@ -43,20 +40,72 @@ public class Vaccine {
     }
   }
 
-  public void validateVacType(String vacTypeId) {
-    if (vacTypeId == "" || vacTypeId == null) {
-      throw new IllegalArgumentException("Vaccine type id field is required.");
-    }
-
-    if (VaccineTypeStore.getVaccineTypeById(vacTypeId) == null) {
+  public void validateVacType(VaccineType vacType) {
+    if (vacType == null) {
       throw new IllegalArgumentException("The vaccine type must exist.");
     }
   }
 
 
-  public void createAdminProc(int minAge, int maxAge, int numberOfDoses) {
-    // TODO
+  // GETTER & SETTERS
+  public String getDesignation() {
+    return this.designation;
+  }
+
+  public void setDesignation(String designation) {
+    validateDesignation(designation);
+    this.designation = designation;
+  }
+
+  public String getBrand() {
+    return this.brand;
+  }
+
+  public void setBrand(String brand) {
+    validateBrand(brand);
+    this.brand = brand;
+  }
+
+  public String getId() {
+    return this.id;
+  }
+
+  public void setId(String id) {
+    validateId(id);
+    this.id = id;
+  }
+
+  public VaccineType getVacType() {
+    return this.vacType;
+  }
+
+  public void setVacType(VaccineType vacType) {
+    validateVacType(vacType);
+    this.vacType = vacType;
   }
 
 
+  // GET ADMINSTRATION PROCESS LIST
+  public AdminProcList getAdminProcList() {
+    return adminProcList;
+  }
+
+
+  // CREATE ADMINISTRATION PROCESS
+  public AdminProcess createAdminProc(int minAge, int maxAge, int numberOfDoses) {
+    AdminProcess ap = new AdminProcess(minAge, maxAge, numberOfDoses);
+    return ap;
+  }
+
+  // TO STRING
+  @Override
+  public String toString() {
+    return "Designation: " + this.designation + "\nBrand: " + this.brand + "\nId: " + this.id
+        + "\nVaccine Type: " + this.vacType.getCode();
+  }
+
+  // ADD A NEW AP
+  public void addAdminProc(AdminProcess adminProc) {
+    adminProcList.addAdminProc(adminProc);
+  }
 }

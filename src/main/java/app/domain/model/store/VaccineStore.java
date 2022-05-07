@@ -17,14 +17,19 @@ public class VaccineStore {
         this.vaccines = new ArrayList<Vaccine>();
     }
 
-    public void createVaccine(String designation, String id, String brand, VaccineType vacType){
-        //TODO
+    public Vaccine createVaccine(String designation, String id, String brand, VaccineType vacType){
+        Vaccine vac = new Vaccine(designation, id, brand, vacType);
+        return vac;
     }
 
-    public boolean validateVaccine(Vaccine vac){
-        //TODO
-        return true;
+    public void saveVaccine(Vaccine vac){
+        vaccines.add(vac);
     }
     
+    public boolean exist(String designation){
+        for (Vaccine vac : vaccines)
+            if (vac.getDesignation() == designation) return true;
+        return false;
+    }
   
 }

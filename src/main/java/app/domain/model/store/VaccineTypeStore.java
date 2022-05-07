@@ -2,7 +2,6 @@ package app.domain.model.store;
 
 import java.util.ArrayList;
 import java.util.List;
-import app.domain.model.Vaccine;
 import app.domain.model.VaccineType;
 
 
@@ -35,7 +34,8 @@ public class VaccineTypeStore {
   public static VaccineType getVaccineTypeById(String vaccineTypeId) {
     // NEEDS REVISION
     if (vaccineTypeId == null) throw new IllegalArgumentException("Vaccine Type id cannot be null");
-    if (!vaccineType.existsTypeId(vaccineTypeId)) throw new IllegalArgumentException("Vaccine Type does not exist");
+    if (!vaccineType.existsTypeId(vaccineTypeId))
+      throw new IllegalArgumentException("Vaccine Type does not exist");
     boolean flag = false;
     List<VaccineType> lstVacType = new ArrayList<>();
 
@@ -47,15 +47,16 @@ public class VaccineTypeStore {
     return vaccineType;
   }
 
+  public VaccineType getVacTypeById(String vacTypeId) {
+    for (VaccineType vacT : vaccineTypes)
+      if (vacT.getCode() == vacTypeId) return vacT;
+    return null;
+  }
 
-  /**
-   * Adds a new vaccine type
-   * 
-   * @param code the vaccine type code
-   * @param description the vaccine type description
-   * @param technology the vaccine type technology
-   * @return vaccine type
-   */
+  public List<VaccineType> getList() {
+    return vaccineTypes;
+  }
+
 
   public VaccineType addVaccineType(String code, String description, String technology) {
     VaccineType vaccineType = new VaccineType(code, description, technology);

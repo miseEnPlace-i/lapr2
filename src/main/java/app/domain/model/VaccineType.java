@@ -26,6 +26,10 @@ public class VaccineType {
     setTechnology(technology);
   }
 
+  public String getCode() {
+    return code;
+  }
+
   /**
    * Sets the vaccine type code
    * 
@@ -35,7 +39,9 @@ public class VaccineType {
    */
 
   private void setCode(String code) {
-    if (code == null || code.isEmpty() || code.length() != Constants.VACCINE_TYPE_CODE_LENGTH) throw new IllegalArgumentException("Vaccine type code must be " + Constants.VACCINE_TYPE_CODE_LENGTH + " characters long.");
+    if (code == null || code.isEmpty() || code.length() != Constants.VACCINE_TYPE_CODE_LENGTH)
+      throw new IllegalArgumentException(
+          "Vaccine type code must be " + Constants.VACCINE_TYPE_CODE_LENGTH + " characters long.");
 
     this.code = code;
   }
@@ -49,7 +55,8 @@ public class VaccineType {
    */
 
   private void setDescription(String description) {
-    if (description.isEmpty() || description == null) throw new IllegalArgumentException("Description is not valid.");
+    if (description.isEmpty() || description == null)
+      throw new IllegalArgumentException("Description is not valid.");
 
     this.description = description;
   }
@@ -63,7 +70,8 @@ public class VaccineType {
    */
 
   private void setTechnology(String technology) {
-    if (technology == null || technology.isEmpty() || !isVaccineTechnologyValid(technology)) throw new IllegalArgumentException("Invalid vaccine technology: " + technology);
+    if (technology == null || technology.isEmpty() || !isVaccineTechnologyValid(technology))
+      throw new IllegalArgumentException("Invalid vaccine technology: " + technology);
 
     this.technology = technology;
   }
@@ -118,6 +126,5 @@ public class VaccineType {
   public boolean existsTypeId(String id) {
     // TODO
     return false;
-
   }
 }
