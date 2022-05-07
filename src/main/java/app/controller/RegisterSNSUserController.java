@@ -50,17 +50,12 @@ public class RegisterSNSUserController implements IRegisterController {
     store.validateSNSUser(snsUser);
   }
 
-  /**
-   * Adds an SNS User to the SNS Users list.
-   */
   @Override
   public void save() {
     store.saveSNSUser(this.snsUser);
   }
 
-  /**
-   * Returns the SNS User data as a String.
-   */
+  @Override
   public String stringifyData() {
     return snsUser.toString();
   }

@@ -57,9 +57,6 @@ public class RegisterVaccinationCenterController implements IRegisterController 
     vacStore.validateVaccinationCenter(center);
   }
 
-  /**
-   * Saves Vaccination Center
-   */
   @Override
   public void save() {
     vacStore.saveVaccinationCenter(this.center);
@@ -72,9 +69,6 @@ public class RegisterVaccinationCenterController implements IRegisterController 
     return employeeStore.getEmployeesWithRole(Constants.ROLE_COORDINATOR);
   }
 
-  /**
-   * Returns the Vaccination Center data as a String.
-   */
   @Override
   public String stringifyData() {
     return this.center.toString();
