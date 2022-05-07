@@ -1,6 +1,5 @@
 package app.domain.model;
 
-import java.text.Normalizer.Form;
 import app.service.FormatVerifier;
 
 /**
@@ -36,7 +35,9 @@ public class VaccinationCenter {
    * @param maxVacSlot the vaccination center maximum vaccines per slot
    * @param coordinator the vaccination center coordinator
    */
-  public VaccinationCenter(String name, String address, String email, String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot, Employee coordinator) {
+  public VaccinationCenter(String name, String address, String email, String phoneNum,
+      String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration,
+      int maxVacSlot, Employee coordinator) {
 
     setName(name);
     setAddress(address);
@@ -129,7 +130,7 @@ public class VaccinationCenter {
    * @throws IllegalArgumentException if the website address is null, empty or not valid.
    */
   private void setWebAddress(String webAddress) {
-    if (webAddress == null || webAddress.isEmpty() || !FormatVerifier.validateWebAddress(webAddress)) {
+    if (webAddress == null || webAddress.isEmpty() || !FormatVerifier.validateURL(webAddress)) {
       throw new IllegalArgumentException("Website address is not valid");
     }
     this.webAddress = webAddress;
@@ -147,7 +148,8 @@ public class VaccinationCenter {
     int hours = Integer.parseInt(openHours[0]);
     int minutes = Integer.parseInt(openHours[1]);
 
-    if (openingHours == null || openingHours.isEmpty() || hours < 0 || hours > 24 || minutes < 0 || minutes > 60) {
+    if (openingHours == null || openingHours.isEmpty() || hours < 0 || hours > 24 || minutes < 0
+        || minutes > 60) {
       throw new IllegalArgumentException("Opening hours is not valid.");
     }
     this.openingHours = openingHours;
@@ -165,7 +167,8 @@ public class VaccinationCenter {
     int hours = Integer.parseInt(closHours[0]);
     int minutes = Integer.parseInt(closHours[1]);
 
-    if (closingHours == null || closingHours.isEmpty() || hours < 0 || hours > 24 || minutes < 0 || minutes > 60) {
+    if (closingHours == null || closingHours.isEmpty() || hours < 0 || hours > 24 || minutes < 0
+        || minutes > 60) {
       throw new IllegalArgumentException("Closing hours is not valid.");
     }
     this.closingHours = closingHours;
