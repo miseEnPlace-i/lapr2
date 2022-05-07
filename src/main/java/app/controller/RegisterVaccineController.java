@@ -45,7 +45,7 @@ public class RegisterVaccineController implements IRegisterController {
 
   // CREATE VACCINE
   public void createVaccine(String designation, String id, String brand, String vacTypeId) {
-    VaccineType vacType = vaccineTypeStore.getVacTypeById(vacTypeId);
+    VaccineType vacType = vaccineTypeStore.getVaccineTypeByCode(vacTypeId);
     this.vac = vaccineStore.createVaccine(designation, id, brand, vacType);
   }
 
