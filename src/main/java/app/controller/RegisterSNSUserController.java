@@ -10,7 +10,7 @@ import app.domain.model.store.SNSUserStore;
  * 
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
-public class RegisterSNSUserController {
+public class RegisterSNSUserController implements IRegisterController {
 
   private App app;
   private Company company;
@@ -39,25 +39,29 @@ public class RegisterSNSUserController {
    * @param email
    * @param address
    */
-  public void createSNSUser(String citizenCard, String snsNumber, String name, String birthDay, char gender, String phoneNumber, String email, String address) throws IllegalArgumentException, ParseException {
+  public void create(String citizenCard, String snsNumber, String name, String birthDay,
+      char gender, String phoneNumber, String email, String address)
+      throws IllegalArgumentException, ParseException {
     // create an instance of an SNS User
-    this.snsUser = store.createSNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
+    this.snsUser = store.createSNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber,
+        email, address);
 
     // validate the SNS User
     store.validateSNSUser(snsUser);
   }
 
-  /**
-   * Adds an SNS User to the SNS Users list.
-   */
-  public void saveSNSUser() {
+  @Override
+  public void save() {
     store.saveSNSUser(this.snsUser);
   }
 
-  /**
-   * Returns the SNS User data as a String.
-   */
-  public String stringifySNSUser() {
+  @Override
+  public String stringifyData() {
     return snsUser.toString();
+  }
+
+  @Override
+  public String getResourceName() {
+    return "SNS User";
   }
 }

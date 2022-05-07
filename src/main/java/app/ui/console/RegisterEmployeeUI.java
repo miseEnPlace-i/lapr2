@@ -1,6 +1,6 @@
 package app.ui.console;
 
-import java.util.ArrayList;
+import java.text.ParseException;
 import java.util.List;
 import app.controller.RegisterEmployeeController;
 import app.ui.console.utils.Utils;
@@ -12,32 +12,37 @@ import pt.isep.lei.esoft.auth.domain.model.UserRole;
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
 
-public class RegisterEmployeeUI implements Runnable {
-  private RegisterEmployeeController controller;
+public class RegisterEmployeeUI extends RegisterUI<RegisterEmployeeController> {
+  private String roleId = "";
 
   /**
    * Constructor for RegisterEmployeeUI.
    */
   public RegisterEmployeeUI() {
-    this.controller = new RegisterEmployeeController();
+    super(new RegisterEmployeeController());
   }
 
+  @Override
   public void run() {
     System.out.println("\nRegister Employee UI:");
 
-    List<UserRole> employeeRoles = controller.getEmployeeRoles();
+    List<UserRole> employeeRoles = ctrl.getEmployeeRoles();
     displayEmployeeRoles(employeeRoles);
 
     UserRole role = selectEmployeeRole(employeeRoles);
-    String roleId = role.getId();
+    this.roleId = role.getId();
 
-    insertEmployeeData(roleId);
+    try {
+      insertData();
 
-    boolean confirmed = confirmData();
+      boolean confirmed = confirmData(this.ctrl.stringifyData());
 
-    if (confirmed) {
-      controller.saveEmployee();
-      System.out.println("Employee successfully registered!");
+      if (confirmed) {
+        ctrl.save();
+        System.out.println("Employee successfully registered!");
+      }
+    } catch (Exception e) {
+      System.out.printf("%nError: %s%n", e.getMessage());
     }
   }
 
@@ -64,32 +69,14 @@ public class RegisterEmployeeUI implements Runnable {
   /**
    * Asks user to input employee data
    */
-  private void insertEmployeeData(String roleId) {
+  @Override
+  public void insertData() throws IllegalArgumentException, ParseException {
     String name = Utils.readLineFromConsole("Name: ");
     String address = Utils.readLineFromConsole("Address: ");
     String phoneNumber = Utils.readLineFromConsole("Phone Number: ");
     String email = Utils.readLineFromConsole("Email: ");
     String citizenCard = Utils.readLineFromConsole("Citizen Card Number: ");
 
-    controller.addEmployee(name, address, phoneNumber, email, citizenCard, roleId);
-  }
-
-  /**
-   * Asks user to confirm the employee data
-   *
-   * @return true if the user confirms, false otherwise
-   */
-  private boolean confirmData() {
-    System.out.println("\nPlease confirm the data below.\n");
-    String stringifiedEmployee = controller.stringifyEmployee();
-    System.out.println(stringifiedEmployee);
-
-    List<String> options = new ArrayList<String>();
-    options.add("y");
-    options.add("n");
-    Object input = Utils.showAndSelectOne(options, "Is this information correct? (y/n):  ");
-    String inputStr = (String) input;
-
-    return inputStr.equals("y");
+    super.ctrl.create(name, address, phoneNumber, email, citizenCard, this.roleId);
   }
 }

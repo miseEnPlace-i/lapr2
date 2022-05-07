@@ -1,7 +1,9 @@
 package app.domain.model;
 
 import java.util.Calendar;
-import app.domain.shared.CalendarUtils;
+import app.service.CCFormatVerifier;
+import app.service.CalendarUtils;
+import app.service.FormatVerifier;
 
 /**
  * SNSUser model class.
@@ -47,7 +49,8 @@ public class SNSUser {
    * @param phoneNumber
    * @param email
    */
-  public SNSUser(String citizenCard, String snsNumber, String name, Calendar birthDay, char gender, String phoneNumber, String email, String address) {
+  public SNSUser(String citizenCard, String snsNumber, String name, Calendar birthDay, char gender,
+      String phoneNumber, String email, String address) {
     validateBirthday(birthDay);
     validateCitizenCard(citizenCard);
     validateSNSNumber(snsNumber);
@@ -132,25 +135,21 @@ public class SNSUser {
     int age = CalendarUtils.calculateAge(birthDay);
 
     if (age > MAX_AGE) {
-      throw new IllegalArgumentException(String.format("Birthday cannot be more than %d years ago", MAX_AGE));
+      throw new IllegalArgumentException(
+          String.format("Birthday cannot be more than %d years ago", MAX_AGE));
     }
   }
 
   private static void validateCitizenCard(String citizenCard) {
-    // should follow the portuguese format
-    // dddddddd d XXd (d - digit; X - letter)
-    // regex: ^\d{7}[a-zA-Z]\d{2}[a-zA-Z]$
-    if (!citizenCard.matches("^\\d{7}[a-zA-Z]\\d{2}[a-zA-Z]$")) {
+    CCFormatVerifier verifier = new CCFormatVerifier();
+
+    if (!verifier.validate(citizenCard))
       throw new IllegalArgumentException("Citizen Card is not valid");
-    }
   }
 
   private static void validateSNSNumber(String snsNumber) {
-    // should follow the portuguese format (9 digits)
-    // regex: ^\d{9}$
-    if (!snsNumber.matches("^\\d{9}$")) {
+    if (!FormatVerifier.validateSNSNumber(snsNumber))
       throw new IllegalArgumentException("SNS Number is not valid");
-    }
   }
 
   private static void validateName(String name) {
@@ -162,19 +161,13 @@ public class SNSUser {
   }
 
   private static void validatePhoneNumber(String phoneNumber) {
-    // should have a + prefix
-    // regex +\d{3} \d{9}
-    if (!phoneNumber.matches("^\\+\\d{3} \\d{9}$")) {
+    if (!FormatVerifier.validatePhoneNumber(phoneNumber))
       throw new IllegalArgumentException("Phone Number is not valid");
-    }
   }
 
   private static void validateEmail(String email) {
-    // regex:
-    // ^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$
-    if (!email.matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")) {
+    if (!FormatVerifier.validateEmail(email))
       throw new IllegalArgumentException("Email is not valid");
-    }
   }
 
   private static void validateAddress(String address) {
@@ -199,5 +192,4 @@ public class SNSUser {
 
     return sb.toString();
   }
-
 }

@@ -12,7 +12,7 @@ import pt.isep.lei.esoft.auth.domain.model.UserRole;
  * 
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
-public class RegisterEmployeeController {
+public class RegisterEmployeeController implements IRegisterController {
   private App app;
   private Company company;
   private Employee employee;
@@ -40,18 +40,19 @@ public class RegisterEmployeeController {
    * @param citizenCardNumber the employee citizenCardNumber
    * @param roleId the employee roleId
    */
-  public void addEmployee(String name, String address, String phoneNumber, String email, String citizenCardNumber, String roleId) {
+  public void create(String name, String address, String phoneNumber, String email,
+      String citizenCardNumber, String roleId) {
     // create an instance of an Employee
-    this.employee = store.addEmployee(name, address, phoneNumber, email, citizenCardNumber, roleId);
+    this.employee =
+        store.createEmployee(name, phoneNumber, email, address, citizenCardNumber, roleId);
 
     // validate the Employee
     store.validateEmployee(employee);
+
   }
 
-  /**
-   * Adds an Employee to the Employee store.
-   */
-  public void saveEmployee() {
+  @Override
+  public void save() {
     store.saveEmployee(this.employee);
   }
 
@@ -64,12 +65,13 @@ public class RegisterEmployeeController {
     return roleStore.getRoles();
   }
 
-  /**
-   * Gets all the information about the employee.
-   * 
-   * @return the employee information
-   */
-  public String stringifyEmployee() {
+  @Override
+  public String stringifyData() {
     return this.employee.toString();
+  }
+
+  @Override
+  public String getResourceName() {
+    return "Employee";
   }
 }

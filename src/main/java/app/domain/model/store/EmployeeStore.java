@@ -3,7 +3,7 @@ package app.domain.model.store;
 import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.Employee;
-import app.domain.shared.PasswordGenerator;
+import app.service.PasswordGenerator;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
 /**
@@ -34,7 +34,8 @@ public class EmployeeStore {
    * @param citizenCard the employee citizenCard
    * @param roleId the employee roleId
    */
-  public Employee addEmployee(String name, String phoneNumber, String email, String address, String citizenCard, String roleId) {
+  public Employee createEmployee(String name, String phoneNumber, String email, String address,
+      String citizenCard, String roleId) {
     Employee employee = new Employee(name, phoneNumber, email, address, citizenCard, roleId);
 
     return employee;
@@ -68,7 +69,8 @@ public class EmployeeStore {
 
     String email = employee.getEmail();
 
-    if (this.authFacade.existsUser(email)) throw new IllegalArgumentException("Email already exists");
+    if (this.authFacade.existsUser(email))
+      throw new IllegalArgumentException("Email already exists");
 
     checkDuplicates(employee);
   }
@@ -98,6 +100,7 @@ public class EmployeeStore {
    * @param employee the employee to be checked
    */
   public void checkDuplicates(Employee employee) {
-    if (employees.contains(employee)) throw new IllegalArgumentException("Duplicate employee found");
+    if (employees.contains(employee))
+      throw new IllegalArgumentException("Duplicate employee found");
   }
 }

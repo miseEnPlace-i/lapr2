@@ -1,14 +1,12 @@
 package app.domain.model;
 
-import java.text.ParseException;
-import app.domain.shared.CalendarUtils;
+import app.service.FormatVerifier;
 
 /**
  * Vaccination Center class
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  */
-
 public class VaccinationCenter {
   private String name;
   private String address;
@@ -37,8 +35,9 @@ public class VaccinationCenter {
    * @param maxVacSlot the vaccination center maximum vaccines per slot
    * @param coordinator the vaccination center coordinator
    */
-
-  public VaccinationCenter(String name, String address, String email, String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot, Employee coordinator) {
+  public VaccinationCenter(String name, String address, String email, String phoneNum,
+      String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration,
+      int maxVacSlot, Employee coordinator) {
 
     setName(name);
     setAddress(address);
@@ -89,7 +88,7 @@ public class VaccinationCenter {
    * @throws IllegalArgumentException if the email address is null, empty or not valid.
    */
   private void setEmail(String email) {
-    if (email == null || email.isEmpty() || !email.matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")) {
+    if (email == null || email.isEmpty() || !FormatVerifier.validateEmail(email)) {
       throw new IllegalArgumentException("Email is not valid");
     }
     this.email = email;
@@ -103,7 +102,7 @@ public class VaccinationCenter {
    * @throws IllegalArgumentException if the phone number is null, empty or not valid.
    */
   private void setPhoneNum(String phoneNum) {
-    if (phoneNum == null || phoneNum.isEmpty() || !phoneNum.matches("^(\\+\\d{1,3}(  )?)?((\\(\\d{1,3}\\))|\\d{1,3})[- .]?\\d{3,4}[- .]?\\d{4}$")) {
+    if (phoneNum == null || phoneNum.isEmpty() || !FormatVerifier.validatePhoneNumber(phoneNum)) {
       throw new IllegalArgumentException("Phone number is not valid");
     }
     this.phoneNum = phoneNum;
@@ -117,7 +116,7 @@ public class VaccinationCenter {
    * @throws IllegalArgumentException if the fax number is null, empty or not valid.
    */
   private void setFaxNum(String faxNum) {
-    if (faxNum == null || faxNum.isEmpty() || !faxNum.matches("^\\+\\d{3} \\d{12}$")) {
+    if (faxNum == null || faxNum.isEmpty() || !FormatVerifier.validateFaxNumber(faxNum)) {
       throw new IllegalArgumentException("Fax number is not valid");
     }
     this.faxNum = faxNum;
@@ -131,7 +130,7 @@ public class VaccinationCenter {
    * @throws IllegalArgumentException if the website address is null, empty or not valid.
    */
   private void setWebAddress(String webAddress) {
-    if (webAddress == null || webAddress.isEmpty() || !webAddress.matches("^(https:\\/\\/|https:\\/\\/)?(www.)?([a-zA-Z0-9]+).[a-zA-Z0-9]*.[a-z]{3}.?([a-z]+)?$")) {
+    if (webAddress == null || webAddress.isEmpty() || !FormatVerifier.validateURL(webAddress)) {
       throw new IllegalArgumentException("Website address is not valid");
     }
     this.webAddress = webAddress;
@@ -144,16 +143,16 @@ public class VaccinationCenter {
    * 
    * @throws IllegalArgumentException if the opening hours are null, empty or not valid.
    */
-
   private void setOpeningHours(String openingHours) {
+    String[] openHours = openingHours.split(":");
+    int hours = Integer.parseInt(openHours[0]);
+    int minutes = Integer.parseInt(openHours[1]);
 
-    try {
-      if (openingHours != null && !openingHours.isEmpty() && !CalendarUtils.parse(openingHours).before(closingHours)) {
-        this.openingHours = openingHours;
-      }
-    } catch (ParseException e) {
-      throw new IllegalArgumentException("Opening hours is not valid");
+    if (openingHours == null || openingHours.isEmpty() || hours < 0 || hours > 24 || minutes < 0
+        || minutes > 60) {
+      throw new IllegalArgumentException("Opening hours is not valid.");
     }
+    this.openingHours = openingHours;
   }
 
   /**
@@ -163,16 +162,16 @@ public class VaccinationCenter {
    * 
    * @throws IllegalArgumentException if the closing hours are null, empty or not valid.
    */
-
   private void setClosingHours(String closingHours) {
+    String[] closHours = closingHours.split(":");
+    int hours = Integer.parseInt(closHours[0]);
+    int minutes = Integer.parseInt(closHours[1]);
 
-    try {
-      if (closingHours != null && !closingHours.isEmpty() && !CalendarUtils.parse(closingHours).after(openingHours)) {
-        this.closingHours = closingHours;
-      }
-    } catch (ParseException e) {
-      throw new IllegalArgumentException("Closing hours is not valid");
+    if (closingHours == null || closingHours.isEmpty() || hours < 0 || hours > 24 || minutes < 0
+        || minutes > 60) {
+      throw new IllegalArgumentException("Closing hours is not valid.");
     }
+    this.closingHours = closingHours;
   }
 
   /**
@@ -237,5 +236,20 @@ public class VaccinationCenter {
     sb.append(String.format("Coordinator: %s\n", this.coordinator.getName()));
 
     return sb.toString();
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    VaccinationCenter center = (VaccinationCenter) obj;
+    if (obj == null) return false;
+    if (obj == this) return false;
+
+    // For now, only email, phone number, fax number and website address should be unique for each Center
+    if (this.email.equals(center.email)) return true;
+    if (this.phoneNum.equals(center.phoneNum)) return true;
+    if (this.faxNum.equals(center.faxNum)) return true;
+    if (this.webAddress.equals(center.webAddress)) return true;
+
+    return false;
   }
 }

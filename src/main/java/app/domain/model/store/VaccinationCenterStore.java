@@ -10,7 +10,6 @@ import app.domain.model.VaccinationCenter;
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  */
-
 public class VaccinationCenterStore {
 
   // Vaccination Centers list
@@ -19,7 +18,6 @@ public class VaccinationCenterStore {
   /**
    * Constructor for VaccinationCenterStore
    */
-
   public VaccinationCenterStore() {
     this.vacCenters = new ArrayList<VaccinationCenter>();
   }
@@ -40,11 +38,13 @@ public class VaccinationCenterStore {
    * @param coordinator the vaccination center coordinator
    * @return VaccinationCenter
    */
+  public VaccinationCenter createVaccinationCenter(String name, String address, String emailAddress,
+      String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours,
+      int slotDuration, int maxVacSlot, Employee coordinator) {
 
-  public VaccinationCenter createVaccinationCenter(String name, String address, String emailAddress, String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot,
-      Employee coordinator) {
+    VaccinationCenter center = new VaccinationCenter(name, address, emailAddress, phoneNum, faxNum,
+        webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
 
-    VaccinationCenter center = new VaccinationCenter(name, address, emailAddress, phoneNum, faxNum, webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
     return center;
   }
 
@@ -53,11 +53,9 @@ public class VaccinationCenterStore {
    * 
    * @param center the vaccination center
    */
-
   public void validateVaccinationCenter(VaccinationCenter center) {
-    if (center == null) {
-      throw new Error("\nVaccination center is invalid.");
-    }
+    if (center == null) throw new IllegalArgumentException("\nVaccination center is not valid.");
+
     checkDuplicates(center);
   }
 
@@ -66,11 +64,9 @@ public class VaccinationCenterStore {
    * 
    * @param center the vaccination center
    */
-
-  public void checkDuplicates(VaccinationCenter center) {
-    if (vacCenters.contains(center)) {
+  private void checkDuplicates(VaccinationCenter center) {
+    if (vacCenters.contains(center))
       throw new IllegalArgumentException("\nDuplicated Vaccination Center.");
-    }
   }
 
   /**
@@ -79,6 +75,16 @@ public class VaccinationCenterStore {
    * @param center the vaccination center
    */
   public void saveVaccinationCenter(VaccinationCenter center) {
+    System.out.println("adding");
     vacCenters.add(center);
+  }
+
+  /**
+   * Asks for the size of the List vacCenters
+   * 
+   * @return number of vaccination centers registered in the system
+   */
+  public int size() {
+    return vacCenters.size();
   }
 }

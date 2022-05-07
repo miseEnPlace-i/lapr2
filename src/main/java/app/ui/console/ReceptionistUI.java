@@ -1,9 +1,8 @@
 package app.ui.console;
 
-import app.ui.console.utils.Utils;
-
 import java.util.ArrayList;
 import java.util.List;
+import app.ui.console.utils.Utils;
 
 /**
  *
@@ -19,7 +18,6 @@ public class ReceptionistUI implements Runnable {
     options.add(new MenuItem("Option B ", new ShowTextUI("You have chosen Option B.")));
     options.add(new MenuItem("Option C ", new ShowTextUI("You have chosen Option C.")));
     options.add(new MenuItem("Register a SNS User", new RegisterSNSUserUI()));
-
 
     int option = 0;
     do {

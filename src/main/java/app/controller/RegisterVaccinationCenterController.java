@@ -13,8 +13,7 @@ import app.domain.shared.Constants;
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  */
-
-public class VaccinationCenterController {
+public class RegisterVaccinationCenterController implements IRegisterController {
   private App app;
   private Company company;
   private EmployeeStore employeeStore;
@@ -24,13 +23,11 @@ public class VaccinationCenterController {
   /**
    * Constructor for VaccinationCenterController
    */
-
-  public VaccinationCenterController() {
+  public RegisterVaccinationCenterController() {
     this.app = App.getInstance();
     this.company = this.app.getCompany();
     this.employeeStore = this.company.getEmployeeStore();
     this.vacStore = this.company.getVaccinationCenterStore();
-    this.center = null;
   }
 
   /**
@@ -48,29 +45,37 @@ public class VaccinationCenterController {
    * @param maxVacSlot the vaccination center maximum vaccines per slot
    * @param coordinator the vaccination center coordinator
    */
-
-  public void createVaccinationCenter(String name, String address, String emailAddress, String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot, Employee coordinator) {
+  public void create(String name, String address, String emailAddress, String phoneNum,
+      String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration,
+      int maxVacSlot, Employee coordinator) {
 
     // creates an vaccination center instance
-    this.center = vacStore.createVaccinationCenter(name, address, emailAddress, phoneNum, faxNum, webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
+    this.center = vacStore.createVaccinationCenter(name, address, emailAddress, phoneNum, faxNum,
+        webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
 
     // validates the center
     vacStore.validateVaccinationCenter(center);
   }
 
-  /**
-   * Saves Vaccination Center
-   */
-
-  public void saveVaccinationCenter() {
-    vacStore.saveVaccinationCenter(center);
+  @Override
+  public void save() {
+    vacStore.saveVaccinationCenter(this.center);
   }
 
   /**
    * @return Gets list of all coordinators registered in the system
    */
-
   public List<Employee> getCoordinators() {
     return employeeStore.getEmployeesWithRole(Constants.ROLE_COORDINATOR);
+  }
+
+  @Override
+  public String stringifyData() {
+    return this.center.toString();
+  }
+
+  @Override
+  public String getResourceName() {
+    return "Vaccination Center";
   }
 }

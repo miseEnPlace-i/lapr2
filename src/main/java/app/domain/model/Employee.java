@@ -1,6 +1,6 @@
 package app.domain.model;
 
-import app.domain.shared.CCFormatVerifier;
+import app.service.CCFormatVerifier;
 
 /**
  * Employee model class.
@@ -29,7 +29,8 @@ public class Employee {
    * @param citizenCard the employee citizenCard
    * @param roleId the employee roleId
    */
-  public Employee(String name, String phoneNumber, String email, String address, String citizenCard, String roleId) {
+  public Employee(String name, String phoneNumber, String email, String address, String citizenCard,
+      String roleId) {
     int generatedId = generateId();
 
     setId(generatedId);
@@ -158,7 +159,9 @@ public class Employee {
     if (phoneNumber == null) throw new IllegalArgumentException("Phone number cannot be null");
     if (phoneNumber.isEmpty()) throw new IllegalArgumentException("Phone number cannot be empty");
 
-    if (!phoneNumber.matches("^(\\+\\d{1,3}( )?)?((\\(\\d{1,3}\\))|\\d{1,3})[- .]?\\d{3,4}[- .]?\\d{4}$")) throw new IllegalArgumentException("Phone Number is not valid");
+    if (!phoneNumber
+        .matches("^(\\+\\d{1,3}?)?((\\(\\d{1,3}\\))|\\d{1,3})[- .]?\\d{3,4}[- .]?\\d{4}$"))
+      throw new IllegalArgumentException("Phone Number is not valid");
 
     this.phoneNumber = phoneNumber;
   }
@@ -174,7 +177,9 @@ public class Employee {
     if (email == null) throw new IllegalArgumentException("Email cannot be null");
     if (email.isEmpty()) throw new IllegalArgumentException("Email cannot be empty");
 
-    if (!email.matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")) throw new IllegalArgumentException("Email is not valid");
+    if (!email.matches(
+        "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"))
+      throw new IllegalArgumentException("Email is not valid");
 
     this.email = email;
   }
@@ -207,7 +212,8 @@ public class Employee {
     if (citizenCard == null) throw new IllegalArgumentException("Citizen Card cannot be null");
     if (citizenCard.isEmpty()) throw new IllegalArgumentException("Citizen Card cannot be empty");
 
-    if (!formatVerifier.validate(citizenCard)) throw new IllegalArgumentException("Citizen Card is not valid");
+    if (!formatVerifier.validate(citizenCard))
+      throw new IllegalArgumentException("Citizen Card is not valid");
 
     this.citizenCard = citizenCard;
   }

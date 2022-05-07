@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import app.domain.model.SNSUser;
-import app.domain.shared.CalendarUtils;
 import app.domain.shared.Constants;
-import app.domain.shared.PasswordGenerator;
+import app.service.CalendarUtils;
+import app.service.PasswordGenerator;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
 /**
@@ -42,11 +42,15 @@ public class SNSUserStore {
    * @param address SNS User address
    * @return SNSUser
    */
-  public SNSUser createSNSUser(String citizenCard, String snsNumber, String name, String birthDayStr, char gender, String phoneNumber, String email, String address) throws IllegalArgumentException, ParseException {
+  public SNSUser createSNSUser(String citizenCard, String snsNumber, String name,
+      String birthDayStr, char gender, String phoneNumber, String email, String address)
+      throws IllegalArgumentException, ParseException {
     Calendar birthDay;
     birthDay = CalendarUtils.parse(birthDayStr);
 
-    SNSUser snsUser = new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
+    SNSUser snsUser =
+        new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
+
     return snsUser;
   }
 
@@ -66,9 +70,7 @@ public class SNSUserStore {
     // check with AuthFacade if the email is already in use
     boolean existsUser = this.authFacade.existsUser(email);
 
-    if (existsUser) {
-      throw new IllegalArgumentException("Email already in use");
-    }
+    if (existsUser) throw new IllegalArgumentException("Email already in use");
 
     checkDuplicates(snsUser);
   }
@@ -101,5 +103,14 @@ public class SNSUserStore {
     if (snsUsers.contains(snsUser)) {
       throw new IllegalArgumentException("Duplicate SNS User");
     }
+  }
+
+  /**
+   * Gets the size of the store.
+   * 
+   * @return int of number of SNS Users in the store.
+   */
+  public int size() {
+    return snsUsers.size();
   }
 }
