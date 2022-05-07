@@ -6,7 +6,12 @@ package app.service;
  * @author André Barros <1211299@isep.ipp.pt>
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
-public class FormatVerifier {
+public final class FormatVerifier {
+  /**
+   * Private constructor to avoid instantiation.
+   */
+  private FormatVerifier() {}
+
   /**
    * Validates if the given string is a citizen card number. Follows the rules for portuguese citizens cards.
    * 
