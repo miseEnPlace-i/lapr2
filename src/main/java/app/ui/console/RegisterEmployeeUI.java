@@ -13,7 +13,7 @@ import pt.isep.lei.esoft.auth.domain.model.UserRole;
  */
 
 public class RegisterEmployeeUI extends RegisterUI {
-  private RegisterEmployeeController controller = new RegisterEmployeeController();
+  private RegisterEmployeeController ctrl;
 
   private String roleId = "";
 
@@ -22,13 +22,14 @@ public class RegisterEmployeeUI extends RegisterUI {
    */
   public RegisterEmployeeUI() {
     super(new RegisterEmployeeController());
+    this.ctrl = (RegisterEmployeeController) super.ctrl;
   }
 
   @Override
   public void run() {
     System.out.println("\nRegister Employee UI:");
 
-    List<UserRole> employeeRoles = controller.getEmployeeRoles();
+    List<UserRole> employeeRoles = ctrl.getEmployeeRoles();
     displayEmployeeRoles(employeeRoles);
 
     UserRole role = selectEmployeeRole(employeeRoles);
@@ -37,10 +38,10 @@ public class RegisterEmployeeUI extends RegisterUI {
     try {
       insertData();
 
-      boolean confirmed = confirmData(this.controller.stringifyData());
+      boolean confirmed = confirmData(this.ctrl.stringifyData());
 
       if (confirmed) {
-        controller.save();
+        ctrl.save();
         System.out.println("Employee successfully registered!");
       }
     } catch (Exception e) {
@@ -79,6 +80,6 @@ public class RegisterEmployeeUI extends RegisterUI {
     String email = Utils.readLineFromConsole("Email: ");
     String citizenCard = Utils.readLineFromConsole("Citizen Card Number: ");
 
-    controller.create(name, address, phoneNumber, email, citizenCard, this.roleId);
+    ctrl.create(name, address, phoneNumber, email, citizenCard, this.roleId);
   }
 }

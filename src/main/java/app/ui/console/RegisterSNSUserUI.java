@@ -3,6 +3,7 @@ package app.ui.console;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import app.controller.IRegisterController;
 import app.controller.RegisterSNSUserController;
 import app.ui.console.utils.Utils;
 
@@ -13,10 +14,11 @@ import app.ui.console.utils.Utils;
  */
 
 public class RegisterSNSUserUI extends RegisterUI {
-  private static RegisterSNSUserController ctrl = new RegisterSNSUserController();
+  private RegisterSNSUserController ctrl;
 
   public RegisterSNSUserUI() {
-    super(ctrl);
+    super(new RegisterSNSUserController());
+    this.ctrl = (RegisterSNSUserController) super.ctrl;
   }
 
   @Override

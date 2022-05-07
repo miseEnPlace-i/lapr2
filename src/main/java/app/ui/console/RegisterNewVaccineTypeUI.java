@@ -12,10 +12,11 @@ import app.ui.console.utils.Utils;
  */
 
 public class RegisterNewVaccineTypeUI extends RegisterUI {
-  private RegisterNewVaccineTypeController ctrl = new RegisterNewVaccineTypeController();
+  private RegisterNewVaccineTypeController ctrl;
 
   public RegisterNewVaccineTypeUI() {
     super(new RegisterNewVaccineTypeController());
+    this.ctrl = (RegisterNewVaccineTypeController) super.ctrl;
   }
 
   /**

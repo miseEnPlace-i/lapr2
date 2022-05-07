@@ -13,14 +13,14 @@ import app.ui.console.utils.Utils;
  * @author André Barros <1211299@isep.ipp.pt>
  */
 public class RegisterVaccinationCenterUI extends RegisterUI {
-  private static RegisterVaccinationCenterController ctrl =
-      new RegisterVaccinationCenterController();
+  private RegisterVaccinationCenterController ctrl;
 
   /**
    * VaccinationCenterUI Constructor
    */
   public RegisterVaccinationCenterUI() {
-    super(ctrl);
+    super(new RegisterVaccinationCenterController());
+    this.ctrl = (RegisterVaccinationCenterController) super.ctrl;
   }
 
   @Override
