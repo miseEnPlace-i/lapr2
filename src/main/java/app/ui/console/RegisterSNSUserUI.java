@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import app.controller.RegisterSNSUserController;
-import app.domain.model.SNSUser;
 import app.ui.console.utils.Utils;
 
 /**
@@ -13,27 +12,11 @@ import app.ui.console.utils.Utils;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 
-public class RegisterSNSUserUI extends RegisterUI<SNSUser> implements Runnable {
-  private RegisterSNSUserController ctrl;
+public class RegisterSNSUserUI extends RegisterUI implements Runnable {
+  private RegisterSNSUserController ctrl = new RegisterSNSUserController();
 
   public RegisterSNSUserUI() {
-    ctrl = new RegisterSNSUserController();
-  }
-
-  @Override
-  public void run() {
-    try {
-      insertData();
-    } catch (Exception e) {
-      System.out.println(String.format("Error: %s\n", e.getMessage()));
-    }
-
-    boolean confirmed = confirmData(ctrl.stringifyData());
-
-    if (confirmed) {
-      ctrl.save();
-      System.out.println("SNS User successfully registered!");
-    }
+    super(new RegisterSNSUserController());
   }
 
   @Override

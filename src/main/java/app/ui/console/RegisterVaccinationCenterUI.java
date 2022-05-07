@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import app.controller.RegisterVaccinationCenterController;
 import app.domain.model.Employee;
-import app.domain.model.VaccinationCenter;
 import app.ui.console.utils.Utils;
 
 /**
@@ -13,39 +12,15 @@ import app.ui.console.utils.Utils;
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  */
-public class VaccinationCenterUI extends RegisterUI<VaccinationCenter> implements Runnable {
-  private RegisterVaccinationCenterController ctrl;
+public class RegisterVaccinationCenterUI extends RegisterUI implements Runnable {
+  private RegisterVaccinationCenterController ctrl = new RegisterVaccinationCenterController();
 
   /**
    * VaccinationCenterUI Constructor
    */
-  public VaccinationCenterUI() {
-    ctrl = new RegisterVaccinationCenterController();
+  public RegisterVaccinationCenterUI() {
+    super(new RegisterVaccinationCenterController());
   }
-
-  /**
-   * Calls all the methods to successfully create a new Vaccination Center
-   */
-  @Override
-  public void run() {
-    try {
-      insertData();
-    } catch (Exception e) {
-      System.out.println("Error: " + e);
-    }
-
-    boolean confirmed = confirmData(ctrl.stringifyData());
-
-    if (confirmed) {
-      ctrl.save();
-      System.out.println("\nVaccination Center successfully registered!");
-    }
-
-  }
-
-  /**
-   * UI to register a Vaccination Center
-   */
 
   @Override
   public void insertData() {

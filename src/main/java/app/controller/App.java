@@ -69,16 +69,21 @@ public class App {
     // Added Receptionist user role & a test user with Receptionist role for testing
     // purposes
     this.authFacade.addUserRole(Constants.ROLE_ADMIN, Constants.ROLE_ADMIN);
-    this.employeeRoleStore.addEmployeeRole(Constants.ROLE_RECEPTIONIST, Constants.ROLE_RECEPTIONIST);
+    this.employeeRoleStore.addEmployeeRole(Constants.ROLE_RECEPTIONIST,
+        Constants.ROLE_RECEPTIONIST);
     this.employeeRoleStore.addEmployeeRole(Constants.ROLE_NURSE, Constants.ROLE_NURSE);
     this.employeeRoleStore.addEmployeeRole(Constants.ROLE_COORDINATOR, Constants.ROLE_COORDINATOR);
 
-    this.authFacade.addUserWithRole("Main Administrator", "admin@lei.sem2.pt", "123456", Constants.ROLE_ADMIN);
-    this.authFacade.addUserWithRole("Test Administrator", "admin@admin.pt", "123456", Constants.ROLE_ADMIN);
+    this.authFacade.addUserWithRole("Main Administrator", "admin@lei.sem2.pt", "123456",
+        Constants.ROLE_ADMIN);
+    this.authFacade.addUserWithRole("Test Administrator", "admin@admin.pt", "123456",
+        Constants.ROLE_ADMIN);
 
-    Employee e = this.employeeStore.addEmployee("Name", "+351916919169", "teste@teste.com", "address", "123456789ZZ1", Constants.ROLE_RECEPTIONIST);
+    Employee e = this.employeeStore.createEmployee("Name", "+351916919169", "teste@teste.com",
+        "address", "123456789ZZ1", Constants.ROLE_RECEPTIONIST);
     this.employeeStore.saveEmployee(e);
-    Employee e2 = this.employeeStore.addEmployee("Name2", "+351916919269", "teste1@teste.com", "adress", "155424041ZY0", Constants.ROLE_COORDINATOR);
+    Employee e2 = this.employeeStore.createEmployee("Name2", "+351916919269", "teste1@teste.com",
+        "adress", "155424041ZY0", Constants.ROLE_COORDINATOR);
     this.employeeStore.saveEmployee(e2);
   }
 

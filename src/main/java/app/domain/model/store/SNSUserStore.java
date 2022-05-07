@@ -42,11 +42,15 @@ public class SNSUserStore {
    * @param address SNS User address
    * @return SNSUser
    */
-  public SNSUser createSNSUser(String citizenCard, String snsNumber, String name, String birthDayStr, char gender, String phoneNumber, String email, String address) throws IllegalArgumentException, ParseException {
+  public SNSUser createSNSUser(String citizenCard, String snsNumber, String name,
+      String birthDayStr, char gender, String phoneNumber, String email, String address)
+      throws IllegalArgumentException, ParseException {
     Calendar birthDay;
     birthDay = CalendarUtils.parse(birthDayStr);
 
-    SNSUser snsUser = new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
+    SNSUser snsUser =
+        new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
+
     return snsUser;
   }
 
@@ -66,9 +70,7 @@ public class SNSUserStore {
     // check with AuthFacade if the email is already in use
     boolean existsUser = this.authFacade.existsUser(email);
 
-    if (existsUser) {
-      throw new IllegalArgumentException("Email already in use");
-    }
+    if (existsUser) throw new IllegalArgumentException("Email already in use");
 
     checkDuplicates(snsUser);
   }

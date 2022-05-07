@@ -72,4 +72,8 @@ public class RegisterVaccineController implements IRegisterController {
     return null;
   }
 
+  @Override
+  public String getResourceName() {
+    return "Vaccine";
+  }
 }

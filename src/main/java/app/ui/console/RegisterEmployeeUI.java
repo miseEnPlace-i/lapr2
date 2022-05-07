@@ -3,7 +3,6 @@ package app.ui.console;
 import java.text.ParseException;
 import java.util.List;
 import app.controller.RegisterEmployeeController;
-import app.domain.model.Employee;
 import app.ui.console.utils.Utils;
 import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
@@ -13,8 +12,8 @@ import pt.isep.lei.esoft.auth.domain.model.UserRole;
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
 
-public class RegisterEmployeeUI extends RegisterUI<Employee> implements Runnable {
-  private RegisterEmployeeController controller;
+public class RegisterEmployeeUI extends RegisterUI {
+  private RegisterEmployeeController controller = new RegisterEmployeeController();
 
   private String roleId = "";
 
@@ -22,7 +21,7 @@ public class RegisterEmployeeUI extends RegisterUI<Employee> implements Runnable
    * Constructor for RegisterEmployeeUI.
    */
   public RegisterEmployeeUI() {
-    controller = new RegisterEmployeeController();
+    super(new RegisterEmployeeController());
   }
 
   @Override
@@ -37,15 +36,15 @@ public class RegisterEmployeeUI extends RegisterUI<Employee> implements Runnable
 
     try {
       insertData();
+
+      boolean confirmed = confirmData(this.controller.stringifyData());
+
+      if (confirmed) {
+        controller.save();
+        System.out.println("Employee successfully registered!");
+      }
     } catch (Exception e) {
-      System.out.println(String.format("Error: %s\n", e.getMessage()));
-    }
-
-    boolean confirmed = confirmData(this.controller.stringifyData());
-
-    if (confirmed) {
-      controller.save();
-      System.out.println("Employee successfully registered!");
+      System.out.printf("%nError: %s%n", e.getMessage());
     }
   }
 

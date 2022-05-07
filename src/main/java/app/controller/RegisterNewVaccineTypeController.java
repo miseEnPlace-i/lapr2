@@ -10,7 +10,7 @@ import app.domain.model.store.VaccineTypeStore;
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 
-public class SpecifyNewVaccineTypeController implements IRegisterController {
+public class RegisterNewVaccineTypeController implements IRegisterController {
   private App app;
   private Company company;
   private VaccineTypeStore vaccineTypeStore;
@@ -20,7 +20,7 @@ public class SpecifyNewVaccineTypeController implements IRegisterController {
    * Constructor for SpecifyNewVaccineTypeController
    */
 
-  public SpecifyNewVaccineTypeController() {
+  public RegisterNewVaccineTypeController() {
     this.app = App.getInstance();
     this.company = this.app.getCompany();
     this.vaccineTypeStore = this.company.getVaccineTypeStore();
@@ -49,5 +49,10 @@ public class SpecifyNewVaccineTypeController implements IRegisterController {
   @Override
   public String stringifyData() {
     return null;
+  }
+
+  @Override
+  public String getResourceName() {
+    return "Vaccine Type";
   }
 }

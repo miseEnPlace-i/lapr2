@@ -12,6 +12,12 @@ public interface IRegisterController {
   public void save();
 
   /**
+   * 
+   * @return The resource name
+   */
+  public String getResourceName();
+
+  /**
    * @return a readable representation of the data
    */
   public String stringifyData();

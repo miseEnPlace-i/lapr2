@@ -43,7 +43,8 @@ public class RegisterEmployeeController implements IRegisterController {
   public void create(String name, String address, String phoneNumber, String email,
       String citizenCardNumber, String roleId) {
     // create an instance of an Employee
-    this.employee = store.addEmployee(name, phoneNumber, email, address, citizenCardNumber, roleId);
+    this.employee =
+        store.createEmployee(name, phoneNumber, email, address, citizenCardNumber, roleId);
 
     // validate the Employee
     store.validateEmployee(employee);
@@ -67,5 +68,10 @@ public class RegisterEmployeeController implements IRegisterController {
   @Override
   public String stringifyData() {
     return this.employee.toString();
+  }
+
+  @Override
+  public String getResourceName() {
+    return "Employee";
   }
 }

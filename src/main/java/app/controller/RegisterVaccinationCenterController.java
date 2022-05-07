@@ -73,4 +73,9 @@ public class RegisterVaccinationCenterController implements IRegisterController 
   public String stringifyData() {
     return this.center.toString();
   }
+
+  @Override
+  public String getResourceName() {
+    return "Vaccination Center";
+  }
 }

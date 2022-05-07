@@ -3,6 +3,7 @@ package app.ui.console;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import app.controller.IRegisterController;
 import app.ui.console.utils.Utils;
 
 /**
@@ -11,7 +12,29 @@ import app.ui.console.utils.Utils;
  * 
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
-public abstract class RegisterUI<T> {
+public abstract class RegisterUI implements Runnable {
+  IRegisterController ctrl;
+
+  public RegisterUI(IRegisterController ctrl) {
+    this.ctrl = ctrl;
+  }
+
+  @Override
+  public void run() {
+    try {
+      insertData();
+
+      boolean confirmed = confirmData(ctrl.stringifyData());
+
+      if (confirmed) {
+        ctrl.save();
+        System.out.printf("%n%s successfully registered!", ctrl.getResourceName());
+      }
+    } catch (Exception e) {
+      System.out.printf("%nError: %s%n", e.getMessage());
+    }
+  }
+
   public abstract void insertData() throws IllegalArgumentException, ParseException;
 
   public boolean confirmData(String data) {
