@@ -11,10 +11,10 @@ import app.ui.console.utils.Utils;
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 
-public class SpecifyNewVaccineTypeUI extends RegisterUI implements Runnable {
+public class RegisterNewVaccineTypeUI extends RegisterUI implements Runnable {
   private SpecifyNewVaccineTypeController ctrl;
 
-  public SpecifyNewVaccineTypeUI() {
+  public RegisterNewVaccineTypeUI() {
     ctrl = new SpecifyNewVaccineTypeController();
   }
 
