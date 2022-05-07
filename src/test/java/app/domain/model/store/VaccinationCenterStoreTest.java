@@ -1,5 +1,6 @@
 package app.domain.model.store;
 
+import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.Employee;
 import app.domain.model.VaccinationCenter;
@@ -9,58 +10,58 @@ import app.domain.shared.Constants;
  * @author André Barros <1211299@isep.ipp.pt>
  */
 public class VaccinationCenterStoreTest {
-    VaccinationCenterStore store = new VaccinationCenterStore();
+  VaccinationCenterStore store = new VaccinationCenterStore();
+  Employee coordinator;
+  VaccinationCenter center;
 
-    /**
-     * Check that saveVaccinationCenter method is saving properly the new center
-     * 
-     * @throws IllegalArgumentException
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void ensureAddCenterItsWorkingCorrectly() {
-        Employee coordinator = new Employee("Joana", "+351916478865", "Rua almeida",
-                "joanamaria@gmail.com", "30365258 4 ZZ0", Constants.ROLE_COORDINATOR);
+  @Before
+  public void setUp() {
+    coordinator = new Employee("Joana", "+351916478865", "email@email.com", "address",
+        "000000000ZZ4", Constants.ROLE_COORDINATOR);
+  }
 
-        VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto",
-                "Rua João Almeida", "vacinacaoporto@gmail.com", "+351912345678", "+351-123-1234567",
-                "https://www.centrovacinaoporto.com", "20:00", "30:60", 5, 10, coordinator);
+  @Test
+  public void ensureAddCenterItsWorkingCorrectly() {
+    center = store.createVaccinationCenter("name", "address", "email@email.com", "+351961919169",
+        "+351961919169", "http://www.google.com", "10:00", "19:00", 5, 5, this.coordinator);
 
-        store.saveVaccinationCenter(center);
-        assert (store.size() != 0);
-    }
+    assert store.size() == 0;
 
-    /**
-     * Check that checkDuplicates method is checking duplicated centers properly
-     * 
-     * @throws IllegalArgumentException
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void ensureCheckDuplicatesIsWorkingCorrectly() {
-        Employee coordinator = new Employee("Joana", "+351916478865", "Rua almeida",
-                "joanamaria@gmail.com", "30365258 4 ZZ0", Constants.ROLE_COORDINATOR);
+    store.saveVaccinationCenter(center);
 
-        VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto",
-                "Rua João Almeida", "vacinacaoporto@gmail.com", "+351912345678", "+351223456789",
-                "https://www.centrovacinaoporto.com", "20:00", "30:60", 5, 10, coordinator);
-        store.saveVaccinationCenter(center);
-        store.checkDuplicates(center);
+    assert store.size() == 1;
+  }
 
-    }
+  /**
+   * Check that checkDuplicates method is checking duplicated centers properly
+   * 
+   * @throws IllegalArgumentException
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void ensureCheckDuplicatesIsWorkingCorrectly() {
+    store.validateVaccinationCenter(center);
+  }
 
-    /**
-     * Check that validateCenter method is validating correctly
-     * 
-     * @throws IllegalArgumentException
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void ensureValidateCenterIsWorkingCorrectly() {
-        Employee coordinator = new Employee("Joana", "+351916478865", "Rua almeida",
-                "joanamaria@gmail.com", "30365258 4 ZZ0", Constants.ROLE_COORDINATOR);
+  @Test(expected = IllegalArgumentException.class)
+  public void ensureValidateIsWorking() {
+    store.validateVaccinationCenter(null);
+  }
 
-        VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto",
-                "Rua João Almeida", "vacinacaoporto@gmail.com", "+351912345678", "+351223456789",
-                "https://www.centrovacinaoporto.com", "20:00", "30:60", 5, 10, coordinator);
+  @Test
+  public void ensureIsPossibleToAddAnotherCenter() {
+    assert store.size() == 0;
 
-        store.validateVaccinationCenter(center);
-    }
+    store.saveVaccinationCenter(center);
+
+    assert store.size() == 1;
+
+    center = store.createVaccinationCenter("name123", "address", "email@email.com", "+351961919169",
+        "+351961919169", "http://www.google.com", "10:00", "19:00", 5, 5, this.coordinator);
+
+    store.validateVaccinationCenter(center);
+
+    store.saveVaccinationCenter(center);
+
+    assert store.size() == 2;
+  }
 }
