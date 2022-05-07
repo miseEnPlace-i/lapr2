@@ -50,9 +50,6 @@ public class RegisterEmployeeController implements IRegisterController {
 
   }
 
-  /**
-   * Adds an Employee to the Employee store.
-   */
   @Override
   public void save() {
     store.saveEmployee(this.employee);
@@ -67,11 +64,6 @@ public class RegisterEmployeeController implements IRegisterController {
     return roleStore.getRoles();
   }
 
-  /**
-   * Gets all the information about the employee.
-   * 
-   * @return the employee information
-   */
   @Override
   public String stringifyData() {
     return this.employee.toString();

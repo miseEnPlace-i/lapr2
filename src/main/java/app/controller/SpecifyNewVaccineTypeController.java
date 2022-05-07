@@ -41,11 +41,6 @@ public class SpecifyNewVaccineTypeController implements IRegisterController {
     return this.vt;
   }
 
-  /**
-   * Saves the new vaccine type
-   * 
-   */
-
   @Override
   public void save() {
     vaccineTypeStore.saveVaccineType(this.vt);
