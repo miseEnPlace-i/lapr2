@@ -13,7 +13,7 @@ import app.domain.model.store.VaccineTypeStore;
  * 
  * @author Carlos Lopes <1211277@isep.ipp.pt>
  */
-public class RegisterVaccineController implements IController {
+public class RegisterVaccineController implements IController<Vaccine> {
   private App app;
   private Company company;
   private VaccineStore vaccineStore;

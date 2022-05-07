@@ -10,7 +10,7 @@ import app.domain.model.store.VaccineTypeStore;
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 
-public class SpecifyNewVaccineTypeController implements IController {
+public class SpecifyNewVaccineTypeController implements IController<VaccineType> {
   private App app;
   private Company company;
   private VaccineTypeStore vaccineTypeStore;
