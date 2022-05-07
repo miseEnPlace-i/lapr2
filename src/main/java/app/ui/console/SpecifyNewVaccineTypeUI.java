@@ -1,8 +1,6 @@
 package app.ui.console;
 
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
 import app.controller.SpecifyNewVaccineTypeController;
 import app.ui.console.utils.Utils;
 
@@ -13,7 +11,7 @@ import app.ui.console.utils.Utils;
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 
-public class SpecifyNewVaccineTypeUI implements Runnable, IRegisterUI {
+public class SpecifyNewVaccineTypeUI extends RegisterUI implements Runnable {
   private SpecifyNewVaccineTypeController ctrl;
 
   public SpecifyNewVaccineTypeUI() {
@@ -32,10 +30,10 @@ public class SpecifyNewVaccineTypeUI implements Runnable, IRegisterUI {
       System.out.println(String.format("Error: %s\n", e.getMessage()));
     }
 
-    boolean confirmed = confirmData();
+    boolean confirmed = confirmData(ctrl.stringifyData());
 
     if (confirmed) {
-      ctrl.saveVaccineType();
+      ctrl.save();
       System.out.println("SNS User successfully registered!");
     }
   }
@@ -51,28 +49,6 @@ public class SpecifyNewVaccineTypeUI implements Runnable, IRegisterUI {
     String designation = Utils.readLineFromConsole("Designation: ");
     String technology = Utils.readLineFromConsole("Technology: ");
 
-    ctrl.addVaccineType(code, designation, technology);
-
-  }
-
-  /**
-   * Confirms all the data
-   * 
-   * @return return "true" if correct or "false" if incorrect
-   */
-
-  @Override
-  public boolean confirmData() {
-    System.out.println("\nPlease confirm the data below.\n");
-    String vaccineTypeData = ctrl.toString();
-    System.out.println(vaccineTypeData);
-
-    List<String> options = new ArrayList<String>();
-    options.add("y");
-    options.add("n");
-    Object input = Utils.showAndSelectOne(options, "Is this information correct? (y/n):  ");
-    String inputStr = (String) input;
-
-    return inputStr.equals("y");
+    ctrl.create(code, designation, technology);
   }
 }

@@ -10,7 +10,7 @@ import app.domain.model.store.VaccineTypeStore;
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 
-public class SpecifyNewVaccineTypeController {
+public class SpecifyNewVaccineTypeController implements IController {
   private App app;
   private Company company;
   private VaccineTypeStore vaccineTypeStore;
@@ -35,7 +35,7 @@ public class SpecifyNewVaccineTypeController {
    * @return vaccine type
    */
 
-  public VaccineType addVaccineType(String code, String description, String technology) {
+  public VaccineType create(String code, String description, String technology) {
     this.vt = vaccineTypeStore.addVaccineType(code, description, technology);
 
     return this.vt;
@@ -46,7 +46,13 @@ public class SpecifyNewVaccineTypeController {
    * 
    */
 
-  public void saveVaccineType() {
+  @Override
+  public void save() {
     vaccineTypeStore.saveVaccineType(this.vt);
+  }
+
+  @Override
+  public String stringifyData() {
+    return null;
   }
 }

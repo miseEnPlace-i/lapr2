@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import app.controller.RegisterSNSUserController;
+import app.domain.model.SNSUser;
 import app.ui.console.utils.Utils;
 
 /**
@@ -12,13 +13,14 @@ import app.ui.console.utils.Utils;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 
-public class RegisterSNSUserUI implements Runnable, IRegisterUI {
+public class RegisterSNSUserUI extends RegisterUI<SNSUser> implements Runnable {
   private RegisterSNSUserController ctrl;
 
   public RegisterSNSUserUI() {
     ctrl = new RegisterSNSUserController();
   }
 
+  @Override
   public void run() {
     try {
       insertData();
@@ -26,10 +28,10 @@ public class RegisterSNSUserUI implements Runnable, IRegisterUI {
       System.out.println(String.format("Error: %s\n", e.getMessage()));
     }
 
-    boolean confirmed = confirmData();
+    boolean confirmed = confirmData(ctrl.stringifyData());
 
     if (confirmed) {
-      ctrl.saveSNSUser();
+      ctrl.save();
       System.out.println("SNS User successfully registered!");
     }
   }
@@ -63,20 +65,6 @@ public class RegisterSNSUserUI implements Runnable, IRegisterUI {
       }
     } while (!flag);
 
-    ctrl.createSNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
-  }
-
-  public boolean confirmData() {
-    System.out.println("\nPlease confirm the data below.\n");
-    String stringifiedSNSUser = ctrl.stringifySNSUser();
-    System.out.println(stringifiedSNSUser);
-
-    List<String> options = new ArrayList<String>();
-    options.add("y");
-    options.add("n");
-    Object input = Utils.showAndSelectOne(options, "Is this information correct? (y/n):  ");
-    String inputStr = (String) input;
-
-    return inputStr.equals("y");
+    ctrl.create(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
   }
 }

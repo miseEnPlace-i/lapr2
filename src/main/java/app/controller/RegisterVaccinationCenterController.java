@@ -13,7 +13,7 @@ import app.domain.shared.Constants;
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  */
-public class RegisterVaccinationCenterController {
+public class RegisterVaccinationCenterController implements IController {
   private App app;
   private Company company;
   private EmployeeStore employeeStore;
@@ -45,10 +45,13 @@ public class RegisterVaccinationCenterController {
    * @param maxVacSlot the vaccination center maximum vaccines per slot
    * @param coordinator the vaccination center coordinator
    */
-  public void createVaccinationCenter(String name, String address, String emailAddress, String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot, Employee coordinator) {
+  public void create(String name, String address, String emailAddress, String phoneNum,
+      String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration,
+      int maxVacSlot, Employee coordinator) {
 
     // creates an vaccination center instance
-    this.center = vacStore.createVaccinationCenter(name, address, emailAddress, phoneNum, faxNum, webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
+    this.center = vacStore.createVaccinationCenter(name, address, emailAddress, phoneNum, faxNum,
+        webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
 
     // validates the center
     vacStore.validateVaccinationCenter(center);
@@ -57,7 +60,8 @@ public class RegisterVaccinationCenterController {
   /**
    * Saves Vaccination Center
    */
-  public void saveVaccinationCenter() {
+  @Override
+  public void save() {
     vacStore.saveVaccinationCenter(this.center);
   }
 
@@ -71,7 +75,8 @@ public class RegisterVaccinationCenterController {
   /**
    * Returns the Vaccination Center data as a String.
    */
-  public String stringifyCenter() {
+  @Override
+  public String stringifyData() {
     return this.center.toString();
   }
 }

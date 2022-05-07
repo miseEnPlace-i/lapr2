@@ -1,9 +1,9 @@
 package app.ui.console;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 import app.controller.RegisterEmployeeController;
+import app.domain.model.Employee;
 import app.ui.console.utils.Utils;
 import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
@@ -13,7 +13,7 @@ import pt.isep.lei.esoft.auth.domain.model.UserRole;
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
 
-public class RegisterEmployeeUI implements Runnable, IRegisterUI {
+public class RegisterEmployeeUI extends RegisterUI<Employee> implements Runnable {
   private RegisterEmployeeController controller;
 
   private String roleId = "";
@@ -22,9 +22,10 @@ public class RegisterEmployeeUI implements Runnable, IRegisterUI {
    * Constructor for RegisterEmployeeUI.
    */
   public RegisterEmployeeUI() {
-    this.controller = new RegisterEmployeeController();
+    controller = new RegisterEmployeeController();
   }
 
+  @Override
   public void run() {
     System.out.println("\nRegister Employee UI:");
 
@@ -40,10 +41,10 @@ public class RegisterEmployeeUI implements Runnable, IRegisterUI {
       System.out.println(String.format("Error: %s\n", e.getMessage()));
     }
 
-    boolean confirmed = confirmData();
+    boolean confirmed = confirmData(this.controller.stringifyData());
 
     if (confirmed) {
-      controller.saveEmployee();
+      controller.save();
       System.out.println("Employee successfully registered!");
     }
   }
@@ -79,26 +80,6 @@ public class RegisterEmployeeUI implements Runnable, IRegisterUI {
     String email = Utils.readLineFromConsole("Email: ");
     String citizenCard = Utils.readLineFromConsole("Citizen Card Number: ");
 
-    controller.addEmployee(name, address, phoneNumber, email, citizenCard, this.roleId);
-  }
-
-  /**
-   * Asks user to confirm the employee data
-   *
-   * @return true if the user confirms, false otherwise
-   */
-  @Override
-  public boolean confirmData() {
-    System.out.println("\nPlease confirm the data below.\n");
-    String stringifiedEmployee = controller.stringifyEmployee();
-    System.out.println(stringifiedEmployee);
-
-    List<String> options = new ArrayList<String>();
-    options.add("y");
-    options.add("n");
-    Object input = Utils.showAndSelectOne(options, "Is this information correct? (y/n):  ");
-    String inputStr = (String) input;
-
-    return inputStr.equals("y");
+    controller.create(name, address, phoneNumber, email, citizenCard, this.roleId);
   }
 }
