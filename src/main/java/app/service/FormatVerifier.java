@@ -43,7 +43,7 @@ public class FormatVerifier {
    * @return True if the expression is a valid phone number, false otherwise.
    */
   public static boolean validatePhoneNumber(String expression) {
-    return expression.matches("\\+[0-9]{1,3}[2|9][0-9]{8}");
+    return expression.matches("\\+[0-9]{1,3}[2|3|9][0-9]{8}");
   }
 
   /**
