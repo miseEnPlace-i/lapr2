@@ -237,4 +237,19 @@ public class VaccinationCenter {
 
     return sb.toString();
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    VaccinationCenter center = (VaccinationCenter) obj;
+    if (obj == null) return false;
+    if (obj == this) return false;
+
+    // For now, only email, phone number, fax number and website address should be unique for each Center
+    if (this.email.equals(center.email)) return true;
+    if (this.phoneNum.equals(center.phoneNum)) return true;
+    if (this.faxNum.equals(center.faxNum)) return true;
+    if (this.webAddress.equals(center.webAddress)) return true;
+
+    return false;
+  }
 }

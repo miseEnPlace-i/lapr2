@@ -146,6 +146,7 @@ public class VaccinationCenterTest {
                 Employee coordinator = new Employee("Joana", "+351916478865",
                                 "joanamaria@gmail.com", "Rua almeida", "123456789ZZ1",
                                 Constants.ROLE_COORDINATOR);
+
                 VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto",
                                 "Rua João Almeida", "vacinacaoporto@gmail.com", "+351912345678",
                                 "+351223456789", "https://www.centrovacinaoporto.com", "20:00",

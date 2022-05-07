@@ -10,58 +10,60 @@ import app.domain.shared.Constants;
  * @author André Barros <1211299@isep.ipp.pt>
  */
 public class VaccinationCenterStoreTest {
-  VaccinationCenterStore store = new VaccinationCenterStore();
-  Employee coordinator;
-  VaccinationCenter center;
+        VaccinationCenterStore store = new VaccinationCenterStore();
+        Employee coordinator;
+        VaccinationCenter center;
 
-  @Before
-  public void setUp() {
-    coordinator = new Employee("Joana", "+351916478865", "email@email.com", "address",
-        "000000000ZZ4", Constants.ROLE_COORDINATOR);
-  }
+        @Before
+        public void setUp() {
+                coordinator = new Employee("Joana", "+351916478865", "email@email.com", "address",
+                                "000000000ZZ4", Constants.ROLE_COORDINATOR);
+        }
 
-  @Test
-  public void ensureAddCenterItsWorkingCorrectly() {
-    center = store.createVaccinationCenter("name", "address", "email@email.com", "+351961919169",
-        "+351961919169", "http://www.google.com", "10:00", "19:00", 5, 5, this.coordinator);
+        @Test
+        public void ensureAddCenterIsWorkingCorrectly() {
+                center = store.createVaccinationCenter("name", "address", "email@email.com",
+                                "+351961919169", "+351961919169", "http://www.google.com", "10:00",
+                                "19:00", 5, 5, this.coordinator);
 
-    assert store.size() == 0;
+                assert store.size() == 0;
 
-    store.saveVaccinationCenter(center);
+                store.saveVaccinationCenter(center);
 
-    assert store.size() == 1;
-  }
+                assert store.size() == 1;
+        }
 
-  /**
-   * Check that checkDuplicates method is checking duplicated centers properly
-   * 
-   * @throws IllegalArgumentException
-   */
-  @Test(expected = IllegalArgumentException.class)
-  public void ensureCheckDuplicatesIsWorkingCorrectly() {
-    store.validateVaccinationCenter(center);
-  }
+        /**
+         * Check that checkDuplicates method is checking duplicated centers properly
+         * 
+         * @throws IllegalArgumentException
+         */
+        @Test(expected = IllegalArgumentException.class)
+        public void ensureCheckDuplicatesIsWorkingCorrectly() {
+                store.validateVaccinationCenter(center);
+        }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void ensureValidateIsWorking() {
-    store.validateVaccinationCenter(null);
-  }
+        @Test(expected = IllegalArgumentException.class)
+        public void ensureValidateIsWorking() {
+                store.validateVaccinationCenter(null);
+        }
 
-  @Test
-  public void ensureIsPossibleToAddAnotherCenter() {
-    assert store.size() == 0;
+        @Test
+        public void ensureIsPossibleToAddAnotherCenter() {
+                assert store.size() == 0;
 
-    store.saveVaccinationCenter(center);
+                store.saveVaccinationCenter(center);
 
-    assert store.size() == 1;
+                assert store.size() == 1;
 
-    center = store.createVaccinationCenter("name123", "address", "email@email.com", "+351961919169",
-        "+351961919169", "http://www.google.com", "10:00", "19:00", 5, 5, this.coordinator);
+                center = store.createVaccinationCenter("name123", "address", "email@email.com",
+                                "+351961919169", "+351961919169", "http://www.google.com", "10:00",
+                                "19:00", 5, 5, this.coordinator);
 
-    store.validateVaccinationCenter(center);
+                store.validateVaccinationCenter(center);
 
-    store.saveVaccinationCenter(center);
+                store.saveVaccinationCenter(center);
 
-    assert store.size() == 2;
-  }
+                assert store.size() == 2;
+        }
 }
