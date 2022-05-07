@@ -12,14 +12,15 @@ import app.ui.console.utils.Utils;
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  */
-public class RegisterVaccinationCenterUI extends RegisterUI implements Runnable {
-  private RegisterVaccinationCenterController ctrl = new RegisterVaccinationCenterController();
+public class RegisterVaccinationCenterUI extends RegisterUI {
+  private static RegisterVaccinationCenterController ctrl =
+      new RegisterVaccinationCenterController();
 
   /**
    * VaccinationCenterUI Constructor
    */
   public RegisterVaccinationCenterUI() {
-    super(new RegisterVaccinationCenterController());
+    super(ctrl);
   }
 
   @Override

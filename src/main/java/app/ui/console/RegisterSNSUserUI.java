@@ -12,11 +12,11 @@ import app.ui.console.utils.Utils;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 
-public class RegisterSNSUserUI extends RegisterUI implements Runnable {
-  private RegisterSNSUserController ctrl = new RegisterSNSUserController();
+public class RegisterSNSUserUI extends RegisterUI {
+  private static RegisterSNSUserController ctrl = new RegisterSNSUserController();
 
   public RegisterSNSUserUI() {
-    super(new RegisterSNSUserController());
+    super(ctrl);
   }
 
   @Override
