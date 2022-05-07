@@ -10,7 +10,7 @@ import app.domain.model.store.SNSUserStore;
  * 
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
-public class RegisterSNSUserController implements IController<SNSUser> {
+public class RegisterSNSUserController implements IRegisterController {
 
   private App app;
   private Company company;

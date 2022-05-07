@@ -12,7 +12,7 @@ import pt.isep.lei.esoft.auth.domain.model.UserRole;
  * 
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
-public class RegisterEmployeeController implements IController<Employee> {
+public class RegisterEmployeeController implements IRegisterController {
   private App app;
   private Company company;
   private Employee employee;

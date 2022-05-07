@@ -13,7 +13,7 @@ import app.domain.shared.Constants;
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  */
-public class RegisterVaccinationCenterController implements IController<VaccinationCenter> {
+public class RegisterVaccinationCenterController implements IRegisterController {
   private App app;
   private Company company;
   private EmployeeStore employeeStore;
