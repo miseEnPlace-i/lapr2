@@ -12,9 +12,7 @@ import pt.isep.lei.esoft.auth.domain.model.UserRole;
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
 
-public class RegisterEmployeeUI extends RegisterUI {
-  private RegisterEmployeeController ctrl;
-
+public class RegisterEmployeeUI extends RegisterUI<RegisterEmployeeController> {
   private String roleId = "";
 
   /**
@@ -22,7 +20,6 @@ public class RegisterEmployeeUI extends RegisterUI {
    */
   public RegisterEmployeeUI() {
     super(new RegisterEmployeeController());
-    this.ctrl = (RegisterEmployeeController) super.ctrl;
   }
 
   @Override
@@ -80,6 +77,6 @@ public class RegisterEmployeeUI extends RegisterUI {
     String email = Utils.readLineFromConsole("Email: ");
     String citizenCard = Utils.readLineFromConsole("Citizen Card Number: ");
 
-    ctrl.create(name, address, phoneNumber, email, citizenCard, this.roleId);
+    super.ctrl.create(name, address, phoneNumber, email, citizenCard, this.roleId);
   }
 }

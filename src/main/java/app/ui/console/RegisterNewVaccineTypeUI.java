@@ -11,12 +11,9 @@ import app.ui.console.utils.Utils;
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 
-public class RegisterNewVaccineTypeUI extends RegisterUI {
-  private RegisterNewVaccineTypeController ctrl;
-
+public class RegisterNewVaccineTypeUI extends RegisterUI<RegisterNewVaccineTypeController> {
   public RegisterNewVaccineTypeUI() {
     super(new RegisterNewVaccineTypeController());
-    this.ctrl = (RegisterNewVaccineTypeController) super.ctrl;
   }
 
   /**
@@ -29,6 +26,6 @@ public class RegisterNewVaccineTypeUI extends RegisterUI {
     String designation = Utils.readLineFromConsole("Designation: ");
     String technology = Utils.readLineFromConsole("Technology: ");
 
-    ctrl.create(code, designation, technology);
+    super.ctrl.create(code, designation, technology);
   }
 }

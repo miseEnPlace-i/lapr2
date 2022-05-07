@@ -3,7 +3,6 @@ package app.ui.console;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import app.controller.IRegisterController;
 import app.controller.RegisterSNSUserController;
 import app.ui.console.utils.Utils;
 
@@ -13,12 +12,9 @@ import app.ui.console.utils.Utils;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 
-public class RegisterSNSUserUI extends RegisterUI {
-  private RegisterSNSUserController ctrl;
-
+public class RegisterSNSUserUI extends RegisterUI<RegisterSNSUserController> {
   public RegisterSNSUserUI() {
     super(new RegisterSNSUserController());
-    this.ctrl = (RegisterSNSUserController) super.ctrl;
   }
 
   @Override
@@ -50,6 +46,6 @@ public class RegisterSNSUserUI extends RegisterUI {
       }
     } while (!flag);
 
-    ctrl.create(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
+    super.ctrl.create(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
   }
 }

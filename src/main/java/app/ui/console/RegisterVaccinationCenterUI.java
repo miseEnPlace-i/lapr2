@@ -12,15 +12,12 @@ import app.ui.console.utils.Utils;
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  */
-public class RegisterVaccinationCenterUI extends RegisterUI {
-  private RegisterVaccinationCenterController ctrl;
-
+public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationCenterController> {
   /**
    * VaccinationCenterUI Constructor
    */
   public RegisterVaccinationCenterUI() {
     super(new RegisterVaccinationCenterController());
-    this.ctrl = (RegisterVaccinationCenterController) super.ctrl;
   }
 
   @Override
@@ -54,7 +51,7 @@ public class RegisterVaccinationCenterUI extends RegisterUI {
       }
     } while (!flag);
 
-    ctrl.create(name, address, email, phone, fax, website, openHours, closHours, slotDur, maxVac,
-        coordinator);
+    super.ctrl.create(name, address, email, phone, fax, website, openHours, closHours, slotDur,
+        maxVac, coordinator);
   }
 }

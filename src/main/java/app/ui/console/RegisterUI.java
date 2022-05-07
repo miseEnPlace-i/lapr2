@@ -12,10 +12,10 @@ import app.ui.console.utils.Utils;
  * 
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
-public abstract class RegisterUI implements Runnable {
-  IRegisterController ctrl;
+public abstract class RegisterUI<T extends IRegisterController> implements Runnable {
+  T ctrl;
 
-  public RegisterUI(IRegisterController ctrl) {
+  public RegisterUI(T ctrl) {
     this.ctrl = ctrl;
   }
 
