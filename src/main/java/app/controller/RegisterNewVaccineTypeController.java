@@ -48,7 +48,7 @@ public class RegisterNewVaccineTypeController implements IRegisterController {
 
   @Override
   public String stringifyData() {
-    return null;
+    return this.vt.toString();
   }
 
   @Override
