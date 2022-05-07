@@ -59,4 +59,9 @@ public class RegisterSNSUserController implements IRegisterController {
   public String stringifyData() {
     return snsUser.toString();
   }
+
+  @Override
+  public String getResourceName() {
+    return "SNS User";
+  }
 }
