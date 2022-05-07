@@ -15,6 +15,8 @@ public final class FormatVerifier {
   /**
    * Validates if the given string is a citizen card number. Follows the rules for portuguese citizens cards.
    * 
+   * Working example: 000000000ZZ4
+   * 
    * For reference:
    * https://www.autenticacao.gov.pt/documents/20126/115760/Valida%C3%A7%C3%A3o+de+N%C3%BAmero+de+Documento+do+Cart%C3%A3o+de+Cidad%C3%A3o.pdf/bdc4eb37-7316-3ff4-164a-f869382b7053
    * 
@@ -28,7 +30,7 @@ public final class FormatVerifier {
   }
 
   /**
-   * Validates if the given string is a email.
+   * Validates if the given string is a email. Must follow the structure <user>@<domain>. Ex.: example@email.com
    * 
    * For reference: https://www.emailregex.com
    * 
