@@ -139,4 +139,125 @@ public class VaccinationCenterTest {
                                 "19:00", 5, 10, this.coordinator);
                 assert (center != null);
         }
+
+        /**
+         * Check that two different centers (following the predefined rules) are not equal
+         */
+        @Test
+        public void ensureTwoCentersAreDifferent() {
+                VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto",
+                                "Rua João Almeida", "vacinacaoporto@gmail.com", "+351912345678",
+                                "+351223456789", "https://www.centrovacinaoporto.com", "20:00",
+                                "19:00", 5, 10, this.coordinator);
+
+                VaccinationCenter center2 = new VaccinationCenter("Centro Vacinação Porto",
+                                "Rua João Almeida", "vacinacaoporto2@gmail.com", "+351912345689",
+                                "+351223456999", "https://www.centrovacinaoporto2.com", "20:00",
+                                "19:00", 5, 10, this.coordinator);
+
+                boolean result = center.equals(center2);
+
+                assert (result == false);
+        }
+
+        /**
+         * Check that that two centers with the same email are the same
+         */
+        @Test
+        public void ensureSameEmailEqualsTrue() {
+                VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto",
+                                "Rua João Almeida", "vacinacaoporto@gmail.com", "+351912345678",
+                                "+351223456789", "https://www.centrovacinaoporto.com", "20:00",
+                                "19:00", 5, 10, this.coordinator);
+
+                VaccinationCenter center2 = new VaccinationCenter("Centro Vacinação Porto",
+                                "Rua João Almeida", "vacinacaoporto@gmail.com", "+351912345689",
+                                "+351223456999", "https://www.centrovacinaoporto2.com", "20:00",
+                                "19:00", 5, 10, this.coordinator);
+
+                boolean result = center.equals(center2);
+
+                assert (result == true);
+        }
+
+        /**
+         * Check that that two centers with the phone number are the same
+         */
+        @Test
+        public void ensureSamePhoneNumberEqualsTrue() {
+                VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto",
+                                "Rua João Almeida", "vacinacaoporto@gmail.com", "+351912345678",
+                                "+351223456789", "https://www.centrovacinaoporto.com", "20:00",
+                                "19:00", 5, 10, this.coordinator);
+
+                VaccinationCenter center2 = new VaccinationCenter("Centro Vacinação Porto",
+                                "Rua João Almeida", "vacinacaoporto2@gmail.com", "+351912345678",
+                                "+351223456999", "https://www.centrovacinaoporto2.com", "20:00",
+                                "19:00", 5, 10, this.coordinator);
+
+                boolean result = center.equals(center2);
+
+                assert (result == true);
+        }
+
+        /**
+         * Check that that two centers with the fax number are the same
+         */
+        @Test
+        public void ensureSameFaxNumberEqualsTrue() {
+                VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto",
+                                "Rua João Almeida", "vacinacaoporto@gmail.com", "+351912345688",
+                                "+351223456789", "https://www.centrovacinaoporto.com", "20:00",
+                                "19:00", 5, 10, this.coordinator);
+
+                VaccinationCenter center2 = new VaccinationCenter("Centro Vacinação Porto",
+                                "Rua João Almeida", "vacinacaoporto2@gmail.com", "+351912345678",
+                                "+351223456789", "https://www.centrovacinaoporto2.com", "20:00",
+                                "19:00", 5, 10, this.coordinator);
+
+                boolean result = center.equals(center2);
+
+                assert (result == true);
+        }
+
+        /**
+         * Check that that two centers with the website address are the same
+         */
+        @Test
+        public void ensureSameWebAddressEqualsTrue() {
+                VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto",
+                                "Rua João Almeida", "vacinacaoporto@gmail.com", "+351912345688",
+                                "+351223456789", "https://www.centrovacinaoporto.com", "20:00",
+                                "19:00", 5, 10, this.coordinator);
+
+                VaccinationCenter center2 = new VaccinationCenter("Centro Vacinação Porto",
+                                "Rua João Almeida", "vacinacaoporto2@gmail.com", "+351912345678",
+                                "+351223456799", "https://www.centrovacinaoporto.com", "20:00",
+                                "19:00", 5, 10, this.coordinator);
+
+                boolean result = center.equals(center2);
+
+                assert (result == true);
+        }
+
+        /**
+         * Check that two centers with everything the same are equal
+         */
+        @Test
+        public void ensureEqualCentersTrue() {
+                VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto",
+                                "Rua João Almeida", "vacinacaoporto@gmail.com", "+351912345678",
+                                "+351223456799", "https://www.centrovacinaoporto.com", "20:00",
+                                "19:00", 5, 10, this.coordinator);
+
+                VaccinationCenter center2 = new VaccinationCenter("Centro Vacinação Porto",
+                                "Rua João Almeida", "vacinacaoporto@gmail.com", "+351912345678",
+                                "+351223456799", "https://www.centrovacinaoporto.com", "20:00",
+                                "19:00", 5, 10, this.coordinator);
+
+                boolean result = center.equals(center2);
+
+                assert (result == true);
+        }
+
 }
