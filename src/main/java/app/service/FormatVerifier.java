@@ -3,6 +3,7 @@ package app.service;
 /**
  * Format Verifier with all the rules for the application.
  * 
+ * @author André Barros <1211299@isep.ipp.pt>
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 public class FormatVerifier {

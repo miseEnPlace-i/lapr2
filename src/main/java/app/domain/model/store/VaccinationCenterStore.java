@@ -38,10 +38,12 @@ public class VaccinationCenterStore {
    * @param coordinator the vaccination center coordinator
    * @return VaccinationCenter
    */
-  public VaccinationCenter createVaccinationCenter(String name, String address, String emailAddress, String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot,
-      Employee coordinator) {
+  public VaccinationCenter createVaccinationCenter(String name, String address, String emailAddress,
+      String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours,
+      int slotDuration, int maxVacSlot, Employee coordinator) {
 
-    VaccinationCenter center = new VaccinationCenter(name, address, emailAddress, phoneNum, faxNum, webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
+    VaccinationCenter center = new VaccinationCenter(name, address, emailAddress, phoneNum, faxNum,
+        webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
     return center;
   }
 
@@ -77,6 +79,11 @@ public class VaccinationCenterStore {
     vacCenters.add(center);
   }
 
+  /**
+   * Asks for the size of the List vacCenters
+   * 
+   * @return number of vaccination centers registered in the system
+   */
   public int size() {
     return vacCenters.size();
   }
