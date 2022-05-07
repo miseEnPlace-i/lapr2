@@ -61,7 +61,7 @@ public class RegisterVaccineController {
     
     //SAVE ADMINISTRATION PROCESS
     public void saveAdminProc() {
-        vac.getAdminProcList().addAdminProc(ap);;
+        vac.addAdminProc(ap);;
     }
 
     //CREATE DOSE INFO
@@ -71,7 +71,7 @@ public class RegisterVaccineController {
 
     //SAVE DOSE INFO
     public void saveDoseInfo() {
-        ap.getDoseInfoList().addDoseInfo(di);
+        ap.addDoseInfo(di);
     }
 
     //VALIDATE VACCINE

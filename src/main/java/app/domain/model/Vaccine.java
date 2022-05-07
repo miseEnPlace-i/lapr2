@@ -103,6 +103,9 @@ public class Vaccine {
         return "Designation: " + this.designation + "\nBrand: " + this.brand + "\nId: " + this.id + "\nVaccine Type: " + this.vacType.getCode();
     }
 
-    
+    //ADD A NEW AP
+    public void addAdminProc(AdminProcess adminProc){
+        adminProcList.addAdminProc(adminProc);
+    }
 
 }

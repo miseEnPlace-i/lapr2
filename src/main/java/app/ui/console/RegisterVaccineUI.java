@@ -21,7 +21,7 @@ public class RegisterVaccineUI {
     }
 
     public void run(){
-        System.out.println("\nRegister Employee UI:");
+        System.out.println("\nRegister Vaccine UI:");
 
         List<VaccineType> vacTypes = controller.getVacTypes(); //all available vaccine types
         displayVacTypes(vacTypes);
@@ -29,15 +29,30 @@ public class RegisterVaccineUI {
         VaccineType vacType = selectVacType(vacTypes); //asks to select the vaccine type
         String vacTypeId = vacType.getCode();
 
-        insertVaccineData(vacTypeId); //asks to insert vaccine data and instantiate and validate a new vaccine
+        insertVaccineData(vacTypeId); //asks to insert vaccine data and instantiates and validates a new vaccine
 
         //CREATE ADMIN PROCESS
-        boolean confirmed = askCreateAdminProc(); //asks the user if he wants to add a new ap
+        boolean confirmed = askCreateAdminProc(); //asks the user if he wants to add a new admin proc
         while(confirmed){
             //CREATE ADMIN PROCESS UI
+            System.out.println("\nRegister administration process:");
+            //asks to insert admin proc data and instatiates a new admin proc
+            int numberOfDoses = insertAdminProcData();//this method returns the number of doses of the new admin proc
 
-            
+            for (int i = 1; i < numberOfDoses; i++) {
+                System.out.println("\nRegister information of dose number: "+ i);
+
+                insertDoseInfoData();//asks to insert dose info data and instatiates a new dose info
+            }
             confirmed = askCreateAdminProc(); //asks the user if he wants to add a new ap
+        }
+
+
+        confirmed = confirmVaccineData();//asks to confirm data
+
+        if (confirmed) {
+            controller.saveVaccine();
+            System.out.println("Vaccine successfully registered!");
         }
         
     }
@@ -53,22 +68,60 @@ public class RegisterVaccineUI {
         return vacTypes.get(vacTypeId);
     }
 
+    //ASKS TO INSERT THE VACCINE DATA AND CREATES A NEW VACCINE
     private void insertVaccineData(String vacTypeId) {
-        String designation = Utils.readLineFromConsole("Name: ");
-        String brand = Utils.readLineFromConsole("Address: ");
-        String id = Utils.readLineFromConsole("Phone Number: ");
-        
-        controller.createVaccine(designation, brand, id, vacTypeId);
+        String designation = Utils.readLineFromConsole("Designation: ");
+        String id = Utils.readLineFromConsole("Id: ");
+        String brand = Utils.readLineFromConsole("Brand: ");
+
+        controller.createVaccine(designation, id, brand, vacTypeId);
 
         controller.validateVaccine();
-
     }
 
+    //ASKS THE USER IF HE WANTS TO ADD A NEW ADMIN PROC
     private boolean askCreateAdminProc() { 
         List<String> options = new ArrayList<String>(); 
         options.add("y");
         options.add("n");
         Object input = Utils.showAndSelectOne(options, "Want to add an adminstration process? (y/n):  ");
+        String inputStr = (String) input;
+    
+        return inputStr.equals("y");
+    }
+
+    //ASKS TO INSERT THE ADMIN PROC DATA AND RETURN THE NUMBER OF DOSES
+    public int insertAdminProcData(){
+        int minAge = Integer.parseInt(Utils.readLineFromConsole("Min age: "));
+        int maxAge = Integer.parseInt(Utils.readLineFromConsole("Max age: "));
+        int numberOfDoses = Integer.parseInt(Utils.readLineFromConsole("Number of doses: "));
+
+        controller.createAdminProc(minAge, maxAge, numberOfDoses);
+
+        controller.saveAdminProc();
+
+        return numberOfDoses;
+    }
+
+    //ASKS TO INSERT THE DOSE INFO DATA
+    public void insertDoseInfoData(){
+        int dosage = Integer.parseInt(Utils.readLineFromConsole("Dosage: "));
+        int timeSinceLastDose = Integer.parseInt(Utils.readLineFromConsole("Time since last dose: "));
+
+        controller.createDoseInfo(dosage, timeSinceLastDose);
+
+        controller.saveDoseInfo();
+    }
+
+    //ASKS TO CONFIRM VACCINE DATA
+    private boolean confirmVaccineData() {
+        System.out.println("\nPlease confirm the data below.\n");
+        System.out.println(controller.stringifyVaccine());
+    
+        List<String> options = new ArrayList<String>();
+        options.add("y");
+        options.add("n");
+        Object input = Utils.showAndSelectOne(options, "Is this information correct? (y/n):  ");
         String inputStr = (String) input;
     
         return inputStr.equals("y");

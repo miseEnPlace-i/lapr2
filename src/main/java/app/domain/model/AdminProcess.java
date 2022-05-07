@@ -89,4 +89,9 @@ public class AdminProcess {
         return "Min age: " + this.minAge + "\nMax age: " + this.maxAge + "\nNumberOfDoses: " + this.numberOfDoses;
     }
 
-}
+    //ADD A NEW DOSE INFO
+    public void addDoseInfo(DoseInfo doseInfo){
+        doseInfoList.addDoseInfo(doseInfo);
+    }
+
+}   
