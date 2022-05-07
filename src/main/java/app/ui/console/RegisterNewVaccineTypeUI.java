@@ -10,7 +10,6 @@ import app.ui.console.utils.Utils;
  * @author André Barros <1211299@isep.ipp.pt>
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
-
 public class RegisterNewVaccineTypeUI extends RegisterUI<RegisterNewVaccineTypeController> {
   public RegisterNewVaccineTypeUI() {
     super(new RegisterNewVaccineTypeController());

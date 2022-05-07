@@ -34,7 +34,8 @@ public class Company {
    * @param designation the designation of the company
    */
   public Company(String designation) {
-    if (StringUtils.isBlank(designation)) throw new IllegalArgumentException("Designation cannot be blank.");
+    if (StringUtils.isBlank(designation))
+      throw new IllegalArgumentException("Designation cannot be blank.");
 
     this.designation = designation;
     this.authFacade = new AuthFacade();
@@ -43,6 +44,7 @@ public class Company {
     this.employeeRoleStore = new EmployeeRoleStore(this.authFacade);
     this.employeeStore = new EmployeeStore(this.authFacade, this.employeeRoleStore);
     this.vaccinationCenterStore = new VaccinationCenterStore();
+    this.vaccineTypeStore = new VaccineTypeStore();
   }
 
   /**

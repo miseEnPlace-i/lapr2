@@ -30,6 +30,10 @@ public class VaccineType {
     return code;
   }
 
+  public boolean hasCode(String code) {
+    return this.code.equals(code);
+  }
+
   /**
    * Sets the vaccine type code
    * 
