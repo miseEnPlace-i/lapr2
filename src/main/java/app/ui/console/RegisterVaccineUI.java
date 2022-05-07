@@ -46,7 +46,6 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
       confirmed = askCreateAdminProc(); // asks the user if he wants to add a new ap
     }
 
-
     confirmed = confirmData(super.ctrl.stringifyData());// asks to confirm data
 
     if (confirmed) {

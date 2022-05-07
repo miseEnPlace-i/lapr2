@@ -22,30 +22,6 @@ public class RegisterEmployeeUI extends RegisterUI<RegisterEmployeeController> {
     super(new RegisterEmployeeController());
   }
 
-  @Override
-  public void run() {
-    System.out.println("\nRegister Employee UI:");
-
-    List<UserRole> employeeRoles = ctrl.getEmployeeRoles();
-    displayEmployeeRoles(employeeRoles);
-
-    UserRole role = selectEmployeeRole(employeeRoles);
-    this.roleId = role.getId();
-
-    try {
-      insertData();
-
-      boolean confirmed = confirmData(this.ctrl.stringifyData());
-
-      if (confirmed) {
-        ctrl.save();
-        System.out.println("Employee successfully registered!");
-      }
-    } catch (Exception e) {
-      System.out.printf("%nError: %s%n", e.getMessage());
-    }
-  }
-
   /**
    * Displays in the screen all the available employee roles
    * 
@@ -71,6 +47,12 @@ public class RegisterEmployeeUI extends RegisterUI<RegisterEmployeeController> {
    */
   @Override
   public void insertData() throws IllegalArgumentException, ParseException {
+    List<UserRole> employeeRoles = ctrl.getEmployeeRoles();
+    displayEmployeeRoles(employeeRoles);
+
+    UserRole role = selectEmployeeRole(employeeRoles);
+    this.roleId = role.getId();
+
     String name = Utils.readLineFromConsole("Name: ");
     String address = Utils.readLineFromConsole("Address: ");
     String phoneNumber = Utils.readLineFromConsole("Phone Number: ");
