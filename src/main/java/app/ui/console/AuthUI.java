@@ -64,7 +64,8 @@ public class AuthUI implements Runnable {
 
       success = ctrl.doLogin(id, pwd);
       if (!success) {
-        System.out.println("Invalid UserId and/or Password. \n You have  " + maxAttempts + " more attempt(s).");
+        System.out.println(
+            "Invalid UserId and/or Password. \n You have  " + maxAttempts + " more attempt(s).");
       }
 
     } while (!success && maxAttempts > 0);
@@ -83,14 +84,15 @@ public class AuthUI implements Runnable {
       found = item.hasDescription(role.getDescription());
       if (found) item.run();
     }
-    if (!found) System.out.println("There is no UI for users with role '" + role.getDescription() + "'");
+    if (!found)
+      System.out.println("There is no UI for users with role '" + role.getDescription() + "'");
   }
 
   private UserRoleDTO selectsRole(List<UserRoleDTO> roles) {
-    if (roles.size() == 1)
-      return roles.get(0);
+    if (roles.size() == 1) return roles.get(0);
     else
-      return (UserRoleDTO) Utils.showAndSelectOne(roles, "Select the role you want to adopt in this session:");
+      return (UserRoleDTO) Utils.showAndSelectOne(roles,
+          "Select the role you want to adopt in this session:");
   }
 
 }
