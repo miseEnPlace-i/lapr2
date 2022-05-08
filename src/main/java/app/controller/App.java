@@ -8,6 +8,7 @@ import app.domain.model.Company;
 import app.domain.model.Employee;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
+import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.shared.Constants;
 import pt.isep.lei.esoft.auth.AuthFacade;
 import pt.isep.lei.esoft.auth.UserSession;
@@ -21,6 +22,7 @@ public class App {
   private AuthFacade authFacade;
   private EmployeeStore employeeStore;
   private EmployeeRoleStore employeeRoleStore;
+  private VaccineTechnologyStore vaccineTechnologyStore;
 
   private App() {
     Properties props = getProperties();
@@ -28,6 +30,7 @@ public class App {
     this.authFacade = this.company.getAuthFacade();
     this.employeeStore = this.company.getEmployeeStore();
     this.employeeRoleStore = this.company.getEmployeeRoleStore();
+    this.vaccineTechnologyStore = this.company.getVaccineTechnologyStore();
 
     bootstrap();
   }
@@ -73,6 +76,12 @@ public class App {
         Constants.ROLE_RECEPTIONIST);
     this.employeeRoleStore.addEmployeeRole(Constants.ROLE_NURSE, Constants.ROLE_NURSE);
     this.employeeRoleStore.addEmployeeRole(Constants.ROLE_COORDINATOR, Constants.ROLE_COORDINATOR);
+    this.vaccineTechnologyStore.addVaccineTechnology("LIVE_ATTENUATED_TECHNOLOGY");
+    this.vaccineTechnologyStore.addVaccineTechnology("INACTIVATED_TECHNOLOGY");
+    this.vaccineTechnologyStore.addVaccineTechnology("SUBUNIT_TECHNOLOGY");
+    this.vaccineTechnologyStore.addVaccineTechnology("TOXOID_TECHNOLOGY");
+    this.vaccineTechnologyStore.addVaccineTechnology("VIRAL_VECTOR_TECHNOLOGY");
+    this.vaccineTechnologyStore.addVaccineTechnology("M_RNA_TECHNOLOGY");
 
     this.authFacade.addUserWithRole("Main Administrator", "admin@lei.sem2.pt", "123456",
         Constants.ROLE_ADMIN);

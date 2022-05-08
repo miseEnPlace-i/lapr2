@@ -1,7 +1,9 @@
 package app.controller;
 
+import java.util.List;
 import app.domain.model.Company;
 import app.domain.model.VaccineType;
+import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.model.store.VaccineTypeStore;
 
 /**
@@ -11,10 +13,12 @@ import app.domain.model.store.VaccineTypeStore;
  */
 
 public class RegisterNewVaccineTypeController implements IRegisterController {
+
   private App app;
   private Company company;
   private VaccineTypeStore vaccineTypeStore;
   private VaccineType vt;
+  private VaccineTechnologyStore vaccineTechnologyStore;
 
   /**
    * Constructor for SpecifyNewVaccineTypeController
@@ -24,6 +28,7 @@ public class RegisterNewVaccineTypeController implements IRegisterController {
     this.app = App.getInstance();
     this.company = this.app.getCompany();
     this.vaccineTypeStore = this.company.getVaccineTypeStore();
+    this.vaccineTechnologyStore = this.company.getVaccineTechnologyStore();
   }
 
   /**
@@ -54,5 +59,9 @@ public class RegisterNewVaccineTypeController implements IRegisterController {
   @Override
   public String getResourceName() {
     return "Vaccine Type";
+  }
+
+  public List<String> getVaccineTechnologyList() {
+    return vaccineTechnologyStore.getList();
   }
 }
