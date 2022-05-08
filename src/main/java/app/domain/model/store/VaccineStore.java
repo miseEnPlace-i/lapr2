@@ -26,10 +26,9 @@ public class VaccineStore {
     vaccines.add(vac);
   }
 
-  public boolean exist(String designation) {
+  public boolean exists(String designation) {
     for (Vaccine vac : vaccines)
       if (vac.getDesignation() == designation) return true;
     return false;
   }
-
 }
