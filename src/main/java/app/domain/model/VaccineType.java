@@ -1,6 +1,5 @@
 package app.domain.model;
 
-import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.shared.Constants;
 
 /**
