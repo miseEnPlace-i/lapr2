@@ -18,6 +18,29 @@
                 </configuration>
             </plugin>
             <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <mainClass>app.ui.Main</mainClass>
+                    </manifest>
+                </archive>
+                <descriptorRefs>
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
+            </configuration>
+            <executions>
+                <execution>
+                    <id>make-assembly</id>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>single</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+            
+            <plugin>
 		   <groupId>org.apache.maven.plugins</groupId>
 		    <artifactId>maven-surefire-plugin</artifactId>
 		    <version>2.22.0</version>
@@ -29,13 +52,6 @@
 				</dependency>
 			</dependencies>
 			<configuration>
-			     <!-- new configuration needed for coverage per test -->
-                            <properties>
-                                  <property>
-                                     <name>listener</name>
-                                     <value>org.sonar.java.jacoco.JUnitListener</value> 
-                                   </property>
-                            </properties>
 				<includes>
 					<include>**/*.java</include>
 				</includes>
@@ -49,26 +65,6 @@
 				</dependency>
 			</dependencies>
 			-->
-	</plugin>
-		<!-- Required for generating coverage report -->
-	<plugin>
-		<groupId>org.jacoco</groupId>
-		<artifactId>jacoco-maven-plugin</artifactId>
-		<version>0.8.2</version>
-		<executions>
-			<execution>
- 			<id>default-prepare-agent</id>
-				<goals>
-					<goal>prepare-agent</goal>
-				</goals>
-			</execution>
-			<execution>
-			<id>default-report</id>
-				<goals>
-					<goal>report</goal>
-				</goals>
-			</execution>
-		</executions>
 	</plugin>
 	<!-- Required for generating PIT Mutation reports -->
 	<plugin>
