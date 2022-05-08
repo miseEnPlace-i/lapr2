@@ -26,7 +26,7 @@ public class RegisterNewVaccineTypeUI extends RegisterUI<RegisterNewVaccineTypeC
    * @param technologyList the list of vaccine technology types
    */
   private void displayTechnology(List<String> technologyList) {
-    Utils.showList(technologyList, "Vaccine Type Technologies");
+    Utils.showList(technologyList, "\nVaccine Type Technologies:");
   }
 
   /**

@@ -28,7 +28,7 @@ public class RegisterEmployeeUI extends RegisterUI<RegisterEmployeeController> {
    * @param employeeRoles the list of employee roles
    */
   private void displayEmployeeRoles(List<UserRole> employeeRoles) {
-    Utils.showList(employeeRoles, "Employee Roles");
+    Utils.showList(employeeRoles, "\nEmployee Roles");
   }
 
   /**
