@@ -102,4 +102,13 @@ public class EmployeeStore {
     if (employees.contains(employee))
       throw new IllegalArgumentException("Duplicate employee found");
   }
+
+  /**
+   * Gets the size of the store.
+   * 
+   * @return int of number of Employees in the store.
+   */
+  public int size() {
+    return employees.size();
+  }
 }
