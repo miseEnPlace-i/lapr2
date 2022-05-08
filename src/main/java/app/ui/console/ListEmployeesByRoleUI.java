@@ -32,7 +32,7 @@ public class ListEmployeesByRoleUI implements Runnable {
 
     List<Employee> employees = getEmployeesWithRole(role.getId());
 
-    Utils.showList(employees, role.getDescription());
+    Utils.showList(employees, "\n" + role.getDescription());
   }
 
   /**
@@ -41,7 +41,7 @@ public class ListEmployeesByRoleUI implements Runnable {
    * @param employeeRoles the list of employee roles
    */
   private void displayEmployeeRoles(List<UserRole> employeeRoles) {
-    Utils.showList(employeeRoles, "Employee Roles");
+    Utils.showList(employeeRoles, "\nEmployee Roles");
   }
 
   /**

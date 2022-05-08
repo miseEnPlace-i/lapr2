@@ -25,7 +25,7 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
     List<VaccineType> vacTypes = super.ctrl.getVacTypes(); // all available vaccine types
 
     if(vacTypes.isEmpty()){
-      Utils.readLineFromConsole("No vaccine type registered. Register a vaccine Type before registering a new Vaccine.\n Press enter to go back to the menu. ");
+      Utils.readLineFromConsole("No vaccine type registered. Register a vaccine Type before registering a new Vaccine.\nPress enter to go back to the menu. ");
       return;
     }
 
@@ -62,7 +62,7 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
 
   // DISPLAY ALL AVAILABLE VACCINE TYPES
   private void displayVacTypes(List<VaccineType> vacTypes) {
-    Utils.showList(vacTypes, "Select a Vaccine Type");
+    Utils.showList(vacTypes, "\nSelect a Vaccine Type");
   }
 
   // RETURNS VACCINE TYPE ID SELECTED
@@ -89,7 +89,7 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
     options.add("y");
     options.add("n");
     Object input =
-        Utils.showAndSelectOne(options, "Want to add another administration process? (y/n):  ");
+        Utils.showAndSelectOne(options, "\nWant to add another administration process? (y/n):  ");
     String inputStr = (String) input;
 
     return inputStr.equals("y");
