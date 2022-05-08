@@ -22,7 +22,7 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
 
   @Override
   public void insertData() {
-    System.out.println("\nRegister Vaccination Center: ");
+    System.out.println("\nRegister Vaccination Center UI: ");
 
     String name = Utils.readLineFromConsole("Name: ");
     String address = Utils.readLineFromConsole("Address: ");
