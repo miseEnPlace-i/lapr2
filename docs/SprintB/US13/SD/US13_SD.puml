@@ -92,9 +92,12 @@ loop for each age group
     activate UI
     UI -> CTRL : saveAdminProc()
     activate CTRL
-        CTRL -> AP_LST : addAdminProc(adminProc)
-        activate AP_LST
-        deactivate AP_LST
+        CTRL -> VAC : addAdminProc(adminProc)
+        activate VAC
+            VAC -> AP_LST : addAdminProc(adminProc)
+            activate AP_LST
+            deactivate AP_LST
+        deactivate VAC
     deactivate CTRL
     UI --> ADM :  informs operation sucess
     deactivate UI
@@ -127,9 +130,12 @@ loop for each age group
         activate UI
         UI -> CTRL : saveDoseInfo()
         activate CTRL
-        CTRL -> DI_LST : addDoseInfo(doseInfo)
-        activate DI_LST
-        deactivate DI_LST
+        CTRL -> AP : addDoseInfo(doseInfo)
+        activate AP
+            AP -> DI_LST : addDoseInfo(doseInfo)
+            activate DI_LST
+            deactivate DI_LST
+        deactivate AP
         deactivate CTRL
         UI --> ADM :  informs operation sucess
         deactivate UI
