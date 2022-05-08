@@ -43,7 +43,7 @@ public class VaccineStoreTest {
    *
    */
   @Test
-  public void ensureAddCenterIsWorkingCorrectly() {
+  public void ensureAddVaccineIsWorkingCorrectly() {
     assert store.size() == 0;
 
     vaccine = store.createVaccine("designation", "id", "brand", this.vacType);
@@ -57,7 +57,7 @@ public class VaccineStoreTest {
    * Check that it is possible to add multiple vaccines to the system
    */
   @Test
-  public void ensureIsPossibleToAddAnotherCenter() {
+  public void ensureIsPossibleToAddVaccine() {
     assert store.size() == 0;
 
     vaccine = store.createVaccine("designation", "id", "brand", this.vacType);
@@ -71,6 +71,21 @@ public class VaccineStoreTest {
     store.saveVaccine(vaccine2);
 
     assert store.size() == 2;
+  }
+
+
+
+  /**
+   * Check that exists method is working correctly
+   */
+  @Test
+  public void ensureExistsMethodIsWorkingCorrectly() {
+    vaccine = store.createVaccine("designation", "id", "brand", this.vacType);
+
+    store.saveVaccine(vaccine);
+
+    assert store.exists("designation");
+
   }
 
 }
