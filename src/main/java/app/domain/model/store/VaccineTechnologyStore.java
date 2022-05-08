@@ -44,4 +44,13 @@ public class VaccineTechnologyStore {
         return types.contains(technology);
     }
 
+    /**
+     * Asks for the size of the List types
+     * 
+     * @return number of vaccine technology types registered in the system
+     */
+    public int size() {
+        return types.size();
+    }
+
 }
