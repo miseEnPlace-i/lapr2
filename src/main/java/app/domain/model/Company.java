@@ -45,6 +45,7 @@ public class Company {
     this.employeeStore = new EmployeeStore(this.authFacade, this.employeeRoleStore);
     this.vaccinationCenterStore = new VaccinationCenterStore();
     this.vaccineTypeStore = new VaccineTypeStore();
+    this.vaccineStore = new VaccineStore();
   }
 
   /**

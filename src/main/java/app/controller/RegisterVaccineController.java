@@ -86,10 +86,10 @@ public class RegisterVaccineController implements IRegisterController {
     String result = vac.toString();
     List<AdminProcess> adminProcList = vac.getAdminProcList().getList(); 
     for (int i = 0; i < adminProcList.size(); i++) {
-        result += "\n\nAdministration process number: " + i + "\n" + adminProcList.get(i).toString();
+        result += "\n\nAdministration process number: " + (i+1) + "\n" + adminProcList.get(i).toString();
         List<DoseInfo> doseInfoList = adminProcList.get(i).getDoseInfoList().getList(); 
         for (int j = 0; j < doseInfoList.size(); j++) {
-            result += "\n\nInformation of dose number: " + i + "\n" + doseInfoList.get(i).toString();
+            result += "\n\nInformation of dose number: " + (j+1) + "\n" + doseInfoList.get(i).toString();
         }
     }
 
