@@ -52,4 +52,20 @@ public class EmployeeRoleStoreTest {
 
     assert employeeRoleStore.existsRole("role");
   }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void ensureItsNotPossibleToCreateDuplicateRoles() {
+    employeeRoleStore.addEmployeeRole("role", "role");
+    employeeRoleStore.addEmployeeRole("role", "role");
+  }
+
+  @Test
+  public void ensureItsPossibleToCreateDuplicateRolesWithDifferentIds() {
+    employeeRoleStore.addEmployeeRole("role", "role");
+    employeeRoleStore.addEmployeeRole("role1", "role");
+
+    assert employeeRoleStore.existsRole("role");
+    assert employeeRoleStore.existsRole("role1");
+    assert employeeRoleStore.getRoles().size() == 2;
+  }
 }
