@@ -77,20 +77,22 @@ public class RegisterVaccineController implements IRegisterController {
 
   // VALIDATE VACCINE
   public boolean validateVaccine() {
-    return (vaccineStore.exist(this.vac.getDesignation()) ? true : false);
+    return (vaccineStore.exists(this.vac.getDesignation()) ? true : false);
   }
 
-  //RETURN A STRING WITH ALL VACCINE DATA
+  // RETURN A STRING WITH ALL VACCINE DATA
   @Override
   public String stringifyData() {
     String result = vac.toString();
-    List<AdminProcess> adminProcList = vac.getAdminProcList().getList(); 
+    List<AdminProcess> adminProcList = vac.getAdminProcList().getList();
     for (int i = 0; i < adminProcList.size(); i++) {
-        result += "\n\nAdministration process number: " + (i+1) + "\n" + adminProcList.get(i).toString();
-        List<DoseInfo> doseInfoList = adminProcList.get(i).getDoseInfoList().getList(); 
-        for (int j = 0; j < doseInfoList.size(); j++) {
-            result += "\n\nInformation of dose number: " + (j+1) + "\n" + doseInfoList.get(i).toString();
-        }
+      result +=
+          "\n\nAdministration process number: " + (i + 1) + "\n" + adminProcList.get(i).toString();
+      List<DoseInfo> doseInfoList = adminProcList.get(i).getDoseInfoList().getList();
+      for (int j = 0; j < doseInfoList.size(); j++) {
+        result +=
+            "\n\nInformation of dose number: " + (j + 1) + "\n" + doseInfoList.get(i).toString();
+      }
     }
 
     return result;

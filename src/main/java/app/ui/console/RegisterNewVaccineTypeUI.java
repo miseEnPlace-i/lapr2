@@ -13,22 +13,35 @@ import app.ui.console.utils.Utils;
  */
 public class RegisterNewVaccineTypeUI extends RegisterUI<RegisterNewVaccineTypeController> {
 
+  /**
+   * Constructor for RegisterNewVaccineTypeUI
+   */
   public RegisterNewVaccineTypeUI() {
     super(new RegisterNewVaccineTypeController());
   }
 
-
+  /**
+   * Displays in the screen all the available technology types
+   * 
+   * @param technologyList the list of vaccine technology types
+   */
   private void displayTechnology(List<String> technologyList) {
     Utils.showList(technologyList, "Vaccine Type Technologies");
   }
 
+  /**
+   * Selects a vaccine technology type
+   * 
+   * @param technologyList the list of vaccine technology types
+   * @return the index of the type selected
+   */
   private String selectTechnology(List<String> technologyList) {
     int technologyIndex = Utils.selectsIndex(technologyList);
     return technologyList.get(technologyIndex);
   }
 
   /**
-   * Asks for the new vaccine type data
+   * Asks user for the new vaccine type data
    */
   @Override
   public void insertData() throws IllegalArgumentException, ParseException {

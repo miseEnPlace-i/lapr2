@@ -49,14 +49,16 @@ public class EmployeeRoleStore {
   }
 
   /**
-   * checks id a given role exists.
+   * Checks id a given role exists.
+   * 
+   * When creating a new User Role the ID is upper cased, so, it is necessary to use equalsIgnoreCase()
    * 
    * @param id the employee role id
    * @return true if the role exists and false otherwise
    */
   public boolean existsRole(String id) {
     for (UserRole userRole : roles)
-      if (userRole.getId().equals(id)) return true;
+      if (userRole.getId().equalsIgnoreCase(id)) return true;
 
     return false;
   }

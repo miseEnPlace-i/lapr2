@@ -7,7 +7,7 @@ import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
-public class ListEmployeeTest {
+public class ListEmployeeByRoleTest {
   EmployeeStore employeeStore;
 
   @Before

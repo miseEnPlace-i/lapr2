@@ -1,12 +1,10 @@
 package app.domain.model;
 
-import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.list.AdminProcList;
 import app.domain.model.list.DoseInfoList;
 
 public class VaccineTest {
-
   AdminProcList adminProcList;
   DoseInfoList doseInfoList;
 
@@ -15,13 +13,10 @@ public class VaccineTest {
     new Vaccine(null, null, null, null);
   }
 
-
   @Test(expected = IllegalArgumentException.class)
   public void EmptyVacArguments() {
     new Vaccine("", "", "", null);
   }
-
-
 
   @Test(expected = IllegalArgumentException.class)
   public void VacNonExistingVacType() {
@@ -30,7 +25,6 @@ public class VaccineTest {
   }
 
   // Administration Process
-
   @Test(expected = IllegalArgumentException.class)
   public void NullAdminProcArguments() {
     new AdminProcess(0, 0, 0);
@@ -41,21 +35,19 @@ public class VaccineTest {
     new AdminProcess(-10, -5, 3);
   }
 
-
   @Test(expected = IllegalArgumentException.class)
   public void MaxAgeBiggerThanMinAge() {
     new AdminProcess(18, 2, 3);
   }
 
-
   // Dose Information
   @Test(expected = IllegalArgumentException.class)
   public void NullDoseInfoArguments() {
-    DoseInfo doseInfo = new DoseInfo(0, 0);
+    new DoseInfo(0, 0);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void NegativeDoseInfoArguments() {
-    DoseInfo doseInfo = new DoseInfo(-10, -5);
+    new DoseInfo(-10, -5);
   }
 }
