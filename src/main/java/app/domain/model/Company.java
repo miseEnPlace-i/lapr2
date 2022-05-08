@@ -48,6 +48,7 @@ public class Company {
     this.vaccinationCenterStore = new VaccinationCenterStore();
     this.vaccineTechnologyStore = new VaccineTechnologyStore();
     this.vaccineTypeStore = new VaccineTypeStore(vaccineTechnologyStore);
+    this.vaccineStore = new VaccineStore();
   }
 
   /**

@@ -31,14 +31,14 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
     insertData(); // asks to insert vaccine data and instantiates and validates a new vaccine
 
     // CREATE ADMIN PROCESS
-    boolean confirmed = askCreateAdminProc(); // asks the user if he wants to add a new admin proc
+    boolean confirmed = true;
     while (confirmed) {
       // CREATE ADMIN PROCESS UI
       System.out.println("\nRegister administration process:");
       // asks to insert admin proc data and instatiates a new admin proc
       int numberOfDoses = insertAdminProcData();// this method returns the number of doses of the new admin proc
 
-      for (int i = 1; i < numberOfDoses; i++) {
+      for (int i = 1; i <= numberOfDoses; i++) {
         System.out.println("\nRegister information of dose number: " + i);
 
         insertDoseInfoData();// asks to insert dose info data and instatiates a new dose info
@@ -56,7 +56,7 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
 
   // DISPLAY ALL AVAILABLE VACCINE TYPES
   private void displayVacTypes(List<VaccineType> vacTypes) {
-    Utils.showList(vacTypes, "Employee Roles");
+    Utils.showList(vacTypes, "Vaccine Types");
   }
 
   // RETURNS VACCINE TYPE ID SELECTED

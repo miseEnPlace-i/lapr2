@@ -19,6 +19,8 @@ public class AdminUI implements Runnable {
     options
         .add(new MenuItem("Register a new Vaccination Center", new RegisterVaccinationCenterUI()));
     options.add(new MenuItem("Register a new Vaccine Type", new RegisterNewVaccineTypeUI()));
+    options.add(new MenuItem("Register a new Vaccine", new RegisterVaccineUI()));
+
 
     int option = 0;
     do {

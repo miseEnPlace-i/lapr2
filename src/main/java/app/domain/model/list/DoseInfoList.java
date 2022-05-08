@@ -17,4 +17,8 @@ public class DoseInfoList {
     public void addDoseInfo(DoseInfo doseInfo){
         doseInfoList.add(doseInfo);
     }
+
+    public List<DoseInfo> getList(){
+        return doseInfoList;
+    }
 }

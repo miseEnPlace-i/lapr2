@@ -19,5 +19,8 @@ public class AdminProcList {
         adminProcList.add(adminProc);
     }
 
+    public List<AdminProcess> getList(){
+        return adminProcList;
+    }
 
 }
