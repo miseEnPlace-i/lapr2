@@ -9,49 +9,51 @@ import java.util.List;
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 public class VaccineTechnologyStore {
- private List<String> types;
 
- /**
-  * Constructor for VaccineTechnologyStore
-  */
- public VaccineTechnologyStore() {
-  this.types = new ArrayList<String>();
- }
+  // List of vaccine technology types
+  private List<String> techTypes;
 
- /**
-  * Adds to the list of types a new technology type
-  * 
-  * @param technology the vaccine technology type
-  */
- public void addVaccineTechnology(String technology) {
-  types.add(technology);
- }
+  /**
+   * Constructor for VaccineTechnologyStore
+   */
+  public VaccineTechnologyStore() {
+    this.techTypes = new ArrayList<String>();
+  }
 
- /**
-  * Gets all vaccine technology types
-  * 
-  * @return list of Vaccine technology types
-  */
- public List<String> getList() {
-  return types;
- }
+  /**
+   * Adds to the list of types a new technology type
+   * 
+   * @param technology the vaccine technology type
+   */
+  public void addVaccineTechnology(String technology) {
+    techTypes.add(technology);
+  }
 
- /**
-  * Sees if exists a certain type of technology
-  * 
-  * @param technology the vaccine technology to see if it matches any of those already in the system
-  * @return "true" if valid, "false" if invalid
-  */
- public boolean existsType(String technology) {
-  return types.contains(technology);
- }
+  /**
+   * Gets all vaccine technology types
+   * 
+   * @return list of Vaccine technology types
+   */
+  public List<String> getList() {
+    return techTypes;
+  }
 
- /**
-  * Asks for the size of the List types
-  * 
-  * @return number of vaccine technology types registered in the system
-  */
- public int size() {
-  return types.size();
- }
+  /**
+   * Sees if exists a certain type of technology
+   * 
+   * @param technology the vaccine technology to see if it matches any of those already in the system
+   * @return "true" if valid, "false" if invalid
+   */
+  public boolean existsType(String technology) {
+    return techTypes.contains(technology);
+  }
+
+  /**
+   * Asks for the size of the List types
+   * 
+   * @return number of vaccine technology types registered in the system
+   */
+  public int size() {
+    return techTypes.size();
+  }
 }

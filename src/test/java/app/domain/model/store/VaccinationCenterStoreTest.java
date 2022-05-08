@@ -27,7 +27,6 @@ public class VaccinationCenterStoreTest {
   /**
    * Check that saveVaccinationCenter is working properly
    * 
-   * @throws IllegalArgumentException
    */
   @Test
   public void ensureAddCenterIsWorkingCorrectly() {
