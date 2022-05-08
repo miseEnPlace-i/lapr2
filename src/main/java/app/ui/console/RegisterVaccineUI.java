@@ -25,7 +25,7 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
     List<VaccineType> vacTypes = super.ctrl.getVacTypes(); // all available vaccine types
 
     if(vacTypes.isEmpty()){
-      Utils.readLineFromConsole("No vaccine type registered. Register a vaccine Type before registering a new Vaccine.");
+      Utils.readLineFromConsole("No vaccine type registered. Register a vaccine Type before registering a new Vaccine.\n Press enter to go back to the menu. ");
       return;
     }
 
@@ -41,13 +41,13 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
     while (confirmed) {
       // CREATE ADMIN PROCESS UI
       System.out.println("\nRegister administration process:");
-      // asks to insert admin proc data and instatiates a new admin proc
+      // asks to insert admin proc data and instantiates a new admin proc
       int numberOfDoses = insertAdminProcData();// this method returns the number of doses of the new admin proc
 
       for (int i = 1; i <= numberOfDoses; i++) {
         System.out.println("\nRegister information of dose number: " + i);
 
-        insertDoseInfoData();// asks to insert dose info data and instatiates a new dose info
+        insertDoseInfoData();// asks to insert dose info data and instantiates a new dose info
       }
       confirmed = askCreateAdminProc(); // asks the user if he wants to add a new ap
     }
@@ -62,7 +62,7 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
 
   // DISPLAY ALL AVAILABLE VACCINE TYPES
   private void displayVacTypes(List<VaccineType> vacTypes) {
-    Utils.showList(vacTypes, "Vaccine Types");
+    Utils.showList(vacTypes, "Select a Vaccine Type");
   }
 
   // RETURNS VACCINE TYPE ID SELECTED
@@ -89,7 +89,7 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
     options.add("y");
     options.add("n");
     Object input =
-        Utils.showAndSelectOne(options, "Want to add an adminstration process? (y/n):  ");
+        Utils.showAndSelectOne(options, "Want to add another administration process? (y/n):  ");
     String inputStr = (String) input;
 
     return inputStr.equals("y");
