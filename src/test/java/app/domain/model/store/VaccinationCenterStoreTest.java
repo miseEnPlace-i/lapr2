@@ -13,6 +13,7 @@ public class VaccinationCenterStoreTest {
   VaccinationCenterStore store = new VaccinationCenterStore();
   Employee coordinator;
   VaccinationCenter center;
+  VaccinationCenter center2;
 
   /**
    * Set up for the tests
@@ -61,22 +62,26 @@ public class VaccinationCenterStoreTest {
   }
 
   /**
-   * Check that it is possible to add centers to the system
+   * Check that it is possible to add multiple centers to the system
    */
   @Test
   public void ensureIsPossibleToAddAnotherCenter() {
     assert store.size() == 0;
 
+    center = store.createVaccinationCenter("name123", "address", "email@email.com", "+351961919169",
+        "+351961919169", "http://www.google.com", "10:00", "19:00", 5, 5, this.coordinator);
+
     store.saveVaccinationCenter(center);
 
     assert store.size() == 1;
 
-    center = store.createVaccinationCenter("name123", "address", "email@email.com", "+351961919169",
-        "+351961919169", "http://www.google.com", "10:00", "19:00", 5, 5, this.coordinator);
+    center2 =
+        store.createVaccinationCenter("name123", "address", "email@gmail.com", "+351961919168",
+            "+351961919179", "http://www.gogle.com", "10:00", "19:00", 5, 5, this.coordinator);
 
-    store.validateVaccinationCenter(center);
+    store.validateVaccinationCenter(center2);
 
-    store.saveVaccinationCenter(center);
+    store.saveVaccinationCenter(center2);
 
     assert store.size() == 2;
   }

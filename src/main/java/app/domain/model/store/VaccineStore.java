@@ -31,4 +31,8 @@ public class VaccineStore {
       if (vac.getDesignation() == designation) return true;
     return false;
   }
+
+  public int size() {
+    return vaccines.size();
+  }
 }
