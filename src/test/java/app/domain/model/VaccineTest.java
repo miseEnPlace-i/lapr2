@@ -1,53 +1,59 @@
 package app.domain.model;
 
+import static org.junit.Assert.assertNotNull;
+import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.list.AdminProcList;
 import app.domain.model.list.DoseInfoList;
 
+
+/**
+ * @author Carlos Lopes <1211277@isep.ipp.pt>
+ */
 public class VaccineTest {
   AdminProcList adminProcList;
   DoseInfoList doseInfoList;
+  VaccineType vaccineType;
 
+  /**
+   * Set up for the tests
+   */
+  @Before
+  public void setUp() {
+    vaccineType = new VaccineType("12345", "description", "TEST");
+  }
+
+
+  //Check that it is not possible to create a vaccine with null arguments
   @Test(expected = IllegalArgumentException.class)
-  public void NullVacArguments() {
+  public void ensureNullVacArgumentsNotValid() {
     new Vaccine(null, null, null, null);
   }
 
+  //Check that it is not possible to create a vaccine with empty arguments
   @Test(expected = IllegalArgumentException.class)
-  public void EmptyVacArguments() {
+  public void ensureEmptyVacArgumentsNotValid() {
     new Vaccine("", "", "", null);
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void VacNonExistingVacType() {
-    VaccineType notExistingVacT = null;
-    new Vaccine("Pfizer–BioNTech COVID-19", "Pfizer", "vac1", notExistingVacT);
+  //Check that Vaccine constructor is working correctly
+  @Test
+  public void ensureIsPossibleToCreateVaccine() {
+    Vaccine vaccine = new Vaccine("designation", "id", "brade", vaccineType);
+
+    assertNotNull(vaccine);
   }
 
-  // Administration Process
-  @Test(expected = IllegalArgumentException.class)
-  public void NullAdminProcArguments() {
-    new AdminProcess(0, 0, 0);
+  //Check that is possible to add an administration process
+  @Test
+  public void ensureIsPossibleToAddVaccine() {
+    Vaccine vaccine = new Vaccine("designation", "id", "brade", vaccineType);
+    assert vaccine.getAdminProcList().getList().size() == 0;
+
+    AdminProcess ap = new AdminProcess(1, 10, 2);
+
+    vaccine.addAdminProc(ap);
+    assert vaccine.getAdminProcList().getList().size() == 1;
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void NegativeAdminProcArguments() {
-    new AdminProcess(-10, -5, 3);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void MaxAgeBiggerThanMinAge() {
-    new AdminProcess(18, 2, 3);
-  }
-
-  // Dose Information
-  @Test(expected = IllegalArgumentException.class)
-  public void NullDoseInfoArguments() {
-    new DoseInfo(0, 0);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void NegativeDoseInfoArguments() {
-    new DoseInfo(-10, -5);
-  }
 }
