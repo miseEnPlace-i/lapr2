@@ -25,6 +25,7 @@ public class VaccineTypeStore {
   }
 
   /**
+   * Gets the a vaccine type by code
    * 
    * @param vaccineTypeCode the vaccine type code
    * @return vaccine type with a given Code
@@ -38,10 +39,23 @@ public class VaccineTypeStore {
     return null;
   }
 
+  /**
+   * Gets list
+   * 
+   * @return list of vaccine types
+   */
   public List<VaccineType> getList() {
     return vaccineTypes;
   }
 
+  /**
+   * Adds a new vaccine type
+   * 
+   * @param code the vaccine type code
+   * @param description the vaccine type description
+   * @param technology the vaccine type technology
+   * @return the new vaccine type
+   */
   public VaccineType addVaccineType(String code, String description, String technology) {
     if (!vaccineTechnologyStore.existsType(technology))
       throw new IllegalArgumentException("Technology must exist.");
