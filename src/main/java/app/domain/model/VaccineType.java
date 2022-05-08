@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.shared.Constants;
 
 /**
@@ -74,25 +75,10 @@ public class VaccineType {
    */
 
   private void setTechnology(String technology) {
-    if (technology == null || technology.isEmpty() || !isVaccineTechnologyValid(technology))
+    if (technology == null || technology.isEmpty())
       throw new IllegalArgumentException("Invalid vaccine technology: " + technology);
 
     this.technology = technology;
-  }
-
-  /**
-   * Checks if the vaccine technology is valid.
-   * 
-   * @param technology the vaccine type technology.
-   * 
-   * @return "true" if valid, "false" if invalid
-   */
-
-  private boolean isVaccineTechnologyValid(String technology) {
-    for (Constants.VaccineTechnology vaccineTechnology : Constants.VaccineTechnology.values())
-      if (vaccineTechnology.toString().equals(technology)) return true;
-
-    return false;
   }
 
   /**

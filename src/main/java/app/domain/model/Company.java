@@ -6,6 +6,7 @@ import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.SNSUserStore;
 import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineStore;
+import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.model.store.VaccineTypeStore;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
@@ -27,6 +28,7 @@ public class Company {
   private VaccinationCenterStore vaccinationCenterStore;
   private VaccineStore vaccineStore;
   private VaccineTypeStore vaccineTypeStore;
+  private VaccineTechnologyStore vaccineTechnologyStore;
 
   /**
    * Company constructor.
@@ -44,7 +46,8 @@ public class Company {
     this.employeeRoleStore = new EmployeeRoleStore(this.authFacade);
     this.employeeStore = new EmployeeStore(this.authFacade, this.employeeRoleStore);
     this.vaccinationCenterStore = new VaccinationCenterStore();
-    this.vaccineTypeStore = new VaccineTypeStore();
+    this.vaccineTechnologyStore = new VaccineTechnologyStore();
+    this.vaccineTypeStore = new VaccineTypeStore(vaccineTechnologyStore);
   }
 
   /**
@@ -104,4 +107,7 @@ public class Company {
     return this.vaccineTypeStore;
   }
 
+  public VaccineTechnologyStore getVaccineTechnologyStore() {
+    return this.vaccineTechnologyStore;
+  }
 }

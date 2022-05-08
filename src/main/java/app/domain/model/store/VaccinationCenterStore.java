@@ -75,7 +75,6 @@ public class VaccinationCenterStore {
    * @param center the vaccination center
    */
   public void saveVaccinationCenter(VaccinationCenter center) {
-    System.out.println("adding");
     vacCenters.add(center);
   }
 

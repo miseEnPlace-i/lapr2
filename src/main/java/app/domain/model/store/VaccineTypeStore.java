@@ -14,12 +14,14 @@ import app.domain.model.VaccineType;
  */
 public class VaccineTypeStore {
   private List<VaccineType> vaccineTypes;
+  private VaccineTechnologyStore vaccineTechnologyStore;
 
   /**
    * Constructor for VaccineTypeStore
    */
-  public VaccineTypeStore() {
+  public VaccineTypeStore(VaccineTechnologyStore technologyStore) {
     this.vaccineTypes = new ArrayList<VaccineType>();
+    this.vaccineTechnologyStore = technologyStore;
   }
 
   /**
@@ -41,6 +43,9 @@ public class VaccineTypeStore {
   }
 
   public VaccineType addVaccineType(String code, String description, String technology) {
+    if (!vaccineTechnologyStore.existsType(technology))
+      throw new IllegalArgumentException("Technology must exist.");
+
     VaccineType vaccineType = new VaccineType(code, description, technology);
 
     return vaccineType;
