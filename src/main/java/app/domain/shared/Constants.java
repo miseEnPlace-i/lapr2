@@ -19,9 +19,5 @@ public class Constants {
   public static final String PARAMS_FILENAME = "config.properties";
   public static final String PARAMS_COMPANY_DESIGNATION = "Company.Designation";
 
-  public static enum VaccineTechnology {
-    LIVE_ATTENUATED_TECHNOLOGY, INACTIVATED_TECHNOLOGY, SUBUNIT_TECHNOLOGY, TOXOID_TECHNOLOGY, VIRAL_VECTOR_TECHNOLOGY, M_RNA_TECHNOLOGY;
-  }
-
   public static final byte VACCINE_TYPE_CODE_LENGTH = 5;
 }
