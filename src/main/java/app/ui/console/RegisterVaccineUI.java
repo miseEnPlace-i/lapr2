@@ -23,6 +23,12 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
     System.out.println("\nRegister Vaccine UI:");
 
     List<VaccineType> vacTypes = super.ctrl.getVacTypes(); // all available vaccine types
+
+    if(vacTypes.isEmpty()){
+      Utils.readLineFromConsole("No vaccine type registered. Register a vaccine Type before registering a new Vaccine.");
+      return;
+    }
+
     displayVacTypes(vacTypes);
 
     VaccineType vacType = selectVacType(vacTypes); // asks to select the vaccine type
