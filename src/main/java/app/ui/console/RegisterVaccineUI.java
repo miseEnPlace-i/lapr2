@@ -10,7 +10,7 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
   private String vacTypeId = "";
 
   /**
-   * Register Employee View
+   * Register Vaccine View
    * 
    * @author Carlos Lopes <1211277@isep.ipp.pt>
    */
