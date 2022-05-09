@@ -1,0 +1,23 @@
+@startuml System Sequence Diagram
+autonumber
+actor "Receptionist" as Receptionist
+
+activate Receptionist
+Receptionist -> ":System" : asks to register a SNS User
+activate ":System"
+":System" --> Receptionist : requests data (name, birth date, phone number, email)
+deactivate ":System"
+
+Receptionist -> ":System" : types requested data
+activate ":System"
+":System" --> Receptionist : shows all data and requests confirmation
+deactivate ":System"
+
+Receptionist -> ":System" : confirms the data
+activate ":System"
+":System" --> Receptionist : informs operation success
+deactivate ":System"
+
+deactivate Receptionist
+
+@enduml

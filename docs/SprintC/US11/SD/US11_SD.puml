@@ -1,0 +1,76 @@
+@startuml
+autonumber
+'hide footbox
+actor "Administrator" as ADM
+
+participant ":ListEmployeeUI" as UI
+participant ":ListEmployeeController" as CTRL
+participant "comp\n:Company" as COMP
+participant "employeeStore\n:EmployeeStore" as EMPS
+participant "employeeRoleStore\n:EmployeeRoleStore" as ROLES
+participant "emp:Employee" as EMP
+
+activate ADM
+ADM -> UI : asks to list employees for given role
+activate UI
+activate CTRL
+UI -> CTRL : emnployeeRoles=getEmployeeRoles()
+CTRL -> COMP : roleStore=getEmployeeRoleStore()
+activate COMP
+deactivate COMP
+
+CTRL -> ROLES : roleList=getEmployeeRoles()
+activate ROLES
+|||
+deactivate ROLES
+deactivate CTRL
+
+UI --> ADM : shows roles list and ask to select one
+deactivate UI
+
+ADM -> UI : selects an employee role
+activate UI
+
+UI -> CTRL : getEmployeesWithRole(roleId)
+activate CTRL
+
+CTRL -> COMP: getEmployeeStore()
+activate COMP
+deactivate COMP
+CTRL -> EMPS: getEmployeesWithRole(roleId)
+activate EMPS
+deactivate EMPS
+EMPS -> ROLES: existsRole(roleId)
+activate ROLES
+deactivate ROLES
+create "lstEmp\n:List<Employee>" as LST
+EMPS --> LST
+
+loop for each employee
+    EMPS -> EMP: e=employee.hasRoleId(roleId)
+  activate EMP
+    EMP --> EMPS: true/false
+  deactivate EMP
+    alt e==true
+        EMPS -> LST: add(employee)
+      activate LST
+    |||
+    deactivate LST
+    end
+end
+
+CTRL --> UI: lstEmp
+
+deactivate COMP
+deactivate CTRL
+UI --> ADM : informs operation success
+UI --> ADM: shows the list of employees
+deactivate UI
+
+deactivate UI
+deactivate CTRL
+deactivate ADM
+
+participant "roleList:\nList<UserRole>"
+
+@enduml

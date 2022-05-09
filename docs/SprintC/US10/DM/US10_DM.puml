@@ -1,0 +1,26 @@
+@startuml US10_DM
+hide methods
+skinparam classAttributeIconSize 0
+
+class Company {
+  -designation
+}
+
+class Administrator {
+}
+
+class Employee {
+  -name
+  -phoneNumber
+  -email
+  -password
+  -address
+  -citizenCardNumber
+  -roleId
+}
+
+Company "1" -- "*" Administrator : knows >
+Company "1" -- "*" Employee : knows >
+Administrator "1" -- "*" Employee : registers >
+
+@enduml
