@@ -2,24 +2,17 @@
 
 ## 1. Requirements Engineering
 
-
 ### 1.1. User Story Description
 
-
-As a receptionist at one vaccination center, I want to schedule a vaccination.
-
+_"As a receptionist at one vaccination center, I want to schedule a vaccination."_
 
 ### 1.2. Customer Specifications and Clarifications 
 
-
 **From the specifications document:**
 
->	--
+> "Some users (e.g.: older ones) may want to go to a healthcare center to schedule the vaccine appointment with the help of a receptionists at one vaccination center."
 
-
->	--
-
-
+> " (...) his/her SNS user number, select the vaccination center, the date, and the time (s)he wants to be vaccinated as well as the type of vaccine to be administered (...)"
 
 **From the client clarifications:**
 
@@ -36,9 +29,7 @@ As a receptionist at one vaccination center, I want to schedule a vaccination.
 
 ### 1.4. Found out Dependencies
 
-
 * --
-
 
 ### 1.5 Input and Output Data
 
@@ -46,46 +37,37 @@ As a receptionist at one vaccination center, I want to schedule a vaccination.
 **Input Data:**
 
 * Typed data:
-	* a reference, 
-	* a designation, 
-	* an informal description
-	* a technical description
-	* an estimated duration
-	* an estimated cost
-	
+	* SNS number, 
+	* date, 
+	* time.
 * Selected data:
-	* Classifying task category 
+	* Vaccination Center,
+	* Type of vaccine.
 
 
 **Output Data:**
 
-* List of existing task categories
-* (In)Success of the operation
+* List of vaccines,
+* List of vaccination centers,
+* (In)Success of the operation.
 
 ### 1.6. System Sequence Diagram (SSD)
 
 **Alternative 1**
 
-![US02_SSD](US02_SSD.svg)
-
-
-**Alternative 2**
-
-![US006_SSD_v2](US006_SSD_v2.svg)
-
+![US02_SSD](SSD/US02_SSD.svg)
 
 **Other alternatives might exist.**
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
-
+* --
 
 ## 2. OO Analysis
 
 ### 2.1. Relevant Domain Model Excerpt 
 
-![US02_MD](US02_DM.svg)
+![US02_MD](DM/US02_DM.svg)
 
 ### 2.2. Other Remarks
 
@@ -127,25 +109,22 @@ According to the taken rationale, the conceptual classes promoted to software cl
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
- * CreateTaskUI  
- * CreateTaskController
+ * ScheduleVaccinationUI  
+ * ScheduleVaccinationController
 
 
 ## 3.2. Sequence Diagram (SD)
 
 **Alternative 1**
 
-![US02_SD](US02_SD.svg)
+![US02_SD](SD/US02_SD.svg)
 
-**Alternative 2**
-
-![US02_SD](US006_SD_v2.svg)
 
 ## 3.3. Class Diagram (CD)
 
 **From alternative 1**
 
-![US02_CD](US02_CD.svg)
+![US02_CD](CD/US02_CD.svg)
 
 # 4. Tests 
 
