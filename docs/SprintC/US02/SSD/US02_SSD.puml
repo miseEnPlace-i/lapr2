@@ -1,28 +1,32 @@
-@startuml SSD_US02
+@startuml US02_SSD
 autonumber
-actor "Organization Employee" as OE
+actor "Receptionist" as Recept
 
-activate OE
-OE -> ":System" : asks to create a new task
+activate Recept
+Recept -> ":System" : asks to schedule a vaccination
 activate ":System"
-":System" --> OE : requests data (reference, designation,  informal \n description, technical description, duration, cost)
+":System" --> Recept : requests data (SNSNumber, date, time)
+deactivate ":System"
+Recept -> ":System" : types requested data
+activate ":System"
+
+":System" --> Recept : shows all vaccination centers and asks to select one
+deactivate ":System"
+Recept -> ":System" : selects one vaccination center
+activate ":System"
+
+":System" --> Recept : shows all vaccine types and asks to select one
+deactivate ":System"
+Recept -> ":System" : selects one vaccine type
+activate ":System"
+
+":System" --> Recept : shows all data and requests confirmation
+deactivate ":System"
+Recept -> ":System" : confirms the data
+activate ":System"
+":System" --> Recept : informs operation success
 deactivate ":System"
 
-OE -> ":System" : types requested data
-activate ":System"
-":System" --> OE : shows task categories list and ask to select one
-deactivate ":System"
-
-OE -> ":System" : selects a task category
-activate ":System"
-":System" --> OE : shows all data and requests confirmation
-deactivate ":System"
-
-OE -> ":System" : confirms the data
-activate ":System"
-":System" --> OE : informs operation success
-deactivate ":System"
-
-deactivate OE
+deactivate Recept
 
 @enduml

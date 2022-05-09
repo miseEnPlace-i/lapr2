@@ -1,4 +1,4 @@
-# US 006 - To create a Task 
+# US 02 - Schedule a vaccination
 
 ## 1. Requirements Engineering
 
