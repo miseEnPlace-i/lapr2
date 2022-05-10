@@ -2,12 +2,12 @@
 skinparam classAttributeIconSize 0
 
 class VaccinationSchedule {
-  - SNSNumber: int
+  - SNSUserNumber: int
   - date: Date
   - time: String
   - center: VACCINATIONCENTER
   - vaccineType : VACCINETYPE
-  +VaccinationSchedule(SNSNumber, date, time, center, vaccineType)
+  +VaccinationSchedule(SNSUserNumber, date, time, center, vaccineType)
 }
 
 
@@ -19,7 +19,7 @@ class Company {
 }
 
 class VaccinationScheduleController {
-  +createVaccinationSchedule(SNSNumber, date, time, center, vaccineType)
+  +createVaccinationSchedule(SNSUserNumber, date, time, center, vaccineType)
 }
 
 class VaccinationScheduleUI {}
