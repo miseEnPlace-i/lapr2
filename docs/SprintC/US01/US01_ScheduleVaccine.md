@@ -35,7 +35,7 @@ _"As an SNS user, I intend to use the application to schedule a vaccine."_
 ### 1.3. Acceptance Criteria
 
 
-* **AC1:** All required fields must be filled in. (SNS User Number, ).
+* **AC1:** All required fields must be filled in. (SNS user Number, ).
 * **AC2:** The SNS User number must have 9 digits.
 * **AC3:** A SNS user cannot schedule the same vaccine more than once.
 * **AC4:** The algorithm should check if the SNS User is within the age and time since the last vaccine.
@@ -46,7 +46,7 @@ _"As an SNS user, I intend to use the application to schedule a vaccine."_
 
 * There is a dependency to "US03 - Register an SNS User", because SNS users can only use the application if they are registered in the system.
 * There is a dependency to "US09 - Register a Vaccination Center", as the application needs to know which vaccination centers are available.
-* There is a dependency to "US12 - Specify a Vaccine Type", as the application needs to know which vaccine types are available, so that SNS Users (and Receptionists) can schedule a vaccine.
+* There is a dependency to "US12 - Specify a Vaccine Type", as the application needs to know which vaccine types are available, so that SNS users (and receptionists) can schedule a vaccine.
 * There is a dependency to "US13 - Specify a Vaccine", because in order to schedule a vaccine, there has to exist, at least, one vaccine registered in the system.
 
 
@@ -56,7 +56,7 @@ _"As an SNS user, I intend to use the application to schedule a vaccine."_
 **Input Data:**
 
 * Typed data:
-	* SNS User number
+	* SNS user number
 	* date and time of the vaccination
 
 * Selected data:
