@@ -1,28 +1,46 @@
-@startuml
+@startuml US01_SSD
 autonumber
-actor "Organization Employee" as OE
+actor "SNS User" as user
 
-activate OE
-OE -> ":System" : asks to create a new task
+activate user
+user -> ":System" : asks to schedule a vaccine
 activate ":System"
-":System" --> OE : requests data (reference, designation,  informal \n description, technical description, duration, cost)
+":System" --> user : shows suggested vaccine type and asks to accept it
 deactivate ":System"
 
-OE -> ":System" : types requested data
-activate ":System"
-":System" --> OE : shows task categories list and ask to select one
+user -> ":System" : accepts the suggested vaccine type
+opt declines the suggested vaccine type
+    activate ":System"
+    ":System" --> user : shows a list of all vaccine types and asks to select one
+    deactivate ":System"
+    user -> ":System" : selects a vaccine type
+    activate ":System"
+end
+":System" --> user : shows a list of all available vaccination centers and asks to select one
 deactivate ":System"
 
-OE -> ":System" : selects a task category
+user -> ":System" : selects a vaccination center
 activate ":System"
-":System" --> OE : shows all data and requests confirmation
+":System" --> user : requests data (SNS user number, date, time)
 deactivate ":System"
 
-OE -> ":System" : confirms the data
-activate ":System"
-":System" --> OE : informs operation success
-deactivate ":System"
+user -> ":System" : types requested data
+alt vaccine scheduled successfully
+    activate ":System"
+    ":System" --> user : asks to send sms with information about the scheduled vaccine
+    deactivate ":System"
+    user -> ":System" : accepts or declines the sending of the sms
+    activate ":System"
+    ":System" --> user : shows all data and requests confirmation
+    deactivate ":System"
+    user -> ":System" : confirms the data
+    activate ":System"
+    ":System" --> user : informs operation success
+    deactivate ":System"
+else vaccine not scheduled
+    ":System" --> user : informs operation failure
+end
 
-deactivate OE
+deactivate user
 
 @enduml
