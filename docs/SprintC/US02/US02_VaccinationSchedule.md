@@ -14,6 +14,10 @@ _"As a receptionist at one vaccination center, I want to schedule a vaccination.
 
 > " (...) his/her SNS user number, select the vaccination center, the date, and the time (s)he wants to be vaccinated as well as the type of vaccine to be administered (...)"
 
+> "Then, the application should check the vaccination center capacity for that day/time and, if possible, confirm that the vaccination is scheduled and inform the user that (s)he should be at the selected vaccination center at the scheduled day and time."
+
+> "The SNS user may also authorize the DGS to send an SMS message with information about the scheduled appointment. If the user authorizes the sending of the SMS, the application should send an SMS message when the vaccination event is scheduled and registered in the system."
+
 **From the client clarifications:**
 
 > **Question:** "How does the system know which vaccine to suggest when the SNS user is scheduling their vaccine? Is the administrator responsible for setting the outbreak vaccine?"
@@ -30,10 +34,16 @@ _"As a receptionist at one vaccination center, I want to schedule a vaccination.
 
 * **AC1:** All required fields must be filled in.
 * **AC2:** The algorithm should check if the SNS User is within the age and time since the last vaccine.
+* **AC2:** The SNS User number must have 9 digits.
 
 ### 1.4. Found out Dependencies
 
-* --
+* There is a dependency to "US03 - Register an SNS User", because SNS users can only use the application if they are registered in the system.
+* There is a dependency to "US09 - Register a Vaccination Center", as the receptionist is related to one vaccination center.
+* There is a dependency to "US12 - Specify a Vaccine Type", as the application needs to know which vaccine types are available, so that SNS users (and receptionists) can schedule a vaccine.
+* There is a dependency to "US13 - Specify a Vaccine", because in order to schedule a vaccine, there has to exist, at least, one vaccine registered in the system.
+
+ 
 
 ### 1.5 Input and Output Data
 
@@ -45,13 +55,12 @@ _"As a receptionist at one vaccination center, I want to schedule a vaccination.
 	* date, 
 	* time.
 * Selected data:
-	* Vaccination Center,
 	* Type of vaccine.
 
 **Output Data:**
 
-* List of vaccines,
-* List of vaccination centers,
+
+* Suggested vaccine type (or the list of all available vaccine types)
 * (In)Success of the operation.
 
 ### 1.6. System Sequence Diagram (SSD)
