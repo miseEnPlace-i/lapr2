@@ -1,30 +1,42 @@
 @startuml US02_CD
 skinparam classAttributeIconSize 0
 
-class ScheduleVaccination {
+class VaccinationSchedule {
   - SNSNumber: int
   - date: Date
   - time: String
   - center: VACCINATIONCENTER
   - vaccineType : VACCINETYPE
-  +ScheduleVaccination(SNSNumber, date, time, center, vaccineType)
+  +VaccinationSchedule(SNSNumber, date, time, center, vaccineType)
 }
 
 
 class Company {
   -designation: String
-  
+  +getSNSUserStore()
+  +getVaccinationCenterStore()
+  +getVaccineTypeStore()
 }
 
-class ScheduleVaccinationController {
-  +createScheduleVaccination(SNSNumber, date, time, center, vaccineType)
+class VaccinationScheduleController {
+  +createVaccinationSchedule(SNSNumber, date, time, center, vaccineType)
 }
 
-class ScheduleVaccinationUI {}
+class VaccinationScheduleUI {}
 
-ScheduleVaccinationUI ..> ScheduleVaccinationController
-ScheduleVaccinationController ..> ScheduleVaccination
-Company --> ScheduleVaccination
+class SNSUserStore {}
+
+class VaccinationCenterStore {}
+
+class VaccineTypeStore {}
+
+VaccinationScheduleUI ..> VaccinationScheduleController
+VaccinationScheduleController ..> VaccinationSchedule
+VaccinationScheduleController ..> Company
+Company --> VaccinationSchedule
+Company --> SNSUserStore
+Company --> VaccinationCenterStore
+Company --> VaccineTypeStore
 
 
 @enduml
