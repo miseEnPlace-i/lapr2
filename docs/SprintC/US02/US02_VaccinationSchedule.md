@@ -16,9 +16,13 @@ _"As a receptionist at one vaccination center, I want to schedule a vaccination.
 
 **From the client clarifications:**
 
-> **Question:** --
+> **Question:** "How does the system know which vaccine to suggest when the SNS user is scheduling their vaccine? Is the administrator responsible for setting the outbreak vaccine?"
 >  
-> **Answer:** --
+> **Answer:** "The ongoing outbreak should be defined in the system using a configuration file."
+
+> **Question:** "A receptionist has the ability to schedule an appointment in different vaccination centres or only on their own?"
+>
+> **Answer:** _**Not answered yet**_.
 
 
 ### 1.3. Acceptance Criteria
@@ -43,7 +47,6 @@ _"As a receptionist at one vaccination center, I want to schedule a vaccination.
 * Selected data:
 	* Vaccination Center,
 	* Type of vaccine.
-
 
 **Output Data:**
 
