@@ -14,7 +14,6 @@ activate RECEPT
 RECEPT -> UI : asks to schedule a vaccination
 activate UI
 
-
 UI --> RECEPT : requests data (SNSUserNumber, date, time)
 deactivate UI
 
@@ -40,14 +39,37 @@ activate CTRL
 
 CTRL -> COMP : getVaccineTypeStore()
 activate COMP
-deactivate CTRL
 deactivate COMP
+deactivate CTRL
+
+
+opt declines the suggested vaccine type
+UI --> RECEPT : shows all vaccine types and asks to select one
+deactivate UI
+
+RECEPT -> UI : selects a vaccine type
+activate UI
+
+UI -> CTRL : getVaccineTypeByCode(code)
+activate CTRL
+
+CTRL -> STORE : getVaccineTypeByCode(code)
+activate STORE
+deactivate STORE
+deactivate CTRL
+end
+
+opt vaccination scheduled 
+UI --> RECEPT : asks to send sms with information about the scheduled vaccine
+deactivate UI
+RECEPT -> UI : accepts or declines the sending sms
+activate UI
 
 UI -> CTRL : createVaccinationSchedule(dto)
 activate CTRL
 
 note right 
-dto has all information (SNSUserNumber,date,time)
+dto has all information (SNSUserNumber,date,time,vaccineType,SMS)
 end note
 CTRL -> COMP : vacSchedule = createVaccinationSchedule(dto)
 activate COMP
@@ -68,22 +90,10 @@ deactivate DTO
 MAPPER -> DTO : time = getTime()
 activate DTO
 deactivate DTO
+deactivate CTRL
+
+MAPPER -> VaccinationSchedule** : create(SNSUserNumber,date,time,vaccineType,SMS)
 deactivate MAPPER
-
-opt does not accept
-UI --> RECEPT : shows all vaccine types and asks to select one
-deactivate UI
-RECEPT -> UI : selects a vaccine type
-activate UI
-end
-
-opt vaccination scheduled 
-UI --> RECEPT : asks to send sms with information about the scheduled vaccine
-deactivate UI
-RECEPT -> UI : accepts or declines the sending sms
-activate UI
-
-MAPPER -> VaccinationSchedule** : create(SNSUserNumber,date,time)
 
 UI --> RECEPT : shows all data and requests confirmation
 deactivate UI
@@ -93,7 +103,6 @@ end
 
 UI --> RECEPT : informs operation success
 deactivate UI
-
 
 deactivate RECEPT
 
