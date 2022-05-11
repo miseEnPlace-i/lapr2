@@ -6,21 +6,25 @@ actor "Receptionist" as RECEPT
 participant ":VaccinationScheduleUI" as UI
 participant ":VaccinationScheduleController" as CTRL
 participant "comp\n:Company" as COMP
-participant "dto:VaccinationScheduleDto" as DTO
+participant "mapper\n:VaccinationMapper" as MAPPER
+participant "vacDto:VaccinationScheduleDto" as DTO
+participant "store\n:VaccineTypeStore" as STORE
 
 activate RECEPT
 RECEPT -> UI : asks to schedule a vaccination
 activate UI
+
+
 UI --> RECEPT : requests data (SNSUserNumber, date, time)
 deactivate UI
 
 RECEPT -> UI : types requested data
 activate UI
 
-UI -> CTRL
+UI -> CTRL : getSuggestedVaccine()
 activate CTRL
 
-CTRL -> COMP
+CTRL -> COMP : sugVac = getSuggestedVaccine()
 activate COMP
 deactivate CTRL
 deactivate COMP
@@ -30,6 +34,41 @@ deactivate UI
 
 RECEPT -> UI : accepts the suggested vaccine type
 activate UI
+
+UI -> CTRL : getVaccineTypeStore()
+activate CTRL
+
+CTRL -> COMP : getVaccineTypeStore()
+activate COMP
+deactivate CTRL
+deactivate COMP
+
+UI -> CTRL : createVaccinationSchedule(dto)
+activate CTRL
+
+note right 
+dto has all information (SNSUserNumber,date,time)
+end note
+CTRL -> COMP : vacSchedule = createVaccinationSchedule(dto)
+activate COMP
+deactivate CTRL
+
+COMP -> MAPPER : vacSchedule = toModel(dto)
+activate MAPPER
+deactivate COMP
+
+MAPPER -> DTO : SNSUserNumber = getSNSNumber()
+activate DTO
+deactivate DTO
+
+MAPPER -> DTO : date = getDate()
+activate DTO
+deactivate DTO
+
+MAPPER -> DTO : time = getTime()
+activate DTO
+deactivate DTO
+deactivate MAPPER
 
 opt does not accept
 UI --> RECEPT : shows all vaccine types and asks to select one
@@ -43,6 +82,8 @@ UI --> RECEPT : asks to send sms with information about the scheduled vaccine
 deactivate UI
 RECEPT -> UI : accepts or declines the sending sms
 activate UI
+
+MAPPER -> VaccinationSchedule** : create(SNSUserNumber,date,time)
 
 UI --> RECEPT : shows all data and requests confirmation
 deactivate UI
