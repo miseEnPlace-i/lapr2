@@ -3,7 +3,13 @@ autonumber
 actor "SNS User" as user
 
 activate user
+
 user -> ":System" : asks to schedule a vaccine
+activate ":System"
+":System" --> user : requests data (SNS user number, date, time)
+deactivate ":System"
+
+user -> ":System" : types requested data
 activate ":System"
 ":System" --> user : shows suggested vaccine type and asks to accept it
 deactivate ":System"
@@ -20,12 +26,7 @@ end
 deactivate ":System"
 
 user -> ":System" : selects a vaccination center
-activate ":System"
-":System" --> user : requests data (SNS user number, date, time)
-deactivate ":System"
-
-user -> ":System" : types requested data
-alt vaccine scheduled successfully
+opt vaccine scheduled successfully
     activate ":System"
     ":System" --> user : asks to send sms with information about the scheduled vaccine
     deactivate ":System"
@@ -35,11 +36,9 @@ alt vaccine scheduled successfully
     deactivate ":System"
     user -> ":System" : confirms the data
     activate ":System"
-    ":System" --> user : informs operation success
-    deactivate ":System"
-else vaccine not scheduled
-    ":System" --> user : informs operation failure
 end
+":System" --> user : informs operation success
+deactivate ":System"
 
 deactivate user
 
