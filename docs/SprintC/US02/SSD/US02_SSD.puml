@@ -22,10 +22,10 @@ Recept -> ":System" : selects a vaccine type
 activate ":System"
 end
 
-opt vaccination schedule
+opt vaccination scheduled
 ":System" --> Recept : asks to send sms with information about the scheduled vaccine 
 deactivate ":System"
-Recept -> ":System" : accepts or declines the sendind sms
+Recept -> ":System" : accepts or declines the sending sms
 activate ":System"
 
 ":System" --> Recept : shows all data and requests confirmation

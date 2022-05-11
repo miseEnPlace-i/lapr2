@@ -17,6 +17,43 @@ deactivate UI
 RECEPT -> UI : types requested data
 activate UI
 
+UI -> CTRL
+activate CTRL
+
+CTRL -> COMP
+activate COMP
+deactivate CTRL
+deactivate COMP
+
+UI --> RECEPT : shows suggested vaccine type and asks to accept it
+deactivate UI
+
+RECEPT -> UI : accepts the suggested vaccine type
+activate UI
+
+opt does not accept
+UI --> RECEPT : shows all vaccine types and asks to select one
+deactivate UI
+RECEPT -> UI : selects a vaccine type
+activate UI
+end
+
+opt vaccination scheduled 
+UI --> RECEPT : asks to send sms with information about the scheduled vaccine
+deactivate UI
+RECEPT -> UI : accepts or declines the sending sms
+activate UI
+
+UI --> RECEPT : shows all data and requests confirmation
+deactivate UI
+RECEPT -> UI : confirms the data
+activate UI
+end
+
+UI --> RECEPT : informs operation success
+deactivate UI
+
+
 deactivate RECEPT
 
 @enduml
