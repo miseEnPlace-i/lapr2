@@ -38,6 +38,8 @@ class Company{
 
 class Receptionist {}
 
+class Employee {}
+
 Company "1" -- "*" VaccinationSchedule : knows >
 VaccinationSchedule "1"  -- "1" VaccineType : has >
 VaccinationSchedule "*" -- "1" VaccinationCenter : related to <
@@ -46,6 +48,8 @@ VaccinationSchedule -- Receptionist : associated to >
 Receptionist "1" -- "1" SNSUser : schedules for >
 Company "1" -- "*" Receptionist : knows >
 VaccinationSchedule "1" -- "1" SNSUser : has >
+Employee <|-- Receptionist
+Company -- Employee : has >
 
 
 @enduml
