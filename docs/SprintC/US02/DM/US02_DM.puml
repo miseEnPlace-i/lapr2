@@ -38,12 +38,12 @@ class Company{
 
 class Receptionist {}
 
-Company "1" -- "*" VaccinationSchedule : has >
+Company "1" -- "*" VaccinationSchedule : knows >
 VaccinationSchedule "1"  -- "1" VaccineType : has >
 VaccinationSchedule "*" -- "1" VaccinationCenter : related to <
-Company "1" -- "*" VaccinationCenter : has >
+Company "1" -- "*" VaccinationCenter : knows >
 VaccinationSchedule -- Receptionist : associated to >
-Receptionist "0..1" -- "1" SNSUser : schedules for >
+Receptionist "1" -- "1" SNSUser : schedules for >
 Company "1" -- "*" Receptionist : knows >
 VaccinationSchedule "1" -- "1" SNSUser : has >
 
