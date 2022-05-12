@@ -60,7 +60,7 @@ _"As a receptionist at one vaccination center, I want to schedule a vaccination.
 **Output Data:**
 
 
-* Suggested vaccine type (or the list of all available vaccine types)
+* Suggested vaccine type (or the list of all available vaccine types).
 * (In)Success of the operation.
 
 ### 1.6. System Sequence Diagram (SSD)
@@ -115,14 +115,13 @@ n/a
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
- * Organization
- * Platform
- * Task
-
+ * Company
+ * VaccinationSchedule
+  
 Other software classes (i.e. Pure Fabrication) identified: 
 
- * ScheduleVaccinationUI  
- * ScheduleVaccinationController
+ * VaccinationScheduleUI  
+ * VaccinationScheduleController
 
 
 ## 3.2. Sequence Diagram (SD)
