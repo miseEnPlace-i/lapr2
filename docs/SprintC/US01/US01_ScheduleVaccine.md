@@ -36,9 +36,9 @@ _"As an SNS user, I intend to use the application to schedule a vaccine."_
 
 
 * **AC1:** All required fields must be filled in. (SNS user Number, ).
-* **AC2:** The SNS User number must have 9 digits.
+* **AC2:** The SNS user number must have 9 digits.
 * **AC3:** A SNS user cannot schedule the same vaccine more than once.
-* **AC4:** The algorithm should check if the SNS User is within the age and time since the last vaccine.
+* **AC4:** The algorithm should check if the SNS user is within the age and time since the last vaccine.
 
 
 ### 1.4. Found out Dependencies
@@ -66,7 +66,7 @@ _"As an SNS user, I intend to use the application to schedule a vaccine."_
 **Output Data:**
 
 * Suggested vaccine type (or the list of all available vaccine types)
-* List of all vaccination centers
+* List of all available vaccination centers
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
