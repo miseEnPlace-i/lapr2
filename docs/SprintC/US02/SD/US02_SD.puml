@@ -8,7 +8,9 @@ participant ":VaccinationScheduleController" as CTRL
 participant "comp\n:Company" as COMP
 participant "mapper\n:VaccinationMapper" as MAPPER
 participant "vacDto:VaccinationScheduleDto" as DTO
-participant "store\n:VaccineTypeStore" as STORE
+participant "store\n:VaccineTypeStore" as VACSTORE
+participant "store\n:SNSUserStore" as SNSSTORE
+participant "store\n:VaccinatonScheduleStore" as SCHESTORE
 
 activate RECEPT
 RECEPT -> UI : asks to schedule a vaccination
@@ -40,6 +42,10 @@ activate CTRL
 CTRL -> COMP : getVaccineTypeStore()
 activate COMP
 deactivate COMP
+
+CTRL -> VACSTORE : vacList = getVaccineList()
+activate VACSTORE
+deactivate VACSTORE
 deactivate CTRL
 
 
@@ -53,13 +59,12 @@ activate UI
 UI -> CTRL : getVaccineTypeByCode(code)
 activate CTRL
 
-CTRL -> STORE : getVaccineTypeByCode(code)
-activate STORE
-deactivate STORE
+CTRL -> VACSTORE : getVaccineTypeByCode(code)
+activate VACSTORE
+deactivate VACSTORE
 deactivate CTRL
 end
 
-opt vaccination scheduled 
 UI --> RECEPT : asks to send sms with information about the scheduled vaccine
 deactivate UI
 RECEPT -> UI : accepts or declines the sending sms
@@ -75,7 +80,7 @@ CTRL -> COMP : vacSchedule = createVaccinationSchedule(dto)
 activate COMP
 deactivate CTRL
 
-COMP -> MAPPER : vacSchedule = toModel(dto)
+COMP -> MAPPER : vacSchedule = toDto(dto)
 activate MAPPER
 deactivate COMP
 
@@ -92,14 +97,26 @@ activate DTO
 deactivate DTO
 deactivate CTRL
 
-MAPPER -> VaccinationSchedule** : create(SNSUserNumber,date,time,vaccineType,SMS)
+MAPPER -> SCHESTORE : create(SNSUserNumber,date,time,vaccineType,SMS)
+activate SCHESTORE
+
+SCHESTORE -> VaccinationSchedule** : create(SNSUserNumber,date,time,vaccineType,SMS)
 deactivate MAPPER
+
+SCHESTORE -> SCHESTORE : addVaccinationSchedule()
+activate SCHESTORE
+deactivate SCHESTORE
+
+SCHESTORE -> SCHESTORE : checkDuplicates()
+activate SCHESTORE
+deactivate SCHESTORE
+deactivate SCHESTORE
 
 UI --> RECEPT : shows all data and requests confirmation
 deactivate UI
 RECEPT -> UI : confirms the data
 activate UI
-end
+
 
 UI --> RECEPT : informs operation success
 deactivate UI
