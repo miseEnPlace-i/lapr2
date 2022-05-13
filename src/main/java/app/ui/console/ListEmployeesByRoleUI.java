@@ -32,7 +32,8 @@ public class ListEmployeesByRoleUI implements Runnable {
 
     List<Employee> employees = getEmployeesWithRole(role.getId());
 
-    Utils.showList(employees, "\n" + role.getDescription());
+    if (employees.isEmpty()) System.out.println("\nNo employees with this role.");
+    else Utils.showList(employees, "\n" + role.getDescription());
   }
 
   /**
