@@ -1,72 +1,106 @@
-@startuml
+@startuml US04_CD
 skinparam classAttributeIconSize 0
 
-class ApplicationPOT
-{
-  +static getInstance()
-  +getCurrentSession()
+class RegisterSNSUserArrivalUI {}
+
+class RegisterSNSUserArrivalController {}
+
+class Company {
+  - String designation
+  + getDesignation()
 }
 
-class UserSession
-{
-  +getUserEmail()
+class SNSUser {
+  - String citizenCard
+  - String snsNumber
+  - Date birthDay
+  - Char gender
+  - String phoneNumber
+  - String address
+  + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
 }
 
-class Task {
-  -String reference
-  -String designation
-  -String informalDescription
-  -String technicalDescription
-  -Integer duration
-  -Double cost
-  +Task(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
+class SNSUserStore {
+  + createUser(name, email, pwd, roleId)
+  + validateUser(user)
+  + saveUser(user)
+  + checkDuplicates(user)
 }
 
-class Category {
-  -String id
-  -String description
+class Employee {
+  - id: String
+  - address: String
+  - phoneNumber: String
+  - citizenCardNumber: String
+  + Employee(id, name, address, phoneNumber, email, citizenCardNumber, roleId)
+  + getId()
+  + getName()
+  + getAddress()
+  + getPhoneNumber()
+  + getEmail()
+  + getCitizenCardNumber()
+  + getPassword()
+  + getRoleId()
 }
 
-class Organization {
-  -String name
-  -String VatNumber
-  -String website
-  -String phone
-  -String email
-  +Organization(name, VatNumber, webSite, phone, email, postalAddress, manager)
-  +createTask(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
-  +saveTask(task)
-  -addTask(task)
-  -validateTask(task)
+class Receptionist {}
+
+class Arrival {
+  - Date arrivalDate
 }
 
-class Platform {
-  -String designation
-  +getCategories()
-  +getCategoryById(catId)
-  +getOrganizationByUserEmail(email)
+class Appointment {}
+
+class WaitingRoomList {}
+
+class VaccinationCenterStore {
+  ---
+  + createVaccinationCenter(centerData, coordinator)
+  + validateVaccinatonCenter(center)
+  + saveVaccinationCenter(center)
+  + checkDuplicates(center)
+  + addVaccinationCenter(center)
 }
 
-class CreateTaskController {
-  +getCategories()
-  +createTask(ref,designation,informalDesc,technicalDesc,duration,cost,categoryId)
-  +saveTask()
+class VaccinationCenter {
+  - name: String
+  - address: String
+  - emailAddress: String
+  - phoneNumber: String
+  - faxNumber: String
+  - websiteAddress: String
+  - openingHours: String
+  - closingHours: String
+  - slotDuration: int
+  - maximumVaccinesPerSlot: int
+  - coordinator: EMPLOYEE
+  ---
+  + VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
 }
 
-class CreateTaskUI {
+Arrival "1" --> "0..1" Appointment : has
 
-}
+Company ..> SNSUserStore
+Company ..> VaccinationCenterStore
+Company "1" --> "*" SNSUser : knows
+Company "1" --> "*" Employee : knows
 
-CreateTaskUI ..> CreateTaskController
-CreateTaskController ..> Platform
-CreateTaskController ..> Category
-CreateTaskController ..> Task
-CreateTaskController ..> Organization
-CreateTaskController ..> ApplicationPOT
-CreateTaskController ..> UserSession
-Task "*" -> "1" Category : classified in
-Platform "1" --> "*" Category : defines
-Organization "1" --> "*" Task : owns
+Employee "1" --> "1" Receptionist : plays as
 
+Receptionist ..> Arrival
+
+RegisterSNSUserArrivalController ..> Company
+
+RegisterSNSUserArrivalUI ..> RegisterSNSUserArrivalController
+
+SNSUserStore "1" --> "*" SNSUser : stores
+VaccinationCenterStore "1" --> "*" VaccinationCenter : stores
+
+VaccinationCenter "1" --> "1" WaitingRoomList : has
+
+SNSUser ..> Arrival
+SNSUser ..> Appointment
+
+WaitingRoomList "1" --> "*" SNSUser : has
 
 @enduml

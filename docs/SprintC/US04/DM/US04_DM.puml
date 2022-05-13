@@ -3,7 +3,7 @@ hide methods
 left to right direction
 skinparam classAttributeIconSize 0
 
-class Receptionist {
+class Employee {
   - name
   - phoneNumber
   - email
@@ -12,6 +12,8 @@ class Receptionist {
   - citizenCardNumber
   - roleId
 }
+
+class Receptionist {}
 
 class Arrival {
   - date
@@ -37,7 +39,8 @@ class Company {
 class WaitingRoomList {}
 
 Arrival "1" -- "0..1" Appointment : related to >
-Company "1" -- "*" Receptionist : knows >
+Company "1" -- "*" Employee : knows >
+Employee -- Receptionist : plays as >
 Company "1" -- "*" SNSUser : knows >
 Receptionist "1" -- "*" Arrival : registers >
 Receptionist "1" -- "*" WaitingRoomList : sends to >
