@@ -25,19 +25,89 @@ class VaccinationScheduleController {
 
 class VaccinationScheduleUI {}
 
-class SNSUserStore {}
+class SNSUserStore {
+  + createUser(name, email, pwd, roleId)
+  + validateUser(user)
+  + saveUser(user)
+  + checkDuplicates(user)
+}
 
-class VaccinationCenterStore {}
+class VaccinationCenterStore {
++createVaccinationCenter(centerData,coordinator)
++validateVaccinatonCenter(center)
++saveVaccinationCenter(center)
++checkDuplicates(center)
+-addVaccinationCenter(center)
+}
 
-class VaccineTypeStore {}
+class VaccineTypeStore {
+  +getVaccineTypeByCode(code)
+  +getList()
+  +addVaccineType()
+  +saveVaccineType()
+}
+
+class VaccinationCenter{
+  - name: String
+  - address: String
+  - emailAddress: String
+  - phoneNumber: String
+  - faxNumber: String
+  - websiteAddress: String
+  - openingHours: String
+  - closingHours: String
+  - slotDuration: int
+  - maximumVaccinesPerSlot: int
+  - coordinator: EMPLOYEE
+}
+
+class VaccineType {
+  - code: String
+  - description: String
+  - technology: String
+  + VaccineType(code,description,technology)
+}
+
+class SNSUser {
+  - citizenCard: String 
+  - snsNumber: String 
+  - birthDay: Date 
+  - gender: Char
+  - phoneNumber: String 
+  - address: String
+  + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
+  }
+
+class Employee {
+  -id: String 
+  -name: String 
+  -email: String 
+  -phone: String 
+  -address: String 
+  -citizenCardNumber: int 
+  -roleId: String 
+}
+
+class Receptionist {}
+
+class SMS {}
 
 VaccinationScheduleUI ..> VaccinationScheduleController
 VaccinationScheduleController ..> VaccinationSchedule
 VaccinationScheduleController ..> Company
-Company --> VaccinationSchedule
-Company --> SNSUserStore
-Company --> VaccinationCenterStore
-Company --> VaccineTypeStore
+Company ..> SNSUserStore
+Company ..> VaccinationCenterStore
+Company ..> VaccineTypeStore
+Company "1" --> "*" Employee : knows
+VaccinationCenterStore "1" -> "*" VaccinationCenter : stores
+VaccineTypeStore "1" -> "*" VaccineType : stores
+SNSUserStore "1" -> "*" SNSUser : stores
+Employee "1" --> "1" Receptionist : play as
+Receptionist "1" --> "1" VaccinationSchedule : is related to
+VaccinationCenter "1" --> "1" VaccinationSchedule : is related to
+SNSUser --> VaccinationSchedule : is related to
+VaccineType "1" --> "1" VaccinationSchedule : is related to
+SMS "0..1" --> "1" VaccinationSchedule : is related to
 
 
 @enduml

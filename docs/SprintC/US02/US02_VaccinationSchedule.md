@@ -26,7 +26,7 @@ _"As a receptionist at one vaccination center, I want to schedule a vaccination.
 
 > **Question:** "A receptionist has the ability to schedule an appointment in different vaccination centres or only on their own?"
 >
-> **Answer:** _**Not answered yet**_.
+> **Answer:** "A receptionist (and a user) can schedule a vaccine at any vaccination center."
 
 
 ### 1.3. Acceptance Criteria
