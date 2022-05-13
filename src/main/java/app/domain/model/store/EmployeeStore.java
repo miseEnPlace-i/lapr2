@@ -81,6 +81,7 @@ public class EmployeeStore {
    * @param employee the employee to be inserted
    */
   public void saveEmployee(Employee employee) {
+    Employee.incrementId();
     String name = employee.getName();
     String email = employee.getEmail();
     String roleId = employee.getRoleId();

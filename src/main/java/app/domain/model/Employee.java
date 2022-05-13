@@ -9,7 +9,7 @@ import app.service.CCFormatVerifier;
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
 public class Employee {
-  static int lastIdCreated = 0;
+  static int idToGenerate = 1;
 
   int id = 0;
   String name = "";
@@ -78,7 +78,7 @@ public class Employee {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append(String.format("ID: %s\n", this.id));
+    sb.append(String.format("ID: %s\n", getId()));
     sb.append(String.format("Name: %s\n", this.name));
     sb.append(String.format("Phone number: %s\n", this.phoneNumber));
     sb.append(String.format("Email: %s\n", this.email));
@@ -87,6 +87,15 @@ public class Employee {
     sb.append(String.format("Role: %s\n", this.roleId));
 
     return sb.toString();
+  }
+
+  /**
+   * Gets the employee id.
+   * 
+   * @return the employee id
+   */
+  public String getId() {
+    return String.format("%010d", this.id);
   }
 
   /**
@@ -122,7 +131,14 @@ public class Employee {
    * @return the generated id
    */
   private static int generateId() {
-    return ++lastIdCreated;
+    return idToGenerate;
+  }
+
+  /**
+   * Increments the id to generate by one unit. This method is only called when a new employee is saved at the Store.
+   */
+  public static void incrementId() {
+    idToGenerate++;
   }
 
   /**
