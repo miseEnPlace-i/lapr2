@@ -55,9 +55,9 @@ public class RegisterEmployeeUI extends RegisterUI<RegisterEmployeeController> {
 
     String name = Utils.readLineFromConsole("Name: ");
     String address = Utils.readLineFromConsole("Address: ");
-    String phoneNumber = Utils.readLineFromConsole("Phone Number: ");
+    String phoneNumber = Utils.readLineFromConsole("Phone Number (+351xxxxxxxxx): ");
     String email = Utils.readLineFromConsole("Email: ");
-    String citizenCard = Utils.readLineFromConsole("Citizen Card Number: ");
+    String citizenCard = Utils.readLineFromConsole("Citizen Card Number (xxxxxxxxxLLx): ");
 
     super.ctrl.create(name, address, phoneNumber, email, citizenCard, this.roleId);
   }
