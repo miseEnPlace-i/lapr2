@@ -209,11 +209,11 @@ public class Employee {
   private void setCitizenCard(String citizenCard) {
     CCFormatVerifier formatVerifier = new CCFormatVerifier();
 
-    if (citizenCard == null) throw new IllegalArgumentException("Citizen Card cannot be null");
-    if (citizenCard.isEmpty()) throw new IllegalArgumentException("Citizen Card cannot be empty");
+    if (citizenCard == null) throw new IllegalArgumentException("Citizen Card cannot be null.");
+    if (citizenCard.isEmpty()) throw new IllegalArgumentException("Citizen Card cannot be empty.");
 
     if (!formatVerifier.validate(citizenCard))
-      throw new IllegalArgumentException("Citizen Card is not valid");
+      throw new IllegalArgumentException("Citizen Card is not valid.");
 
     this.citizenCard = citizenCard;
   }

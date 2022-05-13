@@ -48,8 +48,8 @@ public class EmployeeStore {
    * @return a List of employees with that given role
    */
   public List<Employee> getEmployeesWithRole(String roleId) {
-    if (roleId == null) throw new IllegalArgumentException("Role id cannot be null");
-    if (!roleStore.existsRole(roleId)) throw new IllegalArgumentException("Role does not exist");
+    if (roleId == null) throw new IllegalArgumentException("Role id cannot be null.");
+    if (!roleStore.existsRole(roleId)) throw new IllegalArgumentException("Role does not exist.");
 
     List<Employee> lstEmp = new ArrayList<>();
 
@@ -65,12 +65,12 @@ public class EmployeeStore {
    * @param employee the employee to be checked
    */
   public void validateEmployee(Employee employee) {
-    if (employee == null) throw new IllegalArgumentException("Employee cannot be null");
+    if (employee == null) throw new IllegalArgumentException("Employee cannot be null.");
 
     String email = employee.getEmail();
 
     if (this.authFacade.existsUser(email))
-      throw new IllegalArgumentException("Email already exists");
+      throw new IllegalArgumentException("Email already exists.");
 
     checkDuplicates(employee);
   }
@@ -101,7 +101,7 @@ public class EmployeeStore {
    */
   public void checkDuplicates(Employee employee) {
     if (employees.contains(employee))
-      throw new IllegalArgumentException("Duplicate employee found");
+      throw new IllegalArgumentException("Duplicate employee found.");
   }
 
   /**
