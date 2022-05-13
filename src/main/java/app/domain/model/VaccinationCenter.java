@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import app.domain.model.list.WaitingRoomList;
 import app.service.FormatVerifier;
 
 /**
@@ -19,6 +20,7 @@ public class VaccinationCenter {
   private int slotDuration;
   private int maxVacSlot;
   private Employee coordinator;
+  private WaitingRoomList waitingRoomList;
 
   /**
    * Constructor for the Vaccination Center
@@ -50,6 +52,8 @@ public class VaccinationCenter {
     setSlotDuration(slotDuration);
     setMaxVacSlot(maxVacSlot);
     setCoordinator(coordinator);
+
+    waitingRoomList = new WaitingRoomList();
   }
 
   /**
@@ -251,5 +255,14 @@ public class VaccinationCenter {
     if (this.webAddress.equals(center.webAddress)) return true;
 
     return false;
+  }
+
+  /**
+   * Gets the waiting room list.
+   * 
+   * @return The waiting room list.
+   */
+  public WaitingRoomList getWaitingRoomList() {
+    return waitingRoomList;
   }
 }
