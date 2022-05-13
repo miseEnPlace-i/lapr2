@@ -34,7 +34,8 @@ activate RECEPT
           APTSTORE -> APT : b = hasSNSNumber(snsNumber) && isInTheNextHour()
           activate APT
           alt b == true
-            
+            APTSTORE <-- APT : return apt
+            deactivate APT
           end
         end
 
