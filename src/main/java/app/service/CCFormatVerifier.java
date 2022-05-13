@@ -39,10 +39,9 @@ public class CCFormatVerifier {
    * @return the number represented by the character
    */
   public int getNumberFromChar(char character) {
-    if (character >= '0' && character <= '9')
-      return character - '0';
+    if (character >= '0' && character <= '9') return character - '0';
     else if (character >= 'A' && character <= 'Z') return character - 'A' + 10;
 
-    throw new IllegalArgumentException("Size invalid of the Citizen Card.");
+    throw new IllegalArgumentException("Invalid Citizen Card number.");
   }
 }
