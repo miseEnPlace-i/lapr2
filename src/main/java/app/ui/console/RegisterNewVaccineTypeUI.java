@@ -47,7 +47,7 @@ public class RegisterNewVaccineTypeUI extends RegisterUI<RegisterNewVaccineTypeC
   public void insertData() throws IllegalArgumentException, ParseException {
 
     System.out.println("\nRegister a new Vaccine type: ");
-    String code = Utils.readLineFromConsole("Code: ");
+    String code = Utils.readLineFromConsole("Code (xxxxx): ");
     String designation = Utils.readLineFromConsole("Designation: ");
 
     List<String> technologyList = super.ctrl.getVaccineTechnologyList();
