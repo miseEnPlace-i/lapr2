@@ -34,10 +34,14 @@ class Company {
   - designation
 }
 
+class WaitingRoomList {}
+
 Arrival "1" -- "0..1" Appointment : related to >
 Company "1" -- "*" Receptionist : knows >
 Company "1" -- "*" SNSUser : knows >
 Receptionist "1" -- "*" Arrival : registers >
+Receptionist "1" -- "*" WaitingRoomList : sends to >
+SNSUser "*" -- "*" WaitingRoomList : is in >
 SNSUser "1" -- "*" Arrival : associated to >
 
 @enduml
