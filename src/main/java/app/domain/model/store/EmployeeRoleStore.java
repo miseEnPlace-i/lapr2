@@ -28,8 +28,8 @@ public class EmployeeRoleStore {
    * @param description the role description
    */
   public UserRole addEmployeeRole(String id, String description) {
-    if (authFacade.existsRole(id)) throw new IllegalArgumentException("Role already exists");
-    if (existsRole(id)) throw new IllegalArgumentException("Role already exists");
+    if (authFacade.existsRole(id)) throw new IllegalArgumentException("Role already exists.");
+    if (existsRole(id)) throw new IllegalArgumentException("Role already exists.");
 
     authFacade.addUserRole(id, description);
 
