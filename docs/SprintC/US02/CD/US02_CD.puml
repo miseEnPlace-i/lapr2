@@ -6,8 +6,9 @@ class VaccinationSchedule {
   - date: Date
   - time: String
   - center: VACCINATIONCENTER
-  - vaccineType : VACCINETYPE
-  +VaccinationSchedule(SNSUserNumber, date, time, center, vaccineType)
+  - vaccineType: VACCINETYPE
+  - sms: boolean
+  +VaccinationSchedule(SNSUserNumber, date, time, center, vaccineType,sms)
 }
 
 
@@ -19,7 +20,7 @@ class Company {
 }
 
 class VaccinationScheduleController {
-  +createVaccinationSchedule(SNSUserNumber, date, time, center, vaccineType)
+  +createVaccinationSchedule(SNSUserNumber, date, time, center, vaccineType,sms)
 }
 
 class VaccinationScheduleUI {}
