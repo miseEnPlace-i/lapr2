@@ -34,7 +34,8 @@ _"As a receptionist at one vaccination center, I want to schedule a vaccination.
 
 * **AC1:** All required fields must be filled in.
 * **AC2:** The algorithm should check if the SNS User is within the age and time since the last vaccine.
-* **AC2:** The SNS User number must have 9 digits.
+* **AC3:** The SNS User number must have 9 digits.
+* **AC4:** A receptionist cannot schedule the same vaccine more than once for the same SNS User.
 
 ### 1.4. Found out Dependencies
 
@@ -44,7 +45,6 @@ _"As a receptionist at one vaccination center, I want to schedule a vaccination.
 * There is a dependency to "US13 - Specify a Vaccine", because in order to schedule a vaccine, there has to exist, at least, one vaccine registered in the system.
 
  
-
 ### 1.5 Input and Output Data
 
 
@@ -55,11 +55,12 @@ _"As a receptionist at one vaccination center, I want to schedule a vaccination.
 	* date, 
 	* time.
 * Selected data:
+	* Vaccination centers,
 	* Type of vaccine.
 
 **Output Data:**
 
-
+* List of vaccination centers.
 * Suggested vaccine type (or the list of all available vaccine types).
 * (In)Success of the operation.
 
