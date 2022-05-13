@@ -1,104 +1,77 @@
 @startuml
 autonumber
 'hide footbox
-actor "Organization Employee" as ADM
+actor "Nurse" as NURSE
 
-participant ":CreateTaskUI" as UI
-participant ":CreateTaskController" as CTRL
-participant "ApplicationPOT" as _APP
-participant "app\n:ApplicationPOT" as APP
-participant "session\n:UserSession" as SESSAO
-participant ":Platform" as PLAT
-participant "org\n:Organization" as ORG
-participant "task\n:Task" as TAREFA
-participant "cat\n:Category" as CAT
-participant "lc\n:List<Category>" as LIST_CAT
+participant ":ListUsersInWaitingRoomUI" as UI
+participant ":ListUsersInWaitingRoomController" as CTRL
+participant "comp\n:Company" as COMP
+participant "waitingRoomStore\n:EmployeeStore" as EMPS
+participant "waitingRoomStore\n:EmployeeStore" as EMPS
+participant "user:User" as USER
+participant "vaccinationCenterStore\n:VaccinationCenterStore" as VACS
 
-activate ADM
-ADM -> UI : asks to create a new task
+activate NURSE
+NURSE -> UI : asks to list users in waiting room for a given vaccination center
 activate UI
-UI --> ADM : requests data (reference, designation,  informal \n description, technical description, duration, cost)
-deactivate UI
-
-ADM -> UI : types requested data
-activate UI
-
-UI -> CTRL : lc=getTaskCategories()
 activate CTRL
+UI -> CTRL : vaccinationCenter=getVaccinationCenters()
+CTRL -> COMP : vaccinationCenterStore=getVaccinationCenterStore()
+activate COMP
+deactivate COMP
 
-CTRL -> PLAT : lc=getTaskCategories()
-activate PLAT
+CTRL -> VACS : vaccinationCenters=getVaccinationCenters()
+activate VACS
 |||
-deactivate PLAT
+deactivate VACS
 deactivate CTRL
 
-UI --> ADM : shows task categories list and ask to select one
-deactivate PLAT
+UI --> NURSE : shows all vaccination centers and asks to select one
 deactivate UI
 
-ADM -> UI : selects a task category
+NURSE -> UI : selects an employee role
 activate UI
 
-UI -> CTRL : createTask(ref,designation,informalDesc,technicalDesc,duration,cost,categoryId)
+UI -> CTRL : getEmployeesWithRole(roleId)
 activate CTRL
 
-CTRL -> PLAT : cat=getCategoryById(categoryId)
-activate PLAT
-|||
-deactivate PLAT
+CTRL -> COMP: getEmployeeStore()
+activate COMP
+deactivate COMP
+CTRL -> EMPS: getEmployeesWithRole(roleId)
+activate EMPS
+deactivate EMPS
+EMPS -> ROLES: existsRole(roleId)
+activate ROLES
+deactivate ROLES
+create "lstEmp\n:List<Employee>" as LST
+EMPS --> LST
 
-CTRL -> _APP: app = getInstance()
-activate _APP
-|||
-deactivate _APP
+loop for each employee
+    EMPS -> USER: e=employee.hasRoleId(roleId)
+  activate USER
+    USER --> EMPS: true/false
+  deactivate USER
+    alt e==true
+        EMPS -> LST: add(employee)
+      activate LST
+    |||
+    deactivate LST
+    end
+end
 
-CTRL -> APP: session = getCurrentSession()
-activate APP
-|||
-deactivate APP
+CTRL --> UI: lstEmp
 
-CTRL -> SESSAO: email = getUserEmail()
-activate SESSAO
-|||
-deactivate SESSAO
-
-CTRL -> PLAT: org = getOrganizationByUserEmail(email)
-activate PLAT
-|||
-deactivate PLAT
-
-CTRL -> ORG: task=createTask(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
-activate ORG
-
-ORG --> TAREFA**: create(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
-ORG -> ORG: validateTask(task)
-
-CTRL --> UI: result
-
-UI --> ADM: shows all data and requests confirmation
-deactivate ORG
-deactivate PLAT
+deactivate COMP
 deactivate CTRL
+UI --> NURSE : informs operation success
+UI --> NURSE: shows the list of employees
 deactivate UI
 
-ADM -> UI : confirms the data
-activate UI
-UI -> CTRL : saveTask()
-activate CTRL
-
-CTRL -> ORG : saveTask(task)
-activate ORG
-
-ORG -> ORG: validateTask(task)
-ORG -> ORG: addTask(task)
-
-CTRL --> UI: result
-
-UI --> ADM : informs operation success
-deactivate ORG
-deactivate CTRL
 deactivate UI
+deactivate CTRL
+deactivate NURSE
 
-deactivate ADM
+participant "roleList:\nList<UserRole>"
 
 @enduml

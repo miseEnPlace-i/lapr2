@@ -5,7 +5,7 @@ actor "Nurse" as NURSE
 activate NURSE
 NURSE -> ":System" : asks to list all present users in the waiting room of a given vaccination center
 activate ":System"
-":System" --> NURSE : lists all the vaccination center and asks to select one
+":System" --> NURSE : shows all vaccination centers and asks to select one
 deactivate ":System"
 
 NURSE -> ":System" : selects a vaccination center
