@@ -2,40 +2,6 @@
 hide methods
 skinparam classAttributeIconSize 0
 
-<<<<<<< HEAD
-
-class Company {
-  -designation
-}
-
-class Vaccine {
-  -reference
-  -designation
-  -informalDesc
-  -technicalDesc
-  -duration
-  -cost
-}
-
-class VaccineType {
-  -id
-  -description
-}
-
-class Administrator {
-  -name
-  -function
-  -phone
-  -email
-}
-
-class Administratoin process {
-  -name
-  -email
-  -password
-}
-
-=======
 class Administrator {}
 
 class Employee {
@@ -46,10 +12,9 @@ class Company {
 }
 
 Administrator "1" -- "*" Employee : lists 
->>>>>>> 9b727a26e2faca62b1ca597066ff326ac8d8617a
 
 Company "1" -- "*" Administrator : knows  >
-Company "1" -- "*" Employee : knows 
+Company "1" -- "*" Employee : knows >
 
 Employee <|-- Nurse
 Employee <|-- Receptionist

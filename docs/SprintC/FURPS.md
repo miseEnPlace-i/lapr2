@@ -9,7 +9,7 @@
 - Communication - "The user may also authorize the DGS to send a SMS message with information about the scheduled appointment."
 - Localization - "The application must support, at least, the Portuguese and the English languages."
 - Registration - "Any Administrator uses the application to register centers, SNS users, center coordinators, receptionists, and nurses enrolled in the vaccination process."
-- Reporting - "The Center Coordinator wants to monitor the vaccination process,(...) generate reports and analyze data from other centers"/"The JaCoCo plugin should be used to generate the coverage report"
+- Reporting - "The Center Coordinator wants to monitor the vaccination process, (...) generate reports and analyze data from other centers" / "The JaCoCo plugin should be used to generate the coverage report"
 - Security - "All those who wish to use the application must be authenticated with a password holding seven alphanumeric characters, including three capital letters and two digits." / "Only the nurses are allowed to access all user’s health data."
 
 ## Usability
@@ -53,9 +53,9 @@
 ---
 
 - Development tools and frameworks - "The application must be developed (...) using the IntelliJ IDE or NetBeans. (...) The team must (...) use Javadoc to generate useful documentation for Java code. (...) The development team must implement unit tests for all methods, (...) using the JUnit 5 framework. The JaCoCo plugin should be used to generate the coverage report."
-- File formats - "All the images/figures produced during the software development process should be recorded in SVG format."
+- File formats - "All the images/figures produced during the software development process should be recorded in SVG format." / "The application must support importing two types of CSV files: a) one type must have a header, column separation is done using “;” character; b) the other type does not have a header, column separation is done using “,” character." (_User Story_)
 - Programming languages - "The application must be developed in Java language. (...) The application graphical interface is to be developed in JavaFX 11"
-- PlatForm Support - "The application should run on Microsoft Windows, macOS and several Unix-like OSs." (_Client Email_)
+- Platform Support - "The application should run on Microsoft Windows, macOS and several Unix-like OSs." (_Client Email_)
 
 ### Interface Constraints
 

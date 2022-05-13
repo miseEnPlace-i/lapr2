@@ -61,7 +61,7 @@ public class VaccinationCenter {
    */
   private void setName(String name) {
     if (name == null || name.isEmpty()) {
-      throw new IllegalArgumentException("Name is not valid");
+      throw new IllegalArgumentException("Name is not valid.");
     }
     this.name = name;
   }
@@ -75,7 +75,7 @@ public class VaccinationCenter {
    */
   private void setAddress(String address) {
     if (address == null || address.isEmpty()) {
-      throw new IllegalArgumentException("Address is not valid");
+      throw new IllegalArgumentException("Address is not valid.");
     }
     this.address = address;
   }
@@ -89,7 +89,7 @@ public class VaccinationCenter {
    */
   private void setEmail(String email) {
     if (email == null || email.isEmpty() || !FormatVerifier.validateEmail(email)) {
-      throw new IllegalArgumentException("Email is not valid");
+      throw new IllegalArgumentException("Email is not valid.");
     }
     this.email = email;
   }
@@ -103,7 +103,7 @@ public class VaccinationCenter {
    */
   private void setPhoneNum(String phoneNum) {
     if (phoneNum == null || phoneNum.isEmpty() || !FormatVerifier.validatePhoneNumber(phoneNum)) {
-      throw new IllegalArgumentException("Phone number is not valid");
+      throw new IllegalArgumentException("Phone number is not valid.");
     }
     this.phoneNum = phoneNum;
   }
@@ -117,7 +117,7 @@ public class VaccinationCenter {
    */
   private void setFaxNum(String faxNum) {
     if (faxNum == null || faxNum.isEmpty() || !FormatVerifier.validateFaxNumber(faxNum)) {
-      throw new IllegalArgumentException("Fax number is not valid");
+      throw new IllegalArgumentException("Fax number is not valid.");
     }
     this.faxNum = faxNum;
   }
@@ -131,7 +131,7 @@ public class VaccinationCenter {
    */
   private void setWebAddress(String webAddress) {
     if (webAddress == null || webAddress.isEmpty() || !FormatVerifier.validateURL(webAddress)) {
-      throw new IllegalArgumentException("Website address is not valid");
+      throw new IllegalArgumentException("Website address is not valid.");
     }
     this.webAddress = webAddress;
   }
@@ -183,7 +183,7 @@ public class VaccinationCenter {
    */
   private void setSlotDuration(int slotDuration) {
     if (slotDuration <= 0) {
-      throw new IllegalArgumentException("Slot duration is not valid");
+      throw new IllegalArgumentException("Slot duration is not valid.");
     }
     this.slotDuration = slotDuration;
   }
@@ -197,7 +197,7 @@ public class VaccinationCenter {
    */
   private void setMaxVacSlot(int maxVacSlot) {
     if (maxVacSlot <= 0) {
-      throw new IllegalArgumentException("Maximum number of vaccines per slot is not valid");
+      throw new IllegalArgumentException("Maximum number of vaccines per slot is not valid.");
     }
     this.maxVacSlot = maxVacSlot;
   }
@@ -211,7 +211,7 @@ public class VaccinationCenter {
    */
   private void setCoordinator(Employee coordinator) {
     if (coordinator == null) {
-      throw new IllegalArgumentException("Coordinator is not valid");
+      throw new IllegalArgumentException("Coordinator is not valid.");
     }
     this.coordinator = coordinator;
   }

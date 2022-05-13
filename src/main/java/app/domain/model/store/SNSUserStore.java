@@ -61,7 +61,7 @@ public class SNSUserStore {
    */
   public void validateSNSUser(SNSUser snsUser) {
     if (snsUser == null) {
-      throw new Error("SNS User is null");
+      throw new Error("SNS User is null.");
     }
 
     // get the SNS User email
@@ -70,7 +70,7 @@ public class SNSUserStore {
     // check with AuthFacade if the email is already in use
     boolean existsUser = this.authFacade.existsUser(email);
 
-    if (existsUser) throw new IllegalArgumentException("Email already in use");
+    if (existsUser) throw new IllegalArgumentException("Email already in use.");
 
     checkDuplicates(snsUser);
   }
@@ -101,7 +101,7 @@ public class SNSUserStore {
    */
   public void checkDuplicates(SNSUser snsUser) {
     if (snsUsers.contains(snsUser)) {
-      throw new IllegalArgumentException("Duplicate SNS User");
+      throw new IllegalArgumentException("Duplicate SNS User.");
     }
   }
 

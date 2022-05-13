@@ -128,7 +128,7 @@ public class SNSUser {
   private static void validateBirthday(Calendar birthDay) {
     // checks if the birthday is in the future
     if (birthDay.after(Calendar.getInstance())) {
-      throw new IllegalArgumentException("Birthday cannot be in the future");
+      throw new IllegalArgumentException("Birthday cannot be in the future.");
     }
 
     // check if the birthday is more than MAX_AGE years ago
@@ -136,7 +136,7 @@ public class SNSUser {
 
     if (age > MAX_AGE) {
       throw new IllegalArgumentException(
-          String.format("Birthday cannot be more than %d years ago", MAX_AGE));
+          String.format("Birthday cannot be more than %d years ago.", MAX_AGE));
     }
   }
 
@@ -144,37 +144,37 @@ public class SNSUser {
     CCFormatVerifier verifier = new CCFormatVerifier();
 
     if (!verifier.validate(citizenCard))
-      throw new IllegalArgumentException("Citizen Card is not valid");
+      throw new IllegalArgumentException("Citizen Card is not valid.");
   }
 
   private static void validateSNSNumber(String snsNumber) {
     if (!FormatVerifier.validateSNSNumber(snsNumber))
-      throw new IllegalArgumentException("SNS Number is not valid");
+      throw new IllegalArgumentException("SNS Number is not valid.");
   }
 
   private static void validateName(String name) {
     // should not be empty
     // regex: ^.+$
     if (!name.matches("^.+$")) {
-      throw new IllegalArgumentException("Name is not valid");
+      throw new IllegalArgumentException("Name is not valid.");
     }
   }
 
   private static void validatePhoneNumber(String phoneNumber) {
     if (!FormatVerifier.validatePhoneNumber(phoneNumber))
-      throw new IllegalArgumentException("Phone Number is not valid");
+      throw new IllegalArgumentException("Phone Number is not valid.");
   }
 
   private static void validateEmail(String email) {
     if (!FormatVerifier.validateEmail(email))
-      throw new IllegalArgumentException("Email is not valid");
+      throw new IllegalArgumentException("Email is not valid.");
   }
 
   private static void validateAddress(String address) {
     // should not be empty
     // regex: ^.+$
     if (!address.matches("^.+$")) {
-      throw new IllegalArgumentException("Address is not valid");
+      throw new IllegalArgumentException("Address is not valid.");
     }
   }
 
