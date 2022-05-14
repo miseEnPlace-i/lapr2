@@ -8,7 +8,6 @@ participant ":ListUsersInWaitingRoomController" as CTRL
 participant ":NurseSessionFacade" as FAC
 participant "comp\n:Company" as COMP
 participant "vaccinationCenterStore\n:VaccinationCenterStore" as VACS
-participant ":VaccinationCenterMapper" as VACM
 participant ":AppointmentMapper" as APOM
 participant "appointment:Appointment" as APO
 
@@ -22,6 +21,10 @@ CTRL -> FAC : nurseVaccinationCenterId=getNurseVaccinationCenterId()
 activate FAC
 deactivate FAC
 |||
+
+CTRL -> COMP : vaccinationCenterStore=getVaccinationCenterStore()
+activate COMP
+deactivate
 
 CTRL -> VACS : waitingRoom=getCenterWaitingRoom(nurseVaccinationCenterId)
 activate VACS

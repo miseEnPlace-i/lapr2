@@ -58,25 +58,21 @@ As a nurse, I intend to consult the users in the waiting room of a vaccination c
 
 ![US05_SSD](SSD/US05_SSD.svg)
 
-**Alternative 2**
-
-![US005_SSD_v2](SSD/US005_SSD_v2.svg)
-
 **Other alternatives might exist.**
 
 ### 1.7 Other Relevant Remarks
 
-- The created task stays in a "not published" state in order to distinguish from "published" tasks.
+- The nurse selects the vaccination center he/she is working on after logging in.
 
 ## 2. OO Analysis
 
 ### 2.1. Relevant Domain Model Excerpt
 
-![US005_MD](US005_MD.svg)
+![US05_DM](DM/US05_DM.svg)
 
 ### 2.2. Other Remarks
 
-n/a
+Not found.
 
 ## 3. Design - User Story Realization
 
@@ -107,30 +103,29 @@ n/a
 
 According to the taken rationale, the conceptual classes promoted to software classes are:
 
-- Organization
-- Platform
-- Task
+- Company
+- VaccinationCenter
+- VaccinationCenterStore
+- Employee
+- Appointment
+- Arrive
 
 Other software classes (i.e. Pure Fabrication) identified:
 
-- CreateTaskUI
-- CreateTaskController
+- CheckWaitingRoomUI
+- CheckWaitingRoomController
 
 ## 3.2. Sequence Diagram (SD)
 
 **Alternative 1**
 
-![US005_SD](US005_SD.svg)
-
-**Alternative 2**
-
-![US005_SD](US005_SD_v2.svg)
+![US05_SD](SD/US05_SD.svg)
 
 ## 3.3. Class Diagram (CD)
 
 **From alternative 1**
 
-![US005_CD](US005_CD.svg)
+![US05_CD](CD/US05_CD.svg)
 
 # 4. Tests
 
@@ -183,12 +178,6 @@ _It is also recommended to organize this content by subsections._
 
 # 6. Integration and Demo
 
-- A new option on the Employee menu options was added.
-
-- Some demo purposes some tasks are bootstrapped while system starts.
+- A new option on the Nurse menu options was added.
 
 # 7. Observations
-
-Platform and Organization classes are getting too many responsibilities due to IE pattern and, therefore, they are becoming huge and harder to maintain.
-
-Is there any way to avoid this to happen?
