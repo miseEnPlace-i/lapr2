@@ -1,4 +1,4 @@
-# US 006 - To create a Task
+# US 005 - To create a Task
 
 ## 1. Requirements Engineering
 
@@ -16,9 +16,21 @@ As a nurse, I intend to consult the users in the waiting room of a vaccination c
 
 **From the client clarifications:**
 
-> **Question:** "..."
+> **Question:** "[...] what does consulting constitute in this context? [...]"
 >
-> **Answer:** "..."
+> **Answer:** "[...] is to check the list of users that are waiting and ready to take the vaccine."
+
+> **Question:** "[...] the nurse have to chose the vaccination center before executing the list [...] ?"
+>
+> **Answer:** "When the nurse starts to use the application, firstly, the nurse should select the vaccination center where she his working. The nurse wants to check the list of SNS users that are waiting in the vaccination center where she his working."
+
+> **Question:** "[...] which are the attributes of the waiting room"
+>
+> **Answer:** "The waiting room will not be registered or defined in the system. The waiting room of each vaccination center has the capacity to receive all users who take the vaccine on given slot."
+
+> **Question:** "[...] the nurses and the receptionists will work at any center [...]?"
+>
+> **Answer:** "Nurses and receptionists can work in any vaccination center."
 
 ### 1.3. Acceptance Criteria
 
@@ -44,11 +56,11 @@ As a nurse, I intend to consult the users in the waiting room of a vaccination c
 
 **Alternative 1**
 
-![US006_SSD](US006_SSD.svg)
+![US05_SSD](SSD/US05_SSD.svg)
 
 **Alternative 2**
 
-![US006_SSD_v2](US006_SSD_v2.svg)
+![US005_SSD_v2](SSD/US005_SSD_v2.svg)
 
 **Other alternatives might exist.**
 
@@ -60,7 +72,7 @@ As a nurse, I intend to consult the users in the waiting room of a vaccination c
 
 ### 2.1. Relevant Domain Model Excerpt
 
-![US006_MD](US006_MD.svg)
+![US005_MD](US005_MD.svg)
 
 ### 2.2. Other Remarks
 
@@ -108,17 +120,17 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 **Alternative 1**
 
-![US006_SD](US006_SD.svg)
+![US005_SD](US005_SD.svg)
 
 **Alternative 2**
 
-![US006_SD](US006_SD_v2.svg)
+![US005_SD](US005_SD_v2.svg)
 
 ## 3.3. Class Diagram (CD)
 
 **From alternative 1**
 
-![US006_CD](US006_CD.svg)
+![US005_CD](US005_CD.svg)
 
 # 4. Tests
 

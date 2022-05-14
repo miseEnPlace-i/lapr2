@@ -5,6 +5,7 @@ actor "Nurse" as NURSE
 
 participant ":ListUsersInWaitingRoomUI" as UI
 participant ":ListUsersInWaitingRoomController" as CTRL
+participant ":NurseSessionFacade" as FAC
 participant "comp\n:Company" as COMP
 participant "vaccinationCenterStore\n:VaccinationCenterStore" as VACS
 participant ":VaccinationCenterMapper" as VACM
@@ -14,31 +15,15 @@ participant "appointment:Appointment" as APO
 activate NURSE
 NURSE -> UI : asks to list users in waiting room for a given vaccination center
 activate UI
-activate CTRL
-UI -> CTRL : vaccinationCenter=getVaccinationCenters()
-CTRL -> COMP : vaccinationCenterStore=getVaccinationCenterStore()
-activate COMP
-deactivate COMP
 
-CTRL -> VACS : vaccinationCenters=getVaccinationCenters()
-activate VACS
+UI -> CTRL : getWaitingRoomListFromNurseCenter()
+activate CTRL
+CTRL -> FAC : nurseVaccinationCenterId=getNurseVaccinationCenterId()
+activate FAC
+deactivate FAC
 |||
-deactivate VACS
-CTRL -> VACM : vaccinationCentersDto=toDto(vaccinationCenters)
-activate VACM
-deactivate VACM
-deactivate CTRL
 
-UI --> NURSE : shows all vaccination centers and asks to select one
-deactivate UI
-
-NURSE -> UI : selects a vaccination center
-activate UI
-
-UI -> CTRL : getWaitingRoomListFromCenter(centerId)
-activate CTRL
-
-CTRL -> VACS : waitingRoom=getWaitingRoom(centerId)
+CTRL -> VACS : waitingRoom=getCenterWaitingRoom(nurseVaccinationCenterId)
 activate VACS
 deactivate VACS
 

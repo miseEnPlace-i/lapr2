@@ -8,14 +8,12 @@ class Arrive {
 class Company {
   -designation: String
   -authFacade: AuthFacade
-  -employeeStore: EmployeeStore
-  -employeeRoleStore: EmployeeRoleStore
+  -vaccinationCenterStore: VaccinationCenterStore
   
   +Company(designation)
 
   +getAuthFacade()
-  +getEmployeeStore()
-  +getEmployeeRoleStore()
+  +getVaccinationCenterStore()
 }
 
 class CheckWaitingRoomController {
@@ -93,8 +91,9 @@ VaccinationCenterStore "1" -- "*" VaccinationCenter : stores >
 
 Company ..> VaccinationCenterStore
 
-WaitingRoomList "1" -- "*" Arrive : stores
+WaitingRoomList "1" -- "*" Arrive : stores >
 
+Employee "1" -- "*" WaitingRoomList : checks
 VaccinationCenter *-- WaitingRoomList
 
 @enduml
