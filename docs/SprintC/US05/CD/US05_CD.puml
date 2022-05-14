@@ -81,9 +81,9 @@ class WaitingRoomList {
 CheckWaitingRoomUI ..> CheckWaitingRoomController
 CheckWaitingRoomController ..> Company
 
-Arrive *-- SNSUser
+Arrive o-- SNSUser
 
-VaccinationCenter *-- Employee : coordinator
+VaccinationCenter o-- Employee : coordinator
 VaccinationCenterStore "1" -- "*" VaccinationCenter : stores >
 
 Company -- VaccinationCenterStore : knows
