@@ -78,15 +78,20 @@ class WaitingRoomList {
   -checkDuplicates(center)
 }
 
+class Appointment {
+
+}
+
 CheckWaitingRoomUI ..> CheckWaitingRoomController
 CheckWaitingRoomController ..> Company
 
 Arrive o-- SNSUser
+Arrive o-- Appointment
 
 VaccinationCenter o-- Employee : coordinator
 VaccinationCenterStore "1" -- "*" VaccinationCenter : stores >
 
-Company -- VaccinationCenterStore : knows
+Company ..> VaccinationCenterStore
 
 WaitingRoomList "1" -- "*" Arrive : stores
 
