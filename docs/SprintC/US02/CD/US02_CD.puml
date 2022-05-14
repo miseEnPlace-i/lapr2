@@ -2,13 +2,9 @@
 skinparam classAttributeIconSize 0
 
 class VaccinationSchedule {
-  - SNSUserNumber: int
   - date: Date
   - time: String
-  - center: VACCINATIONCENTER
-  - vaccineType: VACCINETYPE
-  - sms: boolean
-  +VaccinationSchedule(SNSUserNumber, date, time, center, vaccineType,sms)
+  +VaccinationSchedule(SNSUserNumber, date, time, center, vaccineType, sms)
 }
 
 
@@ -58,7 +54,7 @@ class VaccinationCenter{
   - closingHours: String
   - slotDuration: int
   - maximumVaccinesPerSlot: int
-  - coordinator: EMPLOYEE
+  +VaccinationCenter(name,address,emailAddres,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
 }
 
 class VaccineType {
@@ -86,6 +82,7 @@ class Employee {
   -address: String 
   -citizenCardNumber: int 
   -roleId: String 
+  +Employee(name,email,phone,address,citizenCardNumber,roleId)
 }
 
 class Receptionist {}
@@ -93,7 +90,6 @@ class Receptionist {}
 class SMS {}
 
 VaccinationScheduleUI ..> VaccinationScheduleController
-VaccinationScheduleController ..> VaccinationSchedule
 VaccinationScheduleController ..> Company
 Company ..> SNSUserStore
 Company ..> VaccinationCenterStore
@@ -103,11 +99,13 @@ VaccinationCenterStore "1" -> "*" VaccinationCenter : stores
 VaccineTypeStore "1" -> "*" VaccineType : stores
 SNSUserStore "1" -> "*" SNSUser : stores
 Employee "1" --> "1" Receptionist : play as
+Employee ---o VaccinationCenter : coordinator
 Receptionist "1" --> "1" VaccinationSchedule : is related to
-VaccinationCenter "1" --> "1" VaccinationSchedule : is related to
-SNSUser --> VaccinationSchedule : is related to
-VaccineType "1" --> "1" VaccinationSchedule : is related to
-SMS "0..1" --> "1" VaccinationSchedule : is related to
+VaccinationCenter "1" --o "*" VaccinationSchedule
+SNSUser --o VaccinationSchedule
+VaccineType "1" --o "1" VaccinationSchedule
+SMS "0..1" --o "1" VaccinationSchedule : triggers SMS
+VaccinationSchedule -- Appointment : creates new
 
 
 @enduml
