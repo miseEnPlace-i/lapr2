@@ -21,11 +21,11 @@ public class RegisterSNSUserUI extends RegisterUI<RegisterSNSUserController> {
   public void insertData() throws IllegalArgumentException, ParseException {
     System.out.println("\nRegister SNS User UI:");
 
-    String citizenCard = Utils.readLineFromConsole("Citizen Card: ");
-    String snsNumber = Utils.readLineFromConsole("SNS Number: ");
+    String citizenCard = Utils.readLineFromConsole("Citizen Card (xxxxxxxxxLLx): ");
+    String snsNumber = Utils.readLineFromConsole("SNS Number (xxxxxxxxx): ");
     String name = Utils.readLineFromConsole("Name: ");
-    String birthDay = Utils.readLineFromConsole("Birthday: ");
-    String phoneNumber = Utils.readLineFromConsole("Phone Number: ");
+    String birthDay = Utils.readLineFromConsole("Birthday (DD/MM/YYYY): ");
+    String phoneNumber = Utils.readLineFromConsole("Phone Number (+351xxxxxxxxx): ");
     String email = Utils.readLineFromConsole("Email: ");
     String address = Utils.readLineFromConsole("Address: ");
     char gender = 'm';
