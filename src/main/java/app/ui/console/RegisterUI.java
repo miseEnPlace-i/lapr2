@@ -43,9 +43,9 @@ public abstract class RegisterUI<T extends IRegisterController> implements Runna
     System.out.println(data);
 
     List<String> options = new ArrayList<String>();
-    options.add("y");
-    options.add("n");
-    Object input = Utils.showAndSelectOne(options, "\nIs this information correct? (y/n):  ");
+    options.add("Yes, it is correct.");
+    options.add("No, it is not correct.");
+    Object input = Utils.showAndSelectOne(options, "\nIs this information correct?: (1 or 2)  ");
     String inputStr = (String) input;
 
     return inputStr.equals("y");
