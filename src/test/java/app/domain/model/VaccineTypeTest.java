@@ -2,6 +2,9 @@ package app.domain.model;
 
 import org.junit.Test;
 
+/**
+ * @author André Barros <1211299@isep.ipp.pt>
+ */
 public class VaccineTypeTest {
     VaccineType vType;
 
