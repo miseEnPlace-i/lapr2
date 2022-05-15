@@ -3,7 +3,7 @@ hide methods
 skinparam classAttributeIconSize 0
 
 
-class VaccinationSchedule {}
+class Appointment {}
 
 class VaccineType {}
 
@@ -40,16 +40,16 @@ class Receptionist {}
 
 class Employee {}
 
-Company "1" -- "*" VaccinationSchedule : knows >
-VaccinationSchedule "1"  -- "1" VaccineType : has >
-VaccinationSchedule "*" -- "1" VaccinationCenter : related to <
+Company "1" -- "*" Appointment : knows >
+Appointment "1"  -- "1" VaccineType : has >
+Appointment "*" -- "1" VaccinationCenter : has >
 Company "1" -- "*" VaccinationCenter : knows >
-VaccinationSchedule -- Receptionist : associated to >
+Appointment -- Receptionist : associated to >
 Receptionist "1" -- "1" SNSUser : schedules for >
 Company "1" -- "*" Receptionist : knows >
-VaccinationSchedule "1" -- "1" SNSUser : has >
+Appointment "1" -- "1" SNSUser : has >
 Employee <|-- Receptionist
-Company -- Employee : has >
+Company -- Employee : knows >
 
 
 @enduml
