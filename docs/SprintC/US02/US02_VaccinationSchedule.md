@@ -39,9 +39,9 @@ _"As a receptionist at one vaccination center, I want to schedule a vaccination.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency to "US03 - Register an SNS User", because SNS users can only use the application if they are registered in the system.
-* There is a dependency to "US09 - Register a Vaccination Center", as the receptionist is related to one vaccination center.
-* There is a dependency to "US12 - Specify a Vaccine Type", as the application needs to know which vaccine types are available, so that SNS users (and receptionists) can schedule a vaccine.
+* There is a dependency to "US03 - Register an SNS User", as the SNS User needs to be registered in the system to be part of a vaccination schedule.
+* There is a dependency to "US09 - Register a Vaccination Center", as it needs to exist at least one vaccination center registered in the system.
+* There is a dependency to "US12 - Specify a Vaccine Type", as the application needs to know which vaccine types are available, so that SNS users and receptionists can schedule a vaccine.
 * There is a dependency to "US13 - Specify a Vaccine", because in order to schedule a vaccine, there has to exist, at least, one vaccine registered in the system.
 
  
@@ -86,43 +86,43 @@ _"As a receptionist at one vaccination center, I want to schedule a vaccination.
 
 n/a
 
-
 ## 3. Design - User Story Realization 
 
 ### 3.1. Rationale
 
 **SSD - Alternative 1 is adopted.**
 
-| Interaction ID                                                                | Question: Which class is responsible for...   | Answer                   | Justification (with patterns)                   |
-| :---------------------------------------------------------------------------- | :-------------------------------------------- | :----------------------- | :---------------------------------------------- |
-| Step 1 starts creating a new Vaccination Schedule                             | ... instantiating a new Vaccination Schedule? | VaccinationScheduleStore | Creator: R1/2                                   |
-| Step 2 requests data (SNSNumber,date,time)                                    | n/a                                           | n/a                      | n/a                                             |
-| Step 3 types requested data                                                   | ... saving the inputted data?                 | VaccinationSchedule      | IE: object created in step 1 has its own data.  |
-| Step 4 shows suggested vaccine type and asks to accept it                     | ... knows the suggested vaccine?              | Company                  | IE: knows the ongoing outbreak is occurring     |
-| Step 5 accepts or declines the suggested vaccine type                         | n/a                                           | n/a                      | n/a                                             |
-| opt Step 6 shows all vaccine types and asks to select one                     | ... listing all vaccine types?                | VaccineTypeStore         | IE: knows all the existing vaccine types        |
-| opt Step 7 selects a vaccine type                                             | n/a                                           | n/a                      | n/a                                             |
-| step 8 shows list of all available vaccination centers and asks to select one | ... listing all vaccination centers?          | VaccinationCenterStore   | IE: knows all the existing vaccination centers  |
-| step 9 selects a vaccination center                                           | n/a                                           | n/a                      | n/a                                             |
-| Step 10 requests to send information about the schedule vaccine               | n/a                                           | n/a                      | n/a                                             |
-| Step 11 accepts or declines the request                                       | n/a                                           | n/a                      | n/a                                             |
-| Step 12 shows all data and requests confirmation                              | ... validating the data introduced?           | VaccinationScheduleStore | IE: knows its own data.                         |
-|                                                                               | ... check for duplicates?                     | VaccinationScheduleStore | IE: holds every information about the schedules |
-| Step 13 confirms the data                                                     | ... saving the new appointment?               |                          |                                                 |
-| Step 14 informs operation success                                             | ... informing operation success?              | UI                       | IE: is responsible for user interactions.       |
+| Interaction ID                                                                | Question: Which class is responsible for... | Answer                 | Justification (with patterns)                   |
+| :---------------------------------------------------------------------------- | :------------------------------------------ | :--------------------- | :---------------------------------------------- |
+| Step 1 starts creating a new Vaccination Schedule                             | ... instantiating a new Appointment?        | AppointmentStore       | Creator: R1/2                                   |
+| Step 2 requests data (SNSNumber,date,time)                                    | n/a                                         | n/a                    | n/a                                             |
+| Step 3 types requested data                                                   | ... saving the inputted data?               | Appointment            | IE: object created in step 1 has its own data.  |
+| Step 4 shows suggested vaccine type and asks to accept it                     | ... knows the suggested vaccine?            | Company                | IE: knows the ongoing outbreak is occurring     |
+| Step 5 accepts or declines the suggested vaccine type                         | n/a                                         | n/a                    | n/a                                             |
+| opt Step 6 shows all vaccine types and asks to select one                     | ... listing all vaccine types?              | VaccineTypeStore       | IE: knows all the existing vaccine types        |
+| opt Step 7 selects a vaccine type                                             | n/a                                         | n/a                    | n/a                                             |
+| step 8 shows list of all available vaccination centers and asks to select one | ... listing all vaccination centers?        | VaccinationCenterStore | IE: knows all the existing vaccination centers  |
+| step 9 selects a vaccination center                                           | n/a                                         | n/a                    | n/a                                             |
+| Step 10 requests to send information about the schedule vaccine               | n/a                                         | n/a                    | n/a                                             |
+| Step 11 accepts or declines the request                                       | n/a                                         | n/a                    | n/a                                             |
+| Step 12 shows all data and requests confirmation                              | ... validating the data introduced?         | AppointmentStore       | IE: knows its own data.                         |
+|                                                                               | ... check for duplicates?                   | AppointmentStore       | IE: holds every information about the schedules |
+| Step 13 confirms the data                                                     | ... saving the new appointment?             |                        |                                                 |
+| Step 14 informs operation success                                             | ... informing operation success?            | UI                     | IE: is responsible for user interactions.       |
+
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
  * Company
- * VaccinationSchedule
- * VaccinationScheduleStore
+ * Appointment
+ * AppointmentStore
  * VaccineTypeStore
   
 Other software classes (i.e. Pure Fabrication) identified: 
 
- * VaccinationScheduleUI  
- * VaccinationScheduleController
+ * AppointmentUI  
+ * AppointmentController
 
 
 ## 3.2. Sequence Diagram (SD)
@@ -196,9 +196,8 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 6. Integration and Demo 
 
-* A new option on the Employee menu options was added.
+* A new option on the Receptionist menu options was added.
 
-* Some demo purposes some tasks are bootstrapped while system starts.
 
 
 # 7. Observations

@@ -3,14 +3,14 @@ autonumber
 'hide footbox
 actor "Receptionist" as RECEPT
 
-participant ":VaccinationScheduleUI" as UI
-participant ":VaccinationScheduleController" as CTRL
+participant ":AppointmentUI" as UI
+participant ":AppointmentController" as CTRL
 participant "comp\n:Company" as COMP
-participant "mapper\n:VaccinationMapper" as MAPPER
-participant "vacDto:VaccinationScheduleDto" as DTO
+participant "mapper\n:AppointmentMapper" as MAPPER
+participant "vacDto:AppointmentDto" as DTO
 participant "store\n:VaccineTypeStore" as VACSTORE
 participant "store\n:SNSUserStore" as SNSSTORE
-participant "store\n:VaccinatonScheduleStore" as SCHESTORE
+participant "store\n:AppointmentStore" as APPSTORE
 
 activate RECEPT
 RECEPT -> UI : asks to schedule a vaccination
@@ -70,13 +70,13 @@ deactivate UI
 RECEPT -> UI : accepts or declines the sending sms
 activate UI
 
-UI -> CTRL : createVaccinationSchedule(dto)
+UI -> CTRL : createAppointment(dto)
 activate CTRL
 
 note right 
 dto has all information (SNSUserNumber,date,time,vaccineType,SMS)
 end note
-CTRL -> COMP : vacSchedule = createVaccinationSchedule(dto)
+CTRL -> COMP : vacSchedule = createAppointment(dto)
 activate COMP
 deactivate CTRL
 
@@ -97,20 +97,20 @@ activate DTO
 deactivate DTO
 deactivate CTRL
 
-MAPPER -> SCHESTORE : create(SNSUserNumber,date,time,vaccineType,SMS)
-activate SCHESTORE
+MAPPER -> APPSTORE : create(SNSUserNumber,date,time,vaccineType,SMS)
+activate APPSTORE
 
-SCHESTORE -> VaccinationSchedule** : create(SNSUserNumber,date,time,vaccineType,SMS)
+APPSTORE -> Appointment** : create(SNSUserNumber,date,time,vaccineType,SMS)
 deactivate MAPPER
 
-SCHESTORE -> SCHESTORE : addVaccinationSchedule()
-activate SCHESTORE
-deactivate SCHESTORE
+APPSTORE -> APPSTORE : addAppointment()
+activate APPSTORE
+deactivate APPSTORE
 
-SCHESTORE -> SCHESTORE : checkDuplicates()
-activate SCHESTORE
-deactivate SCHESTORE
-deactivate SCHESTORE
+APPSTORE -> APPSTORE : checkDuplicates()
+activate APPSTORE
+deactivate APPSTORE
+deactivate APPSTORE
 
 UI --> RECEPT : shows all data and requests confirmation
 deactivate UI
