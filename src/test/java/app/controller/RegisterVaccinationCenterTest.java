@@ -1,5 +1,6 @@
 package app.controller;
 
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.Employee;
@@ -17,6 +18,25 @@ public class RegisterVaccinationCenterTest {
         coordinator = new Employee("Joana", "+351916478865", "email@email.com", "address",
                 "000000000ZZ4", Constants.ROLE_COORDINATOR);
     }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Vaccination Center data:\n");
+        sb.append(String.format("Name: %s\n", "name"));
+        sb.append(String.format("Address: %s\n", "address"));
+        sb.append(String.format("Email: %s\n", "example@gmail.com"));
+        sb.append(String.format("Phone number: %s\n", "+351913456789"));
+        sb.append(String.format("Fax number: %s\n", "+351913456788"));
+        sb.append(String.format("Web address: %s\n", "https://www.teste.com"));
+        sb.append(String.format("Opening hours: %s\n", "11:00"));
+        sb.append(String.format("Closing hours: %s\n", "23:00"));
+        sb.append(String.format("Slot duration: %s\n", "5"));
+        sb.append(String.format("Maximum vaccines per slot: %s\n", "5"));
+        sb.append(String.format("Coordinator: %s\n", "Joana"));
+
+        return sb.toString();
+    }
+
 
     /**
      * Check that getResourceName method is working properly
@@ -97,7 +117,7 @@ public class RegisterVaccinationCenterTest {
     }
 
     /**
-     * Check that it is not possible to create a vaccination center with maximum vaccines per slot invalid (x=<0)
+     * Check that it is not possible to create a vaccination center with invalid coordinator
      */
     @Test(expected = IllegalArgumentException.class)
     public void ensureInvalidCoordinatorThrowsException() {
@@ -112,5 +132,14 @@ public class RegisterVaccinationCenterTest {
     public void ensureValidValuesCreateNewCenter() {
         controller.create("name", "address", "example@gmail.com", "+351913456789", "+351913456788",
                 "https://www.teste.com", "11:00", "12:00", 5, 5, coordinator);
+    }
+
+    @Test
+    public void ensureStringfyDataWorking() {
+        String center = toString();
+        controller.create("name", "address", "example@gmail.com", "+351913456789", "+351913456788",
+                "https://www.teste.com", "11:00", "23:00", 5, 5, coordinator);
+        controller.save();
+        assertEquals(controller.stringifyData(), center);
     }
 }
