@@ -1,5 +1,6 @@
 package app.domain.model.store;
 
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.Employee;
@@ -33,11 +34,11 @@ public class VaccinationCenterStoreTest {
     center = store.createVaccinationCenter("name", "address", "email@email.com", "+351961919169",
         "+351961919169", "http://www.google.com", "10:00", "19:00", 5, 5, this.coordinator);
 
-    assert store.size() == 0;
+    assertEquals(store.size(), 0);
 
     store.saveVaccinationCenter(center);
 
-    assert store.size() == 1;
+    assertEquals(store.size(), 1);
   }
 
   /**
@@ -72,7 +73,7 @@ public class VaccinationCenterStoreTest {
 
     store.saveVaccinationCenter(center);
 
-    assert store.size() == 1;
+    assertEquals(store.size(), 1);
 
     center2 =
         store.createVaccinationCenter("name123", "address", "email@gmail.com", "+351961919168",
@@ -82,6 +83,6 @@ public class VaccinationCenterStoreTest {
 
     store.saveVaccinationCenter(center2);
 
-    assert store.size() == 2;
+    assertEquals(store.size(), 2);
   }
 }

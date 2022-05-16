@@ -1,6 +1,7 @@
 package app.domain.model;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import java.util.Calendar;
 import org.junit.Test;
 
@@ -118,8 +119,8 @@ public class SNSUserTest {
     SNSUser instance = new SNSUser("123456789ZZ1", "123456789", "name", c, 'M', "+351211111111",
         "email@email.com", "address");
 
-    assert instance.getCitizenCard().equals("123456789ZZ1");
-    assert instance.getSnsNumber().equals("123456789");
+    assertEquals(instance.getCitizenCard(), "123456789ZZ1");
+    assertEquals(instance.getSnsNumber(), "123456789");
     assertNotNull(instance);
   }
 }

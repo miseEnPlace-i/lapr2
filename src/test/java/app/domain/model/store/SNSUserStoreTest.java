@@ -1,5 +1,6 @@
 package app.domain.model.store;
 
+import static org.junit.Assert.assertEquals;
 import java.util.Calendar;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,9 +30,9 @@ public class SNSUserStoreTest {
    */
   @Test
   public void ensureAddSNSUserIsWorkingCorrectly() {
-    assert store.size() == 0;
+    assertEquals(store.size(), 0);
     store.saveSNSUser(snsUser);
-    assert store.size() == 1;
+    assertEquals(store.size(), 1);
   }
 
   /**

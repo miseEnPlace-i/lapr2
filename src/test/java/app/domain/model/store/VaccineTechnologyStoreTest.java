@@ -1,5 +1,7 @@
 package app.domain.model.store;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,11 +25,11 @@ public class VaccineTechnologyStoreTest {
    */
   @Test
   public void ensureAddVaccineTechnologyIsWorkingCorrectly() {
-    assert store.size() == 0;
+    assertEquals(store.size(), 0);
 
     store.addVaccineTechnology(technology);
 
-    assert store.size() == 1;
+    assertEquals(store.size(), 1);
   }
 
   /**
@@ -38,6 +40,6 @@ public class VaccineTechnologyStoreTest {
     store.addVaccineTechnology(technology);
     String tech = "TEST";
 
-    assert (store.existsType(tech));
+    assertTrue(store.existsType(tech));
   }
 }

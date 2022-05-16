@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import static org.junit.Assert.assertNotNull;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,12 +29,12 @@ public class ListEmployeeByRoleTest {
   @Test(expected = IllegalArgumentException.class)
   public void testNonExistingRole() {
     List<Employee> result = employeeStore.getEmployeesWithRole("INVALID_ROLE");
-    assert (result != null);
+    assertNotNull(result);
   }
 
   @Test
   public void testExistingRole() {
     List<Employee> result = employeeStore.getEmployeesWithRole("TEST_ROLE");
-    assert (result != null);
+    assertNotNull(result);
   }
 }
