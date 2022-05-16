@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import java.util.List;
 import org.junit.Before;
@@ -19,6 +20,12 @@ public class ListEmployeeByRoleTest {
     this.employeeStore = new EmployeeStore(authFacade, roleStore);
 
     roleStore.addEmployeeRole("TEST_ROLE", "Test description");
+    roleStore.addEmployeeRole("TEST_ROLE2", "Test description 2");
+
+    Employee e = employeeStore.createEmployee("name", "+351212345678", "email@email.com", "address",
+        "000000000ZZ4", "TEST_ROLE");
+
+    employeeStore.saveEmployee(e);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -35,6 +42,16 @@ public class ListEmployeeByRoleTest {
   @Test
   public void testExistingRole() {
     List<Employee> result = employeeStore.getEmployeesWithRole("TEST_ROLE");
+
     assertNotNull(result);
+    assertEquals(result.size(), 1);
+  }
+
+  @Test
+  public void testExistingRoleWithoutEmployees() {
+    List<Employee> result = employeeStore.getEmployeesWithRole("TEST_ROLE2");
+
+    assertNotNull(result);
+    assertEquals(result.size(), 0);
   }
 }
