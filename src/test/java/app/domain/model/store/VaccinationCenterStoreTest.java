@@ -44,7 +44,7 @@ public class VaccinationCenterStoreTest {
   /**
    * Check that checkDuplicates method is checking duplicated centers properly
    * 
-   * @throws IllegalArgumentException
+   * @throws Exception IllegalArgumentException
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureCheckDuplicatesIsWorkingCorrectly() {
@@ -54,7 +54,7 @@ public class VaccinationCenterStoreTest {
   /**
    * Check that validateVaccinationCenter is working properly
    * 
-   * @throws IllegalArgumentException
+   * @throws Exception IllegalArgumentException
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureValidateIsWorking() {
