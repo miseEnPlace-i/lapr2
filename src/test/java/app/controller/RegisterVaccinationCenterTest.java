@@ -53,7 +53,7 @@ public class RegisterVaccinationCenterTest {
    */
   @Test
   public void ensureGetResourceNameIsWorkingCorrectly() {
-    assert centerName == controller.getResourceName();
+    assertEquals(centerName, controller.getResourceName());
   }
 
   /**
