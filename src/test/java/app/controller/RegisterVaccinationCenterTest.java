@@ -3,6 +3,7 @@ package app.controller;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
+import app.domain.model.Company;
 import app.domain.model.Employee;
 import app.domain.shared.Constants;
 
@@ -10,7 +11,8 @@ import app.domain.shared.Constants;
  * @author André Barros <1211299@isep.ipp.pt>
  */
 public class RegisterVaccinationCenterTest {
-  RegisterVaccinationCenterController controller = new RegisterVaccinationCenterController();
+  RegisterVaccinationCenterController controller =
+      new RegisterVaccinationCenterController(new Company("designation"));
   String centerName = "Vaccination Center";
   Employee coordinator;
 
