@@ -14,7 +14,6 @@ import app.domain.shared.Constants;
  * @author André Barros <1211299@isep.ipp.pt>
  */
 public class RegisterVaccinationCenterController implements IRegisterController {
-  private App app;
   private Company company;
   private EmployeeStore employeeStore;
   private VaccinationCenter center;
@@ -23,9 +22,8 @@ public class RegisterVaccinationCenterController implements IRegisterController 
   /**
    * Constructor for VaccinationCenterController
    */
-  public RegisterVaccinationCenterController() {
-    this.app = App.getInstance();
-    this.company = this.app.getCompany();
+  public RegisterVaccinationCenterController(Company company) {
+    this.company = company;
     this.employeeStore = this.company.getEmployeeStore();
     this.vacStore = this.company.getVaccinationCenterStore();
   }

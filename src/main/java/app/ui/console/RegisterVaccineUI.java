@@ -2,6 +2,7 @@ package app.ui.console;
 
 import java.util.ArrayList;
 import java.util.List;
+import app.controller.App;
 import app.controller.RegisterVaccineController;
 import app.domain.model.VaccineType;
 import app.ui.console.utils.Utils;
@@ -15,7 +16,7 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
    * @author Carlos Lopes <1211277@isep.ipp.pt>
    */
   public RegisterVaccineUI() {
-    super(new RegisterVaccineController());
+    super(new RegisterVaccineController(App.getInstance().getCompany()));
   }
 
   @Override
@@ -24,8 +25,9 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
 
     List<VaccineType> vacTypes = super.ctrl.getVacTypes(); // all available vaccine types
 
-    if(vacTypes.isEmpty()){
-      Utils.readLineFromConsole("No vaccine type registered. Register a vaccine Type before registering a new Vaccine.\nPress enter to go back to the menu. ");
+    if (vacTypes.isEmpty()) {
+      Utils.readLineFromConsole(
+          "No vaccine type registered. Register a vaccine Type before registering a new Vaccine.\nPress enter to go back to the menu. ");
       return;
     }
 
