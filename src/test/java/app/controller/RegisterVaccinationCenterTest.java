@@ -1,6 +1,7 @@
 package app.controller;
 
 import static org.junit.Assert.assertEquals;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.Employee;
@@ -169,5 +170,12 @@ public class RegisterVaccinationCenterTest {
         "https://www.teste.com", "11:00", "23:00", 5, 5, coordinator);
     controller.save();
     assertEquals(controller.stringifyData(), center);
+  }
+
+  @Test
+  public void ensureCoordinatorListWorking() {
+    List<Employee> list = controller.getCoordinators();
+    assertEquals(list.size(), 1);
+    assertEquals(list.get(0), coordinator);
   }
 }
