@@ -3,6 +3,7 @@ skinparam classAttributeIconSize 0
 
 class Arrive {
   - Date arriveTime
+  - int status
 }
 
 class NurseSession {
@@ -79,13 +80,25 @@ class SNSUser {
 }
 
 class WaitingRoomList {
-  +createArrive(...)
-  +saveArrive(center)
-  -checkDuplicates(center)
+  +createArrive(arriveTime, user, appointment)
+  +saveArrive(arrive)
+  +removeArrive(arrive)
+  -checkDuplicates(arrive)
 }
 
 class Appointment {
+  -Date appointmentDate
 
+  +Appointment(appointmentDate, user, vaccine)
+}
+
+class Vaccine{
+  -designation : String
+  -brand : String
+  -id : String
+  -vacType : VaccineType
+
+  +Vaccine(designation, id, brand, vacTypeId)
 }
 
 CheckWaitingRoomUI ..> CheckWaitingRoomController
@@ -93,6 +106,7 @@ CheckWaitingRoomController ..> Company
 
 Arrive o-- SNSUser
 Arrive o-- Appointment
+Appointment o-- SNSUser
 
 VaccinationCenter o-- Employee : coordinator
 VaccinationCenterStore "1" -- "*" VaccinationCenter : stores >
@@ -105,5 +119,8 @@ Employee "1" -- "*" WaitingRoomList : checks
 VaccinationCenter *-- WaitingRoomList
 
 CheckWaitingRoomController ..> NurseSession
+
+Appointment "*" -- "1" VaccinationCenter : has <
+Appointment o-- Vaccine
 
 @enduml
