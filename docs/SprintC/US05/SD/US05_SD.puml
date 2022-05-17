@@ -5,7 +5,7 @@ actor "Nurse" as NURSE
 
 participant ":ListUsersInWaitingRoomUI" as UI
 participant ":ListUsersInWaitingRoomController" as CTRL
-participant ":NurseSessionFacade" as FAC
+participant "nurseSession:NurseSession" as FAC
 participant "comp\n:Company" as COMP
 participant "vaccinationCenterStore\n:VaccinationCenterStore" as VACS
 participant ":AppointmentMapper" as APOM
@@ -17,7 +17,7 @@ activate UI
 
 UI -> CTRL : getWaitingRoomListFromNurseCenter()
 activate CTRL
-CTRL -> FAC : nurseVaccinationCenterId=getNurseVaccinationCenterId()
+CTRL -> FAC : nurseVaccinationCenterId=getVaccinationCenterId()
 activate FAC
 deactivate FAC
 |||

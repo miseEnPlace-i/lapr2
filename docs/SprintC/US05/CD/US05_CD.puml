@@ -5,6 +5,14 @@ class Arrive {
   - Date arriveTime
 }
 
+class NurseSession {
+  - String nurseName
+  - String vaccinationCenterId
+
+  + NurseSession(String nurseName, String vaccinationCenterId)
+  + String getVaccinationCenterId()
+}
+
 class Company {
   -designation: String
   -authFacade: AuthFacade
@@ -95,5 +103,7 @@ WaitingRoomList "1" -- "*" Arrive : stores >
 
 Employee "1" -- "*" WaitingRoomList : checks
 VaccinationCenter *-- WaitingRoomList
+
+CheckWaitingRoomController ..> NurseSession
 
 @enduml
