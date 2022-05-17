@@ -1,30 +1,17 @@
 @startuml US04_CD
 skinparam classAttributeIconSize 0
 
-class RegisterSNSUserArrivalUI {}
+class Appointment {}
 
-class RegisterSNSUserArrivalController {}
+class AppointmentStore {}
+
+class Arrival {
+  - Date arrivalDate
+}
 
 class Company {
   - String designation
   + getDesignation()
-}
-
-class SNSUser {
-  - String citizenCard
-  - String snsNumber
-  - Date birthDay
-  - Char gender
-  - String phoneNumber
-  - String address
-  + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
-}
-
-class SNSUserStore {
-  + createUser(name, email, pwd, roleId)
-  + validateUser(user)
-  + saveUser(user)
-  + checkDuplicates(user)
 }
 
 class Employee {
@@ -43,24 +30,32 @@ class Employee {
   + getRoleId()
 }
 
+class RegisterSNSUserArrivalUI {}
+
+class RegisterSNSUserArrivalController {}
+
+class SNSUser {
+  - String citizenCard
+  - String snsNumber
+  - Date birthDay
+  - Char gender
+  - String phoneNumber
+  - String address
+  + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
+}
+
+class SNSUserStore {
+  + createUser(name, email, pwd, roleId)
+  + validateUser(user)
+  + saveUser(user)
+  + checkDuplicates(user)
+}
+
+
 class Receptionist {}
 
-class Arrival {
-  - Date arrivalDate
-}
 
-class Appointment {}
-
-class WaitingRoomList {}
-
-class VaccinationCenterStore {
-  ---
-  + createVaccinationCenter(centerData, coordinator)
-  + validateVaccinatonCenter(center)
-  + saveVaccinationCenter(center)
-  + checkDuplicates(center)
-  + addVaccinationCenter(center)
-}
+class SMSSender {}
 
 class VaccinationCenter {
   - name: String
@@ -78,29 +73,65 @@ class VaccinationCenter {
   + VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
 }
 
-Arrival "1" --> "0..1" Appointment : has
+class VaccinationCenterStore {
+  ---
+  + createVaccinationCenter(centerData, coordinator)
+  + validateVaccinatonCenter(center)
+  + saveVaccinationCenter(center)
+  + checkDuplicates(center)
+  + addVaccinationCenter(center)
+}
+
+class VaccineType {
+  - code: String
+  - description : String
+  - technology : String
+  ---
+  + VaccineType(code, description, technology)
+}
+
+class VaccineTypeStore {
+  - getVaccineTypeByCode()
+  - addVaccineType()
+  - saveVaccineType()
+}
+
+class WaitingRoomList {}
+
+
+Appointment "1" --> "0..1" SMSSender : triggers
+
+AppointmentStore "1" --> "*" Appointment : stores
+
+Arrival "1" --> "1" Appointment : has
 
 Company ..> SNSUserStore
 Company ..> VaccinationCenterStore
-Company "1" --> "*" SNSUser : knows
+Company ..> VaccineTypeStore
 Company "1" --> "*" Employee : knows
 
 Employee "1" --> "1" Receptionist : plays as
 
-Receptionist ..> Arrival
+Receptionist "1" --> "*" Appointment : related to
 
 RegisterSNSUserArrivalController ..> Company
 
 RegisterSNSUserArrivalUI ..> RegisterSNSUserArrivalController
 
+SNSUser --o Arrival
+SNSUser --o Appointment
+
 SNSUserStore "1" --> "*" SNSUser : stores
-VaccinationCenterStore "1" --> "*" VaccinationCenter : stores
 
 VaccinationCenter "1" --> "1" WaitingRoomList : has
+VaccinationCenter ..> AppointmentStore
 
-SNSUser ..> Arrival
-SNSUser ..> Appointment
+VaccinationCenterStore "1" --> "*" VaccinationCenter : stores
 
-WaitingRoomList "1" --> "*" SNSUser : has
+VaccineType --o Appointment
+
+VaccineTypeStore "1" --> "*" VaccineType : stores
+
+WaitingRoomList "1" --> "*" Arrival : has
 
 @enduml
