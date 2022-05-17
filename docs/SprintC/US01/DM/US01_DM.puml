@@ -2,7 +2,7 @@
 hide methods
 skinparam classAttributeIconSize 0
 
-class VaccinationSchedule {}
+class Appointment {}
 
 class VaccineType {}
 
@@ -31,15 +31,15 @@ class VaccinationCenter{
   -coordinator
 }
 
-class Company{
+class Company {
   -designation
 }
 
-Company "1" -- "*" VaccinationSchedule : knows >
-VaccinationSchedule "1"  -- "1" VaccineType : has >
-VaccinationSchedule "*" -- "1" VaccinationCenter : has >
+Company "1" -- "*" Appointment : knows >
+Appointment "1"  -- "1" VaccineType : has >
+Appointment "*" -- "1" VaccinationCenter : has >
 Company "1" -- "*" VaccinationCenter : knows >
-VaccinationSchedule "1" -- "1" SNSUser : schedules <
+Appointment "1" -- "1" SNSUser : schedules <
 Company "1" -- "*" SNSUser : knows >
 
 @enduml
