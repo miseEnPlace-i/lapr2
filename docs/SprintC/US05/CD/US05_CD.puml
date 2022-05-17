@@ -49,12 +49,13 @@ class VaccinationCenter {
 }
 
 class VaccinationCenterStore {
-+createVaccinationCenter(centerData,coordinator)
-+validateVaccinatonCenter(center)
-+saveVaccinationCenter(center)
-+checkDuplicates(center)
+  +createVaccinationCenter(centerData,coordinator)
+  +validateVaccinatonCenter(center)
+  +saveVaccinationCenter(center)
+  +checkDuplicates(center)
+  +getWaitingRoom(center)
 
--addVaccinationCenter(center)
+  -addVaccinationCenter(center)
 }
 
 class Employee {
