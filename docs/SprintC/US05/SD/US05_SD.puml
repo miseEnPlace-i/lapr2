@@ -4,17 +4,28 @@ autonumber
 actor "Nurse" as NURSE
 
 participant ":ListUsersInWaitingRoomUI" as UI
-participant ":ListUsersInWaitingRoomController" as CTRL
-participant "nurseSession:NurseSession" as FAC
-participant "comp\n:Company" as COMP
-participant "vaccinationCenterStore\n:VaccinationCenterStore" as VACS
-participant ":ArriveMapper" as ARRM
-participant "arriveHistory:ArriveHistory" as ARR
-participant "arrive:Arrive" as ARR
-
 activate NURSE
 NURSE -> UI : asks to list users in waiting room for a given vaccination center
 activate UI
+participant ":App" as APP
+UI -> APP : app=getInstance()
+activate APP
+deactivate APP
+UI -> APP : company=app.getCompany()
+activate APP
+deactivate APP
+
+create ":ListUsersInWaitingRoomController" as CTRL
+
+UI -> CTRL : create(company)
+
+participant "nurseSession\n:NurseSession" as FAC
+participant "comp\n:Company" as COMP
+participant "vaccinationCenterStore\n:VaccinationCenterStore" as VACS
+participant ":ArriveMapper" as ARRM
+participant "arriveHistory\n:ArriveHistory" as ARR
+participant "arrive:Arrive" as ARR
+
 
 UI -> CTRL : getWaitingRoomListFromNurseCenter()
 activate CTRL
