@@ -3,6 +3,7 @@ package app.ui.console;
 
 import java.util.ArrayList;
 import java.util.List;
+import app.controller.App;
 import app.controller.RegisterVaccinationCenterController;
 import app.domain.model.Employee;
 import app.ui.console.utils.Utils;
@@ -17,7 +18,7 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
    * VaccinationCenterUI Constructor
    */
   public RegisterVaccinationCenterUI() {
-    super(new RegisterVaccinationCenterController());
+    super(new RegisterVaccinationCenterController(App.getInstance().getCompany()));
   }
 
   @Override

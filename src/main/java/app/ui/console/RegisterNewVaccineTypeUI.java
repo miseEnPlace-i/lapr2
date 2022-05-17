@@ -2,6 +2,7 @@ package app.ui.console;
 
 import java.text.ParseException;
 import java.util.List;
+import app.controller.App;
 import app.controller.RegisterNewVaccineTypeController;
 import app.ui.console.utils.Utils;
 
@@ -17,7 +18,7 @@ public class RegisterNewVaccineTypeUI extends RegisterUI<RegisterNewVaccineTypeC
    * Constructor for RegisterNewVaccineTypeUI
    */
   public RegisterNewVaccineTypeUI() {
-    super(new RegisterNewVaccineTypeController());
+    super(new RegisterNewVaccineTypeController(App.getInstance().getCompany()));
   }
 
   /**
