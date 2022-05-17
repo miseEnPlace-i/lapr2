@@ -34,7 +34,7 @@ As an administrator, I want to load a set of users from a CSV file.
 files: a) one type must have a header, column separation is done using “;”
 character; b) the other type does not have a header, column separation is done
 using “,” character. 
-* **AC2:** The file path name and the file type must filled in.
+* **AC2:** The file path name field must filled in.
 * **AC3:** The file path name must correspond to an existing and valid CSV file.
 
 
@@ -50,10 +50,6 @@ using “,” character.
 
 * Typed data:
 	* File path name
-	
-* Selected data:
-	* File type
-
 
 **Output Data:**
 
@@ -63,26 +59,19 @@ using “,” character.
 
 **Alternative 1**
 
-![US006_SSD](US006_SSD.svg)
-
-
-**Alternative 2**
-
-![US006_SSD_v2](US006_SSD_v2.svg)
-
+![SSD_US14](SSD/US14_SSD.svg)
 
 **Other alternatives might exist.**
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
-
+n/a
 
 ## 2. OO Analysis
 
 ### 2.1. Relevant Domain Model Excerpt 
 
-![US006_MD](US006_MD.svg)
+![US14_DM](DM/US14_MD.svg)
 
 ### 2.2. Other Remarks
 
