@@ -16,7 +16,7 @@ _"As a receptionist, I want to register a SNS User."_
 
 > Any Administrator uses the application to register SNS users.
 
-> When the SNS user arrives at the vaccination center, a receptionist registers the arrival of the user to take the respective vaccine.
+<!-- > When the SNS user arrives at the vaccination center, a receptionist registers the arrival of the user to take the respective vaccine. -->
 
 **From the client clarifications:**
 
@@ -36,6 +36,14 @@ _"As a receptionist, I want to register a SNS User."_
 > The Sex attribute is optional. All other fields are required.
 > The E-mail, Phone Number, Citizen Card Number and SNS User Number should be unique for each SNS user.
 
+> **Question:** Can the SNS User change the password? 
+>
+> **Answer:** No.
+
+> **Question:** Is the password generated automatically, or is it specified by the user operating the system?
+>
+> **Answer:** The password should be generated automatically.
+
 ### 1.3. Acceptance Criteria
 
 <!-- TODO -->
@@ -47,9 +55,9 @@ _"As a receptionist, I want to register a SNS User."_
 -   **AC05:** SNS number must have 9 digits.
 -   **AC06:** Phone numbers should follow the portuguese format ("+351" + 9 digits).
 -   **AC07:** Email address must be validated using a regular expression.
--   **AC08:** Gender options: Male/Female.
+-   **AC08:** Sex options: Male/Female.
 -   **AC09:** The password should be randomly generated. It should have 7 alphanumeric characters, 3 of them being upper case and 2 of them must be digits.
--   **AC10:** All input fields are required except gender.
+-   **AC10:** All input fields are required except sex.
 -   **AC11:** The email, phone number, citizen card number and SNS User number must be unique for each SNS User.
     <!-- ? QUESTION -->
     <!-- -   **AC10:** The user receives an e-mail informing that the registration was successful and that he can start to use the system. The e-mail includes the user password. All the e-mail messages should be written to a file with the name emailAndSMSMessages.txt. -->
@@ -57,7 +65,7 @@ _"As a receptionist, I want to register a SNS User."_
 
 ### 1.4. Found out Dependencies
 
--   No dependencies were found.
+-   Receptionists register SNS Users.
 
 ### 1.5 Input and Output Data
 
@@ -74,7 +82,7 @@ _"As a receptionist, I want to register a SNS User."_
     -   Email
     -   Address
 -   Selected data:
-    -   Gender
+    -   Sex
 
 **Output Data:**
 
@@ -115,7 +123,7 @@ n/a
 |                                              | ... instantiating a new SNS User?           | SNSUserStore              | **Creator (Rule 1)**                                                                                              |
 | Step 2: requests data                        | n/a                                         |                           |                                                                                                                   |
 | Step 3: types the requested data             | ... saving the inputted data?               | User                      | IE: object created in step 1 has its own data.                                                                    |
-| Step 4: shows data and asks for confirmation |                                             | User                      | IE: object created in step 1 has one gender.                                                                      |
+| Step 4: shows data and asks for confirmation |                                             | User                      | IE: object created in step 1 has one sex.                                                                      |
 | Step 5: confirms the data                    | ... saving the user?                        | SNSUserStore              | IE: owns all users.                                                                                               |
 | Step 6: informs operation success            | ... informing operation success?            | RegisterSNSUserUI         | IE: is responsible for user interactions.                                                                         |
 
@@ -173,9 +181,9 @@ _It is also recommended to organize this content by subsections._
 
 ## Class CreateTaskController
 
-    public void create(String citizenCard, String snsNumber, String name, String birthDay, char gender, String phoneNumber, String email, String address) throws IllegalArgumentException, ParseException {
+    public void create(String citizenCard, String snsNumber, String name, String birthDay, char sex, String phoneNumber, String email, String address) throws IllegalArgumentException, ParseException {
         // create an instance of an SNS User
-        this.snsUser = store.createSNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
+        this.snsUser = store.createSNSUser(citizenCard, snsNumber, name, birthDay, sex, phoneNumber, email, address);
 
         // validate the SNS User
         store.validateSNSUser(snsUser);
@@ -183,11 +191,11 @@ _It is also recommended to organize this content by subsections._
 
 ## Class Organization
 
-    public SNSUser createSNSUser(String citizenCard, String snsNumber, String name, String birthDayStr, char gender, String phoneNumber, String email, String address) throws IllegalArgumentException, ParseException {
+    public SNSUser createSNSUser(String citizenCard, String snsNumber, String name, String birthDayStr, char sex, String phoneNumber, String email, String address) throws IllegalArgumentException, ParseException {
         Calendar birthDay;
         birthDay = CalendarUtils.parse(birthDayStr);
 
-        SNSUser snsUser = new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
+        SNSUser snsUser = new SNSUser(citizenCard, snsNumber, name, birthDay, sex, phoneNumber, email, address);
 
         return snsUser;
     }
