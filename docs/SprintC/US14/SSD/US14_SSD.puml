@@ -5,10 +5,10 @@ actor "Administrator" as ADMIN
 activate ADMIN
 ADMIN -> ":System" : asks to load users from a file
 activate ":System"
-":System" --> ADMIN : shows available file types to select one and requests data (file path name)
+":System" --> ADMIN : requests data (file path name)
 deactivate ":System"
 
-ADMIN -> ":System" : selects and types requested data
+ADMIN -> ":System" : types requested data
 activate ":System"
 ":System" --> ADMIN : shows all data and requests confirmation
 deactivate ":System"
