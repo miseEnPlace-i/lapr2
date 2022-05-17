@@ -10,7 +10,7 @@ _"As a receptionist, I want to register a SNS User."_
 
 **From the specifications document:**
 
-> A SNS User is a person who is registered in the system.
+<!-- > A SNS User is a person who is registered in the system. -->
 
 > A SNS User must have an email, a password, a name, a birthday as well as a SNS number.
 
@@ -22,13 +22,13 @@ _"As a receptionist, I want to register a SNS User."_
 
 <!-- TODO: update questions - check forum -->
 
-> **Question:** Accordingly to our project description, the person allowed to register a SNS User is the Administrator. When the receptionist registers a SNS User, does he register the SNS user in the application or his arrival?
+<!-- > **Question:** Accordingly to our project description, the person allowed to register a SNS User is the Administrator. When the receptionist registers a SNS User, does he register the SNS user in the application or his arrival?
 >
 > **Answer:** —
 
 > **Question:** What information should the receptionist ask the SNS user to insert in the application?
 >
-> **Answer:** —
+> **Answer:** — -->
 
 > **Question:** Regarding US3: "As a receptionist, I want to register an SNS User". What are the necessary components in order to register an SNS User?
 >
