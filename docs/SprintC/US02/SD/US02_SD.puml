@@ -7,7 +7,7 @@ participant ":AppointmentUI" as UI
 participant ":AppointmentController" as CTRL
 participant "comp\n:Company" as COMP
 participant "mapper\n:AppointmentMapper" as MAPPER
-participant "vacDto:AppointmentDto" as DTO
+participant "appDto:AppointmentDto" as DTO
 participant "store\n:VaccineTypeStore" as VACSTORE
 participant "store\n:SNSUserStore" as SNSSTORE
 participant "store\n:AppointmentStore" as APPSTORE
@@ -95,9 +95,21 @@ deactivate DTO
 MAPPER -> DTO : time = getTime()
 activate DTO
 deactivate DTO
+
+MAPPER -> DTO : center=getVaccinationCenter()
+activate DTO
+deactivate DTO
+
+MAPPER -> DTO : vaccineType = getVaccineType()
+activate DTO
+deactivate DTO
+
+MAPPER -> DTO : sms = getSms() 
+activate DTO
+deactivate DTO
 deactivate CTRL
 
-MAPPER -> APPSTORE : create(SNSUserNumber,date,time,vaccineType,SMS)
+MAPPER -> APPSTORE : create(SNSUserNumber,date,time,center,vaccineType,SMS)
 activate APPSTORE
 
 APPSTORE -> Appointment** : create(SNSUserNumber,date,time,vaccineType,SMS)
@@ -116,7 +128,6 @@ UI --> RECEPT : shows all data and requests confirmation
 deactivate UI
 RECEPT -> UI : confirms the data
 activate UI
-
 
 UI --> RECEPT : informs operation success
 deactivate UI
