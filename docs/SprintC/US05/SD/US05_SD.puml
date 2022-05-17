@@ -9,6 +9,7 @@ participant "nurseSession:NurseSession" as FAC
 participant "comp\n:Company" as COMP
 participant "vaccinationCenterStore\n:VaccinationCenterStore" as VACS
 participant ":ArriveMapper" as ARRM
+participant "arriveHistory:ArriveHistory" as ARR
 participant "arrive:Arrive" as ARR
 
 activate NURSE
@@ -33,7 +34,7 @@ deactivate VACS
 CTRL -> ARRM : waitingRoomDto=toDto(waitingRoom)
 activate ARRM
 
-create "waitingRoomDto:\nList<arriveDto>" as WAITDTO
+create "waitingRoomDto:\nList<ArriveDto>" as WAITDTO
 
 ARRM -> WAITDTO
 
@@ -48,7 +49,7 @@ loop for each arrive in waitingRoom
   deactivate ARR
 
   create "arriveDto\n:ArriveDto" as APODTO
-  ARRM -> APODTO : create(i,username,arriveTime)
+  ARRM -> APODTO : create(placeInLine,username,arriveTime)
 
   ARRM -> WAITDTO : add(arriveDto)
   activate WAITDTO
@@ -57,7 +58,7 @@ loop for each arrive in waitingRoom
 end
 
 |||
-ARRM --> CTRL : arriveDto 
+ARRM --> CTRL : waitingRoomDto 
 
 deactivate ARRM
 

@@ -80,7 +80,7 @@ class SNSUser {
   + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
 }
 
-class WaitingRoomList {
+class WaitingRoom {
   +createArrive(arriveTime, user, appointment)
   +saveArrive(arrive)
   +removeArrive(arrive)
@@ -114,10 +114,10 @@ VaccinationCenterStore "1" -- "*" VaccinationCenter : stores >
 
 Company ..> VaccinationCenterStore
 
-WaitingRoomList "1" -- "*" Arrive : stores >
+WaitingRoom "1" -- "*" Arrive : stores >
 
-Employee "1" -- "*" WaitingRoomList : checks
-VaccinationCenter *-- WaitingRoomList
+Employee "1" -- "*" WaitingRoom : checks
+VaccinationCenter *-- WaitingRoom
 
 CheckWaitingRoomController ..> NurseSession
 
