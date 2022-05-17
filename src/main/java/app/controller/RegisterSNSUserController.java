@@ -11,7 +11,6 @@ import app.domain.model.store.SNSUserStore;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 public class RegisterSNSUserController implements IRegisterController {
-
   private App app;
   private Company company;
   private SNSUserStore store;
@@ -20,9 +19,8 @@ public class RegisterSNSUserController implements IRegisterController {
   /**
    * Constructor for RegisterSNSUserController.
    */
-  public RegisterSNSUserController() {
-    this.app = App.getInstance();
-    this.company = this.app.getCompany();
+  public RegisterSNSUserController(Company company) {
+    this.company = company;
     this.store = this.company.getSNSUserStore();
     this.snsUser = null;
   }

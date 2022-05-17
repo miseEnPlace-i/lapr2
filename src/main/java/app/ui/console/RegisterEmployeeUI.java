@@ -2,6 +2,7 @@ package app.ui.console;
 
 import java.text.ParseException;
 import java.util.List;
+import app.controller.App;
 import app.controller.RegisterEmployeeController;
 import app.ui.console.utils.Utils;
 import pt.isep.lei.esoft.auth.domain.model.UserRole;
@@ -19,7 +20,7 @@ public class RegisterEmployeeUI extends RegisterUI<RegisterEmployeeController> {
    * Constructor for RegisterEmployeeUI.
    */
   public RegisterEmployeeUI() {
-    super(new RegisterEmployeeController());
+    super(new RegisterEmployeeController(App.getInstance().getCompany()));
   }
 
   /**

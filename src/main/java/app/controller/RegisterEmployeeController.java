@@ -13,7 +13,6 @@ import pt.isep.lei.esoft.auth.domain.model.UserRole;
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
 public class RegisterEmployeeController implements IRegisterController {
-  private App app;
   private Company company;
   private Employee employee;
   private EmployeeStore store;
@@ -22,9 +21,8 @@ public class RegisterEmployeeController implements IRegisterController {
   /**
    * Constructor for RegisterEmployeeController.
    */
-  public RegisterEmployeeController() {
-    this.app = App.getInstance();
-    this.company = this.app.getCompany();
+  public RegisterEmployeeController(Company company) {
+    this.company = company;
     this.store = this.company.getEmployeeStore();
     this.roleStore = this.company.getEmployeeRoleStore();
     this.employee = null;
