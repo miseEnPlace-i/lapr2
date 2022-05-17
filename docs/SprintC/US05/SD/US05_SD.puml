@@ -29,7 +29,7 @@ participant "arrive:Arrive" as ARR
 
 UI -> CTRL : getWaitingRoomListFromNurseCenter()
 activate CTRL
-CTRL -> FAC : nurseVaccinationCenterId=getVaccinationCenterId()
+CTRL -> FAC : nurseVaccinationCenterId=getVaccinationCenter()
 activate FAC
 deactivate FAC
 |||
@@ -38,7 +38,7 @@ CTRL -> COMP : vaccinationCenterStore=getVaccinationCenterStore()
 activate COMP
 deactivate
 
-CTRL -> VACS : waitingRoom=getCenterWaitingRoom(nurseVaccinationCenterId)
+CTRL -> VACS : waitingRoom=getCenterWaitingRoom(nurseVaccinationCenter)
 activate VACS
 deactivate VACS
 
