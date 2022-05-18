@@ -35,11 +35,11 @@ class Company {
   -designation
 }
 
-Company "1" -- "*" Appointment : knows >
 Appointment "1"  -- "1" VaccineType : has >
-Appointment "*" -- "1" VaccinationCenter : is held >
+Appointment "*" -- "1" VaccinationCenter : is held at >
+
 Company "1" -- "*" VaccinationCenter : knows >
+
 SNSUser "1" -- "*" Appointment : schedules >
-Company "1" -- "*" SNSUser : knows >
 
 @enduml
