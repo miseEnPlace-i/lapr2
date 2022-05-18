@@ -44,9 +44,8 @@ Company "1" -- "*" Appointment : knows >
 Appointment "1"  -- "1" VaccineType : has >
 Appointment "*" -- "1" VaccinationCenter : has >
 Company "1" -- "*" VaccinationCenter : knows >
-Appointment -- Receptionist : associated to >
+Appointment -- Receptionist : schedules <
 Receptionist "1" -- "1" SNSUser : schedules for >
-Company "1" -- "*" Receptionist : knows >
 Appointment "1" -- "1" SNSUser : has >
 Employee <|-- Receptionist
 Company -- Employee : knows >

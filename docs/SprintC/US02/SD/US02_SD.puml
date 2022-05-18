@@ -4,19 +4,30 @@ autonumber
 actor "Receptionist" as RECEPT
 
 participant ":AppointmentUI" as UI
+participant ":Application" as APP
 participant ":AppointmentController" as CTRL
 participant "comp\n:Company" as COMP
 participant "mapper\n:AppointmentMapper" as MAPPER
 participant "appDto:AppointmentDto" as DTO
 participant "store\n:VaccineTypeStore" as VACSTORE
-participant "list\n:VaccineList"
 participant "store\n:SNSUserStore" as SNSSTORE
 participant "store\n:AppointmentStore" as APPSTORE
 participant "appointment\n:Appointment" as APPOINT
+participant "list\n:VaccineList"
 
 activate RECEPT
 RECEPT -> UI : asks to schedule a vaccination
 activate UI
+
+UI -> APP : app=getInstance()
+activate APP
+deactivate APP
+
+UI -> APP : company=app.getCompany()
+activate APP
+deactivate APP
+
+UI -> CTRL** : create(company)
 
 UI --> RECEPT : requests data (SNSUserNumber, date, time)
 deactivate UI
@@ -27,7 +38,7 @@ activate UI
 UI -> CTRL : getSuggestedVaccine()
 activate CTRL
 
-CTRL -> COMP : sugVac = getSuggestedVaccine()
+CTRL -> COMP : suggestedVac = getSuggestedVaccine()
 activate COMP
 deactivate CTRL
 deactivate COMP
@@ -67,16 +78,16 @@ deactivate VACSTORE
 deactivate CTRL
 end
 
-UI --> RECEPT : asks to send sms with information about the scheduled vaccine
+UI --> RECEPT : requests to send information about the scheduled vaccine
 deactivate UI
-RECEPT -> UI : accepts or declines the sending sms
+RECEPT -> UI : accepts or declines the request
 activate UI
 
 UI -> CTRL : createAppointment(dto)
 activate CTRL
 
 note right 
-dto has all information (SNSUserNumber,date,time, center, vaccineType,SMS)
+dto has all information (SNSUserNumber,date,time,center,vaccineType,SMS)
 end note
 CTRL -> COMP : appointment = createAppointment(dto)
 activate COMP
@@ -113,7 +124,7 @@ deactivate DTO
 MAPPER -> APPSTORE : create(SNSUserNumber,date,time,center,vaccineType,SMS)
 activate APPSTORE
 
-APPSTORE -> APPOINT** : create(SNSUserNumber,date,time, center, vaccineType,SMS)
+APPSTORE -> APPOINT** : create(SNSUserNumber,date,time,center,vaccineType,SMS)
 deactivate MAPPER
 deactivate APPSTORE
 
