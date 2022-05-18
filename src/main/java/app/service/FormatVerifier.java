@@ -1,5 +1,8 @@
 package app.service;
 
+import java.lang.reflect.Method;
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * Format Verifier with all the rules for the application.
  * 
@@ -27,6 +30,22 @@ public final class FormatVerifier {
     CCFormatVerifier ccVerifier = new CCFormatVerifier();
 
     return ccVerifier.validate(cc);
+  }
+
+  public static Method getValidationMethodForField(String field) {
+    Class[] argList = {String.class};
+
+    String methodName = "validate";
+
+    String fieldName = StringUtils.join(field.split(" "), "");
+    methodName += fieldName;
+
+    try {
+      return Class.forName("app.service.FormatVerifier").getMethod(methodName, argList);
+    } catch (Throwable e) {
+      System.err.println(e);
+      return null;
+    }
   }
 
   /**
