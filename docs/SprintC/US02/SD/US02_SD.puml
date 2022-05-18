@@ -11,6 +11,7 @@ participant "appDto:AppointmentDto" as DTO
 participant "store\n:VaccineTypeStore" as VACSTORE
 participant "store\n:SNSUserStore" as SNSSTORE
 participant "store\n:AppointmentStore" as APPSTORE
+participant "appointment\n:Appointment" as APPOINT
 
 activate RECEPT
 RECEPT -> UI : asks to schedule a vaccination
@@ -112,7 +113,7 @@ deactivate CTRL
 MAPPER -> APPSTORE : create(SNSUserNumber,date,time,center,vaccineType,SMS)
 activate APPSTORE
 
-APPSTORE -> Appointment** : create(SNSUserNumber,date,time,vaccineType,SMS)
+APPSTORE -> APPOINT** : create(SNSUserNumber,date,time,vaccineType,SMS)
 deactivate MAPPER
 
 APPSTORE -> APPSTORE : addAppointment()
