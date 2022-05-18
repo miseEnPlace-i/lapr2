@@ -95,9 +95,9 @@ public class VaccinationCenterStore {
     List<VaccinationCenterListDTO> centers = new ArrayList<VaccinationCenterListDTO>();
 
     for (VaccinationCenter vaccinationCenter : vaccinationCenters) {
-      VaccinationCenterListDTO vaccinationCenterDTO = new VaccinationCenterListDTO(
-          vaccinationCenter.getName(), vaccinationCenter.getAddress(), vaccinationCenter.getEmail(),
-          vaccinationCenter.getPhone(), vaccinationCenter.getCoordinatorName());
+      VaccinationCenterListDTO vaccinationCenterDTO =
+          new VaccinationCenterListDTO(vaccinationCenter.getName(), vaccinationCenter.getAddress(),
+              vaccinationCenter.getEmail(), vaccinationCenter.getPhone());
 
       centers.add(vaccinationCenterDTO);
     }

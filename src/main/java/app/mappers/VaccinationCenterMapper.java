@@ -15,7 +15,6 @@ public class VaccinationCenterMapper
 
   public VaccinationCenterListDTO toDto(VaccinationCenter vaccinationCenter) {
     return new VaccinationCenterListDTO(vaccinationCenter.getName(), vaccinationCenter.getAddress(),
-        vaccinationCenter.getEmail(), vaccinationCenter.getPhone(),
-        vaccinationCenter.getCoordinatorName());
+        vaccinationCenter.getEmail(), vaccinationCenter.getPhone());
   }
 }

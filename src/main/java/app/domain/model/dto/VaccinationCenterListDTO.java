@@ -5,15 +5,12 @@ public class VaccinationCenterListDTO {
   private String address;
   private String email;
   private String phone;
-  private String coordinatorName;
 
-  public VaccinationCenterListDTO(String name, String address, String email, String phone,
-      String coordinatorName) {
+  public VaccinationCenterListDTO(String name, String address, String email, String phone) {
     this.name = name;
     this.address = address;
     this.email = email;
     this.phone = phone;
-    this.coordinatorName = coordinatorName;
   }
 
   public String getName() {
@@ -32,10 +29,6 @@ public class VaccinationCenterListDTO {
     return phone;
   }
 
-  public String getCoordinatorName() {
-    return coordinatorName;
-  }
-
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -44,7 +37,6 @@ public class VaccinationCenterListDTO {
     sb.append(String.format("Address: %s\n", this.address));
     sb.append(String.format("Email: %s\n", this.email));
     sb.append(String.format("Phone number: %s\n", this.phone));
-    sb.append(String.format("Coordinator: %s\n", this.getCoordinatorName()));
 
     return sb.toString();
   }

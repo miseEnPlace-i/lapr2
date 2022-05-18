@@ -6,7 +6,7 @@ import app.session.NurseSession;
 import app.ui.console.utils.Utils;
 
 public class NurseUI implements Runnable {
-  private NurseSession nurseSession = null;
+  private NurseSession nurseSession = new NurseSession();
 
   public NurseUI() {}
 
@@ -15,14 +15,14 @@ public class NurseUI implements Runnable {
 
     new SelectNurseVaccinationCenterUI(nurseSession).run();
 
-    // If no nurse session was created, don't proceed
-    if (nurseSession == null) return;
+    if (!nurseSession.isLoggedIn()) return;
 
     options.add(
         new MenuItem("Get users in Waiting Room", new ShowTextUI("\n\nGet users in Waiting Room")));
 
     int option = 0;
     do {
+      System.out.printf("Nurse Vaccination Center: %s%n", nurseSession.getVaccinationCenter());
       option = Utils.showAndSelectIndex(options, "\n\nNurse Menu:");
 
       if ((option >= 0) && (option < options.size())) options.get(option).run();

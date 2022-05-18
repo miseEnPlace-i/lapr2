@@ -22,13 +22,13 @@ public class SelectNurseVaccinationCenterUI implements Runnable {
       return;
     }
 
-    while (nurseSession == null) {
+    while (!nurseSession.isLoggedIn()) {
       Object center =
           Utils.showAndSelectOne(controller.listVaccinationCenters(), "\n\nVaccination Centers\n");
 
       try {
         VaccinationCenterListDTO centerDTO = (VaccinationCenterListDTO) center;
-        nurseSession = controller.selectVaccinationCenter(centerDTO);
+        nurseSession.setVaccinationCenter(centerDTO);
       } catch (ClassCastException e) {
         System.out.println("\n\nInvalid selection.");
       }
