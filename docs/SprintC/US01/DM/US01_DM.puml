@@ -17,7 +17,7 @@ class SNSUser {
   -address
 }
 
-class VaccinationCenter{
+class VaccinationCenter {
   -name
   -address
   -emailAddress
