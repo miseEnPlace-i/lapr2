@@ -29,7 +29,7 @@ public abstract class RegisterUI<T extends IRegisterController> implements Runna
       if (confirmed) {
         ctrl.save();
         System.out.printf("%n%s successfully registered!", ctrl.getResourceName());
-      }
+      } else System.out.printf("%nOperation canceled! %s not registered!", ctrl.getResourceName());
     } catch (Exception e) {
       System.out.printf("%nError: %s%n", e.getMessage());
     }
@@ -45,9 +45,8 @@ public abstract class RegisterUI<T extends IRegisterController> implements Runna
     List<String> options = new ArrayList<String>();
     options.add("Yes, it is correct.");
     options.add("No, it is not correct.");
-    Object input = Utils.showAndSelectOne(options, "\nIs this information correct?: (1 or 2)  ");
-    String inputStr = (String) input;
+    int index = Utils.showAndSelectIndex(options, "\nIs this information correct?: (1 or 2)  ");
 
-    return inputStr.equals("y");
+    return index == 0;
   }
 }
