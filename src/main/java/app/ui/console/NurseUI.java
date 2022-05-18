@@ -22,7 +22,8 @@ public class NurseUI implements Runnable {
 
     int option = 0;
     do {
-      System.out.printf("Nurse Vaccination Center: %s%n", nurseSession.getVaccinationCenter());
+      System.out.printf("%nNurse Vaccination Center: %s",
+          nurseSession.getVaccinationCenter().getName());
       option = Utils.showAndSelectIndex(options, "\n\nNurse Menu:");
 
       if ((option >= 0) && (option < options.size())) options.get(option).run();
