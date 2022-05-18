@@ -17,8 +17,8 @@ public class NurseUI implements Runnable {
 
     if (!nurseSession.isLoggedIn()) return;
 
-    options.add(
-        new MenuItem("Get users in Waiting Room", new ShowTextUI("\n\nGet users in Waiting Room")));
+    options
+        .add(new MenuItem("Get users in Waiting Room", new ListUsersInWaitingRoomUI(nurseSession)));
 
     int option = 0;
     do {

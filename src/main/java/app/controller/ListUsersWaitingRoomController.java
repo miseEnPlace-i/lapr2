@@ -1,10 +1,10 @@
 package app.controller;
 
-import java.util.List;
 import app.domain.model.Company;
-import app.domain.model.SNSUser;
+import app.domain.model.WaitingRoom;
 import app.domain.model.dto.VaccinationCenterListDTO;
 import app.domain.model.store.VaccinationCenterStore;
+import app.exception.NotAuthorizedException;
 import app.session.NurseSession;
 
 public class ListUsersWaitingRoomController {
@@ -15,14 +15,19 @@ public class ListUsersWaitingRoomController {
   /**
    * Constructor for ListUsersWaitingRoomController.
    */
-  public ListUsersWaitingRoomController(Company company, NurseSession nurseSession) {
+  public ListUsersWaitingRoomController(Company company, NurseSession nurseSession)
+      throws NotAuthorizedException {
     this.company = company;
+    if (!nurseSession.isLoggedIn()) throw new NotAuthorizedException("Nurse is not logged in");
     this.nurseSession = nurseSession;
+    this.vaccinationCenterStore = company.getVaccinationCenterStore();
   }
 
-  public List<SNSUser> getWaitingRoomListFromNurseCenter() {
+  public WaitingRoom getWaitingRoomListFromNurseCenter() {
     VaccinationCenterListDTO nurseVaccinationCenter = nurseSession.getVaccinationCenter();
 
-    return null;
+    // TODO refactor using equals
+    // TODO refactor using Waiting Room DTO
+    return vaccinationCenterStore.getWaitingRoom(nurseVaccinationCenter.getPhone());
   }
 }

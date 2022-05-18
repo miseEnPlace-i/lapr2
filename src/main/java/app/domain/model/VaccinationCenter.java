@@ -19,6 +19,7 @@ public class VaccinationCenter {
   private int slotDuration;
   private int maxVacSlot;
   private Employee coordinator;
+  private WaitingRoom waitingRoom;
 
   /**
    * Constructor for the Vaccination Center
@@ -50,6 +51,7 @@ public class VaccinationCenter {
     setSlotDuration(slotDuration);
     setMaxVacSlot(maxVacSlot);
     setCoordinator(coordinator);
+    this.waitingRoom = new WaitingRoom();
   }
 
   /**
@@ -256,6 +258,10 @@ public class VaccinationCenter {
    */
   public boolean hasPhone(String phone) {
     return phoneNum.equals(phone);
+  }
+
+  public WaitingRoom getWaitingRoom() {
+    return waitingRoom;
   }
 
   /**

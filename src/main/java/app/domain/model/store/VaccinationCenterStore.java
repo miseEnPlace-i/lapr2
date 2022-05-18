@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.Employee;
 import app.domain.model.VaccinationCenter;
+import app.domain.model.WaitingRoom;
 import app.domain.model.dto.VaccinationCenterListDTO;
 
 /**
@@ -105,11 +106,21 @@ public class VaccinationCenterStore {
     return centers;
   }
 
+  public WaitingRoom getWaitingRoom(String phone) {
+    return getVaccinationCenterByPhone(phone).getWaitingRoom();
+  }
+
+  private VaccinationCenter getVaccinationCenterByPhone(String phone) {
+    for (VaccinationCenter center : vaccinationCenters) {
+      if (center.getPhone().equals(phone)) {
+        return center;
+      }
+    }
+    return null;
+  }
+
   public boolean exists(String phone) {
     // !! Refactor !!
-    for (VaccinationCenter vaccinationCenter : vaccinationCenters)
-      if (vaccinationCenter.hasPhone(phone)) return true;
-
-    return false;
+    return !(getVaccinationCenterByPhone(phone) == null);
   }
 }
