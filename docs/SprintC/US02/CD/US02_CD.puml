@@ -58,9 +58,9 @@ class VaccinationCenter{
 class VaccinationCenterStore {
 +createVaccinationCenter(centerData,coordinator)
 +validateVaccinatonCenter(center)
+-checkDuplicates(center)
 +saveVaccinationCenter(center)
-+checkDuplicates(center)
--addVaccinationCenter(center)
++size()
 }
 
 class VaccineType {
@@ -88,8 +88,6 @@ class Employee {
   +Employee(name,email,phone,address,citizenCardNumber,roleId)
 }
 
-class Receptionist {}
-
 class SMS {}
 
 AppointmentUI ..> AppointmentController
@@ -102,9 +100,7 @@ Company "1" --> "*" Employee : knows
 VaccinationCenterStore "1" -> "*" VaccinationCenter : stores
 VaccineTypeStore "1" -> "*" VaccineType : stores
 SNSUserStore "1" -> "*" SNSUser : stores
-Employee "1" --> "1" Receptionist : play as
 Employee ---o VaccinationCenter : coordinator
-Receptionist "1" --> "1" Appointment : is related to
 VaccinationCenter "1" --o "*" Appointment
 SNSUser "1" --o "*" Appointment
 VaccineType "1" --o "1" Appointment
