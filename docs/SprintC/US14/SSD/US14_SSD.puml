@@ -10,11 +10,6 @@ deactivate ":System"
 
 ADMIN -> ":System" : types requested data
 activate ":System"
-":System" --> ADMIN : shows all data and requests confirmation
-deactivate ":System"
-
-ADMIN -> ":System" : confirms the data
-activate ":System"
 ":System" --> ADMIN : informs operation success
 deactivate ":System"
 
