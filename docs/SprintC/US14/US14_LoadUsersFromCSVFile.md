@@ -36,6 +36,16 @@ character; b) the other type does not have a header, column separation is done
 using “,” character. 
 * **AC2:** The file path name field must filled in.
 * **AC3:** The file path name must correspond to an existing and valid CSV file.
+* **AC4:** When loading a User with an already existing reference, the system must reject such operation.
+* **AC5:** Birth day must have the format: DD/MM/YYYY. A SNS User should not have more than 150 years of age.
+* **AC6:** Citizen card numbers should follow the portuguese format (8 digits, 1 control digit and 2 chars + 1 digit)
+* **AC7:** SNS number must have 9 digits.
+* **AC8:** Phone numbers should follow the portuguese format ("+351" + 9 digits).
+* **AC9:** Email address must be validated using a regular expression.
+* **AC10:** Gender options: Male/Female.
+* **AC11:** The password should be randomly generated. It should have 7 alphanumeric characters, 3 of them being upper case and 2 of them must be digits.
+* **AC12:** All input fields are required except gender.
+* **AC13:** The email, phone number, citizen card number and SNS User number must be unique for each SNS User.
 
 
 ### 1.4. Found out Dependencies
