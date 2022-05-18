@@ -29,7 +29,7 @@ user -> ":System" : selects a vaccination center
 activate ":System"
 ":System" --> user : requests to send information about the scheduled vaccine
 deactivate ":System"
-
+  
 user -> ":System" : accepts or declines the request
 activate ":System"
 ":System" --> user : shows all data and requests confirmation
