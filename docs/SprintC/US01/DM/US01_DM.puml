@@ -37,9 +37,9 @@ class Company {
 
 Company "1" -- "*" Appointment : knows >
 Appointment "1"  -- "1" VaccineType : has >
-Appointment "*" -- "1" VaccinationCenter : has >
+Appointment "*" -- "1" VaccinationCenter : is held >
 Company "1" -- "*" VaccinationCenter : knows >
-Appointment "1" -- "1" SNSUser : schedules <
+SNSUser "1" -- "*" Appointment : schedules >
 Company "1" -- "*" SNSUser : knows >
 
 @enduml
