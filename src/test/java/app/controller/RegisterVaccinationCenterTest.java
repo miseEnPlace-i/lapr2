@@ -6,14 +6,15 @@ import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.Company;
 import app.domain.model.Employee;
-import app.domain.shared.Constants;
+import app.domain.model.store.EmployeeRoleStore;
+import app.domain.model.store.EmployeeStore;
 
 /**
  * @author André Barros <1211299@isep.ipp.pt>
  */
 public class RegisterVaccinationCenterTest {
-  RegisterVaccinationCenterController controller =
-      new RegisterVaccinationCenterController(new Company("designation"));
+  Company company = new Company("designation");
+  RegisterVaccinationCenterController controller = new RegisterVaccinationCenterController(company);
   String centerName = "Vaccination Center";
   Employee coordinator;
 
@@ -22,8 +23,14 @@ public class RegisterVaccinationCenterTest {
    */
   @Before
   public void setUp() {
-    coordinator = new Employee("Joana", "+351916478865", "email@email.com", "address",
-        "000000000ZZ4", Constants.ROLE_COORDINATOR);
+    EmployeeRoleStore roleStore = company.getEmployeeRoleStore();
+    roleStore.addEmployeeRole("COORDINATOR", "COORDINATOR");
+
+    EmployeeStore employeeStore = company.getEmployeeStore();
+
+    coordinator = employeeStore.createEmployee("Joana", "+351916478865", "email@email.com",
+        "address", "000000000ZZ4", "COORDINATOR");
+    employeeStore.saveEmployee(coordinator);
   }
 
   /**

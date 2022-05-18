@@ -1,19 +1,25 @@
 package app.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.Company;
+import app.domain.model.store.VaccineTechnologyStore;
 
 /**
  * @author André Barros <1211299@isep.ipp.pt>
  */
 public class RegisterVaccineTypeTest {
-  App app = App.getInstance();
-  RegisterNewVaccineTypeController controller =
-      new RegisterNewVaccineTypeController(new Company("designation"));
+  Company company = new Company("designation");
+  RegisterNewVaccineTypeController controller = new RegisterNewVaccineTypeController(company);
   String vaccineType = "Vaccine Type";
 
 
+  @Before
+  public void setUp() {
+    VaccineTechnologyStore store = company.getVaccineTechnologyStore();
+    store.addVaccineTechnology("LIVE_ATTENUATED_TECHNOLOGY");
+  }
 
   /**
    * To string method for tests purpose
@@ -76,7 +82,7 @@ public class RegisterVaccineTypeTest {
   /**
    * Check that it is possible to create a vaccine type with all valid values
    */
-  // @Test
+  @Test
   public void ensureValidValuesCreateNewVaccineType() {
     controller.create("12345", "test", "LIVE_ATTENUATED_TECHNOLOGY");
   }
@@ -84,7 +90,7 @@ public class RegisterVaccineTypeTest {
   /**
    * Check that StringifyData method is working properly
    */
-  // @Test
+  @Test
   public void ensureStringifyDataWorking() {
     String vaccineType = toString();
     controller.create("12345", "test", "LIVE_ATTENUATED_TECHNOLOGY");
