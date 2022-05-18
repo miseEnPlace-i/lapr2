@@ -9,6 +9,7 @@ participant "comp\n:Company" as COMP
 participant "mapper\n:AppointmentMapper" as MAPPER
 participant "appDto:AppointmentDto" as DTO
 participant "store\n:VaccineTypeStore" as VACSTORE
+participant "list\n:VaccineList"
 participant "store\n:SNSUserStore" as SNSSTORE
 participant "store\n:AppointmentStore" as APPSTORE
 participant "appointment\n:Appointment" as APPOINT
@@ -75,13 +76,12 @@ UI -> CTRL : createAppointment(dto)
 activate CTRL
 
 note right 
-dto has all information (SNSUserNumber,date,time,vaccineType,SMS)
+dto has all information (SNSUserNumber,date,time, center, vaccineType,SMS)
 end note
-CTRL -> COMP : vacSchedule = createAppointment(dto)
+CTRL -> COMP : appointment = createAppointment(dto)
 activate COMP
 
-
-COMP -> MAPPER : vacSchedule = toDto(dto)
+COMP -> MAPPER : appointmentDTO = toDto(dto)
 activate MAPPER
 deactivate COMP
 
@@ -113,7 +113,7 @@ deactivate DTO
 MAPPER -> APPSTORE : create(SNSUserNumber,date,time,center,vaccineType,SMS)
 activate APPSTORE
 
-APPSTORE -> APPOINT** : create(SNSUserNumber,date,time,vaccineType,SMS)
+APPSTORE -> APPOINT** : create(SNSUserNumber,date,time, center, vaccineType,SMS)
 deactivate MAPPER
 deactivate APPSTORE
 
