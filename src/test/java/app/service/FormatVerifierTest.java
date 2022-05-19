@@ -8,32 +8,32 @@ import org.junit.Test;
 public class FormatVerifierTest {
   @Test
   public void ensureCCFormatIsValid() {
-    assert FormatVerifier.validateCC("123456789ZZ1");
+    assert FormatVerifier.validateCitizenCard("123456789ZZ1");
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void ensureCCFormatWithMissingLastDigit() {
-    assert !FormatVerifier.validateCC("123456789ZZ");
+    assert !FormatVerifier.validateCitizenCard("123456789ZZ");
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void ensureCCFormatWithMissingLetter() {
-    assert !FormatVerifier.validateCC("123456789Z1");
+    assert !FormatVerifier.validateCitizenCard("123456789Z1");
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void ensureCCFormatWithMoreDigits() {
-    assert !FormatVerifier.validateCC("123456789Z111");
+    assert !FormatVerifier.validateCitizenCard("123456789Z111");
   }
 
   @Test
   public void ensureCCFormatViolatingDigitRules() {
-    assert !FormatVerifier.validateCC("122222222Z11");
+    assert !FormatVerifier.validateCitizenCard("122222222Z11");
   }
 
   @Test
   public void ensureCCFormatViolatingLetterRules() {
-    assert !FormatVerifier.validateCC("000000000ZZ1");
+    assert !FormatVerifier.validateCitizenCard("000000000ZZ1");
   }
 
   @Test

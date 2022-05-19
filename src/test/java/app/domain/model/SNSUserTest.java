@@ -1,8 +1,9 @@
 package app.domain.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import java.util.Calendar;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import java.util.Date;
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 
 /**
@@ -16,9 +17,8 @@ public class SNSUserTest {
    * @throws Exception
    */
   @Test(expected = Exception.class)
-  public void ensureNullArgumentsArentAllowed() {
-    Calendar c = Calendar.getInstance();
-    new SNSUser(null, null, null, c, ' ', null, null, null);
+  public void ensureNullArgumentsAreNotAllowed() {
+    new SNSUser(null, null, null, null, ' ', null, null, null);
   }
 
   /**
@@ -27,7 +27,7 @@ public class SNSUserTest {
    * @throws IllegalArgumentException
    */
   @Test(expected = IllegalArgumentException.class)
-  public void ensureInvalidBirthDayIsntAccepted() {
+  public void ensureInvalidBirthDayIsNotAccepted() {
     String citizenCard = "123456789";
     String snsNumber = "123456789";
     String name = "Teste";
@@ -36,8 +36,8 @@ public class SNSUserTest {
     String email = "example@example.com";
     String address = "Test Address 101";
 
-    Calendar birthDay = Calendar.getInstance();
-    birthDay.add(Calendar.YEAR, -151);
+    Date birthDay = new Date();
+    birthDay = DateUtils.addYears(birthDay, -151);
 
     new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
   }
@@ -48,7 +48,7 @@ public class SNSUserTest {
    * @throws IllegalArgumentException
    */
   @Test(expected = IllegalArgumentException.class)
-  public void ensureInvalidFutureBirthDayArentAccepted() {
+  public void ensureInvalidFutureBirthDayAreNotAccepted() {
     String citizenCard = "123456789";
     String snsNumber = "123456789";
     String name = "Teste";
@@ -57,8 +57,8 @@ public class SNSUserTest {
     String email = "example@example.com";
     String address = "Test Address 101";
 
-    Calendar birthDay = Calendar.getInstance();
-    birthDay.add(Calendar.YEAR, 1);
+    Date birthDay = new Date();
+    birthDay = DateUtils.addYears(birthDay, 1);
 
     new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
   }
@@ -69,8 +69,8 @@ public class SNSUserTest {
    * @throws IllegalArgumentException
    */
   @Test(expected = IllegalArgumentException.class)
-  public void ensureInvalidPhoneNumbersArentAllowed() {
-    Calendar c = Calendar.getInstance();
+  public void ensureInvalidPhoneNumbersAreNotAllowed() {
+    Date c = new Date();
     new SNSUser("123456789ZZ1", "123456789", "name", c, 'M', "0", "email@email.com", "address");
   }
 
@@ -81,7 +81,7 @@ public class SNSUserTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidCCLengthIsntAllowed() {
-    Calendar c = Calendar.getInstance();
+    Date c = new Date();
     new SNSUser("987987", "123456789", "name", c, 'M', "+351912345678", "email@email.com",
         "address");
   }
@@ -92,8 +92,8 @@ public class SNSUserTest {
    * @throws IllegalArgumentException
    */
   @Test(expected = IllegalArgumentException.class)
-  public void ensureInvalidCCIsntAllowed() {
-    Calendar c = Calendar.getInstance();
+  public void ensureInvalidCCIsNotAllowed() {
+    Date c = new Date();
     new SNSUser("000000000ZZ0", "123456789", "name", c, 'M', "+351912345678", "email@email.com",
         "address");
   }
@@ -105,7 +105,7 @@ public class SNSUserTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidEmailIsntAllowed() {
-    Calendar c = Calendar.getInstance();
+    Date c = new Date();
     new SNSUser("123456789ZZ1", "123456789", "name", c, 'M', "+351912345678", "2h1125h1q5as",
         "address");
   }
@@ -117,7 +117,7 @@ public class SNSUserTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidSNSNumberIsntAllowed() {
-    Calendar c = Calendar.getInstance();
+    Date c = new Date();
     new SNSUser("123456789ZZ1", "1111111111111111111", "name", c, 'M', "+351912345678",
         "2h1125h1q5as", "address");
   }
@@ -129,7 +129,7 @@ public class SNSUserTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidNameIsntAllowed() {
-    Calendar c = Calendar.getInstance();
+    Date c = new Date();
     new SNSUser("123456789ZZ1", "222222222", "", c, 'M', "+351912345678", "example@example.com",
         "address");
   }
@@ -140,8 +140,8 @@ public class SNSUserTest {
    * @throws IllegalArgumentException
    */
   @Test(expected = IllegalArgumentException.class)
-  public void ensureInvalidAddressIsntAllowed() {
-    Calendar c = Calendar.getInstance();
+  public void ensureInvalidAddressIsNotAllowed() {
+    Date c = new Date();
     new SNSUser("123456789ZZ1", "222222222", "test", c, 'M', "+351912345678", "example@example.com",
         "");
   }
@@ -151,12 +151,12 @@ public class SNSUserTest {
    */
   @Test
   public void ensureIsPossibleToCreateSNSUser() {
-    Calendar c = Calendar.getInstance();
+    Date c = new Date();
     SNSUser instance = new SNSUser("123456789ZZ1", "123456789", "name", c, 'M', "+351211111111",
         "email@email.com", "address");
 
-    assert instance.getCitizenCard().equals("123456789ZZ1");
-    assert instance.getSnsNumber().equals("123456789");
+    assertEquals(instance.getCitizenCard(), "123456789ZZ1");
+    assertEquals(instance.getSnsNumber(), "123456789");
     assertNotNull(instance);
   }
 
@@ -164,8 +164,8 @@ public class SNSUserTest {
    * Tests if gets returns the correct values.
    */
   @Test
-  public void ensureGetAddressWorksAsExpected() {
-    Calendar c = Calendar.getInstance();
+  public void ensureGetsWorkAsExpected() {
+    Date c = new Date();
     SNSUser instance = new SNSUser("123456789ZZ1", "123456789", "name", c, 'M', "+351211111111",
         "email@email.com", "address");
 
@@ -184,7 +184,7 @@ public class SNSUserTest {
    */
   @Test
   public void ensureToStringWorksAsExpected() {
-    Calendar c = Calendar.getInstance();
+    Date c = new Date();
     SNSUser instance = new SNSUser("123456789ZZ1", "123456789", "name", c, 'F', "+351211111111",
         "email@email.com", "address");
 
@@ -199,23 +199,26 @@ public class SNSUserTest {
    */
   @Test
   public void ensureEqualsWorksAsExpected() {
-    Calendar c = Calendar.getInstance();
+    Date c = new Date();
     SNSUser instance = new SNSUser("123456789ZZ1", "123456789", "name", c, 'F', "+351211111111",
         "email@email.com", "address");
     SNSUser instance2 = new SNSUser("135510490ZX8", "323456789", "name", c, 'F', "+351211111112",
         "email2@email.com", "address");
     Object randomObject = new Object();
+    SNSUser emailEquals = new SNSUser("346715253ZY4", "523456789", "name", c, 'F', "+351211111117",
+        "email@email.com", "address");
     SNSUser phoneEquals = new SNSUser("346715253ZY4", "523456789", "name", c, 'F', "+351211111111",
         "email3@email.com", "address");
     SNSUser ccEquals = new SNSUser("123456789ZZ1", "523456789", "name", c, 'F', "+351211111115",
         "email3@email.com", "address");
-    SNSUser snsNumberEquals = new SNSUser("346715253ZY4", "123456789", "name", c, 'F', "+351211111115",
-        "email3@email.com", "address");
+    SNSUser snsNumberEquals = new SNSUser("346715253ZY4", "123456789", "name", c, 'F',
+        "+351211111115", "email3@email.com", "address");
 
     assert instance.equals(instance);
     assert !instance.equals(instance2);
     assert !instance.equals(randomObject);
     assert !instance.equals(null);
+    assert instance.equals(emailEquals);
     assert instance.equals(phoneEquals);
     assert instance.equals(ccEquals);
     assert instance.equals(snsNumberEquals);

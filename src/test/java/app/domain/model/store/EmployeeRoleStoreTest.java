@@ -1,5 +1,8 @@
 package app.domain.model.store;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,8 +32,8 @@ public class EmployeeRoleStoreTest {
 
     roles = employeeRoleStore.getRoles();
 
-    assert roles.size() == 1;
-    assert roles.get(0).equals(role);
+    assertEquals(roles.size(), 1);
+    assertEquals(roles.get(0), role);
   }
 
   @Test
@@ -39,18 +42,18 @@ public class EmployeeRoleStoreTest {
 
     employeeRoleStore.addEmployeeRole("role", "role");
 
-    assert authFacade.existsRole("role");
+    assertTrue(authFacade.existsRole("role"));
   }
 
   @Test
   public void ensureExistsRoleIsWorking() {
-    assert !employeeRoleStore.existsRole("role");
+    assertFalse(employeeRoleStore.existsRole("role"));
 
     employeeRoleStore.addEmployeeRole("role", "role");
 
     System.out.println(employeeRoleStore.getRoles());
 
-    assert employeeRoleStore.existsRole("role");
+    assertTrue(employeeRoleStore.existsRole("role"));
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -64,8 +67,8 @@ public class EmployeeRoleStoreTest {
     employeeRoleStore.addEmployeeRole("role", "role");
     employeeRoleStore.addEmployeeRole("role1", "role");
 
-    assert employeeRoleStore.existsRole("role");
-    assert employeeRoleStore.existsRole("role1");
-    assert employeeRoleStore.getRoles().size() == 2;
+    assertTrue(employeeRoleStore.existsRole("role"));
+    assertTrue(employeeRoleStore.existsRole("role1"));
+    assertEquals(employeeRoleStore.getRoles().size(), 2);
   }
 }

@@ -13,8 +13,6 @@ import app.domain.model.store.VaccineTypeStore;
  */
 
 public class RegisterNewVaccineTypeController implements IRegisterController {
-
-  private App app;
   private Company company;
   private VaccineTypeStore vaccineTypeStore;
   private VaccineType vt;
@@ -24,9 +22,8 @@ public class RegisterNewVaccineTypeController implements IRegisterController {
    * Constructor for SpecifyNewVaccineTypeController
    */
 
-  public RegisterNewVaccineTypeController() {
-    this.app = App.getInstance();
-    this.company = this.app.getCompany();
+  public RegisterNewVaccineTypeController(Company company) {
+    this.company = company;
     this.vaccineTypeStore = this.company.getVaccineTypeStore();
     this.vaccineTechnologyStore = this.company.getVaccineTechnologyStore();
   }
