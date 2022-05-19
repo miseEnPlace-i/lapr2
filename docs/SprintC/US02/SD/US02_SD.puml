@@ -11,7 +11,6 @@ participant "store\n:VaccinationCenterStore" as CENTER
 participant "mapper\n:AppointmentMapper" as MAPPER
 participant "appDto:AppointmentDto" as DTO
 participant "store\n:VaccineTypeStore" as VACSTORE
-participant "store\n:SNSUserStore" as SNSSTORE
 participant "store\n:AppointmentStore" as APPSTORE
 participant "appointment\n:Appointment" as APPOINT
 participant "list\n:VaccineList"
@@ -36,10 +35,10 @@ deactivate UI
 RECEPT -> UI : types requested data
 activate UI
 
-UI -> CTRL : getSuggestedVaccine()
+UI -> CTRL : suggestedVaccineType = getSuggestedVaccineType()
 activate CTRL
 
-CTRL -> COMP : suggestedVac = getSuggestedVaccine()
+CTRL -> COMP : suggestedVaccineType = getSuggestedVaccineType()
 activate COMP
 deactivate CTRL
 deactivate COMP
@@ -50,7 +49,8 @@ deactivate UI
 RECEPT -> UI : accepts the suggested vaccine type
 activate UI
 
-UI -> CTRL : getVaccineTypeStore()
+opt declines the suggested vaccine type
+UI -> CTRL : getListOfVaccineTypes()
 activate CTRL
 
 CTRL -> COMP : getVaccineTypeStore()
@@ -62,12 +62,12 @@ activate VACSTORE
 deactivate VACSTORE
 deactivate CTRL
 
-opt declines the suggested vaccine type
 UI --> RECEPT : shows all vaccine types and asks to select one
 deactivate UI
 
 RECEPT -> UI : selects a vaccine type
 activate UI
+end
 
 UI -> CTRL : getListOfVaccinationCentersWithVaccineType(vaccineType)
 activate CTRL
@@ -84,7 +84,6 @@ CTRL -> CENTER : availableVaccinationCenters = getVaccinationCentersByVaccineTyp
 activate CENTER
 deactivate CENTER
 deactivate CTRL
-end
 
 UI --> RECEPT : shows all available vaccination centers and asks to select one
 deactivate UI
@@ -101,7 +100,7 @@ UI -> CTRL : createAppointment(dto)
 activate CTRL
 
 note right 
-dto has all information (SNSUserNumber,date,time,center,vaccineType,SMS)
+dto has all information needed to create an appointment (SNS User Number,date,time,vaccination center,vaccine type,sms)
 end note
 CTRL -> COMP : appointment = createAppointment(dto)
 activate COMP
