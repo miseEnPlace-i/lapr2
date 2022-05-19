@@ -13,8 +13,6 @@ import app.domain.model.store.VaccineTypeStore;
  */
 
 public class RegisterNewVaccineTypeController implements IRegisterController {
-
-  private App app;
   private Company company;
   private VaccineTypeStore vaccineTypeStore;
   private VaccineType vt;

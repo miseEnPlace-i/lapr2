@@ -13,7 +13,6 @@ import pt.isep.lei.esoft.auth.domain.model.UserRole;
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 public class ListEmployeesByRoleController {
-  private App app;
   private Company company;
   private EmployeeStore employeeStore;
   private EmployeeRoleStore rolesStore;
