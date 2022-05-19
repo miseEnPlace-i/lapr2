@@ -1,15 +1,13 @@
 package app.controller;
 
-import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
-
 import java.util.List;
+import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
 
 /**
  *
  * @author Paulo Maio <pam@isep.ipp.pt>
  */
 public class AuthController {
-
   private App app;
 
   public AuthController() {
