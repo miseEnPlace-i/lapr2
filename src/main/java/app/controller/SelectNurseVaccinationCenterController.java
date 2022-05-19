@@ -8,11 +8,9 @@ import app.session.NurseSession;
 
 public class SelectNurseVaccinationCenterController {
   private VaccinationCenterStore vaccinationCenterStore;
-  private NurseSession nurseSession;
 
   public SelectNurseVaccinationCenterController(Company company, NurseSession nurseSession) {
     this.vaccinationCenterStore = company.getVaccinationCenterStore();
-    this.nurseSession = nurseSession;
   }
 
   public List<VaccinationCenterListDTO> listVaccinationCenters() {

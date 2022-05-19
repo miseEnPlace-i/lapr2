@@ -8,7 +8,6 @@ import app.exception.NotAuthorizedException;
 import app.session.NurseSession;
 
 public class ListUsersWaitingRoomController {
-  private Company company;
   private VaccinationCenterStore vaccinationCenterStore;
   private NurseSession nurseSession;
 
@@ -17,7 +16,6 @@ public class ListUsersWaitingRoomController {
    */
   public ListUsersWaitingRoomController(Company company, NurseSession nurseSession)
       throws NotAuthorizedException {
-    this.company = company;
     if (!nurseSession.isLoggedIn()) throw new NotAuthorizedException("Nurse is not logged in");
     this.nurseSession = nurseSession;
     this.vaccinationCenterStore = company.getVaccinationCenterStore();
