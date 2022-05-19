@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.List;
 import app.controller.App;
 import app.controller.RegisterNewVaccineTypeController;
+import app.service.FieldsToValidate;
 import app.ui.console.utils.Utils;
 
 /**
@@ -48,7 +49,8 @@ public class RegisterNewVaccineTypeUI extends RegisterUI<RegisterNewVaccineTypeC
   public void insertData() throws IllegalArgumentException, ParseException {
 
     System.out.println("\nRegister a new Vaccine type: ");
-    String code = Utils.readLineFromConsole("Code (xxxxx): ");
+    String code =
+        Utils.readLineFromConsoleWithValidation("Code (xxxxx): ", FieldsToValidate.VAC_CODE);
     String designation = Utils.readLineFromConsole("Designation: ");
 
     List<String> technologyList = super.ctrl.getVaccineTechnologyList();

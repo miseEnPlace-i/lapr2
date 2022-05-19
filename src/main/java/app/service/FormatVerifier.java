@@ -108,4 +108,16 @@ public final class FormatVerifier {
   public static boolean validateSNSNumber(String expression) {
     return expression.matches("[0-9]{9}");
   }
+
+  /**
+   * Validates if the given string is a valid Vaccine Code.
+   * 
+   * The only rule is that the expression must be composed by 5 digits
+   * 
+   * @param expression The expression to be validated.
+   * @return True if the expression is a valid Vaccine Code, false otherwise.
+   */
+  public static boolean validateVaccineCode(String expression) {
+    return expression.matches("[0-9]{5}");
+  }
 }
