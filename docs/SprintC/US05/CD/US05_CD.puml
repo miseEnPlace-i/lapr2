@@ -1,72 +1,127 @@
 @startuml
 skinparam classAttributeIconSize 0
 
-class ApplicationPOT
-{
-  +static getInstance()
-  +getCurrentSession()
+class Arrive {
+  - Date arriveTime
+  - int status
 }
 
-class UserSession
-{
-  +getUserEmail()
+class NurseSession {
+  - String nurseName
+  - String vaccinationCenterId
+
+  + NurseSession(String nurseName, String vaccinationCenterId)
+  + String getVaccinationCenterId()
 }
 
-class Task {
-  -String reference
-  -String designation
-  -String informalDescription
-  -String technicalDescription
-  -Integer duration
-  -Double cost
-  +Task(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
+class Company {
+  -designation: String
+  -authFacade: AuthFacade
+  -vaccinationCenterStore: VaccinationCenterStore
+  
+  +Company(designation)
+
+  +getAuthFacade()
+  +getVaccinationCenterStore()
 }
 
-class Category {
-  -String id
-  -String description
-}
-
-class Organization {
-  -String name
-  -String VatNumber
-  -String website
-  -String phone
-  -String email
-  +Organization(name, VatNumber, webSite, phone, email, postalAddress, manager)
-  +createTask(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
-  +saveTask(task)
-  -addTask(task)
-  -validateTask(task)
-}
-
-class Platform {
-  -String designation
+class CheckWaitingRoomController {
   +getCategories()
-  +getCategoryById(catId)
-  +getOrganizationByUserEmail(email)
-}
-
-class CreateTaskController {
-  +getCategories()
-  +createTask(ref,designation,informalDesc,technicalDesc,duration,cost,categoryId)
+  +CheckWaitingRoom(ref,designation,informalDesc,technicalDesc,duration,cost,categoryId)
   +saveTask()
 }
 
-class CreateTaskUI {
+class CheckWaitingRoomUI {}
 
+class VaccinationCenter {
+  - name: String
+  - address: String
+  - emailAddress: String
+  - phoneNumber: String
+  - faxNumber: String
+  - websiteAddress: String
+  - openingHours: String
+  - closingHours: String
+  - slotDuration: int
+  - maximumVaccinesPerSlot: int
+  
+  +VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
 }
 
-CreateTaskUI ..> CreateTaskController
-CreateTaskController ..> Platform
-CreateTaskController ..> Category
-CreateTaskController ..> Task
-CreateTaskController ..> Organization
-CreateTaskController ..> ApplicationPOT
-CreateTaskController ..> UserSession
-Task "*" -> "1" Category : classified in
-Platform "1" --> "*" Category : defines
-Organization "1" --> "*" Task : owns
+class VaccinationCenterStore {
+  +createVaccinationCenter(centerData,coordinator)
+  +validateVaccinatonCenter(center)
+  +saveVaccinationCenter(center)
+  +checkDuplicates(center)
+  +getWaitingRoom(center)
 
+  -addVaccinationCenter(center)
+}
+
+class Employee {
+  -id: String 
+  -name: String 
+  -email: String 
+  -phone: String 
+  -address: String 
+  -citizenCardNumber: int 
+  -roleId: String 
+
+  +Employee(name,email,phone,address,citizenCardNumber,roleId)
+}
+
+class SNSUser {
+  - String citizenCard
+  - String snsNumber
+  - Date birthDay
+  - Char gender
+  - String phoneNumber
+  - String address
+  + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
+}
+
+class WaitingRoom {
+  +createArrive(arriveTime, user, appointment)
+  +saveArrive(arrive)
+  +removeArrive(arrive)
+  -checkDuplicates(arrive)
+}
+
+class Appointment {
+  -Date appointmentDate
+
+  +Appointment(appointmentDate, user, vaccine)
+}
+
+class Vaccine{
+  -designation : String
+  -brand : String
+  -id : String
+  -vacType : VaccineType
+
+  +Vaccine(designation, id, brand, vacTypeId)
+}
+
+CheckWaitingRoomUI ..> CheckWaitingRoomController
+CheckWaitingRoomController ..> Company
+
+Arrive o-- SNSUser
+Arrive o-- Appointment
+Appointment o-- SNSUser
+
+VaccinationCenter o-- Employee : coordinator
+VaccinationCenterStore "1" -- "*" VaccinationCenter : stores >
+
+Company ..> VaccinationCenterStore
+
+WaitingRoom "1" -- "*" Arrive : stores >
+
+Employee "1" -- "*" WaitingRoom : checks
+VaccinationCenter *-- WaitingRoom
+
+CheckWaitingRoomController ..> NurseSession
+
+Appointment "*" -- "1" VaccinationCenter : has <
+Appointment o-- Vaccine
 
 @enduml

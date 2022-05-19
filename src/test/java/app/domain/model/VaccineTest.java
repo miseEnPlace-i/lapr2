@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,19 +25,19 @@ public class VaccineTest {
   }
 
 
-  //Check that it is not possible to create a vaccine with null arguments
+  // Check that it is not possible to create a vaccine with null arguments
   @Test(expected = IllegalArgumentException.class)
   public void ensureNullVacArgumentsNotValid() {
     new Vaccine(null, null, null, null);
   }
 
-  //Check that it is not possible to create a vaccine with empty arguments
+  // Check that it is not possible to create a vaccine with empty arguments
   @Test(expected = IllegalArgumentException.class)
   public void ensureEmptyVacArgumentsNotValid() {
     new Vaccine("", "", "", null);
   }
 
-  //Check that Vaccine constructor is working correctly
+  // Check that Vaccine constructor is working correctly
   @Test
   public void ensureIsPossibleToCreateVaccine() {
     Vaccine vaccine = new Vaccine("designation", "id", "brade", vaccineType);
@@ -44,7 +45,7 @@ public class VaccineTest {
     assertNotNull(vaccine);
   }
 
-  //Check that is possible to add an administration process
+  // Check that is possible to add an administration process
   @Test
   public void ensureIsPossibleToAddVaccine() {
     Vaccine vaccine = new Vaccine("designation", "id", "brade", vaccineType);
@@ -53,7 +54,6 @@ public class VaccineTest {
     AdminProcess ap = new AdminProcess(1, 10, 2);
 
     vaccine.addAdminProc(ap);
-    assert vaccine.getAdminProcList().getList().size() == 1;
+    assertEquals(vaccine.getAdminProcList().getList().size(), 1);
   }
-
 }

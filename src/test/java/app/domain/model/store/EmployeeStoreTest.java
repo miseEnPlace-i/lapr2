@@ -1,5 +1,6 @@
 package app.domain.model.store;
 
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.Employee;
@@ -29,9 +30,9 @@ public class EmployeeStoreTest {
    */
   @Test
   public void ensureAddEmployeeIsWorkingCorrectly() {
-    assert store.size() == 0;
+    assertEquals(store.size(), 0);
     store.saveEmployee(employee);
-    assert store.size() == 1;
+    assertEquals(store.size(), 1);
   }
 
   /**

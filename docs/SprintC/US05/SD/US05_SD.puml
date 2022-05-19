@@ -5,73 +5,77 @@ actor "Nurse" as NURSE
 
 participant ":ListUsersInWaitingRoomUI" as UI
 participant ":ListUsersInWaitingRoomController" as CTRL
+participant "nurseSession:NurseSession" as FAC
 participant "comp\n:Company" as COMP
-participant "waitingRoomStore\n:EmployeeStore" as EMPS
-participant "waitingRoomStore\n:EmployeeStore" as EMPS
-participant "user:User" as USER
 participant "vaccinationCenterStore\n:VaccinationCenterStore" as VACS
+participant ":ArriveMapper" as ARRM
+participant "arriveHistory:ArriveHistory" as ARR
+participant "arrive:Arrive" as ARR
 
 activate NURSE
 NURSE -> UI : asks to list users in waiting room for a given vaccination center
 activate UI
+
+UI -> CTRL : getWaitingRoomListFromNurseCenter()
 activate CTRL
-UI -> CTRL : vaccinationCenter=getVaccinationCenters()
+CTRL -> FAC : nurseVaccinationCenterId=getVaccinationCenterId()
+activate FAC
+deactivate FAC
+|||
+
 CTRL -> COMP : vaccinationCenterStore=getVaccinationCenterStore()
 activate COMP
-deactivate COMP
+deactivate
 
-CTRL -> VACS : vaccinationCenters=getVaccinationCenters()
+CTRL -> VACS : waitingRoom=getCenterWaitingRoom(nurseVaccinationCenterId)
 activate VACS
-|||
 deactivate VACS
-deactivate CTRL
 
-UI --> NURSE : shows all vaccination centers and asks to select one
-deactivate UI
+CTRL -> ARRM : waitingRoomDto=toDto(waitingRoom)
+activate ARRM
 
-NURSE -> UI : selects an employee role
-activate UI
+create "waitingRoomDto:\nList<ArriveDto>" as WAITDTO
 
-UI -> CTRL : getEmployeesWithRole(roleId)
-activate CTRL
+ARRM -> WAITDTO
 
-CTRL -> COMP: getEmployeeStore()
-activate COMP
-deactivate COMP
-CTRL -> EMPS: getEmployeesWithRole(roleId)
-activate EMPS
-deactivate EMPS
-EMPS -> ROLES: existsRole(roleId)
-activate ROLES
-deactivate ROLES
-create "lstEmp\n:List<Employee>" as LST
-EMPS --> LST
+loop for each arrive in waitingRoom
+|||
+  ARRM -> ARRM : placeInLine=i
+  ARRM -> ARR : username=arrive.getUserName()
+  activate ARR
+  deactivate ARR
+  ARRM -> ARR : arriveTime=arrive.getArriveTime()
+  activate ARR
+  deactivate ARR
 
-loop for each employee
-    EMPS -> USER: e=employee.hasRoleId(roleId)
-  activate USER
-    USER --> EMPS: true/false
-  deactivate USER
-    alt e==true
-        EMPS -> LST: add(employee)
-      activate LST
-    |||
-    deactivate LST
-    end
+  create "arriveDto\n:ArriveDto" as APODTO
+  ARRM -> APODTO : create(placeInLine,username,arriveTime)
+
+  ARRM -> WAITDTO : add(arriveDto)
+  activate WAITDTO
+  deactivate WAITDTO
+|||
 end
 
-CTRL --> UI: lstEmp
+|||
+ARRM --> CTRL : waitingRoomDto 
+
+deactivate ARRM
+
+CTRL --> UI: waitingRoomDto
 
 deactivate COMP
 deactivate CTRL
 UI --> NURSE : informs operation success
-UI --> NURSE: shows the list of employees
+UI --> NURSE: shows list of users waiting in vaccination center
 deactivate UI
 
 deactivate UI
 deactivate CTRL
 deactivate NURSE
 
-participant "roleList:\nList<UserRole>"
+participant "vaccinationCenters:\nList<VaccinationCenter>"
+participant "vaccinationCentersDto:\nList<VaccinationCenterDTO>"
+participant "waitingRoom:\nList<Appointment>"
 
 @enduml

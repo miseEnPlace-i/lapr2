@@ -1,6 +1,7 @@
 package app.ui.console;
 
 import java.util.List;
+import app.controller.App;
 import app.controller.ListEmployeesByRoleController;
 import app.domain.model.Employee;
 import app.ui.console.utils.Utils;
@@ -16,7 +17,7 @@ public class ListEmployeesByRoleUI implements Runnable {
   private ListEmployeesByRoleController ctrl;
 
   public ListEmployeesByRoleUI() {
-    ctrl = new ListEmployeesByRoleController();
+    ctrl = new ListEmployeesByRoleController(App.getInstance().getCompany());
   }
 
   public void run() {
@@ -32,7 +33,8 @@ public class ListEmployeesByRoleUI implements Runnable {
 
     List<Employee> employees = getEmployeesWithRole(role.getId());
 
-    Utils.showList(employees, "\n" + role.getDescription());
+    if (employees.isEmpty()) System.out.println("\nNo employees with this role.");
+    else Utils.showList(employees, "\n" + role.getDescription());
   }
 
   /**

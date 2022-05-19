@@ -17,7 +17,6 @@ import pt.isep.lei.esoft.auth.UserSession;
  * @author Paulo Maio <pam@isep.ipp.pt>
  */
 public class App {
-
   private Company company;
   private AuthFacade authFacade;
   private EmployeeStore employeeStore;
