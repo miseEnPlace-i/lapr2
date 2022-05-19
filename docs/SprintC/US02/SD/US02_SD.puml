@@ -7,6 +7,7 @@ participant ":AppointmentUI" as UI
 participant ":Application" as APP
 participant ":AppointmentController" as CTRL
 participant "comp\n:Company" as COMP
+participant "store\n:VaccinationCenterStore" as CENTER
 participant "mapper\n:AppointmentMapper" as MAPPER
 participant "appDto:AppointmentDto" as DTO
 participant "store\n:VaccineTypeStore" as VACSTORE
@@ -61,7 +62,6 @@ activate VACSTORE
 deactivate VACSTORE
 deactivate CTRL
 
-
 opt declines the suggested vaccine type
 UI --> RECEPT : shows all vaccine types and asks to select one
 deactivate UI
@@ -69,14 +69,28 @@ deactivate UI
 RECEPT -> UI : selects a vaccine type
 activate UI
 
-UI -> CTRL : getVaccineTypeByCode(code)
+UI -> CTRL : getListOfVaccinationCentersWithVaccineType(vaccineType)
 activate CTRL
 
-CTRL -> VACSTORE : getVaccineTypeByCode(code)
-activate VACSTORE
-deactivate VACSTORE
+CTRL -> COMP : vaccinationCenterStore = getVaccinationCenterStore()
+activate COMP
+deactivate COMP
+
+CTRL -> COMP : getVaccineStore()
+activate COMP
+deactivate COMP
+
+CTRL -> CENTER : availableVaccinationCenters = getVaccinationCentersByVaccineType(vaccineType)
+activate CENTER
+deactivate CENTER
 deactivate CTRL
 end
+
+UI --> RECEPT : shows all available vaccination centers and asks to select one
+deactivate UI
+
+RECEPT -> UI : selects a vaccination center
+activate UI
 
 UI --> RECEPT : requests to send information about the scheduled vaccine
 deactivate UI
@@ -92,31 +106,31 @@ end note
 CTRL -> COMP : appointment = createAppointment(dto)
 activate COMP
 
-COMP -> MAPPER : appointmentDTO = toDto(dto)
+COMP -> MAPPER : appointmentDTO = toDto(appointment)
 activate MAPPER
 deactivate COMP
 
-MAPPER -> DTO : SNSUserNumber = getSNSNumber()
+MAPPER -> DTO : SNSUserNumber = appointment.getSNSNumber()
 activate DTO
 deactivate DTO
 
-MAPPER -> DTO : date = getDate()
+MAPPER -> DTO : date = appointment.getDate()
 activate DTO
 deactivate DTO
 
-MAPPER -> DTO : time = getTime()
+MAPPER -> DTO : time = appointment.getTime()
 activate DTO
 deactivate DTO
 
-MAPPER -> DTO : center=getVaccinationCenter()
+MAPPER -> DTO : center=appointment.getVaccinationCenter()
 activate DTO
 deactivate DTO
 
-MAPPER -> DTO : vaccineType = getVaccineType()
+MAPPER -> DTO : vaccineType = appointment.getVaccineType()
 activate DTO
 deactivate DTO
 
-MAPPER -> DTO : sms = getSms() 
+MAPPER -> DTO : sms = appointment.getSms() 
 activate DTO
 deactivate DTO
 
