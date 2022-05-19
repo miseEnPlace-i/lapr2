@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1047px" preserveAspectRatio="none" style="width:2773px;height:1047px;background:#FFFFFF;" version="1.1" viewBox="0 0 2773 1047" width="2773px" zoomAndPan="magnify"><defs><filter height="300%" id="fm13uuzqoyd1l" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" filter="url(#fm13uuzqoyd1l)" height="847.1797" style="stroke:#A80036;stroke-width:1.0;" width="10" x="23.5" y="98.2969"/><rect fill="#FFFFFF" filter="url(#fm13uuzqoyd1l)" height="826.0469" style="stroke:#A80036;stroke-width:1.0;" width="10" x="465.5" y="119.4297"/><rect fill="#FFFFFF" filter="url(#fm13uuzqoyd1l)" height="738.6484" style="stroke:#A80036;stroke-width:1.0;" width="10" x="757.5" y="148.5625"/><rect fill="#FFFFFF" filter="url(#fm13uuzqoyd1l)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1133.5" y="177.6953"/><rect fill="#FFFFFF" filter="url(#fm13uuzqoyd1l)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1294.5" y="261.8281"/><rect fill="#FFFFFF" filter="url(#fm13uuzqoyd1l)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1441.5" y="320.9609"/><rect fill="#FFFFFF" filter="url(#fm13uuzqoyd1l)" height="477.9844" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1601" y="380.0938"/><rect fill="#FFFFFF" filter="url(#fm13uuzqoyd1l)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1869" y="562.0859"/><rect fill="#FFFFFF" filter="url(#fm13uuzqoyd1l)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1869" y="621.2188"/><rect fill="#FFFFFF" filter="url(#fm13uuzqoyd1l)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1996.5" y="741.9453"/><rect fill="#FFFFFF" filter="url(#fm13uuzqoyd1l)" height="348.2578" style="stroke:#000000;stroke-width:2.0;" width="636.5" x="1539.5" y="456.6875"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="28" x2="28" y1="88.2969" y2="963.4766"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="470.5" x2="470.5" y1="88.2969" y2="963.4766"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="762.5" x2="762.5" y1="88.2969" y2="963.4766"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1138.5" x2="1138.5" y1="88.2969" y2="963.4766"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1299.5" x2="1299.5" y1="88.2969" y2="963.4766"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1446.5" x2="1446.5" y1="88.2969" y2="963.4766"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1605.5" x2="1605.5" y1="88.2969" y2="963.4766"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1874" x2="1874" y1="88.2969" y2="963.4766"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="2001" x2="2001" y1="428.8906" y2="963.4766"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="2123" x2="2123" y1="700.0156" y2="963.4766"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="2271" x2="2271" y1="88.2969" y2="963.4766"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="2488" x2="2488" y1="88.2969" y2="963.4766"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="2686" x2="2686" y1="88.2969" y2="963.4766"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="41" x="5" y="84.9951">Nurse</text><ellipse cx="28.5" cy="15" fill="#FEFECE" filter="url(#fm13uuzqoyd1l)" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M28.5,23 L28.5,50 M15.5,31 L41.5,31 M28.5,50 L15.5,65 M28.5,50 L41.5,65 " fill="none" filter="url(#fm13uuzqoyd1l)" style="stroke:#A80036;stroke-width:2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="41" x="5" y="975.4717">Nurse</text><ellipse cx="28.5" cy="988.7734" fill="#FEFECE" filter="url(#fm13uuzqoyd1l)" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M28.5,996.7734 L28.5,1023.7734 M15.5,1004.7734 L41.5,1004.7734 M28.5,1023.7734 L15.5,1038.7734 M28.5,1023.7734 L41.5,1038.7734 " fill="none" filter="url(#fm13uuzqoyd1l)" style="stroke:#A80036;stroke-width:2.0;"/><rect fill="#FEFECE" filter="url(#fm13uuzqoyd1l)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="198" x="369.5" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="184" x="376.5" y="72.9951">:ListUsersInWaitingRoomUI</text><rect fill="#FEFECE" filter="url(#fm13uuzqoyd1l)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="198" x="369.5" y="962.4766"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="184" x="376.5" y="982.4717">:ListUsersInWaitingRoomUI</text><rect fill="#FEFECE" filter="url(#fm13uuzqoyd1l)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="252" x="634.5" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="238" x="641.5" y="72.9951">:ListUsersInWaitingRoomController</text><rect fill="#FEFECE" filter="url(#fm13uuzqoyd1l)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="252" x="634.5" y="962.4766"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="238" x="641.5" y="982.4717">:ListUsersInWaitingRoomController</text><rect fill="#FEFECE" filter="url(#fm13uuzqoyd1l)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="210" x="1031.5" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="196" x="1038.5" y="72.9951">nurseSession:NurseSession</text><rect fill="#FEFECE" filter="url(#fm13uuzqoyd1l)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="210" x="1031.5" y="962.4766"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="196" x="1038.5" y="982.4717">nurseSession:NurseSession</text><rect fill="#FEFECE" filter="url(#fm13uuzqoyd1l)" height="46.5938" style="stroke:#A80036;stroke-width:1.5;" width="84" x="1255.5" y="36.7031"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="39" x="1278" y="56.6982">comp</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70" x="1262.5" y="72.9951">:Company</text><rect fill="#FEFECE" filter="url(#fm13uuzqoyd1l)" height="46.5938" style="stroke:#A80036;stroke-width:1.5;" width="84" x="1255.5" y="962.4766"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="39" x="1278" y="982.4717">comp</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70" x="1262.5" y="998.7686">:Company</text><rect fill="#FEFECE" filter="url(#fm13uuzqoyd1l)" height="46.5938" style="stroke:#A80036;stroke-width:1.5;" width="182" x="1353.5" y="36.7031"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="161" x="1364" y="56.6982">vaccinationCenterStore</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="168" x="1360.5" y="72.9951">:VaccinationCenterStore</text><rect fill="#FEFECE" filter="url(#fm13uuzqoyd1l)" height="46.5938" style="stroke:#A80036;stroke-width:1.5;" width="182" x="1353.5" y="962.4766"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="161" x="1364" y="982.4717">vaccinationCenterStore</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="168" x="1360.5" y="998.7686">:VaccinationCenterStore</text><rect fill="#FEFECE" filter="url(#fm13uuzqoyd1l)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="109" x="1549.5" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="95" x="1556.5" y="72.9951">:ArriveMapper</text><rect fill="#FEFECE" filter="url(#fm13uuzqoyd1l)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="109" x="1549.5" y="962.4766"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="95" x="1556.5" y="982.4717">:ArriveMapper</text><rect fill="#FEFECE" filter="url(#fm13uuzqoyd1l)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="94" x="1825" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="80" x="1832" y="72.9951">arrive:Arrive</text><rect fill="#FEFECE" filter="url(#fm13uuzqoyd1l)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="94" x="1825" y="962.4766"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="80" x="1832" y="982.4717">arrive:Arrive</text><rect fill="#FEFECE" filter="url(#fm13uuzqoyd1l)" height="46.5938" style="stroke:#A80036;stroke-width:1.5;" width="133" x="1933" y="962.4766"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="119" x="1940" y="982.4717">waitingRoomDto:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="109" x="1945" y="998.7686">List&lt;arriveDto&gt;</text><rect fill="#FEFECE" filter="url(#fm13uuzqoyd1l)" height="46.5938" style="stroke:#A80036;stroke-width:1.5;" width="82" x="2080" y="962.4766"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="62" x="2090" y="982.4717">arriveDto</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="68" x="2087" y="998.7686">:ArriveDto</text><rect fill="#FEFECE" filter="url(#fm13uuzqoyd1l)" height="46.5938" style="stroke:#A80036;stroke-width:1.5;" width="187" x="2176" y="36.7031"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="137" x="2201" y="56.6982">vaccinationCenters:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="173" x="2183" y="72.9951">List&lt;VaccinationCenter&gt;</text><rect fill="#FEFECE" filter="url(#fm13uuzqoyd1l)" height="46.5938" style="stroke:#A80036;stroke-width:1.5;" width="187" x="2176" y="962.4766"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="137" x="2201" y="982.4717">vaccinationCenters:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="173" x="2183" y="998.7686">List&lt;VaccinationCenter&gt;</text><rect fill="#FEFECE" filter="url(#fm13uuzqoyd1l)" height="46.5938" style="stroke:#A80036;stroke-width:1.5;" width="218" x="2377" y="36.7031"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="162" x="2405" y="56.6982">vaccinationCentersDto:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="204" x="2384" y="72.9951">List&lt;VaccinationCenterDTO&gt;</text><rect fill="#FEFECE" filter="url(#fm13uuzqoyd1l)" height="46.5938" style="stroke:#A80036;stroke-width:1.5;" width="218" x="2377" y="962.4766"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="162" x="2405" y="982.4717">vaccinationCentersDto:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="204" x="2384" y="998.7686">List&lt;VaccinationCenterDTO&gt;</text><rect fill="#FEFECE" filter="url(#fm13uuzqoyd1l)" height="46.5938" style="stroke:#A80036;stroke-width:1.5;" width="150" x="2609" y="36.7031"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="94" x="2637" y="56.6982">waitingRoom:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="136" x="2616" y="72.9951">List&lt;Appointment&gt;</text><rect fill="#FEFECE" filter="url(#fm13uuzqoyd1l)" height="46.5938" style="stroke:#A80036;stroke-width:1.5;" width="150" x="2609" y="962.4766"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="94" x="2637" y="982.4717">waitingRoom:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="136" x="2616" y="998.7686">List&lt;Appointment&gt;</text><rect fill="#FFFFFF" filter="url(#fm13uuzqoyd1l)" height="847.1797" style="stroke:#A80036;stroke-width:1.0;" width="10" x="23.5" y="98.2969"/><rect fill="#FFFFFF" filter="url(#fm13uuzqoyd1l)" height="826.0469" style="stroke:#A80036;stroke-width:1.0;" width="10" x="465.5" y="119.4297"/><rect fill="#FFFFFF" filter="url(#fm13uuzqoyd1l)" height="738.6484" style="stroke:#A80036;stroke-width:1.0;" width="10" x="757.5" y="148.5625"/><rect fill="#FFFFFF" filter="url(#fm13uuzqoyd1l)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1133.5" y="177.6953"/><rect fill="#FFFFFF" filter="url(#fm13uuzqoyd1l)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1294.5" y="261.8281"/><rect fill="#FFFFFF" filter="url(#fm13uuzqoyd1l)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1441.5" y="320.9609"/><rect fill="#FFFFFF" filter="url(#fm13uuzqoyd1l)" height="477.9844" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1601" y="380.0938"/><rect fill="#FFFFFF" filter="url(#fm13uuzqoyd1l)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1869" y="562.0859"/><rect fill="#FFFFFF" filter="url(#fm13uuzqoyd1l)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1869" y="621.2188"/><rect fill="#FFFFFF" filter="url(#fm13uuzqoyd1l)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1996.5" y="741.9453"/><polygon fill="#A80036" points="453.5,115.4297,463.5,119.4297,453.5,123.4297,457.5,119.4297" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="33.5" x2="459.5" y1="119.4297" y2="119.4297"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="40.5" y="114.3638">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="400" x="53.5" y="114.3638">asks to list users in waiting room for a given vaccination center</text><polygon fill="#A80036" points="745.5,144.5625,755.5,148.5625,745.5,152.5625,749.5,148.5625" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="475.5" x2="751.5" y1="148.5625" y2="148.5625"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="482.5" y="143.4966">2</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="250" x="495.5" y="143.4966">getWaitingRoomListFromNurseCenter()</text><polygon fill="#A80036" points="1121.5,173.6953,1131.5,177.6953,1121.5,181.6953,1125.5,177.6953" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="767.5" x2="1127.5" y1="177.6953" y2="177.6953"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="774.5" y="172.6294">3</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="334" x="787.5" y="172.6294">nurseVaccinationCenterId=getVaccinationCenterId()</text><polygon fill="#A80036" points="1282.5,257.8281,1292.5,261.8281,1282.5,265.8281,1286.5,261.8281" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="767.5" x2="1288.5" y1="261.8281" y2="261.8281"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="774.5" y="256.7622">4</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="344" x="787.5" y="256.7622">vaccinationCenterStore=getVaccinationCenterStore()</text><polygon fill="#A80036" points="1429.5,316.9609,1439.5,320.9609,1429.5,324.9609,1433.5,320.9609" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="767.5" x2="1435.5" y1="320.9609" y2="320.9609"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="774.5" y="315.895">5</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="413" x="787.5" y="315.895">waitingRoom=getCenterWaitingRoom(nurseVaccinationCenterId)</text><polygon fill="#A80036" points="1589,376.0938,1599,380.0938,1589,384.0938,1593,380.0938" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="767.5" x2="1595" y1="380.0938" y2="380.0938"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="774.5" y="375.0278">6</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="242" x="787.5" y="375.0278">waitingRoomDto=toDto(waitingRoom)</text><polygon fill="#A80036" points="1921,405.2266,1931,409.2266,1921,413.2266,1925,409.2266" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="1611" x2="1927" y1="409.2266" y2="409.2266"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="1618" y="404.1606">7</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="0" x="1635" y="404.1606"/><rect fill="#FEFECE" filter="url(#fm13uuzqoyd1l)" height="46.5938" style="stroke:#A80036;stroke-width:1.5;" width="133" x="1933" y="388.0938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="119" x="1940" y="408.0889">waitingRoomDto:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="109" x="1945" y="424.3857">List&lt;arriveDto&gt;</text><path d="M1539.5,456.6875 L1616.5,456.6875 L1616.5,463.6875 L1606.5,473.6875 L1539.5,473.6875 L1539.5,456.6875 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0;"/><rect fill="none" height="348.2578" style="stroke:#000000;stroke-width:2.0;" width="636.5" x="1539.5" y="456.6875"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="32" x="1554.5" y="469.7544">loop</text><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="207" x="1631.5" y="468.8979">[for each arrive in waitingRoom]</text><line style="stroke:#A80036;stroke-width:1.0;" x1="1611" x2="1653" y1="519.9531" y2="519.9531"/><line style="stroke:#A80036;stroke-width:1.0;" x1="1653" x2="1653" y1="519.9531" y2="532.9531"/><line style="stroke:#A80036;stroke-width:1.0;" x1="1612" x2="1653" y1="532.9531" y2="532.9531"/><polygon fill="#A80036" points="1622,528.9531,1612,532.9531,1622,536.9531,1618,532.9531" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="1618" y="514.8872">8</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="85" x="1631" y="514.8872">placeInLine=i</text><polygon fill="#A80036" points="1857,558.0859,1867,562.0859,1857,566.0859,1861,562.0859" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="1611" x2="1863" y1="562.0859" y2="562.0859"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="1618" y="557.02">9</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="216" x="1631" y="557.02">username=arrive.getUserName()</text><polygon fill="#A80036" points="1857,617.2188,1867,621.2188,1857,625.2188,1861,621.2188" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="1611" x2="1863" y1="621.2188" y2="621.2188"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="1618" y="616.1528">10</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="217" x="1640" y="616.1528">arriveTime=arrive.getArriveTime()</text><polygon fill="#A80036" points="2068,676.3516,2078,680.3516,2068,684.3516,2072,680.3516" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="1611" x2="2074" y1="680.3516" y2="680.3516"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="1618" y="675.2856">11</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="194" x="1640" y="675.2856">create(i,username,arriveTime)</text><rect fill="#FEFECE" filter="url(#fm13uuzqoyd1l)" height="46.5938" style="stroke:#A80036;stroke-width:1.5;" width="82" x="2080" y="659.2188"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="62" x="2090" y="679.2139">arriveDto</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="68" x="2087" y="695.5107">:ArriveDto</text><polygon fill="#A80036" points="1984.5,737.9453,1994.5,741.9453,1984.5,745.9453,1988.5,741.9453" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="1611" x2="1990.5" y1="741.9453" y2="741.9453"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="1618" y="736.8794">12</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="93" x="1640" y="736.8794">add(arriveDto)</text><polygon fill="#A80036" points="778.5,854.0781,768.5,858.0781,778.5,862.0781,774.5,858.0781" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="772.5" x2="1605" y1="858.0781" y2="858.0781"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="784.5" y="853.0122">13</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="59" x="806.5" y="853.0122">arriveDto</text><polygon fill="#A80036" points="486.5,883.2109,476.5,887.2109,486.5,891.2109,482.5,887.2109" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="480.5" x2="761.5" y1="887.2109" y2="887.2109"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="492.5" y="882.145">14</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="104" x="514.5" y="882.145">waitingRoomDto</text><polygon fill="#A80036" points="44.5,912.3438,34.5,916.3438,44.5,920.3438,40.5,916.3438" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="38.5" x2="464.5" y1="916.3438" y2="916.3438"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="50.5" y="911.2778">15</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="168" x="72.5" y="911.2778">informs operation success</text><polygon fill="#A80036" points="39.5,941.4766,29.5,945.4766,39.5,949.4766,35.5,945.4766" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="33.5" x2="469.5" y1="945.4766" y2="945.4766"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="45.5" y="940.4106">16</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="300" x="67.5" y="940.4106">shows list of users waiting in vaccination center</text><!--MD5=[8f60f51fdc144dabd0184b94fecc1d54]
+@startuml
+autonumber
+'hide footbox
+actor "Nurse" as NURSE
+
+participant ":ListUsersInWaitingRoomUI" as UI
+participant ":ListUsersInWaitingRoomController" as CTRL
+participant "nurseSession:NurseSession" as FAC
+participant "comp\n:Company" as COMP
+participant "vaccinationCenterStore\n:VaccinationCenterStore" as VACS
+participant ":ArriveMapper" as ARRM
+participant "arrive:Arrive" as ARR
+
+activate NURSE
+NURSE -> UI : asks to list users in waiting room for a given vaccination center
+activate UI
+
+UI -> CTRL : getWaitingRoomListFromNurseCenter()
+activate CTRL
+CTRL -> FAC : nurseVaccinationCenterId=getVaccinationCenterId()
+activate FAC
+deactivate FAC
+|||
+
+CTRL -> COMP : vaccinationCenterStore=getVaccinationCenterStore()
+activate COMP
+deactivate
+
+CTRL -> VACS : waitingRoom=getCenterWaitingRoom(nurseVaccinationCenterId)
+activate VACS
+deactivate VACS
+
+CTRL -> ARRM : waitingRoomDto=toDto(waitingRoom)
+activate ARRM
+
+create "waitingRoomDto:\nList<arriveDto>" as WAITDTO
+
+ARRM -> WAITDTO
+
+loop for each arrive in waitingRoom
+|||
+  ARRM -> ARRM : placeInLine=i
+  ARRM -> ARR : username=arrive.getUserName()
+  activate ARR
+  deactivate ARR
+  ARRM -> ARR : arriveTime=arrive.getArriveTime()
+  activate ARR
+  deactivate ARR
+
+  create "arriveDto\n:ArriveDto" as APODTO
+  ARRM -> APODTO : create(i,username,arriveTime)
+
+  ARRM -> WAITDTO : add(arriveDto)
+  activate WAITDTO
+  deactivate WAITDTO
+|||
+end
+
+|||
+ARRM - -> CTRL : arriveDto 
+
+deactivate ARRM
+
+CTRL - -> UI: waitingRoomDto
+
+deactivate COMP
+deactivate CTRL
+UI - -> NURSE : informs operation success
+UI - -> NURSE: shows list of users waiting in vaccination center
+deactivate UI
+
+deactivate UI
+deactivate CTRL
+deactivate NURSE
+
+participant "vaccinationCenters:\nList<VaccinationCenter>"
+participant "vaccinationCentersDto:\nList<VaccinationCenterDTO>"
+participant "waitingRoom:\nList<Appointment>"
+
+@enduml
+
+@startuml
+autonumber
+actor "Nurse" as NURSE
+
+participant ":ListUsersInWaitingRoomUI" as UI
+participant ":ListUsersInWaitingRoomController" as CTRL
+participant "nurseSession:NurseSession" as FAC
+participant "comp\n:Company" as COMP
+participant "vaccinationCenterStore\n:VaccinationCenterStore" as VACS
+participant ":ArriveMapper" as ARRM
+participant "arrive:Arrive" as ARR
+
+activate NURSE
+NURSE -> UI : asks to list users in waiting room for a given vaccination center
+activate UI
+
+UI -> CTRL : getWaitingRoomListFromNurseCenter()
+activate CTRL
+CTRL -> FAC : nurseVaccinationCenterId=getVaccinationCenterId()
+activate FAC
+deactivate FAC
+|||
+
+CTRL -> COMP : vaccinationCenterStore=getVaccinationCenterStore()
+activate COMP
+deactivate
+
+CTRL -> VACS : waitingRoom=getCenterWaitingRoom(nurseVaccinationCenterId)
+activate VACS
+deactivate VACS
+
+CTRL -> ARRM : waitingRoomDto=toDto(waitingRoom)
+activate ARRM
+
+create "waitingRoomDto:\nList<arriveDto>" as WAITDTO
+
+ARRM -> WAITDTO
+
+loop for each arrive in waitingRoom
+|||
+  ARRM -> ARRM : placeInLine=i
+  ARRM -> ARR : username=arrive.getUserName()
+  activate ARR
+  deactivate ARR
+  ARRM -> ARR : arriveTime=arrive.getArriveTime()
+  activate ARR
+  deactivate ARR
+
+  create "arriveDto\n:ArriveDto" as APODTO
+  ARRM -> APODTO : create(i,username,arriveTime)
+
+  ARRM -> WAITDTO : add(arriveDto)
+  activate WAITDTO
+  deactivate WAITDTO
+|||
+end
+
+|||
+ARRM - -> CTRL : arriveDto 
+
+deactivate ARRM
+
+CTRL - -> UI: waitingRoomDto
+
+deactivate COMP
+deactivate CTRL
+UI - -> NURSE : informs operation success
+UI - -> NURSE: shows list of users waiting in vaccination center
+deactivate UI
+
+deactivate UI
+deactivate CTRL
+deactivate NURSE
+
+participant "vaccinationCenters:\nList<VaccinationCenter>"
+participant "vaccinationCentersDto:\nList<VaccinationCenterDTO>"
+participant "waitingRoom:\nList<Appointment>"
+
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 16:16:42 WET 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

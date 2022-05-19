@@ -1,5 +1,8 @@
 package app.domain.model;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
 import app.domain.shared.Constants;
@@ -121,7 +124,7 @@ public class VaccinationCenterTest {
         "vacinacaoporto@gmail.com", "+351912345678", "+351223456789",
         "https://www.centrovacinaoporto.com", "20:00", "19:00", 5, 10, this.coordinator);
 
-    assert (center != null);
+    assertNotNull(center);
   }
 
   /**
@@ -137,9 +140,7 @@ public class VaccinationCenterTest {
         "vacinacaoporto2@gmail.com", "+351912345689", "+351223456999",
         "https://www.centrovacinaoporto2.com", "20:00", "19:00", 5, 10, this.coordinator);
 
-    boolean result = center.equals(center2);
-
-    assert (result == false);
+    assertNotEquals(center, center2);
   }
 
   /**
@@ -155,9 +156,7 @@ public class VaccinationCenterTest {
         "vacinacaoporto@gmail.com", "+351912345689", "+351223456999",
         "https://www.centrovacinaoporto2.com", "20:00", "19:00", 5, 10, this.coordinator);
 
-    boolean result = center.equals(center2);
-
-    assert (result == true);
+    assertEquals(center, center2);
   }
 
   /**
@@ -173,9 +172,7 @@ public class VaccinationCenterTest {
         "vacinacaoporto2@gmail.com", "+351912345678", "+351223456999",
         "https://www.centrovacinaoporto2.com", "20:00", "19:00", 5, 10, this.coordinator);
 
-    boolean result = center.equals(center2);
-
-    assert (result == true);
+    assertEquals(center, center2);
   }
 
   /**
@@ -191,9 +188,7 @@ public class VaccinationCenterTest {
         "vacinacaoporto2@gmail.com", "+351912345678", "+351223456789",
         "https://www.centrovacinaoporto2.com", "20:00", "19:00", 5, 10, this.coordinator);
 
-    boolean result = center.equals(center2);
-
-    assert (result == true);
+    assertEquals(center, center2);
   }
 
   /**
@@ -209,9 +204,7 @@ public class VaccinationCenterTest {
         "vacinacaoporto2@gmail.com", "+351912345678", "+351223456799",
         "https://www.centrovacinaoporto.com", "20:00", "19:00", 5, 10, this.coordinator);
 
-    boolean result = center.equals(center2);
-
-    assert (result == true);
+    assertEquals(center, center2);
   }
 
   /**
@@ -227,8 +220,6 @@ public class VaccinationCenterTest {
         "vacinacaoporto@gmail.com", "+351912345678", "+351223456799",
         "https://www.centrovacinaoporto.com", "20:00", "19:00", 5, 10, this.coordinator);
 
-    boolean result = center.equals(center2);
-
-    assert (result == true);
+    assertEquals(center, center2);
   }
 }

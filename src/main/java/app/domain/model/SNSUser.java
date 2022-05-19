@@ -1,9 +1,9 @@
 package app.domain.model;
 
-import java.util.Calendar;
+import java.util.Date;
 import app.service.CCFormatVerifier;
-import app.service.CalendarUtils;
 import app.service.FormatVerifier;
+import app.service.TimeUtils;
 
 /**
  * SNSUser model class.
@@ -25,7 +25,7 @@ public class SNSUser {
   private String name;
 
   // SNS User birth day
-  private Calendar birthDay;
+  private Date birthDay;
 
   // SNS User gender
   private char gender;
@@ -49,7 +49,7 @@ public class SNSUser {
    * @param phoneNumber
    * @param email
    */
-  public SNSUser(String citizenCard, String snsNumber, String name, Calendar birthDay, char gender,
+  public SNSUser(String citizenCard, String snsNumber, String name, Date birthDay, char gender,
       String phoneNumber, String email, String address) {
     validateBirthday(birthDay);
     validateCitizenCard(citizenCard);
@@ -94,7 +94,7 @@ public class SNSUser {
     return phoneNumber;
   }
 
-  public Calendar getBirthDay() {
+  public Date getBirthDay() {
     return birthDay;
   }
 
@@ -125,14 +125,14 @@ public class SNSUser {
    * 
    * @param birthDay
    */
-  private static void validateBirthday(Calendar birthDay) {
+  private static void validateBirthday(Date birthDay) {
     // checks if the birthday is in the future
-    if (birthDay.after(Calendar.getInstance())) {
+    if (birthDay.after(new Date())) {
       throw new IllegalArgumentException("Birthday cannot be in the future.");
     }
 
     // check if the birthday is more than MAX_AGE years ago
-    int age = CalendarUtils.calculateAge(birthDay);
+    int age = TimeUtils.calculateAge(birthDay);
 
     if (age > MAX_AGE) {
       throw new IllegalArgumentException(
@@ -184,7 +184,7 @@ public class SNSUser {
     sb.append(String.format("SNS User name: %s\n", this.name));
     sb.append(String.format("Citizen card number: %s\n", this.citizenCard));
     sb.append(String.format("SNS number: %s\n", this.snsNumber));
-    sb.append(String.format("Birthday: %s\n", CalendarUtils.calendarToString(this.birthDay)));
+    sb.append(String.format("Birthday: %s\n", TimeUtils.dateToString(this.birthDay)));
     sb.append(String.format("Gender: %s\n", this.gender == 'm' ? "Male" : "Female"));
     sb.append(String.format("Phone number: %s\n", this.phoneNumber));
     sb.append(String.format("Email: %s\n", this.email));

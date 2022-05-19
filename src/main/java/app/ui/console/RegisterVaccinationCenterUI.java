@@ -3,8 +3,10 @@ package app.ui.console;
 
 import java.util.ArrayList;
 import java.util.List;
+import app.controller.App;
 import app.controller.RegisterVaccinationCenterController;
 import app.domain.model.Employee;
+import app.service.FieldsToValidate;
 import app.ui.console.utils.Utils;
 
 /**
@@ -17,7 +19,7 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
    * VaccinationCenterUI Constructor
    */
   public RegisterVaccinationCenterUI() {
-    super(new RegisterVaccinationCenterController());
+    super(new RegisterVaccinationCenterController(App.getInstance().getCompany()));
   }
 
   @Override
@@ -26,10 +28,14 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
 
     String name = Utils.readLineFromConsole("Name: ");
     String address = Utils.readLineFromConsole("Address: ");
-    String email = Utils.readLineFromConsole("Email: ");
-    String phone = Utils.readLineFromConsole("Phone Number (+351xxxxxxxxx): ");
-    String fax = Utils.readLineFromConsole("Fax Number (+351xxxxxxxxx): ");
-    String website = Utils.readLineFromConsole("Website Address (https://domain.ext): ");
+    String email = Utils.readLineFromConsoleWithValidation("Email (example@example.com): ",
+        FieldsToValidate.EMAIL);
+    String phone = Utils.readLineFromConsoleWithValidation("Phone Number (+351xxxxxxxxx): ",
+        FieldsToValidate.PHONE_NUMBER);
+    String fax = Utils.readLineFromConsoleWithValidation("Fax Number (+351xxxxxxxxx): ",
+        FieldsToValidate.FAX);
+    String website = Utils.readLineFromConsoleWithValidation(
+        "Website Address (https://domain.ext): ", FieldsToValidate.WEBSITE);
     String openHours = Utils.readLineFromConsole("Opening hours (HH:MM): ");
     String closHours = Utils.readLineFromConsole("Closing hours (HH:MM): ");
     int slotDur = Utils.readIntegerFromConsole("Slot duration: ");

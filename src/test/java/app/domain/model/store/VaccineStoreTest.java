@@ -1,5 +1,8 @@
 package app.domain.model.store;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.Vaccine;
@@ -30,12 +33,11 @@ public class VaccineStoreTest {
   @Test
   public void ensureCreateVaccineIsWorkingCorrectly() {
 
-    assert store.size() == 0;
+    assertEquals(store.size(), 0);
 
     vaccine = store.createVaccine("designation", "id", "brand", this.vacType);
 
-    assert (vaccine != null);
-
+    assertNotNull(vaccine);
   }
 
   /**
@@ -44,13 +46,13 @@ public class VaccineStoreTest {
    */
   @Test
   public void ensureAddVaccineIsWorkingCorrectly() {
-    assert store.size() == 0;
+    assertEquals(store.size(), 0);
 
     vaccine = store.createVaccine("designation", "id", "brand", this.vacType);
 
     store.saveVaccine(vaccine);
 
-    assert store.size() == 1;
+    assertEquals(store.size(), 1);
   }
 
   /**
@@ -58,22 +60,20 @@ public class VaccineStoreTest {
    */
   @Test
   public void ensureIsPossibleToAddVaccine() {
-    assert store.size() == 0;
+    assertEquals(store.size(), 0);
 
     vaccine = store.createVaccine("designation", "id", "brand", this.vacType);
 
     store.saveVaccine(vaccine);
 
-    assert store.size() == 1;
+    assertEquals(store.size(), 1);
 
     vaccine2 = store.createVaccine("designation", "id", "brand", this.vacType);
 
     store.saveVaccine(vaccine2);
 
-    assert store.size() == 2;
+    assertEquals(store.size(), 2);
   }
-
-
 
   /**
    * Check that exists method is working correctly
@@ -84,8 +84,6 @@ public class VaccineStoreTest {
 
     store.saveVaccine(vaccine);
 
-    assert store.exists("designation");
-
+    assertTrue(store.exists("designation"));
   }
-
 }

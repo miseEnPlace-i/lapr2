@@ -13,7 +13,6 @@ import pt.isep.lei.esoft.auth.domain.model.UserRole;
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 public class ListEmployeesByRoleController {
-  private App app;
   private Company company;
   private EmployeeStore employeeStore;
   private EmployeeRoleStore rolesStore;
@@ -21,9 +20,8 @@ public class ListEmployeesByRoleController {
   /**
    * Constructor for ListEmployeesByRole
    */
-  public ListEmployeesByRoleController() {
-    this.app = App.getInstance();
-    this.company = this.app.getCompany();
+  public ListEmployeesByRoleController(Company company) {
+    this.company = company;
     this.employeeStore = this.company.getEmployeeStore();
     this.rolesStore = this.company.getEmployeeRoleStore();
   }

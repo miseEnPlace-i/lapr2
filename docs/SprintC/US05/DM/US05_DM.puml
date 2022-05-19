@@ -15,6 +15,8 @@ class WaitingRoom {}
 
 class SNSUser {}
 
+class Company {}
+
 Employee <|-- Nurse
 Employee <|-- Receptionist
 
@@ -23,5 +25,9 @@ WaitingRoom "1" -- "*" SNSUser : waits <
 
 Nurse "1" -- "*" WaitingRoom : consults list >
 Receptionist "1" -- "*" WaitingRoom : sends to >
+
+Company "1" -- "*" VaccinationCenter : knows > 
+Company "1" -- "*" SNSUser : knows > 
+Company "1" -- "*" Employee : knows > 
 
 @enduml
