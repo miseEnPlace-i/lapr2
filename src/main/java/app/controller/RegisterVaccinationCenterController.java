@@ -47,7 +47,7 @@ public class RegisterVaccinationCenterController implements IRegisterController 
       String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration,
       int maxVacSlot, Employee coordinator) {
 
-    // creates an vaccination center instance
+    // creates a vaccination center instance
     this.center = vacStore.createVaccinationCenter(name, address, emailAddress, phoneNum, faxNum,
         webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
 

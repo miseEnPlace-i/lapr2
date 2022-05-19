@@ -13,100 +13,100 @@ participant ":EmailSender" as EMAIL
 participant "auth\n:AuthFacade" as AUTH
 
 activate RECEPT
-RECEPT -> UI : starts to register a new SNS User
-activate UI
-UI --> RECEPT : requests data (citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
-deactivate UI
+  RECEPT -> UI : starts to register a new SNS User
+  activate UI
+    RECEPT <-- UI : requests data (citizenCard, snsNumber, name, birthDay, phoneNumber, email, address)
+  deactivate UI
 
-RECEPT -> UI : types requested data
-activate UI
+  RECEPT -> UI : types requested data
+  activate UI
+    RECEPT <-- UI : asks to select sex
+  deactivate UI
 
-UI --> CTRL : snsUser = createSNSUser(snsUserData)
-activate CTRL
+  RECEPT -> UI : selects sex
+  activate UI
+    note right of UI
+      snsUserData implies citizenCard, snsNumber, name, birthDay, phoneNumber, email, address, sex
+    end note
 
-CTRL --> COMP : store = getSNSUserStore()
-activate COMP
-deactivate COMP
+    UI -> CTRL : snsUser = createSNSUser(snsUserData)
+    activate CTRL
+      CTRL -> COMP : store = getSNSUserStore()
+      activate COMP
+      deactivate COMP
 
-CTRL --> STORE : snsUser = createSNSUser()
-activate STORE
+      CTRL -> STORE : snsUser = createSNSUser()
+      activate STORE
+        STORE -> SUSER** : create()
+      deactivate STORE
 
-STORE --> SUSER** : create()
+      CTRL -> STORE : validateSNSUser(snsUser)
+      activate STORE
+        STORE -> SUSER : email = getEmail(snsUser)
+        activate SUSER
+        deactivate SUSER
 
-deactivate STORE
+        STORE -> COMP : auth = getAuthFacade()
+        activate COMP
+        deactivate COMP
 
-CTRL --> STORE : validateSNSUser(snsUser)
-activate STORE
+        STORE -> AUTH : existsUser(email)
+        activate AUTH
+        deactivate AUTH
 
-STORE --> SUSER : email = getEmail(snsUser)
-activate SUSER
-deactivate SUSER
+        STORE -> STORE : checkDuplicates(snsUser)
+        activate STORE
+        deactivate STORE
 
-STORE --> COMP : auth = getAuthFacade()
-activate COMP
-deactivate COMP
+      deactivate STORE
+    deactivate CTRL
 
-STORE --> AUTH : existsUser(email)
-activate AUTH
-deactivate AUTH
+  RECEPT <-- UI : shows data and asks for confirmation
+  deactivate UI
 
-STORE --> STORE : checkDuplicates(snsUser)
-activate STORE
-deactivate STORE
-
-deactivate STORE
-deactivate CTRL
-
-UI --> RECEPT : shows data and asks for confirmation
-deactivate UI
-
-
-RECEPT --> UI : confirms the data
-activate UI
-
-UI --> CTRL : saveSNSUser()
-activate CTRL
-
-CTRL --> STORE : saveSNSUser(snsUser)
-activate STORE
+  RECEPT -> UI : confirms the data
+  activate UI
+    UI -> CTRL : saveSNSUser()
+    activate CTRL
+      CTRL -> STORE : saveSNSUser(snsUser)
+      activate STORE
 
 ' STORE --> STORE : validateSNSUser(snsUser)
 ' activate STORE
 ' deactivate STORE
 
-STORE --> SUSER : name = snsUser.getName()
-activate SUSER
-deactivate SUSER
+        STORE -> SUSER : name = snsUser.getName()
+        activate SUSER
+        deactivate SUSER
 
-STORE --> SUSER : email = snsUser.getEmail()
-activate SUSER
-deactivate SUSER
+        STORE -> SUSER : email = snsUser.getEmail()
+        activate SUSER
+        deactivate SUSER
 
-STORE --> PWDGEN : pwd = generatePwd()
-activate PWDGEN
-deactivate PWDGEN
+        STORE -> PWDGEN : pwd = generatePwd()
+        activate PWDGEN
+        deactivate PWDGEN
 
 ' STORE --> COMP : auth = getAuthFacade()
 ' activate COMP
 ' deactivate COMP
 
-STORE --> AUTH : addUserWithRole(name, email, pwd, "SNS_USER")
-activate AUTH
-deactivate AUTH
+        STORE -> AUTH : addUserWithRole(name, email, pwd, "SNS_USER")
+        activate AUTH
+        deactivate AUTH
 
-STORE --> STORE : addSNSUser(snsUser)
-activate STORE
-deactivate STORE
+        STORE -> STORE : addSNSUser(snsUser)
+        activate STORE
+        deactivate STORE
 
-STORE --> EMAIL : sendPasswordEmail(email, pwd)
-activate EMAIL
-deactivate EMAIL
+        STORE -> EMAIL : sendEmail(email)
+        activate EMAIL
+        deactivate EMAIL
+      deactivate STORE
+    deactivate CTRL
 
-deactivate STORE
-deactivate CTRL
-
-UI --> RECEPT : informs operation success
-deactivate UI
+    RECEPT <-- UI : informs operation success
+  deactivate UI
 
 deactivate RECEPT
 

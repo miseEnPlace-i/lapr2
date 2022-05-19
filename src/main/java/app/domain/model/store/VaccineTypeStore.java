@@ -73,4 +73,13 @@ public class VaccineTypeStore {
   public void saveVaccineType(VaccineType vt) {
     this.vaccineTypes.add(vt);
   }
+
+  /**
+   * Asks for the size of the List types
+   * 
+   * @return number of vaccine types registered in the system
+   */
+  public int size() {
+    return vaccineTypes.size();
+  }
 }

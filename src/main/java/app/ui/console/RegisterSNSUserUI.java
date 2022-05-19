@@ -2,9 +2,11 @@ package app.ui.console;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import app.controller.App;
 import app.controller.RegisterSNSUserController;
+import app.service.FieldsToValidate;
 import app.ui.console.utils.Utils;
 
 /**
@@ -22,12 +24,15 @@ public class RegisterSNSUserUI extends RegisterUI<RegisterSNSUserController> {
   public void insertData() throws IllegalArgumentException, ParseException {
     System.out.println("\nRegister SNS User UI:");
 
-    String citizenCard = Utils.readLineFromConsole("Citizen Card (xxxxxxxxxLLx): ");
-    String snsNumber = Utils.readLineFromConsole("SNS Number (xxxxxxxxx): ");
+    String citizenCard = Utils.readLineFromConsoleWithValidation("Citizen Card (xxxxxxxxxLLx): ",
+        FieldsToValidate.CC);
+    String snsNumber = Utils.readLineFromConsoleWithValidation("SNS Number (xxxxxxxxx): ",
+        FieldsToValidate.SNS_NUMBER);
     String name = Utils.readLineFromConsole("Name: ");
-    String birthDay = Utils.readLineFromConsole("Birthday (DD/MM/YYYY): ");
-    String phoneNumber = Utils.readLineFromConsole("Phone Number (+351xxxxxxxxx): ");
-    String email = Utils.readLineFromConsole("Email: ");
+    Date birthDay = Utils.readDateFromConsole("Birthday (dd/MM/yyyy): ");
+    String phoneNumber = Utils.readLineFromConsoleWithValidation("Phone Number (+351xxxxxxxxx): ",
+        FieldsToValidate.PHONE_NUMBER);
+    String email = Utils.readLineFromConsoleWithValidation("Email: ", FieldsToValidate.EMAIL);
     String address = Utils.readLineFromConsole("Address: ");
     char gender = 'm';
 
