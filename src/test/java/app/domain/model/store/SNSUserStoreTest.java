@@ -45,4 +45,23 @@ public class SNSUserStoreTest {
     store.saveSNSUser(snsUser);
     store.validateSNSUser(snsUser);
   }
+
+  /**
+   * Test that validate method is working for null objects.
+   * 
+   * @throws IllegalArgumentException
+   */
+  @Test(expected = Error.class)
+  public void ensureValidateForNullWorksAsExpected() {
+    store.validateSNSUser(null);
+  }
+
+  /**
+   * Test that validate method is working for already inserted system users.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void ensureValidateForInsertedSystemUserWorksAsExpected() {
+    authFacade.addUser("test", "email@email.com", "123456");
+    store.validateSNSUser(snsUser);
+  }
 }
