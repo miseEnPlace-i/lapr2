@@ -4,6 +4,10 @@ hide methods
 left to right direction
 skinparam classAttributeIconSize 0
 
+class Company {
+  - designation
+}
+
 class CommunityMassVaccinationCenter {}
 
 class HealthCareCenter {}
@@ -30,7 +34,23 @@ class VaccineType {
   whoid
 }
 
-class SNSUser {}
+class SNSUser {
+  - citizenCard
+  - snsNumber
+  - name
+  - birthDay
+  - gender
+  - phoneNumber
+  - email
+  - address
+}
+
+class User {
+  - name
+  - email
+  - pwd
+  - role
+}
 
 class HealthInformation {}
 
@@ -86,6 +106,7 @@ Appointment "1" -- "1" Notification : triggers >
 
 Receptionist "1" -- "*" ReadyUsersList : manages >
 Receptionist "1" -- "*" ArrivedUsersList : manages >
+Receptionist "1" -- "*" SNSUser : registers >
 
 ReadyUsersList "1" -- "*" SNSUser : is composed by >
 ArrivedUsersList "1" -- "*" SNSUser : is composed by > 
@@ -99,17 +120,19 @@ Administrator "1" -- "*" VaccinationCenter : registers >
 Administrator "1" -- "*" VaccineType : manages >
 Administrator "1" -- "*" Vaccine : manages > 
 
-SNSUser "1" -- "*" Appointment : schedules >
-SNSUser "1" -- "1" HealthInformation : has >
-
 Vaccine "1" -- "1..*" AdministrationProccess : has >
 
+SNSUser "1" -- "*" Appointment : schedules >
+SNSUser "1" -- "1" HealthInformation : has >
 SNSUser "1" -- "*" Notification : receives >
-
 SNSUser "1" -- "*" VaccinationCertificate : requests >
+SNSUser "0..1" -- "1" User : becomes >
+
 
 VaccinationCertificate "1" -- "1" Vaccine : corresponds >
+
 Company "1" -- "*" VaccinationCertificate : emmits >
+Company "1" -- "*" Receptionist : knows >
 
 Receptionist "0,1" -- "1" Appointment : schedules >
 
