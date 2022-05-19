@@ -2,7 +2,8 @@ package app.domain.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import java.util.Calendar;
+import java.util.Date;
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 
 /**
@@ -16,9 +17,8 @@ public class SNSUserTest {
    * @throws Exception
    */
   @Test(expected = Exception.class)
-  public void ensureNullArgumentsArentAllowed() {
-    Calendar c = Calendar.getInstance();
-    new SNSUser(null, null, null, c, ' ', null, null, null);
+  public void ensureNullArgumentsAreNotAllowed() {
+    new SNSUser(null, null, null, null, ' ', null, null, null);
   }
 
   /**
@@ -27,7 +27,7 @@ public class SNSUserTest {
    * @throws IllegalArgumentException
    */
   @Test(expected = IllegalArgumentException.class)
-  public void ensureInvalidBirthDayIsntAccepted() {
+  public void ensureInvalidBirthDayIsNotAccepted() {
     String citizenCard = "123456789";
     String snsNumber = "123456789";
     String name = "Teste";
@@ -36,8 +36,8 @@ public class SNSUserTest {
     String email = "example@example.com";
     String address = "Test Address 101";
 
-    Calendar birthDay = Calendar.getInstance();
-    birthDay.add(Calendar.YEAR, -151);
+    Date birthDay = new Date();
+    DateUtils.addYears(birthDay, -151);
 
     new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
   }
@@ -48,7 +48,7 @@ public class SNSUserTest {
    * @throws IllegalArgumentException
    */
   @Test(expected = IllegalArgumentException.class)
-  public void ensureInvalidFutureBirthDayArentAccepted() {
+  public void ensureInvalidFutureBirthDayAreNotAccepted() {
     String citizenCard = "123456789";
     String snsNumber = "123456789";
     String name = "Teste";
@@ -57,8 +57,8 @@ public class SNSUserTest {
     String email = "example@example.com";
     String address = "Test Address 101";
 
-    Calendar birthDay = Calendar.getInstance();
-    birthDay.add(Calendar.YEAR, 1);
+    Date birthDay = new Date();
+    DateUtils.addYears(birthDay, 1);
 
     new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
   }
@@ -69,8 +69,8 @@ public class SNSUserTest {
    * @throws IllegalArgumentException
    */
   @Test(expected = IllegalArgumentException.class)
-  public void ensureInvalidPhoneNumbersArentAllowed() {
-    Calendar c = Calendar.getInstance();
+  public void ensureInvalidPhoneNumbersAreNotAllowed() {
+    Date c = new Date();
     new SNSUser("123456789ZZ1", "123456789", "name", c, 'M', "0", "email@email.com", "address");
   }
 
@@ -80,8 +80,8 @@ public class SNSUserTest {
    * @throws IllegalArgumentException
    */
   @Test(expected = IllegalArgumentException.class)
-  public void ensureInvalidCCIsntAllowed() {
-    Calendar c = Calendar.getInstance();
+  public void ensureInvalidCCIsNotAllowed() {
+    Date c = new Date();
     new SNSUser("987987", "123456789", "name", c, 'M', "+351912345678", "email@email.com",
         "address");
   }
@@ -93,7 +93,7 @@ public class SNSUserTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidEmailIsntAllowed() {
-    Calendar c = Calendar.getInstance();
+    Date c = new Date();
     new SNSUser("123456789ZZ1", "123456789", "name", c, 'M', "+351912345678", "2h1125h1q5as",
         "address");
   }
@@ -105,7 +105,7 @@ public class SNSUserTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidSNSNumberIsntAllowed() {
-    Calendar c = Calendar.getInstance();
+    Date c = new Date();
     new SNSUser("123456789ZZ1", "1111111111111111111", "name", c, 'M', "+351912345678",
         "2h1125h1q5as", "address");
   }
@@ -115,7 +115,7 @@ public class SNSUserTest {
    */
   @Test
   public void ensureIsPossibleToCreateSNSUser() {
-    Calendar c = Calendar.getInstance();
+    Date c = new Date();
     SNSUser instance = new SNSUser("123456789ZZ1", "123456789", "name", c, 'M', "+351211111111",
         "email@email.com", "address");
 

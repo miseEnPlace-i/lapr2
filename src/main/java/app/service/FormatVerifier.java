@@ -26,7 +26,7 @@ public final class FormatVerifier {
    * @param cc The citizen card number to be verified.
    * @return True if the cc is valid, false otherwise.
    */
-  public static boolean validateCC(String cc) {
+  public static boolean validateCitizenCard(String cc) {
     CCFormatVerifier ccVerifier = new CCFormatVerifier();
 
     return ccVerifier.validate(cc);

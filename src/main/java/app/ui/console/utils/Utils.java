@@ -97,7 +97,7 @@ public class Utils {
       try {
         String strDate = readLineFromConsole(prompt);
 
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
         Date date = df.parse(strDate);
 
