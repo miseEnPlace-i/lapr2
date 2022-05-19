@@ -20,6 +20,8 @@ activate RECEPT
   RECEPT -> UI : types the requested data
   activate UI
 
+    
+    UI -> CTRL** : create(company)
     UI -> CTRL : findAppointment(snsNumber)
     activate CTRL
 

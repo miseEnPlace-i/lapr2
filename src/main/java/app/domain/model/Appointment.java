@@ -8,13 +8,11 @@ import java.util.Calendar;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 public class Appointment {
-    private int snsNumber;
+    private String snsNumber;
     private Calendar date;
-
-    //// an appointment should have a vaccine type if it is in a healthcare center
-    // TODO: and a center where it is being administered
-
     private VaccinationCenter center;
+
+    // an appointment should have a vaccine type if it is in a healthcare center
 
     /**
      * Constructor for Appointment.
@@ -22,20 +20,22 @@ public class Appointment {
      * @param snsNumber The SNS number of the user this appointment is related to.
      * @param date The date of the appointment.
      */
-    public Appointment(int snsNumber, Calendar date) {
+    public Appointment(String snsNumber, Calendar date) {
         this.snsNumber = snsNumber;
         this.date = date;
+        // TODO: implement centers
     }
 
     /**
      * Compares the SNS number of this appointment with another number.
      */
-    public boolean hasSnsNumber(int snsNumber) {
-        return this.snsNumber == snsNumber;
+    public boolean hasSnsNumber(String snsNumber) {
+        return this.snsNumber.equals(snsNumber);
     }
 
     /**
      * Checks if the date of this appointment is in the next hour.
+     * TODO: check next slot instead
      */
     public boolean isInTheNextHour() {
         Calendar now = Calendar.getInstance();

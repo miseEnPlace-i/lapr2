@@ -23,7 +23,7 @@ public class AppointmentStore {
     /**
      * Creates a new appointment.
      */
-    public Appointment addAppointment(int snsNumber, Calendar date) {
+    public Appointment addAppointment(String snsNumber, Calendar date) {
         // TODO: validations once more in the attack
         Appointment appointment = new Appointment(snsNumber, date);
         appointments.add(appointment);
@@ -33,7 +33,7 @@ public class AppointmentStore {
     /**
      * Finds an appointment by its SNS number.
      */
-    public Appointment findAppointment(int snsNumber) {
+    public Appointment findAppointment(String snsNumber) {
         for (Appointment appointment : appointments) {
             // TODO: check center
             if (appointment.hasSnsNumber(snsNumber) && appointment.isInTheNextHour())

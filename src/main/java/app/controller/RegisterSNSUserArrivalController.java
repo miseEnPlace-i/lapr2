@@ -1,8 +1,7 @@
 package app.controller;
 
 import app.domain.model.Company;
-import app.domain.model.SNSUser;
-import app.domain.model.store.SNSUserStore;
+import app.domain.model.store.AppointmentStore;
 
 /**
  * Register SNS User Arrival Controller.
@@ -11,19 +10,17 @@ import app.domain.model.store.SNSUserStore;
  */
 public class RegisterSNSUserArrivalController {
     private Company company;
-    private SNSUserStore store;
-    private SNSUser snsUser;
+    private AppointmentStore store;
 
     /**
      * Constructor for RegisterSNSUserController.
      */
     public RegisterSNSUserArrivalController(Company company) {
         this.company = company;
-        this.store = this.company.getSNSUserStore();
-        this.snsUser = null;
+        this.store = this.company.getAppointmentStore();
     }
 
     public void findAppointment(String snsNumber) {
-        
+        store.findAppointment(snsNumber);
     }
 }
