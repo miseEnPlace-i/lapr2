@@ -39,6 +39,7 @@ As a nurse, I intend to consult the users in the waiting room of a vaccination c
 ### 1.4. Found out Dependencies
 
 - There is a dependency to "US04 Register SNS User Arrival" since the list of SNS Users present in the waiting room is needed to be consulted.
+- There is dependency with the implementation of the NurseSession, this component is needed to know the vaccination center the nurse is working on.
 
 ### 1.5 Input and Output Data
 
@@ -105,10 +106,13 @@ According to the taken rationale, the conceptual classes promoted to software cl
 
 - Company
 - VaccinationCenter
+- VaccinationCenterListDTO
 - VaccinationCenterStore
 - Employee
 - Appointment
+- AppointmentDTO
 - Arrive
+- NurseSession
 
 Other software classes (i.e. Pure Fabrication) identified:
 
@@ -181,3 +185,7 @@ _It is also recommended to organize this content by subsections._
 - A new option on the Nurse menu options was added.
 
 # 7. Observations
+
+**Nurse select center SD**
+
+![NurseLogin_SD](SD/NurseLogin_SD.svg)

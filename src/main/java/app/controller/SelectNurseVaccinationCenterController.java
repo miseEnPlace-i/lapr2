@@ -9,21 +9,17 @@ import app.session.NurseSession;
 public class SelectNurseVaccinationCenterController {
   private VaccinationCenterStore vaccinationCenterStore;
 
-  public SelectNurseVaccinationCenterController(Company company, NurseSession nurseSession) {
+  public SelectNurseVaccinationCenterController(Company company) {
     this.vaccinationCenterStore = company.getVaccinationCenterStore();
   }
 
-  public List<VaccinationCenterListDTO> listVaccinationCenters() {
+  public List<VaccinationCenterListDTO> getVaccinationCentersList() {
     return vaccinationCenterStore.getVaccinationCenters();
   }
 
-  public NurseSession selectVaccinationCenter(VaccinationCenterListDTO vaccinationCenter) {
-    if (vaccinationCenterStore.exists(vaccinationCenter.getPhone())) {
-      String nurseName = App.getInstance().getCurrentUserSession().getUserName();
-
-      return new NurseSession(nurseName, vaccinationCenter);
-    }
-
-    return null;
+  public void selectVaccinationCenter(VaccinationCenterListDTO vaccinationCenter,
+      NurseSession nurseSession) {
+    if (vaccinationCenterStore.exists(vaccinationCenter.getPhone()))
+      nurseSession.setVaccinationCenter(vaccinationCenter);
   }
 }
