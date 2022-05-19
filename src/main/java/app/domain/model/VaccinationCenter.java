@@ -1,6 +1,5 @@
 package app.domain.model;
 
-import app.domain.model.list.WaitingRoomList;
 import app.service.FormatVerifier;
 
 /**
@@ -20,7 +19,7 @@ public class VaccinationCenter {
   private int slotDuration;
   private int maxVacSlot;
   private Employee coordinator;
-  private WaitingRoomList waitingRoomList;
+  private WaitingRoom waitingRoom;
 
   /**
    * Constructor for the Vaccination Center
@@ -52,8 +51,42 @@ public class VaccinationCenter {
     setSlotDuration(slotDuration);
     setMaxVacSlot(maxVacSlot);
     setCoordinator(coordinator);
+    this.waitingRoom = new WaitingRoom();
+  }
 
-    waitingRoomList = new WaitingRoomList();
+  /**
+   * @return the name of the vaccination center
+   */
+  public String getName() {
+    return name;
+  }
+
+  /**
+   * @return the address of the vaccination center
+   */
+  public String getAddress() {
+    return address;
+  }
+
+  /**
+   * @return the phone of the vaccination center
+   */
+  public String getPhone() {
+    return phoneNum;
+  }
+
+  /**
+   * @return the email of the vaccination center
+   */
+  public String getEmail() {
+    return email;
+  }
+
+  /**
+   * @return the name of the coordinator of the vaccination center
+   */
+  public String getCoordinatorName() {
+    return coordinator.name;
   }
 
   /**
@@ -221,6 +254,17 @@ public class VaccinationCenter {
   }
 
   /**
+   * @return true if the center phone is the same as the given phone number, false otherwise.
+   */
+  public boolean hasPhone(String phone) {
+    return phoneNum.equals(phone);
+  }
+
+  public WaitingRoom getWaitingRoom() {
+    return waitingRoom;
+  }
+
+  /**
    * Shows all vaccination center data
    */
   @Override
@@ -252,17 +296,7 @@ public class VaccinationCenter {
     if (this.email.equals(center.email)) return true;
     if (this.phoneNum.equals(center.phoneNum)) return true;
     if (this.faxNum.equals(center.faxNum)) return true;
-    if (this.webAddress.equals(center.webAddress)) return true;
 
     return false;
-  }
-
-  /**
-   * Gets the waiting room list.
-   * 
-   * @return The waiting room list.
-   */
-  public WaitingRoomList getWaitingRoomList() {
-    return waitingRoomList;
   }
 }

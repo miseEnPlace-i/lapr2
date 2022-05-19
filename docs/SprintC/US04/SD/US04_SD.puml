@@ -13,25 +13,25 @@ participant "wrLst:WaitingRoomList" as WRLST
 activate RECEPT
   RECEPT -> UI : starts to register the SNS User arrival to the vaccination center
   activate UI
-
+  
   RECEPT <-- UI : asks for the SNS User number
   deactivate UI
 
   RECEPT -> UI : types the requested data
   activate UI
 
-    UI -> CTRL : registerSNSUserArrival(snsNumber)
+    UI -> CTRL : findAppointment(snsNumber)
     activate CTRL
 
       CTRL -> COMP : aptStore = getAppointmentsStore()
       activate COMP
       deactivate COMP
 
-      CTRL -> APTSTORE : appointment = findAppointment(snsNumber)
+      CTRL -> APTSTORE : apt = findAppointment(snsNumber)
       activate APTSTORE
 
         loop for each appointment
-          APTSTORE -> APT : b = hasSNSNumber(snsNumber) && isInTheNextHour()
+          APTSTORE -> APT : b = hasSNSNumber(snsNumber) && isInTheNextSlot()
           activate APT
           alt b == true
             APTSTORE <-- APT : return apt
@@ -43,7 +43,19 @@ activate RECEPT
 
     deactivate CTRL
   
-  RECEPT <-- UI : ??? asks for confirmation
+  RECEPT <-- UI : asks for confirmation for the appointment
+  deactivate UI
+
+  RECEPT -> UI : confirms the data
+  activate UI
+
+    UI -> CTRL : confirmAppointment(apt)
+    activate CTRL
+
+
+
+    deactivate CTRL
+
   deactivate UI
 
 deactivate RECEPT

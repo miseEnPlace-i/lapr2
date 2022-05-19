@@ -60,7 +60,7 @@ Appointment "1" -- "1" VaccinationCenter : has >
 Appointment "1" -- "1" VaccineType : has 
 Company "1" -- "*" Employee : knows >
 Company "1" -- "*" VaccinationCenter : knows >
-Employee -- Receptionist : plays as >
+Employee <|-- Receptionist
 Receptionist "1" -- "*" Appointment : related to >
 Receptionist "1" -- "*" Arrival : registers >
 Receptionist "1" -- "*" SNSUser : schedules for >
