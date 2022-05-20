@@ -64,7 +64,7 @@ public class RegisterSNSUserTest {
     }
 
     @Test
-    public void ensureResurceNameIsCorrect() {
+    public void ensureResourceNameIsCorrect() {
         assertEquals(ctrl.getResourceName(), "SNS User");
     }
 }
