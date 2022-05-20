@@ -43,41 +43,30 @@ public class AppointmentScheduleList {
         // Appointment appointment = new Appointment(snsNumber, date);
         // appointments.add(appointment);
         // return appointment;
+        return null;
     }
 
     /**
      * Creates a new appointment.
      *
      * @param appointmentDTO
-     * @return
+     * @return Appointment
      */
     public Appointment create(AppointmentDTO appointmentDTO) {
-        // TODO: maybe try fix
         String snsNumber = appointmentDTO.getSnsNumber();
         Calendar date = appointmentDTO.getDate();
-        String time = appointmentDTO.getTime();
+        // String time = appointmentDTO.getTime(); // Calendar has time
         VaccinationCenter center = appointmentDTO.getCenter();
         VaccineType vacType = appointmentDTO.getVaccineType();
         boolean sms = appointmentDTO.isSms();
 
-        // appointment = new Appointment(snsNumber, date, time, center, vacType, sms);
+        Appointment appointment = new Appointment(snsNumber, date, center, vacType, sms);
 
-        // return appointment;
-        return null;
-    }
-
-    /**
-     * Creates a new appointment.
-     */
-    public Appointment addAppointment(String snsNumber, Calendar date) {
-        // TODO: validations once more in the attack
-        Appointment appointment = new Appointment(snsNumber, date);
-        // TODO FIX
-        // appointments.add(appointment);
         return appointment;
     }
 
     /**
+     * Validates an appointment.
      * 
      * @param appointmentDto
      */
@@ -99,7 +88,7 @@ public class AppointmentScheduleList {
         // if (appointment.hasSnsNumber(snsNumber) && appointment.isInTheNextHour())
         // return appointment;
         // }
-        // return null;
+        return null;
     }
 
     /**
@@ -109,10 +98,11 @@ public class AppointmentScheduleList {
      */
     public void saveVaccinationCenter(Appointment appointment) {
         // TODO FIX
-        // appointments.add(appointment);
+        // appointments.get(appointments.size())
     }
 
     /**
+     * Checks if an appointment is duplicated.
      * 
      * @param appointment
      */
