@@ -5,7 +5,7 @@ import app.domain.model.Arrival;
 import app.domain.model.Company;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
-import app.domain.model.store.AppointmentStore;
+import app.domain.model.list.AppointmentScheduleList;
 import app.domain.model.store.SNSUserStore;
 
 /**
@@ -68,5 +68,5 @@ public class RegisterSNSUserArrivalController implements IRegisterController {
         // }
     }
 
-    
+
 }
