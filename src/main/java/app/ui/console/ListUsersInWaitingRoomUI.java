@@ -2,10 +2,10 @@ package app.ui.console;
 
 import app.controller.App;
 import app.controller.ListUsersWaitingRoomController;
-import app.controller.session.NurseSession;
 import app.domain.model.Arrive;
 import app.domain.model.WaitingRoom;
 import app.exception.NotAuthorizedException;
+import app.session.NurseSession;
 
 public class ListUsersInWaitingRoomUI implements Runnable {
   ListUsersWaitingRoomController controller;

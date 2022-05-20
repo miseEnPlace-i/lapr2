@@ -1,4 +1,4 @@
-package app.controller.session;
+package app.session;
 
 import app.domain.model.dto.VaccinationCenterListDTO;
 
@@ -19,7 +19,7 @@ public class NurseSession {
     this.vaccinationCenter = vaccinationCenter;
   }
 
-  public boolean isLoggedIn() {
+  public boolean hasCenter() {
     return vaccinationCenter == null ? false : true;
   }
 }

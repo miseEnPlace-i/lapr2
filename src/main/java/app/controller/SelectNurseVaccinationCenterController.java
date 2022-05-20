@@ -1,10 +1,10 @@
 package app.controller;
 
 import java.util.List;
-import app.controller.session.NurseSession;
 import app.domain.model.Company;
 import app.domain.model.dto.VaccinationCenterListDTO;
 import app.domain.model.store.VaccinationCenterStore;
+import app.session.NurseSession;
 
 public class SelectNurseVaccinationCenterController {
   private VaccinationCenterStore vaccinationCenterStore;

@@ -2,8 +2,8 @@ package app.ui.console;
 
 import app.controller.App;
 import app.controller.SelectNurseVaccinationCenterController;
-import app.controller.session.NurseSession;
 import app.domain.model.dto.VaccinationCenterListDTO;
+import app.session.NurseSession;
 import app.ui.console.utils.Utils;
 
 public class SelectNurseVaccinationCenterUI implements Runnable {
@@ -21,7 +21,7 @@ public class SelectNurseVaccinationCenterUI implements Runnable {
       return;
     }
 
-    while (!nurseSession.isLoggedIn()) {
+    while (!nurseSession.hasCenter()) {
       Object center = Utils.showAndSelectOne(controller.getVaccinationCentersList(),
           "\n\nVaccination Centers\n");
 

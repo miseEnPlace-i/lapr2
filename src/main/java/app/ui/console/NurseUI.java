@@ -2,7 +2,7 @@ package app.ui.console;
 
 import java.util.ArrayList;
 import java.util.List;
-import app.controller.session.NurseSession;
+import app.session.NurseSession;
 import app.ui.console.utils.Utils;
 
 public class NurseUI implements Runnable {
@@ -15,7 +15,7 @@ public class NurseUI implements Runnable {
 
     new SelectNurseVaccinationCenterUI(nurseSession).run();
 
-    if (!nurseSession.isLoggedIn()) return;
+    if (!nurseSession.hasCenter()) return;
 
     options
         .add(new MenuItem("Get users in Waiting Room", new ListUsersInWaitingRoomUI(nurseSession)));

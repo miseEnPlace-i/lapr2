@@ -2,16 +2,17 @@
 skinparam classAttributeIconSize 0
 
 class Arrive {
-  - Date arriveTime
-  - int status
+  -arriveTime: Date
+  -status: int
 }
 
 class NurseSession {
-  - String nurseName
-  - String vaccinationCenterId
+  -vaccinationCenter: VaccinationCenterDTO
 
-  + NurseSession(String nurseName, String vaccinationCenterId)
-  + String getVaccinationCenterId()
+  + NurseSession()
+  + getVaccinationCenterId()
+  + setVaccinationCenterId(center)
+  + hasCenter()
 }
 
 class Company {
