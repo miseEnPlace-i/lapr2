@@ -48,14 +48,15 @@ class VaccinationCenter {
   -createdAt: Date
   
   +VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
+  +getWaitingRoom()
 }
 
 class VaccinationCenterStore {
-  +createVaccinationCenter(centerData,coordinator)
+  +createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
   +validateVaccinatonCenter(center)
   +saveVaccinationCenter(center)
   +checkDuplicates(center)
-  +getWaitingRoom(center)
+  +getVaccinationCenterWithPhone(phone)
 
   -addVaccinationCenter(center)
 }
