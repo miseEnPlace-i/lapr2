@@ -51,7 +51,6 @@ As a nurse, I intend to consult the users in the waiting room of a vaccination c
 **Output Data:**
 
 - List of users present in the waiting room
-- (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
@@ -81,16 +80,16 @@ Not found.
 
 **SSD - Alternative 1 is adopted.**
 
-| Interaction ID                                                    | Question: Which class is responsible for...                 | Answer            | Justification (with patterns)                                                                                 |
-| :---------------------------------------------------------------- | :---------------------------------------------------------- | :---------------- | :------------------------------------------------------------------------------------------------------------ |
-| asks to list users in waiting room for a given vaccination center | ... interacting with the nurse?                             | UI                | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-|                                                                   | ... coordinating the US?                                    | Controller        | Controller                                                                                                    |
-|                                                                   | ... knowing the vaccination center the nurse is working on? | UserSession       | IE: cf. A&A component documentation.                                                                          |
-|                                                                   | ... knowing the users who have arrived?                     | VaccinationCenter | IE: has registed all Organizations                                                                            |
-|                                                                   | ... knowing the attributes to display?                      | DTO               | IE: has registed all Organizations                                                                            |
-|                                                                   |                                                             | Organization      | IE: knows/has its own Employees                                                                               |
-|                                                                   |                                                             | Employee          | IE: knows its own data (e.g. email)                                                                           |
-| lists all the users present on the waiting room                   | ... display the list to the user?                           | CreateTaskUI      | IE: is responsible for user interactions.                                                                     |
+| Interaction ID                                                    | Question: Which class is responsible for...                 | Answer                         | Justification (with patterns)                                                                                 |
+| :---------------------------------------------------------------- | :---------------------------------------------------------- | :----------------------------- | :------------------------------------------------------------------------------------------------------------ | --- |
+| asks to list users in waiting room for a given vaccination center | ... interacting with the nurse?                             | ListUsersInWaitingRoomUI       | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+|                                                                   | ... coordinating the US?                                    | ListUsersWaitingRoomController | Controller: Has responsibility to delegate the UI events                                                      |
+|                                                                   | ... knowing the vaccination center the nurse is working on? | NurseSession                   | Pure Fabrication: Is not specified in the domain model but is needed to accomplish low coupling.              |
+|                                                                   | ... getting the nurse vaccination center data?              | VaccinationCenterStore         | IE: knows all the existing vaccination centers                                                                |     |
+|                                                                   | ... knowing the vaccination center waiting room?            | VaccinationCenter              | IE: knows it's attributes                                                                                     |
+|                                                                   | ... knowing the users who have arrived?                     | WaitingRoom                    | IE: aggregates arrives                                                                                        |
+|                                                                   | ... knowing the attributes to display?                      | ArriveDTO                      | DTO: has registered all Organizations                                                                         |
+| lists all the users present on the waiting room                   | ... display the list to the user?                           | CreateTaskUI                   | IE: is responsible for user interactions.                                                                     |
 
 ### Systematization
 

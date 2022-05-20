@@ -11,4 +11,8 @@ public class WaitingRoom implements Iterable<Arrive> {
   public Iterator<Arrive> iterator() {
     return waitingRoom.iterator();
   }
+
+  public int size() {
+    return waitingRoom.size();
+  }
 }

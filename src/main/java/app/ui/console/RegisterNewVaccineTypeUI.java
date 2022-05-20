@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.util.List;
 import app.controller.App;
 import app.controller.RegisterNewVaccineTypeController;
-import app.service.FieldsToValidate;
+import app.domain.shared.FieldToValidate;
 import app.ui.console.utils.Utils;
 
 /**
@@ -50,7 +50,7 @@ public class RegisterNewVaccineTypeUI extends RegisterUI<RegisterNewVaccineTypeC
 
     System.out.println("\nRegister a new Vaccine type: ");
     String code =
-        Utils.readLineFromConsoleWithValidation("Code (xxxxx): ", FieldsToValidate.VAC_CODE);
+        Utils.readLineFromConsoleWithValidation("Code (xxxxx): ", FieldToValidate.VAC_CODE);
     String designation = Utils.readLineFromConsole("Designation: ");
 
     List<String> technologyList = super.ctrl.getVaccineTechnologyList();

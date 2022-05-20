@@ -2,10 +2,10 @@ package app.ui.console;
 
 import app.controller.App;
 import app.controller.ListUsersWaitingRoomController;
+import app.controller.session.NurseSession;
 import app.domain.model.Arrive;
 import app.domain.model.WaitingRoom;
 import app.exception.NotAuthorizedException;
-import app.session.NurseSession;
 
 public class ListUsersInWaitingRoomUI implements Runnable {
   ListUsersWaitingRoomController controller;
@@ -23,12 +23,15 @@ public class ListUsersInWaitingRoomUI implements Runnable {
   public void run() {
     String data = getWaitingRoomDataForNurseCenter();
 
-    System.out.println(data);
+    if (data == null) System.out.println("\nThere are no users waiting in the waiting Room");
+    else System.out.println(data);
   }
 
   private String getWaitingRoomDataForNurseCenter() {
     // TODO implement Waiting Room DTO
     WaitingRoom waitingRoom = controller.getWaitingRoomListFromNurseCenter();
+
+    if (waitingRoom.size() == 0) return null;
 
     StringBuilder sb = new StringBuilder();
     sb.append("\n\nWaiting Room:");
@@ -40,5 +43,6 @@ public class ListUsersInWaitingRoomUI implements Runnable {
     }
 
     return sb.toString();
+
   }
 }

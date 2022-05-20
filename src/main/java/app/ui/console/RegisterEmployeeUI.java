@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.util.List;
 import app.controller.App;
 import app.controller.RegisterEmployeeController;
-import app.service.FieldsToValidate;
+import app.domain.shared.FieldToValidate;
 import app.ui.console.utils.Utils;
 import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
@@ -58,10 +58,10 @@ public class RegisterEmployeeUI extends RegisterUI<RegisterEmployeeController> {
     String name = Utils.readLineFromConsole("Name: ");
     String address = Utils.readLineFromConsole("Address: ");
     String phoneNumber = Utils.readLineFromConsoleWithValidation("Phone Number (+351xxxxxxxxx): ",
-        FieldsToValidate.PHONE_NUMBER);
-    String email = Utils.readLineFromConsoleWithValidation("Email: ", FieldsToValidate.EMAIL);
+        FieldToValidate.PHONE_NUMBER);
+    String email = Utils.readLineFromConsoleWithValidation("Email: ", FieldToValidate.EMAIL);
     String citizenCard = Utils.readLineFromConsoleWithValidation(
-        "Citizen Card Number (xxxxxxxxxLLx): ", FieldsToValidate.CC);
+        "Citizen Card Number (xxxxxxxxxLLx): ", FieldToValidate.CC);
 
     super.ctrl.create(name, address, phoneNumber, email, citizenCard, this.roleId);
   }

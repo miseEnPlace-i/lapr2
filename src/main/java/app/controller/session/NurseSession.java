@@ -1,4 +1,4 @@
-package app.session;
+package app.controller.session;
 
 import app.domain.model.dto.VaccinationCenterListDTO;
 
