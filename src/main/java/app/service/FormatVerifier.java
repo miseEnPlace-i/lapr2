@@ -120,4 +120,8 @@ public final class FormatVerifier {
   public static boolean validateVaccineCode(String expression) {
     return expression.matches("[0-9]{5}");
   }
+
+  public static boolean validateHours(String expression) {
+    return expression.matches("[0-9]{2}:[0-9]{2}");
+  }
 }
