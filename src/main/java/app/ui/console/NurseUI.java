@@ -2,7 +2,7 @@ package app.ui.console;
 
 import java.util.ArrayList;
 import java.util.List;
-import app.session.NurseSession;
+import app.controller.session.NurseSession;
 import app.ui.console.utils.Utils;
 
 public class NurseUI implements Runnable {

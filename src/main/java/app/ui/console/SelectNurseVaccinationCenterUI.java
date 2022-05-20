@@ -2,8 +2,8 @@ package app.ui.console;
 
 import app.controller.App;
 import app.controller.SelectNurseVaccinationCenterController;
+import app.controller.session.NurseSession;
 import app.domain.model.dto.VaccinationCenterListDTO;
-import app.session.NurseSession;
 import app.ui.console.utils.Utils;
 
 public class SelectNurseVaccinationCenterUI implements Runnable {
@@ -12,23 +12,22 @@ public class SelectNurseVaccinationCenterUI implements Runnable {
 
   public SelectNurseVaccinationCenterUI(NurseSession nurseSession) {
     this.nurseSession = nurseSession;
-    this.controller =
-        new SelectNurseVaccinationCenterController(App.getInstance().getCompany(), nurseSession);
+    this.controller = new SelectNurseVaccinationCenterController(App.getInstance().getCompany());
   }
 
   public void run() {
-    if (controller.listVaccinationCenters().size() == 0) {
+    if (controller.getVaccinationCentersList().size() == 0) {
       System.out.println("\n\nThere are no vaccination centers in the system.");
       return;
     }
 
     while (!nurseSession.isLoggedIn()) {
-      Object center =
-          Utils.showAndSelectOne(controller.listVaccinationCenters(), "\n\nVaccination Centers\n");
+      Object center = Utils.showAndSelectOne(controller.getVaccinationCentersList(),
+          "\n\nVaccination Centers\n");
 
       try {
         VaccinationCenterListDTO centerDTO = (VaccinationCenterListDTO) center;
-        nurseSession.setVaccinationCenter(centerDTO);
+        controller.selectVaccinationCenter(centerDTO, nurseSession);
       } catch (ClassCastException e) {
         System.out.println("\n\nInvalid selection.");
       }
