@@ -9,7 +9,7 @@ class Appointment {
   + Appointment(appointmentTime, snsUser, vaccineType)
 }
 
-class AppointmentStore {
+class AppointmentScheduleList {
   + Appointment findSNSUserAppointment(snsUser)
 }
 
@@ -120,7 +120,7 @@ class WaitingRoomList {
 
 Appointment "1" --> "0..1" SMSSender : triggers
 
-AppointmentStore "1" --> "*" Appointment : stores
+AppointmentScheduleList "1" --> "*" Appointment : stores
 
 Arrival "1" --> "1" Appointment : has
 
@@ -144,7 +144,7 @@ SNSUser --o Appointment
 SNSUserStore "1" --> "*" SNSUser : stores
 
 VaccinationCenter ..> WaitingRoomList
-VaccinationCenter ..> AppointmentStore
+VaccinationCenter ..> AppointmentScheduleList
 
 VaccinationCenterStore "1" --> "*" VaccinationCenter : stores
 
