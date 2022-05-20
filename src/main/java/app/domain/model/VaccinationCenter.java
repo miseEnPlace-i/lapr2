@@ -93,6 +93,33 @@ public class VaccinationCenter {
   }
 
   /**
+   * Gets the opening hours.
+   * 
+   * @return the opening hours.
+   */
+  public String getOpeningHours() {
+    return this.openingHours;
+  }
+
+  /**
+   * Gets the closing hours.
+   * 
+   * @return the closing hours.
+   */
+  public String getClosingHours() {
+    return this.closingHours;
+  }
+
+  /**
+   * Gets the slot duration.
+   * 
+   * @return the slot duration.
+   */
+  public int getSlotDuration() {
+    return this.slotDuration;
+  }
+
+  /**
    * Sets the center name.
    * 
    * @param name the vaccination center name
