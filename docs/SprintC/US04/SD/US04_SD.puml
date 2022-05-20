@@ -24,11 +24,11 @@ activate RECEPT
   RECEPT -> UI : types the requested data
   activate UI
   
-  RECEPT <-- UI : asks to select the vaccination center
-  deactivate UI
+  ' RECEPT <-- UI : asks to select the vaccination center
+  ' deactivate UI
 
-  RECEPT -> UI : selects the vaccination center
-  activate UI
+  ' RECEPT -> UI : selects the vaccination center
+  ' activate UI
     
     UI -> CTRL** : create(company)
 
