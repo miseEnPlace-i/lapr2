@@ -2,10 +2,12 @@ package app.ui.console;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import app.controller.App;
 import app.controller.RegisterVaccinationCenterController;
 import app.domain.model.Employee;
+import app.domain.shared.VaccinationCenterType;
 import app.service.FieldsToValidate;
 import app.ui.console.utils.Utils;
 
@@ -24,8 +26,10 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
 
   @Override
   public void insertData() {
-    System.out.println("\nRegister Vaccination Center UI: ");
-
+    // Select center type
+    System.out.println("\nSelect the Vaccination Center type: ");
+    Integer type =
+        (Integer) Utils.showAndSelectIndex(Arrays.asList(VaccinationCenterType.values()), "");
     String name = Utils.readLineFromConsole("Name: ");
     String address = Utils.readLineFromConsole("Address: ");
     String email = Utils.readLineFromConsoleWithValidation("Email (example@example.com): ",
@@ -36,8 +40,10 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
         FieldsToValidate.FAX);
     String website = Utils.readLineFromConsoleWithValidation(
         "Website Address (https://domain.ext): ", FieldsToValidate.WEBSITE);
-    String openHours = Utils.readLineFromConsole("Opening hours (HH:MM): ");
-    String closHours = Utils.readLineFromConsole("Closing hours (HH:MM): ");
+    String openHours =
+        Utils.readLineFromConsoleWithValidation("Opening hours (HH:MM): ", FieldsToValidate.HOURS);
+    String closHours =
+        Utils.readLineFromConsoleWithValidation("Closing hours (HH:MM): ", FieldsToValidate.HOURS);
     int slotDur = Utils.readIntegerFromConsole("Slot duration: ");
     int maxVac = Utils.readIntegerFromConsole("Maximum vaccines per slot: ");
     Employee coordinator;
@@ -57,7 +63,15 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
       }
     } while (!flag);
 
-    super.ctrl.create(name, address, email, phone, fax, website, openHours, closHours, slotDur,
-        maxVac, coordinator);
+    // if type == 0 -> Community Mass Vaccination Center; if type == 1 -> Health Care Center
+    if (type == 0) {
+      super.ctrl.createCommunityMass(name, address, email, phone, fax, website, openHours,
+          closHours, slotDur, maxVac, coordinator);
+    } else {
+      String ages = Utils.readLineFromConsole("AGES: ");
+      String ars = Utils.readLineFromConsole("ARS: ");
+      super.ctrl.createHealthCare(name, address, email, phone, fax, website, openHours, closHours,
+          slotDur, maxVac, coordinator, ages, ars);
+    }
   }
 }
