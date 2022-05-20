@@ -1,6 +1,6 @@
 package app.controller;
 
-import app.controller.session.NurseSession;
+import app.controller.session.EmployeeSession;
 import app.domain.model.Company;
 import app.domain.model.WaitingRoom;
 import app.domain.model.dto.VaccinationCenterListDTO;
@@ -9,12 +9,12 @@ import app.exception.NotAuthorizedException;
 
 public class ListUsersWaitingRoomController {
   private VaccinationCenterStore vaccinationCenterStore;
-  private NurseSession nurseSession;
+  private EmployeeSession nurseSession;
 
   /**
    * Constructor for ListUsersWaitingRoomController.
    */
-  public ListUsersWaitingRoomController(Company company, NurseSession nurseSession)
+  public ListUsersWaitingRoomController(Company company, EmployeeSession nurseSession)
       throws NotAuthorizedException {
     if (!nurseSession.isLoggedIn()) throw new NotAuthorizedException("Nurse is not logged in");
     this.nurseSession = nurseSession;

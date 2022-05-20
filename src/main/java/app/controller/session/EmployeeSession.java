@@ -2,12 +2,12 @@ package app.controller.session;
 
 import app.domain.model.dto.VaccinationCenterListDTO;
 
-public class NurseSession {
+public class EmployeeSession {
   private VaccinationCenterListDTO vaccinationCenter;
 
-  public NurseSession() {}
+  public EmployeeSession() {}
 
-  public NurseSession(String username, VaccinationCenterListDTO vaccinationCenter) {
+  public EmployeeSession(String username, VaccinationCenterListDTO vaccinationCenter) {
     this.vaccinationCenter = vaccinationCenter;
   }
 

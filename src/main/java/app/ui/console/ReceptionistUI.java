@@ -7,22 +7,24 @@ import app.ui.console.utils.Utils;
 /**
  *
  * @author Paulo Maio <pam@isep.ipp.pt>
+ * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
+public class ReceptionistUI extends EmployeeSessionUI {
+  public ReceptionistUI() {
+    super();
+  }
 
-public class ReceptionistUI implements Runnable {
-  public ReceptionistUI() {}
-
-  public void run() {
+  public void callback() {
     List<MenuItem> options = new ArrayList<MenuItem>();
+
     options.add(new MenuItem("Register a SNS User", new RegisterSNSUserUI()));
 
     int option = 0;
     do {
+      System.out.printf("%nNurse Vaccination Center: %s", super.getCurrentVaccinationCenter());
       option = Utils.showAndSelectIndex(options, "\n\nReceptionist Menu:");
 
-      if ((option >= 0) && (option < options.size())) {
-        options.get(option).run();
-      }
+      if ((option >= 0) && (option < options.size())) options.get(option).run();
     } while (option != -1);
   }
 }
