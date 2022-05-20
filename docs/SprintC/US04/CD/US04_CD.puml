@@ -110,7 +110,7 @@ Company ..> VaccinationCenterStore
 Company ..> VaccineTypeStore
 Company "1" --> "*" Employee : knows
 
-Employee "1" --> "1" Receptionist : plays as
+Employee <|-- Receptionist
 
 Receptionist "1" --> "*" Appointment : related to
 
@@ -123,7 +123,7 @@ SNSUser --o Appointment
 
 SNSUserStore "1" --> "*" SNSUser : stores
 
-VaccinationCenter "1" --> "1" WaitingRoomList : has
+VaccinationCenter ..> WaitingRoomList
 VaccinationCenter ..> AppointmentStore
 
 VaccinationCenterStore "1" --> "*" VaccinationCenter : stores

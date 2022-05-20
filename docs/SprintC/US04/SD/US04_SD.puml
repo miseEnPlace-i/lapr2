@@ -6,8 +6,12 @@ actor "Receptionist" as RECEPT
 participant ":RegisterSNSUserArrivalUI" as UI
 participant ":RegisterSNSUserArrivalController" as CTRL
 participant "comp:Company" as COMP
+participant "suStore:SNSUserStore" as SUSTORE
+participant "snsUser:SNSUser" as SNSUSER
+participant "center:VaccinationCenter" as CENTER
 participant "aptStore:AppointmentStore" as APTSTORE
 participant "apt:Appointment" as APT
+participant "arrival:Arrival" as ARRIVAL
 participant "wrLst:WaitingRoomList" as WRLST
 
 activate RECEPT
@@ -19,15 +23,42 @@ activate RECEPT
 
   RECEPT -> UI : types the requested data
   activate UI
+  
+  RECEPT <-- UI : asks to select the vaccination center
+  deactivate UI
 
+  RECEPT -> UI : selects the vaccination center
+  activate UI
     
     UI -> CTRL** : create(company)
+
+    UI -> CTRL : findSNSUser(snsNumber)
+    activate CTRL
+
+      CTRL -> COMP : suStore = getSNSUserStore()
+      activate COMP
+      deactivate COMP
+
+      CTRL -> SUSTORE : suStore.findSNSUser(snsNumber)
+      activate SUSTORE
+        loop for each snsUser
+          SUSTORE -> SNSUSER : b = snsUser.hasSNSNumber(snsNumber)
+          activate SNSUSER
+          alt b == true
+            SUSTORE <-- SNSUSER : return snsUser
+            deactivate SNSUSER
+          end
+        end
+      deactivate SUSTORE
+
+    deactivate CTRL
+
     UI -> CTRL : findAppointment(snsNumber)
     activate CTRL
 
-      CTRL -> COMP : aptStore = getAppointmentsStore()
-      activate COMP
-      deactivate COMP
+      CTRL -> CENTER : aptStore = getAppointmentStore()
+      activate CENTER
+      deactivate CENTER
 
       CTRL -> APTSTORE : apt = findAppointment(snsNumber)
       activate APTSTORE
@@ -53,11 +84,15 @@ activate RECEPT
 
     UI -> CTRL : confirmAppointment(apt)
     activate CTRL
+      CTRL -> ARRIVAL** : create(snsUser, apt)
 
-
+      CTRL -> WRLST : add(arrival)
+      activate WRLST
+      deactivate WRLST
 
     deactivate CTRL
 
+  RECEPT <-- UI : informs operation success
   deactivate UI
 
 deactivate RECEPT
