@@ -15,13 +15,23 @@ import app.domain.model.dto.AppointmentDTO;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 public class AppointmentScheduleList {
-    private Appointment[][] appointments;
+    private List<Appointment[][]> appointments;
+
+    /** Each one of these is a day
+     * 
+     *    vaccines per slot
+     *  s  [][][][][]
+     *  l  [][][][][]
+     *  o  [][][][][]
+     *  t  [][][][][]
+     *  s  [][][][][]
+     */
 
     /**
      * Constructor for AppointmentStore.
      */
     public AppointmentScheduleList() {
-        this.appointments = new Appointment[0][0];
+        this.appointments = new ArrayList<Appointment[][]>();
     }
 
     /**
@@ -108,8 +118,8 @@ public class AppointmentScheduleList {
      */
     private void checkDuplicates(Appointment appointment) {
         // TODO FIX
-        if (appointments.contains(appointment)) {
-            throw new IllegalArgumentException("\nDuplicated appointment.");
-        }
+        // if (appointments.contains(appointment)) {
+            // throw new IllegalArgumentException("\nDuplicated appointment.");
+        // }
     }
 }
