@@ -1,12 +1,16 @@
 @startuml US04_CD
 skinparam classAttributeIconSize 0
 
-class Appointment {}
+class Appointment {
+  - Date time
+}
 
-class AppointmentStore {}
+class AppointmentStore {
+  + findSNSUserAppointment(snsUser)
+}
 
 class Arrival {
-  - Date arrivalDate
+  - Date arrivalTime
 }
 
 class Company {
@@ -45,10 +49,7 @@ class SNSUser {
 }
 
 class SNSUserStore {
-  + createUser(name, email, pwd, roleId)
-  + validateUser(user)
-  + saveUser(user)
-  + checkDuplicates(user)
+  + findSNSUserByNumber(snsNumber)
 }
 
 

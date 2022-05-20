@@ -32,7 +32,7 @@ activate RECEPT
     
     UI -> CTRL** : create(company)
 
-    UI -> CTRL : findSNSUser(snsNumber)
+    UI -> CTRL : findSNSUserByNumber(snsNumber)
     activate CTRL
 
       CTRL -> COMP : suStore = getSNSUserStore()
@@ -53,7 +53,7 @@ activate RECEPT
 
     deactivate CTRL
 
-    UI -> CTRL : findAppointment(snsNumber)
+    UI -> CTRL : findSNSUserAppointment(snsNumber)
     activate CTRL
 
       CTRL -> CENTER : aptStore = getAppointmentStore()
