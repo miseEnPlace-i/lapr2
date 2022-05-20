@@ -97,9 +97,9 @@ According to the taken rationale, the conceptual classes promoted to software cl
 
 - Company
 - VaccinationCenter
-- VaccinationCenterListDTO
 - VaccinationCenterStore
-- Employee
+- VaccinationCenterListDTO
+- WaitingRoom
 - Arrive
 - ArriveDTO
 - NurseSession

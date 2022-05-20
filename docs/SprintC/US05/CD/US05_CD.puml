@@ -44,6 +44,7 @@ class VaccinationCenter {
   - closingHours: String
   - slotDuration: int
   - maximumVaccinesPerSlot: int
+  -createdAt: Date
   
   +VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
 }
@@ -87,6 +88,15 @@ class WaitingRoom {
   -checkDuplicates(arrive)
 }
 
+class AppointmentSchedule {
+  -appointments: List<Appointment[][]>
+  +createAppointment(date,user,vaccine)
+  +saveAppointment(appointment)
+
+  -getAppointmentDayIndex(date)
+  -getAppointmentSlotIndex(hour)
+}
+
 class Appointment {
   -Date appointmentDate
 
@@ -116,12 +126,13 @@ Company ..> VaccinationCenterStore
 
 WaitingRoom "1" -- "*" Arrive : stores >
 
-Employee "1" -- "*" WaitingRoom : checks
+Employee "1" -- "*" WaitingRoom : checks >
 VaccinationCenter *-- WaitingRoom
 
 CheckWaitingRoomController ..> NurseSession
 
-Appointment "*" -- "1" VaccinationCenter : has <
+AppointmentSchedule "1" -- "*" Appointment : stores >
+VaccinationCenter *-- AppointmentSchedule
 Appointment o-- Vaccine
 
 @enduml
