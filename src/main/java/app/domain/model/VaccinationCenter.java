@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import app.domain.model.store.AppointmentStore;
 import app.service.FormatVerifier;
 
 /**
@@ -20,6 +21,7 @@ public class VaccinationCenter {
   private int maxVacSlot;
   private Employee coordinator;
   private WaitingRoom waitingRoom;
+  private AppointmentStore aptStore;
 
   /**
    * Constructor for the Vaccination Center
@@ -52,6 +54,7 @@ public class VaccinationCenter {
     setMaxVacSlot(maxVacSlot);
     setCoordinator(coordinator);
     this.waitingRoom = new WaitingRoom();
+    this.aptStore = new AppointmentStore();
   }
 
   /**
@@ -262,6 +265,10 @@ public class VaccinationCenter {
 
   public WaitingRoom getWaitingRoom() {
     return waitingRoom;
+  }
+
+  public AppointmentStore getAppointmentStore() {
+    return aptStore;
   }
 
   /**

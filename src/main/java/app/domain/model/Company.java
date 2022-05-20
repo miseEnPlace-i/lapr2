@@ -1,7 +1,6 @@
 package app.domain.model;
 
 import org.apache.commons.lang3.StringUtils;
-import app.domain.model.store.AppointmentStore;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.SNSUserStore;
@@ -23,7 +22,6 @@ public class Company {
   private String designation;
   private AuthFacade authFacade;
 
-  private AppointmentStore appointmentStore;
   private EmployeeStore employeeStore;
   private EmployeeRoleStore employeeRoleStore;
   private SNSUserStore snsUserStore;
@@ -44,7 +42,6 @@ public class Company {
     this.designation = designation;
     this.authFacade = new AuthFacade();
 
-    this.appointmentStore = new AppointmentStore();
     this.employeeRoleStore = new EmployeeRoleStore(this.authFacade);
     this.employeeStore = new EmployeeStore(this.authFacade, this.employeeRoleStore);
     this.snsUserStore = new SNSUserStore(this.authFacade);
@@ -113,14 +110,5 @@ public class Company {
 
   public VaccineTechnologyStore getVaccineTechnologyStore() {
     return this.vaccineTechnologyStore;
-  }
-
-  /**
-   * Gets the AppointmentStore.
-   * 
-   * @return appointmentStore The appointment store.
-   */
-  public AppointmentStore getAppointmentStore() {
-    return this.appointmentStore;
   }
 }

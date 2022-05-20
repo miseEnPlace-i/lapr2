@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class WaitingRoom implements Iterable<Arrive> {
-  List<Arrive> waitingRoom = new ArrayList<Arrive>();
+public class WaitingRoom implements Iterable<Arrival> {
+  List<Arrival> waitingRoom = new ArrayList<Arrival>();
 
   @Override
-  public Iterator<Arrive> iterator() {
+  public Iterator<Arrival> iterator() {
     return waitingRoom.iterator();
   }
 }
