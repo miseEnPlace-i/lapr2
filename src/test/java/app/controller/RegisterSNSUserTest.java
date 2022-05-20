@@ -1,24 +1,25 @@
 package app.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.sql.Date;
 import java.text.ParseException;
 import org.junit.Before;
 import org.junit.Test;
+import app.domain.model.Company;
 
 public class RegisterSNSUserTest {
-    private RegisterSNSUserController ctrl;
+    Company company = new Company("designation");
+    private RegisterSNSUserController ctrl = new RegisterSNSUserController(company);
 
     @Before
-    public void setUp() {
-        ctrl = new RegisterSNSUserController();
-    }
+    public void setUp() {}
 
     @Test
     public void ensureSNSUserIsCreatedSuccessfully() throws ParseException {
         String cc = "325173354ZV5";
         String snsNumber = "323456789";
         String name = "test";
-        String birthDay = "01/01/2000";
+        Date birthDay = new Date(20000);
         char gender = 'm';
         String phoneNumber = "+351910000002";
         String email = "example3@example.com";
@@ -32,7 +33,7 @@ public class RegisterSNSUserTest {
         String cc = "189257695ZY4";
         String snsNumber = "223456789";
         String name = "test";
-        String birthDay = "01/01/2000";
+        Date birthDay = new Date(20000);
         char gender = 'm';
         String phoneNumber = "+351910000001";
         String email = "example2@example.com";
@@ -48,11 +49,11 @@ public class RegisterSNSUserTest {
     }
 
     @Test
-    public void ensureSaveWorksAsExpected() throws ParseException{
+    public void ensureSaveWorksAsExpected() throws ParseException {
         String cc = "192339524ZY2";
         String snsNumber = "123456789";
         String name = "test";
-        String birthDay = "01/01/2000";
+        Date birthDay = new Date(20000);
         char gender = 'm';
         String phoneNumber = "+351910000000";
         String email = "example@example.com";
