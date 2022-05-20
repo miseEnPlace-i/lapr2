@@ -27,7 +27,7 @@ deactivate ":System"
 Recept -> ":System" : selects a vaccination center
 activate ":System"
 
-":System" --> Recept : requests to send information about the scheduled vaccine 
+":System" --> Recept : asks permission to send sms about the scheduled vaccine
 deactivate ":System"
 Recept -> ":System" : accepts or declines the request
 activate ":System"
