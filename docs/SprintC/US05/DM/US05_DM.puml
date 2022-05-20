@@ -17,6 +17,8 @@ class SNSUser {}
 
 class Company {}
 
+class Appointment {}
+
 Employee <|-- Nurse
 Employee <|-- Receptionist
 
@@ -29,5 +31,8 @@ Receptionist "1" -- "*" WaitingRoom : sends to >
 Company "1" -- "*" VaccinationCenter : knows > 
 Company "1" -- "*" SNSUser : knows > 
 Company "1" -- "*" Employee : knows > 
+
+SNSUser "1" -- "*" Appointment : schedules >
+Appointment "*" -- "1" VaccinationCenter : is held >
 
 @enduml
