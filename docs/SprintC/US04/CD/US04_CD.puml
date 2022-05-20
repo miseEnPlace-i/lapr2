@@ -2,20 +2,26 @@
 skinparam classAttributeIconSize 0
 
 class Appointment {
-  - Date time
+  - Date appointmentTime
+  - SNSUser snsUser
+  - VaccineType vaccineType
+  ---
+  + Appointment(appointmentTime, snsUser, vaccineType)
 }
 
 class AppointmentStore {
-  + findSNSUserAppointment(snsUser)
+  + Appointment findSNSUserAppointment(snsUser)
 }
 
 class Arrival {
   - Date arrivalTime
+  - int status
 }
 
 class Company {
   - String designation
-  + getDesignation()
+  ---
+  + String getDesignation()
 }
 
 class Employee {
@@ -23,6 +29,7 @@ class Employee {
   - address: String
   - phoneNumber: String
   - citizenCardNumber: String
+  ---
   + Employee(id, name, address, phoneNumber, email, citizenCardNumber, roleId)
   + getId()
   + getName()
@@ -32,6 +39,14 @@ class Employee {
   + getCitizenCardNumber()
   + getPassword()
   + getRoleId()
+}
+
+class EmployeeSession {
+  - String employeeName
+  - String vaccinationCenterId
+  ---
+  + EmployeeSession(employeeName, vaccinationCenterId)
+  + String getVaccinationCenterId()  
 }
 
 class RegisterSNSUserArrivalUI {}
@@ -45,16 +60,15 @@ class SNSUser {
   - Char gender
   - String phoneNumber
   - String address
+  ---
   + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
 }
 
 class SNSUserStore {
-  + findSNSUserByNumber(snsNumber)
+  + SNSUser findSNSUserByNumber(snsNumber)
 }
 
-
 class Receptionist {}
-
 
 class SMSSender {}
 
@@ -75,7 +89,6 @@ class VaccinationCenter {
 }
 
 class VaccinationCenterStore {
-  ---
   + createVaccinationCenter(centerData, coordinator)
   + validateVaccinatonCenter(center)
   + saveVaccinationCenter(center)
@@ -92,12 +105,17 @@ class VaccineType {
 }
 
 class VaccineTypeStore {
-  - getVaccineTypeByCode()
-  - addVaccineType()
-  - saveVaccineType()
+  + getVaccineTypeByCode()
+  + addVaccineType()
+  + saveVaccineType()
 }
 
-class WaitingRoomList {}
+class WaitingRoomList {
+  + createArrival(arrivalTime, snsUser, appointment)
+  + saveArrival(arrival)
+  + removeArrival(arrival)
+  + checkDuplicates(arrival)
+}
 
 
 Appointment "1" --> "0..1" SMSSender : triggers
@@ -116,6 +134,7 @@ Employee <|-- Receptionist
 Receptionist "1" --> "*" Appointment : related to
 
 RegisterSNSUserArrivalController ..> Company
+RegisterSNSUserArrivalController ..> EmployeeSession
 
 RegisterSNSUserArrivalUI ..> RegisterSNSUserArrivalController
 
