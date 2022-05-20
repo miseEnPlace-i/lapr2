@@ -3,7 +3,7 @@ package app.ui.console;
 import java.text.ParseException;
 import app.controller.App;
 import app.controller.RegisterSNSUserArrivalController;
-import app.service.FieldsToValidate;
+import app.domain.shared.FieldToValidate;
 import app.ui.console.utils.Utils;
 
 /**
@@ -21,7 +21,7 @@ public class RegisterSNSUserArrivalUI extends RegisterUI<RegisterSNSUserArrivalC
         System.out.println("\nRegister SNS User Arrival UI:");
 
         String snsNumber = Utils.readLineFromConsoleWithValidation("SNS Number (xxxxxxxxx): ",
-                FieldsToValidate.SNS_NUMBER);
+                FieldToValidate.SNS_NUMBER);
 
         // verify if the user exists
         try {
