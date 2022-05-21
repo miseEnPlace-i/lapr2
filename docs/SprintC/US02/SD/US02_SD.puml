@@ -16,8 +16,13 @@ participant "mapper\n:AppointmentMapper" as APPMAPPER
 participant "appDto:AppointmentDto" as DTO
 participant "store\n:VaccineTypeStore" as VACSTORE
 participant "store\n:AppointmentStore" as APPSTORE
+participant "userHealthData\n:UserHealthData" as USERDATA
 participant "appointment\n:Appointment" as APPOINT
-participant "list\n:VaccineList"
+participant "snsUser\n:SNSUser" as SNSUSER
+participant "vaccinationCenter\n:VaccinationCenter" as VACCENTER
+participant "vaccinesTypes\n:List<VaccineType>"
+participant "administeredVaccines\n:List<Vaccines>"
+
 
 activate RECEPT
 RECEPT -> UI : asks to schedule a vaccination
@@ -125,11 +130,13 @@ activate UI
 UI -> CTRL : createAppointment(dto)
 activate CTRL
 
+CTRL -> COMP : getAppointmentStore()
+activate COMP
+
 note right 
 dto has all information needed to create an appointment (SNS User Number,date,time,vaccination center,vaccine type,sms)
 end note
 CTRL -> COMP : appointment = createAppointment(dto)
-activate COMP
 
 COMP -> APPMAPPER : appointmentDTO = toDto(appointment)
 activate APPMAPPER
@@ -155,13 +162,24 @@ APPMAPPER -> DTO : vaccineType = appointment.getVaccineType()
 activate DTO
 deactivate DTO
 
-APPMAPPER -> DTO : sms = appointment.getSms() 
+APPMAPPER -> DTO : userHealthData = appointment.getUserHealthData() 
 activate DTO
 deactivate DTO
 
-
 APPMAPPER -> APPSTORE : create(SNSUserNumber,date,time,center,vaccineType,SMS)
 activate APPSTORE
+
+APPSTORE -> APPSTORE : checkDuplicates(snsUserNumber,date,time)
+activate APPSTORE
+deactivate APPSTORE
+
+APPSTORE -> USERDATA : isEligibleForVaccine(vaccineType)
+activate USERDATA
+deactivate USERDATA
+
+APPSTORE -> VACCENTER : checkAvailability(date,time,vaccineType)
+activate VACCENTER
+deactivate VACCENTER
 
 APPSTORE -> APPOINT** : create(SNSUserNumber,date,time,center,vaccineType,SMS)
 deactivate APPMAPPER
@@ -184,13 +202,36 @@ activate CTRL
 CTRL -> APPSTORE : saveAppointment(appointment)
 activate APPSTORE
 
-APPSTORE -> APPSTORE : checkDuplicates()
-activate APPSTORE
-deactivate APPSTORE
+APPSTORE -> APPOINT : vaccinationCenter = getVaccinationCenter()
+activate APPOINT
+deactivate APPOINT
+
+APPSTORE -> VACCENTER : addAppointmentToList(appointment)
+activate VACCENTER
+deactivate VACCENTER
 
 APPSTORE -> APPSTORE : addAppointment()
 activate APPSTORE
 deactivate APPSTORE
+
+APPSTORE -> APPOINT : sendSMS()
+activate APPOINT
+
+alt sms==true
+APPOINT -> APPOINT : smsContent = getSmsContent()
+activate APPOINT
+deactivate APPOINT
+
+APPOINT -> SNSUSER : phoneNumber = getPhoneNumber()
+activate SNSUSER
+deactivate SNSUSER
+
+APPOINT -> APPOINT : sendSMS(phoneNumber,smsContent)
+activate APPOINT
+deactivate APPOINT
+end
+
+
 deactivate APPSTORE
 deactivate CTRL
 
