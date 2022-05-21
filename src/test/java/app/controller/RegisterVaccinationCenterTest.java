@@ -64,109 +64,198 @@ public class RegisterVaccinationCenterTest {
   }
 
   /**
-   * Check that it is not possible to create a vaccination center with null values
+   * Check that it is not possible to create a community mass with null values
    * 
    * @throws Exception IllegalArgumentException
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureNullValuesNotAllowed() {
-    controller.create(null, null, null, null, null, null, null, null, 0, 0, null);
+    controller.createCommunityMass(null, null, null, null, null, null, null, null, 0, 0, null);
   }
 
   /**
-   * Check that it is not possible to create a vaccination center with empty values
+   * Check that it is not possible to create a health care with null values
+   * 
+   * @throws Exception IllegalArgumentException
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void ensureNullValuesNotAllowed2() {
+    controller.createHealthCare(null, null, null, null, null, null, null, null, 0, 0, null, null,
+        null);
+  }
+
+  /**
+   * Check that it is not possible to create a community mass with empty values
    * 
    * @throws Exception IllegalArgumentException
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureEmptyValuesNotAllowed() {
-    controller.create("", "", "", "", "", "", "", "", 0, 0, coordinator);
+    controller.createCommunityMass("", "", "", "", "", "", "", "", 0, 0, coordinator);
   }
 
   /**
-   * Check that it is not possible to create a vaccination center with email invalid
+   * Check that it is not possible to create a health care with empty values
+   * 
+   * @throws Exception IllegalArgumentException
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void ensureEmptyValuesNotAllowed2() {
+    controller.createHealthCare("", "", "", "", "", "", "", "", 0, 0, coordinator, "", "");
+  }
+
+  /**
+   * Check that it is not possible to create a community mass with email invalid
    * 
    * @throws Exception IllegalArgumentException
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidEmailThrowsException() {
-    controller.create("name", "address", "emailaddress", "+351913456789", "+351913456788",
-        "https://www.teste.com", "11:00", "12:00", 5, 5, coordinator);
+    controller.createCommunityMass("name", "address", "emailaddress", "+351913456789",
+        "+351913456788", "https://www.teste.com", "11:00", "12:00", 5, 5, coordinator);
   }
 
   /**
-   * Check that it is not possible to create a vaccination center with phone invalid
+   * Check that it is not possible to create a health care with email invalid
+   * 
+   * @throws Exception IllegalArgumentException
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void ensureInvalidEmailThrowsException2() {
+    controller.createHealthCare("name", "address", "emailaddress", "+351913456789", "+351913456788",
+        "https://www.teste.com", "11:00", "12:00", 5, 5, coordinator, "test", "test");
+  }
+
+  /**
+   * Check that it is not possible to create a community mass with phone invalid
    * 
    * @throws Exception IllegalArgumentException
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidPhoneThrowsException() {
-    controller.create("name", "address", "example@gmail.com", "913456789", "+351913456788",
-        "https://www.teste.com", "11:00", "12:00", 5, 5, coordinator);
+    controller.createCommunityMass("name", "address", "example@gmail.com", "913456789",
+        "+351913456788", "https://www.teste.com", "11:00", "12:00", 5, 5, coordinator);
   }
 
   /**
-   * Check that it is not possible to create a vaccination center with fax invalid
+   * Check that it is not possible to create a health care with phone invalid
+   * 
+   * @throws Exception IllegalArgumentException
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void ensureInvalidPhoneThrowsException2() {
+    controller.createHealthCare("name", "address", "example@gmail.com", "913456789",
+        "+351913456788", "https://www.teste.com", "11:00", "12:00", 5, 5, coordinator, "test",
+        "test");
+  }
+
+  /**
+   * Check that it is not possible to create a community mass with fax invalid
    * 
    * @throws Exception IllegalArgumentException
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidFaxThrowsException() {
-    controller.create("name", "address", "example@gmail.com", "+351913456789", "913456788",
-        "https://www.teste.com", "11:00", "12:00", 5, 5, coordinator);
+    controller.createCommunityMass("name", "address", "example@gmail.com", "+351913456789",
+        "913456788", "https://www.teste.com", "11:00", "12:00", 5, 5, coordinator);
   }
 
   /**
-   * Check that it is not possible to create a vaccination center with website invalid
+   * Check that it is not possible to create a health care with fax invalid
+   * 
+   * @throws Exception IllegalArgumentException
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void ensureInvalidFaxThrowsException2() {
+    controller.createHealthCare("name", "address", "example@gmail.com", "+351913456789",
+        "913456788", "https://www.teste.com", "11:00", "12:00", 5, 5, coordinator, "test", "test");
+  }
+
+  /**
+   * Check that it is not possible to create a community mass with website invalid
    * 
    * @throws Exception IllegalArgumentException
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidWebsiteThrowsException() {
-    controller.create("name", "address", "example@gmail.com", "+351913456789", "+351913456788",
-        "abc://www.teste.com", "11:00", "12:00", 5, 5, coordinator);
+    controller.createCommunityMass("name", "address", "example@gmail.com", "+351913456789",
+        "+351913456788", "abc://www.teste.com", "11:00", "12:00", 5, 5, coordinator);
   }
 
   /**
-   * Check that it is not possible to create a vaccination center with slot duration invalid (x=<0)
+   * Check that it is not possible to create a health care with website invalid
+   * 
+   * @throws Exception IllegalArgumentException
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void ensureInvalidWebsiteThrowsException2() {
+    controller.createHealthCare("name", "address", "example@gmail.com", "+351913456789",
+        "+351913456788", "abc://www.teste.com", "11:00", "12:00", 5, 5, coordinator, "test",
+        "test");
+  }
+
+  /**
+   * Check that it is not possible to create a community mass with slot duration invalid (x=<0)
    * 
    * @throws Exception IllegalArgumentException
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidSlotDurationThrowsException() {
-    controller.create("name", "address", "example@gmail.com", "+351913456789", "+351913456788",
-        "https://www.teste.com", "11:00", "12:00", -5, 5, coordinator);
+    controller.createCommunityMass("name", "address", "example@gmail.com", "+351913456789",
+        "+351913456788", "https://www.teste.com", "11:00", "12:00", -5, 5, coordinator);
   }
 
   /**
-   * Check that it is not possible to create a vaccination center with maximum vaccines per slot invalid (x=<0)
+   * Check that it is not possible to create a health care with maximum vaccines per slot invalid (x=<0)
    * 
    * @throws Exception IllegalArgumentException
    */
   @Test(expected = IllegalArgumentException.class)
-  public void ensureInvalidMaxVacSlotThrowsException() {
-    controller.create("name", "address", "example@gmail.com", "+351913456789", "+351913456788",
-        "https://www.teste.com", "11:00", "12:00", 5, -5, coordinator);
+  public void ensureInvalidMaxVacSlotThrowsException2() {
+    controller.createHealthCare("name", "address", "example@gmail.com", "+351913456789",
+        "+351913456788", "https://www.teste.com", "11:00", "12:00", 5, -5, coordinator, "test",
+        "test");
   }
 
   /**
-   * Check that it is not possible to create a vaccination center with invalid coordinator
+   * Check that it is not possible to create a community mass with invalid coordinator
    * 
    * @throws Exception IllegalArgumentException
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidCoordinatorThrowsException() {
-    controller.create("name", "address", "example@gmail.com", "+351913456789", "+351913456788",
-        "https://www.teste.com", "11:00", "12:00", 5, 5, null);
+    controller.createCommunityMass("name", "address", "example@gmail.com", "+351913456789",
+        "+351913456788", "https://www.teste.com", "11:00", "12:00", 5, 5, null);
   }
 
   /**
-   * Check that it is possible to create a vaccination center with all valid values
+   * Check that it is not possible to create a health care with invalid coordinator
+   * 
+   * @throws Exception IllegalArgumentException
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void ensureInvalidCoordinatorThrowsException2() {
+    controller.createHealthCare("name", "address", "example@gmail.com", "+351913456789",
+        "+351913456788", "https://www.teste.com", "11:00", "12:00", 5, 5, null, "test", "test");
+  }
+
+  /**
+   * Check that it is possible to create a community mass with all valid values
    */
   @Test
   public void ensureValidValuesCreateNewCenter() {
-    controller.create("name", "address", "example@gmail.com", "+351913456789", "+351913456788",
-        "https://www.teste.com", "11:00", "12:00", 5, 5, coordinator);
+    controller.createCommunityMass("name", "address", "example@gmail.com", "+351913456789",
+        "+351913456788", "https://www.teste.com", "11:00", "12:00", 5, 5, coordinator);
+  }
+
+  /**
+   * Check that it is possible to create a health care with all valid values
+   */
+  @Test
+  public void ensureValidValuesCreateNewCenter2() {
+    controller.createHealthCare("name", "address", "example@gmail.com", "+351913456789",
+        "+351913456788", "https://www.teste.com", "11:00", "12:00", 5, 5, coordinator, "test",
+        "test");
   }
 
   /**
@@ -175,8 +264,8 @@ public class RegisterVaccinationCenterTest {
   @Test
   public void ensureStringifyDataWorking() {
     String center = toString();
-    controller.create("name", "address", "example@gmail.com", "+351913456789", "+351913456788",
-        "https://www.teste.com", "11:00", "23:00", 5, 5, coordinator);
+    controller.createCommunityMass("name", "address", "example@gmail.com", "+351913456789",
+        "+351913456788", "https://www.teste.com", "11:00", "23:00", 5, 5, coordinator);
     controller.save();
     assertEquals(controller.stringifyData(), center);
   }
