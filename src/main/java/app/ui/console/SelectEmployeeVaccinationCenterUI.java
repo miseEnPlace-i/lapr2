@@ -10,8 +10,8 @@ public class SelectEmployeeVaccinationCenterUI implements Runnable {
   private SelectEmployeeVaccinationCenterController controller;
   private EmployeeSession employeeSession;
 
-  public SelectEmployeeVaccinationCenterUI(EmployeeSession nurseSession) {
-    this.employeeSession = nurseSession;
+  public SelectEmployeeVaccinationCenterUI(EmployeeSession employeeSession) {
+    this.employeeSession = employeeSession;
     this.controller = new SelectEmployeeVaccinationCenterController(App.getInstance().getCompany());
   }
 
