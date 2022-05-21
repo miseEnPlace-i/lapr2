@@ -8,6 +8,7 @@ participant ":AppointmentController" as controller
 participant "comp\n:Company" as company
 participant "appointmentStore\n:AppointmentStore" as appointmentStore
 participant "appointment\n:Appointment" as appointment
+participant ":SMSSender" as smsSender
 participant "vaccinationCenterStore\n:VaccinationCenterStore" as vacCenterStore
 participant "vaccineTypeStore\n:VaccineTypeStore" as vacTypeStore
 participant "vaccinationCenter\n:VaccinationCenter" as vacCenter
@@ -153,16 +154,13 @@ activate ui
             appointmentStore -> snsUser : userHealthData = getUserHealthData()
             activate snsUser
             deactivate snsUser
-            appointmentStore -> userHealthData : lastAdministeredVaccine = getLastAdministeredVaccine(vaccineType)
+            appointmentStore -> userHealthData : isEligibleForVaccine(vaccineType)
             activate userHealthData
             deactivate userHealthData
-            appointmentStore -> appointmentStore : checkLastAppointment(snsUserNumber, date, time, lastAdministeredVaccine)
-            activate appointmentStore
-            deactivate appointmentStore
             appointmentStore -> appointmentDto : vaccinationCenter = getVaccinationCenter()
             activate appointmentDto
             deactivate appointmentDto
-            appointmentStore -> vacCenter : checkAvailability(date, time)
+            appointmentStore -> vacCenter : checkAvailability(date, time, vaccineType)
             activate vacCenter
             deactivate vacCenter
             appointmentStore -> appointment** : create(snsUserNumber, date, time, vaccineType, vaccinationCenter)
@@ -190,6 +188,20 @@ activate ui
             appointmentStore -> appointmentStore : addAppointment(appointment)
             activate appointmentStore
             deactivate appointmentStore
+            appointmentStore -> appointment : sendSMS()
+            activate appointment
+                alt sms == true
+                    appointment -> appointment : smsContent = getSmsContent()
+                    activate appointment
+                    deactivate appointment
+                    appointment -> snsUser : phoneNumber = getPhoneNumber()
+                    activate snsUser
+                    deactivate snsUser
+                    appointment -> appointment : sendSMS(phoneNumber, smsContent)
+                    activate appointment
+                    deactivate appointment
+                end
+            deactivate appointment
         deactivate appointmentStore
     deactivate controller
     ui --> user : informs operation success
