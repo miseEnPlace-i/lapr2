@@ -10,6 +10,11 @@ deactivate ":System"
 
 ADMIN -> ":System" : types requested data
 activate ":System"
+":System" --> ADMIN : asks to confirm action
+deactivate ":System"
+
+ADMIN -> ":System" : confirms action
+activate ":System"
 ":System" --> ADMIN : informs operation success
 deactivate ":System"
 
