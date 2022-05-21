@@ -2,6 +2,9 @@ package app.session;
 
 import app.domain.model.dto.VaccinationCenterListDTO;
 
+/**
+ * @author Tomás Lopes <1211289@isep.ipp.pt>
+ */
 public class NurseSession {
   private VaccinationCenterListDTO vaccinationCenter;
 
