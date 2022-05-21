@@ -32,9 +32,19 @@ As a nurse, I intend to consult the users in the waiting room of a vaccination c
 >
 > **Answer:** "Nurses and receptionists can work in any vaccination center."
 
+> **Question**: "What information about the Users (name, SNS number, etc) should the system display when listing them?"
+>
+> **Answer**: "Name, Sex, Birth Date, SNS User Number and Phone Number."
+
+> **Question**: "Regarding US05, the listing is supposed to be for the day itself or for a specific day."
+>
+> **Answer**: "The list should show the users in the waiting room of a vaccination center."
+
 ### 1.3. Acceptance Criteria
 
-- **AC1:** SNS Users’ list should be presented by order of arrival.
+- **AC1:** The nurse must be authenticated to and with a have selected a valid vaccination center
+- **AC2:** SNS Users’ list should be presented by order of arrival.
+- **AC3:** The fields to be shown must be: name, sex, birth date, SNS User Number and Phone Number.
 
 ### 1.4. Found out Dependencies
 
@@ -45,8 +55,7 @@ As a nurse, I intend to consult the users in the waiting room of a vaccination c
 
 **Input Data:**
 
-- Selected data:
-  - Vaccination Center
+There is no input data.
 
 **Output Data:**
 
