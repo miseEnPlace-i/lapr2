@@ -22,13 +22,13 @@ public class Company {
   private String designation;
   private AuthFacade authFacade;
 
-  private SNSUserStore snsUserStore;
   private EmployeeStore employeeStore;
   private EmployeeRoleStore employeeRoleStore;
+  private SNSUserStore snsUserStore;
   private VaccinationCenterStore vaccinationCenterStore;
   private VaccineStore vaccineStore;
-  private VaccineTypeStore vaccineTypeStore;
   private VaccineTechnologyStore vaccineTechnologyStore;
+  private VaccineTypeStore vaccineTypeStore;
 
   /**
    * Company constructor.
@@ -42,13 +42,13 @@ public class Company {
     this.designation = designation;
     this.authFacade = new AuthFacade();
 
-    this.snsUserStore = new SNSUserStore(this.authFacade);
     this.employeeRoleStore = new EmployeeRoleStore(this.authFacade);
     this.employeeStore = new EmployeeStore(this.authFacade, this.employeeRoleStore);
+    this.snsUserStore = new SNSUserStore(this.authFacade);
     this.vaccinationCenterStore = new VaccinationCenterStore();
+    this.vaccineStore = new VaccineStore();
     this.vaccineTechnologyStore = new VaccineTechnologyStore();
     this.vaccineTypeStore = new VaccineTypeStore(vaccineTechnologyStore);
-    this.vaccineStore = new VaccineStore();
   }
 
   /**

@@ -5,16 +5,16 @@ import app.domain.model.WaitingRoom;
 import app.domain.model.dto.VaccinationCenterListDTO;
 import app.domain.model.store.VaccinationCenterStore;
 import app.exception.NotAuthorizedException;
-import app.session.NurseSession;
+import app.session.EmployeeSession;
 
 public class ListUsersWaitingRoomController {
   private VaccinationCenterStore vaccinationCenterStore;
-  private NurseSession nurseSession;
+  private EmployeeSession nurseSession;
 
   /**
    * Constructor for ListUsersWaitingRoomController.
    */
-  public ListUsersWaitingRoomController(Company company, NurseSession nurseSession)
+  public ListUsersWaitingRoomController(Company company, EmployeeSession nurseSession)
       throws NotAuthorizedException {
     if (!nurseSession.hasCenter()) throw new NotAuthorizedException("Nurse is not logged in");
     this.nurseSession = nurseSession;

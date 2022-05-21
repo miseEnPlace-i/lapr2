@@ -4,12 +4,12 @@ import java.util.List;
 import app.domain.model.Company;
 import app.domain.model.dto.VaccinationCenterListDTO;
 import app.domain.model.store.VaccinationCenterStore;
-import app.session.NurseSession;
+import app.session.EmployeeSession;
 
-public class SelectNurseVaccinationCenterController {
+public class SelectEmployeeVaccinationCenterController {
   private VaccinationCenterStore vaccinationCenterStore;
 
-  public SelectNurseVaccinationCenterController(Company company) {
+  public SelectEmployeeVaccinationCenterController(Company company) {
     this.vaccinationCenterStore = company.getVaccinationCenterStore();
   }
 
@@ -18,8 +18,8 @@ public class SelectNurseVaccinationCenterController {
   }
 
   public void selectVaccinationCenter(VaccinationCenterListDTO vaccinationCenter,
-      NurseSession nurseSession) {
+      EmployeeSession employeeSession) {
     if (vaccinationCenterStore.exists(vaccinationCenter.getPhone()))
-      nurseSession.setVaccinationCenter(vaccinationCenter);
+      employeeSession.setVaccinationCenter(vaccinationCenter);
   }
 }

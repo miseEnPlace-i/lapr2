@@ -101,6 +101,22 @@ public class SNSUserStore {
   }
 
   /**
+   * Finds a SNS User by SNS Number.
+   * 
+   * @param snsNumber The SNS User Number.
+   * @return SNSUser
+   */
+  public SNSUser findSNSUserByNumber(String snsNumber) {
+    for (SNSUser snsUser : snsUsers) {
+      if (snsUser.getSnsNumber().equals(snsNumber)) {
+        return snsUser;
+      }
+    }
+
+    return null;
+  }
+
+  /**
    * Gets the size of the store.
    * 
    * @return int of number of SNS Users in the store.

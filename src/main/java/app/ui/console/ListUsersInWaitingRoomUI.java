@@ -2,15 +2,15 @@ package app.ui.console;
 
 import app.controller.App;
 import app.controller.ListUsersWaitingRoomController;
-import app.domain.model.Arrive;
+import app.domain.model.Arrival;
 import app.domain.model.WaitingRoom;
 import app.exception.NotAuthorizedException;
-import app.session.NurseSession;
+import app.session.EmployeeSession;
 
 public class ListUsersInWaitingRoomUI implements Runnable {
   ListUsersWaitingRoomController controller;
 
-  public ListUsersInWaitingRoomUI(NurseSession nurseSession) {
+  public ListUsersInWaitingRoomUI(EmployeeSession nurseSession) {
     try {
       this.controller =
           new ListUsersWaitingRoomController(App.getInstance().getCompany(), nurseSession);
@@ -37,7 +37,7 @@ public class ListUsersInWaitingRoomUI implements Runnable {
     sb.append("\n\nWaiting Room:");
     sb.append("\n\n");
 
-    for (Arrive arrive : waitingRoom) {
+    for (Arrival arrive : waitingRoom) {
       sb.append(arrive.getTime());
       sb.append("\n");
     }
