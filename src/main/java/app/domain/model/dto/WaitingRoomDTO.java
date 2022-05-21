@@ -19,39 +19,39 @@ public class WaitingRoomDTO {
     this.phoneNumber = phoneNumber;
   }
 
-    /**
-     * @return String return the name
-     */
-    public String getName() {
-        return name;
-    }
+  /**
+   * @return String return the name
+   */
+  public String getName() {
+    return name;
+  }
 
-    /**
-     * @return String return the sex
-     */
-    public String getSex() {
-        return sex;
-    }
+  /**
+   * @return String return the sex
+   */
+  public String getSex() {
+    return sex;
+  }
 
-    /**
-     * @return Date return the birthDate
-     */
-    public Date getBirthDate() {
-        return birthDate;
-    }
+  /**
+   * @return Date return the birthDate
+   */
+  public Date getBirthDate() {
+    return birthDate;
+  }
 
-    /**
-     * @return String return the snsUserNumber
-     */
-    public String getSnsUserNumber() {
-        return snsUserNumber;
-    }
+  /**
+   * @return String return the snsUserNumber
+   */
+  public String getSnsUserNumber() {
+    return snsUserNumber;
+  }
 
-    /**
-     * @return String return the phoneNumber
-     */
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
+  /**
+   * @return String return the phoneNumber
+   */
+  public String getPhoneNumber() {
+    return phoneNumber;
+  }
 
 }
