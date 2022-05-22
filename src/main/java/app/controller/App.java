@@ -6,8 +6,10 @@ import java.io.InputStream;
 import java.util.Properties;
 import app.domain.model.Company;
 import app.domain.model.Employee;
+import app.domain.model.VaccinationCenter;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
+import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.shared.Constants;
 import pt.isep.lei.esoft.auth.AuthFacade;
@@ -22,6 +24,7 @@ public class App {
   private EmployeeStore employeeStore;
   private EmployeeRoleStore employeeRoleStore;
   private VaccineTechnologyStore vaccineTechnologyStore;
+  private VaccinationCenterStore vaccinationCenterStore;
 
   private App() {
     Properties props = getProperties();
@@ -30,6 +33,7 @@ public class App {
     this.employeeStore = this.company.getEmployeeStore();
     this.employeeRoleStore = this.company.getEmployeeRoleStore();
     this.vaccineTechnologyStore = this.company.getVaccineTechnologyStore();
+    this.vaccinationCenterStore = this.company.getVaccinationCenterStore();
 
     bootstrap();
   }
@@ -93,6 +97,15 @@ public class App {
     Employee e2 = this.employeeStore.createEmployee("Name2", "+351916919269", "teste1@teste.com",
         "adress", "155424041ZY0", Constants.ROLE_COORDINATOR);
     this.employeeStore.saveEmployee(e2);
+
+    Employee e3 = this.employeeStore.createEmployee("Name2", "+351916919269", "nurse@nurse.pt",
+        "adress", "000000000ZZ4", Constants.ROLE_NURSE);
+    this.employeeStore.saveEmployee(e3);
+
+    VaccinationCenter vc =
+        this.vaccinationCenterStore.createCommunityMassCenter("name", "address", "sda@das.com",
+            "+351212345678", "+351212345678", "http://www.ggg.com", "20:00", "21:00", 5, 5, e2);
+    this.vaccinationCenterStore.saveVaccinationCenter(vc);
   }
 
   // Extracted from

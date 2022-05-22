@@ -40,8 +40,8 @@ public class CommunityMassVaccinationCenter extends VaccinationCenter {
     sb.append(String.format("\nName: %s\n", super.getName()));
     sb.append(String.format("Address: %s\n", super.getAddress()));
     sb.append(String.format("Email: %s\n", super.getEmail()));
-    sb.append(String.format("Phone number: %s\n", super.getPhoneNum()));
-    sb.append(String.format("Fax number: %s\n", super.getFaxNum()));
+    sb.append(String.format("Phone number: %s\n", super.getPhone()));
+    sb.append(String.format("Fax number: %s\n", super.getFax()));
     sb.append(String.format("Web address: %s\n", super.getWebAddress()));
     sb.append(String.format("Opening hours: %s\n", super.getOpeningHours()));
     sb.append(String.format("Closing hours: %s\n", super.getClosingHours()));

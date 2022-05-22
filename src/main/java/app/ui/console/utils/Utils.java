@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import app.service.FieldsToValidate;
+import app.domain.shared.FieldToValidate;
 import app.service.FormatVerifier;
 
 /**
@@ -32,7 +32,7 @@ public class Utils {
     }
   }
 
-  static public String readLineFromConsoleWithValidation(String prompt, FieldsToValidate field) {
+  static public String readLineFromConsoleWithValidation(String prompt, FieldToValidate field) {
     boolean valid = false;
     String answer = "";
 

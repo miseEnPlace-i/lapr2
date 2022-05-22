@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import app.domain.model.list.AppointmentScheduleList;
 import app.service.FormatVerifier;
 
 /**
@@ -19,6 +20,8 @@ public class VaccinationCenter {
   private int slotDuration;
   private int maxVacSlot;
   private Employee coordinator;
+  private WaitingRoom waitingRoom;
+  private AppointmentScheduleList aptLst;
 
   /**
    * Constructor for the Vaccination Center
@@ -50,6 +53,91 @@ public class VaccinationCenter {
     setSlotDuration(slotDuration);
     setMaxVacSlot(maxVacSlot);
     setCoordinator(coordinator);
+    this.waitingRoom = new WaitingRoom();
+    this.aptLst = new AppointmentScheduleList();
+  }
+
+  /**
+   * @return the name of the vaccination center
+   */
+  public String getName() {
+    return name;
+  }
+
+  /**
+   * @return the address of the vaccination center
+   */
+  public String getAddress() {
+    return address;
+  }
+
+  /**
+   * @return the phone of the vaccination center
+   */
+  public String getPhone() {
+    return phoneNum;
+  }
+
+  /**
+   * @return the fax of the vaccination center
+   */
+  public String getFax() {
+    return faxNum;
+  }
+
+  /**
+   * @return the web address of the vaccination center
+   */
+  public String getWebAddress() {
+    return webAddress;
+  }
+
+  /**
+   * @return the email of the vaccination center
+   */
+  public String getEmail() {
+    return email;
+  }
+
+  /**
+   * @return the maximum number of vaccines given per slot
+   */
+  public int getMaxVacSlot() {
+    return maxVacSlot;
+  }
+
+  /**
+   * @return the name of the coordinator of the vaccination center
+   */
+  public String getCoordinatorName() {
+    return coordinator.name;
+  }
+
+  /**
+   * Gets the opening hours.
+   * 
+   * @return the opening hours.
+   */
+  public String getOpeningHours() {
+    return this.openingHours;
+  }
+
+  /**
+   * Gets the closing hours.
+   * 
+   * @return the closing hours.
+   */
+  public String getClosingHours() {
+    return this.closingHours;
+  }
+
+  /**
+   * Gets the slot duration.
+   * 
+   * @return the slot duration.
+   */
+  public int getSlotDuration() {
+    return this.slotDuration;
   }
 
   /**
@@ -216,6 +304,43 @@ public class VaccinationCenter {
     this.coordinator = coordinator;
   }
 
+  /**
+   * @return true if the center phone is the same as the given phone number, false otherwise.
+   */
+  public boolean hasPhone(String phone) {
+    return phoneNum.equals(phone);
+  }
+
+  public WaitingRoom getWaitingRoom() {
+    return waitingRoom;
+  }
+
+  public AppointmentScheduleList getAppointmentStore() {
+    return aptLst;
+  }
+
+  /**
+   * Shows all vaccination center data
+   */
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("Vaccination Center data:\n");
+    sb.append(String.format("Name: %s\n", this.name));
+    sb.append(String.format("Address: %s\n", this.address));
+    sb.append(String.format("Email: %s\n", this.email));
+    sb.append(String.format("Phone number: %s\n", this.phoneNum));
+    sb.append(String.format("Fax number: %s\n", this.faxNum));
+    sb.append(String.format("Web address: %s\n", this.webAddress));
+    sb.append(String.format("Opening hours: %s\n", this.openingHours));
+    sb.append(String.format("Closing hours: %s\n", this.closingHours));
+    sb.append(String.format("Slot duration: %s\n", this.slotDuration));
+    sb.append(String.format("Maximum vaccines per slot: %s\n", this.maxVacSlot));
+    sb.append(String.format("Coordinator: %s\n", this.coordinator.getName()));
+
+    return sb.toString();
+  }
+
   @Override
   public boolean equals(Object obj) {
     VaccinationCenter center = (VaccinationCenter) obj;
@@ -226,86 +351,7 @@ public class VaccinationCenter {
     if (this.email.equals(center.email)) return true;
     if (this.phoneNum.equals(center.phoneNum)) return true;
     if (this.faxNum.equals(center.faxNum)) return true;
-    if (this.webAddress.equals(center.webAddress)) return true;
 
     return false;
   }
-
-  /**
-   * @return String return the name
-   */
-  public String getName() {
-    return name;
-  }
-
-  /**
-   * @return String return the address
-   */
-  public String getAddress() {
-    return address;
-  }
-
-  /**
-   * @return String return the email
-   */
-  public String getEmail() {
-    return email;
-  }
-
-  /**
-   * @return String return the phoneNum
-   */
-  public String getPhoneNum() {
-    return phoneNum;
-  }
-
-  /**
-   * @return String return the faxNum
-   */
-  public String getFaxNum() {
-    return faxNum;
-  }
-
-  /**
-   * @return String return the webAddress
-   */
-  public String getWebAddress() {
-    return webAddress;
-  }
-
-  /**
-   * @return String return the openingHours
-   */
-  public String getOpeningHours() {
-    return openingHours;
-  }
-
-  /**
-   * @return String return the closingHours
-   */
-  public String getClosingHours() {
-    return closingHours;
-  }
-
-  /**
-   * @return int return the slot Duration
-   */
-  public int getSlotDuration() {
-    return slotDuration;
-  }
-
-  /**
-   * @return int return the maximum vaccines per slot
-   */
-  public int getMaxVacSlot() {
-    return maxVacSlot;
-  }
-
-  /**
-   * @return Employee return the coordinator name
-   */
-  public String getCoordinatorName() {
-    return this.coordinator.name;
-  }
-
 }

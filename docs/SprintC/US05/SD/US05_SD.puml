@@ -4,21 +4,34 @@ autonumber
 actor "Nurse" as NURSE
 
 participant ":ListUsersInWaitingRoomUI" as UI
-participant ":ListUsersInWaitingRoomController" as CTRL
-participant "nurseSession:NurseSession" as FAC
-participant "comp\n:Company" as COMP
-participant "vaccinationCenterStore\n:VaccinationCenterStore" as VACS
-participant ":ArriveMapper" as ARRM
-participant "arriveHistory:ArriveHistory" as ARR
-participant "arrive:Arrive" as ARR
-
 activate NURSE
 NURSE -> UI : asks to list users in waiting room for a given vaccination center
 activate UI
+participant ":App" as APP
+UI -> APP : app=getInstance()
+activate APP
+deactivate APP
+UI -> APP : company=app.getCompany()
+activate APP
+deactivate APP
+
+create ":ListUsersInWaitingRoomController" as CTRL
+
+UI -> CTRL : create(company,nurseSession)
+
+participant "nurseSession\n:NurseSession" as FAC
+participant "comp\n:Company" as COMP
+participant "vaccinationCenterStore\n:VaccinationCenterStore" as VACS
+participant "vaccinationCenter\n:VaccinationCenter" as VACC
+participant "vaccinationCenterDto:\nList<VaccinationCenterDTO>" as VACCDTO
+participant ":ArriveMapper" as ARRM
+participant "arriveHistory\n:ArriveHistory" as ARR
+participant "arrive:Arrive" as ARR
+
 
 UI -> CTRL : getWaitingRoomListFromNurseCenter()
 activate CTRL
-CTRL -> FAC : nurseVaccinationCenterId=getVaccinationCenterId()
+CTRL -> FAC : nurseVaccinationCenter=getVaccinationCenter()
 activate FAC
 deactivate FAC
 |||
@@ -27,9 +40,17 @@ CTRL -> COMP : vaccinationCenterStore=getVaccinationCenterStore()
 activate COMP
 deactivate
 
-CTRL -> VACS : waitingRoom=getCenterWaitingRoom(nurseVaccinationCenterId)
+CTRL -> VACCDTO : phone=getPhone()
+activate VACCDTO
+deactivate VACCDTO
+
+CTRL -> VACS : vaccinationCenter=getVaccinationCenterWithPhone(phone)
 activate VACS
 deactivate VACS
+
+CTRL -> VACC : waitingRoom=vaccinationCenter.getWaitingRoom()
+activate VACC
+deactivate VACC
 
 CTRL -> ARRM : waitingRoomDto=toDto(waitingRoom)
 activate ARRM
@@ -66,7 +87,6 @@ CTRL --> UI: waitingRoomDto
 
 deactivate COMP
 deactivate CTRL
-UI --> NURSE : informs operation success
 UI --> NURSE: shows list of users waiting in vaccination center
 deactivate UI
 
@@ -75,7 +95,6 @@ deactivate CTRL
 deactivate NURSE
 
 participant "vaccinationCenters:\nList<VaccinationCenter>"
-participant "vaccinationCentersDto:\nList<VaccinationCenterDTO>"
 participant "waitingRoom:\nList<Appointment>"
 
 @enduml
