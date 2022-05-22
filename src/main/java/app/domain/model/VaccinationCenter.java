@@ -3,7 +3,7 @@ package app.domain.model;
 import app.service.FormatVerifier;
 
 /**
- * Vaccination Center class
+ * Vaccination Center super class
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  */
@@ -288,21 +288,21 @@ public class VaccinationCenter {
   }
 
   /**
-   * @return int return the slotDuration
+   * @return int return the slot Duration
    */
   public int getSlotDuration() {
     return slotDuration;
   }
 
   /**
-   * @return int return the maxVacSlot
+   * @return int return the maximum vaccines per slot
    */
   public int getMaxVacSlot() {
     return maxVacSlot;
   }
 
   /**
-   * @return Employee return the coordinator
+   * @return Employee return the coordinator name
    */
   public String getCoordinatorName() {
     return this.coordinator.name;

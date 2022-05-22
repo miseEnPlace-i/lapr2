@@ -1,8 +1,26 @@
 package app.domain.model;
 
+/**
+ * @author André Barros <1211299@isep.ipp.pt>
+ */
 public class CommunityMassVaccinationCenter extends VaccinationCenter {
 
 
+  /**
+   * Constructor for community mass vaccination center
+   * 
+   * @param name the community mass vaccination center name
+   * @param address the community mass vaccination center address
+   * @param email the community mass vaccination center email address
+   * @param phoneNum the community mass vaccination center phone number
+   * @param faxNum the community mass vaccination center fax number
+   * @param webAddress the community mass vaccination center website address
+   * @param openingHours the community mass vaccination center opening hours
+   * @param closingHours the community mass vaccination center closing hours
+   * @param slotDuration the community mass vaccination center slot duration
+   * @param maxVacSlot the community mass vaccination center maximum vaccines per slot
+   * @param coordinator the community mass vaccination center coordinator
+   */
   public CommunityMassVaccinationCenter(String name, String address, String email, String phoneNum,
       String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration,
       int maxVacSlot, Employee coordinator) {
