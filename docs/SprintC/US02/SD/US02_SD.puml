@@ -11,6 +11,7 @@ participant "store\n:VaccinationCenterStore" as CENTERSTORE
 participant "vaccinationCenter\n:VaccinationCenter" as CENTER
 participant "availableVaccinationCenters\n:List<VaccinationCenter>" as LISTCENTER
 participant "vaccine\n:Vaccine" as VACCINE
+participant "mapper\n:VaccineTypeMapper" as VACTYPEMAPPER
 participant "mapper\n:vaccinationCenterMapper" as VACMAPPER
 participant "mapper\n:AppointmentMapper" as APPMAPPER
 participant "appDto:AppointmentDto" as DTO
@@ -22,6 +23,7 @@ participant "snsUser\n:SNSUser" as SNSUSER
 participant "vaccinationCenter\n:VaccinationCenter" as VACCENTER
 participant "vaccinesTypes\n:List<VaccineType>"
 participant "administeredVaccines\n:List<Vaccines>"
+participant "vaccineTypesDto\n:List<VaccineTypeDto>"
 
 
 activate RECEPT
@@ -66,9 +68,13 @@ CTRL -> COMP : getVaccineTypeStore()
 activate COMP
 deactivate COMP
 
-CTRL -> VACSTORE : vacList = getVaccineList()
+CTRL -> VACSTORE : vaccineTypes = getVaccineTypes()
 activate VACSTORE
 deactivate VACSTORE
+
+CTRL -> VACTYPEMAPPER : vaccineTypesDto = toDto(vaccineTypes)
+activate VACTYPEMAPPER
+deactivate VACTYPEMAPPER
 deactivate CTRL
 
 UI --> RECEPT : shows all vaccine types and asks to select one
@@ -184,12 +190,7 @@ deactivate VACCENTER
 APPSTORE -> APPOINT** : create(SNSUserNumber,date,time,center,vaccineType,SMS)
 deactivate APPMAPPER
 deactivate APPSTORE
-
-CTRL -> APPSTORE : validateAppointment()
-activate APPSTORE
 deactivate CTRL
-deactivate APPSTORE
-
 
 UI --> RECEPT : shows all data and requests confirmation
 deactivate UI
@@ -201,6 +202,10 @@ activate CTRL
 
 CTRL -> APPSTORE : saveAppointment(appointment)
 activate APPSTORE
+
+APPSTORE -> APPSTORE : validateAppointment(appointment)
+activate APPSTORE
+deactivate APPSTORE
 
 APPSTORE -> APPOINT : vaccinationCenter = getVaccinationCenter()
 activate APPOINT

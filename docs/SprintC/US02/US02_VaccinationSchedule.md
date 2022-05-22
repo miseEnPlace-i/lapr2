@@ -27,6 +27,10 @@ _"As a receptionist at one vaccination center, I want to schedule a vaccination.
 > **Question:** "A receptionist has the ability to schedule an appointment in different vaccination centres or only on their own?"
 >
 > **Answer:** "A receptionist (and a user) can schedule a vaccine at any vaccination center."
+> 
+> **Question:** "When a receptionist schedules a vaccination for an SNS user, should they be presented with a list of available vaccines (brands, that meet acceptance criteria) from which to choose? Or should the application suggest only one?"
+>
+> **Answer:** "The receptionist do not select the vaccine brand. When the user is at the vaccination center to take the vaccine, the nurse selects the vaccine. In Sprint D we will introduce new USs where the nurse records the administration of a vaccine to a SNS user."
 
 
 ### 1.3. Acceptance Criteria
@@ -39,7 +43,7 @@ _"As a receptionist at one vaccination center, I want to schedule a vaccination.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency to "US03 - Register an SNS User", as the SNS User needs to be registered in the system to be part of a vaccination schedule.
+* There is a dependency to "US03 - Register an SNS User", as the SNS User needs to be registered in the system to be part of an appointment.
 * There is a dependency to "US09 - Register a Vaccination Center", as it needs to exist at least one vaccination center registered in the system.
 * There is a dependency to "US12 - Specify a Vaccine Type", as the application needs to know which vaccine types are available, so that SNS users and receptionists can schedule a vaccine.
 * There is a dependency to "US13 - Specify a Vaccine", because in order to schedule a vaccine, there has to exist, at least, one vaccine registered in the system.
