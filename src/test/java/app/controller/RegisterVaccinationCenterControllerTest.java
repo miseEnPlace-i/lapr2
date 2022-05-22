@@ -12,7 +12,7 @@ import app.domain.model.store.EmployeeStore;
 /**
  * @author André Barros <1211299@isep.ipp.pt>
  */
-public class RegisterVaccinationCenterTest {
+public class RegisterVaccinationCenterControllerTest {
   Company company = new Company("designation");
   RegisterVaccinationCenterController controller = new RegisterVaccinationCenterController(company);
   String centerName = "Vaccination Center";

@@ -8,7 +8,7 @@ import app.domain.model.Company;
 import app.domain.model.store.EmployeeRoleStore;
 import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
-public class RegisterEmployeeTest {
+public class RegisterEmployeeControllerTest {
   Company company = new Company("designation");
   private RegisterEmployeeController ctrl = new RegisterEmployeeController(company);
 

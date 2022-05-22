@@ -7,8 +7,8 @@ import java.util.List;
 import app.controller.App;
 import app.controller.RegisterVaccinationCenterController;
 import app.domain.model.Employee;
+import app.domain.shared.FieldToValidate;
 import app.domain.shared.VaccinationCenterType;
-import app.service.FieldsToValidate;
 import app.ui.console.utils.Utils;
 
 /**
@@ -33,17 +33,17 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
     String name = Utils.readLineFromConsole("Name: ");
     String address = Utils.readLineFromConsole("Address: ");
     String email = Utils.readLineFromConsoleWithValidation("Email (example@example.com): ",
-        FieldsToValidate.EMAIL);
+        FieldToValidate.EMAIL);
     String phone = Utils.readLineFromConsoleWithValidation("Phone Number (+351xxxxxxxxx): ",
-        FieldsToValidate.PHONE_NUMBER);
+        FieldToValidate.PHONE_NUMBER);
     String fax = Utils.readLineFromConsoleWithValidation("Fax Number (+351xxxxxxxxx): ",
-        FieldsToValidate.FAX);
+        FieldToValidate.FAX);
     String website = Utils.readLineFromConsoleWithValidation(
-        "Website Address (https://domain.ext): ", FieldsToValidate.WEBSITE);
+        "Website Address (https://domain.ext): ", FieldToValidate.WEBSITE);
     String openHours =
-        Utils.readLineFromConsoleWithValidation("Opening hours (HH:MM): ", FieldsToValidate.HOURS);
+        Utils.readLineFromConsoleWithValidation("Opening hours (HH:MM): ", FieldToValidate.HOURS);
     String closHours =
-        Utils.readLineFromConsoleWithValidation("Closing hours (HH:MM): ", FieldsToValidate.HOURS);
+        Utils.readLineFromConsoleWithValidation("Closing hours (HH:MM): ", FieldToValidate.HOURS);
     int slotDur = Utils.readIntegerFromConsole("Slot duration: ");
     int maxVac = Utils.readIntegerFromConsole("Maximum vaccines per slot: ");
     Employee coordinator;

@@ -192,22 +192,6 @@ public class VaccinationCenterTest {
   }
 
   /**
-   * Check that that two centers with the website address are the same
-   */
-  @Test
-  public void ensureSameWebAddressEqualsTrue() {
-    VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida",
-        "vacinacaoporto@gmail.com", "+351912345688", "+351223456789",
-        "https://www.centrovacinaoporto.com", "20:00", "19:00", 5, 10, this.coordinator);
-
-    VaccinationCenter center2 = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida",
-        "vacinacaoporto2@gmail.com", "+351912345678", "+351223456799",
-        "https://www.centrovacinaoporto.com", "20:00", "19:00", 5, 10, this.coordinator);
-
-    assertEquals(center, center2);
-  }
-
-  /**
    * Check that two centers with everything the same are equal
    */
   @Test

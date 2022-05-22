@@ -32,25 +32,34 @@ As a nurse, I intend to consult the users in the waiting room of a vaccination c
 >
 > **Answer:** "Nurses and receptionists can work in any vaccination center."
 
+> **Question**: "What information about the Users (name, SNS number, etc) should the system display when listing them?"
+>
+> **Answer**: "Name, Sex, Birth Date, SNS User Number and Phone Number."
+
+> **Question**: "Regarding US05, the listing is supposed to be for the day itself or for a specific day."
+>
+> **Answer**: "The list should show the users in the waiting room of a vaccination center."
+
 ### 1.3. Acceptance Criteria
 
-- **AC1:** SNS Users’ list should be presented by order of arrival.
+- **AC1:** The nurse must be authenticated to and with a have selected a valid vaccination center
+- **AC2:** SNS Users’ list should be presented by order of arrival.
+- **AC3:** The fields to be shown must be: name, sex, birth date, SNS User Number and Phone Number.
 
 ### 1.4. Found out Dependencies
 
 - There is a dependency to "US04 Register SNS User Arrival" since the list of SNS Users present in the waiting room is needed to be consulted.
+- There is dependency with the implementation of the NurseSession, this component is needed to know the vaccination center the nurse is working on.
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
-- Selected data:
-  - Vaccination Center
+There is no input data.
 
 **Output Data:**
 
 - List of users present in the waiting room
-- (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
@@ -80,24 +89,16 @@ Not found.
 
 **SSD - Alternative 1 is adopted.**
 
-| Interaction ID                                                    | Question: Which class is responsible for...            | Answer               | Justification (with patterns)                                                                                 |
-| :---------------------------------------------------------------- | :----------------------------------------------------- | :------------------- | :------------------------------------------------------------------------------------------------------------ |
-| asks to list users in waiting room for a given vaccination center | ... interacting with the actor?                        | CreateTaskUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-|                                                                   | ... coordinating the US?                               | CreateTaskController | Controller                                                                                                    |
-|                                                                   | ... instantiating a new Task?                          | Organization         | Creator (Rule 1): in the DM Organization has a Task.                                                          |
-|                                                                   | ... knowing the user using the system?                 | UserSession          | IE: cf. A&A component documentation.                                                                          |
-|                                                                   | ... knowing to which organization the user belongs to? | Platform             | IE: has registed all Organizations                                                                            |
-|                                                                   |                                                        | Organization         | IE: knows/has its own Employees                                                                               |
-|                                                                   |                                                        | Employee             | IE: knows its own data (e.g. email)                                                                           |
-| Step 2                                                            |                                                        |                      |                                                                                                               |
-| Step 3                                                            | ...saving the inputted data?                           | Task                 | IE: object created in step 1 has its own data.                                                                |
-| Step 4                                                            | ...knowing the task categories to show?                | Platform             | IE: Task Categories are defined by the Platform.                                                              |
-| Step 5                                                            | ... saving the selected category?                      | Task                 | IE: object created in step 1 is classified in one Category.                                                   |
-| Step 6                                                            |                                                        |                      |                                                                                                               |
-| Step 7                                                            | ... validating all data (local validation)?            | Task                 | IE: owns its data.                                                                                            |
-|                                                                   | ... validating all data (global validation)?           | Organization         | IE: knows all its tasks.                                                                                      |
-|                                                                   | ... saving the created task?                           | Organization         | IE: owns all its tasks.                                                                                       |
-| Step 8                                                            | ... informing operation success?                       | CreateTaskUI         | IE: is responsible for user interactions.                                                                     |
+| Interaction ID                                                    | Question: Which class is responsible for...                 | Answer                         | Justification (with patterns)                                                                                                                                                                             |
+| :---------------------------------------------------------------- | :---------------------------------------------------------- | :----------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+| asks to list users in waiting room for a given vaccination center | ... interacting with the nurse?                             | ListUsersInWaitingRoomUI       | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.                                                                                             |
+|                                                                   | ... coordinating the US?                                    | ListUsersWaitingRoomController | Controller: Has responsibility to delegate the UI events                                                                                                                                                  |
+|                                                                   | ... knowing the vaccination center the nurse is working on? | NurseSession                   | Pure Fabrication/HC: Is not specified in the domain model but is needed to accomplish high cohesion. (Not let the task of informing the center the nurse is working on to SelectNurseVaccinationCenterUI) |
+|                                                                   | ... getting the nurse vaccination center data?              | VaccinationCenterStore         | IE: knows all the existing vaccination centers                                                                                                                                                            |     |
+|                                                                   | ... knowing the vaccination center waiting room?            | VaccinationCenter              | IE: knows it's attributes                                                                                                                                                                                 |
+|                                                                   | ... knowing the users who have arrived?                     | WaitingRoom                    | IE: aggregates arrives                                                                                                                                                                                    |
+|                                                                   | ... knowing the attributes to display?                      | ArriveDTO                      | DTO: has registered all Organizations                                                                                                                                                                     |
+| lists all the users present on the waiting room                   | ... display the list to the user?                           | CreateTaskUI                   | IE: is responsible for user interactions.                                                                                                                                                                 |
 
 ### Systematization
 
@@ -106,9 +107,11 @@ According to the taken rationale, the conceptual classes promoted to software cl
 - Company
 - VaccinationCenter
 - VaccinationCenterStore
-- Employee
-- Appointment
+- VaccinationCenterListDTO
+- WaitingRoom
 - Arrive
+- ArriveDTO
+- NurseSession
 
 Other software classes (i.e. Pure Fabrication) identified:
 
@@ -181,3 +184,7 @@ _It is also recommended to organize this content by subsections._
 - A new option on the Nurse menu options was added.
 
 # 7. Observations
+
+**Nurse select center SD**
+
+![EmployeeLogin_SD](SD/EmployeeLogin_SD.svg)

@@ -1,14 +1,13 @@
 package app.ui.console;
 
-import app.controller.AuthController;
-import app.domain.shared.Constants;
-import app.ui.console.utils.Utils;
-import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import app.controller.AuthController;
+import app.domain.shared.Constants;
+import app.ui.console.utils.Utils;
+import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
 
 /**
  *
@@ -47,7 +46,7 @@ public class AuthUI implements Runnable {
     rolesUI.add(new MenuItem(Constants.ROLE_ADMIN, new AdminUI()));
     // To complete with other user roles and related RoleUI
     rolesUI.add(new MenuItem(Constants.ROLE_RECEPTIONIST, new ReceptionistUI()));
-
+    rolesUI.add(new MenuItem(Constants.ROLE_NURSE, new NurseUI()));
     //
     return rolesUI;
   }

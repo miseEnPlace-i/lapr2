@@ -38,7 +38,7 @@ public class SNSUserTest {
     String address = "Test Address 101";
 
     Date birthDay = new Date();
-    DateUtils.addYears(birthDay, -151);
+    birthDay = DateUtils.addYears(birthDay, -151);
 
     new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
   }
@@ -59,7 +59,7 @@ public class SNSUserTest {
     String address = "Test Address 101";
 
     Date birthDay = new Date();
-    DateUtils.addYears(birthDay, 1);
+    birthDay = DateUtils.addYears(birthDay, 1);
 
     new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
   }
@@ -95,7 +95,7 @@ public class SNSUserTest {
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidCCIsNotAllowed() {
     Date c = new Date();
-    new SNSUser("987987", "123456789", "name", c, 'M', "+351912345678", "email@email.com",
+    new SNSUser("000000000ZZ0", "123456789", "name", c, 'M', "+351912345678", "email@email.com",
         "address");
   }
 
@@ -165,7 +165,7 @@ public class SNSUserTest {
    * Tests if gets returns the correct values.
    */
   @Test
-  public void ensureGetAddressWorksAsExpected() {
+  public void ensureGetsWorkAsExpected() {
     Date c = new Date();
     SNSUser instance = new SNSUser("123456789ZZ1", "123456789", "name", c, 'M', "+351211111111",
         "email@email.com", "address");
@@ -210,6 +210,8 @@ public class SNSUserTest {
     SNSUser instance2 = new SNSUser("135510490ZX8", "323456789", "name", c, 'F', "+351211111112",
         "email2@email.com", "address");
     Object randomObject = new Object();
+    SNSUser emailEquals = new SNSUser("346715253ZY4", "523456789", "name", c, 'F', "+351211111117",
+        "email@email.com", "address");
     SNSUser phoneEquals = new SNSUser("346715253ZY4", "523456789", "name", c, 'F', "+351211111111",
         "email3@email.com", "address");
     SNSUser ccEquals = new SNSUser("123456789ZZ1", "523456789", "name", c, 'F', "+351211111115",
@@ -221,6 +223,7 @@ public class SNSUserTest {
     assert !instance.equals(instance2);
     assert !instance.equals(randomObject);
     assert !instance.equals(null);
+    assert instance.equals(emailEquals);
     assert instance.equals(phoneEquals);
     assert instance.equals(ccEquals);
     assert instance.equals(snsNumberEquals);
