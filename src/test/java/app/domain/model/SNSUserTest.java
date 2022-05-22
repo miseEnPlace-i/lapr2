@@ -189,7 +189,7 @@ public class SNSUserTest {
         "email@email.com", "address");
 
     String expected =
-        "SNS User name: name\nCitizen card number: 123456789ZZ1\nSNS number: 123456789\nBirthday: 19/05/2022\nGender: Female\nPhone number: +351211111111\nEmail: email@email.com\nAddress: address\n";
+        "SNS User name: name\nCitizen card number: 123456789ZZ1\nSNS number: 123456789\nBirthday: 22/05/2022\nGender: Female\nPhone number: +351211111111\nEmail: email@email.com\nAddress: address\n";
 
     assertEquals(instance.toString(), expected);
   }

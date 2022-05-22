@@ -43,7 +43,7 @@ public class RegisterSNSUserTest {
 
         String stringified = ctrl.stringifyData();
         String expected =
-                "SNS User name: test\nCitizen card number: 189257695ZY4\nSNS number: 223456789\nBirthday: 01/01/2000\nGender: Male\nPhone number: +351910000001\nEmail: example2@example.com\nAddress: test\n";
+                "SNS User name: test\nCitizen card number: 189257695ZY4\nSNS number: 223456789\nBirthday: 01/01/1970\nGender: Male\nPhone number: +351910000001\nEmail: example2@example.com\nAddress: test\n";
 
         assertEquals(stringified, expected);
     }
