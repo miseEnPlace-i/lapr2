@@ -26,13 +26,30 @@ public class VaccinationCenterStoreTest {
   }
 
   /**
-   * Check that saveVaccinationCenter is working properly
+   * Check that saveVaccinationCenter (community mass vaccination center) is working properly
    * 
    */
   @Test
   public void ensureAddCenterIsWorkingCorrectly() {
-    center = store.createVaccinationCenter("name", "address", "email@email.com", "+351961919169",
+    center = store.createCommunityMassCenter("name", "address", "email@email.com", "+351961919169",
         "+351961919169", "http://www.google.com", "10:00", "19:00", 5, 5, this.coordinator);
+
+    assertEquals(store.size(), 0);
+
+    store.saveVaccinationCenter(center);
+
+    assertEquals(store.size(), 1);
+  }
+
+  /**
+   * Check that saveVaccinationCenter (health care center) is working properly
+   * 
+   */
+  @Test
+  public void ensureAddCenterIsWorkingCorrectly2() {
+    center = store.createHealthCareCenter("name", "address", "email@email.com", "+351961919169",
+        "+351961919169", "http://www.google.com", "10:00", "19:00", 5, 5, this.coordinator, "test",
+        "test");
 
     assertEquals(store.size(), 0);
 
@@ -62,21 +79,75 @@ public class VaccinationCenterStoreTest {
   }
 
   /**
-   * Check that it is possible to add multiple centers to the system
+   * Check that it is possible to add multiple centers to the system (community mass vaccination center)
    */
   @Test
   public void ensureIsPossibleToAddAnotherCenter() {
     assert store.size() == 0;
 
-    center = store.createVaccinationCenter("name123", "address", "email@email.com", "+351961919169",
-        "+351961919169", "http://www.google.com", "10:00", "19:00", 5, 5, this.coordinator);
+    center =
+        store.createCommunityMassCenter("name123", "address", "email@email.com", "+351961919169",
+            "+351961919169", "http://www.google.com", "10:00", "19:00", 5, 5, this.coordinator);
 
     store.saveVaccinationCenter(center);
 
     assertEquals(store.size(), 1);
 
     center2 =
-        store.createVaccinationCenter("name123", "address", "email@gmail.com", "+351961919168",
+        store.createCommunityMassCenter("name123", "address", "email@gmail.com", "+351961919168",
+            "+351961919179", "http://www.gogle.com", "10:00", "19:00", 5, 5, this.coordinator);
+
+    store.validateVaccinationCenter(center2);
+
+    store.saveVaccinationCenter(center2);
+
+    assertEquals(store.size(), 2);
+  }
+
+  /**
+   * Check that it is possible to add multiple centers to the system (health care center)
+   */
+  @Test
+  public void ensureIsPossibleToAddAnotherCenter2() {
+    assert store.size() == 0;
+
+    center = store.createHealthCareCenter("name123", "address", "email@email.com", "+351961919169",
+        "+351961919169", "http://www.google.com", "10:00", "19:00", 5, 5, this.coordinator, "test",
+        "test");
+
+    store.saveVaccinationCenter(center);
+
+    assertEquals(store.size(), 1);
+
+    center2 = store.createHealthCareCenter("name123", "address", "email@gmail.com", "+351961919168",
+        "+351961919179", "http://www.gogle.com", "10:00", "19:00", 5, 5, this.coordinator, "teste",
+        "teste");
+
+    store.validateVaccinationCenter(center2);
+
+    store.saveVaccinationCenter(center2);
+
+    assertEquals(store.size(), 2);
+  }
+
+  /**
+   * Check that it is possible to add multiple centers to the system (health care center and community mass vaccination
+   * center)
+   */
+  @Test
+  public void ensureIsPossibleToAddAnotherCenter3() {
+    assert store.size() == 0;
+
+    center = store.createHealthCareCenter("name123", "address", "email@email.com", "+351961919169",
+        "+351961919169", "http://www.google.com", "10:00", "19:00", 5, 5, this.coordinator, "test",
+        "test");
+
+    store.saveVaccinationCenter(center);
+
+    assertEquals(store.size(), 1);
+
+    center2 =
+        store.createCommunityMassCenter("name123", "address", "email@gmail.com", "+351961919168",
             "+351961919179", "http://www.gogle.com", "10:00", "19:00", 5, 5, this.coordinator);
 
     store.validateVaccinationCenter(center2);
