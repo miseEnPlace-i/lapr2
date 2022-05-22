@@ -48,7 +48,7 @@ public class RegisterVaccinationCenterController implements IRegisterController 
       int maxVacSlot, Employee coordinator) {
 
     // creates a vaccination center instance
-    this.center = vacStore.createVaccinationCenter(name, address, emailAddress, phoneNum, faxNum,
+    this.center = vacStore.createCommunityMassCenter(name, address, emailAddress, phoneNum, faxNum,
         webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
 
     // validates the center
@@ -77,8 +77,8 @@ public class RegisterVaccinationCenterController implements IRegisterController 
       int maxVacSlot, Employee coordinator, String ages, String ars) {
 
     // creates a vaccination center instance
-    this.center = vacStore.createVaccinationCenter(name, address, emailAddress, phoneNum, faxNum,
-        webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
+    this.center = vacStore.createHealthCareCenter(name, address, emailAddress, phoneNum, faxNum,
+        webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator, ages, ars);
 
     // validates the center
     vacStore.validateVaccinationCenter(center);

@@ -216,28 +216,6 @@ public class VaccinationCenter {
     this.coordinator = coordinator;
   }
 
-  /**
-   * Shows all vaccination center data
-   */
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("Vaccination Center data:\n");
-    sb.append(String.format("Name: %s\n", this.name));
-    sb.append(String.format("Address: %s\n", this.address));
-    sb.append(String.format("Email: %s\n", this.email));
-    sb.append(String.format("Phone number: %s\n", this.phoneNum));
-    sb.append(String.format("Fax number: %s\n", this.faxNum));
-    sb.append(String.format("Web address: %s\n", this.webAddress));
-    sb.append(String.format("Opening hours: %s\n", this.openingHours));
-    sb.append(String.format("Closing hours: %s\n", this.closingHours));
-    sb.append(String.format("Slot duration: %s\n", this.slotDuration));
-    sb.append(String.format("Maximum vaccines per slot: %s\n", this.maxVacSlot));
-    sb.append(String.format("Coordinator: %s\n", this.coordinator.getName()));
-
-    return sb.toString();
-  }
-
   @Override
   public boolean equals(Object obj) {
     VaccinationCenter center = (VaccinationCenter) obj;
@@ -252,4 +230,82 @@ public class VaccinationCenter {
 
     return false;
   }
+
+  /**
+   * @return String return the name
+   */
+  public String getName() {
+    return name;
+  }
+
+  /**
+   * @return String return the address
+   */
+  public String getAddress() {
+    return address;
+  }
+
+  /**
+   * @return String return the email
+   */
+  public String getEmail() {
+    return email;
+  }
+
+  /**
+   * @return String return the phoneNum
+   */
+  public String getPhoneNum() {
+    return phoneNum;
+  }
+
+  /**
+   * @return String return the faxNum
+   */
+  public String getFaxNum() {
+    return faxNum;
+  }
+
+  /**
+   * @return String return the webAddress
+   */
+  public String getWebAddress() {
+    return webAddress;
+  }
+
+  /**
+   * @return String return the openingHours
+   */
+  public String getOpeningHours() {
+    return openingHours;
+  }
+
+  /**
+   * @return String return the closingHours
+   */
+  public String getClosingHours() {
+    return closingHours;
+  }
+
+  /**
+   * @return int return the slotDuration
+   */
+  public int getSlotDuration() {
+    return slotDuration;
+  }
+
+  /**
+   * @return int return the maxVacSlot
+   */
+  public int getMaxVacSlot() {
+    return maxVacSlot;
+  }
+
+  /**
+   * @return Employee return the coordinator
+   */
+  public String getCoordinatorName() {
+    return this.coordinator.name;
+  }
+
 }
