@@ -40,15 +40,23 @@ class Receptionist {}
 
 class Employee {}
 
+class Vaccine {
+  -designation
+  -brand
+  -id
+  -vaccineType
+}
+
 Company "1" -- "*" Appointment : knows >
-Appointment "1"  -- "1" VaccineType : has >
+Appointment "1"  -- "1" Vaccine : has >
 Appointment "*" -- "1" VaccinationCenter : has >
 Company "1" -- "*" VaccinationCenter : knows >
-Appointment -- Receptionist : schedules <
+Appointment "*" -- "1" Receptionist : scheduled by >
 Receptionist "1" -- "1" SNSUser : schedules for >
 Appointment "1" -- "1" SNSUser : has >
-Employee <|-- Receptionist
+Employee "1" -- "0..1" Receptionist : play as >
 Company -- Employee : knows >
+Vaccine "1" -- "*" VaccineType : part of <
 
 
 @enduml
