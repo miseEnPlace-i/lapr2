@@ -28,8 +28,8 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
   public void insertData() {
     // Select center type
     System.out.println("\nSelect the Vaccination Center type: ");
-    Integer type =
-        (Integer) Utils.showAndSelectIndex(Arrays.asList(VaccinationCenterType.values()), "");
+    VaccinationCenterType type = (VaccinationCenterType) Utils
+        .showAndSelectOne(Arrays.asList(VaccinationCenterType.values()), "");
     String name = Utils.readLineFromConsole("Name: ");
     String address = Utils.readLineFromConsole("Address: ");
     String email = Utils.readLineFromConsoleWithValidation("Email (example@example.com): ",
@@ -64,7 +64,7 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
     } while (!flag);
 
     // if type == 0 -> Community Mass Vaccination Center; if type == 1 -> Health Care Center
-    if (type == 0) {
+    if (type == VaccinationCenterType.COMMUNITY_MASS_VACCINATION_CENTER) {
       super.ctrl.createCommunityMass(name, address, email, phone, fax, website, openHours,
           closHours, slotDur, maxVac, coordinator);
     } else {

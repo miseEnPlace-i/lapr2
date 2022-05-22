@@ -2,7 +2,7 @@ package app.domain.shared;
 
 
 public enum VaccinationCenterType {
-    MASS_COMMUNITY_VACCINATION_CENTER("Mass Community Vaccination Center"), HEALTH_CARE_CENTER(
+    COMMUNITY_MASS_VACCINATION_CENTER("Community Mass Vaccination Center"), HEALTH_CARE_CENTER(
             "Health Care Center");
 
     private String value;
