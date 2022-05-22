@@ -3,6 +3,8 @@ package app.domain.model.store;
 import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.Employee;
+import app.domain.model.HealthCareCenter;
+import app.domain.model.CommunityMassVaccinationCenter;
 import app.domain.model.VaccinationCenter;
 
 /**
@@ -38,12 +40,23 @@ public class VaccinationCenterStore {
    * @param coordinator the vaccination center coordinator
    * @return VaccinationCenter
    */
-  public VaccinationCenter createVaccinationCenter(String name, String address, String emailAddress,
-      String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours,
-      int slotDuration, int maxVacSlot, Employee coordinator) {
+  public VaccinationCenter createCommunityMassCenter(String name, String address,
+      String emailAddress, String phoneNum, String faxNum, String webAddress, String openingHours,
+      String closingHours, int slotDuration, int maxVacSlot, Employee coordinator) {
 
-    VaccinationCenter center = new VaccinationCenter(name, address, emailAddress, phoneNum, faxNum,
-        webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
+    CommunityMassVaccinationCenter center =
+        new CommunityMassVaccinationCenter(name, address, emailAddress, phoneNum, faxNum,
+            webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
+
+    return center;
+  }
+
+  public VaccinationCenter createHealthCareCenter(String name, String address, String emailAddress,
+      String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours,
+      int slotDuration, int maxVacSlot, Employee coordinator, String ages, String ags) {
+
+    HealthCareCenter center = new HealthCareCenter(name, address, emailAddress, phoneNum, faxNum,
+        webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator, ages, ags);
 
     return center;
   }
