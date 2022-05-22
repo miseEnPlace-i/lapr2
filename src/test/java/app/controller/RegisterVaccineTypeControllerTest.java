@@ -9,7 +9,7 @@ import app.domain.model.store.VaccineTechnologyStore;
 /**
  * @author André Barros <1211299@isep.ipp.pt>
  */
-public class RegisterVaccineTypeTest {
+public class RegisterVaccineTypeControllerTest {
   Company company = new Company("designation");
   RegisterNewVaccineTypeController controller = new RegisterNewVaccineTypeController(company);
   String vaccineType = "Vaccine Type";
