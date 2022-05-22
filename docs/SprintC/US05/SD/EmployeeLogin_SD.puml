@@ -1,25 +1,42 @@
 @startuml
 
-participant "Nurse" as NUR
-participant ":SelectNurseVaccinationCenterUI" as UI
+
+actor "Receptionist / Nurse" as NUR
+
+note over NUR
+ After logging in successfully
+end note
+
+participant ":AuthUI" as AUTHUI
+
+activate AUTHUI
+create ":SelectEmployeeVaccinationCenterUI" as UI
+AUTHUI -> UI
+AUTHUI -> UI : run
+activate UI
 participant ":App" as APP
 activate NUR
 
-NUR -> UI : asks to select a vaccination center
-activate UI
+
 
 UI -> APP : company=getCompany()
 activate APP
 deactivate APP
 
-participant ":SelectNurseVaccinationCenterController" as CTRL
-participant "nurseSession\n:NurseSession" as SESSION
+participant ":SelectEmployeeVaccinationCenterController" as CTRL
+participant "employeeSession\n:EmployeeSession" as SESSION
 UI -> SESSION **
-UI -> CTRL ** : create(company,nurseSession)
+UI -> CTRL ** : create(company,employeeSession)
 
 UI -> CTRL : vaccinationCenters=getVaccinationCentersList()
 activate CTRL
 deactivate CTRL
+
+loop while valid is false
+UI -> SESSION : valid=hasCenter()
+activate SESSION
+deactivate SESSION
+
 UI --> NUR : lists all the available vaccination centers
 deactivate UI
 
@@ -27,15 +44,17 @@ participant "company\n:Company" as COMP
 
 NUR -> UI : selects a vaccination center
 activate UI
-UI -> CTRL : selectVaccinationCenter(centerDTO, nurseSession)
+UI -> CTRL : selectVaccinationCenter(centerDTO, employeeSession)
 activate CTRL
+deactivate UI
 CTRL -> SESSION : setVaccinationCenter(vaccinationCenter)
 activate SESSION
 deactivate SESSION
 
+end loop
+
 deactivate CTRL
 
-UI --> NUR : informs operation success
 deactivate UI
 
 deactivate NUR

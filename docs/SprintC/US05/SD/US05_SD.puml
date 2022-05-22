@@ -6,6 +6,13 @@ actor "Nurse" as NURSE
 participant ":ListUsersInWaitingRoomUI" as UI
 activate NURSE
 NURSE -> UI : asks to list users in waiting room for a given vaccination center
+
+note right of NURSE
+**nurseSession** has the data of the vaccination center
+the nurse is working on, this data is selected right
+after the nurse logging in
+end note
+
 activate UI
 participant ":App" as APP
 UI -> APP : app=getInstance()

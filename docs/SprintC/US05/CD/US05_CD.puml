@@ -153,8 +153,8 @@ CheckWaitingRoomController ..> Company
 
 UserHealthData "1" -- "*" VaccinationData : stores >
 
-VaccinationData --o Vaccine
-VaccinationData --o VaccinationCenter
+VaccinationData o-- Vaccine
+VaccinationData o-- VaccinationCenter
 
 Arrive o-- SNSUser
 Arrive o-- Appointment

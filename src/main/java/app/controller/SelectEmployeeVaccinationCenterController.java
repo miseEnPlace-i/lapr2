@@ -17,9 +17,12 @@ public class SelectEmployeeVaccinationCenterController {
     return vaccinationCenterStore.getVaccinationCenters();
   }
 
+  public boolean validateVaccinationCenter(VaccinationCenterListDTO vaccinationCenter) {
+    return vaccinationCenterStore.exists(vaccinationCenter.getPhone());
+  }
+
   public void selectVaccinationCenter(VaccinationCenterListDTO vaccinationCenter,
       EmployeeSession employeeSession) {
-    if (vaccinationCenterStore.exists(vaccinationCenter.getPhone()))
-      employeeSession.setVaccinationCenter(vaccinationCenter);
+    employeeSession.setVaccinationCenter(vaccinationCenter);
   }
 }
