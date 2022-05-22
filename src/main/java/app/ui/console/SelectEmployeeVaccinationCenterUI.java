@@ -2,16 +2,16 @@ package app.ui.console;
 
 import app.controller.App;
 import app.controller.SelectEmployeeVaccinationCenterController;
-import app.controller.session.EmployeeSession;
 import app.domain.model.dto.VaccinationCenterListDTO;
+import app.session.EmployeeSession;
 import app.ui.console.utils.Utils;
 
 public class SelectEmployeeVaccinationCenterUI implements Runnable {
   private SelectEmployeeVaccinationCenterController controller;
   private EmployeeSession employeeSession;
 
-  public SelectEmployeeVaccinationCenterUI(EmployeeSession nurseSession) {
-    this.employeeSession = nurseSession;
+  public SelectEmployeeVaccinationCenterUI(EmployeeSession employeeSession) {
+    this.employeeSession = employeeSession;
     this.controller = new SelectEmployeeVaccinationCenterController(App.getInstance().getCompany());
   }
 
@@ -21,7 +21,7 @@ public class SelectEmployeeVaccinationCenterUI implements Runnable {
       return;
     }
 
-    while (!employeeSession.isLoggedIn()) {
+    while (!employeeSession.hasCenter()) {
       Object center = Utils.showAndSelectOne(controller.getVaccinationCentersList(),
           "\n\nVaccination Centers\n");
 

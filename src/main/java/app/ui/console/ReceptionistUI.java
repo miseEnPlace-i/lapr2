@@ -9,7 +9,7 @@ import app.ui.console.utils.Utils;
  * @author Paulo Maio <pam@isep.ipp.pt>
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
-public class ReceptionistUI extends EmployeeSessionUI {
+public class ReceptionistUI extends EmployeeWithCenterUI {
   public ReceptionistUI() {
     super();
   }

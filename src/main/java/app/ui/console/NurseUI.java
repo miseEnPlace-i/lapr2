@@ -2,10 +2,10 @@ package app.ui.console;
 
 import java.util.ArrayList;
 import java.util.List;
-import app.controller.session.EmployeeSession;
+import app.session.EmployeeSession;
 import app.ui.console.utils.Utils;
 
-public class NurseUI extends EmployeeSessionUI {
+public class NurseUI extends EmployeeWithCenterUI {
   public NurseUI() {
     super();
   }
@@ -19,6 +19,7 @@ public class NurseUI extends EmployeeSessionUI {
         .add(new MenuItem("Get users in Waiting Room", new ListUsersInWaitingRoomUI(nurseSession)));
 
     int option = 0;
+
     do {
       System.out.printf("%nNurse Vaccination Center: %s", super.getCurrentVaccinationCenter());
       option = Utils.showAndSelectIndex(options, "\n\nNurse Menu:");

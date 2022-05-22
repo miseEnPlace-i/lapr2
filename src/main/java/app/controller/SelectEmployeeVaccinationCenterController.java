@@ -1,10 +1,10 @@
 package app.controller;
 
 import java.util.List;
-import app.controller.session.EmployeeSession;
 import app.domain.model.Company;
 import app.domain.model.dto.VaccinationCenterListDTO;
 import app.domain.model.store.VaccinationCenterStore;
+import app.session.EmployeeSession;
 
 public class SelectEmployeeVaccinationCenterController {
   private VaccinationCenterStore vaccinationCenterStore;
@@ -18,8 +18,8 @@ public class SelectEmployeeVaccinationCenterController {
   }
 
   public void selectVaccinationCenter(VaccinationCenterListDTO vaccinationCenter,
-      EmployeeSession nurseSession) {
+      EmployeeSession employeeSession) {
     if (vaccinationCenterStore.exists(vaccinationCenter.getPhone()))
-      nurseSession.setVaccinationCenter(vaccinationCenter);
+      employeeSession.setVaccinationCenter(vaccinationCenter);
   }
 }

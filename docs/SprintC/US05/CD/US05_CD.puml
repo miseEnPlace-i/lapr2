@@ -2,16 +2,16 @@
 skinparam classAttributeIconSize 0
 
 class Arrive {
-  - Date arriveTime
-  - int status
+  -arriveTime: Date
 }
 
 class NurseSession {
-  - String nurseName
-  - String vaccinationCenterId
+  -vaccinationCenter: VaccinationCenterDTO
 
-  + NurseSession(String nurseName, String vaccinationCenterId)
-  + String getVaccinationCenterId()
+  + NurseSession()
+  + getVaccinationCenterId()
+  + setVaccinationCenterId(center)
+  + hasCenter()
 }
 
 class Company {
@@ -44,16 +44,20 @@ class VaccinationCenter {
   - closingHours: String
   - slotDuration: int
   - maximumVaccinesPerSlot: int
+  -createdAt: Date
   
   +VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
+  +getWaitingRoom()
+
+  -calculateNOfSlotsPerDay()
 }
 
 class VaccinationCenterStore {
-  +createVaccinationCenter(centerData,coordinator)
+  +createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
   +validateVaccinatonCenter(center)
   +saveVaccinationCenter(center)
   +checkDuplicates(center)
-  +getWaitingRoom(center)
+  +getVaccinationCenterWithPhone(phone)
 
   -addVaccinationCenter(center)
 }
@@ -71,20 +75,62 @@ class Employee {
 }
 
 class SNSUser {
-  - String citizenCard
-  - String snsNumber
-  - Date birthDay
-  - Char gender
-  - String phoneNumber
-  - String address
+  - citizenCard: String
+  - snsNumber: String
+  - birthDay: Date
+  - gender: Char
+  - phoneNumber: String
+  - address: String
+
   + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
+  + isEligibleForVaccine(vaccineType,nOfDose)
+}
+
+class UserHealthData {
+  - vaccinesTaken: List<VaccinationData>
+}
+
+class VaccinationData {
+  - batchNumber: int
+  - nOfDose: int
+  - date: Date
 }
 
 class WaitingRoom {
-  +createArrive(arriveTime, user, appointment)
+  - waitingRoom: Queue<Arrive>
+
+  +createArrive(user, appointment)
   +saveArrive(arrive)
   +removeArrive(arrive)
   -checkDuplicates(arrive)
+}
+
+class CenterEvents {
+  - events: List<CenterEvent>
+
+  +CenterEvents()
+}
+
+enum EventType {
+  ARRIVE,
+  VACCINATED,
+  LEAVE
+}
+
+class CenterEvent {
+  - eventType: EventType
+  - eventDate: Date
+
+  +CenterEvent(eventType, eventDate, user)
+}
+
+class AppointmentSchedule {
+  -appointments: List<Appointment[][]>
+  +createAppointment(date,user,vaccine)
+  +saveAppointment(appointment)
+
+  -getAppointmentDayIndex(date)
+  -getAppointmentSlotIndex(hour)
 }
 
 class Appointment {
@@ -105,9 +151,16 @@ class Vaccine{
 CheckWaitingRoomUI ..> CheckWaitingRoomController
 CheckWaitingRoomController ..> Company
 
+UserHealthData "1" -- "*" VaccinationData : stores >
+
+VaccinationData --o Vaccine
+VaccinationData --o VaccinationCenter
+
 Arrive o-- SNSUser
 Arrive o-- Appointment
 Appointment o-- SNSUser
+
+UserHealthData  --o SNSUser
 
 VaccinationCenter o-- Employee : coordinator
 VaccinationCenterStore "1" -- "*" VaccinationCenter : stores >
@@ -116,12 +169,17 @@ Company ..> VaccinationCenterStore
 
 WaitingRoom "1" -- "*" Arrive : stores >
 
-Employee "1" -- "*" WaitingRoom : checks
+Employee "1" -- "*" WaitingRoom : checks >
 VaccinationCenter *-- WaitingRoom
+VaccinationCenter *-- CenterEvents
 
+CenterEvents "1" -- "*" CenterEvent : stores >
+
+CenterEvent o-- SNSUser
 CheckWaitingRoomController ..> NurseSession
 
-Appointment "*" -- "1" VaccinationCenter : has <
+AppointmentSchedule "1" -- "*" Appointment : stores >
+VaccinationCenter *-- AppointmentSchedule
 Appointment o-- Vaccine
 
 @enduml

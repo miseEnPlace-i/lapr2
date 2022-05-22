@@ -32,9 +32,19 @@ As a nurse, I intend to consult the users in the waiting room of a vaccination c
 >
 > **Answer:** "Nurses and receptionists can work in any vaccination center."
 
+> **Question**: "What information about the Users (name, SNS number, etc) should the system display when listing them?"
+>
+> **Answer**: "Name, Sex, Birth Date, SNS User Number and Phone Number."
+
+> **Question**: "Regarding US05, the listing is supposed to be for the day itself or for a specific day."
+>
+> **Answer**: "The list should show the users in the waiting room of a vaccination center."
+
 ### 1.3. Acceptance Criteria
 
-- **AC1:** SNS Users’ list should be presented by order of arrival.
+- **AC1:** The nurse must be authenticated to and with a have selected a valid vaccination center
+- **AC2:** SNS Users’ list should be presented by order of arrival.
+- **AC3:** The fields to be shown must be: name, sex, birth date, SNS User Number and Phone Number.
 
 ### 1.4. Found out Dependencies
 
@@ -45,8 +55,7 @@ As a nurse, I intend to consult the users in the waiting room of a vaccination c
 
 **Input Data:**
 
-- Selected data:
-  - Vaccination Center
+There is no input data.
 
 **Output Data:**
 
@@ -80,16 +89,16 @@ Not found.
 
 **SSD - Alternative 1 is adopted.**
 
-| Interaction ID                                                    | Question: Which class is responsible for...                 | Answer                         | Justification (with patterns)                                                                                 |
-| :---------------------------------------------------------------- | :---------------------------------------------------------- | :----------------------------- | :------------------------------------------------------------------------------------------------------------ | --- |
-| asks to list users in waiting room for a given vaccination center | ... interacting with the nurse?                             | ListUsersInWaitingRoomUI       | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-|                                                                   | ... coordinating the US?                                    | ListUsersWaitingRoomController | Controller: Has responsibility to delegate the UI events                                                      |
-|                                                                   | ... knowing the vaccination center the nurse is working on? | NurseSession                   | Pure Fabrication: Is not specified in the domain model but is needed to accomplish low coupling.              |
-|                                                                   | ... getting the nurse vaccination center data?              | VaccinationCenterStore         | IE: knows all the existing vaccination centers                                                                |     |
-|                                                                   | ... knowing the vaccination center waiting room?            | VaccinationCenter              | IE: knows it's attributes                                                                                     |
-|                                                                   | ... knowing the users who have arrived?                     | WaitingRoom                    | IE: aggregates arrives                                                                                        |
-|                                                                   | ... knowing the attributes to display?                      | ArriveDTO                      | DTO: has registered all Organizations                                                                         |
-| lists all the users present on the waiting room                   | ... display the list to the user?                           | CreateTaskUI                   | IE: is responsible for user interactions.                                                                     |
+| Interaction ID                                                    | Question: Which class is responsible for...                 | Answer                         | Justification (with patterns)                                                                                                                                                                             |
+| :---------------------------------------------------------------- | :---------------------------------------------------------- | :----------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+| asks to list users in waiting room for a given vaccination center | ... interacting with the nurse?                             | ListUsersInWaitingRoomUI       | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.                                                                                             |
+|                                                                   | ... coordinating the US?                                    | ListUsersWaitingRoomController | Controller: Has responsibility to delegate the UI events                                                                                                                                                  |
+|                                                                   | ... knowing the vaccination center the nurse is working on? | NurseSession                   | Pure Fabrication/HC: Is not specified in the domain model but is needed to accomplish high cohesion. (Not let the task of informing the center the nurse is working on to SelectNurseVaccinationCenterUI) |
+|                                                                   | ... getting the nurse vaccination center data?              | VaccinationCenterStore         | IE: knows all the existing vaccination centers                                                                                                                                                            |     |
+|                                                                   | ... knowing the vaccination center waiting room?            | VaccinationCenter              | IE: knows it's attributes                                                                                                                                                                                 |
+|                                                                   | ... knowing the users who have arrived?                     | WaitingRoom                    | IE: aggregates arrives                                                                                                                                                                                    |
+|                                                                   | ... knowing the attributes to display?                      | ArriveDTO                      | DTO: has registered all Organizations                                                                                                                                                                     |
+| lists all the users present on the waiting room                   | ... display the list to the user?                           | CreateTaskUI                   | IE: is responsible for user interactions.                                                                                                                                                                 |
 
 ### Systematization
 
@@ -97,9 +106,9 @@ According to the taken rationale, the conceptual classes promoted to software cl
 
 - Company
 - VaccinationCenter
-- VaccinationCenterListDTO
 - VaccinationCenterStore
-- Employee
+- VaccinationCenterListDTO
+- WaitingRoom
 - Arrive
 - ArriveDTO
 - NurseSession

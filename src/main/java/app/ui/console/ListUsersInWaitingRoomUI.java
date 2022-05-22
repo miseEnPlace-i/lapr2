@@ -3,9 +3,9 @@ package app.ui.console;
 import app.controller.App;
 import app.controller.ListUsersWaitingRoomController;
 import app.domain.model.Arrival;
-import app.controller.session.EmployeeSession;
 import app.domain.model.WaitingRoom;
 import app.exception.NotAuthorizedException;
+import app.session.EmployeeSession;
 
 public class ListUsersInWaitingRoomUI implements Runnable {
   ListUsersWaitingRoomController controller;
