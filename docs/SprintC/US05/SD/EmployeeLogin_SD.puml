@@ -32,7 +32,11 @@ UI -> CTRL : vaccinationCenters=getVaccinationCentersList()
 activate CTRL
 deactivate CTRL
 
-loop while a valid center is not selected
+loop while valid is false
+UI -> SESSION : valid=hasCenter()
+activate SESSION
+deactivate SESSION
+
 UI --> NUR : lists all the available vaccination centers
 deactivate UI
 
@@ -42,16 +46,13 @@ NUR -> UI : selects a vaccination center
 activate UI
 UI -> CTRL : selectVaccinationCenter(centerDTO, employeeSession)
 activate CTRL
-CTRL -> CTRL : validateVaccinationCenter(vaccinationCenter)
 deactivate UI
+CTRL -> SESSION : setVaccinationCenter(vaccinationCenter)
 activate SESSION
 deactivate SESSION
 
 end loop
 
-|||
-
-CTRL -> SESSION : setVaccinationCenter(vaccinationCenter)
 deactivate CTRL
 
 deactivate UI
