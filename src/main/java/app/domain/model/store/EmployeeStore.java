@@ -35,9 +35,14 @@ public class EmployeeStore {
    */
   public Employee createEmployee(String name, String phoneNumber, String email, String address,
       String citizenCard, String roleId) {
-    Employee employee = new Employee(name, phoneNumber, email, address, citizenCard, roleId);
+    String id = generateId();
+    Employee employee = new Employee(id, name, phoneNumber, email, address, citizenCard, roleId);
 
     return employee;
+  }
+
+  private String generateId() {
+    return String.format("%010d", employees.size() + 1);
   }
 
   /**
@@ -80,7 +85,6 @@ public class EmployeeStore {
    * @param employee the employee to be inserted
    */
   public void saveEmployee(Employee employee) {
-    Employee.incrementId();
     String name = employee.getName();
     String email = employee.getEmail();
     String roleId = employee.getRoleId();

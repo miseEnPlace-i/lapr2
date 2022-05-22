@@ -16,7 +16,7 @@ public class VaccinationCenterTest {
 
   @Before
   public void setUp() {
-    coordinator = new Employee("Joana", "+351916478865", "email@email.com", "address",
+    coordinator = new Employee("00000001", "Joana", "+351916478865", "email@email.com", "address",
         "000000000ZZ4", Constants.ROLE_COORDINATOR);
   }
 
@@ -38,7 +38,7 @@ public class VaccinationCenterTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureEmptyIsNotAllowed() {
-    Employee coordinator = new Employee("", "", "", "", "", "");
+    Employee coordinator = new Employee("", "", "", "", "", "", "");
 
     new VaccinationCenter("", "", "", "", "", "", "", "", 0, 0, coordinator);
   }

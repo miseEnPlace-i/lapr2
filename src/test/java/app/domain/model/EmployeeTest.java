@@ -26,7 +26,7 @@ public class EmployeeTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureNullIsNotAllowed() {
-    new Employee(null, null, null, null, null, null);
+    new Employee(null, null, null, null, null, null, null);
   }
 
   /**
@@ -36,7 +36,7 @@ public class EmployeeTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureEmptyIsNotAllowed() {
-    new Employee("", "", "", "", "", "");
+    new Employee("", "", "", "", "", "", "");
   }
 
   /**
@@ -48,8 +48,8 @@ public class EmployeeTest {
   public void ensureValidEmail() {
     String invalidEmail = "joana";
 
-    new Employee("Joana Maria", "Av. da Liberdade", "+351916478865", invalidEmail, "303652584ZZ0",
-        "Nurse");
+    new Employee("0000000001", "Joana Maria", "Av. da Liberdade", "+351916478865", invalidEmail,
+        "303652584ZZ0", "Nurse");
   }
 
   /**
@@ -62,8 +62,8 @@ public class EmployeeTest {
   public void ensureValidPhoneNumberWithValidLength() {
     String invalidPhoneNumber = "+3519164788687897845";
 
-    new Employee("Joana Maria", "Av. da Liberdade", invalidPhoneNumber, "joanamaria@gmail.com",
-        "30365258 4 ZZ0", "Nurse");
+    new Employee("000000001", "Joana Maria", "Av. da Liberdade", invalidPhoneNumber,
+        "joanamaria@gmail.com", "30365258 4 ZZ0", "Nurse");
   }
 
   /**
@@ -76,8 +76,8 @@ public class EmployeeTest {
   public void ensureValidPhoneNumberWithoutLetters() {
     String invalidPhoneNumber = "+3519164foe";
 
-    new Employee("Joana Maria", "Av. da Liberdade", invalidPhoneNumber, "joanamaria@gmail.com",
-        "30365258 4 ZZ0", "Nurse");
+    new Employee("000000001", "Joana Maria", "Av. da Liberdade", invalidPhoneNumber,
+        "joanamaria@gmail.com", "30365258 4 ZZ0", "Nurse");
   }
 
   /**
@@ -90,13 +90,13 @@ public class EmployeeTest {
   public void ensureValidCCNumber() {
     String invalidCCNumber = "30325126512";
 
-    new Employee("Joana Maria", "Av. da Liberdade", "+351916478865", "joanamaria@gmail.com",
-        invalidCCNumber, "Nurse");
+    new Employee("000000001", "Joana Maria", "Av. da Liberdade", "+351916478865",
+        "joanamaria@gmail.com", invalidCCNumber, "Nurse");
   }
 
   @Test
   public void ensureIsPossibleToCreateEmployee() {
-    Employee instance = new Employee("Joana Maria", "+351123456789", "email@email.com",
+    Employee instance = new Employee("000000001", "Joana Maria", "+351123456789", "email@email.com",
         "Av. da Liberdade", "123456789ZZ1", "NURSE");
 
     assertNotNull(instance);

@@ -21,7 +21,7 @@ public class VaccinationCenterStoreTest {
    */
   @Before
   public void setUp() {
-    coordinator = new Employee("Joana", "+351916478865", "email@email.com", "address",
+    coordinator = new Employee("00000001", "Joana", "+351916478865", "email@email.com", "address",
         "000000000ZZ4", Constants.ROLE_COORDINATOR);
   }
 

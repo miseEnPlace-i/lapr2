@@ -21,8 +21,8 @@ public class EmployeeStoreTest {
     roleStore = new EmployeeRoleStore(authFacade);
     store = new EmployeeStore(authFacade, roleStore);
 
-    employee = new Employee("Joana Maria", "+351123456789", "email@email.com", "Av. da Liberdade",
-        "123456789ZZ1", "NURSE");
+    employee = new Employee("00000001", "Joana Maria", "+351123456789", "email@email.com",
+        "Av. da Liberdade", "123456789ZZ1", "NURSE");
   }
 
   /**
