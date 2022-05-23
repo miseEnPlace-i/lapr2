@@ -38,7 +38,7 @@ activate ui
     activate app
     deactivate app
     ui -> controller** : create(company)
-    ui --> user : requests data (date, time)
+    ui --> user : requests data (date)
 deactivate ui
 
 user -> ui : types requested data
@@ -81,9 +81,6 @@ end
         controller -> company : vaccinationCenterStore = getVaccinationCenterStore()
         activate company
         deactivate company
-        controller -> company : vaccineStore = getVaccineStore()
-        activate company
-        deactivate company
         controller -> vacCenterStore : availableVaccinationCenters = getVaccinationCentersByVaccineType(vaccineType)
         activate vacCenterStore
             vacCenterStore --> vacCenterList**
@@ -123,7 +120,7 @@ activate ui
     ui -> controller : createAppointment(appointmentDto)
     note right
         appointmentDto has all the information 
-        needed to create an appointment (date, time, 
+        needed to create an appointment (date, 
         vaccine type, vaccination center, sms)
     end note
     activate controller
@@ -150,10 +147,7 @@ activate ui
             appointmentStore -> appointmentDto : date = getDate()
             activate appointmentDto
             deactivate appointmentDto
-            appointmentStore -> appointmentDto : time = getTime()
-            activate appointmentDto
-            deactivate appointmentDto
-            appointmentStore -> appointmentStore : checkDuplicateAppointment(snsUserNumber, date, time)
+            appointmentStore -> appointmentStore : checkDuplicateAppointment(snsUserNumber, date)
             activate appointmentStore
             deactivate appointmentStore
             appointmentStore -> appointmentDto : vaccineType = getVaccineType()
@@ -168,10 +162,10 @@ activate ui
             appointmentStore -> appointmentDto : vaccinationCenter = getVaccinationCenter()
             activate appointmentDto
             deactivate appointmentDto
-            appointmentStore -> vacCenter : checkAvailability(date, time, vaccineType)
+            appointmentStore -> vacCenter : checkAvailability(date, vaccineType)
             activate vacCenter
             deactivate vacCenter
-            appointmentStore -> appointment** : create(snsUserNumber, date, time, vaccineType, vaccinationCenter)
+            appointmentStore -> appointment** : create(snsUserNumber, date, vaccineType, vaccinationCenter)
         deactivate appointmentStore
     deactivate controller
     ui --> user : shows all data and requests confirmation
