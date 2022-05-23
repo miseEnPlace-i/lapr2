@@ -133,11 +133,11 @@ SNSUserStore "1" -- "*" SNSUser : stores >
 VaccineTypeStore "1" -- "*" VaccineType : stores >
 
 Appointment "*" -- "1" VaccinationCenter : is held at >
-Appointment --o VaccineType
 Appointment ..> SMSSender
 
-Vaccine --o VaccineType
+VaccineType --o Vaccine
+VaccineType --o Appointment
 
-SNSUser --o UserHealthData
+UserHealthData --o SNSUser
 
 @enduml
