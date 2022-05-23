@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.Company;
 import app.domain.model.Employee;
+import app.domain.model.VaccineType;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
 
@@ -17,6 +18,7 @@ public class RegisterVaccinationCenterControllerTest {
   RegisterVaccinationCenterController controller = new RegisterVaccinationCenterController(company);
   String centerName = "Vaccination Center";
   Employee coordinator;
+  VaccineType vacType;
 
   /**
    * Set up for the tests
@@ -31,6 +33,8 @@ public class RegisterVaccinationCenterControllerTest {
     coordinator = employeeStore.createEmployee("Joana", "+351916478865", "email@email.com",
         "address", "000000000ZZ4", "COORDINATOR");
     employeeStore.saveEmployee(coordinator);
+
+    vacType = new VaccineType("12345", "description", "technology");
   }
 
   /**
@@ -50,6 +54,8 @@ public class RegisterVaccinationCenterControllerTest {
     sb.append(String.format("Slot duration: %s\n", "5"));
     sb.append(String.format("Maximum vaccines per slot: %s\n", "5"));
     sb.append(String.format("Coordinator: %s\n", "Joana"));
+    sb.append(String.format("Vaccine type given on the center: %s\n",
+        "Vaccine type specifications:\nCode: 12345\nDescription: description\nTechnology: technology"));
 
     return sb.toString();
   }
@@ -93,7 +99,8 @@ public class RegisterVaccinationCenterControllerTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureNullValuesNotAllowed() {
-    controller.createCommunityMass(null, null, null, null, null, null, null, null, 0, 0, null);
+    controller.createCommunityMass(null, null, null, null, null, null, null, null, 0, 0, null,
+        null);
   }
 
   /**
@@ -114,7 +121,7 @@ public class RegisterVaccinationCenterControllerTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureEmptyValuesNotAllowed() {
-    controller.createCommunityMass("", "", "", "", "", "", "", "", 0, 0, coordinator);
+    controller.createCommunityMass("", "", "", "", "", "", "", "", 0, 0, null, null);
   }
 
   /**
@@ -135,7 +142,7 @@ public class RegisterVaccinationCenterControllerTest {
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidEmailThrowsException() {
     controller.createCommunityMass("name", "address", "emailaddress", "+351913456789",
-        "+351913456788", "https://www.teste.com", "11:00", "12:00", 5, 5, coordinator);
+        "+351913456788", "https://www.teste.com", "11:00", "12:00", 5, 5, coordinator, vacType);
   }
 
   /**
@@ -157,7 +164,7 @@ public class RegisterVaccinationCenterControllerTest {
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidPhoneThrowsException() {
     controller.createCommunityMass("name", "address", "example@gmail.com", "913456789",
-        "+351913456788", "https://www.teste.com", "11:00", "12:00", 5, 5, coordinator);
+        "+351913456788", "https://www.teste.com", "11:00", "12:00", 5, 5, coordinator, vacType);
   }
 
   /**
@@ -180,7 +187,7 @@ public class RegisterVaccinationCenterControllerTest {
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidFaxThrowsException() {
     controller.createCommunityMass("name", "address", "example@gmail.com", "+351913456789",
-        "913456788", "https://www.teste.com", "11:00", "12:00", 5, 5, coordinator);
+        "913456788", "https://www.teste.com", "11:00", "12:00", 5, 5, coordinator, vacType);
   }
 
   /**
@@ -202,7 +209,7 @@ public class RegisterVaccinationCenterControllerTest {
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidWebsiteThrowsException() {
     controller.createCommunityMass("name", "address", "example@gmail.com", "+351913456789",
-        "+351913456788", "abc://www.teste.com", "11:00", "12:00", 5, 5, coordinator);
+        "+351913456788", "abc://www.teste.com", "11:00", "12:00", 5, 5, coordinator, vacType);
   }
 
   /**
@@ -225,7 +232,7 @@ public class RegisterVaccinationCenterControllerTest {
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidSlotDurationThrowsException() {
     controller.createCommunityMass("name", "address", "example@gmail.com", "+351913456789",
-        "+351913456788", "https://www.teste.com", "11:00", "12:00", -5, 5, coordinator);
+        "+351913456788", "https://www.teste.com", "11:00", "12:00", -5, 5, coordinator, vacType);
   }
 
   /**
@@ -248,7 +255,7 @@ public class RegisterVaccinationCenterControllerTest {
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidCoordinatorThrowsException() {
     controller.createCommunityMass("name", "address", "example@gmail.com", "+351913456789",
-        "+351913456788", "https://www.teste.com", "11:00", "12:00", 5, 5, null);
+        "+351913456788", "https://www.teste.com", "11:00", "12:00", 5, 5, null, vacType);
   }
 
   /**
@@ -268,7 +275,7 @@ public class RegisterVaccinationCenterControllerTest {
   @Test
   public void ensureValidValuesCreateNewCenter() {
     controller.createCommunityMass("name", "address", "example@gmail.com", "+351913456789",
-        "+351913456788", "https://www.teste.com", "11:00", "12:00", 5, 5, coordinator);
+        "+351913456788", "https://www.teste.com", "11:00", "12:00", 5, 5, coordinator, vacType);
   }
 
   /**
@@ -288,7 +295,7 @@ public class RegisterVaccinationCenterControllerTest {
   public void ensureStringifyDataWorking() {
     String center = toString();
     controller.createCommunityMass("name", "address", "example@gmail.com", "+351913456789",
-        "+351913456788", "https://www.teste.com", "11:00", "23:00", 5, 5, coordinator);
+        "+351913456788", "https://www.teste.com", "11:00", "23:00", 5, 5, coordinator, vacType);
     controller.save();
     assertEquals(center, controller.stringifyData());
   }
