@@ -19,5 +19,8 @@ public class Constants {
   public static final String PARAMS_FILENAME = "config.properties";
   public static final String PARAMS_COMPANY_DESIGNATION = "Company.Designation";
 
+  public static final String PARAMS_ONGOING_OUTBREAK_VACCINE_TYPE =
+      "OngoingOutbreak.VaccineTypeCode";
+
   public static final byte VACCINE_TYPE_CODE_LENGTH = 5;
 }
