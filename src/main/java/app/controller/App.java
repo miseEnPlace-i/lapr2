@@ -1,12 +1,10 @@
 package app.controller;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 import app.domain.model.Company;
 import app.domain.model.Employee;
 import app.domain.model.VaccinationCenter;
+import app.domain.model.VaccineType;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.VaccinationCenterStore;
@@ -14,6 +12,7 @@ import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.shared.Constants;
 import pt.isep.lei.esoft.auth.AuthFacade;
 import pt.isep.lei.esoft.auth.UserSession;
+import app.service.PropertiesUtils;
 
 /**
  * @author Paulo Maio <pam@isep.ipp.pt>
@@ -27,7 +26,7 @@ public class App {
   private VaccinationCenterStore vaccinationCenterStore;
 
   private App() {
-    Properties props = getProperties();
+    Properties props = PropertiesUtils.getProperties();
     this.company = new Company(props.getProperty(Constants.PARAMS_COMPANY_DESIGNATION));
     this.authFacade = this.company.getAuthFacade();
     this.employeeStore = this.company.getEmployeeStore();
@@ -52,23 +51,6 @@ public class App {
 
   public void doLogout() {
     this.authFacade.doLogout();
-  }
-
-  private Properties getProperties() {
-    Properties props = new Properties();
-
-    // Add default properties and values
-    props.setProperty(Constants.PARAMS_COMPANY_DESIGNATION, "DGS/SNS");
-
-    // Read configured values
-    try {
-      InputStream in = new FileInputStream(Constants.PARAMS_FILENAME);
-      props.load(in);
-      in.close();
-    } catch (IOException ex) {
-
-    }
-    return props;
   }
 
   private void bootstrap() {
@@ -102,9 +84,11 @@ public class App {
         "adress", "000000000ZZ4", Constants.ROLE_NURSE);
     this.employeeStore.saveEmployee(e3);
 
-    VaccinationCenter vc =
-        this.vaccinationCenterStore.createCommunityMassCenter("name", "address", "sda@das.com",
-            "+351212345678", "+351212345678", "http://www.ggg.com", "20:00", "21:00", 5, 5, e2);
+    VaccineType type = new VaccineType("12345", "description", "test");
+
+    VaccinationCenter vc = this.vaccinationCenterStore.createCommunityMassCenter("name", "address",
+        "sda@das.com", "+351212345678", "+351212345678", "http://www.ggg.com", "20:00", "21:00", 5,
+        5, e2, type);
     this.vaccinationCenterStore.saveVaccinationCenter(vc);
   }
 
