@@ -6,7 +6,11 @@ class AppointmentUI {
 }
 
 class AppointmentController {
-
+  +getSuggestedVaccineType()
+  +getListOfVaccineTypes()
+  +getListOfVaccinationCentersWithVaccineType(vaccineType)
+  +createAppointment(appointmentDto)
+  +saveAppointment()
 }
 
 class Appointment {
@@ -19,19 +23,30 @@ class Appointment {
 }
 
 class AppointmentStore {
-
+  +createAppointment(appointmentDto)
+  +saveAppointment(appointment)
 }
 
 class Company {
   -designation : String
+  +getSuggestedVaccineType()
+  +getVaccineTypeStore()
+  +getVaccinationCenterStore()
+  +getVaccineStore()
+  +getAppointmentStore()
+  +getUserSession()
+  +getSNSUserStore()
 }
 
 class VaccinationCenter {
-
+  +getAdministeredVaccines()
+  +checkAvailability(date, time, vaccineType)
+  +addAppointmentToList(appointment)
 }
 
 class VaccinationCenterStore {
-
+  +availableVaccinationCenters : List<VaccinationCenter>  
+  +getVaccinationCentersByVaccineType(vaccineType)
 }
 
 class VaccineType {
@@ -39,7 +54,7 @@ class VaccineType {
 }
 
 class VaccineTypeStore {
-
+  +getVaccineTypes()
 }
 
 class Vaccine {
