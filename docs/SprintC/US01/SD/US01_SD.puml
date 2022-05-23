@@ -4,6 +4,7 @@ autonumber
 actor "SNS User" as user
 
 participant ":AppointmentUI" as ui
+participant ":App" as app
 participant ":AppointmentController" as controller
 participant "comp\n:Company" as company
 participant "appointmentStore\n:AppointmentStore" as appointmentStore
@@ -30,6 +31,13 @@ activate user
 user -> ui : asks to schedule a vaccine
 
 activate ui
+    ui -> app : app = getInstance()
+    activate app
+    deactivate app
+    ui -> app : company = app.getCompany()
+    activate app
+    deactivate app
+    ui -> controller** : create(company)
     ui --> user : requests data (date, time)
 deactivate ui
 
@@ -197,9 +205,9 @@ activate ui
                     appointment -> snsUser : phoneNumber = getPhoneNumber()
                     activate snsUser
                     deactivate snsUser
-                    appointment -> appointment : sendSMS(phoneNumber, smsContent)
-                    activate appointment
-                    deactivate appointment
+                    appointment -> smsSender : sendSMS(phoneNumber, smsContent)
+                    activate smsSender
+                    deactivate smsSender
                 end
             deactivate appointment
         deactivate appointmentStore
