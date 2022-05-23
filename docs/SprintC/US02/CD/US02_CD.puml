@@ -5,9 +5,11 @@ class Appointment {
   - date: Date
   - time: String
   +Appointment(SNSUserNumber, date, time, center, vaccineType)
+  +sendSMS()
+  +getVaccinationCenter()
 }
 
-class AppointmentSchedule {
+class AppointmentScheduleList {
   -appointments: List<Appointment[][]>
   +createAppointment(date,user,vaccine)
   +saveAppointment(appointment)
@@ -37,6 +39,7 @@ class Company {
   +getSuggestedVaccineType()
   +getVaccinationCenterStore()
   +getVaccineTypeStore()
+  +getAppointmentScheduleList()
 }
 
 class SNSUser {
@@ -46,12 +49,13 @@ class SNSUser {
   - gender: Char
   - phoneNumber: String 
   - address: String
+  - userHealthData : UserHealthData
   + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
-   + isEligibleForVaccine(vaccineType)
   }
 
 class UserHealthData {
-  - vaccinesTaken: List<VaccinationData>
+ - vaccinesTaken: List<VaccinationData>
+ +isEligibleForVaccine(vaccineType)
 }
 
 class VaccinationData {
@@ -72,60 +76,73 @@ class VaccinationCenter{
   - slotDuration: int
   - maximumVaccinesPerSlot: int
   - createdAt: Date
+  - administeredVaccines : List<Vaccine>
   +VaccinationCenter(name,address,emailAddres,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
+  +getAdministeredVaccines()
+  +checkAvailability(date,time,vaccineType)
+  +addAppointmentToList(appointment)
 }
 
 class VaccinationCenterStore {
-  ---
-+availableVaccinationCentersList: List<VaccinationCenter>
+-availableVaccinationCentersList: List<VaccinationCenter>
 +getVaccinationCenterByVaccineType(vaccineType)
-+createVaccinationCenter(centerData,coordinator)
-+validateVaccinatonCenter(center)
--checkDuplicates(center)
-+saveVaccinationCenter(center)
 }
+
+class VaccineType {}
 
 class VaccineTypeStore {
-  +getVaccineTypeByCode(code)
-  +getList()
-  +addVaccineType()
-  +saveVaccineType()
+  -vaccineTypes : List<VaccineType>
+  +getVaccineTypes()
 }
-
-class Employee {
-  -id: String 
-  -name: String 
-  -email: String 
-  -phone: String 
-  -address: String 
-  -citizenCardNumber: int 
-  -roleId: String 
-  +Employee(name,email,phone,address,citizenCardNumber,roleId)
-}
-
-class EmployeeStore {}
 
 class SMSSender {
-  +sendMessage(appointment)
+  +sendSMS(phoneNumber,message)
 }
+
+class VaccineTypeMapper {
++toDto(vaccineTypes)
+}
+
+class VaccinationCenterMapper {
+  +toDto(vaccinationCenters)
+}
+
+class AppointmentDto {
+  -snsUser : SNSUser
+  -vaccineType : VaccineType
+  -center : VaccinationCenter
+  -date : Calendar
+  -time : String
+  +getVaccineType()
+  +getVaccinationCenter()
+  +getDate()
+  +getTime()
+  +getSNSNumber()
+}
+
+class AppointmentMapper {}
 
 AppointmentUI ..> AppointmentController
 AppointmentController ..> Company
 Company ..> VaccinationCenterStore
 Company ..> VaccineTypeStore
-Company ..> AppointmentSchedule
-Company ..> EmployeeStore
-EmployeeStore "1" -> "*" Employee : stores
-VaccinationCenterStore "1" -> "*" VaccinationCenter : stores
-Employee ---o VaccinationCenter : coordinator
+Company ..> AppointmentScheduleList
+VaccinationCenterStore "1" --> "*" VaccinationCenter : stores
 VaccinationCenter "1" --o "*" Appointment
 SNSUser "1" --o "*" Appointment
-AppointmentSchedule "1" -> "*" Appointment : stores
+AppointmentScheduleList "1" --> "*" Appointment : stores
 VaccinationData o-- Vaccine
 VaccinationData o--  VaccinationCenter
 UserHealthData  --o SNSUser
 UserHealthData "1" -- "*" VaccinationData : stores >
-Appointment o-- Vaccine
-SMSSender <- Appointment
+Appointment o-- VaccineType
+SMSSender <.. Appointment
+VaccineType --o Vaccine 
+VaccinationCenterStore ..> Vaccine
+AppointmentMapper ..> AppointmentDto
+AppointmentController ..> AppointmentMapper
+AppointmentController ..> VaccinationCenterMapper
+AppointmentController ..> VaccineTypeMapper 
+VaccineTypeStore --> VaccineType : stores > 
 
 @enduml
