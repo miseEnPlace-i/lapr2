@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import app.controller.App;
 import app.controller.RegisterVaccinationCenterController;
+import app.domain.model.Company;
 import app.domain.model.Employee;
 import app.domain.shared.FieldToValidate;
 import app.domain.shared.VaccinationCenterType;
@@ -17,6 +18,8 @@ import app.ui.console.utils.Utils;
  * @author André Barros <1211299@isep.ipp.pt>
  */
 public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationCenterController> {
+  private Company company;
+
   /**
    * VaccinationCenterUI Constructor
    */
@@ -63,10 +66,10 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
       }
     } while (!flag);
 
-    // if type == 0 -> Community Mass Vaccination Center; if type == 1 -> Health Care Center
+
     if (type == 0) {
       super.ctrl.createCommunityMass(name, address, email, phone, fax, website, openHours,
-          closHours, slotDur, maxVac, coordinator);
+          closHours, slotDur, maxVac, coordinator, this.company.getSuggestedVaccineType());
     } else {
       String ages = Utils.readLineFromConsole("AGES: ");
       String ars = Utils.readLineFromConsole("ARS: ");
