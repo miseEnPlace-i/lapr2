@@ -5,7 +5,11 @@ skinparam classAttributeIconSize 0
 
 class Appointment {}
 
-class VaccineType {}
+class VaccineType {
+  -code 
+  -description
+  -technology
+}
 
 class SNSUser {
   - citizenCard
@@ -30,6 +34,7 @@ class VaccinationCenter{
   -slotDuration
   -maximumVaccinesPerSlot
   -coordinator
+  -createdAt
 }
 
 class Company{
@@ -38,25 +43,28 @@ class Company{
 
 class Receptionist {}
 
-class Employee {}
-
-class Vaccine {
-  -designation
-  -brand
+class Employee {
   -id
-  -vaccineType
+  -name
+  -email
+  -phone
+  -address
+  -citizenCardNumber
+  -roleId
 }
 
+class SMSSender {}
+
 Company "1" -- "*" Appointment : knows >
-Appointment "1"  -- "1" Vaccine : has >
-Appointment "*" -- "1" VaccinationCenter : has >
+Appointment "1"  -- "1" VaccineType : has >
+Appointment "*" -- "1" VaccinationCenter : is held in >
 Company "1" -- "*" VaccinationCenter : knows >
 Appointment "*" -- "1" Receptionist : scheduled by >
 Receptionist "1" -- "1" SNSUser : schedules for >
 Appointment "1" -- "1" SNSUser : has >
 Employee "1" -- "0..1" Receptionist : play as >
 Company -- Employee : knows >
-Vaccine "1" -- "*" VaccineType : part of <
+Appointment "1" -- "0..1" SMSSender : triggers >
 
 
 @enduml
