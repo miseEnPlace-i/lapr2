@@ -1,6 +1,7 @@
 package app.domain.model.store;
 
-import java.util.Calendar;
+import static org.junit.Assert.assertEquals;
+import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.SNSUser;
@@ -19,7 +20,7 @@ public class SNSUserStoreTest {
   public void setUp() {
     authFacade = new AuthFacade();
     store = new SNSUserStore(authFacade);
-    Calendar c = Calendar.getInstance();
+    Date c = new Date();
     snsUser = new SNSUser("123456789ZZ1", "123456789", "name", c, 'M', "+351211111111",
         "email@email.com", "address");
   }
@@ -29,9 +30,9 @@ public class SNSUserStoreTest {
    */
   @Test
   public void ensureAddSNSUserIsWorkingCorrectly() {
-    assert store.size() == 0;
+    assertEquals(store.size(), 0);
     store.saveSNSUser(snsUser);
-    assert store.size() == 1;
+    assertEquals(store.size(), 1);
   }
 
   /**
@@ -42,6 +43,25 @@ public class SNSUserStoreTest {
   @Test(expected = IllegalArgumentException.class)
   public void ensureCheckDuplicatesIsWorkingCorrectly() {
     store.saveSNSUser(snsUser);
+    store.validateSNSUser(snsUser);
+  }
+
+  /**
+   * Test that validate method is working for null objects.
+   * 
+   * @throws IllegalArgumentException
+   */
+  @Test(expected = Error.class)
+  public void ensureValidateForNullWorksAsExpected() {
+    store.validateSNSUser(null);
+  }
+
+  /**
+   * Test that validate method is working for already inserted system users.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void ensureValidateForInsertedSystemUserWorksAsExpected() {
+    authFacade.addUser("test", "email@email.com", "123456");
     store.validateSNSUser(snsUser);
   }
 }

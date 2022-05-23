@@ -1,9 +1,10 @@
 package app.domain.model;
 
+import app.domain.model.list.AppointmentScheduleList;
 import app.service.FormatVerifier;
 
 /**
- * Vaccination Center class
+ * Vaccination Center super class
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  */
@@ -19,6 +20,8 @@ public class VaccinationCenter {
   private int slotDuration;
   private int maxVacSlot;
   private Employee coordinator;
+  private WaitingRoom waitingRoom;
+  private AppointmentScheduleList aptLst;
 
   /**
    * Constructor for the Vaccination Center
@@ -50,6 +53,91 @@ public class VaccinationCenter {
     setSlotDuration(slotDuration);
     setMaxVacSlot(maxVacSlot);
     setCoordinator(coordinator);
+    this.waitingRoom = new WaitingRoom();
+    this.aptLst = new AppointmentScheduleList();
+  }
+
+  /**
+   * @return the name of the vaccination center
+   */
+  public String getName() {
+    return name;
+  }
+
+  /**
+   * @return the address of the vaccination center
+   */
+  public String getAddress() {
+    return address;
+  }
+
+  /**
+   * @return the phone of the vaccination center
+   */
+  public String getPhone() {
+    return phoneNum;
+  }
+
+  /**
+   * @return the fax of the vaccination center
+   */
+  public String getFax() {
+    return faxNum;
+  }
+
+  /**
+   * @return the web address of the vaccination center
+   */
+  public String getWebAddress() {
+    return webAddress;
+  }
+
+  /**
+   * @return the email of the vaccination center
+   */
+  public String getEmail() {
+    return email;
+  }
+
+  /**
+   * @return the maximum number of vaccines given per slot
+   */
+  public int getMaxVacSlot() {
+    return maxVacSlot;
+  }
+
+  /**
+   * @return the name of the coordinator of the vaccination center
+   */
+  public String getCoordinatorName() {
+    return coordinator.name;
+  }
+
+  /**
+   * Gets the opening hours.
+   * 
+   * @return the opening hours.
+   */
+  public String getOpeningHours() {
+    return this.openingHours;
+  }
+
+  /**
+   * Gets the closing hours.
+   * 
+   * @return the closing hours.
+   */
+  public String getClosingHours() {
+    return this.closingHours;
+  }
+
+  /**
+   * Gets the slot duration.
+   * 
+   * @return the slot duration.
+   */
+  public int getSlotDuration() {
+    return this.slotDuration;
   }
 
   /**
@@ -217,6 +305,21 @@ public class VaccinationCenter {
   }
 
   /**
+   * @return true if the center phone is the same as the given phone number, false otherwise.
+   */
+  public boolean hasPhone(String phone) {
+    return phoneNum.equals(phone);
+  }
+
+  public WaitingRoom getWaitingRoom() {
+    return waitingRoom;
+  }
+
+  public AppointmentScheduleList getAppointmentStore() {
+    return aptLst;
+  }
+
+  /**
    * Shows all vaccination center data
    */
   @Override
@@ -248,7 +351,6 @@ public class VaccinationCenter {
     if (this.email.equals(center.email)) return true;
     if (this.phoneNum.equals(center.phoneNum)) return true;
     if (this.faxNum.equals(center.faxNum)) return true;
-    if (this.webAddress.equals(center.webAddress)) return true;
 
     return false;
   }

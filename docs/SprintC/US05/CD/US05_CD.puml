@@ -1,72 +1,185 @@
 @startuml
 skinparam classAttributeIconSize 0
 
-class ApplicationPOT
-{
-  +static getInstance()
-  +getCurrentSession()
+class Arrive {
+  -arriveTime: Date
 }
 
-class UserSession
-{
-  +getUserEmail()
+class NurseSession {
+  -vaccinationCenter: VaccinationCenterDTO
+
+  + NurseSession()
+  + getVaccinationCenterId()
+  + setVaccinationCenterId(center)
+  + hasCenter()
 }
 
-class Task {
-  -String reference
-  -String designation
-  -String informalDescription
-  -String technicalDescription
-  -Integer duration
-  -Double cost
-  +Task(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
+class Company {
+  -designation: String
+  -authFacade: AuthFacade
+  -vaccinationCenterStore: VaccinationCenterStore
+  
+  +Company(designation)
+
+  +getAuthFacade()
+  +getVaccinationCenterStore()
 }
 
-class Category {
-  -String id
-  -String description
-}
-
-class Organization {
-  -String name
-  -String VatNumber
-  -String website
-  -String phone
-  -String email
-  +Organization(name, VatNumber, webSite, phone, email, postalAddress, manager)
-  +createTask(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
-  +saveTask(task)
-  -addTask(task)
-  -validateTask(task)
-}
-
-class Platform {
-  -String designation
+class CheckWaitingRoomController {
   +getCategories()
-  +getCategoryById(catId)
-  +getOrganizationByUserEmail(email)
-}
-
-class CreateTaskController {
-  +getCategories()
-  +createTask(ref,designation,informalDesc,technicalDesc,duration,cost,categoryId)
+  +CheckWaitingRoom(ref,designation,informalDesc,technicalDesc,duration,cost,categoryId)
   +saveTask()
 }
 
-class CreateTaskUI {
+class CheckWaitingRoomUI {}
 
+class VaccinationCenter {
+  - name: String
+  - address: String
+  - emailAddress: String
+  - phoneNumber: String
+  - faxNumber: String
+  - websiteAddress: String
+  - openingHours: String
+  - closingHours: String
+  - slotDuration: int
+  - maximumVaccinesPerSlot: int
+  -createdAt: Date
+  
+  +VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
+  +getWaitingRoom()
+
+  -calculateNOfSlotsPerDay()
 }
 
-CreateTaskUI ..> CreateTaskController
-CreateTaskController ..> Platform
-CreateTaskController ..> Category
-CreateTaskController ..> Task
-CreateTaskController ..> Organization
-CreateTaskController ..> ApplicationPOT
-CreateTaskController ..> UserSession
-Task "*" -> "1" Category : classified in
-Platform "1" --> "*" Category : defines
-Organization "1" --> "*" Task : owns
+class VaccinationCenterStore {
+  +createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
+  +validateVaccinatonCenter(center)
+  +saveVaccinationCenter(center)
+  +checkDuplicates(center)
+  +getVaccinationCenterWithPhone(phone)
 
+  -addVaccinationCenter(center)
+}
+
+class Employee {
+  -id: String 
+  -name: String 
+  -email: String 
+  -phone: String 
+  -address: String 
+  -citizenCardNumber: int 
+  -roleId: String 
+
+  +Employee(name,email,phone,address,citizenCardNumber,roleId)
+}
+
+class SNSUser {
+  - citizenCard: String
+  - snsNumber: String
+  - birthDay: Date
+  - gender: Char
+  - phoneNumber: String
+  - address: String
+
+  + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
+  + isEligibleForVaccine(vaccineType,nOfDose)
+}
+
+class UserHealthData {
+  - vaccinesTaken: List<VaccinationData>
+}
+
+class VaccinationData {
+  - batchNumber: int
+  - nOfDose: int
+  - date: Date
+}
+
+class WaitingRoom {
+  - waitingRoom: Queue<Arrive>
+
+  +createArrive(user, appointment)
+  +saveArrive(arrive)
+  +removeArrive(arrive)
+  -checkDuplicates(arrive)
+}
+
+class CenterEvents {
+  - events: List<CenterEvent>
+
+  +CenterEvents()
+}
+
+enum EventType {
+  ARRIVE,
+  VACCINATED,
+  LEAVE
+}
+
+class CenterEvent {
+  - eventType: EventType
+  - eventDate: Date
+
+  +CenterEvent(eventType, eventDate, user)
+}
+
+class AppointmentSchedule {
+  -appointments: List<Appointment[][]>
+  +createAppointment(date,user,vaccine)
+  +saveAppointment(appointment)
+
+  -getAppointmentDayIndex(date)
+  -getAppointmentSlotIndex(hour)
+}
+
+class Appointment {
+  -Date appointmentDate
+
+  +Appointment(appointmentDate, user, vaccine)
+}
+
+class Vaccine{
+  -designation : String
+  -brand : String
+  -id : String
+  -vacType : VaccineType
+
+  +Vaccine(designation, id, brand, vacTypeId)
+}
+
+CheckWaitingRoomUI ..> CheckWaitingRoomController
+CheckWaitingRoomController ..> Company
+
+UserHealthData "1" -- "*" VaccinationData : stores >
+
+VaccinationData o-- Vaccine
+VaccinationData o-- VaccinationCenter
+
+Arrive o-- SNSUser
+Arrive o-- Appointment
+Appointment o-- SNSUser
+
+UserHealthData  --o SNSUser
+
+VaccinationCenter o-- Employee : coordinator
+VaccinationCenterStore "1" -- "*" VaccinationCenter : stores >
+
+Company ..> VaccinationCenterStore
+
+WaitingRoom "1" -- "*" Arrive : stores >
+
+Employee "1" -- "*" WaitingRoom : checks >
+VaccinationCenter *-- WaitingRoom
+VaccinationCenter *-- CenterEvents
+
+CenterEvents "1" -- "*" CenterEvent : stores >
+
+CenterEvent o-- SNSUser
+CheckWaitingRoomController ..> NurseSession
+
+AppointmentSchedule "1" -- "*" Appointment : stores >
+VaccinationCenter *-- AppointmentSchedule
+Appointment o-- Vaccine
 
 @enduml

@@ -2,9 +2,13 @@ package app.ui.console;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import app.controller.App;
 import app.controller.RegisterVaccinationCenterController;
 import app.domain.model.Employee;
+import app.domain.shared.FieldToValidate;
+import app.domain.shared.VaccinationCenterType;
 import app.ui.console.utils.Utils;
 
 /**
@@ -17,21 +21,29 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
    * VaccinationCenterUI Constructor
    */
   public RegisterVaccinationCenterUI() {
-    super(new RegisterVaccinationCenterController());
+    super(new RegisterVaccinationCenterController(App.getInstance().getCompany()));
   }
 
   @Override
   public void insertData() {
-    System.out.println("\nRegister Vaccination Center UI: ");
-
+    // Select center type
+    System.out.println("\nSelect the Vaccination Center type: ");
+    Integer type =
+        (Integer) Utils.showAndSelectIndex(Arrays.asList(VaccinationCenterType.values()), "");
     String name = Utils.readLineFromConsole("Name: ");
     String address = Utils.readLineFromConsole("Address: ");
-    String email = Utils.readLineFromConsole("Email: ");
-    String phone = Utils.readLineFromConsole("Phone Number: ");
-    String fax = Utils.readLineFromConsole("Fax Number: ");
-    String website = Utils.readLineFromConsole("Website Address: ");
-    String openHours = Utils.readLineFromConsole("Opening hours: ");
-    String closHours = Utils.readLineFromConsole("Closing hours: ");
+    String email = Utils.readLineFromConsoleWithValidation("Email (example@example.com): ",
+        FieldToValidate.EMAIL);
+    String phone = Utils.readLineFromConsoleWithValidation("Phone Number (+351xxxxxxxxx): ",
+        FieldToValidate.PHONE_NUMBER);
+    String fax = Utils.readLineFromConsoleWithValidation("Fax Number (+351xxxxxxxxx): ",
+        FieldToValidate.FAX);
+    String website = Utils.readLineFromConsoleWithValidation(
+        "Website Address (https://domain.ext): ", FieldToValidate.WEBSITE);
+    String openHours =
+        Utils.readLineFromConsoleWithValidation("Opening hours (HH:MM): ", FieldToValidate.HOURS);
+    String closHours =
+        Utils.readLineFromConsoleWithValidation("Closing hours (HH:MM): ", FieldToValidate.HOURS);
     int slotDur = Utils.readIntegerFromConsole("Slot duration: ");
     int maxVac = Utils.readIntegerFromConsole("Maximum vaccines per slot: ");
     Employee coordinator;
@@ -51,7 +63,15 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
       }
     } while (!flag);
 
-    super.ctrl.create(name, address, email, phone, fax, website, openHours, closHours, slotDur,
-        maxVac, coordinator);
+    // if type == 0 -> Community Mass Vaccination Center; if type == 1 -> Health Care Center
+    if (type == 0) {
+      super.ctrl.createCommunityMass(name, address, email, phone, fax, website, openHours,
+          closHours, slotDur, maxVac, coordinator);
+    } else {
+      String ages = Utils.readLineFromConsole("AGES: ");
+      String ars = Utils.readLineFromConsole("ARS: ");
+      super.ctrl.createHealthCare(name, address, email, phone, fax, website, openHours, closHours,
+          slotDur, maxVac, coordinator, ages, ars);
+    }
   }
 }

@@ -1,5 +1,6 @@
 package app.domain.model.store;
 
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.Employee;
@@ -20,8 +21,8 @@ public class EmployeeStoreTest {
     roleStore = new EmployeeRoleStore(authFacade);
     store = new EmployeeStore(authFacade, roleStore);
 
-    employee = new Employee("Joana Maria", "+351123456789", "email@email.com", "Av. da Liberdade",
-        "123456789ZZ1", "NURSE");
+    employee = new Employee("00000001", "Joana Maria", "+351123456789", "email@email.com",
+        "Av. da Liberdade", "123456789ZZ1", "NURSE");
   }
 
   /**
@@ -29,9 +30,9 @@ public class EmployeeStoreTest {
    */
   @Test
   public void ensureAddEmployeeIsWorkingCorrectly() {
-    assert store.size() == 0;
+    assertEquals(store.size(), 0);
     store.saveEmployee(employee);
-    assert store.size() == 1;
+    assertEquals(store.size(), 1);
   }
 
   /**

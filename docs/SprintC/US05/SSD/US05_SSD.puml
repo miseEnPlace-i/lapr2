@@ -3,12 +3,7 @@ autonumber
 actor "Nurse" as NURSE
 
 activate NURSE
-NURSE -> ":System" : asks to list all present users in the waiting room of a given vaccination center
-activate ":System"
-":System" --> NURSE : shows all vaccination centers and asks to select one
-deactivate ":System"
-
-NURSE -> ":System" : selects a vaccination center
+NURSE -> ":System" : asks to list all present users in the waiting room for the vaccination the nurse is working on
 activate ":System"
 ":System" --> NURSE : lists all the users present on the waiting room
 deactivate ":System"
