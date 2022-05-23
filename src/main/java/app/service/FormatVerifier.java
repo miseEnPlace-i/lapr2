@@ -124,4 +124,14 @@ public final class FormatVerifier {
   public static boolean validateHours(String expression) {
     return expression.matches("[0-9]{2}:[0-9]{2}");
   }
+
+  public static boolean validateSlotDuration(String expression) {
+    int number = Integer.parseInt(expression);
+    return number > 0;
+  }
+
+  public static boolean validateMaxVacPerSlot(String expression) {
+    int number = Integer.parseInt(expression);
+    return number > 0;
+  }
 }
