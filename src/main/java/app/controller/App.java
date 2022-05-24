@@ -78,6 +78,7 @@ public class App {
         Constants.ROLE_ADMIN);
     this.authFacade.addUserWithRole("Test Administrator", "admin@admin.pt", "123456",
         Constants.ROLE_ADMIN);
+    this.authFacade.addUserWithRole("teste", "t@t.com", "123", Constants.ROLE_SNS_USER);
 
     Employee e = this.employeeStore.createEmployee("Name", "+351916919169", "teste@teste.com",
         "address", "123456789ZZ1", Constants.ROLE_RECEPTIONIST);

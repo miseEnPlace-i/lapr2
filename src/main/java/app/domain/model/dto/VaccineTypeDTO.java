@@ -22,4 +22,9 @@ public class VaccineTypeDTO {
   public String getTechnology() {
     return this.technology;
   }
+
+  @Override
+  public String toString() {
+    return getDescription();
+  }
 }

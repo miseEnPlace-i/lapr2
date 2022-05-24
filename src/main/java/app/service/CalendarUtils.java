@@ -74,7 +74,7 @@ public class CalendarUtils {
    */
   public static Calendar parseDateTime(Date date, String time) throws ParseException {
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-    String dateStr = sdf.format(date.toString());
+    String dateStr = sdf.format(date);
 
     String dateAndTime = dateStr + " " + time;
 
