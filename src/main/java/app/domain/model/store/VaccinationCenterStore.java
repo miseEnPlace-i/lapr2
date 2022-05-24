@@ -50,7 +50,7 @@ public class VaccinationCenterStore {
 
     boolean isCoordinatorValid = validateCoordinator(coordinator);
 
-    if (!isCoordinatorValid) return null;
+    if (!isCoordinatorValid) throw new IllegalArgumentException("Coordinator is not valid");
 
     CommunityMassVaccinationCenter center = new CommunityMassVaccinationCenter(name, address,
         emailAddress, phoneNum, faxNum, webAddress, openingHours, closingHours, slotDuration,
@@ -65,7 +65,7 @@ public class VaccinationCenterStore {
 
     boolean isCoordinatorValid = validateCoordinator(coordinator);
 
-    if (!isCoordinatorValid) return null;
+    if (!isCoordinatorValid) throw new IllegalArgumentException("Coordinator is not valid");
 
     HealthCareCenter center = new HealthCareCenter(name, address, emailAddress, phoneNum, faxNum,
         webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator, ages, ags);
@@ -78,7 +78,7 @@ public class VaccinationCenterStore {
     if (!coordinator.hasRoleId(Constants.ROLE_COORDINATOR)) return false;
 
     for (VaccinationCenter vaccinationCenter : vaccinationCenters)
-      if (vaccinationCenter.getCoordinatorName().equals(coordinator.getName())) return false;
+      if (vaccinationCenter.getCoordinator().equals(coordinator)) return false;
 
     return true;
   }
