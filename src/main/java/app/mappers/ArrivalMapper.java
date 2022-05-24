@@ -8,7 +8,7 @@ public class ArrivalMapper {
   private ArrivalMapper() {}
 
   // TODO implement this method
-  public ArrivalDTO toDto(Arrival arrival) {
+  public static ArrivalDTO toDto(Arrival arrival) {
     return null;
   }
 }
