@@ -5,6 +5,8 @@ import app.domain.model.Company;
 import app.domain.model.Employee;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
+import app.service.PasswordGenerator;
+import pt.isep.lei.esoft.auth.AuthFacade;
 import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
 /**
@@ -14,6 +16,7 @@ import pt.isep.lei.esoft.auth.domain.model.UserRole;
  */
 public class RegisterEmployeeController implements IRegisterController {
   private Company company;
+  private AuthFacade authFacade;
   private Employee employee;
   private EmployeeStore store;
   private EmployeeRoleStore roleStore;
@@ -23,6 +26,7 @@ public class RegisterEmployeeController implements IRegisterController {
    */
   public RegisterEmployeeController(Company company) {
     this.company = company;
+    this.authFacade = company.getAuthFacade();
     this.store = this.company.getEmployeeStore();
     this.roleStore = this.company.getEmployeeRoleStore();
     this.employee = null;
@@ -47,11 +51,22 @@ public class RegisterEmployeeController implements IRegisterController {
     // validate the Employee
     store.validateEmployee(employee);
 
+    if (this.authFacade.existsUser(email))
+      throw new IllegalArgumentException("Email already exists.");
   }
 
   @Override
   public void save() {
     store.saveEmployee(this.employee);
+
+    String password = PasswordGenerator.generatePwd();
+    // String password = "123456";
+
+    this.authFacade.addUserWithRole(employee.getName(), employee.getEmail(), password,
+        employee.getRoleId());
+
+    // TODO: send password email
+    // this.emailSender.sendPasswordEmail(email, password);
   }
 
   /**

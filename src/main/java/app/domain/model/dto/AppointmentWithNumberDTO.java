@@ -8,22 +8,22 @@ import app.domain.model.VaccineType;
 /**
  * @author André Barros <1211299@isep.ipp.pt>
  */
-public class AppointmentDTO {
+public class AppointmentWithNumberDTO {
   private String snsNumber;
   private Calendar date;
   // private String time; // Calendar has time
   private VaccinationCenter center;
   private VaccineType vaccineType;
-  private boolean sms;
+  private boolean smsPermission;
 
-  public AppointmentDTO(String snsNumber, Calendar date, String time, VaccinationCenter center,
-      VaccineType vaccineType, boolean sms) {
+  public AppointmentWithNumberDTO(String snsNumber, Calendar date, String time,
+      VaccinationCenter center, VaccineType vaccineType, boolean sms) {
     this.snsNumber = snsNumber;
     this.date = date;
     // this.time = time;
     this.center = center;
     this.vaccineType = vaccineType;
-    this.sms = sms;
+    this.smsPermission = sms;
   }
 
   /**
@@ -64,8 +64,8 @@ public class AppointmentDTO {
   /**
    * @return boolean return the sms
    */
-  public boolean isSms() {
-    return sms;
+  public boolean getSmsPermission() {
+    return smsPermission;
   }
 
 }

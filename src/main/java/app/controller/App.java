@@ -1,17 +1,17 @@
 package app.controller;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 import app.domain.model.Company;
 import app.domain.model.Employee;
 import app.domain.model.VaccinationCenter;
+import app.domain.model.VaccineType;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineTechnologyStore;
+import app.domain.model.store.VaccineTypeStore;
 import app.domain.shared.Constants;
+import app.service.PropertiesUtils;
 import pt.isep.lei.esoft.auth.AuthFacade;
 import pt.isep.lei.esoft.auth.UserSession;
 
@@ -25,15 +25,18 @@ public class App {
   private EmployeeRoleStore employeeRoleStore;
   private VaccineTechnologyStore vaccineTechnologyStore;
   private VaccinationCenterStore vaccinationCenterStore;
+  private VaccineTypeStore vacTypeStore;
 
   private App() {
-    Properties props = getProperties();
-    this.company = new Company(props.getProperty(Constants.PARAMS_COMPANY_DESIGNATION));
+    Properties props = PropertiesUtils.getProperties();
+    this.company = new Company(props.getProperty(Constants.PARAMS_COMPANY_DESIGNATION),
+        props.getProperty(Constants.PARAMS_ONGOING_OUTBREAK_VACCINE_TYPE_CODE));
     this.authFacade = this.company.getAuthFacade();
     this.employeeStore = this.company.getEmployeeStore();
     this.employeeRoleStore = this.company.getEmployeeRoleStore();
     this.vaccineTechnologyStore = this.company.getVaccineTechnologyStore();
     this.vaccinationCenterStore = this.company.getVaccinationCenterStore();
+    this.vacTypeStore = this.company.getVaccineTypeStore();
 
     bootstrap();
   }
@@ -54,23 +57,6 @@ public class App {
     this.authFacade.doLogout();
   }
 
-  private Properties getProperties() {
-    Properties props = new Properties();
-
-    // Add default properties and values
-    props.setProperty(Constants.PARAMS_COMPANY_DESIGNATION, "DGS/SNS");
-
-    // Read configured values
-    try {
-      InputStream in = new FileInputStream(Constants.PARAMS_FILENAME);
-      props.load(in);
-      in.close();
-    } catch (IOException ex) {
-
-    }
-    return props;
-  }
-
   private void bootstrap() {
     // Added Receptionist user role & a test user with Receptionist role for testing
     // purposes
@@ -79,6 +65,7 @@ public class App {
         Constants.ROLE_RECEPTIONIST);
     this.employeeRoleStore.addEmployeeRole(Constants.ROLE_NURSE, Constants.ROLE_NURSE);
     this.employeeRoleStore.addEmployeeRole(Constants.ROLE_COORDINATOR, Constants.ROLE_COORDINATOR);
+
     this.vaccineTechnologyStore.addVaccineTechnology("LIVE_ATTENUATED_TECHNOLOGY");
     this.vaccineTechnologyStore.addVaccineTechnology("INACTIVATED_TECHNOLOGY");
     this.vaccineTechnologyStore.addVaccineTechnology("SUBUNIT_TECHNOLOGY");
@@ -95,16 +82,19 @@ public class App {
         "address", "123456789ZZ1", Constants.ROLE_RECEPTIONIST);
     this.employeeStore.saveEmployee(e);
     Employee e2 = this.employeeStore.createEmployee("Name2", "+351916919269", "teste1@teste.com",
-        "adress", "155424041ZY0", Constants.ROLE_COORDINATOR);
+        "address", "155424041ZY0", Constants.ROLE_COORDINATOR);
     this.employeeStore.saveEmployee(e2);
 
     Employee e3 = this.employeeStore.createEmployee("Name2", "+351916919269", "nurse@nurse.pt",
-        "adress", "000000000ZZ4", Constants.ROLE_NURSE);
+        "address", "000000000ZZ4", Constants.ROLE_NURSE);
     this.employeeStore.saveEmployee(e3);
 
-    VaccinationCenter vc =
-        this.vaccinationCenterStore.createCommunityMassCenter("name", "address", "sda@das.com",
-            "+351212345678", "+351212345678", "http://www.ggg.com", "20:00", "21:00", 5, 5, e2);
+    VaccineType vacType = this.vacTypeStore.addVaccineType("00000", "COVID-19", "M_RNA_TECHNOLOGY");
+    this.vacTypeStore.saveVaccineType(vacType);
+
+    VaccinationCenter vc = this.vaccinationCenterStore.createCommunityMassCenter("name", "address",
+        "test@gmail.com", "+351212345678", "+351212345679", "http://www.test.com", "20:00", "21:00",
+        5, 5, e2, vacType);
     this.vaccinationCenterStore.saveVaccinationCenter(vc);
   }
 

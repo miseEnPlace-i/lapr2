@@ -10,14 +10,13 @@ import pt.isep.lei.esoft.auth.AuthFacade;
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
 public class EmployeeStoreTest {
-  AuthFacade authFacade;
+  AuthFacade authFacade = new AuthFacade();
   EmployeeStore store;
   EmployeeRoleStore roleStore;
   Employee employee;
 
   @Before
   public void setUp() {
-    authFacade = new AuthFacade();
     roleStore = new EmployeeRoleStore(authFacade);
     store = new EmployeeStore(authFacade, roleStore);
 

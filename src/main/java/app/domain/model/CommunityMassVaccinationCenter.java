@@ -6,6 +6,8 @@ package app.domain.model;
 public class CommunityMassVaccinationCenter extends VaccinationCenter {
 
 
+  private VaccineType vaccineType;
+
   /**
    * Constructor for community mass vaccination center
    * 
@@ -23,11 +25,36 @@ public class CommunityMassVaccinationCenter extends VaccinationCenter {
    */
   public CommunityMassVaccinationCenter(String name, String address, String email, String phoneNum,
       String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration,
-      int maxVacSlot, Employee coordinator) {
+      int maxVacSlot, Employee coordinator, VaccineType vaccineType) {
 
     super(name, address, email, phoneNum, faxNum, webAddress, openingHours, closingHours,
         slotDuration, maxVacSlot, coordinator);
 
+    setVaccineType(vaccineType);
+
+  }
+
+  private void setVaccineType(VaccineType vaccineType) {
+    if (vaccineType == null) throw new IllegalArgumentException("Vaccine type not valid.");
+
+    this.vaccineType = vaccineType;
+  }
+
+  /**
+   * @return VaccineType return the vaccineType
+   */
+  public VaccineType getVaccineType() {
+    return vaccineType;
+  }
+
+  /**
+   * Checks if this center administers certain vaccine type.
+   * 
+   * @param vaccineType the vaccine type to be checked
+   * @return true if it administers, false otherwise
+   */
+  public boolean administersVaccineType(VaccineType vaccineType) {
+    return vaccineType == this.vaccineType;
   }
 
   /**
@@ -48,6 +75,7 @@ public class CommunityMassVaccinationCenter extends VaccinationCenter {
     sb.append(String.format("Slot duration: %s\n", super.getSlotDuration()));
     sb.append(String.format("Maximum vaccines per slot: %s\n", super.getMaxVacSlot()));
     sb.append(String.format("Coordinator: %s\n", super.getCoordinatorName()));
+    sb.append(String.format("Vaccine type given on the center:\n\n%s", getVaccineType()));
 
 
     return sb.toString();

@@ -30,6 +30,14 @@ public class VaccineType {
     return code;
   }
 
+  public String getDescription() {
+    return description;
+  }
+
+  public String getTechnology() {
+    return technology;
+  }
+
   public boolean hasCode(String code) {
     return this.code.equals(code);
   }
@@ -43,7 +51,7 @@ public class VaccineType {
    */
 
   private void setCode(String code) {
-    if (code == null || code.isEmpty() || code.length() != Constants.VACCINE_TYPE_CODE_LENGTH)
+    if (code == null || !code.matches("[0-9]{" + Constants.VACCINE_TYPE_CODE_LENGTH + "}"))
       throw new IllegalArgumentException(
           "Vaccine type code must be " + Constants.VACCINE_TYPE_CODE_LENGTH + " characters long.");
 

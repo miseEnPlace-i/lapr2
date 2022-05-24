@@ -14,7 +14,7 @@ public class RegisterSNSUserTest {
 
   @Before
   public void setUp() {
-    ctrl = new RegisterSNSUserController(new Company("designation"));
+    ctrl = new RegisterSNSUserController(new Company("designation", "12345"));
   }
 
   @Test

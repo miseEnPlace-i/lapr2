@@ -20,8 +20,8 @@ import pt.isep.lei.esoft.auth.AuthFacade;
  */
 public class Company {
   private String designation;
+  private String ongoingOutbreakVaccineTypeCode;
   private AuthFacade authFacade;
-
   private EmployeeStore employeeStore;
   private EmployeeRoleStore employeeRoleStore;
   private SNSUserStore snsUserStore;
@@ -35,11 +35,15 @@ public class Company {
    *
    * @param designation the designation of the company
    */
-  public Company(String designation) {
+  public Company(String designation, String ongoingOutbreakVaccineTypeCode) {
     if (StringUtils.isBlank(designation))
       throw new IllegalArgumentException("Designation cannot be blank.");
 
+    if (ongoingOutbreakVaccineTypeCode == null)
+      throw new IllegalArgumentException("Ongoing outbreak vaccine type code cannot be null.");
+
     this.designation = designation;
+
     this.authFacade = new AuthFacade();
 
     this.employeeRoleStore = new EmployeeRoleStore(this.authFacade);
@@ -49,6 +53,8 @@ public class Company {
     this.vaccineStore = new VaccineStore();
     this.vaccineTechnologyStore = new VaccineTechnologyStore();
     this.vaccineTypeStore = new VaccineTypeStore(vaccineTechnologyStore);
+
+    this.ongoingOutbreakVaccineTypeCode = ongoingOutbreakVaccineTypeCode;
   }
 
   /**
@@ -110,5 +116,9 @@ public class Company {
 
   public VaccineTechnologyStore getVaccineTechnologyStore() {
     return this.vaccineTechnologyStore;
+  }
+
+  public String getOngoingOutbreakVaccineTypeCode() {
+    return this.ongoingOutbreakVaccineTypeCode;
   }
 }

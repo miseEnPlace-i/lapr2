@@ -1,5 +1,7 @@
 package app.service;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 /**
@@ -8,151 +10,151 @@ import org.junit.Test;
 public class FormatVerifierTest {
   @Test
   public void ensureCCFormatIsValid() {
-    assert FormatVerifier.validateCitizenCard("123456789ZZ1");
+    assertTrue(FormatVerifier.validateCitizenCard("123456789ZZ1"));
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void ensureCCFormatWithMissingLastDigit() {
-    assert !FormatVerifier.validateCitizenCard("123456789ZZ");
+    assertFalse(FormatVerifier.validateCitizenCard("123456789ZZ"));
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void ensureCCFormatWithMissingLetter() {
-    assert !FormatVerifier.validateCitizenCard("123456789Z1");
+    assertFalse(FormatVerifier.validateCitizenCard("123456789Z1"));
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void ensureCCFormatWithMoreDigits() {
-    assert !FormatVerifier.validateCitizenCard("123456789Z111");
+    assertFalse(FormatVerifier.validateCitizenCard("123456789Z111"));
   }
 
   @Test
   public void ensureCCFormatViolatingDigitRules() {
-    assert !FormatVerifier.validateCitizenCard("122222222Z11");
+    assertFalse(FormatVerifier.validateCitizenCard("122222222Z11"));
   }
 
   @Test
   public void ensureCCFormatViolatingLetterRules() {
-    assert !FormatVerifier.validateCitizenCard("000000000ZZ1");
+    assertFalse(FormatVerifier.validateCitizenCard("000000000ZZ1"));
   }
 
   @Test
   public void ensureEmailFormatIsValid() {
-    assert FormatVerifier.validateEmail("email@email.com");
+    assertTrue(FormatVerifier.validateEmail("email@email.com"));
   }
 
   @Test
   public void ensureEmailFormatViolatingExtension() {
-    assert !FormatVerifier.validateEmail("email@email.");
+    assertFalse(FormatVerifier.validateEmail("email@email."));
   }
 
   @Test
   public void ensureEmailFormatWithoutDomain() {
-    assert !FormatVerifier.validateEmail("email.com");
+    assertFalse(FormatVerifier.validateEmail("email.com"));
   }
 
   @Test
   public void ensureEmailFormatWithoutExtension() {
-    assert !FormatVerifier.validateEmail("email@email");
+    assertFalse(FormatVerifier.validateEmail("email@email"));
   }
 
   @Test
   public void ensurePhoneNumberIsValid() {
-    assert FormatVerifier.validatePhoneNumber("+351223456789");
+    assertTrue(FormatVerifier.validatePhoneNumber("+351223456789"));
   }
 
   @Test
   public void ensurePhoneNumberWithForeignExtension() {
-    assert FormatVerifier.validatePhoneNumber("+44923456789");
+    assertTrue(FormatVerifier.validatePhoneNumber("+44923456789"));
   }
 
   @Test
   public void ensurePhoneNumberWithoutExtension() {
-    assert !FormatVerifier.validatePhoneNumber("123456789");
+    assertFalse(FormatVerifier.validatePhoneNumber("123456789"));
   }
 
   @Test
   public void ensurePhoneNumberWithoutPlusInExtension() {
-    assert !FormatVerifier.validatePhoneNumber("351123456789");
+    assertFalse(FormatVerifier.validatePhoneNumber("351123456789"));
   }
 
   @Test
   public void ensurePhoneNumberWithMoreDigits() {
-    assert !FormatVerifier.validatePhoneNumber("+3511234567890");
+    assertFalse(FormatVerifier.validatePhoneNumber("+3511234567890"));
   }
 
   @Test
   public void ensureFaxNumberIsValid() {
-    assert FormatVerifier.validateFaxNumber("+351223456789");
+    assertTrue(FormatVerifier.validateFaxNumber("+351223456789"));
   }
 
   @Test
   public void ensureFaxNumberIsValidWithForeignExtension() {
-    assert FormatVerifier.validateFaxNumber("+44223456789");
+    assertTrue(FormatVerifier.validateFaxNumber("+44223456789"));
   }
 
   @Test
   public void ensureFaxNumberWithoutValidFirstDigit() {
-    assert !FormatVerifier.validateFaxNumber("+351723456789");
+    assertFalse(FormatVerifier.validateFaxNumber("+351723456789"));
   }
 
   @Test
   public void ensureFaxNumberWithoutExtension() {
-    assert !FormatVerifier.validateFaxNumber("723456789");
+    assertFalse(FormatVerifier.validateFaxNumber("723456789"));
   }
 
   @Test
   public void ensureFaxNumberWithoutPlusInExtension() {
-    assert !FormatVerifier.validateFaxNumber("351723456789");
+    assertFalse(FormatVerifier.validateFaxNumber("351723456789"));
   }
 
   @Test
   public void ensureFaxNumberWithoutWithMoreDigits() {
-    assert !FormatVerifier.validateFaxNumber("+3517234567890");
+    assertFalse(FormatVerifier.validateFaxNumber("+3517234567890"));
   }
 
   @Test
   public void ensureWebsiteIsValid() {
-    assert FormatVerifier.validateURL("http://www.google.com");
+    assertTrue(FormatVerifier.validateURL("http://www.google.com"));
   }
 
   @Test
   public void ensureWebsiteIsValidWithSSL() {
-    assert FormatVerifier.validateURL("https://www.google.com");
+    assertTrue(FormatVerifier.validateURL("https://www.google.com"));
   }
 
   @Test
   public void ensureWebsiteWithInvalidExtension() {
-    assert !FormatVerifier.validateURL("http://google.");
+    assertFalse(FormatVerifier.validateURL("http://google."));
   }
 
   @Test
   public void ensureWebsiteWithoutExtension() {
-    assert !FormatVerifier.validateURL("http://google");
+    assertFalse(FormatVerifier.validateURL("http://google"));
   }
 
   @Test
   public void ensureWebsiteWithoutProtocol() {
-    assert !FormatVerifier.validateURL("www.google.com");
+    assertFalse(FormatVerifier.validateURL("www.google.com"));
   }
 
   @Test
   public void ensureWebsiteWithInvalidProtocol() {
-    assert !FormatVerifier.validateURL("abc://www.google.com");
+    assertFalse(FormatVerifier.validateURL("abc://www.google.com"));
   }
 
   @Test
   public void ensureSNSNumberValid() {
-    assert FormatVerifier.validateSNSNumber("123456789");
+    assertTrue(FormatVerifier.validateSNSNumber("123456789"));
   }
 
   @Test
   public void ensureSNSNumberWithMoreDigits() {
-    assert !FormatVerifier.validateSNSNumber("1234567890");
+    assertFalse(FormatVerifier.validateSNSNumber("1234567890"));
   }
 
   @Test
   public void ensureSNSNumberWithLessDigits() {
-    assert !FormatVerifier.validateSNSNumber("12345678");
+    assertFalse(FormatVerifier.validateSNSNumber("12345678"));
   }
 }

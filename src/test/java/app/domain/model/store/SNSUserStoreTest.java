@@ -11,14 +11,12 @@ import pt.isep.lei.esoft.auth.AuthFacade;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 public class SNSUserStoreTest {
-
-  AuthFacade authFacade;
   SNSUserStore store;
   SNSUser snsUser;
 
   @Before
   public void setUp() {
-    authFacade = new AuthFacade();
+    AuthFacade authFacade = new AuthFacade();
     store = new SNSUserStore(authFacade);
     Date c = new Date();
     snsUser = new SNSUser("123456789ZZ1", "123456789", "name", c, 'M', "+351211111111",
@@ -54,14 +52,5 @@ public class SNSUserStoreTest {
   @Test(expected = Error.class)
   public void ensureValidateForNullWorksAsExpected() {
     store.validateSNSUser(null);
-  }
-
-  /**
-   * Test that validate method is working for already inserted system users.
-   */
-  @Test(expected = IllegalArgumentException.class)
-  public void ensureValidateForInsertedSystemUserWorksAsExpected() {
-    authFacade.addUser("test", "email@email.com", "123456");
-    store.validateSNSUser(snsUser);
   }
 }
