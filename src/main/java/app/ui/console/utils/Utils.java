@@ -52,7 +52,6 @@ public class Utils {
         } catch (Exception e) {
           System.out.println(e);
         }
-
       } catch (Exception e) {
         e.printStackTrace();
         return null;

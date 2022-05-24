@@ -14,7 +14,6 @@ import app.ui.console.utils.Utils;
  * 
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
-
 public class RegisterSNSUserUI extends RegisterUI<RegisterSNSUserController> {
   public RegisterSNSUserUI() {
     super(new RegisterSNSUserController(App.getInstance().getCompany()));
@@ -25,7 +24,7 @@ public class RegisterSNSUserUI extends RegisterUI<RegisterSNSUserController> {
     System.out.println("\nRegister SNS User UI:");
 
     String citizenCard = Utils.readLineFromConsoleWithValidation("Citizen Card (xxxxxxxxxLLx): ",
-        FieldToValidate.CC);
+        FieldToValidate.CITIZEN_CARD);
     String snsNumber = Utils.readLineFromConsoleWithValidation("SNS Number (xxxxxxxxx): ",
         FieldToValidate.SNS_NUMBER);
     String name = Utils.readLineFromConsole("Name: ");

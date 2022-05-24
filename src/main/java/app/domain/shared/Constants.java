@@ -23,4 +23,6 @@ public class Constants {
       "OngoingOutbreak.VaccineTypeCode";
 
   public static final byte VACCINE_TYPE_CODE_LENGTH = 5;
+
+  public static final String SMS_FILE = "SMS.txt";
 }
