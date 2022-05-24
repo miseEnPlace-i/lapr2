@@ -10,7 +10,7 @@ import pt.isep.lei.esoft.auth.AuthFacade;
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
 public class EmployeeStoreTest {
-  AuthFacade authFacade;
+  AuthFacade authFacade = new AuthFacade();
   EmployeeStore store;
   EmployeeRoleStore roleStore;
   Employee employee;
@@ -18,7 +18,7 @@ public class EmployeeStoreTest {
   @Before
   public void setUp() {
     roleStore = new EmployeeRoleStore(authFacade);
-    store = new EmployeeStore(roleStore);
+    store = new EmployeeStore(authFacade, roleStore);
 
     employee = new Employee("00000001", "Joana Maria", "+351123456789", "email@email.com",
         "Av. da Liberdade", "123456789ZZ1", "NURSE");
