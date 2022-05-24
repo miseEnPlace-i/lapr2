@@ -1,12 +1,10 @@
 package app.controller;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import app.domain.model.Appointment;
 import app.domain.model.Company;
 import app.domain.model.SNSUser;
-import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
 import app.domain.model.dto.AppointmentWithNumberDTO;
 import app.domain.model.dto.AppointmentWithoutNumberDTO;
@@ -18,7 +16,6 @@ import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineTypeStore;
 import app.mappers.VaccineTypeMapper;
 import pt.isep.lei.esoft.auth.UserSession;
-import pt.isep.lei.esoft.auth.domain.model.Email;
 
 public class ScheduleVaccineController {
   private Company company;
@@ -67,7 +64,10 @@ public class ScheduleVaccineController {
    * @return the suggested vaccine type
    */
   public VaccineType getSuggestedVaccineType() {
-    return this.company.getSuggestedVaccineType();
+    VaccineType vaccineType =
+        vaccineTypeStore.getVaccineTypeByCode(company.getOngoingOutbreakVaccineTypeCode());
+
+    return vaccineType;
   }
 
   public List<VaccineTypeDTO> getListOfVaccineTypes() {
