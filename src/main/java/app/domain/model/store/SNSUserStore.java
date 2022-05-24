@@ -115,6 +115,22 @@ public class SNSUserStore {
   }
 
   /**
+   * Checks if a SNS User exists.
+   * 
+   * @param snsNumber The SNS User Number.
+   * @return SNSUser
+   */
+  public boolean checkSNSUserExists(String snsNumber) {
+    for (SNSUser snsUser : snsUsers) {
+      if (snsUser.getSnsNumber().equals(snsNumber)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  /**
    * Finds a SNS User by Email.
    * 
    * @param email The SNS User email.
