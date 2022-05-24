@@ -156,11 +156,9 @@ public class Utils {
   }
 
   static public int selectsIndex(List list) {
-    String input;
-    Integer value;
+    int value = -1;
     do {
-      input = Utils.readLineFromConsole("Type your option: ");
-      value = Integer.valueOf(input);
+      value = Utils.readIntegerFromConsole("Type your option: ");
     } while (value < 0 || value > list.size());
 
     return value - 1;
