@@ -4,6 +4,7 @@ import java.util.List;
 import app.domain.model.Company;
 import app.domain.model.Employee;
 import app.domain.model.VaccinationCenter;
+import app.domain.model.VaccineType;
 import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.VaccinationCenterStore;
 import app.domain.shared.Constants;
@@ -47,9 +48,11 @@ public class RegisterVaccinationCenterController implements IRegisterController 
       String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration,
       int maxVacSlot, Employee coordinator) {
 
+    VaccineType vaccineType = this.company.getSuggestedVaccineType();
+
     // creates a vaccination center instance
     this.center = vacStore.createCommunityMassCenter(name, address, emailAddress, phoneNum, faxNum,
-        webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
+        webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator, vaccineType);
 
     // validates the center
     vacStore.validateVaccinationCenter(center);

@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.Employee;
 import app.domain.model.VaccinationCenter;
+import app.domain.model.VaccineType;
 import app.domain.shared.Constants;
 
 /**
@@ -15,6 +16,7 @@ public class VaccinationCenterStoreTest {
   Employee coordinator;
   VaccinationCenter center;
   VaccinationCenter center2;
+  private VaccineType vacType;
 
   /**
    * Set up for the tests
@@ -23,6 +25,8 @@ public class VaccinationCenterStoreTest {
   public void setUp() {
     coordinator = new Employee("00000001", "Joana", "+351916478865", "email@email.com", "address",
         "000000000ZZ4", Constants.ROLE_COORDINATOR);
+
+    vacType = new VaccineType("12345", "description", "technology");
   }
 
   /**
@@ -32,7 +36,8 @@ public class VaccinationCenterStoreTest {
   @Test
   public void ensureAddCenterIsWorkingCorrectly() {
     center = store.createCommunityMassCenter("name", "address", "email@email.com", "+351961919169",
-        "+351961919169", "http://www.google.com", "10:00", "19:00", 5, 5, this.coordinator);
+        "+351961919169", "http://www.google.com", "10:00", "19:00", 5, 5, this.coordinator,
+        this.vacType);
 
     assertEquals(store.size(), 0);
 
@@ -85,17 +90,17 @@ public class VaccinationCenterStoreTest {
   public void ensureIsPossibleToAddAnotherCenter() {
     assert store.size() == 0;
 
-    center =
-        store.createCommunityMassCenter("name123", "address", "email@email.com", "+351961919169",
-            "+351961919169", "http://www.google.com", "10:00", "19:00", 5, 5, this.coordinator);
+    center = store.createCommunityMassCenter("name123", "address", "email@email.com",
+        "+351961919169", "+351961919169", "http://www.google.com", "10:00", "19:00", 5, 5,
+        this.coordinator, this.vacType);
 
     store.saveVaccinationCenter(center);
 
     assertEquals(store.size(), 1);
 
-    center2 =
-        store.createCommunityMassCenter("name123", "address", "email@gmail.com", "+351961919168",
-            "+351961919179", "http://www.gogle.com", "10:00", "19:00", 5, 5, this.coordinator);
+    center2 = store.createCommunityMassCenter("name123", "address", "email@gmail.com",
+        "+351961919168", "+351961919179", "http://www.gogle.com", "10:00", "19:00", 5, 5,
+        this.coordinator, this.vacType);
 
     store.validateVaccinationCenter(center2);
 
@@ -146,9 +151,9 @@ public class VaccinationCenterStoreTest {
 
     assertEquals(store.size(), 1);
 
-    center2 =
-        store.createCommunityMassCenter("name123", "address", "email@gmail.com", "+351961919168",
-            "+351961919179", "http://www.gogle.com", "10:00", "19:00", 5, 5, this.coordinator);
+    center2 = store.createCommunityMassCenter("name123", "address", "email@gmail.com",
+        "+351961919168", "+351961919179", "http://www.gogle.com", "10:00", "19:00", 5, 5,
+        this.coordinator, this.vacType);
 
     store.validateVaccinationCenter(center2);
 

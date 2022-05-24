@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import java.util.List;
 import app.domain.model.list.AppointmentScheduleList;
 import app.service.FormatVerifier;
 
@@ -21,7 +22,7 @@ public class VaccinationCenter {
   private int maxVacSlot;
   private Employee coordinator;
   private WaitingRoom waitingRoom;
-  private AppointmentScheduleList aptLst;
+  private AppointmentScheduleList appointmentList;
 
   /**
    * Constructor for the Vaccination Center
@@ -54,7 +55,7 @@ public class VaccinationCenter {
     setMaxVacSlot(maxVacSlot);
     setCoordinator(coordinator);
     this.waitingRoom = new WaitingRoom();
-    this.aptLst = new AppointmentScheduleList();
+    this.appointmentList = new AppointmentScheduleList();
   }
 
   /**
@@ -216,9 +217,6 @@ public class VaccinationCenter {
     if (!FormatVerifier.validateFaxNumber(faxNum)) {
       throw new IllegalArgumentException("Fax number is not valid.");
     }
-    if (faxNum.equals(this.phoneNum)) {
-      throw new IllegalArgumentException("Fax number and phone number cannot be the same.");
-    }
     this.faxNum = faxNum;
   }
 
@@ -335,8 +333,12 @@ public class VaccinationCenter {
     return waitingRoom;
   }
 
-  public AppointmentScheduleList getAppointmentStore() {
-    return aptLst;
+  public AppointmentScheduleList getAppointmentList() {
+    return appointmentList;
+  }
+
+  public List<VaccinationCenter> getListOfVaccinationCentersWithVaccineType() {
+    return null;
   }
 
   /**

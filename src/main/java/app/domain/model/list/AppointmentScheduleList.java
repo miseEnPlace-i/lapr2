@@ -15,101 +15,100 @@ import app.domain.model.dto.AppointmentDTO;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 public class AppointmentScheduleList {
-    private List<Appointment[][]> appointments;
+  private List<Appointment[][]> appointments;
 
-    /** Each one of these is a day
-     * 
-     *    vaccines per slot
-     *  s  [][][][][]
-     *  l  [][][][][]
-     *  o  [][][][][]
-     *  t  [][][][][]
-     *  s  [][][][][]
-     */
+  /**
+   * Constructor for AppointmentStore.
+   */
+  public AppointmentScheduleList() {
+    this.appointments = new ArrayList<Appointment[][]>();
+  }
 
-    /**
-     * Constructor for AppointmentStore.
-     */
-    public AppointmentScheduleList() {
-        this.appointments = new ArrayList<Appointment[][]>();
+  /**
+   * Creates a new appointment.
+   *
+   * @param appointmentDTO
+   * @return Appointment
+   */
+  public Appointment create(AppointmentDTO appointmentDTO) {
+    String snsNumber = appointmentDTO.getSnsNumber();
+    Calendar date = appointmentDTO.getDate();
+    VaccinationCenter center = appointmentDTO.getCenter();
+    VaccineType vacType = appointmentDTO.getVaccineType();
+    boolean sms = appointmentDTO.getSmsPermission();
+
+    Appointment appointment = new Appointment(snsNumber, date, center, vacType, sms);
+
+    return appointment;
+  }
+
+  private int getAppointmentDayIndex(Calendar date) {
+    return 0;
+  }
+
+  private int getAppointmentSlotIndex(Appointment appointment) {
+    return 0;
+  }
+
+  /**
+   * Creates a new appointment.
+   */
+  public Appointment addAppointment(String snsNumber, Calendar date) {
+    // TODO: refactor broke everything 👍
+    // TODO: validations once more in the attack
+    // Appointment appointment = new Appointment(snsNumber, date);
+    // appointments.add(appointment);
+    // return appointment;
+    return null;
+  }
+
+
+  /**
+   * Validates an appointment.
+   * 
+   * @param appointmentDto
+   */
+  public void validateAppointment(AppointmentDTO appointmentDto) {
+    if (appointmentDto == null) {
+      throw new IllegalArgumentException("Appointment is not valid.");
     }
+    // TODO FIX
+    // checkDuplicates(appointment);
+  }
 
-    /**
-     * Creates a new appointment.
-     */
-    public Appointment addAppointment(String snsNumber, Calendar date) {
-        // TODO: refactor broke everything 👍
-        // TODO: validations once more in the attack
-        // Appointment appointment = new Appointment(snsNumber, date);
-        // appointments.add(appointment);
-        // return appointment;
-        return null;
-    }
+  /**
+   * Finds an appointment by its SNS number.
+   */
+  public Appointment findAppointment(String snsNumber) {
+    // TODO FIX
+    // for (Appointment appointment : appointments) {
+    // TODO: check center
+    // if (appointment.hasSnsNumber(snsNumber) && appointment.isInTheNextHour())
+    // return appointment;
+    // }
+    return null;
+  }
 
-    /**
-     * Creates a new appointment.
-     *
-     * @param appointmentDTO
-     * @return Appointment
-     */
-    public Appointment create(AppointmentDTO appointmentDTO) {
-        String snsNumber = appointmentDTO.getSnsNumber();
-        Calendar date = appointmentDTO.getDate();
-        // String time = appointmentDTO.getTime(); // Calendar has time
-        VaccinationCenter center = appointmentDTO.getCenter();
-        VaccineType vacType = appointmentDTO.getVaccineType();
-        boolean sms = appointmentDTO.isSms();
+  /**
+   * Saves an appointment.
+   * 
+   * @param appointment the appointment
+   */
+  public void saveVaccinationCenter(Appointment appointment) {
+    // TODO FIX
+    // appointments.get(appointments.size())
+  }
 
-        Appointment appointment = new Appointment(snsNumber, date, center, vacType, sms);
+  /**
+   * Checks if an appointment is duplicated.
+   * 
+   * @param appointment
+   */
+  private void checkDuplicates(Appointment appointment) {
+    // TODO FIX
+    // if (appointments.contains(appointment)) {
+    // throw new IllegalArgumentException("\nDuplicated appointment.");
+    // }
+  }
 
-        return appointment;
-    }
-
-    /**
-     * Validates an appointment.
-     * 
-     * @param appointmentDto
-     */
-    public void validateAppointment(AppointmentDTO appointmentDto) {
-        if (appointmentDto == null) {
-            throw new IllegalArgumentException("Appointment is not valid.");
-        }
-        // TODO FIX
-        // checkDuplicates(appointment);
-    }
-
-    /**
-     * Finds an appointment by its SNS number.
-     */
-    public Appointment findAppointment(String snsNumber) {
-        // TODO FIX
-        // for (Appointment appointment : appointments) {
-        // TODO: check center
-        // if (appointment.hasSnsNumber(snsNumber) && appointment.isInTheNextHour())
-        // return appointment;
-        // }
-        return null;
-    }
-
-    /**
-     * Saves an appointment.
-     * 
-     * @param appointment the appointment
-     */
-    public void saveVaccinationCenter(Appointment appointment) {
-        // TODO FIX
-        // appointments.get(appointments.size())
-    }
-
-    /**
-     * Checks if an appointment is duplicated.
-     * 
-     * @param appointment
-     */
-    private void checkDuplicates(Appointment appointment) {
-        // TODO FIX
-        // if (appointments.contains(appointment)) {
-            // throw new IllegalArgumentException("\nDuplicated appointment.");
-        // }
-    }
 }

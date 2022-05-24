@@ -6,6 +6,7 @@ import app.domain.model.CommunityMassVaccinationCenter;
 import app.domain.model.Employee;
 import app.domain.model.HealthCareCenter;
 import app.domain.model.VaccinationCenter;
+import app.domain.model.VaccineType;
 import app.domain.model.WaitingRoom;
 import app.domain.model.dto.VaccinationCenterListDTO;
 import app.domain.shared.Constants;
@@ -44,15 +45,16 @@ public class VaccinationCenterStore {
    */
   public VaccinationCenter createCommunityMassCenter(String name, String address,
       String emailAddress, String phoneNum, String faxNum, String webAddress, String openingHours,
-      String closingHours, int slotDuration, int maxVacSlot, Employee coordinator) {
+      String closingHours, int slotDuration, int maxVacSlot, Employee coordinator,
+      VaccineType vaccineType) {
 
     boolean isCoordinatorValid = validateCoordinator(coordinator);
 
     if (!isCoordinatorValid) return null;
 
-    CommunityMassVaccinationCenter center =
-        new CommunityMassVaccinationCenter(name, address, emailAddress, phoneNum, faxNum,
-            webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
+    CommunityMassVaccinationCenter center = new CommunityMassVaccinationCenter(name, address,
+        emailAddress, phoneNum, faxNum, webAddress, openingHours, closingHours, slotDuration,
+        maxVacSlot, coordinator, vaccineType);
 
     return center;
   }

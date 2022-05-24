@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.Company;
 import app.domain.model.Employee;
+import app.domain.model.VaccineType;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
 
@@ -50,6 +51,8 @@ public class RegisterVaccinationCenterControllerTest {
     sb.append(String.format("Slot duration: %s\n", "5"));
     sb.append(String.format("Maximum vaccines per slot: %s\n", "5"));
     sb.append(String.format("Coordinator: %s\n", "Joana"));
+    sb.append(String.format("Vaccine type given on the center: %s\n",
+        "Vaccine type specifications:\nCode: 12345\nDescription: description\nTechnology: technology"));
 
     return sb.toString();
   }
@@ -114,7 +117,7 @@ public class RegisterVaccinationCenterControllerTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureEmptyValuesNotAllowed() {
-    controller.createCommunityMass("", "", "", "", "", "", "", "", 0, 0, coordinator);
+    controller.createCommunityMass("", "", "", "", "", "", "", "", 0, 0, null);
   }
 
   /**
