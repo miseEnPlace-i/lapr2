@@ -1,6 +1,5 @@
 package app.domain.model;
 
-import java.util.List;
 import app.domain.model.list.AppointmentScheduleList;
 import app.service.FormatVerifier;
 
