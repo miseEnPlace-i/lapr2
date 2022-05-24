@@ -9,6 +9,7 @@ import app.domain.model.store.VaccineStore;
 import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.model.store.VaccineTypeStore;
 import pt.isep.lei.esoft.auth.AuthFacade;
+import pt.isep.lei.esoft.auth.UserSession;
 
 /**
  * @author Paulo Maio <pam@isep.ipp.pt>
@@ -29,6 +30,7 @@ public class Company {
   private VaccineStore vaccineStore;
   private VaccineTechnologyStore vaccineTechnologyStore;
   private VaccineTypeStore vaccineTypeStore;
+  private UserSession userSession;
 
   /**
    * Company constructor.
@@ -53,6 +55,7 @@ public class Company {
     this.vaccineStore = new VaccineStore();
     this.vaccineTechnologyStore = new VaccineTechnologyStore();
     this.vaccineTypeStore = new VaccineTypeStore(vaccineTechnologyStore);
+    this.userSession = new UserSession();
 
     this.ongoingOutbreakVaccineTypeCode = ongoingOutbreakVaccineTypeCode;
   }
@@ -120,5 +123,9 @@ public class Company {
 
   public String getOngoingOutbreakVaccineTypeCode() {
     return this.ongoingOutbreakVaccineTypeCode;
+  }
+
+  public UserSession getUserSession() {
+    return this.userSession;
   }
 }
