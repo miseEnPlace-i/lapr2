@@ -8,8 +8,7 @@ import app.domain.model.dto.VaccinationCenterListDTO;
  * 
  * @autor Tomás Lopes <1211289@isep.ipp.pt>
  */
-public class VaccinationCenterMapper
-    implements IMapper<VaccinationCenter, VaccinationCenterListDTO> {
+public class VaccinationCenterMapper {
   // Private constructor to prevent instantiation from other classes
   private VaccinationCenterMapper() {}
 

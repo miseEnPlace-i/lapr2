@@ -11,9 +11,9 @@ import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.model.store.VaccineTypeStore;
 import app.domain.shared.Constants;
+import app.service.PropertiesUtils;
 import pt.isep.lei.esoft.auth.AuthFacade;
 import pt.isep.lei.esoft.auth.UserSession;
-import app.service.PropertiesUtils;
 
 /**
  * @author Paulo Maio <pam@isep.ipp.pt>

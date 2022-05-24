@@ -5,6 +5,7 @@ import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.SNSUser;
+import pt.isep.lei.esoft.auth.AuthFacade;
 
 /**
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
@@ -15,7 +16,8 @@ public class SNSUserStoreTest {
 
   @Before
   public void setUp() {
-    store = new SNSUserStore();
+    AuthFacade authFacade = new AuthFacade();
+    store = new SNSUserStore(authFacade);
     Date c = new Date();
     snsUser = new SNSUser("123456789ZZ1", "123456789", "name", c, 'M', "+351211111111",
         "email@email.com", "address");

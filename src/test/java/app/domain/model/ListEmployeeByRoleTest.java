@@ -17,7 +17,7 @@ public class ListEmployeeByRoleTest {
     AuthFacade authFacade = new AuthFacade();
 
     EmployeeRoleStore roleStore = new EmployeeRoleStore(authFacade);
-    this.employeeStore = new EmployeeStore(roleStore);
+    this.employeeStore = new EmployeeStore(authFacade, roleStore);
 
     roleStore.addEmployeeRole("TEST_ROLE", "Test description");
     roleStore.addEmployeeRole("TEST_ROLE2", "Test description 2");

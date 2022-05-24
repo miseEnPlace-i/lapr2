@@ -3,19 +3,22 @@ package app.domain.model.store;
 import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.Employee;
+import pt.isep.lei.esoft.auth.AuthFacade;
 
 /**
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
 public class EmployeeStore {
+  private AuthFacade authFacade;
   private List<Employee> employees;
   private EmployeeRoleStore roleStore;
 
   /**
    * Constructor for EmployeeStore.
    */
-  public EmployeeStore(EmployeeRoleStore roleStore) {
+  public EmployeeStore(AuthFacade authFacade, EmployeeRoleStore roleStore) {
+    this.authFacade = authFacade;
     this.employees = new ArrayList<Employee>();
     this.roleStore = roleStore;
   }
@@ -70,7 +73,8 @@ public class EmployeeStore {
 
     String email = employee.getEmail();
 
-
+    if (this.authFacade.existsUser(email))
+      throw new IllegalArgumentException("Email already exists.");
 
     checkDuplicates(employee);
   }
@@ -81,7 +85,18 @@ public class EmployeeStore {
    * @param employee the employee to be inserted
    */
   public void saveEmployee(Employee employee) {
+    String name = employee.getName();
+    String email = employee.getEmail();
+    String roleId = employee.getRoleId();
+    // String password = PasswordGenerator.generatePwd();
+    String password = "123456";
+
+    this.authFacade.addUserWithRole(name, email, password, roleId);
+
     this.employees.add(employee);
+
+    // TODO: send password email
+    // this.emailSender.sendPasswordEmail(email, password);
   }
 
   /**

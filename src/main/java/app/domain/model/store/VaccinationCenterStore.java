@@ -2,14 +2,15 @@ package app.domain.model.store;
 
 import java.util.ArrayList;
 import java.util.List;
+import app.domain.model.CommunityMassVaccinationCenter;
 import app.domain.model.Employee;
 import app.domain.model.HealthCareCenter;
-import app.domain.model.CommunityMassVaccinationCenter;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
 import app.domain.model.WaitingRoom;
 import app.domain.model.dto.VaccinationCenterListDTO;
 import app.mappers.VaccinationCenterMapper;
+import app.domain.shared.Constants;
 
 /**
  * Vaccination Center store
@@ -17,7 +18,6 @@ import app.mappers.VaccinationCenterMapper;
  * @author André Barros <1211299@isep.ipp.pt>
  */
 public class VaccinationCenterStore {
-
   // Vaccination Centers list
   private List<VaccinationCenter> vaccinationCenters;
 
@@ -49,6 +49,10 @@ public class VaccinationCenterStore {
       String closingHours, int slotDuration, int maxVacSlot, Employee coordinator,
       VaccineType vaccineType) {
 
+    boolean isCoordinatorValid = validateCoordinator(coordinator);
+
+    if (!isCoordinatorValid) throw new IllegalArgumentException("Coordinator is not valid");
+
     CommunityMassVaccinationCenter center = new CommunityMassVaccinationCenter(name, address,
         emailAddress, phoneNum, faxNum, webAddress, openingHours, closingHours, slotDuration,
         maxVacSlot, coordinator, vaccineType);
@@ -60,10 +64,24 @@ public class VaccinationCenterStore {
       String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours,
       int slotDuration, int maxVacSlot, Employee coordinator, String ages, String ags) {
 
+    boolean isCoordinatorValid = validateCoordinator(coordinator);
+
+    if (!isCoordinatorValid) throw new IllegalArgumentException("Coordinator is not valid");
+
     HealthCareCenter center = new HealthCareCenter(name, address, emailAddress, phoneNum, faxNum,
         webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator, ages, ags);
 
     return center;
+  }
+
+  private boolean validateCoordinator(Employee coordinator) {
+    if (coordinator == null) return false;
+    if (!coordinator.hasRoleId(Constants.ROLE_COORDINATOR)) return false;
+
+    for (VaccinationCenter vaccinationCenter : vaccinationCenters)
+      if (vaccinationCenter.getCoordinator().equals(coordinator)) return false;
+
+    return true;
   }
 
   /**

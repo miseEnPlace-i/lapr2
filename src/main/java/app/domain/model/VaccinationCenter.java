@@ -115,6 +115,13 @@ public class VaccinationCenter {
   }
 
   /**
+   * @return the name of the coordinator of the vaccination center
+   */
+  public Employee getCoordinator() {
+    return coordinator;
+  }
+
+  /**
    * Gets the opening hours.
    * 
    * @return the opening hours.
