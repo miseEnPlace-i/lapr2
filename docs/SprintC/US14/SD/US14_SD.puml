@@ -5,7 +5,7 @@ actor "Administrator" as ADM
 
 participant ":UploadUserFromFileUI" as UI
 participant ":RegisterSNSUserController" as CTRL
-participant "svgR:SVGReader" as SVGR
+participant "csvR:CSVReader" as CSVR
 participant "userSt :SNSUserStore" as USR_STR
 participant "comp :Company" as COMP
 participant "mapper: SNSUserMapper" as MAPPER
@@ -13,6 +13,7 @@ participant "dto: SNSUserDto" as DTO
 participant "user :SNSUser" as USR
 participant ":PasswordGenerator" as PWDGEN
 participant "auth :AuthFacade" as AUTH
+participant "userDataList :List<Array<String>>" as LIST
 
 
 activate ADM
@@ -24,17 +25,28 @@ deactivate UI
 ADM -> UI : types requested data
 activate UI
 
-    UI -> CTRL : svgReader = createSvgReader(filePathName)
+    UI -> CTRL : csvReader = createCsvReader(filePathName)
     activate CTRL
-        CTRL -> SVGR ** : svgReader = create(filePathName)
-        activate SVGR
-            SVGR -> SVGR : validatePath()
-            activate SVGR
-            deactivate SVGR
-            SVGR -> SVGR : validateFile()
-            activate SVGR
-            deactivate SVGR 
-        deactivate SVGR
+        CTRL -> CSVR ** : csvReader = create(filePathName)
+        activate CSVR
+
+            CSVR -> CSVR : validatePath()
+            activate CSVR
+            deactivate CSVR
+
+            CSVR -> CSVR : validateFile()
+            activate CSVR
+            deactivate CSVR 
+
+            CSVR -> CSVR : separator = getFileSeparator()
+            activate CSVR
+            deactivate CSVR
+            
+            CSVR -> COMP : store = getSNSUserStore()
+            activate COMP
+            deactivate COMP
+
+        deactivate CSVR
     deactivate CTRL
 
 UI --> ADM : asks to confirm action
@@ -43,83 +55,78 @@ deactivate UI
 ADM -> UI : confirms action
 activate UI
 
-    UI -> CTRL : svgReader.readAndUpload()
+    UI -> CTRL : csvReader.readAndUpload()
     activate CTRL
-        CTRL -> SVGR : svgReader.readAndUpload()
-        activate SVGR
-            SVGR -> SVGR : separator = getFileSeparator()
-            activate SVGR
-            deactivate SVGR
+        loop for each SNSUser regist
+        CTRL -> CSVR : userDataList = csvReader.readSNSUserLineData()
+        activate CSVR
             
-            SVGR -> COMP : store = getSNSUserStore()
-            activate COMP
-            deactivate COMP
+        deactivate CSVR
+        CTRL -> USR_STR : registListOfUsers(userDataList)
+        activate USR_STR
 
-            loop for each SNSUser regist
-            
-                note right of SVGR
-                snsUserData implies citizenCard, snsNumber, name, birthDay, phoneNumber, email, address, sex
-                end note
+        loop for each SNSUser regist
+        note right of USR_STR
+            snsUserData implies citizenCard, snsNumber, name, birthDay, phoneNumber, email, address, sex
+        end note
+        USR_STR -> USR_STR : snsUser = createSNSUser(snsUserData)
+            activate USR_STR
+                USR_STR -> USR** : create(snsUserData)
+            deactivate USR_STR
 
-                SVGR -> USR_STR : snsUser = createSNSUser(snsUserData)
+            USR_STR -> USR_STR : validateSNSUser(snsUser)
+            activate USR_STR
+                USR_STR -> USR : email = getEmail(snsUser)
+                activate USR
+                deactivate USR
+
+                USR_STR -> COMP : auth = getAuthFacade()
+                activate COMP
+                deactivate COMP
+
+                USR_STR -> AUTH : existsUser(email)
+                activate AUTH
+                deactivate AUTH
+
+                USR_STR -> USR_STR : checkDuplicates(snsUser)
                 activate USR_STR
-                    USR_STR -> USR** : create(snsUserData)
-                deactivate USR_STR
+            deactivate USR_STR
 
-                SVGR -> USR_STR : validateSNSUser(snsUser)
-                activate USR_STR
-                    USR_STR -> USR : email = getEmail(snsUser)
+            deactivate USR_STR
+
+            USR_STR -> USR_STR : saveSNSUser(snsUser)
+            activate USR_STR
+
+                USR_STR -> MAPPER : snsUserDto = toDto(snsUser)
+                activate MAPPER
+
+                    MAPPER -> USR : name = snsUser.getName()
                     activate USR
                     deactivate USR
 
-                    USR_STR -> COMP : auth = getAuthFacade()
-                    activate COMP
-                    deactivate COMP
+                    MAPPER -> USR : email = snsUser.getEmail()
+                    activate USR
+                    deactivate USR
 
-                    USR_STR -> AUTH : existsUser(email)
-                    activate AUTH
-                    deactivate AUTH
+                    MAPPER -> PWDGEN : pwd = generatePwd()
+                    activate PWDGEN
+                    deactivate PWDGEN
 
-                    USR_STR -> USR_STR : checkDuplicates(snsUser)
-                    activate USR_STR
-                    deactivate USR_STR
+                    MAPPER -> DTO ** : create(name, email, pwd, "SNS_USER")
 
-                deactivate USR_STR
+                deactivate MAPPER
 
-                SVGR -> USR_STR : saveSNSUser(snsUser)
-                activate USR_STR
+            USR_STR -> AUTH : addUserWithRole(snsUserDto)
+            activate AUTH
+            deactivate AUTH
 
-                    USR_STR -> MAPPER : snsUserDto = toDto(snsUser)
-                    activate MAPPER
+            USR_STR -> USR_STR : addSNSUser(snsUser)
+            activate USR_STR
+            deactivate USR_STR
 
-                        MAPPER -> USR : name = snsUser.getName()
-                        activate USR
-                        deactivate USR
-
-                        MAPPER -> USR : email = snsUser.getEmail()
-                        activate USR
-                        deactivate USR
-
-                        MAPPER -> PWDGEN : pwd = generatePwd()
-                        activate PWDGEN
-                        deactivate PWDGEN
-
-                        MAPPER -> DTO ** : create(name, email, pwd, "SNS_USER")
-
-                    deactivate MAPPER
-
-                    USR_STR -> AUTH : addUserWithRole(snsUserDto)
-                    activate AUTH
-                    deactivate AUTH
-
-                    USR_STR -> USR_STR : addSNSUser(snsUser)
-                    activate USR_STR
-                    deactivate USR_STR
-
-                deactivate USR_STR
-
-            end
-        deactivate SVGR
+        deactivate USR_STR
+        deactivate USR_STR
+        end
     deactivate CTRL
 
 UI --> ADM : informs operation success

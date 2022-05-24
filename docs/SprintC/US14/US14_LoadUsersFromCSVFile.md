@@ -99,9 +99,9 @@ n/a
 | Step 1  		 |	... interacting with the actor? | UploadUserFromFileUI   |  Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.           |
 | 			  		 |	... coordinating the US? | RegisterSNSUserController | Controller                             |
 | Step 2  		 |							 |             |                              |
-| Step 3  		 |	...saving the inputted data? | SVGReader  | IE: owns the data.  |
-|  		 |	...validate SVG path? | SVGReader  | IE: owns the data.  |
-|  		 |	...validate SVG file and check is type? | SVGReader  | IE: is responsible for the SVG.  |
+| Step 3  		 |	...saving the inputted data? | CSVReader  | IE: owns the data.  |
+|  		 |	...validate CSV path? | CSVReader  | IE: owns the data.  |
+|  		 |	...validate CSV file and check is type? | CSVReader  | IE: is responsible for the CSV.  |
 |  		 |	...instantiating SNSUser? | SNSUserStore  | Creator: SNSUserStore has a SNSUser.  |
 |  		 |	...validating SNSUser data?(locally) | SNSUser  | IE: owns the data.  |
 |  		 |	...validating SNSUser data?(globally) | SNSUserStore  | IE: knows every SNSUsers registered.  |
@@ -114,7 +114,7 @@ According to the taken rationale, the conceptual classes promoted to software cl
 
  * SNSUserStore
  * SNSUser
- * SVGReader
+ * CSVReader
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
