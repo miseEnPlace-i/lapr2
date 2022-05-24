@@ -1,6 +1,7 @@
 package app.domain.model.store;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
@@ -85,5 +86,14 @@ public class VaccineStoreTest {
     store.saveVaccine(vaccine);
 
     assertTrue(store.exists("designation"));
+  }
+
+  @Test
+  public void ensureExistsMethodIsWorkingCorrectlyWhenVaccineDoesNotExist() {
+    vaccine = store.createVaccine("designation", "id", "brand", this.vacType);
+
+    store.saveVaccine(vaccine);
+
+    assertFalse(store.exists("non_existing_designation"));
   }
 }
