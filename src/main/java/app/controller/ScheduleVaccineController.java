@@ -34,6 +34,7 @@ public class ScheduleVaccineController implements IRegisterController {
    * @param vaccineTypeStore the vaccine type store
    */
   public ScheduleVaccineController(Company company) {
+    this.company = company;
     this.vaccinationCenterStore = company.getVaccinationCenterStore();
     this.vaccineTypeStore = company.getVaccineTypeStore();
     this.userSession = company.getUserSession();
@@ -108,5 +109,9 @@ public class ScheduleVaccineController implements IRegisterController {
   @Override
   public void save() {
     scheduleList.saveAppointment(appointment);
+  }
+
+  public boolean existsUser(String snsNumber) {
+    return this.company.getSNSUserStore().checkSNSUserExists(snsNumber);
   }
 }

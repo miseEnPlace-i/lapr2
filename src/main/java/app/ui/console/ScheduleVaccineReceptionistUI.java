@@ -12,14 +12,15 @@ import app.domain.model.VaccineType;
 import app.domain.model.dto.AppointmentWithNumberDTO;
 import app.domain.model.dto.VaccinationCenterListDTO;
 import app.domain.model.dto.VaccineTypeDTO;
-import app.domain.model.store.SNSUserStore;
 import app.domain.shared.FieldToValidate;
 import app.service.CalendarUtils;
 import app.ui.console.utils.Utils;
 
+/**
+ * @author André Barros <1211299@isep.ipp.pt>
+ */
 public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineController> {
   ScheduleVaccineController controller;
-  SNSUserStore store;
 
   public ScheduleVaccineReceptionistUI() {
     super(new ScheduleVaccineController(App.getInstance().getCompany()));
@@ -27,13 +28,13 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
 
   @Override
   public void insertData() {
-    System.out.println("Enter the appointment data:");
+    System.out.println("\nEnter the appointment data:");
     String SNSNumber;
     boolean existsUser;
 
     do {
       SNSNumber = Utils.readLineFromConsole("\nSNS Number (xxxxxxxxx):");
-      existsUser = store.checkSNSUserExists(SNSNumber);
+      existsUser = ctrl.existsUser(SNSNumber);
     } while (!existsUser);
 
     Date date = Utils.readDateFromConsole("Date (dd/MM/yyyy): ");
