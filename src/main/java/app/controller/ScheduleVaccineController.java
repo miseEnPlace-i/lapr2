@@ -5,6 +5,7 @@ import java.util.List;
 import app.domain.model.Appointment;
 import app.domain.model.Company;
 import app.domain.model.SNSUser;
+import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
 import app.domain.model.dto.AppointmentWithNumberDTO;
 import app.domain.model.dto.AppointmentWithoutNumberDTO;
@@ -17,7 +18,7 @@ import app.domain.model.store.VaccineTypeStore;
 import app.mappers.VaccineTypeMapper;
 import pt.isep.lei.esoft.auth.UserSession;
 
-public class ScheduleVaccineController {
+public class ScheduleVaccineController implements IRegisterController {
   private Company company;
   private VaccinationCenterStore vaccinationCenterStore;
   private AppointmentScheduleList scheduleList;
@@ -32,12 +33,11 @@ public class ScheduleVaccineController {
    * @param vaccinationCenterStore the vaccination center store
    * @param vaccineTypeStore the vaccine type store
    */
-  public ScheduleVaccineController(VaccinationCenterStore vaccinationCenterStore,
-      VaccineTypeStore vaccineTypeStore, UserSession userSession, SNSUserStore snsUserStore) {
-    this.vaccinationCenterStore = vaccinationCenterStore;
-    this.vaccineTypeStore = vaccineTypeStore;
-    this.userSession = userSession;
-    this.snsUserStore = snsUserStore;
+  public ScheduleVaccineController(Company company) {
+    this.vaccinationCenterStore = company.getVaccinationCenterStore();
+    this.vaccineTypeStore = company.getVaccineTypeStore();
+    this.userSession = company.getUserSession();
+    this.snsUserStore = company.getSNSUserStore();
   }
 
   /**
@@ -87,7 +87,26 @@ public class ScheduleVaccineController {
     return vaccinationCenterStore.getListOfVaccinationCentersWithVaccineType(vaccineType);
   }
 
-  public void saveAppointment() {
+  public VaccineType getVaccineTypeByCode(String code) {
+    return vaccineTypeStore.getVaccineTypeByCode(code);
+  }
+
+  public VaccinationCenter getVaccinationCenterByEmail(String email) {
+    return vaccinationCenterStore.getVaccinationCenterByEmail(email);
+  }
+
+  @Override
+  public String stringifyData() {
+    return null;
+  }
+
+  @Override
+  public String getResourceName() {
+    return "Appointment";
+  }
+
+  @Override
+  public void save() {
     scheduleList.saveAppointment(appointment);
   }
 }
