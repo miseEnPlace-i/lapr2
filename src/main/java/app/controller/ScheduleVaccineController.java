@@ -39,6 +39,7 @@ public class ScheduleVaccineController implements IRegisterController {
     this.vaccineTypeStore = company.getVaccineTypeStore();
     this.userSession = company.getUserSession();
     this.snsUserStore = company.getSNSUserStore();
+    this.scheduleList = new AppointmentScheduleList();
   }
 
   /**

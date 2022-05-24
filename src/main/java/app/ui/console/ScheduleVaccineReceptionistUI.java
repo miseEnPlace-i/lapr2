@@ -33,7 +33,8 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
     boolean existsUser;
 
     do {
-      SNSNumber = Utils.readLineFromConsole("\nSNS Number (xxxxxxxxx):");
+      SNSNumber = Utils.readLineFromConsoleWithValidation("\nSNS Number (xxxxxxxxx):",
+          FieldToValidate.SNS_NUMBER);
       existsUser = ctrl.existsUser(SNSNumber);
     } while (!existsUser);
 
