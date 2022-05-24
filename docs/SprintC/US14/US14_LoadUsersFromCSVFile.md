@@ -102,24 +102,30 @@ n/a
 | Step 3  		 |	...saving the inputted data? | CSVReader  | IE: owns the data.  |
 |  		 |	...validate CSV path? | CSVReader  | IE: owns the data.  |
 |  		 |	...validate CSV file and check is type? | CSVReader  | IE: is responsible for the CSV.  |
-|  		 |	...instantiating SNSUser? | SNSUserStore  | Creator: SNSUserStore has a SNSUser.  |
+| Step 4  		 |							 |             |                              |
+| Step 5  		 |	...instantiating SNSUser? | SNSUserStore  | Creator: SNSUserStore has a SNSUser.  |  		 
 |  		 |	...validating SNSUser data?(locally) | SNSUser  | IE: owns the data.  |
 |  		 |	...validating SNSUser data?(globally) | SNSUserStore  | IE: knows every SNSUsers registered.  |
-|  		 |	...saving created SNSUser | SNSUserStore  | IE: owns every SNSUsers.  |
-| Step 4  		 |	... informing operation success?| UploadUserFromFileUI  | IE: is responsible for user interactions.  | 
+|  		 |	...saving created SNSUser? | SNSUserStore  | IE: owns every SNSUsers.  |
+|  		 |	...know the attributes necessary to add user to the system | UserDto  | DTO: knows necessary attributes.  |
+|  		 |	...add the user to the system? | authFacade  | IE: owns every Users.  |
+| Step 6  		 |	... informing operation success?| UploadUserFromFileUI  | IE: is responsible for user interactions.  |
+
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
+ * Company
  * SNSUserStore
  * SNSUser
  * CSVReader
+ * UserDto
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
- * UploadUserFromFileUI	  
- * RegisterSNSUserController
+ * UploadUsersFromFileUI	  
+ * UploadUsersFromFileController
 
 
 ## 3.2. Sequence Diagram (SD)
@@ -132,7 +138,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 **From alternative 1**
 
-![US006_CD](US006_CD.svg)
+![US14CD](CD/US14_CD.svg)
 
 # 4. Tests 
 
