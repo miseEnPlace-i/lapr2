@@ -344,10 +344,6 @@ public class VaccinationCenter {
     return appointmentList;
   }
 
-  public List<VaccinationCenter> getListOfVaccinationCentersWithVaccineType() {
-    return null;
-  }
-
   /**
    * Shows all vaccination center data
    */

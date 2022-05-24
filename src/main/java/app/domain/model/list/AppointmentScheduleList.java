@@ -6,7 +6,8 @@ import java.util.List;
 import app.domain.model.Appointment;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
-import app.domain.model.dto.AppointmentDTO;
+import app.domain.model.dto.AppointmentWithNumberDTO;
+import app.domain.model.dto.AppointmentWithoutNumberDTO;
 
 /**
  * AppointmentStore class.
@@ -30,8 +31,19 @@ public class AppointmentScheduleList {
    * @param appointmentDTO
    * @return Appointment
    */
-  public Appointment create(AppointmentDTO appointmentDTO) {
+  public Appointment create(AppointmentWithNumberDTO appointmentDTO) {
     String snsNumber = appointmentDTO.getSnsNumber();
+    Calendar date = appointmentDTO.getDate();
+    VaccinationCenter center = appointmentDTO.getCenter();
+    VaccineType vacType = appointmentDTO.getVaccineType();
+    boolean sms = appointmentDTO.getSmsPermission();
+
+    Appointment appointment = new Appointment(snsNumber, date, center, vacType, sms);
+
+    return appointment;
+  }
+
+  public Appointment create(AppointmentWithoutNumberDTO appointmentDTO, String snsNumber) {
     Calendar date = appointmentDTO.getDate();
     VaccinationCenter center = appointmentDTO.getCenter();
     VaccineType vacType = appointmentDTO.getVaccineType();
@@ -68,10 +80,11 @@ public class AppointmentScheduleList {
    * 
    * @param appointmentDto
    */
-  public void validateAppointment(AppointmentDTO appointmentDto) {
-    if (appointmentDto == null) {
+  public void validateAppointment(Appointment appointment) {
+    if (appointment == null) {
       throw new IllegalArgumentException("Appointment is not valid.");
     }
+
     // TODO FIX
     // checkDuplicates(appointment);
   }
@@ -94,9 +107,10 @@ public class AppointmentScheduleList {
    * 
    * @param appointment the appointment
    */
-  public void saveVaccinationCenter(Appointment appointment) {
-    // TODO FIX
-    // appointments.get(appointments.size())
+  public void saveAppointment(Appointment appointment) {
+    validateAppointment(appointment);
+
+    // appointments.add(appointment);
   }
 
   /**

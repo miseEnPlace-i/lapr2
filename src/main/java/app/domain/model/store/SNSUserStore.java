@@ -117,6 +117,22 @@ public class SNSUserStore {
   }
 
   /**
+   * Finds a SNS User by Email.
+   * 
+   * @param email The SNS User email.
+   * @return SNSUser
+   */
+  public SNSUser findSNSUserByEmail(String email) {
+    for (SNSUser snsUser : snsUsers) {
+      if (snsUser.getEmail().equals(email)) {
+        return snsUser;
+      }
+    }
+
+    return null;
+  }
+
+  /**
    * Gets the size of the store.
    * 
    * @return int of number of SNS Users in the store.

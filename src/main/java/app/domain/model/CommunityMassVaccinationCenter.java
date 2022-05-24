@@ -47,6 +47,15 @@ public class CommunityMassVaccinationCenter extends VaccinationCenter {
     return vaccineType;
   }
 
+  /**
+   * Checks if this center administers certain vaccine type.
+   * 
+   * @param vaccineType the vaccine type to be checked
+   * @return true if it administers, false otherwise
+   */
+  public boolean administersVaccineType(VaccineType vaccineType) {
+    return vaccineType == this.vaccineType;
+  }
 
   /**
    * Shows all community mass vaccination center data

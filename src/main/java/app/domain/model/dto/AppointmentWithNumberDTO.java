@@ -8,7 +8,7 @@ import app.domain.model.VaccineType;
 /**
  * @author André Barros <1211299@isep.ipp.pt>
  */
-public class AppointmentDTO {
+public class AppointmentWithNumberDTO {
   private String snsNumber;
   private Calendar date;
   // private String time; // Calendar has time
@@ -16,8 +16,8 @@ public class AppointmentDTO {
   private VaccineType vaccineType;
   private boolean smsPermission;
 
-  public AppointmentDTO(String snsNumber, Calendar date, String time, VaccinationCenter center,
-      VaccineType vaccineType, boolean sms) {
+  public AppointmentWithNumberDTO(String snsNumber, Calendar date, String time,
+      VaccinationCenter center, VaccineType vaccineType, boolean sms) {
     this.snsNumber = snsNumber;
     this.date = date;
     // this.time = time;

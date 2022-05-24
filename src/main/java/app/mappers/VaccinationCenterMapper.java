@@ -12,7 +12,7 @@ public class VaccinationCenterMapper {
   // Private constructor to prevent instantiation from other classes
   private VaccinationCenterMapper() {}
 
-  public VaccinationCenterListDTO toDto(VaccinationCenter vaccinationCenter) {
+  public static VaccinationCenterListDTO toDto(VaccinationCenter vaccinationCenter) {
     return new VaccinationCenterListDTO(vaccinationCenter.getName(), vaccinationCenter.getAddress(),
         vaccinationCenter.getEmail(), vaccinationCenter.getPhone());
   }
