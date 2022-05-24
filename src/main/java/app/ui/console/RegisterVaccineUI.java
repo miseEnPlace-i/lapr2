@@ -112,8 +112,8 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
 
   // ASKS TO INSERT THE DOSE INFO DATA
   public void insertDoseInfoData() {
-    int dosage = Integer.parseInt(Utils.readLineFromConsole("Dosage: "));
-    int timeSinceLastDose = Integer.parseInt(Utils.readLineFromConsole("Time since last dose: "));
+    int dosage = Integer.parseInt(Utils.readLineFromConsole("Dosage (ml): "));
+    int timeSinceLastDose = Integer.parseInt(Utils.readLineFromConsole("Time since last dose (days): "));
 
     super.ctrl.createDoseInfo(dosage, timeSinceLastDose);
 
