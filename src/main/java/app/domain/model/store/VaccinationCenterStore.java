@@ -9,6 +9,7 @@ import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
 import app.domain.model.WaitingRoom;
 import app.domain.model.dto.VaccinationCenterListDTO;
+import app.mappers.VaccinationCenterMapper;
 
 /**
  * Vaccination Center store
@@ -112,13 +113,51 @@ public class VaccinationCenterStore {
 
     for (VaccinationCenter vaccinationCenter : vaccinationCenters) {
       VaccinationCenterListDTO vaccinationCenterDTO =
-          new VaccinationCenterListDTO(vaccinationCenter.getName(), vaccinationCenter.getAddress(),
-              vaccinationCenter.getEmail(), vaccinationCenter.getPhone());
+          VaccinationCenterMapper.toDto(vaccinationCenter);
 
       centers.add(vaccinationCenterDTO);
     }
 
     return centers;
+  }
+
+  /**
+   * Returns a list of Vaccination Centers that give a certain vaccine type.
+   * 
+   * @param vaccineType the vaccine type
+   * 
+   * @return the list of Vaccination Centers
+   */
+  public List<VaccinationCenterListDTO> getListOfVaccinationCentersWithVaccineType(
+      VaccineType vaccineType) {
+    List<VaccinationCenter> availableVaccinationCenters = new ArrayList<VaccinationCenter>();
+    List<VaccinationCenterListDTO> returnList = new ArrayList<VaccinationCenterListDTO>();
+
+    for (VaccinationCenter vaccinationCenter : this.vaccinationCenters) {
+      if (vaccinationCenter instanceof CommunityMassVaccinationCenter) {
+        // Vaccination center is a CMVC, so we check if it administers the vaccine type given
+
+        CommunityMassVaccinationCenter vacCenter =
+            (CommunityMassVaccinationCenter) vaccinationCenter;
+
+        if (vacCenter.administersVaccineType(vaccineType)) {
+          availableVaccinationCenters.add(vaccinationCenter);
+        }
+      } else {
+        // Vaccination center is a HCC, that administers all vaccine types, so we add it to the list
+
+        availableVaccinationCenters.add(vaccinationCenter);
+      }
+    }
+
+    for (VaccinationCenter vaccinationCenter : availableVaccinationCenters) {
+      VaccinationCenterListDTO vaccinationCenterDTO =
+          VaccinationCenterMapper.toDto(vaccinationCenter);
+
+      returnList.add(vaccinationCenterDTO);
+    }
+
+    return returnList;
   }
 
   public WaitingRoom getWaitingRoom(String phone) {
