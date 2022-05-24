@@ -2,6 +2,7 @@ package app.service;
 
 import java.lang.reflect.Method;
 import org.apache.commons.lang3.StringUtils;
+import app.domain.shared.Constants;
 
 /**
  * Format Verifier with all the rules for the application.
@@ -129,7 +130,7 @@ public final class FormatVerifier {
    * @return True if the expression is a valid Vaccine Code, false otherwise.
    */
   public static boolean validateVaccineCode(String expression) {
-    return expression.matches("[0-9]{5}");
+    return expression.matches("[0-9]{" + Constants.VACCINE_TYPE_CODE_LENGTH + "}");
   }
 
   public static boolean validateHours(String expression) {
