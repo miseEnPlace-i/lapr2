@@ -16,7 +16,7 @@ participant "mapper\n:vaccinationCenterMapper" as VACMAPPER
 participant "mapper\n:AppointmentMapper" as APPMAPPER
 participant "appDto:AppointmentDto" as DTO
 participant "store\n:VaccineTypeStore" as VACSTORE
-participant "store\n:AppointmentStore" as APPSTORE
+participant "appointmentScheduleList\n:AappointmentScheduleList" as APPSTORE
 participant "userHealthData\n:UserHealthData" as USERDATA
 participant "appointment\n:Appointment" as APPOINT
 participant "snsUser\n:SNSUser" as SNSUSER
@@ -98,11 +98,12 @@ deactivate COMP
 CTRL -> CENTERSTORE : availableVaccinationCenters = getVaccinationCentersByVaccineType(vaccineType)
 activate CENTERSTORE
 CENTERSTORE --> LISTCENTER**
+
 loop for each vaccinationCenter
 CENTERSTORE -> CENTER : administeredVaccines = getAdministeredVaccines()
 activate CENTER
 deactivate CENTER
-loop for each administeredVaccine
+
 CENTERSTORE -> VACCINE : v = hasVaccineType(vaccineType)
 activate VACCINE
 VACCINE --> CENTERSTORE : true/false
@@ -111,7 +112,7 @@ alt v == true
 CENTERSTORE -> LISTCENTER : add(vaccinationCenter)
 activate LISTCENTER
 deactivate LISTCENTER
-end
+
 end
 end
 deactivate CENTERSTORE
@@ -138,15 +139,14 @@ activate CTRL
 
 CTRL -> COMP : getAppointmentStore()
 activate COMP
+deactivate COMP
 
 note right 
 dto has all information needed to create an appointment (SNS User Number,date,time,vaccination center,vaccine type,sms)
 end note
-CTRL -> COMP : appointment = createAppointment(dto)
 
-COMP -> APPMAPPER : appointmentDTO = toDto(appointment)
+CTRL -> APPMAPPER : appointmentDTO = toDto(appointment)
 activate APPMAPPER
-deactivate COMP
 
 APPMAPPER -> DTO : SNSUserNumber = appointment.getSNSNumber()
 activate DTO
