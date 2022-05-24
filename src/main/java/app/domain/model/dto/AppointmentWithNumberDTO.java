@@ -16,8 +16,8 @@ public class AppointmentWithNumberDTO {
   private VaccineType vaccineType;
   private boolean smsPermission;
 
-  public AppointmentWithNumberDTO(String snsNumber, Calendar date, String time,
-      VaccinationCenter center, VaccineType vaccineType, boolean sms) {
+  public AppointmentWithNumberDTO(String snsNumber, Calendar date, VaccinationCenter center,
+      VaccineType vaccineType, boolean sms) {
     this.snsNumber = snsNumber;
     this.date = date;
     // this.time = time;
