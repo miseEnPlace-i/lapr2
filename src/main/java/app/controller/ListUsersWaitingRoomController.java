@@ -2,6 +2,7 @@ package app.controller;
 
 import java.util.List;
 import app.domain.model.Company;
+import app.domain.model.VaccinationCenter;
 import app.domain.model.WaitingRoom;
 import app.domain.model.dto.ArrivalDTO;
 import app.domain.model.dto.VaccinationCenterListDTO;
@@ -25,7 +26,7 @@ public class ListUsersWaitingRoomController {
   }
 
   public List<ArrivalDTO> getWaitingRoomListFromNurseCenter() {
-    VaccinationCenterListDTO nurseVaccinationCenter = nurseSession.getVaccinationCenter();
+    VaccinationCenter nurseVaccinationCenter = nurseSession.getVaccinationCenter();
 
     // TODO refactor using equals
     // TODO refactor using Waiting Room DTO

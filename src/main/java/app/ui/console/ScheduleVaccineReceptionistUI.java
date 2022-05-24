@@ -14,6 +14,7 @@ import app.domain.model.dto.VaccinationCenterListDTO;
 import app.domain.model.dto.VaccineTypeDTO;
 import app.domain.shared.FieldToValidate;
 import app.service.CalendarUtils;
+import app.session.EmployeeSession;
 import app.ui.console.utils.Utils;
 
 /**

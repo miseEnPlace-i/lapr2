@@ -41,8 +41,7 @@ public class SNSUserStore {
    * @return SNSUser
    */
   public SNSUser createSNSUser(String citizenCard, String snsNumber, String name, Date birthDay,
-      char gender, String phoneNumber, String email, String address)
-      throws IllegalArgumentException, ParseException {
+      char gender, String phoneNumber, String email, String address) {
     SNSUser snsUser =
         new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
 
@@ -137,11 +136,8 @@ public class SNSUserStore {
    * @return SNSUser
    */
   public SNSUser findSNSUserByEmail(String email) {
-    for (SNSUser snsUser : snsUsers) {
-      if (snsUser.getEmail().equals(email)) {
-        return snsUser;
-      }
-    }
+    for (SNSUser snsUser : snsUsers)
+      if (snsUser.getEmail().equals(email)) return snsUser;
 
     return null;
   }

@@ -1,12 +1,17 @@
 package app.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
+import org.apache.commons.lang3.time.DateUtils;
 import app.domain.model.Company;
 import app.domain.model.Employee;
+import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
+import app.domain.model.store.SNSUserStore;
 import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.model.store.VaccineTypeStore;
@@ -26,6 +31,7 @@ public class App {
   private VaccineTechnologyStore vaccineTechnologyStore;
   private VaccinationCenterStore vaccinationCenterStore;
   private VaccineTypeStore vacTypeStore;
+  private SNSUserStore snsUserStore;
 
   private App() {
     Properties props = PropertiesUtils.getProperties();
@@ -37,6 +43,7 @@ public class App {
     this.vaccineTechnologyStore = this.company.getVaccineTechnologyStore();
     this.vaccinationCenterStore = this.company.getVaccinationCenterStore();
     this.vacTypeStore = this.company.getVaccineTypeStore();
+    this.snsUserStore = this.company.getSNSUserStore();
 
     bootstrap();
   }
@@ -78,7 +85,10 @@ public class App {
         Constants.ROLE_ADMIN);
     this.authFacade.addUserWithRole("Test Administrator", "admin@admin.pt", "123456",
         Constants.ROLE_ADMIN);
-    this.authFacade.addUserWithRole("teste", "t@t.com", "123", Constants.ROLE_SNS_USER);
+
+    SNSUser user = this.snsUserStore.createSNSUser("000000000ZZ4", "123456789", "name", new Date(),
+        'M', "+351212345678", "t@t.com", "address");
+    this.snsUserStore.saveSNSUser(user);
 
     Employee e = this.employeeStore.createEmployee("Name", "+351916919169", "teste@teste.com",
         "address", "123456789ZZ1", Constants.ROLE_RECEPTIONIST);

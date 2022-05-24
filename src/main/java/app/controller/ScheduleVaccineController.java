@@ -21,7 +21,7 @@ import pt.isep.lei.esoft.auth.UserSession;
 public class ScheduleVaccineController implements IRegisterController {
   private Company company;
   private VaccinationCenterStore vaccinationCenterStore;
-  private AppointmentScheduleList scheduleList;
+  private AppointmentScheduleList appointmentSchedule;
   private Appointment appointment;
   private VaccineTypeStore vaccineTypeStore;
   private UserSession userSession;
@@ -37,9 +37,8 @@ public class ScheduleVaccineController implements IRegisterController {
     this.company = company;
     this.vaccinationCenterStore = company.getVaccinationCenterStore();
     this.vaccineTypeStore = company.getVaccineTypeStore();
-    this.userSession = company.getUserSession();
+    this.userSession = App.getInstance().getCurrentUserSession();
     this.snsUserStore = company.getSNSUserStore();
-    this.scheduleList = new AppointmentScheduleList();
   }
 
   /**
@@ -47,17 +46,20 @@ public class ScheduleVaccineController implements IRegisterController {
    * 
    * @param dto the appointment dto, containing all the information about the appointment
    */
-  public void createAppointment(AppointmentWithNumberDTO dto) {
-    scheduleList.create(dto);
+  public void createAppointment(AppointmentWithNumberDTO appointment) {
+    this.appointmentSchedule = appointment.getCenter().getAppointmentList();
+    appointmentSchedule.create(appointment);
   }
 
   public void createAppointment(AppointmentWithoutNumberDTO dto) {
+    this.appointmentSchedule = dto.getCenter().getAppointmentList();
+
     String userEmail = String.valueOf(userSession.getUserId());
 
     SNSUser snsUser = snsUserStore.findSNSUserByEmail(userEmail);
     String snsNumber = snsUser.getSnsNumber();
 
-    scheduleList.create(dto, snsNumber);
+    appointment = appointmentSchedule.create(dto, snsNumber);
   }
 
   /**
@@ -99,7 +101,7 @@ public class ScheduleVaccineController implements IRegisterController {
 
   @Override
   public String stringifyData() {
-    return null;
+    return appointment.toString();
   }
 
   @Override
@@ -109,7 +111,7 @@ public class ScheduleVaccineController implements IRegisterController {
 
   @Override
   public void save() {
-    scheduleList.saveAppointment(appointment);
+    appointmentSchedule.saveAppointment(appointment);
   }
 
   public boolean existsUser(String snsNumber) {

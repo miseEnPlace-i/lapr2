@@ -54,7 +54,7 @@ public class VaccinationCenter {
     setMaxVacSlot(maxVacSlot);
     setCoordinator(coordinator);
     this.waitingRoom = new WaitingRoom();
-    this.appointmentList = new AppointmentScheduleList();
+    this.appointmentList = new AppointmentScheduleList(this);
   }
 
   /**
