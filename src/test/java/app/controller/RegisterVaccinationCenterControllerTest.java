@@ -47,7 +47,7 @@ public class RegisterVaccinationCenterControllerTest {
   /**
    * To string method for tests purpose
    */
-  public String toString() {
+  public String getCommunityMassVaccinationCenterReferenceString() {
     StringBuilder sb = new StringBuilder();
     sb.append("Community Mass Vaccination Center data:\n");
     sb.append(String.format("\nName: %s\n", "name"));
@@ -70,7 +70,7 @@ public class RegisterVaccinationCenterControllerTest {
   /**
    * To string method for tests purpose
    */
-  public String toString2() {
+  public String getHealthCareCenterReferenceString() {
     StringBuilder sb = new StringBuilder();
     sb.append("Health Care Center data:\n");
     sb.append(String.format("\nName: %s\n", "name"));
@@ -298,8 +298,8 @@ public class RegisterVaccinationCenterControllerTest {
    * Check that StringifyData method is working properly
    */
   @Test
-  public void ensureStringifyDataWorking() {
-    String center = toString();
+  public void ensureStringifyCommunityMassVaccinationCenterIsWorking() {
+    String center = getCommunityMassVaccinationCenterReferenceString();
     controller.createCommunityMass("name", "address", "example@gmail.com", "+351913456789",
         "+351913456788", "https://www.teste.com", "11:00", "23:00", 5, 5, coordinator);
     controller.save();
@@ -310,8 +310,8 @@ public class RegisterVaccinationCenterControllerTest {
    * Check that StringifyData method is working properly
    */
   @Test
-  public void ensureStringifyDataWorking2() {
-    String center = toString2();
+  public void ensureStringifyHealthCareCenterIsWorking() {
+    String center = getHealthCareCenterReferenceString();
     controller.createHealthCare("name", "address", "example@gmail.com", "+351913456789",
         "+351913456788", "https://www.teste.com", "11:00", "23:00", 5, 5, coordinator, "test",
         "test");
