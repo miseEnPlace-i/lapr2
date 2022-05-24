@@ -2,12 +2,12 @@ package app.session;
 
 import app.domain.model.dto.VaccinationCenterListDTO;
 
-public class NurseSession {
+public class EmployeeSession {
   private VaccinationCenterListDTO vaccinationCenter;
 
-  public NurseSession() {}
+  public EmployeeSession() {}
 
-  public NurseSession(String username, VaccinationCenterListDTO vaccinationCenter) {
+  public EmployeeSession(VaccinationCenterListDTO vaccinationCenter) {
     this.vaccinationCenter = vaccinationCenter;
   }
 
@@ -19,7 +19,7 @@ public class NurseSession {
     this.vaccinationCenter = vaccinationCenter;
   }
 
-  public boolean isLoggedIn() {
+  public boolean hasCenter() {
     return vaccinationCenter == null ? false : true;
   }
 }

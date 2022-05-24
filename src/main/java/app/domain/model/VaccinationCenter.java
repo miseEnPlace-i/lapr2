@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import app.domain.model.list.AppointmentScheduleList;
 import app.service.FormatVerifier;
 
 /**
@@ -20,6 +21,7 @@ public class VaccinationCenter {
   private int maxVacSlot;
   private Employee coordinator;
   private WaitingRoom waitingRoom;
+  private AppointmentScheduleList aptLst;
 
   /**
    * Constructor for the Vaccination Center
@@ -52,6 +54,7 @@ public class VaccinationCenter {
     setMaxVacSlot(maxVacSlot);
     setCoordinator(coordinator);
     this.waitingRoom = new WaitingRoom();
+    this.aptLst = new AppointmentScheduleList();
   }
 
   /**
@@ -87,6 +90,33 @@ public class VaccinationCenter {
    */
   public String getCoordinatorName() {
     return coordinator.name;
+  }
+
+  /**
+   * Gets the opening hours.
+   * 
+   * @return the opening hours.
+   */
+  public String getOpeningHours() {
+    return this.openingHours;
+  }
+
+  /**
+   * Gets the closing hours.
+   * 
+   * @return the closing hours.
+   */
+  public String getClosingHours() {
+    return this.closingHours;
+  }
+
+  /**
+   * Gets the slot duration.
+   * 
+   * @return the slot duration.
+   */
+  public int getSlotDuration() {
+    return this.slotDuration;
   }
 
   /**
@@ -262,6 +292,10 @@ public class VaccinationCenter {
 
   public WaitingRoom getWaitingRoom() {
     return waitingRoom;
+  }
+
+  public AppointmentScheduleList getAppointmentStore() {
+    return aptLst;
   }
 
   /**

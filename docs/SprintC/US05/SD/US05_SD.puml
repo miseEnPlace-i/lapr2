@@ -22,6 +22,8 @@ UI -> CTRL : create(company,nurseSession)
 participant "nurseSession\n:NurseSession" as FAC
 participant "comp\n:Company" as COMP
 participant "vaccinationCenterStore\n:VaccinationCenterStore" as VACS
+participant "vaccinationCenter\n:VaccinationCenter" as VACC
+participant "vaccinationCenterDto:\nList<VaccinationCenterDTO>" as VACCDTO
 participant ":ArriveMapper" as ARRM
 participant "arriveHistory\n:ArriveHistory" as ARR
 participant "arrive:Arrive" as ARR
@@ -38,9 +40,17 @@ CTRL -> COMP : vaccinationCenterStore=getVaccinationCenterStore()
 activate COMP
 deactivate
 
-CTRL -> VACS : waitingRoom=getCenterWaitingRoom(nurseVaccinationCenter)
+CTRL -> VACCDTO : phone=getPhone()
+activate VACCDTO
+deactivate VACCDTO
+
+CTRL -> VACS : vaccinationCenter=getVaccinationCenterWithPhone(phone)
 activate VACS
 deactivate VACS
+
+CTRL -> VACC : waitingRoom=vaccinationCenter.getWaitingRoom()
+activate VACC
+deactivate VACC
 
 CTRL -> ARRM : waitingRoomDto=toDto(waitingRoom)
 activate ARRM
@@ -85,7 +95,6 @@ deactivate CTRL
 deactivate NURSE
 
 participant "vaccinationCenters:\nList<VaccinationCenter>"
-participant "vaccinationCentersDto:\nList<VaccinationCenterDTO>"
 participant "waitingRoom:\nList<Appointment>"
 
 @enduml
