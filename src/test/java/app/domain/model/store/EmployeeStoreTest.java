@@ -44,4 +44,15 @@ public class EmployeeStoreTest {
     store.saveEmployee(employee);
     store.validateEmployee(employee);
   }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void ensureNullDuplicateIsWorking() {
+    store.validateEmployee(null);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void ensureDuplicateCheckInAuthFacadeIsWorking() {
+    authFacade.addUser("name", "email@email.com", "123456");
+    store.validateEmployee(employee);
+  }
 }
