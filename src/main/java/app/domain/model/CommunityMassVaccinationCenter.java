@@ -66,7 +66,7 @@ public class CommunityMassVaccinationCenter extends VaccinationCenter {
     sb.append(String.format("Slot duration: %s\n", super.getSlotDuration()));
     sb.append(String.format("Maximum vaccines per slot: %s\n", super.getMaxVacSlot()));
     sb.append(String.format("Coordinator: %s\n", super.getCoordinatorName()));
-    sb.append(String.format("Vaccine type given on the center: %s\n", getVaccineType()));
+    sb.append(String.format("Vaccine type given on the center:\n\n%s", getVaccineType()));
 
 
     return sb.toString();

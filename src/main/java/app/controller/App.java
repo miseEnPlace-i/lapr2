@@ -9,6 +9,7 @@ import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineTechnologyStore;
+import app.domain.model.store.VaccineTypeStore;
 import app.domain.shared.Constants;
 import pt.isep.lei.esoft.auth.AuthFacade;
 import pt.isep.lei.esoft.auth.UserSession;
@@ -24,6 +25,7 @@ public class App {
   private EmployeeRoleStore employeeRoleStore;
   private VaccineTechnologyStore vaccineTechnologyStore;
   private VaccinationCenterStore vaccinationCenterStore;
+  private VaccineTypeStore vacTypeStore;
 
   private App() {
     Properties props = PropertiesUtils.getProperties();
@@ -33,6 +35,7 @@ public class App {
     this.employeeRoleStore = this.company.getEmployeeRoleStore();
     this.vaccineTechnologyStore = this.company.getVaccineTechnologyStore();
     this.vaccinationCenterStore = this.company.getVaccinationCenterStore();
+    this.vacTypeStore = this.company.getVaccineTypeStore();
 
     bootstrap();
   }
@@ -77,18 +80,19 @@ public class App {
         "address", "123456789ZZ1", Constants.ROLE_RECEPTIONIST);
     this.employeeStore.saveEmployee(e);
     Employee e2 = this.employeeStore.createEmployee("Name2", "+351916919269", "teste1@teste.com",
-        "adress", "155424041ZY0", Constants.ROLE_COORDINATOR);
+        "address", "155424041ZY0", Constants.ROLE_COORDINATOR);
     this.employeeStore.saveEmployee(e2);
 
     Employee e3 = this.employeeStore.createEmployee("Name2", "+351916919269", "nurse@nurse.pt",
-        "adress", "000000000ZZ4", Constants.ROLE_NURSE);
+        "address", "000000000ZZ4", Constants.ROLE_NURSE);
     this.employeeStore.saveEmployee(e3);
 
-    VaccineType type = new VaccineType("12345", "description", "test");
+    VaccineType vacType = this.vacTypeStore.addVaccineType("12345", "COVID-19", "M_RNA_TECHNOLOGY");
+    this.vacTypeStore.saveVaccineType(vacType);
 
     VaccinationCenter vc = this.vaccinationCenterStore.createCommunityMassCenter("name", "address",
-        "sda@das.com", "+351212345678", "+351212345678", "http://www.ggg.com", "20:00", "21:00", 5,
-        5, e2, type);
+        "test@gmail.com", "+351212345678", "+351212345679", "http://www.test.com", "20:00", "21:00",
+        5, 5, e2, vacType);
     this.vaccinationCenterStore.saveVaccinationCenter(vc);
   }
 

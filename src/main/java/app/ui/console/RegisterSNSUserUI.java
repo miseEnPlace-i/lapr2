@@ -24,7 +24,7 @@ public class RegisterSNSUserUI extends RegisterUI<RegisterSNSUserController> {
     System.out.println("\nRegister SNS User UI:");
 
     String citizenCard = Utils.readLineFromConsoleWithValidation("Citizen Card (xxxxxxxxxLLx): ",
-        FieldToValidate.CITIZEN_CARD);
+        FieldToValidate.CC);
     String snsNumber = Utils.readLineFromConsoleWithValidation("SNS Number (xxxxxxxxx): ",
         FieldToValidate.SNS_NUMBER);
     String name = Utils.readLineFromConsole("Name: ");

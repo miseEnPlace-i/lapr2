@@ -29,8 +29,8 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
   public void insertData() {
     // Select center type
     System.out.println("\nSelect the Vaccination Center type: ");
-    Integer type =
-        (Integer) Utils.showAndSelectIndex(Arrays.asList(VaccinationCenterType.values()), "");
+    VaccinationCenterType type = (VaccinationCenterType) Utils
+        .showAndSelectOne(Arrays.asList(VaccinationCenterType.values()), "");
     String name = Utils.readLineFromConsole("Name: ");
     String address = Utils.readLineFromConsole("Address: ");
     String email = Utils.readLineFromConsoleWithValidation("Email (example@example.com): ",
@@ -45,8 +45,11 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
         Utils.readLineFromConsoleWithValidation("Opening hours (HH:MM): ", FieldToValidate.HOURS);
     String closHours =
         Utils.readLineFromConsoleWithValidation("Closing hours (HH:MM): ", FieldToValidate.HOURS);
-    int slotDur = Utils.readIntegerFromConsole("Slot duration (min): ");
-    int maxVac = Utils.readIntegerFromConsole("Maximum vaccines per slot: ");
+    int slotDur = Integer.parseInt(Utils.readLineFromConsoleWithValidation("Slot duration (min): ",
+        FieldToValidate.SLOT_DURATION));
+    int maxVac =
+        Integer.parseInt(Utils.readLineFromConsoleWithValidation("Maximum vaccines per slot: ",
+            FieldToValidate.MAX_VAC_PER_SLOT));
     Employee coordinator;
 
     // select coordinator
@@ -64,8 +67,8 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
       }
     } while (!flag);
 
-
-    if (type == 0) {
+    // select center type
+    if (type == VaccinationCenterType.COMMUNITY_MASS_VACCINATION_CENTER) {
       super.ctrl.createCommunityMass(name, address, email, phone, fax, website, openHours,
           closHours, slotDur, maxVac, coordinator);
     } else {

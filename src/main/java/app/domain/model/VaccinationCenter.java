@@ -150,7 +150,7 @@ public class VaccinationCenter {
    */
   private void setName(String name) {
     if (name == null || name.isEmpty()) {
-      throw new IllegalArgumentException("Name is not valid.");
+      throw new IllegalArgumentException("Name cannot be null or empty.");
     }
     this.name = name;
   }
@@ -164,7 +164,7 @@ public class VaccinationCenter {
    */
   private void setAddress(String address) {
     if (address == null || address.isEmpty()) {
-      throw new IllegalArgumentException("Address is not valid.");
+      throw new IllegalArgumentException("Address cannot be null or empty.");
     }
     this.address = address;
   }
@@ -177,7 +177,10 @@ public class VaccinationCenter {
    * @throws IllegalArgumentException if the email address is null, empty or not valid.
    */
   private void setEmail(String email) {
-    if (email == null || email.isEmpty() || !FormatVerifier.validateEmail(email)) {
+    if (email == null || email.isEmpty()) {
+      throw new IllegalArgumentException("Email cannot be null or empty.");
+    }
+    if (!FormatVerifier.validateEmail(email)) {
       throw new IllegalArgumentException("Email is not valid.");
     }
     this.email = email;
@@ -191,7 +194,10 @@ public class VaccinationCenter {
    * @throws IllegalArgumentException if the phone number is null, empty or not valid.
    */
   private void setPhoneNum(String phoneNum) {
-    if (phoneNum == null || phoneNum.isEmpty() || !FormatVerifier.validatePhoneNumber(phoneNum)) {
+    if (phoneNum == null || phoneNum.isEmpty()) {
+      throw new IllegalArgumentException("Phone number cannot be null or empty.");
+    }
+    if (!FormatVerifier.validatePhoneNumber(phoneNum)) {
       throw new IllegalArgumentException("Phone number is not valid.");
     }
     this.phoneNum = phoneNum;
@@ -205,7 +211,10 @@ public class VaccinationCenter {
    * @throws IllegalArgumentException if the fax number is null, empty or not valid.
    */
   private void setFaxNum(String faxNum) {
-    if (faxNum == null || faxNum.isEmpty() || !FormatVerifier.validateFaxNumber(faxNum)) {
+    if (faxNum == null || faxNum.isEmpty()) {
+      throw new IllegalArgumentException("Fax number cannot be null or empty.");
+    }
+    if (!FormatVerifier.validateFaxNumber(faxNum)) {
       throw new IllegalArgumentException("Fax number is not valid.");
     }
     this.faxNum = faxNum;
@@ -219,7 +228,10 @@ public class VaccinationCenter {
    * @throws IllegalArgumentException if the website address is null, empty or not valid.
    */
   private void setWebAddress(String webAddress) {
-    if (webAddress == null || webAddress.isEmpty() || !FormatVerifier.validateURL(webAddress)) {
+    if (webAddress == null || webAddress.isEmpty()) {
+      throw new IllegalArgumentException("Website address cannot be null or empty.");
+    }
+    if (!FormatVerifier.validateURL(webAddress)) {
       throw new IllegalArgumentException("Website address is not valid.");
     }
     this.webAddress = webAddress;
@@ -237,8 +249,10 @@ public class VaccinationCenter {
     int hours = Integer.parseInt(openHours[0]);
     int minutes = Integer.parseInt(openHours[1]);
 
-    if (openingHours == null || openingHours.isEmpty() || hours < 0 || hours > 24 || minutes < 0
-        || minutes > 60) {
+    if (openingHours == null || openingHours.isEmpty()) {
+      throw new IllegalArgumentException("Opening hours cannot be null or empty.");
+    }
+    if (hours < 0 || hours > 24 || minutes < 0 || minutes > 60) {
       throw new IllegalArgumentException("Opening hours is not valid.");
     }
     this.openingHours = openingHours;
@@ -256,8 +270,10 @@ public class VaccinationCenter {
     int hours = Integer.parseInt(closHours[0]);
     int minutes = Integer.parseInt(closHours[1]);
 
-    if (closingHours == null || closingHours.isEmpty() || hours < 0 || hours > 24 || minutes < 0
-        || minutes > 60) {
+    if (closingHours == null || closingHours.isEmpty()) {
+      throw new IllegalArgumentException("Closing hours cannot be null or empty.");
+    }
+    if (hours < 0 || hours > 24 || minutes < 0 || minutes > 60) {
       throw new IllegalArgumentException("Closing hours is not valid.");
     }
     this.closingHours = closingHours;
@@ -272,7 +288,7 @@ public class VaccinationCenter {
    */
   private void setSlotDuration(int slotDuration) {
     if (slotDuration <= 0) {
-      throw new IllegalArgumentException("Slot duration is not valid.");
+      throw new IllegalArgumentException("Slot duration is not valid. Enter a positive number.");
     }
     this.slotDuration = slotDuration;
   }
@@ -286,7 +302,8 @@ public class VaccinationCenter {
    */
   private void setMaxVacSlot(int maxVacSlot) {
     if (maxVacSlot <= 0) {
-      throw new IllegalArgumentException("Maximum number of vaccines per slot is not valid.");
+      throw new IllegalArgumentException(
+          "Maximum number of vaccines per slot is not valid. Enter a positive number.");
     }
     this.maxVacSlot = maxVacSlot;
   }
@@ -352,7 +369,7 @@ public class VaccinationCenter {
     if (obj == null) return false;
     if (obj == this) return false;
 
-    // For now, only email, phone number, fax number and website address should be unique for each Center
+    // For now, only email, phone number, fax number should be unique for each Center
     if (this.email.equals(center.email)) return true;
     if (this.phoneNum.equals(center.phoneNum)) return true;
     if (this.faxNum.equals(center.faxNum)) return true;
