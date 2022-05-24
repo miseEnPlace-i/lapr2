@@ -13,8 +13,8 @@ participant "dto: SNSUserDto" as DTO
 participant "user :SNSUser" as USR
 participant ":PasswordGenerator" as PWDGEN
 participant "auth :AuthFacade" as AUTH
+participant ":EmailSender" as EMAIl
 participant "userDataList :List<Array<String>>" as LIST
-
 
 activate ADM
 ADM -> UI : asks to load users from a file
@@ -123,6 +123,11 @@ activate UI
             USR_STR -> USR_STR : addSNSUser(snsUser)
             activate USR_STR
             deactivate USR_STR
+           
+            USR_STR -> EMAIl : sendEmail(email)
+      
+            activate EMAIl
+            deactivate EMAIl
 
         deactivate USR_STR
         deactivate USR_STR

@@ -1,72 +1,66 @@
 @startuml
 skinparam classAttributeIconSize 0
 
-class ApplicationPOT
-{
-  +static getInstance()
-  +getCurrentSession()
+class AuthFacade {
+  + existsUser(email)
+  + addUserWithRole(name, email, pwd, roleId)
 }
 
-class UserSession
-{
-  +getUserEmail()
+class Company {
+  - String designation
+  + getAuthFacade()
+  + getDesignation()
+  + createUser(snsNumber, name, email, birthDay, phoneNumber)
 }
 
-class Task {
-  -String reference
-  -String designation
-  -String informalDescription
-  -String technicalDescription
-  -Integer duration
-  -Double cost
-  +Task(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
+class RegisterSNSUserController {
+  + createSNSUser(snsNumber, name, birthDay, gender, phoneNumber, email)
+  + saveSNSUser(user)
 }
 
-class Category {
-  -String id
-  -String description
+class RegisterSNSUserUI { }
+
+class SNSUser {
+  - String citizenCard
+  - String snsNumber
+  - Date birthDay
+  - Char gender
+  - String phoneNumber
+  - String address
+  + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
 }
 
-class Organization {
-  -String name
-  -String VatNumber
-  -String website
-  -String phone
-  -String email
-  +Organization(name, VatNumber, webSite, phone, email, postalAddress, manager)
-  +createTask(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
-  +saveTask(task)
-  -addTask(task)
-  -validateTask(task)
+class User {
+  - String name
+  - String email
+  - String pwd
+  - String roleId
 }
 
-class Platform {
-  -String designation
-  +getCategories()
-  +getCategoryById(catId)
-  +getOrganizationByUserEmail(email)
+class SNSUserStore {
+  + createUser(name, email, pwd, roleId)
+  + validateUser(user)
+  + saveUser(user)
+  + checkDuplicates(user)
 }
 
-class CreateTaskController {
-  +getCategories()
-  +createTask(ref,designation,informalDesc,technicalDesc,duration,cost,categoryId)
-  +saveTask()
+class PasswordGenerator {
+  + generatePassword()
 }
 
-class CreateTaskUI {
+class EmailSender {}
 
-}
 
-CreateTaskUI ..> CreateTaskController
-CreateTaskController ..> Platform
-CreateTaskController ..> Category
-CreateTaskController ..> Task
-CreateTaskController ..> Organization
-CreateTaskController ..> ApplicationPOT
-CreateTaskController ..> UserSession
-Task "*" -> "1" Category : classified in
-Platform "1" --> "*" Category : defines
-Organization "1" --> "*" Task : owns
+Company ..> SNSUserStore
+Company ..> AuthFacade
+Company "1" --> "*" SNSUser : knows
+RegisterSNSUserController ..> Company
+RegisterSNSUserUI ..> RegisterSNSUserController
+SNSUser ..> User
+SNSUserStore --> AuthFacade : uses
+SNSUserStore --> PasswordGenerator : uses
+SNSUserStore --> EmailSender : uses
+SNSUserStore ..> SNSUser
 
 
 @enduml
