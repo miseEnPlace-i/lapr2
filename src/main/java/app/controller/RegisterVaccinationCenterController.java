@@ -48,7 +48,8 @@ public class RegisterVaccinationCenterController implements IRegisterController 
       String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration,
       int maxVacSlot, Employee coordinator) {
 
-    VaccineType vaccineType = this.company.getSuggestedVaccineType();
+    String vaccineTypeCode = this.company.getOngoingOutbreakVaccineTypeCode();
+    VaccineType vaccineType = company.getVaccineTypeStore().getVaccineTypeByCode(vaccineTypeCode);
 
     // creates a vaccination center instance
     this.center = vacStore.createCommunityMassCenter(name, address, emailAddress, phoneNum, faxNum,

@@ -9,7 +9,7 @@ import app.domain.model.store.EmployeeRoleStore;
 import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
 public class RegisterEmployeeControllerTest {
-  Company company = new Company("designation");
+  Company company = new Company("designation", "12345");
   private RegisterEmployeeController ctrl = new RegisterEmployeeController(company);
 
   @Before

@@ -64,7 +64,10 @@ public class ScheduleVaccineController {
    * @return the suggested vaccine type
    */
   public VaccineType getSuggestedVaccineType() {
-    return this.company.getSuggestedVaccineType();
+    VaccineType vaccineType =
+        vaccineTypeStore.getVaccineTypeByCode(company.getOngoingOutbreakVaccineTypeCode());
+
+    return vaccineType;
   }
 
   public List<VaccineTypeDTO> getListOfVaccineTypes() {

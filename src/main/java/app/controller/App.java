@@ -29,7 +29,8 @@ public class App {
 
   private App() {
     Properties props = PropertiesUtils.getProperties();
-    this.company = new Company(props.getProperty(Constants.PARAMS_COMPANY_DESIGNATION));
+    this.company = new Company(props.getProperty(Constants.PARAMS_COMPANY_DESIGNATION),
+        props.getProperty(Constants.PARAMS_ONGOING_OUTBREAK_VACCINE_TYPE_CODE));
     this.authFacade = this.company.getAuthFacade();
     this.employeeStore = this.company.getEmployeeStore();
     this.employeeRoleStore = this.company.getEmployeeRoleStore();
@@ -64,6 +65,7 @@ public class App {
         Constants.ROLE_RECEPTIONIST);
     this.employeeRoleStore.addEmployeeRole(Constants.ROLE_NURSE, Constants.ROLE_NURSE);
     this.employeeRoleStore.addEmployeeRole(Constants.ROLE_COORDINATOR, Constants.ROLE_COORDINATOR);
+
     this.vaccineTechnologyStore.addVaccineTechnology("LIVE_ATTENUATED_TECHNOLOGY");
     this.vaccineTechnologyStore.addVaccineTechnology("INACTIVATED_TECHNOLOGY");
     this.vaccineTechnologyStore.addVaccineTechnology("SUBUNIT_TECHNOLOGY");
@@ -87,7 +89,7 @@ public class App {
         "address", "000000000ZZ4", Constants.ROLE_NURSE);
     this.employeeStore.saveEmployee(e3);
 
-    VaccineType vacType = this.vacTypeStore.addVaccineType("12345", "COVID-19", "M_RNA_TECHNOLOGY");
+    VaccineType vacType = this.vacTypeStore.addVaccineType("00000", "COVID-19", "M_RNA_TECHNOLOGY");
     this.vacTypeStore.saveVaccineType(vacType);
 
     VaccinationCenter vc = this.vaccinationCenterStore.createCommunityMassCenter("name", "address",

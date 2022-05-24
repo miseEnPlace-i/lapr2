@@ -1,6 +1,5 @@
 package app.domain.model;
 
-import java.util.Properties;
 import org.apache.commons.lang3.StringUtils;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
@@ -9,8 +8,6 @@ import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineStore;
 import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.model.store.VaccineTypeStore;
-import app.domain.shared.Constants;
-import app.service.PropertiesUtils;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
 /**
@@ -23,8 +20,8 @@ import pt.isep.lei.esoft.auth.AuthFacade;
  */
 public class Company {
   private String designation;
+  private String ongoingOutbreakVaccineTypeCode;
   private AuthFacade authFacade;
-  private Properties properties;
   private EmployeeStore employeeStore;
   private EmployeeRoleStore employeeRoleStore;
   private SNSUserStore snsUserStore;
@@ -38,11 +35,15 @@ public class Company {
    *
    * @param designation the designation of the company
    */
-  public Company(String designation) {
+  public Company(String designation, String ongoingOutbreakVaccineTypeCode) {
     if (StringUtils.isBlank(designation))
       throw new IllegalArgumentException("Designation cannot be blank.");
 
+    if (ongoingOutbreakVaccineTypeCode == null)
+      throw new IllegalArgumentException("Ongoing outbreak vaccine type code cannot be null.");
+
     this.designation = designation;
+
     this.authFacade = new AuthFacade();
 
     this.employeeRoleStore = new EmployeeRoleStore(this.authFacade);
@@ -52,6 +53,8 @@ public class Company {
     this.vaccineStore = new VaccineStore();
     this.vaccineTechnologyStore = new VaccineTechnologyStore();
     this.vaccineTypeStore = new VaccineTypeStore(vaccineTechnologyStore);
+
+    this.ongoingOutbreakVaccineTypeCode = ongoingOutbreakVaccineTypeCode;
   }
 
   /**
@@ -115,10 +118,7 @@ public class Company {
     return this.vaccineTechnologyStore;
   }
 
-  public VaccineType getSuggestedVaccineType() {
-    properties = PropertiesUtils.getProperties();
-    String code = properties.getProperty(Constants.PARAMS_ONGOING_OUTBREAK_VACCINE_TYPE);
-
-    return this.vaccineTypeStore.getVaccineTypeByCode(code);
+  public String getOngoingOutbreakVaccineTypeCode() {
+    return this.ongoingOutbreakVaccineTypeCode;
   }
 }

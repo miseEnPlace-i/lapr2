@@ -8,7 +8,7 @@ import org.junit.Test;
 import app.domain.model.Company;
 
 public class RegisterSNSUserControllerTest {
-  Company company = new Company("designation");
+  Company company = new Company("designation", "12345");
   private RegisterSNSUserController ctrl = new RegisterSNSUserController(company);
 
   @Before
