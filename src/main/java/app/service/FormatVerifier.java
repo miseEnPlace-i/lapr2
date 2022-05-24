@@ -16,22 +16,11 @@ public final class FormatVerifier {
   private FormatVerifier() {}
 
   /**
-   * Validates if the given string is a citizen card number. Follows the rules for portuguese citizens cards.
+   * From a field String, returns the method that validates it.
    * 
-   * Working example: 000000000ZZ4
-   * 
-   * For reference:
-   * https://www.autenticacao.gov.pt/documents/20126/115760/Valida%C3%A7%C3%A3o+de+N%C3%BAmero+de+Documento+do+Cart%C3%A3o+de+Cidad%C3%A3o.pdf/bdc4eb37-7316-3ff4-164a-f869382b7053
-   * 
-   * @param cc The citizen card number to be verified.
-   * @return True if the cc is valid, false otherwise.
+   * @param field the field to validate
+   * @return
    */
-  public static boolean validateCitizenCard(String cc) {
-    CCFormatVerifier ccVerifier = new CCFormatVerifier();
-
-    return ccVerifier.validate(cc);
-  }
-
   public static Method getValidationMethodForField(String field) {
     Class[] argList = {String.class};
 
@@ -45,6 +34,28 @@ public final class FormatVerifier {
     } catch (Throwable e) {
       System.err.println(e);
       return null;
+    }
+  }
+
+  /**
+   * Validates if the given string is a citizen card number. Follows the rules for portuguese citizens cards.
+   * 
+   * Working example: 000000000ZZ4
+   * 
+   * For reference:
+   * https://www.autenticacao.gov.pt/documents/20126/115760/Valida%C3%A7%C3%A3o+de+N%C3%BAmero+de+Documento+do+Cart%C3%A3o+de+Cidad%C3%A3o.pdf/bdc4eb37-7316-3ff4-164a-f869382b7053
+   * 
+   * @param cc The citizen card number to be verified.
+   * @return True if the cc is valid, false otherwise.
+   */
+  public static boolean validateCitizenCard(String cc) {
+    CCFormatVerifier ccVerifier = new CCFormatVerifier();
+
+    try {
+      return ccVerifier.validate(cc);
+    } catch (IllegalArgumentException e) {
+      // System.out.println(e);
+      return false;
     }
   }
 
@@ -123,15 +134,5 @@ public final class FormatVerifier {
 
   public static boolean validateHours(String expression) {
     return expression.matches("[0-9]{2}:[0-9]{2}");
-  }
-
-  public static boolean validateSlotDuration(String expression) {
-    int number = Integer.parseInt(expression);
-    return number > 0;
-  }
-
-  public static boolean validateMaxVacPerSlot(String expression) {
-    int number = Integer.parseInt(expression);
-    return number > 0;
   }
 }

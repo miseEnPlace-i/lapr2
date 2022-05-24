@@ -4,11 +4,28 @@ skinparam classAttributeIconSize 0
 class Appointment {
   - date: Date
   - time: String
-  - sms: boolean
-  +Appointment(SNSUserNumber, date, time, center, vaccineType, sms)
+  +Appointment(SNSUserNumber, date, time, center, vaccineType)
+  +sendSMS()
+  +getVaccinationCenter()
 }
 
-class AppointmentStore {}
+class AppointmentScheduleList {
+  -appointments: List<Appointment[][]>
+  +createAppointment(date,user,vaccine)
+  +saveAppointment(appointment)
+
+  -getAppointmentDayIndex(date)
+  -getAppointmentSlotIndex(hour)
+}
+
+class Vaccine   {
+  -designation : String
+  -brand : String
+  -id : String
+  -vacType : VaccineType
+
+  +Vaccine(designation, id, brand, vacTypeId)
+}
 
 class AppointmentUI {}
 
@@ -20,10 +37,9 @@ class AppointmentController {
 class Company {
   -designation: String
   +getSuggestedVaccineType()
-  +getSNSUserStore()
   +getVaccinationCenterStore()
   +getVaccineTypeStore()
-  +getAppointmentStore()
+  +getAppointmentScheduleList()
 }
 
 class SNSUser {
@@ -33,14 +49,19 @@ class SNSUser {
   - gender: Char
   - phoneNumber: String 
   - address: String
+  - userHealthData : UserHealthData
   + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
   }
 
-class SNSUserStore {
-  + createUser(name, email, pwd, roleId)
-  + validateUser(user)
-  + saveUser(user)
-  + checkDuplicates(user)
+class UserHealthData {
+ - vaccinesTaken: List<VaccinationData>
+ +isEligibleForVaccine(vaccineType)
+}
+
+class VaccinationData {
+  - batchNumber: int
+  - nOfDose: int
+  - date: Date
 }
 
 class VaccinationCenter{
@@ -54,58 +75,74 @@ class VaccinationCenter{
   - closingHours: String
   - slotDuration: int
   - maximumVaccinesPerSlot: int
+  - createdAt: Date
+  - administeredVaccines : List<Vaccine>
   +VaccinationCenter(name,address,emailAddres,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
+  +getAdministeredVaccines()
+  +checkAvailability(date,time,vaccineType)
+  +addAppointmentToList(appointment)
 }
 
 class VaccinationCenterStore {
-+availableVaccinationCentersList: List<VaccinationCenter>
+-availableVaccinationCentersList: List<VaccinationCenter>
 +getVaccinationCenterByVaccineType(vaccineType)
-+createVaccinationCenter(centerData,coordinator)
-+validateVaccinatonCenter(center)
--checkDuplicates(center)
-+saveVaccinationCenter(center)
 }
 
-class VaccineType {
-  - code: String
-  - description: String
-  - technology: String
-  + VaccineType(code,description,technology)
-}
+class VaccineType {}
 
 class VaccineTypeStore {
-  +getVaccineTypeByCode(code)
-  +getList()
-  +addVaccineType()
-  +saveVaccineType()
+  -vaccineTypes : List<VaccineType>
+  +getVaccineTypes()
 }
 
-class Employee {
-  -id: String 
-  -name: String 
-  -email: String 
-  -phone: String 
-  -address: String 
-  -citizenCardNumber: int 
-  -roleId: String 
-  +Employee(name,email,phone,address,citizenCardNumber,roleId)
+class SMSSender {
+  +sendSMS(phoneNumber,message)
 }
+
+class VaccineTypeMapper {
++toDto(vaccineTypes)
+}
+
+class VaccinationCenterMapper {
+  +toDto(vaccinationCenters)
+}
+
+class AppointmentDto {
+  -snsUser : SNSUser
+  -vaccineType : VaccineType
+  -center : VaccinationCenter
+  -date : Calendar
+  -time : String
+  +getVaccineType()
+  +getVaccinationCenter()
+  +getDate()
+  +getTime()
+  +getSNSNumber()
+}
+
+class AppointmentMapper {}
 
 AppointmentUI ..> AppointmentController
 AppointmentController ..> Company
-Company ..> SNSUserStore
 Company ..> VaccinationCenterStore
 Company ..> VaccineTypeStore
-Company ..> AppointmentStore
-Company "1" --> "*" Employee : knows
-VaccinationCenterStore "1" -> "*" VaccinationCenter : stores
-VaccineTypeStore "1" -> "*" VaccineType : stores
-SNSUserStore "1" -> "*" SNSUser : stores
-Employee ---o VaccinationCenter : coordinator
+Company ..> AppointmentScheduleList
+VaccinationCenterStore "1" --> "*" VaccinationCenter : stores
 VaccinationCenter "1" --o "*" Appointment
 SNSUser "1" --o "*" Appointment
-VaccineType "1" --o "1" Appointment
-AppointmentStore "1" -> "*" Appointment : stores
-
+AppointmentScheduleList "1" --> "*" Appointment : stores
+VaccinationData o-- Vaccine
+VaccinationData o--  VaccinationCenter
+UserHealthData  --o SNSUser
+UserHealthData "1" -- "*" VaccinationData : stores >
+Appointment o-- VaccineType
+SMSSender <.. Appointment
+VaccineType --o Vaccine 
+VaccinationCenterStore ..> Vaccine
+AppointmentMapper ..> AppointmentDto
+AppointmentController ..> AppointmentMapper
+AppointmentController ..> VaccinationCenterMapper
+AppointmentController ..> VaccineTypeMapper 
+VaccineTypeStore --> VaccineType : stores > 
 
 @enduml

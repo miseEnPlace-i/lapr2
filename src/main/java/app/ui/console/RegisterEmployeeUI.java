@@ -61,7 +61,7 @@ public class RegisterEmployeeUI extends RegisterUI<RegisterEmployeeController> {
         FieldToValidate.PHONE_NUMBER);
     String email = Utils.readLineFromConsoleWithValidation("Email: ", FieldToValidate.EMAIL);
     String citizenCard = Utils.readLineFromConsoleWithValidation(
-        "Citizen Card Number (xxxxxxxxxLLx): ", FieldToValidate.CC);
+        "Citizen Card Number (xxxxxxxxxLLx): ", FieldToValidate.CITIZEN_CARD);
 
     super.ctrl.create(name, address, phoneNumber, email, citizenCard, this.roleId);
   }
