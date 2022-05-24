@@ -191,6 +191,15 @@ public class VaccinationCenterStore {
     return null;
   }
 
+  public VaccinationCenter getVaccinationCenterByEmail(String email) {
+    for (VaccinationCenter center : vaccinationCenters) {
+      if (center.getEmail().equals(email)) {
+        return center;
+      }
+    }
+    return null;
+  }
+
   public boolean exists(String phone) {
     // !! Refactor !!
     return !(getVaccinationCenterByPhone(phone) == null);
