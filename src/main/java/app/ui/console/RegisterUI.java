@@ -27,9 +27,14 @@ public abstract class RegisterUI<T extends IRegisterController> implements Runna
       boolean confirmed = confirmData(ctrl.stringifyData());
 
       if (confirmed) {
-        ctrl.save();
-        System.out.printf("%n%s successfully registered!", ctrl.getResourceName());
-      } else System.out.printf("%nOperation canceled! %s not registered!", ctrl.getResourceName());
+        try {
+          ctrl.save();
+        } catch (Exception e) {
+          System.out.println("\nError: " + e.getMessage());
+        }
+        System.out.printf("%n%s successfully registered!%n", ctrl.getResourceName());
+      } else
+        System.out.printf("%nOperation canceled! %s not registered!%n", ctrl.getResourceName());
     } catch (Exception e) {
       System.out.printf("%nError: %s%n", e.getMessage());
     }

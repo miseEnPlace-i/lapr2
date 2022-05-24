@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 import app.domain.model.SNSUser;
 import app.domain.shared.Constants;
-import app.service.PasswordGenerator;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
 /**
@@ -55,9 +54,7 @@ public class SNSUserStore {
    * @param snsUser
    */
   public void validateSNSUser(SNSUser snsUser) {
-    if (snsUser == null) {
-      throw new Error("SNS User is null.");
-    }
+    if (snsUser == null) throw new Error("SNS User is null.");
 
     // get the SNS User email
     String email = snsUser.getEmail();
@@ -78,7 +75,8 @@ public class SNSUserStore {
   public void saveSNSUser(SNSUser snsUser) {
     String name = snsUser.getName();
     String email = snsUser.getEmail();
-    String pwd = PasswordGenerator.generatePwd();
+    // String pwd = PasswordGenerator.generatePwd();
+    String pwd = "123456";
 
     authFacade.addUserWithRole(name, email, pwd, Constants.ROLE_SNS_USER);
 

@@ -18,6 +18,7 @@ public class ReceptionistUI extends EmployeeWithCenterUI {
     List<MenuItem> options = new ArrayList<MenuItem>();
 
     options.add(new MenuItem("Register a SNS User", new RegisterSNSUserUI()));
+    options.add(new MenuItem("Schedule a vaccine", new ScheduleVaccineReceptionistUI()));
 
     int option = 0;
     do {

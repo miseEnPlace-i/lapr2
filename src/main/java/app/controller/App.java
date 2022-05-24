@@ -61,6 +61,7 @@ public class App {
     // Added Receptionist user role & a test user with Receptionist role for testing
     // purposes
     this.authFacade.addUserRole(Constants.ROLE_ADMIN, Constants.ROLE_ADMIN);
+    this.authFacade.addUserRole(Constants.ROLE_SNS_USER, Constants.ROLE_SNS_USER);
     this.employeeRoleStore.addEmployeeRole(Constants.ROLE_RECEPTIONIST,
         Constants.ROLE_RECEPTIONIST);
     this.employeeRoleStore.addEmployeeRole(Constants.ROLE_NURSE, Constants.ROLE_NURSE);
