@@ -8,9 +8,15 @@ end note
 participant ":AuthUI" as AUTHUI
 
 activate AUTHUI
+create ":EmployeeUI" as EUI
+AUTHUI -> EUI **
 create ":SelectEmployeeVaccinationCenterUI" as UI
-AUTHUI -> UI
-AUTHUI -> UI : run
+participant ":SelectEmployeeVaccinationCenterController" as CTRL
+participant "employeeSession\n:EmployeeSession" as SESSION
+activate EUI
+EUI -> SESSION **
+EUI -> UI **
+AUTHUI -> UI : run()
 activate UI
 participant ":App" as APP
 activate NUR
@@ -19,9 +25,7 @@ UI -> APP : company=getCompany()
 activate APP
 deactivate APP
 
-participant ":SelectEmployeeVaccinationCenterController" as CTRL
-participant "employeeSession\n:EmployeeSession" as SESSION
-UI -> SESSION **
+
 UI -> CTRL ** : create(company,employeeSession)
 
 UI -> CTRL : vaccinationCenters=getVaccinationCentersList()
@@ -46,6 +50,8 @@ deactivate UI
 CTRL -> SESSION : setVaccinationCenter(vaccinationCenter)
 activate SESSION
 deactivate SESSION
+deactivate EUI
+
 
 end loop
 
@@ -57,6 +63,8 @@ deactivate NUR
 
 participant "vaccinationCenters\n:List<VaccinationCenterListDTO>" 
 participant "centerDTO\n:VaccinationCenterListDTO" 
+
+|||
 
 note over NUR
   The employee vaccination center is stored in the EmployeeSession
