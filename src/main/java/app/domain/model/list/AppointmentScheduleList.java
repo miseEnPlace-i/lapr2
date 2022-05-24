@@ -103,9 +103,8 @@ public class AppointmentScheduleList {
    * @param appointment
    */
   private void checkDuplicates(Appointment appointment) {
-    if (appointments.contains(appointment)) {
+    if (appointments.contains(appointment))
       throw new IllegalArgumentException("\nDuplicated appointment.");
-    }
-  }
 
+  }
 }

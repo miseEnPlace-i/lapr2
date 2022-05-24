@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import app.controller.App;
 import app.controller.RegisterVaccinationCenterController;
-import app.domain.model.Company;
 import app.domain.model.Employee;
 import app.domain.shared.FieldToValidate;
 import app.domain.shared.VaccinationCenterType;

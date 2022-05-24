@@ -51,6 +51,6 @@ public class ListEmployeeByRoleControllerTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void ensureListEmployeesWithInvalidRoleIsWorking() {
-    List<Employee> list = ctrl.getEmployeesWithRole("NON EXISTING ROLE");
+    ctrl.getEmployeesWithRole("NON EXISTING ROLE");
   }
 }

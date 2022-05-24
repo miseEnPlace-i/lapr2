@@ -22,7 +22,8 @@ public class ReceptionistUI extends EmployeeWithCenterUI {
 
     int option = 0;
     do {
-      System.out.printf("%nNurse Vaccination Center: %s", super.getCurrentVaccinationCenter());
+      System.out.printf("%nReceptionist Vaccination Center: %s",
+          super.getCurrentVaccinationCenter());
       option = Utils.showAndSelectIndex(options, "\n\nReceptionist Menu:");
 
       if ((option >= 0) && (option < options.size())) options.get(option).run();
