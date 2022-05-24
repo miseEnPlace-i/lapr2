@@ -3,7 +3,11 @@ package app.domain.model.store;
 import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.Employee;
+import app.domain.model.HealthCareCenter;
+import app.domain.model.CommunityMassVaccinationCenter;
 import app.domain.model.VaccinationCenter;
+import app.domain.model.WaitingRoom;
+import app.domain.model.dto.VaccinationCenterListDTO;
 
 /**
  * Vaccination Center store
@@ -13,13 +17,13 @@ import app.domain.model.VaccinationCenter;
 public class VaccinationCenterStore {
 
   // Vaccination Centers list
-  private List<VaccinationCenter> vacCenters;
+  private List<VaccinationCenter> vaccinationCenters;
 
   /**
    * Constructor for VaccinationCenterStore
    */
   public VaccinationCenterStore() {
-    this.vacCenters = new ArrayList<VaccinationCenter>();
+    this.vaccinationCenters = new ArrayList<VaccinationCenter>();
   }
 
   /**
@@ -38,12 +42,23 @@ public class VaccinationCenterStore {
    * @param coordinator the vaccination center coordinator
    * @return VaccinationCenter
    */
-  public VaccinationCenter createVaccinationCenter(String name, String address, String emailAddress,
-      String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours,
-      int slotDuration, int maxVacSlot, Employee coordinator) {
+  public VaccinationCenter createCommunityMassCenter(String name, String address,
+      String emailAddress, String phoneNum, String faxNum, String webAddress, String openingHours,
+      String closingHours, int slotDuration, int maxVacSlot, Employee coordinator) {
 
-    VaccinationCenter center = new VaccinationCenter(name, address, emailAddress, phoneNum, faxNum,
-        webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
+    CommunityMassVaccinationCenter center =
+        new CommunityMassVaccinationCenter(name, address, emailAddress, phoneNum, faxNum,
+            webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator);
+
+    return center;
+  }
+
+  public VaccinationCenter createHealthCareCenter(String name, String address, String emailAddress,
+      String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours,
+      int slotDuration, int maxVacSlot, Employee coordinator, String ages, String ags) {
+
+    HealthCareCenter center = new HealthCareCenter(name, address, emailAddress, phoneNum, faxNum,
+        webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator, ages, ags);
 
     return center;
   }
@@ -65,7 +80,7 @@ public class VaccinationCenterStore {
    * @param center the vaccination center
    */
   private void checkDuplicates(VaccinationCenter center) {
-    if (vacCenters.contains(center))
+    if (vaccinationCenters.contains(center))
       throw new IllegalArgumentException("\nDuplicated Vaccination Center.");
   }
 
@@ -75,7 +90,7 @@ public class VaccinationCenterStore {
    * @param center the vaccination center
    */
   public void saveVaccinationCenter(VaccinationCenter center) {
-    vacCenters.add(center);
+    vaccinationCenters.add(center);
   }
 
   /**
@@ -84,6 +99,41 @@ public class VaccinationCenterStore {
    * @return number of vaccination centers registered in the system
    */
   public int size() {
-    return vacCenters.size();
+    return vaccinationCenters.size();
+  }
+
+  /**
+   * @return all Vaccination Centers List
+   */
+  public List<VaccinationCenterListDTO> getVaccinationCenters() {
+    List<VaccinationCenterListDTO> centers = new ArrayList<VaccinationCenterListDTO>();
+
+    for (VaccinationCenter vaccinationCenter : vaccinationCenters) {
+      VaccinationCenterListDTO vaccinationCenterDTO =
+          new VaccinationCenterListDTO(vaccinationCenter.getName(), vaccinationCenter.getAddress(),
+              vaccinationCenter.getEmail(), vaccinationCenter.getPhone());
+
+      centers.add(vaccinationCenterDTO);
+    }
+
+    return centers;
+  }
+
+  public WaitingRoom getWaitingRoom(String phone) {
+    return getVaccinationCenterByPhone(phone).getWaitingRoom();
+  }
+
+  private VaccinationCenter getVaccinationCenterByPhone(String phone) {
+    for (VaccinationCenter center : vaccinationCenters) {
+      if (center.getPhone().equals(phone)) {
+        return center;
+      }
+    }
+    return null;
+  }
+
+  public boolean exists(String phone) {
+    // !! Refactor !!
+    return !(getVaccinationCenterByPhone(phone) == null);
   }
 }

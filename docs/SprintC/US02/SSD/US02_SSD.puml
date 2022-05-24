@@ -10,20 +10,33 @@ deactivate ":System"
 Recept -> ":System" : types requested data
 activate ":System"
 
-":System" --> Recept : shows all vaccination centers and asks to select one
+":System" --> Recept : shows suggested vaccine type and asks to accept it
 deactivate ":System"
-Recept -> ":System" : selects one vaccination center
+Recept -> ":System" : accepts or declines the suggested vaccine type
 activate ":System"
 
+opt declines the suggested vaccine type
 ":System" --> Recept : shows all vaccine types and asks to select one
 deactivate ":System"
-Recept -> ":System" : selects one vaccine type
+Recept -> ":System" : selects a vaccine type
+activate ":System"
+end
+
+":System" --> Recept: shows a list of all available vaccination centers and asks to select one
+deactivate ":System"
+Recept -> ":System" : selects a vaccination center
+activate ":System"
+
+":System" --> Recept : asks permission to send sms about the scheduled vaccine
+deactivate ":System"
+Recept -> ":System" : accepts or declines the request
 activate ":System"
 
 ":System" --> Recept : shows all data and requests confirmation
 deactivate ":System"
 Recept -> ":System" : confirms the data
 activate ":System"
+
 ":System" --> Recept : informs operation success
 deactivate ":System"
 

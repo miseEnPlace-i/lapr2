@@ -228,7 +228,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 6. Integration and Demo 
 
-(Information not available yet.)
+**A new option in the Admin menu was added.**
 
 
 # 7. Observations

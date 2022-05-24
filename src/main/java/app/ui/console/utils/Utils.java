@@ -2,12 +2,15 @@ package app.ui.console.utils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import app.domain.shared.FieldToValidate;
+import app.service.FormatVerifier;
 
 /**
  *
@@ -27,6 +30,37 @@ public class Utils {
       e.printStackTrace();
       return null;
     }
+  }
+
+  static public String readLineFromConsoleWithValidation(String prompt, FieldToValidate field) {
+    boolean valid = false;
+    String answer = "";
+
+    do {
+      try {
+        System.out.println("\n" + prompt);
+
+        InputStreamReader converter = new InputStreamReader(System.in);
+        BufferedReader in = new BufferedReader(converter);
+
+        answer = in.readLine();
+
+        Method validator = FormatVerifier.getValidationMethodForField(field.toString());
+
+        try {
+          valid = (Boolean) validator.invoke(Class.class, answer);
+        } catch (Exception e) {
+          System.out.println(e);
+        }
+      } catch (Exception e) {
+        e.printStackTrace();
+        return null;
+      }
+
+      if (!valid) System.out.printf("%s is not valid!%n", field);
+    } while (!valid);
+
+    return answer;
   }
 
   static public int readIntegerFromConsole(String prompt) {
@@ -62,7 +96,7 @@ public class Utils {
       try {
         String strDate = readLineFromConsole(prompt);
 
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
         Date date = df.parse(strDate);
 
@@ -121,11 +155,9 @@ public class Utils {
   }
 
   static public int selectsIndex(List list) {
-    String input;
-    Integer value;
+    int value = -1;
     do {
-      input = Utils.readLineFromConsole("Type your option: ");
-      value = Integer.valueOf(input);
+      value = Utils.readIntegerFromConsole("Type your option: ");
     } while (value < 0 || value > list.size());
 
     return value - 1;

@@ -1,4 +1,4 @@
-@startuml System Sequence Diagram
+@startuml US03_SSD
 autonumber
 actor "Receptionist" as Receptionist
 
@@ -9,6 +9,11 @@ activate ":System"
 deactivate ":System"
 
 Receptionist -> ":System" : types requested data
+activate ":System"
+":System" --> Receptionist : asks to select sex
+deactivate ":System"
+
+Receptionist -> ":System" : selects sex
 activate ":System"
 ":System" --> Receptionist : shows all data and requests confirmation
 deactivate ":System"

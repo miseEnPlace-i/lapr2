@@ -2,7 +2,9 @@ package app.ui.console;
 
 import java.text.ParseException;
 import java.util.List;
+import app.controller.App;
 import app.controller.RegisterNewVaccineTypeController;
+import app.domain.shared.FieldToValidate;
 import app.ui.console.utils.Utils;
 
 /**
@@ -17,7 +19,7 @@ public class RegisterNewVaccineTypeUI extends RegisterUI<RegisterNewVaccineTypeC
    * Constructor for RegisterNewVaccineTypeUI
    */
   public RegisterNewVaccineTypeUI() {
-    super(new RegisterNewVaccineTypeController());
+    super(new RegisterNewVaccineTypeController(App.getInstance().getCompany()));
   }
 
   /**
@@ -47,7 +49,8 @@ public class RegisterNewVaccineTypeUI extends RegisterUI<RegisterNewVaccineTypeC
   public void insertData() throws IllegalArgumentException, ParseException {
 
     System.out.println("\nRegister a new Vaccine type: ");
-    String code = Utils.readLineFromConsole("Code (xxxxx): ");
+    String code =
+        Utils.readLineFromConsoleWithValidation("Code (xxxxx): ", FieldToValidate.VAC_CODE);
     String designation = Utils.readLineFromConsole("Designation: ");
 
     List<String> technologyList = super.ctrl.getVaccineTechnologyList();

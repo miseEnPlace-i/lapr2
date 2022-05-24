@@ -1,5 +1,8 @@
 package app.domain.model;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
 import app.domain.shared.Constants;
@@ -13,7 +16,7 @@ public class VaccinationCenterTest {
 
   @Before
   public void setUp() {
-    coordinator = new Employee("Joana", "+351916478865", "email@email.com", "address",
+    coordinator = new Employee("00000001", "Joana", "+351916478865", "email@email.com", "address",
         "000000000ZZ4", Constants.ROLE_COORDINATOR);
   }
 
@@ -35,7 +38,7 @@ public class VaccinationCenterTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureEmptyIsNotAllowed() {
-    Employee coordinator = new Employee("", "", "", "", "", "");
+    Employee coordinator = new Employee("", "", "", "", "", "", "");
 
     new VaccinationCenter("", "", "", "", "", "", "", "", 0, 0, coordinator);
   }
@@ -121,7 +124,7 @@ public class VaccinationCenterTest {
         "vacinacaoporto@gmail.com", "+351912345678", "+351223456789",
         "https://www.centrovacinaoporto.com", "20:00", "19:00", 5, 10, this.coordinator);
 
-    assert (center != null);
+    assertNotNull(center);
   }
 
   /**
@@ -137,9 +140,7 @@ public class VaccinationCenterTest {
         "vacinacaoporto2@gmail.com", "+351912345689", "+351223456999",
         "https://www.centrovacinaoporto2.com", "20:00", "19:00", 5, 10, this.coordinator);
 
-    boolean result = center.equals(center2);
-
-    assert (result == false);
+    assertNotEquals(center, center2);
   }
 
   /**
@@ -155,9 +156,7 @@ public class VaccinationCenterTest {
         "vacinacaoporto@gmail.com", "+351912345689", "+351223456999",
         "https://www.centrovacinaoporto2.com", "20:00", "19:00", 5, 10, this.coordinator);
 
-    boolean result = center.equals(center2);
-
-    assert (result == true);
+    assertEquals(center, center2);
   }
 
   /**
@@ -173,9 +172,7 @@ public class VaccinationCenterTest {
         "vacinacaoporto2@gmail.com", "+351912345678", "+351223456999",
         "https://www.centrovacinaoporto2.com", "20:00", "19:00", 5, 10, this.coordinator);
 
-    boolean result = center.equals(center2);
-
-    assert (result == true);
+    assertEquals(center, center2);
   }
 
   /**
@@ -191,27 +188,7 @@ public class VaccinationCenterTest {
         "vacinacaoporto2@gmail.com", "+351912345678", "+351223456789",
         "https://www.centrovacinaoporto2.com", "20:00", "19:00", 5, 10, this.coordinator);
 
-    boolean result = center.equals(center2);
-
-    assert (result == true);
-  }
-
-  /**
-   * Check that that two centers with the website address are the same
-   */
-  @Test
-  public void ensureSameWebAddressEqualsTrue() {
-    VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida",
-        "vacinacaoporto@gmail.com", "+351912345688", "+351223456789",
-        "https://www.centrovacinaoporto.com", "20:00", "19:00", 5, 10, this.coordinator);
-
-    VaccinationCenter center2 = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida",
-        "vacinacaoporto2@gmail.com", "+351912345678", "+351223456799",
-        "https://www.centrovacinaoporto.com", "20:00", "19:00", 5, 10, this.coordinator);
-
-    boolean result = center.equals(center2);
-
-    assert (result == true);
+    assertEquals(center, center2);
   }
 
   /**
@@ -227,8 +204,6 @@ public class VaccinationCenterTest {
         "vacinacaoporto@gmail.com", "+351912345678", "+351223456799",
         "https://www.centrovacinaoporto.com", "20:00", "19:00", 5, 10, this.coordinator);
 
-    boolean result = center.equals(center2);
-
-    assert (result == true);
+    assertEquals(center, center2);
   }
 }

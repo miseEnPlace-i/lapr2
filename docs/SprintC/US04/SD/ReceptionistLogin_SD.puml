@@ -1,0 +1,47 @@
+@startuml
+
+participant "Receptionist" as RECEPT
+participant ":SelectEmployeeVaccinationCenterUI" as UI
+participant ":App" as APP
+participant ":SelectEmployeeVaccinationCenterController" as CTRL
+participant "empSession\n:EmployeeSession" as SESSION
+participant "company\n:Company" as COMP
+participant "vaccinationCenters\n:List<VaccinationCenterListDTO>"
+participant "centerDTO\n:VaccinationCenterListDTO"
+
+activate RECEPT
+  RECEPT -> UI : asks to select a vaccination center
+  activate UI
+    UI -> APP : company=getCompany()
+    activate APP
+    deactivate APP
+
+    UI -> SESSION ** : create()
+
+    UI -> CTRL ** : create(company, empSession)
+
+    UI -> CTRL : vaccinationCenters=getVaccinationCentersList()
+    activate CTRL
+    deactivate CTRL
+
+    RECEPT <-- UI  : lists all the available vaccination centers
+  deactivate UI
+
+  RECEPT -> UI : selects a vaccination center
+  activate UI
+
+    UI -> CTRL : selectVaccinationCenter(centerDTO, empSession)
+    activate CTRL
+
+      CTRL -> SESSION : setVaccinationCenter(vaccinationCenter)
+      activate SESSION
+      deactivate SESSION
+
+    deactivate CTRL
+
+    RECEPT <-- UI : informs operation success
+  deactivate UI
+
+deactivate RECEPT
+
+@enduml

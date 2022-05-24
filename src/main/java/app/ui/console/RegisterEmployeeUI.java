@@ -2,7 +2,9 @@ package app.ui.console;
 
 import java.text.ParseException;
 import java.util.List;
+import app.controller.App;
 import app.controller.RegisterEmployeeController;
+import app.domain.shared.FieldToValidate;
 import app.ui.console.utils.Utils;
 import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
@@ -19,7 +21,7 @@ public class RegisterEmployeeUI extends RegisterUI<RegisterEmployeeController> {
    * Constructor for RegisterEmployeeUI.
    */
   public RegisterEmployeeUI() {
-    super(new RegisterEmployeeController());
+    super(new RegisterEmployeeController(App.getInstance().getCompany()));
   }
 
   /**
@@ -55,9 +57,11 @@ public class RegisterEmployeeUI extends RegisterUI<RegisterEmployeeController> {
 
     String name = Utils.readLineFromConsole("Name: ");
     String address = Utils.readLineFromConsole("Address: ");
-    String phoneNumber = Utils.readLineFromConsole("Phone Number (+351xxxxxxxxx): ");
-    String email = Utils.readLineFromConsole("Email: ");
-    String citizenCard = Utils.readLineFromConsole("Citizen Card Number (xxxxxxxxxLLx): ");
+    String phoneNumber = Utils.readLineFromConsoleWithValidation("Phone Number (+351xxxxxxxxx): ",
+        FieldToValidate.PHONE_NUMBER);
+    String email = Utils.readLineFromConsoleWithValidation("Email: ", FieldToValidate.EMAIL);
+    String citizenCard = Utils.readLineFromConsoleWithValidation(
+        "Citizen Card Number (xxxxxxxxxLLx): ", FieldToValidate.CITIZEN_CARD);
 
     super.ctrl.create(name, address, phoneNumber, email, citizenCard, this.roleId);
   }

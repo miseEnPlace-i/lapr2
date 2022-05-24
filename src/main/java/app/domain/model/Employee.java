@@ -9,9 +9,7 @@ import app.service.CCFormatVerifier;
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
 public class Employee {
-  static int idToGenerate = 1;
-
-  int id = 0;
+  String id = "";
   String name = "";
   String phoneNumber = "";
   String email = "";
@@ -29,11 +27,9 @@ public class Employee {
    * @param citizenCard the employee citizenCard
    * @param roleId the employee roleId
    */
-  public Employee(String name, String phoneNumber, String email, String address, String citizenCard,
-      String roleId) {
-    int generatedId = generateId();
-
-    setId(generatedId);
+  public Employee(String id, String name, String phoneNumber, String email, String address,
+      String citizenCard, String roleId) {
+    this.id = id;
     setName(name);
     setPhoneNumber(phoneNumber);
     setEmail(email);
@@ -78,7 +74,7 @@ public class Employee {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append(String.format("ID: %s\n", getId()));
+    sb.append(String.format("ID: %s\n", id));
     sb.append(String.format("Name: %s\n", this.name));
     sb.append(String.format("Phone number: %s\n", this.phoneNumber));
     sb.append(String.format("Email: %s\n", this.email));
@@ -123,31 +119,6 @@ public class Employee {
    */
   public String getRoleId() {
     return roleId;
-  }
-
-  /**
-   * Generates a sequential id for the employee.
-   * 
-   * @return the generated id
-   */
-  private static int generateId() {
-    return idToGenerate;
-  }
-
-  /**
-   * Increments the id to generate by one unit. This method is only called when a new employee is saved at the Store.
-   */
-  public static void incrementId() {
-    idToGenerate++;
-  }
-
-  /**
-   * Sets the employee id.
-   * 
-   * @param id the employee id
-   */
-  private void setId(int id) {
-    this.id = id;
   }
 
   /**

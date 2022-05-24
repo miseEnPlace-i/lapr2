@@ -2,11 +2,10 @@ package app.domain.model.store;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import app.domain.model.SNSUser;
 import app.domain.shared.Constants;
-import app.service.CalendarUtils;
 import app.service.PasswordGenerator;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
@@ -14,7 +13,6 @@ import pt.isep.lei.esoft.auth.AuthFacade;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 public class SNSUserStore {
-
   // User List
   private List<SNSUser> snsUsers;
 
@@ -42,12 +40,9 @@ public class SNSUserStore {
    * @param address SNS User address
    * @return SNSUser
    */
-  public SNSUser createSNSUser(String citizenCard, String snsNumber, String name,
-      String birthDayStr, char gender, String phoneNumber, String email, String address)
+  public SNSUser createSNSUser(String citizenCard, String snsNumber, String name, Date birthDay,
+      char gender, String phoneNumber, String email, String address)
       throws IllegalArgumentException, ParseException {
-    Calendar birthDay;
-    birthDay = CalendarUtils.parse(birthDayStr);
-
     SNSUser snsUser =
         new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
 
@@ -103,6 +98,22 @@ public class SNSUserStore {
     if (snsUsers.contains(snsUser)) {
       throw new IllegalArgumentException("Duplicate SNS User.");
     }
+  }
+
+  /**
+   * Finds a SNS User by SNS Number.
+   * 
+   * @param snsNumber The SNS User Number.
+   * @return SNSUser
+   */
+  public SNSUser findSNSUserByNumber(String snsNumber) {
+    for (SNSUser snsUser : snsUsers) {
+      if (snsUser.getSnsNumber().equals(snsNumber)) {
+        return snsUser;
+      }
+    }
+
+    return null;
   }
 
   /**

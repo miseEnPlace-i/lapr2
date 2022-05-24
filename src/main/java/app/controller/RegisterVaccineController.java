@@ -16,7 +16,6 @@ import app.domain.model.store.VaccineTypeStore;
  * @author Carlos Lopes <1211277@isep.ipp.pt>
  */
 public class RegisterVaccineController implements IRegisterController {
-  private App app;
   private Company company;
   private VaccineStore vaccineStore;
   private VaccineTypeStore vaccineTypeStore;
@@ -27,9 +26,8 @@ public class RegisterVaccineController implements IRegisterController {
   /**
    * Constructor for CreateVaccineController
    */
-  public RegisterVaccineController() {
-    this.app = App.getInstance();
-    this.company = this.app.getCompany();
+  public RegisterVaccineController(Company company) {
+    this.company = company;
     this.vaccineStore = this.company.getVaccineStore();
     this.vaccineTypeStore = this.company.getVaccineTypeStore();
     this.vac = null;

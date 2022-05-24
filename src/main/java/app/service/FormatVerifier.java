@@ -1,5 +1,8 @@
 package app.service;
 
+import java.lang.reflect.Method;
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * Format Verifier with all the rules for the application.
  * 
@@ -13,6 +16,28 @@ public final class FormatVerifier {
   private FormatVerifier() {}
 
   /**
+   * From a field String, returns the method that validates it.
+   * 
+   * @param field the field to validate
+   * @return
+   */
+  public static Method getValidationMethodForField(String field) {
+    Class[] argList = {String.class};
+
+    String methodName = "validate";
+
+    String fieldName = StringUtils.join(field.split(" "), "");
+    methodName += fieldName;
+
+    try {
+      return Class.forName("app.service.FormatVerifier").getMethod(methodName, argList);
+    } catch (Throwable e) {
+      System.err.println(e);
+      return null;
+    }
+  }
+
+  /**
    * Validates if the given string is a citizen card number. Follows the rules for portuguese citizens cards.
    * 
    * Working example: 000000000ZZ4
@@ -23,10 +48,15 @@ public final class FormatVerifier {
    * @param cc The citizen card number to be verified.
    * @return True if the cc is valid, false otherwise.
    */
-  public static boolean validateCC(String cc) {
+  public static boolean validateCitizenCard(String cc) {
     CCFormatVerifier ccVerifier = new CCFormatVerifier();
 
-    return ccVerifier.validate(cc);
+    try {
+      return ccVerifier.validate(cc);
+    } catch (IllegalArgumentException e) {
+      // System.out.println(e);
+      return false;
+    }
   }
 
   /**
@@ -88,5 +118,21 @@ public final class FormatVerifier {
    */
   public static boolean validateSNSNumber(String expression) {
     return expression.matches("[0-9]{9}");
+  }
+
+  /**
+   * Validates if the given string is a valid Vaccine Code.
+   * 
+   * The only rule is that the expression must be composed by 5 digits
+   * 
+   * @param expression The expression to be validated.
+   * @return True if the expression is a valid Vaccine Code, false otherwise.
+   */
+  public static boolean validateVaccineCode(String expression) {
+    return expression.matches("[0-9]{5}");
+  }
+
+  public static boolean validateHours(String expression) {
+    return expression.matches("[0-9]{2}:[0-9]{2}");
   }
 }
