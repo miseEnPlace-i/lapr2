@@ -63,30 +63,14 @@ public class AppointmentScheduleList {
   }
 
   /**
-   * Creates a new appointment.
-   */
-  public Appointment addAppointment(String snsNumber, Calendar date) {
-    // TODO: refactor broke everything 👍
-    // TODO: validations once more in the attack
-    // Appointment appointment = new Appointment(snsNumber, date);
-    // appointments.add(appointment);
-    // return appointment;
-    return null;
-  }
-
-
-  /**
    * Validates an appointment.
    * 
    * @param appointmentDto
    */
   public void validateAppointment(Appointment appointment) {
-    if (appointment == null) {
-      throw new IllegalArgumentException("Appointment is not valid.");
-    }
+    if (appointment == null) throw new IllegalArgumentException("Appointment is not valid.");
 
-    // TODO FIX
-    // checkDuplicates(appointment);
+    checkDuplicates(appointment);
   }
 
   /**
@@ -119,10 +103,9 @@ public class AppointmentScheduleList {
    * @param appointment
    */
   private void checkDuplicates(Appointment appointment) {
-    // TODO FIX
-    // if (appointments.contains(appointment)) {
-    // throw new IllegalArgumentException("\nDuplicated appointment.");
-    // }
+    if (appointments.contains(appointment)) {
+      throw new IllegalArgumentException("\nDuplicated appointment.");
+    }
   }
 
 }
