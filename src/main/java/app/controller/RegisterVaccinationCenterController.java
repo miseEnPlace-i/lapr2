@@ -46,7 +46,9 @@ public class RegisterVaccinationCenterController implements IRegisterController 
    */
   public void createCommunityMass(String name, String address, String emailAddress, String phoneNum,
       String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration,
-      int maxVacSlot, Employee coordinator, VaccineType vaccineType) {
+      int maxVacSlot, Employee coordinator) {
+
+    VaccineType vaccineType = this.company.getSuggestedVaccineType();
 
     // creates a vaccination center instance
     this.center = vacStore.createCommunityMassCenter(name, address, emailAddress, phoneNum, faxNum,

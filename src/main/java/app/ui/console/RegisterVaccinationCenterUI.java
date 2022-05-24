@@ -18,8 +18,6 @@ import app.ui.console.utils.Utils;
  * @author André Barros <1211299@isep.ipp.pt>
  */
 public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationCenterController> {
-  private Company company;
-
   /**
    * VaccinationCenterUI Constructor
    */
@@ -47,7 +45,7 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
         Utils.readLineFromConsoleWithValidation("Opening hours (HH:MM): ", FieldToValidate.HOURS);
     String closHours =
         Utils.readLineFromConsoleWithValidation("Closing hours (HH:MM): ", FieldToValidate.HOURS);
-    int slotDur = Utils.readIntegerFromConsole("Slot duration: ");
+    int slotDur = Utils.readIntegerFromConsole("Slot duration (min): ");
     int maxVac = Utils.readIntegerFromConsole("Maximum vaccines per slot: ");
     Employee coordinator;
 
@@ -69,7 +67,7 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
 
     if (type == 0) {
       super.ctrl.createCommunityMass(name, address, email, phone, fax, website, openHours,
-          closHours, slotDur, maxVac, coordinator, this.company.getSuggestedVaccineType());
+          closHours, slotDur, maxVac, coordinator);
     } else {
       String ages = Utils.readLineFromConsole("AGES: ");
       String ars = Utils.readLineFromConsole("ARS: ");
