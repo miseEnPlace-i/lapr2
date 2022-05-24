@@ -3,11 +3,13 @@ package app.domain.model.list;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import app.controller.App;
 import app.domain.model.Appointment;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
 import app.domain.model.dto.AppointmentWithNumberDTO;
 import app.domain.model.dto.AppointmentWithoutNumberDTO;
+import app.service.Slots;
 
 /**
  * AppointmentStore class.
@@ -17,12 +19,19 @@ import app.domain.model.dto.AppointmentWithoutNumberDTO;
  */
 public class AppointmentScheduleList {
   private List<Appointment[][]> appointments;
+  private int slotsPerDay;
+  private VaccinationCenter center;
+
 
   /**
    * Constructor for AppointmentStore.
    */
   public AppointmentScheduleList() {
+    center = App.getInstance().getCompany().getVaccinationCenterStore()
+        .getVaccinationCenterByEmail("test@gmail.com");
+    slotsPerDay = Slots.calculateSlots(center);
     this.appointments = new ArrayList<Appointment[][]>();
+
   }
 
   /**
@@ -40,6 +49,8 @@ public class AppointmentScheduleList {
 
     Appointment appointment = new Appointment(snsNumber, date, center, vacType, sms);
 
+    saveAppointment(appointment);
+
     return appointment;
   }
 
@@ -54,11 +65,11 @@ public class AppointmentScheduleList {
     return appointment;
   }
 
-  private int getAppointmentDayIndex(Calendar date) {
+  private int getAppointmentDayIndex() {
     return 0;
   }
 
-  private int getAppointmentSlotIndex(Appointment appointment) {
+  private int getAppointmentSlotIndex() {
     return 0;
   }
 
@@ -93,8 +104,10 @@ public class AppointmentScheduleList {
    */
   public void saveAppointment(Appointment appointment) {
     validateAppointment(appointment);
+    int dayIndex = getAppointmentDayIndex();
+    int slotIndex = getAppointmentSlotIndex();
 
-    // appointments.add(appointment);
+    appointments = appointments.add();
   }
 
   /**
