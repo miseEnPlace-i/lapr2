@@ -30,6 +30,14 @@ public class VaccineType {
     return code;
   }
 
+  public String getDescription() {
+    return description;
+  }
+
+  public String getTechnology() {
+    return technology;
+  }
+
   public boolean hasCode(String code) {
     return this.code.equals(code);
   }
