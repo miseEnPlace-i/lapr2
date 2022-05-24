@@ -96,8 +96,8 @@ n/a
 
 | Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
 |:-------------  |:--------------------- |:------------|:---------------------------- |
-| Step 1  		 |	... interacting with the actor? | UploadUserFromFileUI   |  Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.           |
-| 			  		 |	... coordinating the US? | RegisterSNSUserController | Controller                             |
+| Step 1  		 |	... interacting with the actor? | UploadUsersFromFileUI   |  Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.           |
+| 			  		 |	... coordinating the US? | UploadUsersFromFileController | Controller                             |
 | Step 2  		 |							 |             |                              |
 | Step 3  		 |	...saving the inputted data? | CSVReader  | IE: owns the data.  |
 |  		 |	...validate CSV path? | CSVReader  | IE: owns the data.  |

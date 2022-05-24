@@ -3,13 +3,13 @@ autonumber
 'hide footbox
 actor "Administrator" as ADM
 
-participant ":UploadUserFromFileUI" as UI
-participant ":RegisterSNSUserController" as CTRL
+participant ":UploadUsersFromFileUI" as UI
+participant ":UploadUsersFromFileController" as CTRL
 participant "csvR:CSVReader" as CSVR
 participant "userSt :SNSUserStore" as USR_STR
 participant "comp :Company" as COMP
-participant "mapper: SNSUserMapper" as MAPPER
-participant "dto: SNSUserDto" as DTO
+participant "mapper: UserMapper" as MAPPER
+participant "dto: UserDto" as DTO
 participant "user :SNSUser" as USR
 participant ":PasswordGenerator" as PWDGEN
 participant "auth :AuthFacade" as AUTH
@@ -55,10 +55,10 @@ deactivate UI
 ADM -> UI : confirms action
 activate UI
 
-    UI -> CTRL : csvReader.readAndUpload()
+    UI -> CTRL : readAndUpload()
     activate CTRL
         loop for each SNSUser regist
-        CTRL -> CSVR : userDataList = csvReader.readSNSUserLineData()
+        CTRL -> CSVR : userDataList = readSNSUsersData()
         activate CSVR
             
         deactivate CSVR
@@ -97,14 +97,14 @@ activate UI
             USR_STR -> USR_STR : saveSNSUser(snsUser)
             activate USR_STR
 
-                USR_STR -> MAPPER : snsUserDto = toDto(snsUser)
+                USR_STR -> MAPPER : userDto = toDto(snsUser)
                 activate MAPPER
 
-                    MAPPER -> USR : name = snsUser.getName()
+                    MAPPER -> USR : name = getName()
                     activate USR
                     deactivate USR
 
-                    MAPPER -> USR : email = snsUser.getEmail()
+                    MAPPER -> USR : email = getEmail()
                     activate USR
                     deactivate USR
 

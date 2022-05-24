@@ -8,17 +8,16 @@ class AuthFacade {
 
 class Company {
   - String designation
+  + getSNSUserStore()
   + getAuthFacade()
-  + getDesignation()
-  + createUser(snsNumber, name, email, birthDay, phoneNumber)
 }
 
-class RegisterSNSUserController {
-  + createSNSUser(snsNumber, name, birthDay, gender, phoneNumber, email)
-  + saveSNSUser(user)
+class UploadUsersFromFileController {
+  + createCsvReader()
+  + readAndUpload()
 }
 
-class RegisterSNSUserUI { }
+class UploadUsersFromFileUI { }
 
 class SNSUser {
   - String citizenCard
@@ -27,40 +26,53 @@ class SNSUser {
   - Char gender
   - String phoneNumber
   - String address
-  + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
-}
-
-class User {
-  - String name
-  - String email
-  - String pwd
-  - String roleId
 }
 
 class SNSUserStore {
-  + createUser(name, email, pwd, roleId)
-  + validateUser(user)
-  + saveUser(user)
-  + checkDuplicates(user)
+  + createSNSUser(name, email, pwd, roleId)
+  + validateSNSUser(snsUser)
+  + saveSNSUser(snsUser)
+  + checkDuplicates(snsUser)
+  + registListOfUsers(userDataList)
+  + addSNSUser(snsUser)
 }
 
 class PasswordGenerator {
   + generatePassword()
 }
 
-class EmailSender {}
+class EmailSender {
+  + sendEmail(email)
+}
 
+class CSVReader {
+  - String filePathName
+
+  + readSNSUsersData()
+  + validatePath()
+  + validateFile()
+  + getFileSeparator()
+}
+
+class UserMapper{
+  + toDto(snsUser)
+}
+
+class UserDto{
+}
 
 Company ..> SNSUserStore
 Company ..> AuthFacade
 Company "1" --> "*" SNSUser : knows
-RegisterSNSUserController ..> Company
-RegisterSNSUserUI ..> RegisterSNSUserController
-SNSUser ..> User
+UploadUsersFromFileController ..> Company
+UploadUsersFromFileUI ..> UploadUsersFromFileController
+UploadUsersFromFileController --> CSVReader : uses
 SNSUserStore --> AuthFacade : uses
 SNSUserStore --> PasswordGenerator : uses
 SNSUserStore --> EmailSender : uses
 SNSUserStore ..> SNSUser
+SNSUserStore --> UserMapper : user
+UserMapper --> UserDto : converts to
 
 
 @enduml
