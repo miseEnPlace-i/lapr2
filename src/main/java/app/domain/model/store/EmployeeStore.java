@@ -3,6 +3,7 @@ package app.domain.model.store;
 import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.Employee;
+import app.service.PasswordGenerator;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
 /**
@@ -88,8 +89,7 @@ public class EmployeeStore {
     String name = employee.getName();
     String email = employee.getEmail();
     String roleId = employee.getRoleId();
-    // String password = PasswordGenerator.generatePwd();
-    String password = "123456";
+    String password = PasswordGenerator.generatePwd();
 
     this.authFacade.addUserWithRole(name, email, password, roleId);
 
