@@ -59,6 +59,10 @@ class UserMapper{
 }
 
 class UserDto{
+  + name
+  + email
+  + password 
+  + roleId
 }
 
 Company ..> SNSUserStore
