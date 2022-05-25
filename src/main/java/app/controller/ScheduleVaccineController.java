@@ -46,9 +46,9 @@ public class ScheduleVaccineController implements IRegisterController {
    * 
    * @param dto the appointment dto, containing all the information about the appointment
    */
-  public void createAppointment(AppointmentWithNumberDTO appointment) {
-    this.appointmentSchedule = appointment.getCenter().getAppointmentList();
-    appointmentSchedule.create(appointment);
+  public void createAppointment(AppointmentWithNumberDTO appointmentDto) {
+    this.appointmentSchedule = appointmentDto.getCenter().getAppointmentList();
+    appointment = appointmentSchedule.create(appointmentDto);
   }
 
   public void createAppointment(AppointmentWithoutNumberDTO dto) {
