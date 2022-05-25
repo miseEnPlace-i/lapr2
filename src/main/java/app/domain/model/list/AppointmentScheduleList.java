@@ -43,10 +43,10 @@ public class AppointmentScheduleList {
   }
 
   private void listVaccinationSchedule(Appointment[][] list) {
-    for (Appointment[] appointments : list) {
-      for (Appointment appointment : appointments) {
+    for (int i = 0; i < list.length; i++) {
+      for (int j = 0; j < list[0].length; j++) {
         System.out.print("[ ");
-        if (appointment != null) System.out.println("x");
+        if (list[i][j] != null) System.out.println("x");
         System.out.print(" ]");
       }
     }
