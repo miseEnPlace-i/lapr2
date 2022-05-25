@@ -40,6 +40,9 @@ public class RegisterSNSUserArrivalController implements IRegisterController {
   @Override
   public void save() {
     this.waitingRoom.saveArrival(this.arrival);
+
+    // DEBUG: print the waiting room
+    System.out.println(this.waitingRoom);
   }
 
   @Override

@@ -87,17 +87,17 @@ public class App {
         Constants.ROLE_ADMIN);
 
     SNSUser user = this.snsUserStore.createSNSUser("000000000ZZ4", "123456789", "name", new Date(),
-        'M', "+351212345678", "t@t.com", "address");
+        'M', "+351212345678", "s@user.com", "address");
     this.snsUserStore.saveSNSUser(user);
 
-    Employee e = this.employeeStore.createEmployee("Name", "+351916919169", "teste@teste.com",
+    Employee e = this.employeeStore.createEmployee("Name", "+351916919169", "r@user.com",
         "address", "123456789ZZ1", Constants.ROLE_RECEPTIONIST);
     this.employeeStore.saveEmployee(e);
-    Employee e2 = this.employeeStore.createEmployee("Name2", "+351916919269", "teste1@teste.com",
+    Employee e2 = this.employeeStore.createEmployee("Name2", "+351916919269", "c@user.com",
         "address", "155424041ZY0", Constants.ROLE_COORDINATOR);
     this.employeeStore.saveEmployee(e2);
 
-    Employee e3 = this.employeeStore.createEmployee("Name2", "+351916919269", "nurse@nurse.pt",
+    Employee e3 = this.employeeStore.createEmployee("Name2", "+351916919269", "n@user.com",
         "address", "000000000ZZ4", Constants.ROLE_NURSE);
     this.employeeStore.saveEmployee(e3);
 

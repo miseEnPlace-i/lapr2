@@ -32,4 +32,17 @@ public class WaitingRoom implements Iterable<Arrival> {
   public void saveArrival(Arrival arrival) {
     waitingRoom.add(arrival);
   }
+
+  /**
+   * Prints the waiting room as a string
+   */
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("\nWaiting Room:");
+    for (Arrival arrival : waitingRoom) {
+      sb.append("\n\t" + arrival.toString());
+    }
+    return sb.toString();
+  }
+
 }
