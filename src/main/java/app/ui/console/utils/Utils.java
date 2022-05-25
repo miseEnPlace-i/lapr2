@@ -7,8 +7,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import app.domain.shared.FieldToValidate;
 import app.service.FormatVerifier;
 
@@ -72,7 +70,8 @@ public class Utils {
 
         return value;
       } catch (NumberFormatException ex) {
-        Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
+        System.out.println("Invalid input! Please try again.\n");
+        // Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
       }
     } while (true);
   }
@@ -86,7 +85,8 @@ public class Utils {
 
         return value;
       } catch (NumberFormatException ex) {
-        Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
+        System.out.println("Invalid input! Please try again.\n");
+        // Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
       }
     } while (true);
   }
@@ -102,7 +102,8 @@ public class Utils {
 
         return date;
       } catch (ParseException ex) {
-        Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
+        System.out.println("Invalid input! Please try again.\n");
+        // Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
       }
     } while (true);
   }

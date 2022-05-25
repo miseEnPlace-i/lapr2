@@ -18,10 +18,13 @@ public class ReceptionistUI extends EmployeeWithCenterUI {
     List<MenuItem> options = new ArrayList<MenuItem>();
 
     options.add(new MenuItem("Register a SNS User", new RegisterSNSUserUI()));
+    options.add(new MenuItem("Schedule a vaccine", new ScheduleVaccineReceptionistUI()));
+    options.add(new MenuItem("Register an Arrival", new RegisterSNSUserArrivalUI(super.getEmployeeSession().getVaccinationCenter())));
 
     int option = 0;
     do {
-      System.out.printf("%nNurse Vaccination Center: %s", super.getCurrentVaccinationCenter());
+      System.out.printf("%nReceptionist Vaccination Center: %s",
+          super.getCurrentVaccinationCenter());
       option = Utils.showAndSelectIndex(options, "\n\nReceptionist Menu:");
 
       if ((option >= 0) && (option < options.size())) options.get(option).run();

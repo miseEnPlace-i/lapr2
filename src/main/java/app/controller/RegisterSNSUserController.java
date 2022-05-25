@@ -5,6 +5,7 @@ import java.util.Date;
 import app.domain.model.Company;
 import app.domain.model.SNSUser;
 import app.domain.model.store.SNSUserStore;
+import pt.isep.lei.esoft.auth.AuthFacade;
 
 /**
  * Register SNS User Controller
@@ -13,6 +14,7 @@ import app.domain.model.store.SNSUserStore;
  */
 public class RegisterSNSUserController implements IRegisterController {
   private Company company;
+  private AuthFacade authFacade;
   private SNSUserStore store;
   private SNSUser snsUser;
 
@@ -21,6 +23,7 @@ public class RegisterSNSUserController implements IRegisterController {
    */
   public RegisterSNSUserController(Company company) {
     this.company = company;
+    this.authFacade = company.getAuthFacade();
     this.store = this.company.getSNSUserStore();
     this.snsUser = null;
   }
@@ -46,11 +49,18 @@ public class RegisterSNSUserController implements IRegisterController {
 
     // validate the SNS User
     store.validateSNSUser(snsUser);
+
+    if (authFacade.existsUser(snsUser.getEmail()))
+      throw new IllegalArgumentException("Email already in use.");
   }
 
   @Override
   public void save() {
     store.saveSNSUser(this.snsUser);
+
+    // TODO: send password email
+    // EmailSender emailSender = new EmailSender();
+    // emailSender.sendPasswordEmail(email, pwdStr);
   }
 
   @Override

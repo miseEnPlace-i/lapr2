@@ -6,13 +6,14 @@ actor "Receptionist" as RECEPT
 participant ":RegisterSNSUserArrivalUI" as UI
 participant ":RegisterSNSUserArrivalController" as CTRL
 participant "comp:Company" as COMP
-participant "suStore:SNSUserStore" as SUSTORE
+participant "snsStore:SNSUserStore" as SUSTORE
 participant "snsUser:SNSUser" as SNSUSER
 participant "center:VaccinationCenter" as CENTER
-participant "aptStore:AppointmentStore" as APTSTORE
+participant "appointments:AppointmentStore" as APPTS
 participant "apt:Appointment" as APT
+participant "Mapper<Calendar, Appointment[][]>" as MAPPER
+participant "waitingRoomList:WaitingRoomList" as WRLST
 participant "arrival:Arrival" as ARRIVAL
-participant "wrLst:WaitingRoomList" as WRLST
 
 activate RECEPT
   RECEPT -> UI : starts to register the SNS User arrival to the vaccination center
@@ -23,56 +24,79 @@ activate RECEPT
 
   RECEPT -> UI : types the requested data
   activate UI
-  
-  ' RECEPT <-- UI : asks to select the vaccination center
-  ' deactivate UI
-
-  ' RECEPT -> UI : selects the vaccination center
-  ' activate UI
     
-    UI -> CTRL** : create(company)
+    UI -> CTRL** : create(company, center)
 
     UI -> CTRL : findSNSUserByNumber(snsNumber)
     activate CTRL
 
-      CTRL -> COMP : suStore = getSNSUserStore()
+      CTRL -> COMP : snsStore = getSNSUserStore()
       activate COMP
       deactivate COMP
 
-      CTRL -> SUSTORE : suStore.findSNSUser(snsNumber)
+      CTRL -> SUSTORE : findSNSUser(snsNumber)
       activate SUSTORE
-        loop for each snsUser
-          SUSTORE -> SNSUSER : b = snsUser.hasSNSNumber(snsNumber)
+        ' loop for each snsUser
+        loop while b is false
+          SUSTORE -> SNSUSER : b = hasSNSNumber(snsNumber)
           activate SNSUSER
-          alt b == true
-            SUSTORE <-- SNSUSER : return snsUser
-            deactivate SNSUSER
-          end
+          ' alt b == true
+            ' SUSTORE <-- SNSUSER : return snsUser
+          deactivate SNSUSER
+          ' end
         end
       deactivate SUSTORE
 
     deactivate CTRL
 
-    UI -> CTRL : findSNSUserAppointment(snsNumber)
+    UI -> CTRL : findSNSUserAppointment()
     activate CTRL
 
-      CTRL -> CENTER : aptStore = getAppointmentStore()
+      CTRL -> CENTER : appointments = getAppointmentList()
       activate CENTER
       deactivate CENTER
 
-      CTRL -> APTSTORE : apt = findAppointment(snsNumber)
-      activate APTSTORE
+      CTRL -> SNSUSER : snsNumber = getSnsNumber()
+      activate SNSUSER
+      deactivate SNSUSER
 
-        loop for each appointment
-          APTSTORE -> APT : b = hasSNSNumber(snsNumber) && isInTheNextSlot()
+      CTRL -> APPTS : appointment = hasAppointmentToday(snsNumber)
+      activate APPTS
+
+        note right of APPTS
+          today is an instance of Calendar
+        end note
+        APPTS -> APPTS : key = generateKeyFromDate(today)
+        
+        APPTS -> MAPPER : get(key)
+        activate MAPPER
+        deactivate MAPPER
+
+        ' loop for each appointment
+        loop while b is false
+          APPTS -> APT : b = hasSNSNumber(snsNumber)
           activate APT
-          alt b == true
-            APTSTORE <-- APT : return apt
-            deactivate APT
-          end
+          ' alt b == true
+            ' APPTS <-- APT : return apt
+          deactivate APT
+          ' end
         end
 
-      deactivate APTSTORE
+      deactivate APPTS
+
+    deactivate CTRL
+
+    UI -> CTRL : create()
+    activate CTRL
+
+      CTRL -> CENTER : waitingRoomList = getWaitingRoomList()
+      activate CENTER
+      deactivate CENTER
+
+      CTRL -> WRLST : createArrival(snsNumber)
+      activate WRLST
+        WRLST -> ARRIVAL** : create(snsUser)
+      deactivate WRLST
 
     deactivate CTRL
   
@@ -84,7 +108,6 @@ activate RECEPT
 
     UI -> CTRL : confirmAppointment(apt)
     activate CTRL
-      CTRL -> ARRIVAL** : create(snsUser, apt)
 
       CTRL -> WRLST : add(arrival)
       activate WRLST

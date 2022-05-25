@@ -31,7 +31,8 @@ public class RegisterSNSUserUI extends RegisterUI<RegisterSNSUserController> {
     Date birthDay = Utils.readDateFromConsole("Birthday (dd/MM/yyyy): ");
     String phoneNumber = Utils.readLineFromConsoleWithValidation("Phone Number (+351xxxxxxxxx): ",
         FieldToValidate.PHONE_NUMBER);
-    String email = Utils.readLineFromConsoleWithValidation("Email: ", FieldToValidate.EMAIL);
+    String email = Utils.readLineFromConsoleWithValidation("Email (example@example.com): ",
+        FieldToValidate.EMAIL);
     String address = Utils.readLineFromConsole("Address: ");
     char gender = 'm';
 

@@ -1,0 +1,64 @@
+@startuml
+
+actor "Receptionist / Nurse" as EMP
+participant ":AuthUI" as AUTHUI
+participant ":SelectEmployeeVaccinationCenterUI" as UI
+participant ":App" as APP
+participant ":SelectEmployeeVaccinationCenterController" as CTRL
+participant "empSession\n:EmployeeSession" as SESSION
+participant "company\n:Company" as COMP
+participant "vaccinationCenters\n:List<VaccinationCenterListDTO>"
+participant "centerDTO\n:VaccinationCenterListDTO"
+
+activate AUTHUI
+  AUTHUI -> UI**
+
+  note over EMP
+    after logging in successfully
+  end note
+
+  AUTHUI -> UI : run()
+  activate UI
+    UI -> APP : company = getCompany()
+    activate APP
+    deactivate APP
+
+    UI -> SESSION**
+
+    UI -> CTRL** : create(company, employeeSession)
+
+  activate EMP
+
+    UI -> CTRL : vaccinationCenters=getVaccinationCentersList()
+    activate CTRL
+    deactivate CTRL
+
+loop while valid == false
+
+    UI -> SESSION : valid = hasCenter()
+    activate SESSION
+    deactivate SESSION
+
+    EMP <-- UI : lists all avaliable centers
+  deactivate UI
+
+  EMP -> UI : selects a vaccination center
+  activate UI
+
+    UI -> CTRL : selectVaccinationCenter(centerDTO, employeeSession)
+    activate CTRL
+
+      CTRL -> SESSION : setVaccinationCenter(centerDTO)
+      activate SESSION
+      deactivate SESSION
+
+    deactivate CTRL
+
+  deactivate UI
+
+end
+
+  deactivate EMP
+deactivate AUTHUI
+
+@enduml

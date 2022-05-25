@@ -14,7 +14,7 @@ import pt.isep.lei.esoft.auth.domain.model.UserRole;
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 public class ListEmployeeByRoleControllerTest {
-  Company company = new Company("designation");
+  Company company = new Company("designation", "12345");
   private ListEmployeesByRoleController ctrl = new ListEmployeesByRoleController(company);
 
   @Before
@@ -51,6 +51,6 @@ public class ListEmployeeByRoleControllerTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void ensureListEmployeesWithInvalidRoleIsWorking() {
-    List<Employee> list = ctrl.getEmployeesWithRole("NON EXISTING ROLE");
+    ctrl.getEmployeesWithRole("NON EXISTING ROLE");
   }
 }

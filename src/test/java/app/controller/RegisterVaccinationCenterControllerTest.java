@@ -6,14 +6,17 @@ import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.Company;
 import app.domain.model.Employee;
+import app.domain.model.VaccineType;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
+import app.domain.model.store.VaccineTechnologyStore;
+import app.domain.model.store.VaccineTypeStore;
 
 /**
  * @author André Barros <1211299@isep.ipp.pt>
  */
 public class RegisterVaccinationCenterControllerTest {
-  Company company = new Company("designation");
+  Company company = new Company("designation", "12345");
   RegisterVaccinationCenterController controller = new RegisterVaccinationCenterController(company);
   String centerName = "Vaccination Center";
   Employee coordinator;
@@ -26,6 +29,14 @@ public class RegisterVaccinationCenterControllerTest {
     EmployeeRoleStore roleStore = company.getEmployeeRoleStore();
     roleStore.addEmployeeRole("COORDINATOR", "COORDINATOR");
 
+    VaccineTechnologyStore vaccineTechnologyStore = company.getVaccineTechnologyStore();
+    vaccineTechnologyStore.addVaccineTechnology("TEST_TECHNOLOGY");
+
+    VaccineTypeStore vaccineTypeStore = company.getVaccineTypeStore();
+    VaccineType vacType =
+        vaccineTypeStore.addVaccineType("12345", "description", "TEST_TECHNOLOGY");
+    vaccineTypeStore.saveVaccineType(vacType);
+
     EmployeeStore employeeStore = company.getEmployeeStore();
 
     coordinator = employeeStore.createEmployee("Joana", "+351916478865", "email@email.com",
@@ -36,7 +47,7 @@ public class RegisterVaccinationCenterControllerTest {
   /**
    * To string method for tests purpose
    */
-  public String toString() {
+  public String getCommunityMassVaccinationCenterReferenceString() {
     StringBuilder sb = new StringBuilder();
     sb.append("Community Mass Vaccination Center data:\n");
     sb.append(String.format("\nName: %s\n", "name"));
@@ -50,6 +61,8 @@ public class RegisterVaccinationCenterControllerTest {
     sb.append(String.format("Slot duration: %s\n", "5"));
     sb.append(String.format("Maximum vaccines per slot: %s\n", "5"));
     sb.append(String.format("Coordinator: %s\n", "Joana"));
+    sb.append(String.format("Vaccine type given on the center:\n\n%s\n",
+        "Vaccine type specifications:\nCode: 12345\nDescription: description\nTechnology: TEST_TECHNOLOGY"));
 
     return sb.toString();
   }
@@ -57,7 +70,7 @@ public class RegisterVaccinationCenterControllerTest {
   /**
    * To string method for tests purpose
    */
-  public String toString2() {
+  public String getHealthCareCenterReferenceString() {
     StringBuilder sb = new StringBuilder();
     sb.append("Health Care Center data:\n");
     sb.append(String.format("\nName: %s\n", "name"));
@@ -114,7 +127,7 @@ public class RegisterVaccinationCenterControllerTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureEmptyValuesNotAllowed() {
-    controller.createCommunityMass("", "", "", "", "", "", "", "", 0, 0, coordinator);
+    controller.createCommunityMass("", "", "", "", "", "", "", "", 0, 0, null);
   }
 
   /**
@@ -285,8 +298,8 @@ public class RegisterVaccinationCenterControllerTest {
    * Check that StringifyData method is working properly
    */
   @Test
-  public void ensureStringifyDataWorking() {
-    String center = toString();
+  public void ensureStringifyCommunityMassVaccinationCenterIsWorking() {
+    String center = getCommunityMassVaccinationCenterReferenceString();
     controller.createCommunityMass("name", "address", "example@gmail.com", "+351913456789",
         "+351913456788", "https://www.teste.com", "11:00", "23:00", 5, 5, coordinator);
     controller.save();
@@ -297,8 +310,8 @@ public class RegisterVaccinationCenterControllerTest {
    * Check that StringifyData method is working properly
    */
   @Test
-  public void ensureStringifyDataWorking2() {
-    String center = toString2();
+  public void ensureStringifyHealthCareCenterIsWorking() {
+    String center = getHealthCareCenterReferenceString();
     controller.createHealthCare("name", "address", "example@gmail.com", "+351913456789",
         "+351913456788", "https://www.teste.com", "11:00", "23:00", 5, 5, coordinator, "test",
         "test");

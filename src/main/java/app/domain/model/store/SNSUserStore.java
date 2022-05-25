@@ -41,8 +41,7 @@ public class SNSUserStore {
    * @return SNSUser
    */
   public SNSUser createSNSUser(String citizenCard, String snsNumber, String name, Date birthDay,
-      char gender, String phoneNumber, String email, String address)
-      throws IllegalArgumentException, ParseException {
+      char gender, String phoneNumber, String email, String address) {
     SNSUser snsUser =
         new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
 
@@ -55,9 +54,7 @@ public class SNSUserStore {
    * @param snsUser
    */
   public void validateSNSUser(SNSUser snsUser) {
-    if (snsUser == null) {
-      throw new Error("SNS User is null.");
-    }
+    if (snsUser == null) throw new Error("SNS User is null.");
 
     // get the SNS User email
     String email = snsUser.getEmail();
@@ -112,6 +109,35 @@ public class SNSUserStore {
         return snsUser;
       }
     }
+
+    return null;
+  }
+
+  /**
+   * Checks if a SNS User exists.
+   * 
+   * @param snsNumber The SNS User Number.
+   * @return SNSUser
+   */
+  public boolean checkSNSUserExists(String snsNumber) {
+    for (SNSUser snsUser : snsUsers) {
+      if (snsUser.getSnsNumber().equals(snsNumber)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  /**
+   * Finds a SNS User by Email.
+   * 
+   * @param email The SNS User email.
+   * @return SNSUser
+   */
+  public SNSUser findSNSUserByEmail(String email) {
+    for (SNSUser snsUser : snsUsers)
+      if (snsUser.getEmail().equals(email)) return snsUser;
 
     return null;
   }

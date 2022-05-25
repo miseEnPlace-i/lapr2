@@ -35,7 +35,4 @@ public class Arrival {
     return arrivalTime;
   }
 
-  public String getTime() {
-    return "12:00";
-  }
 }
