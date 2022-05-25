@@ -44,9 +44,26 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
       vaccineType = selectVaccineType();
     }
 
-    // Verificar HealthData History
+    VaccinationCenter vacCenter = null;
 
-    VaccinationCenter vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
+    if (checkIfUserHasTakenVaccineType(vaccineType)) {
+      // ctrl.getVaccinesByType(vaccineType);
+      // ctrl.checkAdministrationProcessForNextDose();
+      // vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
+    } else {
+      if (ctrl.checkAdministrationProcessForVaccineType(vaccineType)) {
+        vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
+      } else {
+        // TODO RAIA MAXIMA SAI DAQUI PARA FORA; NAO HA VACINA PARA A TUA IDADE
+      }
+    }
+
+    if (!ctrl.isCenterOpenAt(vacCenter, hours)) {
+      // TODO RAIA MAXIMA DESAPARECE; CENTRO ENCERRADO
+    }
+
+    // VERIFICAR A DISPONIBILIDADE DO SLOT.
+
 
     boolean sms = selectSMS();
 
@@ -114,7 +131,7 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
     return (index == 0);
   }
 
-  private boolean checkUserHealthDataByVaccineType(VaccineType vt) {
-
+  private boolean checkIfUserHasTakenVaccineType(VaccineType vt) {
+    return ctrl.checkIfUserHasTakenVaccineType(vt);
   }
 }
