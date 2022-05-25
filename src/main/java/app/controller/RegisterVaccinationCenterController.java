@@ -1,5 +1,6 @@
 package app.controller;
 
+import java.text.ParseException;
 import java.util.List;
 import app.domain.model.Company;
 import app.domain.model.Employee;
@@ -46,7 +47,7 @@ public class RegisterVaccinationCenterController implements IRegisterController 
    */
   public void createCommunityMass(String name, String address, String emailAddress, String phoneNum,
       String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration,
-      int maxVacSlot, Employee coordinator) {
+      int maxVacSlot, Employee coordinator) throws ParseException {
 
     String vaccineTypeCode = this.company.getOngoingOutbreakVaccineTypeCode();
     VaccineType vaccineType = company.getVaccineTypeStore().getVaccineTypeByCode(vaccineTypeCode);
@@ -78,7 +79,7 @@ public class RegisterVaccinationCenterController implements IRegisterController 
    */
   public void createHealthCare(String name, String address, String emailAddress, String phoneNum,
       String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration,
-      int maxVacSlot, Employee coordinator, String ages, String ars) {
+      int maxVacSlot, Employee coordinator, String ages, String ars) throws ParseException {
 
     // creates a vaccination center instance
     this.center = vacStore.createHealthCareCenter(name, address, emailAddress, phoneNum, faxNum,

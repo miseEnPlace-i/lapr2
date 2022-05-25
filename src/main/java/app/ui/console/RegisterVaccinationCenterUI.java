@@ -1,6 +1,7 @@
 package app.ui.console;
 
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -68,13 +69,21 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
 
     // select center type
     if (type == VaccinationCenterType.COMMUNITY_MASS_VACCINATION_CENTER) {
-      super.ctrl.createCommunityMass(name, address, email, phone, fax, website, openHours,
-          closHours, slotDur, maxVac, coordinator);
+      try {
+        super.ctrl.createCommunityMass(name, address, email, phone, fax, website, openHours,
+            closHours, slotDur, maxVac, coordinator);
+      } catch (ParseException e) {
+        System.out.println("Hours not correct.");
+      }
     } else {
       String ages = Utils.readLineFromConsole("AGES: ");
       String ars = Utils.readLineFromConsole("ARS: ");
-      super.ctrl.createHealthCare(name, address, email, phone, fax, website, openHours, closHours,
-          slotDur, maxVac, coordinator, ages, ars);
+      try {
+        super.ctrl.createHealthCare(name, address, email, phone, fax, website, openHours, closHours,
+            slotDur, maxVac, coordinator, ages, ars);
+      } catch (ParseException e) {
+        System.out.println("Hours not correct.");
+      }
     }
   }
 }

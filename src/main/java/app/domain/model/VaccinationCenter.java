@@ -1,7 +1,13 @@
 package app.domain.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import app.domain.model.list.AppointmentScheduleList;
+import app.service.CalendarUtils;
 import app.service.FormatVerifier;
+import app.ui.console.utils.Utils;
 
 /**
  * Vaccination Center super class
@@ -40,7 +46,7 @@ public class VaccinationCenter {
    */
   public VaccinationCenter(String name, String address, String email, String phoneNum,
       String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration,
-      int maxVacSlot, Employee coordinator) {
+      int maxVacSlot, Employee coordinator) throws ParseException {
 
     setName(name);
     setAddress(address);
@@ -268,10 +274,15 @@ public class VaccinationCenter {
    * Sets the center closing hours.
    * 
    * @param closingHours the vaccination center closing hours.
+   * @throws ParseException
    * 
    * @throws IllegalArgumentException if the closing hours are null, empty or not valid.
    */
-  private void setClosingHours(String closingHours) {
+  private void setClosingHours(String closingHours) throws ParseException {
+    SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+    Date dateClos = format.parse(closingHours);
+    Date dateOpen = format.parse(openingHours);
+
     String[] closHours = closingHours.split(":");
     int hours = Integer.parseInt(closHours[0]);
     int minutes = Integer.parseInt(closHours[1]);
@@ -281,6 +292,9 @@ public class VaccinationCenter {
     }
     if (hours < 0 || hours > 24 || minutes < 0 || minutes > 60) {
       throw new IllegalArgumentException("Closing hours is not valid.");
+    }
+    if (dateClos.before(dateOpen)) {
+      throw new IllegalArgumentException("Closing hours cannot be before opening hours.");
     }
     this.closingHours = closingHours;
   }

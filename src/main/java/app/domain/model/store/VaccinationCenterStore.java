@@ -1,5 +1,6 @@
 package app.domain.model.store;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.CommunityMassVaccinationCenter;
@@ -47,7 +48,7 @@ public class VaccinationCenterStore {
   public VaccinationCenter createCommunityMassCenter(String name, String address,
       String emailAddress, String phoneNum, String faxNum, String webAddress, String openingHours,
       String closingHours, int slotDuration, int maxVacSlot, Employee coordinator,
-      VaccineType vaccineType) {
+      VaccineType vaccineType) throws ParseException {
 
     boolean isCoordinatorValid = validateCoordinator(coordinator);
 
@@ -62,7 +63,8 @@ public class VaccinationCenterStore {
 
   public VaccinationCenter createHealthCareCenter(String name, String address, String emailAddress,
       String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours,
-      int slotDuration, int maxVacSlot, Employee coordinator, String ages, String ags) {
+      int slotDuration, int maxVacSlot, Employee coordinator, String ages, String ags)
+      throws ParseException {
 
     boolean isCoordinatorValid = validateCoordinator(coordinator);
 
