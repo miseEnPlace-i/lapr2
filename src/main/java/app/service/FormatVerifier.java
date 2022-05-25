@@ -152,6 +152,7 @@ public final class FormatVerifier {
       System.out.println("Invalid date format.\n");
       return false;
     }
+  }
 
   public static boolean validateSlotDuration(String expression) {
     int number = Integer.parseInt(expression);
