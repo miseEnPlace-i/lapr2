@@ -1,6 +1,7 @@
 package app.ui.console;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,7 +24,15 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
   }
 
   public void insertData() {
-    Date date = Utils.readDateFromConsole("Date (dd/MM/yyyy): ");
+    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+    String dateStr =
+        Utils.readLineFromConsoleWithValidation("Date (dd/MM/yyyy): ", FieldToValidate.DATE);
+    Date date = new Date();
+    try {
+      date = df.parse(dateStr);
+    } catch (ParseException ex) {
+      System.out.println("Invalid date format.\n");
+    }
     String hours = Utils.readLineFromConsoleWithValidation("Hour (HH:MM)", FieldToValidate.HOURS);
 
     VaccineType vaccineType = ctrl.getSuggestedVaccineType();
@@ -49,7 +58,7 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
 
     VaccinationCenter vacCenter = null;
 
-    Object selectedCenter = Utils.showAndSelectOne(list, "\n\nSelect a Vaccination Center:\n");
+    Object selectedCenter = Utils.showAndSelectOne(list, "\nSelect a Vaccination Center:\n");
 
     try {
       VaccinationCenterListDTO centerDto = (VaccinationCenterListDTO) selectedCenter;
@@ -58,7 +67,7 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
       System.out.println("\n\nInvalid selection.");
     }
 
-    System.out.println("\nDo you want to receive an SMS with the appointment's info?\n");
+    System.out.println("\nDo you want to receive an SMS with the appointment's info?");
     List<String> options = new ArrayList<String>();
     options.add("Yes, send me an SMS.");
     options.add("No, don't send me an SMS.");
