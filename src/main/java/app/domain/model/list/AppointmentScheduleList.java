@@ -39,16 +39,18 @@ public class AppointmentScheduleList {
     int closingMinutesOfDay =
         Integer.parseInt(closingHours[0]) * 60 + Integer.parseInt(closingHours[1]);
 
-    return (closingMinutesOfDay - openingMinutesOfDay) / center.getSlotDuration();
+    // -1 because the last slot of the day is not usable
+    return ((closingMinutesOfDay - openingMinutesOfDay) / center.getSlotDuration()) - 1;
   }
 
   private void listVaccinationSchedule(Appointment[][] list) {
     for (int i = 0; i < list.length; i++) {
       for (int j = 0; j < list[0].length; j++) {
-        System.out.print("[ ");
-        if (list[i][j] != null) System.out.println("x");
-        System.out.print(" ]");
+        System.out.print("[");
+        if (list[i][j] != null) System.out.print("x]");
+        else System.out.print(" ]");
       }
+      System.out.println("");
     }
   }
 
@@ -91,12 +93,20 @@ public class AppointmentScheduleList {
         Integer.parseInt(closingHours[0]) * 60 + Integer.parseInt(closingHours[1]);
 
     int slotDuration = vaccinationCenter.getSlotDuration();
-    int minutesOfDay =
+    int scheduleMinutesOfDay =
         (date.get(Calendar.HOUR_OF_DAY) * 60 + date.get(Calendar.MINUTE)) - openingMinutesOfDay;
 
-    if (minutesOfDay > closingMinutesOfDay) throw new IllegalArgumentException("Invalid schedule");
+    // -1 because the last slot of the day is not usable
+    if (isValid(scheduleMinutesOfDay)) return scheduleMinutesOfDay / slotDuration;
+    return -1;
+  }
 
-    return minutesOfDay / slotDuration;
+  private boolean isValid(int minutes) {
+    // TODO Implement
+    // This need to have in mind that if the closing hours and opening hours can be bigger than one another
+    // Ex.: opening hours = 18:00 and closing hours = 20:00 -> works 2 hours
+    // Ex.: opening hours = 20:00 and closing hours = 18:00 -> works 22 hours
+    return true;
   }
 
   /**
@@ -134,6 +144,8 @@ public class AppointmentScheduleList {
     Calendar key = generateKeyFromDate(appointment.getDate());
     int slotIndex = getAppointmentSlotIndex(appointment.getDate());
 
+    if (slotIndex == -1) throw new IllegalArgumentException("Appointment schedule is not valid.");
+
     if (appointments.containsKey(key)) {
       Appointment[][] slots = appointments.get(key);
 
@@ -152,14 +164,14 @@ public class AppointmentScheduleList {
     listVaccinationSchedule(getAppointmentScheduleForDay(key));
   }
 
-  private Appointment[][] getAppointmentScheduleForDay(Calendar date) {
+  public Appointment[][] getAppointmentScheduleForDay(Calendar date) {
     return appointments.get(generateKeyFromDate(date));
   }
 
   private int getAvailableIndexInSlot(Appointment[] slot) {
     int i = 0;
 
-    while (slot[i] == null && i < slotsPerDay)
+    while (slot[i] != null && i < slotsPerDay)
       i++;
 
     return i < slot.length ? i : -1;
