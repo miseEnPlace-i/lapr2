@@ -14,7 +14,7 @@ public class SNSUserRegisterInfoMapper {
     // Private constructor to prevent instantiation from other classes
     private SNSUserRegisterInfoMapper() {}
 
-    // converts SNSUser to UserDTO
+    // converts SNSUser to SNSUserRegisterInfoDTO
     public SNSUserRegisterInfoDTO toDto(SNSUser user){
         return new SNSUserRegisterInfoDTO(user.getName(), user.getEmail(), PasswordGenerator.generatePwd(), "SNS_USER");
     }

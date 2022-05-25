@@ -55,7 +55,7 @@ activate UI
 
         loop for each SNSUser register
         note right of USR_STR
-            snsUserData is a string with Name, Sex, Birth Date, Address, Phone Number, E-mail, SNS User Number and Citizen Card Number. 
+            snsUserData is String[Name, Sex, Birth Date, Address, Phone Number, E-mail, SNS User Number and Citizen Card Number] 
         end note
             USR_STR -> MAPPER : userDto = toDto(snsUserData)
             activate MAPPER

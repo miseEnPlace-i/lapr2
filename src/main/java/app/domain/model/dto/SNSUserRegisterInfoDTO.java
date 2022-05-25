@@ -35,4 +35,10 @@ public class SNSUserRegisterInfoDTO {
         return this.role;
     }
 
+    @Override
+    public String toString(){
+        return "Registered User:\nName: " + this.name + "\nE-mail: " + this.email
+        + "\nPassword: " + this.pass + "\nRole: " + this.role;
+    }
+
 }

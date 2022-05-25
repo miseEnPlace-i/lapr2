@@ -1,6 +1,5 @@
 package app.domain.model.store;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -150,4 +149,7 @@ public class SNSUserStore {
   public int size() {
     return snsUsers.size();
   }
+
+  public 
+
 }

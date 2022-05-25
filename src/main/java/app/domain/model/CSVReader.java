@@ -10,8 +10,6 @@ import app.service.FileUtils;
  * @autor Carlos Lopes <1211277@isep.ipp.pt>
  */
 public class CSVReader {
-    
-    private static int FILE_COLUMNS = 8;
 
     private String path;
 
