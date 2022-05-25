@@ -8,6 +8,7 @@ import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
 import app.domain.model.dto.AppointmentWithNumberDTO;
 import app.domain.model.dto.AppointmentWithoutNumberDTO;
+import app.exception.AppointmentNotFoundException;
 
 /**
  * AppointmentStore class.
@@ -119,19 +120,6 @@ public class AppointmentScheduleList {
   }
 
   /**
-   * Finds an appointment by its SNS number.
-   */
-  public Appointment findAppointment(String snsNumber) {
-    // TODO FIX
-    // for (Appointment appointment : appointments) {
-    // TODO: check center
-    // if (appointment.hasSnsNumber(snsNumber) && appointment.isInTheNextHour())
-    // return appointment;
-    // }
-    return null;
-  }
-
-  /**
    * Saves an appointment.
    * 
    * @param appointment the appointment
@@ -190,5 +178,18 @@ public class AppointmentScheduleList {
         if (appointments[i][j] != null && appointments[i][j].hasSnsNumber(snsNumber)) return true;
 
     return false;
+  }
+
+  public Appointment hasAppointmentToday(String snsNumber) throws AppointmentNotFoundException {
+    // get today's appointments
+    Calendar key = this.generateKeyFromDate(Calendar.getInstance());
+    Appointment[][] appointments = this.appointments.get(key);
+
+    for (int i = 0; i < appointments.length; i++)
+      for (int j = 0; j < appointments[i].length; j++)
+        if (appointments[i][j] != null && appointments[i][j].hasSnsNumber(snsNumber))
+          return appointments[i][j];
+
+    throw new AppointmentNotFoundException("This SNS User does not have an appointment for today.");
   }
 }

@@ -3,7 +3,9 @@ package app.ui.console;
 import java.text.ParseException;
 import app.controller.App;
 import app.controller.RegisterSNSUserArrivalController;
+import app.domain.model.VaccinationCenter;
 import app.domain.shared.FieldToValidate;
+import app.exception.AppointmentNotFoundException;
 import app.ui.console.utils.Utils;
 
 /**
@@ -12,46 +14,29 @@ import app.ui.console.utils.Utils;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 public class RegisterSNSUserArrivalUI extends RegisterUI<RegisterSNSUserArrivalController> {
-    public RegisterSNSUserArrivalUI() {
-        super(new RegisterSNSUserArrivalController(App.getInstance().getCompany()));
+    public RegisterSNSUserArrivalUI(VaccinationCenter center) {
+        super(new RegisterSNSUserArrivalController(App.getInstance().getCompany(), center));
     }
 
     @Override
-    public void insertData() throws IllegalArgumentException, ParseException {
+    public void insertData() throws IllegalArgumentException, ParseException, AppointmentNotFoundException {
         System.out.println("\nRegister SNS User Arrival UI:");
 
         String snsNumber = Utils.readLineFromConsoleWithValidation("SNS Number (xxxxxxxxx): ",
                 FieldToValidate.SNS_NUMBER);
 
-        // verify if the user exists
-        try {
+        // try {
+            // verify if the user exists
             super.ctrl.findSNSUser(snsNumber);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return;
-        }
 
-        // select the center
-        // System.out.println("\nSelect the center:");
-        // if (ctrl.listVaccinationCenters().size() == 0) {
-        //     System.out.println("\n\nThere are no vaccination centers in the system.");
+            // find the user appointment
+            super.ctrl.findSNSUserAppointment();
+        // } catch (IllegalArgumentException | AppointmentNotFoundException e) {
+        //     System.out.println(e.getMessage());
         //     return;
         // }
 
-        // Object center = Utils.showAndSelectOne(controller.listVaccinationCenters(),
-        //         "\n\nVaccination Centers\n");
-
-        // try {
-        //     VaccinationCenterListDTO centerDTO = (VaccinationCenterListDTO) center;
-        //     nurseSession.setVaccinationCenter(centerDTO);
-        // } catch (ClassCastException e) {
-        //     System.out.println("\n\nInvalid selection.");
-        // }
-
-
-
-        // find the user appointment
-        super.ctrl.findSNSUserAppointment(snsNumber);
-
+        // create the arrival
+        super.ctrl.create();
     }
 }

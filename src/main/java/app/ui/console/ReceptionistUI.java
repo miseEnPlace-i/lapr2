@@ -19,6 +19,7 @@ public class ReceptionistUI extends EmployeeWithCenterUI {
 
     options.add(new MenuItem("Register a SNS User", new RegisterSNSUserUI()));
     options.add(new MenuItem("Schedule a vaccine", new ScheduleVaccineReceptionistUI()));
+    options.add(new MenuItem("Register an Arrival", new RegisterSNSUserArrivalUI(super.getEmployeeSession().getVaccinationCenter())));
 
     int option = 0;
     do {
