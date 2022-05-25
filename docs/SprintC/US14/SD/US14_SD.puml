@@ -17,7 +17,7 @@ participant ":PasswordGenerator" as PWDGEN
 participant "auth :AuthFacade" as AUTH
 participant ":EmailSender" as EMAIl
 participant "userDataList :List<Array<String>>" as LIST
-participant "userRegisterInfoList: List<UserRegisterInfoDto>" as USER_INFO_LIST
+participant "userRegisterInfoList: List<SNSUserRegisterInfoDTO>" as USER_INFO_LIST
 
 activate ADM
 ADM -> UI : asks to load users from a file

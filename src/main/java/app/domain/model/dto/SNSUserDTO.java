@@ -1,6 +1,6 @@
 package app.domain.model.dto;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Vaccination Center mapper
