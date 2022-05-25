@@ -99,9 +99,9 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
 
   // ASKS TO INSERT THE ADMIN PROC DATA AND RETURN THE NUMBER OF DOSES
   public int insertAdminProcData() {
-    int minAge = Integer.parseInt(Utils.readLineFromConsole("Min age: "));
-    int maxAge = Integer.parseInt(Utils.readLineFromConsole("Max age: "));
-    int numberOfDoses = Integer.parseInt(Utils.readLineFromConsole("Number of doses: "));
+    int minAge = Utils.readIntegerFromConsole("Min age: ");
+    int maxAge = Utils.readIntegerFromConsole("Max age: ");
+    int numberOfDoses = Utils.readIntegerFromConsole("Number of doses: ");
 
     super.ctrl.createAdminProc(minAge, maxAge, numberOfDoses);
 
@@ -112,8 +112,8 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
 
   // ASKS TO INSERT THE DOSE INFO DATA
   public void insertDoseInfoData() {
-    int dosage = Integer.parseInt(Utils.readLineFromConsole("Dosage (ml): "));
-    int timeSinceLastDose = Integer.parseInt(Utils.readLineFromConsole("Time since last dose (days): "));
+    int dosage = Utils.readIntegerFromConsole("Dosage (ml): ");
+    int timeSinceLastDose = Utils.readIntegerFromConsole("Time since last dose (days): ");
 
     super.ctrl.createDoseInfo(dosage, timeSinceLastDose);
 
