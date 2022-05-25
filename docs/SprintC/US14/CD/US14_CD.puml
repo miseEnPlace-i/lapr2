@@ -49,9 +49,6 @@ class CSVReader {
   - String filePathName
 
   + readSNSUsersData()
-  + validatePath()
-  + validateFile()
-  + getFileSeparator()
 }
 
 class UserMapper{

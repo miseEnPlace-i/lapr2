@@ -28,25 +28,6 @@ activate UI
     UI -> CTRL : csvReader = createCsvReader(filePathName)
     activate CTRL
         CTRL -> CSVR ** : csvReader = create(filePathName)
-        activate CSVR
-
-            CSVR -> CSVR : validatePath()
-            activate CSVR
-            deactivate CSVR
-
-            CSVR -> CSVR : validateFile()
-            activate CSVR
-            deactivate CSVR 
-
-            CSVR -> CSVR : separator = getFileSeparator()
-            activate CSVR
-            deactivate CSVR
-            
-            CSVR -> COMP : store = getSNSUserStore()
-            activate COMP
-            deactivate COMP
-
-        deactivate CSVR
     deactivate CTRL
 
 UI --> ADM : asks to confirm action
@@ -57,11 +38,15 @@ activate UI
 
     UI -> CTRL : readAndUpload()
     activate CTRL
-        loop for each SNSUser regist
+
+        CTRL -> COMP : store = getSNSUserStore()
+        activate COMP
+        deactivate COMP
+
         CTRL -> CSVR : userDataList = readSNSUsersData()
         activate CSVR
-            
         deactivate CSVR
+
         CTRL -> USR_STR : registListOfUsers(userDataList)
         activate USR_STR
 
