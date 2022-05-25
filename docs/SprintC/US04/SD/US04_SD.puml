@@ -12,8 +12,8 @@ participant "center:VaccinationCenter" as CENTER
 participant "appointments:AppointmentStore" as APPTS
 participant "apt:Appointment" as APT
 participant "Mapper<Calendar, Appointment[][]>" as MAPPER
+participant "waitingRoomList:WaitingRoomList" as WRLST
 participant "arrival:Arrival" as ARRIVAL
-participant "wrLst:WaitingRoomList" as WRLST
 
 activate RECEPT
   RECEPT -> UI : starts to register the SNS User arrival to the vaccination center
@@ -85,6 +85,20 @@ activate RECEPT
       deactivate APPTS
 
     deactivate CTRL
+
+    UI -> CTRL : create()
+    activate CTRL
+
+      CTRL -> CENTER : waitingRoomList = getWaitingRoomList()
+      activate CENTER
+      deactivate CENTER
+
+      CTRL -> WRLST : createArrival(snsNumber)
+      activate WRLST
+        WRLST -> ARRIVAL** : create(snsUser)
+      deactivate WRLST
+
+    deactivate CTRL
   
   RECEPT <-- UI : asks for confirmation for the appointment
   deactivate UI
@@ -94,7 +108,6 @@ activate RECEPT
 
     UI -> CTRL : confirmAppointment(apt)
     activate CTRL
-      CTRL -> ARRIVAL** : create(snsUser, apt)
 
       CTRL -> WRLST : add(arrival)
       activate WRLST
