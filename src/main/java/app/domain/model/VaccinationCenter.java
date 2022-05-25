@@ -2,12 +2,9 @@ package app.domain.model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import app.domain.model.list.AppointmentScheduleList;
-import app.service.CalendarUtils;
 import app.service.FormatVerifier;
-import app.ui.console.utils.Utils;
 
 /**
  * Vaccination Center super class

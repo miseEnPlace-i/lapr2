@@ -1,7 +1,6 @@
 package app.domain.model;
 
 import java.text.ParseException;
-import javafx.css.CssParser.ParseError;
 
 /**
  * @author André Barros <1211299@isep.ipp.pt>

@@ -2,7 +2,6 @@ package app.domain.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import org.apache.commons.lang3.time.DateUtils;
 
 /**
  * Appointment class.
@@ -65,10 +64,15 @@ public class Appointment {
 
     StringBuilder sb = new StringBuilder();
     sb.append("Appointment: \n");
-    sb.append("\nsnsNumber= " + snsNumber);
-    sb.append("\ndate= " + sdf.format(date.getTime()));
-    sb.append("\ncenter= " + center.getName());
-    sb.append("\nvaccineType= " + vaccineType.getDescription());
+    sb.append("\nSNS Number= " + snsNumber);
+    sb.append("\nDate= " + sdf.format(date.getTime()));
+    sb.append("\nCenter= " + center.getName());
+    sb.append("\nVaccineType= " + vaccineType.getDescription());
+    if (sms) {
+      sb.append("\nSMS= Sim.");
+    } else {
+      sb.append("\nSMS= Não.");
+    }
 
     return sb.toString();
   }
