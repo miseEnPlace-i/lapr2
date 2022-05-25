@@ -5,14 +5,14 @@ package app.domain.model.dto;
  * 
  * @autor Carlos Lopes <1211277@isep.ipp.pt>
  */
-public class UserDTO {
+public class SNSUserRegisterInfoDTO {
 
     private String name;
     private String email;
     private String pass;
     private String role;
 
-    public UserDTO(String name, String email, String pass, String role){
+    public SNSUserRegisterInfoDTO(String name, String email, String pass, String role){
             this.name = name;
             this.email = email;
             this.pass = pass;
