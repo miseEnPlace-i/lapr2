@@ -9,6 +9,7 @@ import app.service.TimeUtils;
  * SNSUser model class.
  * 
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
+ * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 public class SNSUser {
 
@@ -39,6 +40,8 @@ public class SNSUser {
   // SNS User address
   private String address;
 
+  private HealthData userHealthData;
+
   /**
    * Constructor for SNSUser.
    * 
@@ -67,6 +70,8 @@ public class SNSUser {
     this.phoneNumber = phoneNumber;
     this.email = email;
     this.address = address;
+
+    this.userHealthData = new HealthData();
   }
 
   // Getters
@@ -100,6 +105,10 @@ public class SNSUser {
 
   public String getAddress() {
     return address;
+  }
+
+  public Vaccine getLastTakenVaccineFromType(VaccineType vaccineType) {
+    return userHealthData.getLastVaccineTakenWithType(vaccineType);
   }
 
   @Override
