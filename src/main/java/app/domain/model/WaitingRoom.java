@@ -15,4 +15,34 @@ public class WaitingRoom implements Iterable<Arrival> {
   public int size() {
     return waitingRoom.size();
   }
+
+  /**
+   * Creates an instance of Arrival.
+   * 
+   * @param snsNumber the SNS Number of the SNS User.
+   * @return Arrival
+   */
+  public Arrival createArrival(String snsNumber) {
+    return new Arrival(snsNumber);
+  }
+
+  /**
+   * Adds an Arrival to the Waiting Room.
+   */
+  public void saveArrival(Arrival arrival) {
+    waitingRoom.add(arrival);
+  }
+
+  /**
+   * Prints the waiting room as a string
+   */
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("\nWaiting Room:");
+    for (Arrival arrival : waitingRoom) {
+      sb.append("\n\t" + arrival.toString());
+    }
+    return sb.toString();
+  }
+
 }

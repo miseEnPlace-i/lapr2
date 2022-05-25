@@ -2,6 +2,7 @@ package app.domain.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
@@ -185,11 +186,15 @@ public class SNSUserTest {
   @Test
   public void ensureToStringWorksAsExpected() {
     Date c = new Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
     SNSUser instance = new SNSUser("123456789ZZ1", "123456789", "name", c, 'F', "+351211111111",
         "email@email.com", "address");
 
     String expected =
-        "SNS User name: name\nCitizen card number: 123456789ZZ1\nSNS number: 123456789\nBirthday: 19/05/2022\nGender: Female\nPhone number: +351211111111\nEmail: email@email.com\nAddress: address\n";
+        "SNS User name: name\nCitizen card number: 123456789ZZ1\nSNS number: 123456789\nBirthday: "
+            + sdf.format(new Date())
+            + "\nGender: Female\nPhone number: +351211111111\nEmail: email@email.com\nAddress: address\n";
 
     assertEquals(instance.toString(), expected);
   }

@@ -5,8 +5,10 @@ import app.domain.model.Arrival;
 import app.domain.model.Company;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
+import app.domain.model.WaitingRoom;
 import app.domain.model.list.AppointmentScheduleList;
 import app.domain.model.store.SNSUserStore;
+import app.exception.AppointmentNotFoundException;
 
 /**
  * Register SNS User Arrival Controller.
@@ -14,59 +16,59 @@ import app.domain.model.store.SNSUserStore;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 public class RegisterSNSUserArrivalController implements IRegisterController {
-    private Company company;
-    private SNSUserStore snsUserStore;
-    private VaccinationCenter center;
-    private SNSUser snsUser;
+  private Company company;
+  private VaccinationCenter center;
+  private SNSUser snsUser;
+  private Appointment appointment;
+  private Arrival arrival;
+  private WaitingRoom waitingRoom;
 
-    /**
-     * Constructor for RegisterSNSUserController.
-     */
-    public RegisterSNSUserArrivalController(Company company) {
-        this.company = company;
-        this.snsUserStore = company.getSNSUserStore();
-        this.center = null;
-        this.snsUser = null;
+  /**
+   * Constructor for RegisterSNSUserController.
+   */
+  public RegisterSNSUserArrivalController(Company company, VaccinationCenter center) {
+    this.company = company;
+    this.center = center;
+    this.snsUser = null;
+  }
+
+  public void create() {
+    this.waitingRoom = center.getWaitingRoom();
+    this.arrival = waitingRoom.createArrival(this.snsUser.getSnsNumber());
+  }
+
+  @Override
+  public void save() {
+    this.waitingRoom.saveArrival(this.arrival);
+
+    // DEBUG: print the waiting room
+    System.out.println(this.waitingRoom);
+  }
+
+  @Override
+  public String stringifyData() {
+    return this.appointment.toString();
+  }
+
+  @Override
+  public String getResourceName() {
+    return "SNS User Arrival";
+  }
+
+  public void findSNSUser(String snsNumber) {
+    SNSUserStore snsUserStore = company.getSNSUserStore();
+    SNSUser snsUser = snsUserStore.findSNSUserByNumber(snsNumber);
+
+    if (snsUser == null) {
+      throw new IllegalArgumentException("There is no SNS User with this SNS number.");
     }
 
-    public void create() {
-        // TODO
-        // this.center.waitingRoomList.add()
-    }
+    this.snsUser = snsUser;
+  }
 
-    @Override
-    public void save() {
-        // TODO
-    }
-
-    @Override
-    public String stringifyData() {
-        return null;
-    }
-
-    @Override
-    public String getResourceName() {
-        return "SNS User Arrival";
-    }
-
-    public void findSNSUser(String snsNumber) {
-        SNSUser snsUser = this.snsUserStore.findSNSUserByNumber(snsNumber);
-
-        if (snsUser == null) {
-            throw new IllegalArgumentException("There is no SNS User with this SNS number.");
-        }
-
-        this.snsUser = snsUser;
-    }
-
-    public void findSNSUserAppointment(String snsNumber) {
-        
-        // Appointment apt = .findAppointment(snsNumber);
-
-        // if (apt != null) {
-        //     throw new IllegalArgumentException("This SNS User does not have any appointment registered.");
-        // }
-    }
-
+  public void findSNSUserAppointment() throws AppointmentNotFoundException {
+    AppointmentScheduleList appointments = center.getAppointmentList();
+    this.appointment = appointments.hasAppointmentToday(this.snsUser.getSnsNumber());
+  }
 
 }

@@ -16,7 +16,7 @@ public class VaccinationCenterTest {
 
   @Before
   public void setUp() {
-    coordinator = new Employee("Joana", "+351916478865", "email@email.com", "address",
+    coordinator = new Employee("00000001", "Joana", "+351916478865", "email@email.com", "address",
         "000000000ZZ4", Constants.ROLE_COORDINATOR);
   }
 
@@ -38,7 +38,7 @@ public class VaccinationCenterTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureEmptyIsNotAllowed() {
-    Employee coordinator = new Employee("", "", "", "", "", "");
+    Employee coordinator = new Employee("", "", "", "", "", "", "");
 
     new VaccinationCenter("", "", "", "", "", "", "", "", 0, 0, coordinator);
   }
@@ -187,22 +187,6 @@ public class VaccinationCenterTest {
     VaccinationCenter center2 = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida",
         "vacinacaoporto2@gmail.com", "+351912345678", "+351223456789",
         "https://www.centrovacinaoporto2.com", "20:00", "19:00", 5, 10, this.coordinator);
-
-    assertEquals(center, center2);
-  }
-
-  /**
-   * Check that that two centers with the website address are the same
-   */
-  @Test
-  public void ensureSameWebAddressEqualsTrue() {
-    VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida",
-        "vacinacaoporto@gmail.com", "+351912345688", "+351223456789",
-        "https://www.centrovacinaoporto.com", "20:00", "19:00", 5, 10, this.coordinator);
-
-    VaccinationCenter center2 = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida",
-        "vacinacaoporto2@gmail.com", "+351912345678", "+351223456799",
-        "https://www.centrovacinaoporto.com", "20:00", "19:00", 5, 10, this.coordinator);
 
     assertEquals(center, center2);
   }

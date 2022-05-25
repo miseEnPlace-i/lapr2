@@ -187,4 +187,4 @@ _It is also recommended to organize this content by subsections._
 
 **Nurse select center SD**
 
-![NurseLogin_SD](SD/NurseLogin_SD.svg)
+![EmployeeLogin_SD](SD/EmployeeLogin_SD.svg)
