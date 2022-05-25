@@ -35,7 +35,12 @@ public class Arrival {
     return arrivalTime;
   }
 
-  public String getTime() {
-    return "12:00";
+  /**
+   * Returns the Arrival as a string
+   */
+  @Override
+  public String toString() {
+    return "Arrival: " + this.snsNumber + " @ " + this.arrivalTime.getTime();
   }
+
 }

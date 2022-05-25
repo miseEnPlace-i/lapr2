@@ -8,6 +8,7 @@ import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
 import app.domain.model.dto.AppointmentWithNumberDTO;
 import app.domain.model.dto.AppointmentWithoutNumberDTO;
+import app.exception.AppointmentNotFoundException;
 
 /**
  * AppointmentStore class.
@@ -19,6 +20,7 @@ public class AppointmentScheduleList {
   private VaccinationCenter vaccinationCenter;
   private Map<Calendar, Appointment[][]> appointments;
   private int slotsPerDay = 0;
+  private int vaccinesPerSlot = 0;
 
   /**
    * Constructor for AppointmentStore.
@@ -26,6 +28,7 @@ public class AppointmentScheduleList {
   public AppointmentScheduleList(VaccinationCenter vaccinationCenter) {
     this.vaccinationCenter = vaccinationCenter;
     slotsPerDay = calculateNOfSlotsPerDay(vaccinationCenter);
+    vaccinesPerSlot = vaccinationCenter.getMaxVacSlot();
 
     this.appointments = new HashMap<Calendar, Appointment[][]>();
   }
@@ -39,8 +42,7 @@ public class AppointmentScheduleList {
     int closingMinutesOfDay =
         Integer.parseInt(closingHours[0]) * 60 + Integer.parseInt(closingHours[1]);
 
-    // -1 because the last slot of the day is not usable
-    return ((closingMinutesOfDay - openingMinutesOfDay) / center.getSlotDuration()) - 1;
+    return ((closingMinutesOfDay - openingMinutesOfDay) / center.getSlotDuration());
   }
 
   private void listVaccinationSchedule(Appointment[][] list) {
@@ -96,7 +98,6 @@ public class AppointmentScheduleList {
     int scheduleMinutesOfDay =
         (date.get(Calendar.HOUR_OF_DAY) * 60 + date.get(Calendar.MINUTE)) - openingMinutesOfDay;
 
-    // -1 because the last slot of the day is not usable
     if (isValid(scheduleMinutesOfDay)) return scheduleMinutesOfDay / slotDuration;
     return -1;
   }
@@ -116,21 +117,6 @@ public class AppointmentScheduleList {
    */
   public void validateAppointment(Appointment appointment) {
     if (appointment == null) throw new IllegalArgumentException("Appointment is not valid.");
-
-    checkDuplicates(appointment);
-  }
-
-  /**
-   * Finds an appointment by its SNS number.
-   */
-  public Appointment findAppointment(String snsNumber) {
-    // TODO FIX
-    // for (Appointment appointment : appointments) {
-    // TODO: check center
-    // if (appointment.hasSnsNumber(snsNumber) && appointment.isInTheNextHour())
-    // return appointment;
-    // }
-    return null;
   }
 
   /**
@@ -169,12 +155,10 @@ public class AppointmentScheduleList {
   }
 
   private int getAvailableIndexInSlot(Appointment[] slot) {
-    int i = 0;
+    for (int i = 0; i < slot.length; i++)
+      if (slot[i] == null) return i;
 
-    while (slot[i] != null && i < slotsPerDay)
-      i++;
-
-    return i < slot.length ? i : -1;
+    return -1;
   }
 
   private Calendar generateKeyFromDate(Calendar date) {
@@ -188,28 +172,24 @@ public class AppointmentScheduleList {
     return key;
   }
 
-  /**
-   * Checks if an appointment is duplicated.
-   * 
-   * @param appointment
-   */
-  private void checkDuplicates(Appointment appointment) {
-    if (appointments.containsKey(appointment.getDate())) {
-      Calendar key = generateKeyFromDate(appointment.getDate());
-
-      Appointment[][] slots = appointments.get(key);
-      String snsUserNumber = appointment.getSnsNumber();
-
-      if (hasAppointmentInDay(slots, snsUserNumber))
-        throw new IllegalArgumentException("Appointment is duplicated.");
-    }
-  }
-
   private boolean hasAppointmentInDay(Appointment[][] appointments, String snsNumber) {
     for (int i = 0; i < appointments.length; i++)
       for (int j = 0; j < appointments[i].length; j++)
         if (appointments[i][j] != null && appointments[i][j].hasSnsNumber(snsNumber)) return true;
 
     return false;
+  }
+
+  public Appointment hasAppointmentToday(String snsNumber) throws AppointmentNotFoundException {
+    // get today's appointments
+    Calendar key = this.generateKeyFromDate(Calendar.getInstance());
+    Appointment[][] appointments = this.appointments.get(key);
+
+    for (int i = 0; i < appointments.length; i++)
+      for (int j = 0; j < appointments[i].length; j++)
+        if (appointments[i][j] != null && appointments[i][j].hasSnsNumber(snsNumber))
+          return appointments[i][j];
+
+    throw new AppointmentNotFoundException("This SNS User does not have an appointment for today.");
   }
 }

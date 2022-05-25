@@ -122,6 +122,18 @@ public class VaccinationCenterTest {
   public void ensureItsPossibleToCreateVaccinationCenter() {
     VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida",
         "vacinacaoporto@gmail.com", "+351912345678", "+351223456789",
+        "https://www.centrovacinaoporto.com", "19:00", "20:00", 5, 10, this.coordinator);
+
+    assertNotNull(center);
+  }
+
+  /**
+   * Check that it is possible to create a Vaccination Center with all valid parameters.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void ensureItIsNotPossibleToCreateVaccinationCenterWithClosingHoursBeforeOpening() {
+    VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida",
+        "vacinacaoporto@gmail.com", "+351912345678", "+351223456789",
         "https://www.centrovacinaoporto.com", "20:00", "19:00", 5, 10, this.coordinator);
 
     assertNotNull(center);
@@ -134,11 +146,11 @@ public class VaccinationCenterTest {
   public void ensureTwoCentersAreDifferent() {
     VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida",
         "vacinacaoporto@gmail.com", "+351912345678", "+351223456789",
-        "https://www.centrovacinaoporto.com", "20:00", "19:00", 5, 10, this.coordinator);
+        "https://www.centrovacinaoporto.com", "19:00", "20:00", 5, 10, this.coordinator);
 
     VaccinationCenter center2 = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida",
         "vacinacaoporto2@gmail.com", "+351912345689", "+351223456999",
-        "https://www.centrovacinaoporto2.com", "20:00", "19:00", 5, 10, this.coordinator);
+        "https://www.centrovacinaoporto2.com", "19:00", "20:00", 5, 10, this.coordinator);
 
     assertNotEquals(center, center2);
   }
@@ -150,11 +162,11 @@ public class VaccinationCenterTest {
   public void ensureSameEmailEqualsTrue() {
     VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida",
         "vacinacaoporto@gmail.com", "+351912345678", "+351223456789",
-        "https://www.centrovacinaoporto.com", "20:00", "19:00", 5, 10, this.coordinator);
+        "https://www.centrovacinaoporto.com", "10:00", "19:00", 5, 10, this.coordinator);
 
     VaccinationCenter center2 = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida",
         "vacinacaoporto@gmail.com", "+351912345689", "+351223456999",
-        "https://www.centrovacinaoporto2.com", "20:00", "19:00", 5, 10, this.coordinator);
+        "https://www.centrovacinaoporto2.com", "10:00", "19:00", 5, 10, this.coordinator);
 
     assertEquals(center, center2);
   }
@@ -166,11 +178,11 @@ public class VaccinationCenterTest {
   public void ensureSamePhoneNumberEqualsTrue() {
     VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida",
         "vacinacaoporto@gmail.com", "+351912345678", "+351223456789",
-        "https://www.centrovacinaoporto.com", "20:00", "19:00", 5, 10, this.coordinator);
+        "https://www.centrovacinaoporto.com", "10:00", "19:00", 5, 10, this.coordinator);
 
     VaccinationCenter center2 = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida",
         "vacinacaoporto2@gmail.com", "+351912345678", "+351223456999",
-        "https://www.centrovacinaoporto2.com", "20:00", "19:00", 5, 10, this.coordinator);
+        "https://www.centrovacinaoporto2.com", "10:00", "19:00", 5, 10, this.coordinator);
 
     assertEquals(center, center2);
   }
@@ -182,11 +194,11 @@ public class VaccinationCenterTest {
   public void ensureSameFaxNumberEqualsTrue() {
     VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida",
         "vacinacaoporto@gmail.com", "+351912345688", "+351223456789",
-        "https://www.centrovacinaoporto.com", "20:00", "19:00", 5, 10, this.coordinator);
+        "https://www.centrovacinaoporto.com", "10:00", "19:00", 5, 10, this.coordinator);
 
     VaccinationCenter center2 = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida",
         "vacinacaoporto2@gmail.com", "+351912345678", "+351223456789",
-        "https://www.centrovacinaoporto2.com", "20:00", "19:00", 5, 10, this.coordinator);
+        "https://www.centrovacinaoporto2.com", "10:00", "19:00", 5, 10, this.coordinator);
 
     assertEquals(center, center2);
   }
@@ -198,11 +210,11 @@ public class VaccinationCenterTest {
   public void ensureEqualCentersTrue() {
     VaccinationCenter center = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida",
         "vacinacaoporto@gmail.com", "+351912345678", "+351223456799",
-        "https://www.centrovacinaoporto.com", "20:00", "19:00", 5, 10, this.coordinator);
+        "https://www.centrovacinaoporto.com", "10:00", "19:00", 5, 10, this.coordinator);
 
     VaccinationCenter center2 = new VaccinationCenter("Centro Vacinação Porto", "Rua João Almeida",
         "vacinacaoporto@gmail.com", "+351912345678", "+351223456799",
-        "https://www.centrovacinaoporto.com", "20:00", "19:00", 5, 10, this.coordinator);
+        "https://www.centrovacinaoporto.com", "10:00", "19:00", 5, 10, this.coordinator);
 
     assertEquals(center, center2);
   }

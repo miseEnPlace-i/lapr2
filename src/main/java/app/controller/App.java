@@ -1,10 +1,7 @@
 package app.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
-import org.apache.commons.lang3.time.DateUtils;
 import app.domain.model.Company;
 import app.domain.model.Employee;
 import app.domain.model.SNSUser;
@@ -88,17 +85,17 @@ public class App {
         Constants.ROLE_ADMIN);
 
     SNSUser user = this.snsUserStore.createSNSUser("000000000ZZ4", "123456789", "name", new Date(),
-        'M', "+351212345678", "t@t.com", "address");
+        'M', "+351212345678", "s@user.com", "address");
     this.snsUserStore.saveSNSUser(user);
 
-    Employee e = this.employeeStore.createEmployee("Name", "+351916919169", "teste@teste.com",
+    Employee e = this.employeeStore.createEmployee("Name", "+351916919169", "r@user.com",
         "address", "123456789ZZ1", Constants.ROLE_RECEPTIONIST);
     this.employeeStore.saveEmployee(e);
-    Employee e2 = this.employeeStore.createEmployee("Name2", "+351916919269", "teste1@teste.com",
+    Employee e2 = this.employeeStore.createEmployee("Name2", "+351916919269", "c@user.com",
         "address", "155424041ZY0", Constants.ROLE_COORDINATOR);
     this.employeeStore.saveEmployee(e2);
 
-    Employee e3 = this.employeeStore.createEmployee("Name2", "+351916919269", "nurse@nurse.pt",
+    Employee e3 = this.employeeStore.createEmployee("Name2", "+351916919269", "n@user.com",
         "address", "000000000ZZ4", Constants.ROLE_NURSE);
     this.employeeStore.saveEmployee(e3);
 
@@ -109,14 +106,10 @@ public class App {
     VaccineType vacType = this.vacTypeStore.addVaccineType("00000", "COVID-19", "M_RNA_TECHNOLOGY");
     this.vacTypeStore.saveVaccineType(vacType);
 
-    try {
-      VaccinationCenter vc = this.vaccinationCenterStore.createCommunityMassCenter("name",
-          "address", "test@gmail.com", "+351212345678", "+351212345679", "http://www.test.com",
-          "20:00", "21:00", 5, 5, e2, vacType);
-      this.vaccinationCenterStore.saveVaccinationCenter(vc);
-    } catch (ParseException exception) {
-      System.out.println("Hours not correct");
-    }
+    VaccinationCenter vc = this.vaccinationCenterStore.createCommunityMassCenter("name", "address",
+        "test@gmail.com", "+351212345678", "+351212345679", "http://www.test.com", "20:00", "21:00",
+        5, 5, e2, vacType);
+    this.vaccinationCenterStore.saveVaccinationCenter(vc);
   }
 
   // Extracted from

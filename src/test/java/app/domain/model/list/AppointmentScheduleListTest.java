@@ -1,7 +1,12 @@
 package app.domain.model.list;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.Appointment;
@@ -52,20 +57,165 @@ public class AppointmentScheduleListTest {
     assertNotNull(appointments);
   }
 
-
   @Test
   public void ensureThatIsPossibleToScheduleAppointment() {
-    AppointmentWithNumberDTO appointmentDTO = new AppointmentWithNumberDTO("123456789",
-        Calendar.getInstance(), vaccinationCenter, vaccineType, true);
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:MM");
+    try {
+      Calendar appointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 10:00"));
+      Calendar nextDay = DateUtils.toCalendar(DateUtils.addDays(sdf.parse("01/01/2022 10:00"), 1));
 
-    Appointment appointment = appointments.create(appointmentDTO);
+      AppointmentWithNumberDTO appointmentDTO = new AppointmentWithNumberDTO("123456789",
+          appointmentDate, vaccinationCenter, vaccineType, true);
 
-    assertNotNull(appointment);
+      Appointment appointment = appointments.create(appointmentDTO);
 
-    appointments.saveAppointment(appointment);
+      assertNotNull(appointment);
 
-    Appointment[][] list = appointments.getAppointmentScheduleForDay(Calendar.getInstance());
+      appointments.saveAppointment(appointment);
 
-    assertNotNull(list);
+      Appointment[][] list = appointments.getAppointmentScheduleForDay(appointmentDate);
+      Appointment[][] emptyList = appointments.getAppointmentScheduleForDay(nextDay);
+
+      assertNotNull(list);
+      assertNull(emptyList);
+    } catch (ParseException e) {
+    }
+  }
+
+  @Test
+  public void ensureThatScheduleListDimensionsAreCorrect() {
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:MM");
+    try {
+      Calendar appointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 10:00"));
+
+      AppointmentWithNumberDTO appointmentDTO = new AppointmentWithNumberDTO("123456789",
+          appointmentDate, vaccinationCenter, vaccineType, true);
+
+      Appointment appointment = appointments.create(appointmentDTO);
+
+      appointments.saveAppointment(appointment);
+
+      Appointment[][] list = appointments.getAppointmentScheduleForDay(appointmentDate);
+
+      assertEquals(list.length, 12);
+      assertEquals(list[0].length, 5);
+    } catch (ParseException e) {
+    }
+  }
+
+  @Test
+  public void ensureThatScheduleIndexIsCorrect() {
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+    try {
+      Calendar appointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 10:00"));
+      Calendar secondAppointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 10:05"));
+      Calendar thirdAppointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 10:30"));
+
+      AppointmentWithNumberDTO appointmentDTO = new AppointmentWithNumberDTO("123456789",
+          appointmentDate, vaccinationCenter, vaccineType, true);
+
+      Appointment appointment = appointments.create(appointmentDTO);
+
+      appointments.saveAppointment(appointment);
+
+      AppointmentWithNumberDTO secondAppointmentDTO = new AppointmentWithNumberDTO("111111111",
+          secondAppointmentDate, vaccinationCenter, vaccineType, true);
+
+      Appointment secondAppointment = appointments.create(secondAppointmentDTO);
+
+      appointments.saveAppointment(secondAppointment);
+
+      AppointmentWithNumberDTO thirdAppointmentDTO = new AppointmentWithNumberDTO("999999999",
+          thirdAppointmentDate, vaccinationCenter, vaccineType, true);
+
+      Appointment thirdAppointment = appointments.create(thirdAppointmentDTO);
+
+      appointments.saveAppointment(thirdAppointment);
+
+      Appointment[][] list = appointments.getAppointmentScheduleForDay(appointmentDate);
+
+      assertEquals(list[0][0], appointment);
+      assertEquals(list[1][0], secondAppointment);
+      assertEquals(list[6][0], thirdAppointment);
+    } catch (ParseException e) {
+    }
+  }
+
+  @Test
+  public void ensureThatIsPossibleToScheduleMultipleAppointmentsToSameSlot() {
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+    try {
+      Calendar appointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 10:00"));
+      Calendar secondAppointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 10:00"));
+
+      AppointmentWithNumberDTO appointmentDTO = new AppointmentWithNumberDTO("123456789",
+          appointmentDate, vaccinationCenter, vaccineType, true);
+
+      Appointment appointment = appointments.create(appointmentDTO);
+
+      appointments.saveAppointment(appointment);
+
+      AppointmentWithNumberDTO secondAppointmentDTO = new AppointmentWithNumberDTO("111111111",
+          secondAppointmentDate, vaccinationCenter, vaccineType, true);
+
+      Appointment secondAppointment = appointments.create(secondAppointmentDTO);
+
+      appointments.saveAppointment(secondAppointment);
+
+      Appointment[][] list = appointments.getAppointmentScheduleForDay(appointmentDate);
+
+      assertEquals(list[0][0], appointment);
+      assertEquals(list[0][1], secondAppointment);
+    } catch (ParseException e) {
+    }
+  }
+
+  @Test
+  public void ensureThatIsPossibleToCreateAppointmentsUntilSlotIsFull() {
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+    try {
+      Calendar appointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 10:00"));
+
+      AppointmentWithNumberDTO appointmentDTO = new AppointmentWithNumberDTO("123456789",
+          appointmentDate, vaccinationCenter, vaccineType, true);
+
+      Appointment appointment = appointments.create(appointmentDTO);
+
+      appointments.saveAppointment(appointment);
+      appointments.saveAppointment(appointment);
+      appointments.saveAppointment(appointment);
+      appointments.saveAppointment(appointment);
+      appointments.saveAppointment(appointment);
+
+      Appointment[][] list = appointments.getAppointmentScheduleForDay(appointmentDate);
+
+      assertEquals(list[0][0], appointment);
+      assertEquals(list[0][2], appointment);
+      assertEquals(list[0][2], appointment);
+      assertEquals(list[0][3], appointment);
+      assertEquals(list[0][4], appointment);
+    } catch (ParseException e) {
+    }
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void ensureThatIsNotPossibleToCreateAppointmentsWhenSlotIsFull() {
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+    try {
+      Calendar appointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 10:00"));
+
+      AppointmentWithNumberDTO appointmentDTO = new AppointmentWithNumberDTO("123456789",
+          appointmentDate, vaccinationCenter, vaccineType, true);
+
+      Appointment appointment = appointments.create(appointmentDTO);
+
+      appointments.saveAppointment(appointment);
+      appointments.saveAppointment(appointment);
+      appointments.saveAppointment(appointment);
+      appointments.saveAppointment(appointment);
+      appointments.saveAppointment(appointment);
+      appointments.saveAppointment(appointment);
+    } catch (ParseException e) {
+    }
   }
 }

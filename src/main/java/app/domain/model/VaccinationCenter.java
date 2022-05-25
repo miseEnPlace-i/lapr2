@@ -1,8 +1,6 @@
 package app.domain.model;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import app.domain.model.list.AppointmentScheduleList;
 import app.service.FormatVerifier;
 
@@ -43,8 +41,7 @@ public class VaccinationCenter {
    */
   public VaccinationCenter(String name, String address, String email, String phoneNum,
       String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration,
-      int maxVacSlot, Employee coordinator) throws ParseException {
-
+      int maxVacSlot, Employee coordinator) {
     setName(name);
     setAddress(address);
     setEmail(email);
@@ -254,17 +251,21 @@ public class VaccinationCenter {
    * @throws IllegalArgumentException if the opening hours are null, empty or not valid.
    */
   private void setOpeningHours(String openingHours) {
-    String[] openHours = openingHours.split(":");
-    int hours = Integer.parseInt(openHours[0]);
-    int minutes = Integer.parseInt(openHours[1]);
+    validateTime(openingHours);
 
-    if (openingHours == null || openingHours.isEmpty()) {
-      throw new IllegalArgumentException("Opening hours cannot be null or empty.");
-    }
-    if (hours < 0 || hours > 24 || minutes < 0 || minutes > 60) {
-      throw new IllegalArgumentException("Opening hours is not valid.");
-    }
     this.openingHours = openingHours;
+  }
+
+  private void validateTime(String time) {
+    String[] timeString = time.split(":");
+    int hours = Integer.parseInt(timeString[0]);
+    int minutes = Integer.parseInt(timeString[1]);
+
+    if (timeString == null || timeString[0].isEmpty() || timeString[1].isEmpty())
+      throw new IllegalArgumentException("Time cannot be null or empty.");
+
+    if (hours < 0 || hours >= 24 || minutes < 0 || minutes > 60)
+      throw new IllegalArgumentException("Opening hours is not valid.");
   }
 
   /**
@@ -275,25 +276,27 @@ public class VaccinationCenter {
    * 
    * @throws IllegalArgumentException if the closing hours are null, empty or not valid.
    */
-  private void setClosingHours(String closingHours) throws ParseException {
-    SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-    Date dateClos = format.parse(closingHours);
-    Date dateOpen = format.parse(openingHours);
+  private void setClosingHours(String closingHours) {
+    validateTime(closingHours);
 
-    String[] closHours = closingHours.split(":");
-    int hours = Integer.parseInt(closHours[0]);
-    int minutes = Integer.parseInt(closHours[1]);
+    if (isAfter(closingHours, openingHours)) this.closingHours = closingHours;
+    else throw new IllegalArgumentException("Closing hours must be after the opening hours.");
+  }
 
-    if (closingHours == null || closingHours.isEmpty()) {
-      throw new IllegalArgumentException("Closing hours cannot be null or empty.");
-    }
-    if (hours < 0 || hours > 24 || minutes < 0 || minutes > 60) {
-      throw new IllegalArgumentException("Closing hours is not valid.");
-    }
-    if (dateClos.before(dateOpen)) {
-      throw new IllegalArgumentException("Closing hours cannot be before opening hours.");
-    }
-    this.closingHours = closingHours;
+  private boolean isAfter(String firstHours, String secondHours) {
+    String[] firstTime = firstHours.split(":");
+    String[] secondTime = secondHours.split(":");
+
+    int firstHoursInt = Integer.parseInt(firstTime[0]);
+    int firstMinutesInt = Integer.parseInt(firstTime[1]);
+
+    int secondHoursInt = Integer.parseInt(secondTime[0]);
+    int secondMinutesInt = Integer.parseInt(secondTime[1]);
+
+    if (firstHoursInt > secondHoursInt) return true;
+    if (firstHoursInt == secondHoursInt && firstMinutesInt > secondMinutesInt) return true;
+
+    return false;
   }
 
   /**
