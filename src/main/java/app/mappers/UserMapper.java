@@ -3,7 +3,6 @@ package app.mappers;
 import app.domain.model.SNSUser;
 import app.domain.model.dto.UserDTO;
 import app.service.PasswordGenerator;
-import pt.isep.lei.esoft.auth.domain.model.Password;
 
 /**
  * Vaccination Center mapper
