@@ -3,7 +3,6 @@ skinparam classAttributeIconSize 0
 
 class Appointment {
   - date: Date
-  - time: String
   +Appointment(SNSUserNumber, date, time, center, vaccineType)
   +sendSMS()
   +getVaccinationCenter()
@@ -27,11 +26,15 @@ class Vaccine   {
   +Vaccine(designation, id, brand, vacTypeId)
 }
 
-class AppointmentUI {}
+class ScheduleVaccineReceptionistUI {}
 
-class AppointmentController {
-  +createAppointment(SNSUserNumber, date, time, center, vaccineType,sms)
-  +saveAppointment(appointment)
+class ScheduleVaccineController {
+  +createAppointment(appointmentWithNumberDto)
+  +getSuggestedVaccineType()
+  +getVaccineTypeByCode(code)
+  +getVaccinationCenterByEmail(email)
+  +save()
+  +existsUser(snsNumber)
 }
 
 class Company {
@@ -107,26 +110,29 @@ class VaccinationCenterMapper {
   +toDto(vaccinationCenters)
 }
 
-class AppointmentDto {
+class AppointmentWithNumberDto {
   -snsUser : SNSUser
   -vaccineType : VaccineType
   -center : VaccinationCenter
   -date : Calendar
-  -time : String
+  -sms: boolean
   +getVaccineType()
   +getVaccinationCenter()
   +getDate()
-  +getTime()
   +getSNSNumber()
+  +getSMS()
 }
 
-class AppointmentMapper {}
+class SNSUserStore {
+  +checkSNSUserExists(snsNumber)                           
+}
 
-AppointmentUI ..> AppointmentController
-AppointmentController ..> Company
+ScheduleVaccineReceptionistUI ..> ScheduleVaccineController
+ScheduleVaccineController ..> Company
 Company ..> VaccinationCenterStore
 Company ..> VaccineTypeStore
 Company ..> AppointmentScheduleList
+Company ..> SNSUserStore
 VaccinationCenterStore "1" --> "*" VaccinationCenter : stores
 VaccinationCenter "1" --o "*" Appointment
 SNSUser "1" --o "*" Appointment
@@ -139,10 +145,9 @@ Appointment o-- VaccineType
 SMSSender <.. Appointment
 VaccineType --o Vaccine 
 VaccinationCenterStore ..> Vaccine
-AppointmentMapper ..> AppointmentDto
-AppointmentController ..> AppointmentMapper
-AppointmentController ..> VaccinationCenterMapper
-AppointmentController ..> VaccineTypeMapper 
+ScheduleVaccineController ..> AppointmentWithNumberDto
+ScheduleVaccineController ..> VaccinationCenterMapper
+ScheduleVaccineController ..> VaccineTypeMapper 
 VaccineTypeStore --> VaccineType : stores > 
-
+SNSUserStore --> SNSUser : stores
 @enduml
