@@ -1,7 +1,5 @@
 package app.domain.model;
 
-import java.text.ParseException;
-
 /**
  * @author André Barros <1211299@isep.ipp.pt>
  */
@@ -27,7 +25,7 @@ public class CommunityMassVaccinationCenter extends VaccinationCenter {
    */
   public CommunityMassVaccinationCenter(String name, String address, String email, String phoneNum,
       String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration,
-      int maxVacSlot, Employee coordinator, VaccineType vaccineType) throws ParseException {
+      int maxVacSlot, Employee coordinator, VaccineType vaccineType) {
 
     super(name, address, email, phoneNum, faxNum, webAddress, openingHours, closingHours,
         slotDuration, maxVacSlot, coordinator);

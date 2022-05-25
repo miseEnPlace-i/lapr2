@@ -1,6 +1,5 @@
 package app.domain.model.store;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.CommunityMassVaccinationCenter;
@@ -10,8 +9,8 @@ import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
 import app.domain.model.WaitingRoom;
 import app.domain.model.dto.VaccinationCenterListDTO;
-import app.mappers.VaccinationCenterMapper;
 import app.domain.shared.Constants;
+import app.mappers.VaccinationCenterMapper;
 
 /**
  * Vaccination Center store
@@ -48,7 +47,7 @@ public class VaccinationCenterStore {
   public VaccinationCenter createCommunityMassCenter(String name, String address,
       String emailAddress, String phoneNum, String faxNum, String webAddress, String openingHours,
       String closingHours, int slotDuration, int maxVacSlot, Employee coordinator,
-      VaccineType vaccineType) throws ParseException {
+      VaccineType vaccineType) {
 
     boolean isCoordinatorValid = validateCoordinator(coordinator);
 
@@ -63,8 +62,7 @@ public class VaccinationCenterStore {
 
   public VaccinationCenter createHealthCareCenter(String name, String address, String emailAddress,
       String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours,
-      int slotDuration, int maxVacSlot, Employee coordinator, String ages, String ags)
-      throws ParseException {
+      int slotDuration, int maxVacSlot, Employee coordinator, String ages, String ags) {
 
     boolean isCoordinatorValid = validateCoordinator(coordinator);
 
