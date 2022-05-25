@@ -8,8 +8,8 @@ import app.domain.model.HealthCareCenter;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
 import app.domain.model.WaitingRoom;
-import app.domain.model.dto.VaccinationCenterListDTO;
 import app.domain.shared.Constants;
+import app.dto.VaccinationCenterListDTO;
 import app.mappers.VaccinationCenterMapper;
 
 /**

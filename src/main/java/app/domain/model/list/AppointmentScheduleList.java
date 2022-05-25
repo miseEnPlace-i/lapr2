@@ -6,8 +6,8 @@ import java.util.Map;
 import app.domain.model.Appointment;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
-import app.domain.model.dto.AppointmentWithNumberDTO;
-import app.domain.model.dto.AppointmentWithoutNumberDTO;
+import app.dto.AppointmentWithNumberDTO;
+import app.dto.AppointmentWithoutNumberDTO;
 import app.exception.AppointmentNotFoundException;
 
 /**
