@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import app.service.FileUtils;
 
+/**
+ * Vaccination Center mapper
+ * 
+ * @autor Carlos Lopes <1211277@isep.ipp.pt>
+ */
 public class CSVReader {
     
     private static int FILE_COLUMNS = 8;
