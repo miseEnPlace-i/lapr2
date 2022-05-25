@@ -106,10 +106,10 @@ activate RECEPT
   RECEPT -> UI : confirms the data
   activate UI
 
-    UI -> CTRL : confirmAppointment(apt)
+    UI -> CTRL : save()
     activate CTRL
 
-      CTRL -> WRLST : add(arrival)
+      CTRL -> WRLST : saveArrival(arrival)
       activate WRLST
       deactivate WRLST
 
