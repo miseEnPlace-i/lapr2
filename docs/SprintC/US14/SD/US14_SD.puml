@@ -8,13 +8,16 @@ participant ":UploadUsersFromFileController" as CTRL
 participant "csvR:CSVReader" as CSVR
 participant "userSt :SNSUserStore" as USR_STR
 participant "comp :Company" as COMP
-participant "mapper: UserMapper" as MAPPER
-participant "dto: UserDto" as DTO
+participant "mapper: SNSUserMapper" as MAPPER
+participant "dto: SNSUserDTO" as DTO
+participant "mapper: SNSUserRegisterInfoMapper" as USER_INFO_MAPPER
+participant "dto: SNSUserRegisterInfoDTO" as USER_INFO_DTO
 participant "user :SNSUser" as USR
 participant ":PasswordGenerator" as PWDGEN
 participant "auth :AuthFacade" as AUTH
 participant ":EmailSender" as EMAIl
 participant "userDataList :List<Array<String>>" as LIST
+participant "userRegisterInfoList: List<UserRegisterInfoDto>" as USER_INFO_LIST
 
 activate ADM
 ADM -> UI : asks to load users from a file
@@ -47,16 +50,22 @@ activate UI
         activate CSVR
         deactivate CSVR
 
-        CTRL -> USR_STR : registListOfUsers(userDataList)
+        CTRL -> USR_STR : userRegisterInfoList = registerListOfUsers(userDataList)
         activate USR_STR
 
-        loop for each SNSUser regist
+        loop for each SNSUser register
         note right of USR_STR
-            snsUserData implies citizenCard, snsNumber, name, birthDay, phoneNumber, email, address, sex
+            snsUserData is a string with Name, Sex, Birth Date, Address, Phone Number, E-mail, SNS User Number and Citizen Card Number. 
         end note
-        USR_STR -> USR_STR : snsUser = createSNSUser(snsUserData)
+            USR_STR -> MAPPER : userDto = toDto(snsUserData)
+            activate MAPPER
+                MAPPER -> DTO ** : create(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
+            deactivate MAPPER
+
+
+            USR_STR -> USR_STR : snsUser = createSNSUser(userDto)
             activate USR_STR
-                USR_STR -> USR** : create(snsUserData)
+                USR_STR -> USR** : create(userDto)
             deactivate USR_STR
 
             USR_STR -> USR_STR : validateSNSUser(snsUser)
@@ -79,29 +88,29 @@ activate UI
 
             deactivate USR_STR
 
-            USR_STR -> USR_STR : saveSNSUser(snsUser)
+            USR_STR -> USR_STR : userRegisterInfoDto = saveSNSUser(snsUser)
             activate USR_STR
 
-                USR_STR -> MAPPER : userDto = toDto(snsUser)
-                activate MAPPER
+                USR_STR -> USER_INFO_MAPPER : userRegisterInfoDto = toDto(snsUser)
+                activate USER_INFO_MAPPER
 
-                    MAPPER -> USR : name = getName()
+                    USER_INFO_MAPPER -> USR : name = getName()
                     activate USR
                     deactivate USR
 
-                    MAPPER -> USR : email = getEmail()
+                    USER_INFO_MAPPER -> USR : email = getEmail()
                     activate USR
                     deactivate USR
 
-                    MAPPER -> PWDGEN : pwd = generatePwd()
+                    USER_INFO_MAPPER -> PWDGEN : pwd = generatePwd()
                     activate PWDGEN
                     deactivate PWDGEN
 
-                    MAPPER -> DTO ** : create(name, email, pwd, "SNS_USER")
+                    USER_INFO_MAPPER -> USER_INFO_DTO ** : create(name, email, pwd, "SNS_USER")
 
-                deactivate MAPPER
+                deactivate USER_INFO_MAPPER
 
-            USR_STR -> AUTH : addUserWithRole(snsUserDto)
+            USR_STR -> AUTH : addUserWithRole(userRegisterInfoDto)
             activate AUTH
             deactivate AUTH
 
@@ -114,7 +123,7 @@ activate UI
             activate EMAIl
             deactivate EMAIl
 
-        deactivate USR_STR
+            deactivate USR_STR
         deactivate USR_STR
         end
     deactivate CTRL
