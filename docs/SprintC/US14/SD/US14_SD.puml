@@ -39,7 +39,7 @@ deactivate UI
 ADM -> UI : confirms action
 activate UI
 
-    UI -> CTRL : readAndUpload()
+    UI -> CTRL : userRegisterInfoList = readAndUpload()
     activate CTRL
 
         CTRL -> COMP : store = getSNSUserStore()
