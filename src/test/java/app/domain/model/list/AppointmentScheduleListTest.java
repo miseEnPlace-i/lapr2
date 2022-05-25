@@ -170,6 +170,46 @@ public class AppointmentScheduleListTest {
     }
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void ensureThatIsNotPossibleToScheduleAppointmentAfterLastSlot() {
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+    try {
+      Calendar appointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 10:58"));
+
+      AppointmentWithNumberDTO appointmentDTO = new AppointmentWithNumberDTO("123456789",
+          appointmentDate, vaccinationCenter, vaccineType, true);
+
+      Appointment appointment = appointments.create(appointmentDTO);
+
+      appointments.saveAppointment(appointment);
+
+      Appointment[][] list = appointments.getAppointmentScheduleForDay(appointmentDate);
+
+      assertEquals(list[11][0], appointment);
+    } catch (ParseException e) {
+    }
+  }
+
+  @Test()
+  public void ensureThatIsPossibleToScheduleAppointmentToLastSlot() {
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+    try {
+      Calendar appointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 10:55"));
+
+      AppointmentWithNumberDTO appointmentDTO = new AppointmentWithNumberDTO("123456789",
+          appointmentDate, vaccinationCenter, vaccineType, true);
+
+      Appointment appointment = appointments.create(appointmentDTO);
+
+      appointments.saveAppointment(appointment);
+
+      Appointment[][] list = appointments.getAppointmentScheduleForDay(appointmentDate);
+
+      assertEquals(list[11][0], appointment);
+    } catch (ParseException e) {
+    }
+  }
+
   @Test
   public void ensureThatIsPossibleToCreateAppointmentsUntilSlotIsFull() {
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
@@ -214,6 +254,38 @@ public class AppointmentScheduleListTest {
       appointments.saveAppointment(appointment);
       appointments.saveAppointment(appointment);
       appointments.saveAppointment(appointment);
+      appointments.saveAppointment(appointment);
+    } catch (ParseException e) {
+    }
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void ensureThatIsNotPossibleToCreateAppointmentsBeforeCenterOpen() {
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+    try {
+      Calendar appointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 08:00"));
+
+      AppointmentWithNumberDTO appointmentDTO = new AppointmentWithNumberDTO("123456789",
+          appointmentDate, vaccinationCenter, vaccineType, true);
+
+      Appointment appointment = appointments.create(appointmentDTO);
+
+      appointments.saveAppointment(appointment);
+    } catch (ParseException e) {
+    }
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void ensureThatIsNotPossibleToCreateAppointmentsAfterCenterClosed() {
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+    try {
+      Calendar appointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 11:30"));
+
+      AppointmentWithNumberDTO appointmentDTO = new AppointmentWithNumberDTO("123456789",
+          appointmentDate, vaccinationCenter, vaccineType, true);
+
+      Appointment appointment = appointments.create(appointmentDTO);
+
       appointments.saveAppointment(appointment);
     } catch (ParseException e) {
     }

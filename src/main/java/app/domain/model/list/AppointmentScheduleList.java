@@ -98,15 +98,20 @@ public class AppointmentScheduleList {
     int scheduleMinutesOfDay =
         (date.get(Calendar.HOUR_OF_DAY) * 60 + date.get(Calendar.MINUTE)) - openingMinutesOfDay;
 
-    if (isValid(scheduleMinutesOfDay)) return scheduleMinutesOfDay / slotDuration;
+    if (isValidSchedule(scheduleMinutesOfDay, openingMinutesOfDay, closingMinutesOfDay))
+      return scheduleMinutesOfDay / slotDuration;
     return -1;
   }
 
-  private boolean isValid(int minutes) {
-    // TODO Implement
-    // This need to have in mind that if the closing hours and opening hours can be bigger than one another
-    // Ex.: opening hours = 18:00 and closing hours = 20:00 -> works 2 hours
-    // Ex.: opening hours = 20:00 and closing hours = 18:00 -> works 22 hours
+  private boolean isValidSchedule(int scheduledMinutesOfDay, int openingMinutesOfDay,
+      int closingMinutesOfDay) {
+    if (scheduledMinutesOfDay < 0) return false;
+
+    // subtract slot duration because the last slot cannot be used
+    int workingHours =
+        closingMinutesOfDay - openingMinutesOfDay - vaccinationCenter.getSlotDuration();
+
+    if (scheduledMinutesOfDay > workingHours) return false;
     return true;
   }
 
