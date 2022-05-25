@@ -58,16 +58,28 @@ public class Appointment {
     return date;
   }
 
+  public VaccineType getVaccineType() {
+    return vaccineType;
+  }
+
+  public boolean isSms() {
+    return sms;
+  }
+
+  public VaccinationCenter getVaccinationCenter() {
+    return center;
+  }
+
   @Override
   public String toString() {
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
     StringBuilder sb = new StringBuilder();
     sb.append("Appointment: \n");
-    sb.append("\nSNS Number: " + snsNumber);
+    sb.append("\nSNS Number: " + getSnsNumber());
     sb.append("\nDate: " + sdf.format(date.getTime()));
     sb.append("\nVaccination Center: " + center.getName());
-    sb.append("\nVaccine Type: " + vaccineType.getDescription());
+    sb.append("\nVaccine Type: " + getVaccineType());
     sb.append("\nSend SMS: " + (sms ? "Yes" : "No"));
 
     return sb.toString();
