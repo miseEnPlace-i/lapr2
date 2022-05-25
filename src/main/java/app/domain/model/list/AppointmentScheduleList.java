@@ -42,6 +42,16 @@ public class AppointmentScheduleList {
     return (closingMinutesOfDay - openingMinutesOfDay) / center.getSlotDuration();
   }
 
+  private void listVaccinationSchedule(Appointment[][] list) {
+    for (Appointment[] appointments : list) {
+      for (Appointment appointment : appointments) {
+        System.out.print("[ ");
+        if (appointment != null) System.out.println("x");
+        System.out.print(" ]");
+      }
+    }
+  }
+
   /**
    * Creates a new appointment.
    *
@@ -138,6 +148,12 @@ public class AppointmentScheduleList {
       slots[slotIndex][0] = appointment;
       appointments.put(key, slots);
     }
+
+    listVaccinationSchedule(getAppointmentScheduleForDay(key));
+  }
+
+  private Appointment[][] getAppointmentScheduleForDay(Calendar date) {
+    return appointments.get(generateKeyFromDate(date));
   }
 
   private int getAvailableIndexInSlot(Appointment[] slot) {
