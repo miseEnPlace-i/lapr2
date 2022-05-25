@@ -1,5 +1,8 @@
 package app.domain.model;
 
+import java.text.ParseException;
+import javafx.css.CssParser.ParseError;
+
 /**
  * @author André Barros <1211299@isep.ipp.pt>
  */
@@ -27,7 +30,7 @@ public class HealthCareCenter extends VaccinationCenter {
    */
   public HealthCareCenter(String name, String address, String email, String phoneNum, String faxNum,
       String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot,
-      Employee coordinator, String ages, String ars) {
+      Employee coordinator, String ages, String ars) throws ParseException {
 
     super(name, address, email, phoneNum, faxNum, webAddress, openingHours, closingHours,
         slotDuration, maxVacSlot, coordinator);

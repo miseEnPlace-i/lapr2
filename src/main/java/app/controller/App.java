@@ -1,5 +1,6 @@
 package app.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
@@ -101,13 +102,21 @@ public class App {
         "address", "000000000ZZ4", Constants.ROLE_NURSE);
     this.employeeStore.saveEmployee(e3);
 
+    Employee e4 = this.employeeStore.createEmployee("Name2", "+351916919269", "teste@coor.pt",
+        "address", "000000000ZZ4", Constants.ROLE_COORDINATOR);
+    this.employeeStore.saveEmployee(e4);
+
     VaccineType vacType = this.vacTypeStore.addVaccineType("00000", "COVID-19", "M_RNA_TECHNOLOGY");
     this.vacTypeStore.saveVaccineType(vacType);
 
-    VaccinationCenter vc = this.vaccinationCenterStore.createCommunityMassCenter("name", "address",
-        "test@gmail.com", "+351212345678", "+351212345679", "http://www.test.com", "20:00", "21:00",
-        5, 5, e2, vacType);
-    this.vaccinationCenterStore.saveVaccinationCenter(vc);
+    try {
+      VaccinationCenter vc = this.vaccinationCenterStore.createCommunityMassCenter("name",
+          "address", "test@gmail.com", "+351212345678", "+351212345679", "http://www.test.com",
+          "20:00", "21:00", 5, 5, e2, vacType);
+      this.vaccinationCenterStore.saveVaccinationCenter(vc);
+    } catch (ParseException exception) {
+      System.out.println("Hours not correct");
+    }
   }
 
   // Extracted from

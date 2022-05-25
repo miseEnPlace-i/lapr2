@@ -2,7 +2,6 @@ package app.domain.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import org.apache.commons.lang3.time.DateUtils;
 
 /**
  * Appointment class.

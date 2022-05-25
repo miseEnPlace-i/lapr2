@@ -41,42 +41,16 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
 
     if (!accepted) {
       // Declines the suggested vaccine type
-      List<VaccineTypeDTO> list = ctrl.getListOfVaccineTypes();
-
-      Object selectedVt = Utils.showAndSelectOne(list, "\n\nSelect a Vaccine Type:\n");
-
-      try {
-        VaccineTypeDTO vtDto = (VaccineTypeDTO) selectedVt;
-        vaccineType = ctrl.getVaccineTypeByCode(vtDto.getCode());
-      } catch (ClassCastException e) {
-        System.out.println("\n\nInvalid selection.");
-      }
+      vaccineType = selectVaccineType();
     }
 
-    List<VaccinationCenterListDTO> list =
-        ctrl.getListOfVaccinationCentersWithVaccineType(vaccineType);
+    // Verificar HealthData History
 
-    VaccinationCenter vacCenter = null;
+    VaccinationCenter vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
 
-    Object selectedCenter = Utils.showAndSelectOne(list, "\nSelect a Vaccination Center:\n");
-
-    try {
-      VaccinationCenterListDTO centerDto = (VaccinationCenterListDTO) selectedCenter;
-      vacCenter = ctrl.getVaccinationCenterByEmail(centerDto.getEmail());
-    } catch (ClassCastException e) {
-      System.out.println("\n\nInvalid selection.");
-    }
-
-    System.out.println("\nDo you want to receive an SMS with the appointment's info?");
-    List<String> options = new ArrayList<String>();
-    options.add("Yes, send me an SMS.");
-    options.add("No, don't send me an SMS.");
-    int index = Utils.showAndSelectIndex(options, "\nSelect an option: (1 or 2)  ");
-
-    boolean sms = (index == 0);
+    boolean sms = selectSMS();
 
     Calendar appointmentDate = Calendar.getInstance();
-
     try {
       appointmentDate = CalendarUtils.parseDateTime(date, hours);
     } catch (ParseException e) {
@@ -89,7 +63,7 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
     ctrl.createAppointment(appointmentDto);
   }
 
-  public boolean showSuggestedVaccineType(VaccineType vt) {
+  private boolean showSuggestedVaccineType(VaccineType vt) {
     System.out.println("\nSuggested Vaccine Type:\n");
 
     System.out.println(vt.getDescription());
@@ -100,5 +74,47 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
     int index = Utils.showAndSelectIndex(options, "\nSelect an option: (1 or 2)  ");
 
     return index == 0;
+  }
+
+  private VaccineType selectVaccineType() {
+    List<VaccineTypeDTO> list = ctrl.getListOfVaccineTypes();
+
+    Object selectedVt = Utils.showAndSelectOne(list, "\n\nSelect a Vaccine Type:\n");
+
+    try {
+      VaccineTypeDTO vtDto = (VaccineTypeDTO) selectedVt;
+      return ctrl.getVaccineTypeByCode(vtDto.getCode());
+    } catch (ClassCastException e) {
+      System.out.println("\n\nInvalid selection.");
+      return null;
+    }
+  }
+
+  private VaccinationCenter selectVaccinationCenterWithVaccineType(VaccineType vt) {
+    List<VaccinationCenterListDTO> list = ctrl.getListOfVaccinationCentersWithVaccineType(vt);
+
+    Object selectedCenter = Utils.showAndSelectOne(list, "\nSelect a Vaccination Center:\n");
+
+    try {
+      VaccinationCenterListDTO centerDto = (VaccinationCenterListDTO) selectedCenter;
+      return ctrl.getVaccinationCenterByEmail(centerDto.getEmail());
+    } catch (ClassCastException e) {
+      System.out.println("\n\nInvalid selection.");
+      return null;
+    }
+  }
+
+  private boolean selectSMS() {
+    System.out.println("\nDo you want to receive an SMS with the appointment's info?");
+    List<String> options = new ArrayList<String>();
+    options.add("Yes, send me an SMS.");
+    options.add("No, don't send me an SMS.");
+    int index = Utils.showAndSelectIndex(options, "\nSelect an option: (1 or 2)  ");
+
+    return (index == 0);
+  }
+
+  private boolean checkUserHealthDataByVaccineType(VaccineType vt) {
+
   }
 }
