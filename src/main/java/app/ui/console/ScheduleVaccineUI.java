@@ -25,14 +25,7 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
 
   public void insertData() {
     SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-    String dateStr =
-        Utils.readLineFromConsoleWithValidation("Date (dd/MM/yyyy): ", FieldToValidate.DATE);
-    Date date = new Date();
-    try {
-      date = df.parse(dateStr);
-    } catch (ParseException ex) {
-      System.out.println("Invalid date format.\n");
-    }
+    Date dateStr = Utils.readDateFromConsole("Date (dd/MM/yyyy): ");
     String hours = Utils.readLineFromConsoleWithValidation("Hour (HH:MM)", FieldToValidate.HOURS);
 
     VaccineType vaccineType = ctrl.getSuggestedVaccineType();
