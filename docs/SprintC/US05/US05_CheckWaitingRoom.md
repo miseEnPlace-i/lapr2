@@ -15,6 +15,7 @@ As a nurse, I intend to consult the users in the waiting room of a vaccination c
 > "At any time, a nurse responsible for administering the vaccine will use the application to check the list of SNS users that are present in the vaccination center to take the vaccine"
 
 **From the client clarifications:**
+oov
 
 > **Question:** "[...] what does consulting constitute in this context? [...]"
 >
@@ -39,6 +40,10 @@ As a nurse, I intend to consult the users in the waiting room of a vaccination c
 > **Question**: "Regarding US05, the listing is supposed to be for the day itself or for a specific day."
 >
 > **Answer**: "The list should show the users in the waiting room of a vaccination center."
+
+> **Question**: "Is it supposed to remove a SNS user of the wait list when he leaves the waiting room to get the vaccine? If yes, how do we know when the sns user leaves the waiting room?"
+>
+> **Answer**: "US5 is only to list users that are in the waiting room of a vaccination centers."
 
 ### 1.3. Acceptance Criteria
 
