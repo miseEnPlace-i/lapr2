@@ -108,8 +108,7 @@ public class AppointmentScheduleList {
     if (scheduledMinutesOfDay < 0) return false;
 
     // subtract slot duration because the last slot cannot be used
-    int workingHours =
-        closingMinutesOfDay - openingMinutesOfDay - vaccinationCenter.getSlotDuration();
+    int workingHours = closingMinutesOfDay - openingMinutesOfDay;
 
     if (scheduledMinutesOfDay > workingHours) return false;
     return true;
@@ -153,6 +152,22 @@ public class AppointmentScheduleList {
     }
 
     listVaccinationSchedule(getAppointmentScheduleForDay(key));
+  }
+
+  public boolean checkSlotAvailability(Calendar date) {
+    Calendar key = generateKeyFromDate(date);
+    int slotIndex = getAppointmentSlotIndex(date);
+
+    if (appointments.containsKey(key)) {
+      Appointment[][] slots = appointments.get(key);
+
+      int i = getAvailableIndexInSlot(slots[slotIndex]);
+
+      if (i == -1) return false;
+      else return true;
+    } else {
+      return true;
+    }
   }
 
   public Appointment[][] getAppointmentScheduleForDay(Calendar date) {

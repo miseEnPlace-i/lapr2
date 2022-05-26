@@ -2,6 +2,7 @@ package app.domain.model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import app.domain.model.list.AppointmentScheduleList;
 import app.service.FormatVerifier;
@@ -419,10 +420,7 @@ public class VaccinationCenter {
         || (hoursToCheck.after(openingHours) && hoursToCheck.before(closingHours)));
   }
 
-  public boolean hasAvailabilityInSlot(String hours) {
-    // TODO
-    //
-
-    return false;
+  public boolean hasAvailabilityInSlot(Calendar date) {
+    return appointmentList.checkSlotAvailability(date);
   }
 }

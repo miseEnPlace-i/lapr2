@@ -1,6 +1,7 @@
 package app.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import app.domain.model.Appointment;
@@ -152,5 +153,9 @@ public class ScheduleVaccineController implements IRegisterController {
 
   public boolean isCenterOpenAt(VaccinationCenter vacCenter, String hours) {
     return vacCenter.isOpenAt(hours);
+  }
+
+  public boolean hasSlotAvailability(VaccinationCenter vacCenter, Calendar date) {
+    return vacCenter.hasAvailabilityInSlot(date);
   }
 }
