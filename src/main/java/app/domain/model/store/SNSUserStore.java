@@ -5,12 +5,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import app.domain.model.SNSUser;
+import app.domain.model.dto.SNSUserDTO;
+import app.domain.model.dto.SNSUserRegisterInfoDTO;
 import app.domain.shared.Constants;
+import app.mappers.SNSUserMapper;
+import app.mappers.SNSUserRegisterInfoMapper;
 import app.service.PasswordGenerator;
 import pt.isep.lei.esoft.auth.AuthFacade;
+import pt.isep.lei.esoft.auth.mappers.UserMapper;
+import pt.isep.lei.esoft.auth.mappers.dto.UserDTO;
 
 /**
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
+ * @author Carlos Lopes <1211277@isep.ipp.pt>
  */
 public class SNSUserStore {
   // User List
@@ -48,6 +55,15 @@ public class SNSUserStore {
     return snsUser;
   }
 
+
+  //creates SNS User instance.
+  public SNSUser createSNSUser(SNSUserDTO snsUserDto) {
+    SNSUser snsUser =
+        new SNSUser(snsUserDto);
+
+    return snsUser;
+  }
+
   /**
    * Checks if there are duplicates.
    * 
@@ -72,18 +88,23 @@ public class SNSUserStore {
    * 
    * @param user
    */
-  public void saveSNSUser(SNSUser snsUser) {
-    String name = snsUser.getName();
-    String email = snsUser.getEmail();
-    String pwd = PasswordGenerator.generatePwd();
+  public SNSUserRegisterInfoDTO saveSNSUser(SNSUser snsUser) {
+    SNSUserRegisterInfoDTO userRegisterInfoDTO = SNSUserRegisterInfoMapper.toDto(snsUser);
 
-    authFacade.addUserWithRole(name, email, pwd, Constants.ROLE_SNS_USER);
+    authFacade.addUserWithRole(userRegisterInfoDTO.getName(), userRegisterInfoDTO.getEmail(), userRegisterInfoDTO.getPass(), userRegisterInfoDTO.getRole());
 
-    snsUsers.add(snsUser);
+    addSNSUser(snsUser);
+
+    return userRegisterInfoDTO;
 
     // TODO: send password email
     // EmailSender emailSender = new EmailSender();
     // emailSender.sendPasswordEmail(email, pwdStr);
+  }
+
+  //adds SNS User
+  public void addSNSUser(SNSUser snsUser){
+    snsUsers.add(snsUser);
   }
 
   /**
@@ -150,4 +171,20 @@ public class SNSUserStore {
   public int size() {
     return snsUsers.size();
   }
+
+  public List<SNSUserRegisterInfoDTO> registerListOfUsers(List<String[]> userDataList) throws ParseException{
+    List<SNSUserRegisterInfoDTO> userRegisterInfoList = new ArrayList<>();
+
+    for (int i = 0; i < userDataList.size(); i++) {
+      SNSUserDTO userDto = SNSUserMapper.toDto(userDataList.get(i));
+
+      SNSUser snsUser = createSNSUser(userDto);
+
+      validateSNSUser(snsUser);
+
+      userRegisterInfoList.add(saveSNSUser(snsUser));;
+    }
+    return userRegisterInfoList;
+  }
+
 }

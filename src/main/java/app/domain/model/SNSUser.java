@@ -1,6 +1,7 @@
 package app.domain.model;
 
 import java.util.Date;
+import app.domain.model.dto.SNSUserDTO;
 import app.service.CCFormatVerifier;
 import app.service.FormatVerifier;
 import app.service.TimeUtils;
@@ -72,6 +73,25 @@ public class SNSUser {
     this.address = address;
 
     this.userHealthData = new HealthData();
+  }
+
+  public SNSUser(SNSUserDTO snsUserDTO) {
+    validateBirthday(snsUserDTO.getBirthDay());
+    validateCitizenCard(snsUserDTO.getCitizenCard());
+    validateSNSNumber(snsUserDTO.getSnsNumber());
+    validateName(snsUserDTO.getName());
+    validatePhoneNumber(snsUserDTO.getPhoneNumber());
+    validateEmail(snsUserDTO.getEmail());
+    validateAddress(snsUserDTO.getAddress());
+
+    this.citizenCard = snsUserDTO.getCitizenCard().toUpperCase();
+    this.snsNumber = snsUserDTO.getSnsNumber();
+    this.name = snsUserDTO.getName();
+    this.birthDay = snsUserDTO.getBirthDay();
+    this.gender = snsUserDTO.getGender();
+    this.phoneNumber = snsUserDTO.getPhoneNumber();
+    this.email = snsUserDTO.getEmail();
+    this.address = snsUserDTO.getAddress();
   }
 
   // Getters
