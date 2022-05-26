@@ -37,6 +37,14 @@ public class Appointment {
   }
 
   /**
+   * Compares the SNS number of this appointment with another number.
+   */
+  public boolean hasVaccineType(VaccineType vaccineType) {
+    return this.vaccineType.equals(vaccineType);
+  }
+
+
+  /**
    * Returns the SNS User.
    */
   public SNSUser getSnsUser() {
@@ -58,7 +66,7 @@ public class Appointment {
   public VaccinationCenter getVaccinationCenter() {
     return center;
   }
-
+  
   @Override
   public String toString() {
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
