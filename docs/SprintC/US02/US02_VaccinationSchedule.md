@@ -96,23 +96,28 @@ n/a
 
 **SSD - Alternative 1 is adopted.**
 
-| Interaction ID                                                                | Question: Which class is responsible for... | Answer                 | Justification (with patterns)                   |
-| :---------------------------------------------------------------------------- | :------------------------------------------ | :--------------------- | :---------------------------------------------- |
-| Step 1 starts creating a new Vaccination Schedule                             | ... instantiating a new Appointment?        | AppointmentStore       | Creator: R1/2                                   |
-| Step 2 requests data (SNSNumber,date,time)                                    | n/a                                         | n/a                    | n/a                                             |
-| Step 3 types requested data                                                   | ... saving the inputted data?               | Appointment            | IE: object created in step 1 has its own data.  |
-| Step 4 shows suggested vaccine type and asks to accept it                     | ... knows the suggested vaccine?            | Company                | IE: knows the ongoing outbreak is occurring     |
-| Step 5 accepts or declines the suggested vaccine type                         | n/a                                         | n/a                    | n/a                                             |
-| opt Step 6 shows all vaccine types and asks to select one                     | ... listing all vaccine types?              | VaccineTypeStore       | IE: knows all the existing vaccine types        |
-| opt Step 7 selects a vaccine type                                             | n/a                                         | n/a                    | n/a                                             |
-| step 8 shows list of all available vaccination centers and asks to select one | ... listing all vaccination centers?        | VaccinationCenterStore | IE: knows all the existing vaccination centers  |
-| step 9 selects a vaccination center                                           | n/a                                         | n/a                    | n/a                                             |
-| Step 10 requests to send information about the schedule vaccine               | n/a                                         | n/a                    | n/a                                             |
-| Step 11 accepts or declines the request                                       | n/a                                         | n/a                    | n/a                                             |
-| Step 12 shows all data and requests confirmation                              | ... validating the data introduced?         | AppointmentStore       | IE: knows its own data.                         |
-|                                                                               | ... check for duplicates?                   | AppointmentStore       | IE: holds every information about the schedules |
-| Step 13 confirms the data                                                     | ... saving the new appointment?             |                        |                                                 |
-| Step 14 informs operation success                                             | ... informing operation success?            | UI                     | IE: is responsible for user interactions.       |
+| Interaction ID | Question: Which class is responsible for... | Answer                        | Justification (with patterns)                                                                                 |
+| :------------- | :------------------------------------------ | :---------------------------- | :------------------------------------------------------------------------------------------------------------ |
+| Step 1         | ... interacting with the actor?             | ScheduleVaccineReceptionistUI | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+|                | ... coordinating the US?                    | ScheduleVaccineController     | Controller                                                                                                    |
+|                | ... instantiating a new Appointment?        | Appointment                   | Creator: R1/2                                                                                                 |
+| Step 2         | n/a                                         | n/a                           | n/a                                                                                                           |
+| Step 3         | ... validate SNS User Number?               | SNSUserStore                  | IE: object created in step 1 has its own data.                                                                |
+| Step 4         | ... knows the suggested vaccine?            | Company                       | IE: knows the ongoing outbreak.                                                                               |
+| Step 5         | n/a                                         | n/a                           | n/a                                                                                                           |
+| opt Step 6     | ... listing all vaccine types?              | VaccineTypeStore              | IE: knows all the existing vaccine types                                                                      |
+| opt Step 7     | n/a                                         | n/a                           | n/a                                                                                                           |
+| step 8         | ... listing all vaccination centers?        | VaccinationCenterStore        | IE: knows all the existing vaccination centers                                                                |
+| step 9         | ... saving vaccination center?              | Appointment                   | IE:                                                                                                           |
+| step 10        | n/a                                         | n/a                           | n/a                                                                                                           |
+| step 11        | ... saving date and time?                   | Appointment                   | IE:                                                                                                           |
+|                | ... validating center availability?         | VaccinationCenter             | IE: knows vaccination center appointments.                                                                    |
+| Step 12        | n/a                                         | n/a                           | n/a                                                                                                           |
+| Step 13        | ... send SMS message?                       | SMSSender                     | IE:                                                                                                           |
+| Step 14        | ... gets relevant information to the user?  | AppointmentDto                | Dto: knows relevant information.                                                                              |
+|                | ... check for duplicates appointment?       | VaccinationCenter             | IE: holds every information about the schedules.                                                              |
+| Step 15        | ... saving the new appointment?             | VaccinationCenter             | IE: holds every information about the schedules.                                                              |
+| Step 16        | ... informing operation success?            | ScheduleVaccineReceptionistUI | IE: is responsible for user interactions.                                                                     |
 
 ### Systematization ##
 
@@ -120,14 +125,14 @@ According to the taken rationale, the conceptual classes promoted to software cl
 
  * Company
  * Appointment
- * AppointmentStore
+ * AppointmentScheduleList
  * VaccineTypeStore
+ * SNSUserStore
   
 Other software classes (i.e. Pure Fabrication) identified: 
 
- * AppointmentUI  
- * AppointmentController
-
+ * ScheduleVaccineReceptionistUI  
+ * ScheduleVaccineController
 
 ## 3.2. Sequence Diagram (SD)
 

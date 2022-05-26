@@ -5,14 +5,14 @@ actor "Receptionist" as Recept
 activate Recept
 Recept -> ":System" : asks to schedule a vaccination
 activate ":System"
-":System" --> Recept : requests data (SNSNumber, date, time)
+":System" --> Recept : requests data (SNSNumber)
 deactivate ":System"
 Recept -> ":System" : types requested data
 activate ":System"
 
 ":System" --> Recept : shows suggested vaccine type and asks to accept it
 deactivate ":System"
-Recept -> ":System" : accepts or declines the suggested vaccine type
+Recept -> ":System" : accepts the suggested vaccine type
 activate ":System"
 
 opt declines the suggested vaccine type
@@ -22,9 +22,14 @@ Recept -> ":System" : selects a vaccine type
 activate ":System"
 end
 
-":System" --> Recept: shows a list of all available vaccination centers and asks to select one
+":System" --> Recept: shows a list of all available vaccination centers with that vaccine type and asks to select one
 deactivate ":System"
 Recept -> ":System" : selects a vaccination center
+activate ":System"
+
+":System" --> Recept : requests data(date,time)
+deactivate ":System"
+Recept -> ":System" : types requested data
 activate ":System"
 
 ":System" --> Recept : asks permission to send sms about the scheduled vaccine
