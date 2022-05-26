@@ -34,7 +34,7 @@ public class RegisterSNSUserArrivalController implements IRegisterController {
 
   public void create() {
     this.waitingRoom = center.getWaitingRoom();
-    this.arrival = waitingRoom.createArrival(this.snsUser.getSnsNumber());
+    this.arrival = waitingRoom.createArrival(this.snsUser);
   }
 
   @Override

@@ -3,29 +3,29 @@ package app.domain.model;
 import java.util.Calendar;
 
 /**
- * Appointment class.
+ * Arrival class.
  * 
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 public class Arrival {
-  private String snsNumber;
+  private SNSUser snsUser;
   private Calendar arrivalTime;
-  // TODO: leaveTime
+  // TODO: leaveTime for statistics
 
   /**
    * Constructor for Arrival.
    */
-  public Arrival(String snsNumber) {
-    this.snsNumber = snsNumber;
+  public Arrival(SNSUser snsUser) {
+    this.snsUser = snsUser;
     this.arrivalTime = Calendar.getInstance();
   }
 
   /**
    * Gets the snsNumber.
    */
-  public String getSnsNumber() {
-    return snsNumber;
+  public SNSUser getSNSUser() {
+    return this.snsUser;
   }
 
   /**
@@ -40,7 +40,6 @@ public class Arrival {
    */
   @Override
   public String toString() {
-    return "Arrival: " + this.snsNumber + " @ " + this.arrivalTime.getTime();
+    return "Arrival: " + this.snsUser.getSnsNumber() + " @ " + this.arrivalTime.getTime();
   }
-
 }
