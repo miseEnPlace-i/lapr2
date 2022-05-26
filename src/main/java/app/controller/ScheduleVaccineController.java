@@ -129,7 +129,7 @@ public class ScheduleVaccineController implements IRegisterController {
   public void save() {
     appointmentSchedule.saveAppointment(appointment);
 
-    SNSUser snsUser = getSnsUserByUserSession();
+    SNSUser snsUser = snsUserStore.findSNSUserByNumber(appointment.getSnsNumber());
     snsUser.addAppointmentToList(appointment);
   }
 
@@ -142,8 +142,22 @@ public class ScheduleVaccineController implements IRegisterController {
     return snsUser.hasTakenAnyVaccineFromVaccineType(vt);
   }
 
+  public boolean userHasTakenAnyVaccineFromVaccineType(VaccineType vt, String SnsNumber) {
+    SNSUser user = snsUserStore.findSNSUserByNumber(SnsNumber);
+    return user.hasTakenAnyVaccineFromVaccineType(vt);
+  }
+
   public boolean checkAdministrationProcessForVaccineType(VaccineType vt) {
     SNSUser snsUser = getSnsUserByUserSession();
+    Date birthDay = snsUser.getBirthDay();
+
+    int age = TimeUtils.calculateAge(birthDay);
+
+    return vaccineStore.areVaccinesWithValidAdminProcessWithVaccineType(age, vt);
+  }
+
+  public boolean checkAdministrationProcessForVaccineType(VaccineType vt, String number) {
+    SNSUser snsUser = snsUserStore.findSNSUserByNumber(number);
     Date birthDay = snsUser.getBirthDay();
 
     int age = TimeUtils.calculateAge(birthDay);
@@ -163,5 +177,10 @@ public class ScheduleVaccineController implements IRegisterController {
   public boolean userHasAppointmentForVaccineType(VaccineType vaccineType) {
     SNSUser snsUser = getSnsUserByUserSession();
     return snsUser.hasAppointmentForVaccineType(vaccineType);
+  }
+
+  public boolean userHasAppointmentForVaccineType(VaccineType vaccineType, String number) {
+    SNSUser snsUser = snsUserStore.findSNSUserByNumber(number);
+    return snsUser.hasAppointmentForVaccineType(vaccineType, number);
   }
 }
