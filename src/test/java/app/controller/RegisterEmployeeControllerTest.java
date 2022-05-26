@@ -6,10 +6,11 @@ import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.Company;
 import app.domain.model.store.EmployeeRoleStore;
+import app.domain.shared.Constants;
 import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
 public class RegisterEmployeeControllerTest {
-  Company company = new Company("designation", "12345");
+  Company company = new Company("designation", "12345", Constants.PARAMS_SENDER);
   private RegisterEmployeeController ctrl = new RegisterEmployeeController(company);
 
   @Before

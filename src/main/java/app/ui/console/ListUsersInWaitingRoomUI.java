@@ -3,7 +3,7 @@ package app.ui.console;
 import java.util.List;
 import app.controller.App;
 import app.controller.ListUsersWaitingRoomController;
-import app.domain.model.dto.ArrivalDTO;
+import app.dto.ArrivalDTO;
 import app.exception.NotAuthorizedException;
 import app.session.EmployeeSession;
 

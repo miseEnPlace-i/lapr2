@@ -1,9 +1,9 @@
-package app.mappers;
+package app.mapper;
 
 import app.controller.App;
 import app.domain.model.VaccinationCenter;
-import app.domain.model.dto.VaccinationCenterListDTO;
 import app.domain.model.store.VaccinationCenterStore;
+import app.dto.VaccinationCenterListDTO;
 
 /**
  * Vaccination Center mapper

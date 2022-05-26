@@ -1,9 +1,7 @@
 package app.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
-import org.apache.commons.lang3.time.DateUtils;
 import app.domain.model.Company;
 import app.domain.model.Employee;
 import app.domain.model.SNSUser;
@@ -36,7 +34,8 @@ public class App {
   private App() {
     Properties props = PropertiesUtils.getProperties();
     this.company = new Company(props.getProperty(Constants.PARAMS_COMPANY_DESIGNATION),
-        props.getProperty(Constants.PARAMS_ONGOING_OUTBREAK_VACCINE_TYPE_CODE));
+        props.getProperty(Constants.PARAMS_ONGOING_OUTBREAK_VACCINE_TYPE_CODE), props.getProperty(Constants.PARAMS_SENDER));
+
     this.authFacade = this.company.getAuthFacade();
     this.employeeStore = this.company.getEmployeeStore();
     this.employeeRoleStore = this.company.getEmployeeRoleStore();
@@ -100,6 +99,10 @@ public class App {
     Employee e3 = this.employeeStore.createEmployee("Name2", "+351916919269", "n@user.com",
         "address", "000000000ZZ4", Constants.ROLE_NURSE);
     this.employeeStore.saveEmployee(e3);
+
+    Employee e4 = this.employeeStore.createEmployee("Name2", "+351916919269", "teste@coor.pt",
+        "address", "000000000ZZ4", Constants.ROLE_COORDINATOR);
+    this.employeeStore.saveEmployee(e4);
 
     VaccineType vacType = this.vacTypeStore.addVaccineType("00000", "COVID-19", "M_RNA_TECHNOLOGY");
     this.vacTypeStore.saveVaccineType(vacType);

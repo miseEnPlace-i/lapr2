@@ -1,4 +1,4 @@
-# US 006 - To create a Task 
+# US 14 - Load users from a file
 
 ## 1. Requirements Engineering
 
@@ -6,7 +6,7 @@
 ### 1.1. User Story Description
 
 
-As an organization employee, I want to create a new task in order to be further published.
+As an administrator, I want to load a set of users from a CSV file.
 
 
 
@@ -15,39 +15,43 @@ As an organization employee, I want to create a new task in order to be further 
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost as well as the its classifying task category. 
+> A SNS User is a person who is registered in the system.
 
+> A SNS User must have an email, a password, a name, a birthday as well as a SNS number.
 
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
-
-
+> Any Administrator uses the application to register SNS users.
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** What would be the sequence of parameters to be read on the CSV?
 >  
-> **Answer:** Duration is estimated in days.
-
--
-
-> **Question:** Monetary data is expressed in any particular currency?
->  
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POTs (virtual currency internal to the platform).
-
+> **Answer:** Name, Sex, Birth Date, Address, Phone Number, E-mail, SNS User Number and Citizen Card Number.
 
 ### 1.3. Acceptance Criteria
 
 
-* **AC1:** All required fiels must be filled in.
-* **AC2:** Task reference must have at least 5 alphanumeric chars.
-* **AC3:** When creating a task with an already existing reference, the system must reject such operation and the user must have the change to modify the typed reference.
+* **AC1:** The application must support importing two types of CSV
+files: a) one type must have a header, column separation is done using “;”
+character; b) the other type does not have a header, column separation is done
+using “,” character. 
+* **AC2:** The file path name field must filled in.
+* **AC3:** The file path name must correspond to an existing and valid CSV file.
+* **AC4:** When loading a User with an already existing reference, the system must reject such operation.
+* **AC5:** Birth day must have the format: DD/MM/YYYY. A SNS User should not have more than 150 years of age.
+* **AC6:** Citizen card numbers should follow the portuguese format (8 digits, 1 control digit and 2 chars + 1 digit)
+* **AC7:** SNS number must have 9 digits.
+* **AC8:** Phone numbers should follow the portuguese format ("+351" + 9 digits).
+* **AC9:** Email address must be validated using a regular expression.
+* **AC10:** Gender options: Male/Female.
+* **AC11:** The password should be randomly generated. It should have 7 alphanumeric characters, 3 of them being upper case and 2 of them must be digits.
+* **AC12:** All input fields are required except gender.
+* **AC13:** The email, phone number, citizen card number and SNS User number must be unique for each SNS User.
 
 
 ### 1.4. Found out Dependencies
 
 
-* There is a dependency to "US003 Create a task category" since at least a task category must exist to classify the task being created.
-
+* No dependencies were found.
 
 ### 1.5 Input and Output Data
 
@@ -55,46 +59,29 @@ As an organization employee, I want to create a new task in order to be further 
 **Input Data:**
 
 * Typed data:
-	* a reference, 
-	* a designation, 
-	* an informal description
-	* a technical description
-	* an estimated duration
-	* an estimated cost
-	
-* Selected data:
-	* Classifying task category 
-
+	* File path name
 
 **Output Data:**
 
-* List of existing task categories
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
 **Alternative 1**
 
-![US006_SSD](US006_SSD.svg)
-
-
-**Alternative 2**
-
-![US006_SSD_v2](US006_SSD_v2.svg)
-
+![SSD_US14](SSD/US14_SSD.svg)
 
 **Other alternatives might exist.**
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
-
+n/a
 
 ## 2. OO Analysis
 
 ### 2.1. Relevant Domain Model Excerpt 
 
-![US006_MD](US006_MD.svg)
+![US14_DM](DM/US14_MD.svg)
 
 ### 2.2. Other Remarks
 
@@ -109,52 +96,49 @@ n/a
 
 | Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
 |:-------------  |:--------------------- |:------------|:---------------------------- |
-| Step 1  		 |	... interacting with the actor? | CreateTaskUI   |  Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.           |
-| 			  		 |	... coordinating the US? | CreateTaskController | Controller                             |
-| 			  		 |	... instantiating a new Task? | Organization   | Creator (Rule 1): in the DM Organization has a Task.   |
-| 			  		 | ... knowing the user using the system?  | UserSession  | IE: cf. A&A component documentation.  |
-| 			  		 |	... knowing to which organization the user belongs to? | Platform  | IE: has registed all Organizations |
-| 			  		 |							 | Organization   | IE: knows/has its own Employees|
-| 			  		 |							 | Employee  | IE: knows its own data (e.g. email) |
+| Step 1  		 |	... interacting with the actor? | UploadUsersFromFileUI   |  Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.           |
+| 			  		 |	... coordinating the US? | UploadUsersFromFileController | Controller                             |
 | Step 2  		 |							 |             |                              |
-| Step 3  		 |	...saving the inputted data? | Task  | IE: object created in step 1 has its own data.  |
-| Step 4  		 |	...knowing the task categories to show? | Platform  | IE: Task Categories are defined by the Platform. |
-| Step 5  		 |	... saving the selected category? | Task  | IE: object created in step 1 is classified in one Category.  |
-| Step 6  		 |							 |             |                              |              
-| Step 7  		 |	... validating all data (local validation)? | Task | IE: owns its data.| 
-| 			  		 |	... validating all data (global validation)? | Organization | IE: knows all its tasks.| 
-| 			  		 |	... saving the created task? | Organization | IE: owns all its tasks.| 
-| Step 8  		 |	... informing operation success?| CreateTaskUI  | IE: is responsible for user interactions.  | 
+| Step 3  		 |	...saving the inputted data? | CSVReader  | IE: owns the data.  |
+|  		 |	...validate CSV path? | CSVReader  | IE: owns the data.  |
+|  		 |	...validate CSV file and check is type? | CSVReader  | IE: is responsible for the CSV.  |
+| Step 4  		 |							 |             |                              |
+| Step 5  		 |	...instantiating SNSUser? | SNSUserStore  | Creator: SNSUserStore has a SNSUser.  |  		 
+|  		 |	...validating SNSUser data?(locally) | SNSUser  | IE: owns the data.  |
+|  		 |	...validating SNSUser data?(globally) | SNSUserStore  | IE: knows every SNSUsers registered.  |
+|  		 |	...saving created SNSUser? | SNSUserStore  | IE: owns every SNSUsers.  |
+|  		 |	...know the attributes necessary to add user to the system | UserDto  | DTO: knows necessary attributes.  |
+|  		 |	...add the user to the system? | authFacade  | IE: owns every Users.  |
+| Step 6  		 |	... informing operation success?| UploadUserFromFileUI  | IE: is responsible for user interactions.  |
+
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
- * Organization
- * Platform
- * Task
+ * Company
+ * SNSUserStore
+ * SNSUser
+ * CSVReader
+ * UserDto
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
- * CreateTaskUI  
- * CreateTaskController
+ * UploadUsersFromFileUI	  
+ * UploadUsersFromFileController
 
 
 ## 3.2. Sequence Diagram (SD)
 
 **Alternative 1**
 
-![US006_SD](US006_SD.svg)
-
-**Alternative 2**
-
-![US006_SD](US006_SD_v2.svg)
+![US14_SD](SD/US14_SD.svg)
 
 ## 3.3. Class Diagram (CD)
 
 **From alternative 1**
 
-![US006_CD](US006_CD.svg)
+![US14CD](CD/US14_CD.svg)
 
 # 4. Tests 
 

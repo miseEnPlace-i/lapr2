@@ -6,8 +6,8 @@ import java.util.Map;
 import app.domain.model.Appointment;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
-import app.domain.model.dto.AppointmentWithNumberDTO;
-import app.domain.model.dto.AppointmentWithoutNumberDTO;
+import app.dto.AppointmentWithNumberDTO;
+import app.dto.AppointmentWithoutNumberDTO;
 import app.exception.AppointmentNotFoundException;
 
 /**
@@ -20,6 +20,7 @@ public class AppointmentScheduleList {
   private VaccinationCenter vaccinationCenter;
   private Map<Calendar, Appointment[][]> appointments;
   private int slotsPerDay = 0;
+  private int vaccinesPerSlot = 0;
 
   /**
    * Constructor for AppointmentStore.
@@ -27,6 +28,7 @@ public class AppointmentScheduleList {
   public AppointmentScheduleList(VaccinationCenter vaccinationCenter) {
     this.vaccinationCenter = vaccinationCenter;
     slotsPerDay = calculateNOfSlotsPerDay(vaccinationCenter);
+    vaccinesPerSlot = vaccinationCenter.getMaxVacSlot();
 
     this.appointments = new HashMap<Calendar, Appointment[][]>();
   }
@@ -40,7 +42,18 @@ public class AppointmentScheduleList {
     int closingMinutesOfDay =
         Integer.parseInt(closingHours[0]) * 60 + Integer.parseInt(closingHours[1]);
 
-    return (closingMinutesOfDay - openingMinutesOfDay) / center.getSlotDuration();
+    return ((closingMinutesOfDay - openingMinutesOfDay) / center.getSlotDuration());
+  }
+
+  private void listVaccinationSchedule(Appointment[][] list) {
+    for (int i = 0; i < list.length; i++) {
+      for (int j = 0; j < list[0].length; j++) {
+        System.out.print("[");
+        if (list[i][j] != null) System.out.print("x]");
+        else System.out.print(" ]");
+      }
+      System.out.println("");
+    }
   }
 
   /**
@@ -82,12 +95,24 @@ public class AppointmentScheduleList {
         Integer.parseInt(closingHours[0]) * 60 + Integer.parseInt(closingHours[1]);
 
     int slotDuration = vaccinationCenter.getSlotDuration();
-    int minutesOfDay =
+    int scheduleMinutesOfDay =
         (date.get(Calendar.HOUR_OF_DAY) * 60 + date.get(Calendar.MINUTE)) - openingMinutesOfDay;
 
-    if (minutesOfDay > closingMinutesOfDay) throw new IllegalArgumentException("Invalid schedule");
+    if (isValidSchedule(scheduleMinutesOfDay, openingMinutesOfDay, closingMinutesOfDay))
+      return scheduleMinutesOfDay / slotDuration;
+    return -1;
+  }
 
-    return minutesOfDay / slotDuration;
+  private boolean isValidSchedule(int scheduledMinutesOfDay, int openingMinutesOfDay,
+      int closingMinutesOfDay) {
+    if (scheduledMinutesOfDay < 0) return false;
+
+    // subtract slot duration because the last slot cannot be used
+    int workingHours =
+        closingMinutesOfDay - openingMinutesOfDay - vaccinationCenter.getSlotDuration();
+
+    if (scheduledMinutesOfDay > workingHours) return false;
+    return true;
   }
 
   /**
@@ -97,8 +122,6 @@ public class AppointmentScheduleList {
    */
   public void validateAppointment(Appointment appointment) {
     if (appointment == null) throw new IllegalArgumentException("Appointment is not valid.");
-
-    checkDuplicates(appointment);
   }
 
   /**
@@ -111,6 +134,8 @@ public class AppointmentScheduleList {
 
     Calendar key = generateKeyFromDate(appointment.getDate());
     int slotIndex = getAppointmentSlotIndex(appointment.getDate());
+
+    if (slotIndex == -1) throw new IllegalArgumentException("Appointment schedule is not valid.");
 
     if (appointments.containsKey(key)) {
       Appointment[][] slots = appointments.get(key);
@@ -126,15 +151,19 @@ public class AppointmentScheduleList {
       slots[slotIndex][0] = appointment;
       appointments.put(key, slots);
     }
+
+    listVaccinationSchedule(getAppointmentScheduleForDay(key));
+  }
+
+  public Appointment[][] getAppointmentScheduleForDay(Calendar date) {
+    return appointments.get(generateKeyFromDate(date));
   }
 
   private int getAvailableIndexInSlot(Appointment[] slot) {
-    int i = 0;
+    for (int i = 0; i < slot.length; i++)
+      if (slot[i] == null) return i;
 
-    while (slot[i] == null && i < slotsPerDay)
-      i++;
-
-    return i < slot.length ? i : -1;
+    return -1;
   }
 
   private Calendar generateKeyFromDate(Calendar date) {
@@ -146,23 +175,6 @@ public class AppointmentScheduleList {
     key.set(Calendar.MILLISECOND, 0);
 
     return key;
-  }
-
-  /**
-   * Checks if an appointment is duplicated.
-   * 
-   * @param appointment
-   */
-  private void checkDuplicates(Appointment appointment) {
-    if (appointments.containsKey(appointment.getDate())) {
-      Calendar key = generateKeyFromDate(appointment.getDate());
-
-      Appointment[][] slots = appointments.get(key);
-      String snsUserNumber = appointment.getSnsNumber();
-
-      if (hasAppointmentInDay(slots, snsUserNumber))
-        throw new IllegalArgumentException("Appointment is duplicated.");
-    }
   }
 
   private boolean hasAppointmentInDay(Appointment[][] appointments, String snsNumber) {

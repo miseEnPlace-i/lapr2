@@ -11,12 +11,13 @@ import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.model.store.VaccineTypeStore;
+import app.domain.shared.Constants;
 
 /**
  * @author André Barros <1211299@isep.ipp.pt>
  */
 public class RegisterVaccinationCenterControllerTest {
-  Company company = new Company("designation", "12345");
+  Company company = new Company("designation", "12345", Constants.PARAMS_SENDER);
   RegisterVaccinationCenterController controller = new RegisterVaccinationCenterController(company);
   String centerName = "Vaccination Center";
   Employee coordinator;

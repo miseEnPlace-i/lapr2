@@ -1,4 +1,7 @@
-package app.service;
+package app.service.sender;
+
+import org.apache.commons.lang3.NotImplementedException;
+import app.dto.UserNotificationDTO;
 
 /**
  * Email Sender class used to send emails with the password to the user.
@@ -9,7 +12,7 @@ package app.service;
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
-public class EmailSender {
+public class EmailSender implements ISender {
 
   /**
    * Constructor for EmailSender.
@@ -19,21 +22,11 @@ public class EmailSender {
   /**
    * Sends an email with the password to the user.
    * 
-   * @param email the email to send the password to.
-   * @param name the user name.
-   * @param password the password to send.
+   * @param dto the dto.
+   * @throws Exception if the email could not be sent.
    */
-  public static void sendPasswordEmail(String email, String name, String password) {
+  public void send(UserNotificationDTO dto) throws Exception {
     // TODO
+    throw new NotImplementedException("Not implemented yet");
   }
-
-  /**
-   * Sends an email notifying the user about his vaccination schedule.
-   * 
-   * @param
-   */
-  public static void sendVaccinationScheduleEmail() {
-    // TODO
-  }
-
 }

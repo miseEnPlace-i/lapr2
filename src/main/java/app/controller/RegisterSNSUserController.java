@@ -57,10 +57,6 @@ public class RegisterSNSUserController implements IRegisterController {
   @Override
   public void save() {
     store.saveSNSUser(this.snsUser);
-
-    // TODO: send password email
-    // EmailSender emailSender = new EmailSender();
-    // emailSender.sendPasswordEmail(email, pwdStr);
   }
 
   @Override

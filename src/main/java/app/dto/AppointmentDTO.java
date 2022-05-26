@@ -1,28 +1,30 @@
-package app.domain.model.dto;
-
+package app.dto;
 
 import java.util.Calendar;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
 
-/**
- * @author André Barros <1211299@isep.ipp.pt>
- * @author Tomás Russo <1211288@isep.ipp.pt>
- */
-public class AppointmentWithoutNumberDTO {
+public class AppointmentDTO {
+  private String snsNumber;
   private Calendar date;
-  // private String time; // Calendar has time
   private VaccinationCenter center;
   private VaccineType vaccineType;
   private boolean smsPermission;
 
-  public AppointmentWithoutNumberDTO(Calendar date, VaccinationCenter center,
+  public AppointmentDTO(String snsNumber, Calendar date, VaccinationCenter center,
       VaccineType vaccineType, boolean sms) {
+    this.snsNumber = snsNumber;
     this.date = date;
-    // this.time = time;
     this.center = center;
     this.vaccineType = vaccineType;
     this.smsPermission = sms;
+  }
+
+  /**
+   * @return String return the snsNumber
+   */
+  public String getSnsNumber() {
+    return snsNumber;
   }
 
   /**
@@ -52,5 +54,4 @@ public class AppointmentWithoutNumberDTO {
   public boolean getSmsPermission() {
     return smsPermission;
   }
-
 }

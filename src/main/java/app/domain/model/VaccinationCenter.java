@@ -1,5 +1,8 @@
 package app.domain.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import app.domain.model.list.AppointmentScheduleList;
 import app.service.FormatVerifier;
 
@@ -41,7 +44,6 @@ public class VaccinationCenter {
   public VaccinationCenter(String name, String address, String email, String phoneNum,
       String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration,
       int maxVacSlot, Employee coordinator) {
-
     setName(name);
     setAddress(address);
     setEmail(email);
@@ -251,38 +253,52 @@ public class VaccinationCenter {
    * @throws IllegalArgumentException if the opening hours are null, empty or not valid.
    */
   private void setOpeningHours(String openingHours) {
-    String[] openHours = openingHours.split(":");
-    int hours = Integer.parseInt(openHours[0]);
-    int minutes = Integer.parseInt(openHours[1]);
+    validateTime(openingHours);
 
-    if (openingHours == null || openingHours.isEmpty()) {
-      throw new IllegalArgumentException("Opening hours cannot be null or empty.");
-    }
-    if (hours < 0 || hours > 24 || minutes < 0 || minutes > 60) {
-      throw new IllegalArgumentException("Opening hours is not valid.");
-    }
     this.openingHours = openingHours;
+  }
+
+  private void validateTime(String time) {
+    String[] timeString = time.split(":");
+    int hours = Integer.parseInt(timeString[0]);
+    int minutes = Integer.parseInt(timeString[1]);
+
+    if (timeString == null || timeString[0].isEmpty() || timeString[1].isEmpty())
+      throw new IllegalArgumentException("Time cannot be null or empty.");
+
+    if (hours < 0 || hours >= 24 || minutes < 0 || minutes > 60)
+      throw new IllegalArgumentException("Opening hours is not valid.");
   }
 
   /**
    * Sets the center closing hours.
    * 
    * @param closingHours the vaccination center closing hours.
+   * @throws ParseException
    * 
    * @throws IllegalArgumentException if the closing hours are null, empty or not valid.
    */
   private void setClosingHours(String closingHours) {
-    String[] closHours = closingHours.split(":");
-    int hours = Integer.parseInt(closHours[0]);
-    int minutes = Integer.parseInt(closHours[1]);
+    validateTime(closingHours);
 
-    if (closingHours == null || closingHours.isEmpty()) {
-      throw new IllegalArgumentException("Closing hours cannot be null or empty.");
-    }
-    if (hours < 0 || hours > 24 || minutes < 0 || minutes > 60) {
-      throw new IllegalArgumentException("Closing hours is not valid.");
-    }
-    this.closingHours = closingHours;
+    if (isAfter(closingHours, openingHours)) this.closingHours = closingHours;
+    else throw new IllegalArgumentException("Closing hours must be after the opening hours.");
+  }
+
+  private boolean isAfter(String firstHours, String secondHours) {
+    String[] firstTime = firstHours.split(":");
+    String[] secondTime = secondHours.split(":");
+
+    int firstHoursInt = Integer.parseInt(firstTime[0]);
+    int firstMinutesInt = Integer.parseInt(firstTime[1]);
+
+    int secondHoursInt = Integer.parseInt(secondTime[0]);
+    int secondMinutesInt = Integer.parseInt(secondTime[1]);
+
+    if (firstHoursInt > secondHoursInt) return true;
+    if (firstHoursInt == secondHoursInt && firstMinutesInt > secondMinutesInt) return true;
+
+    return false;
   }
 
   /**
@@ -375,6 +391,37 @@ public class VaccinationCenter {
     if (this.email.equals(center.email)) return true;
     if (this.phoneNum.equals(center.phoneNum)) return true;
     if (this.faxNum.equals(center.faxNum)) return true;
+
+    return false;
+  }
+
+  /**
+   * Checks if the center is open at a given time.
+   * 
+   * @param hours time (HH:mm) to check
+   * @return true if center is open, false otherwise
+   */
+  public boolean isOpenAt(String hours) {
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+    Date openingHours = new Date();
+    Date closingHours = new Date();
+    Date hoursToCheck = new Date();
+
+    try {
+      openingHours = sdf.parse(this.openingHours);
+      closingHours = sdf.parse(this.closingHours);
+      hoursToCheck = sdf.parse(hours);
+    } catch (ParseException ex) {
+      return false;
+    }
+
+    return ((hoursToCheck.equals(openingHours)) || (hoursToCheck.equals(closingHours))
+        || (hoursToCheck.after(openingHours) && hoursToCheck.before(closingHours)));
+  }
+
+  public boolean hasAvailabilityInSlot(String hours) {
+    // TODO
+    //
 
     return false;
   }

@@ -8,6 +8,7 @@ import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineStore;
 import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.model.store.VaccineTypeStore;
+import app.service.sender.ISender;
 import pt.isep.lei.esoft.auth.AuthFacade;
 import pt.isep.lei.esoft.auth.UserSession;
 
@@ -31,13 +32,14 @@ public class Company {
   private VaccineTechnologyStore vaccineTechnologyStore;
   private VaccineTypeStore vaccineTypeStore;
   private UserSession userSession;
+  private ISender sender;
 
   /**
    * Company constructor.
    *
    * @param designation the designation of the company
    */
-  public Company(String designation, String ongoingOutbreakVaccineTypeCode) {
+  public Company(String designation, String ongoingOutbreakVaccineTypeCode, String senderName) {
     if (StringUtils.isBlank(designation))
       throw new IllegalArgumentException("Designation cannot be blank.");
 
@@ -48,9 +50,18 @@ public class Company {
 
     this.authFacade = new AuthFacade();
 
+    try {
+      Class<?> sender = Class.forName(senderName);
+
+      this.sender = (ISender) sender.getDeclaredConstructor().newInstance();
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      e.printStackTrace();
+    }
+
     this.employeeRoleStore = new EmployeeRoleStore(this.authFacade);
-    this.employeeStore = new EmployeeStore(this.authFacade, this.employeeRoleStore);
-    this.snsUserStore = new SNSUserStore(this.authFacade);
+    this.employeeStore = new EmployeeStore(this.authFacade, this.employeeRoleStore, this.sender);
+    this.snsUserStore = new SNSUserStore(this.authFacade, this.sender);
     this.vaccinationCenterStore = new VaccinationCenterStore();
     this.vaccineStore = new VaccineStore();
     this.vaccineTechnologyStore = new VaccineTechnologyStore();
@@ -76,6 +87,15 @@ public class Company {
    */
   public AuthFacade getAuthFacade() {
     return authFacade;
+  }
+
+  /**
+   * Gets the Sender.
+   * 
+   * @return ISender.
+   */
+  public ISender getSender() {
+    return this.sender;
   }
 
   /**

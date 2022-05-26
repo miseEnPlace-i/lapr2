@@ -1,21 +1,25 @@
 package app.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import app.domain.model.Appointment;
 import app.domain.model.Company;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
+import app.domain.model.Vaccine;
 import app.domain.model.VaccineType;
-import app.domain.model.dto.AppointmentWithNumberDTO;
-import app.domain.model.dto.AppointmentWithoutNumberDTO;
-import app.domain.model.dto.VaccinationCenterListDTO;
-import app.domain.model.dto.VaccineTypeDTO;
 import app.domain.model.list.AppointmentScheduleList;
 import app.domain.model.store.SNSUserStore;
 import app.domain.model.store.VaccinationCenterStore;
+import app.domain.model.store.VaccineStore;
 import app.domain.model.store.VaccineTypeStore;
-import app.mappers.VaccineTypeMapper;
+import app.dto.AppointmentWithNumberDTO;
+import app.dto.AppointmentWithoutNumberDTO;
+import app.dto.VaccinationCenterListDTO;
+import app.dto.VaccineTypeDTO;
+import app.mapper.VaccineTypeMapper;
+import app.service.TimeUtils;
 import pt.isep.lei.esoft.auth.UserSession;
 
 public class ScheduleVaccineController implements IRegisterController {
@@ -24,6 +28,7 @@ public class ScheduleVaccineController implements IRegisterController {
   private AppointmentScheduleList appointmentSchedule;
   private Appointment appointment;
   private VaccineTypeStore vaccineTypeStore;
+  private VaccineStore vaccineStore;
   private UserSession userSession;
   private SNSUserStore snsUserStore;
 
@@ -39,6 +44,7 @@ public class ScheduleVaccineController implements IRegisterController {
     this.vaccineTypeStore = company.getVaccineTypeStore();
     this.userSession = App.getInstance().getCurrentUserSession();
     this.snsUserStore = company.getSNSUserStore();
+    this.vaccineStore = company.getVaccineStore();
   }
 
   /**
@@ -46,17 +52,16 @@ public class ScheduleVaccineController implements IRegisterController {
    * 
    * @param dto the appointment dto, containing all the information about the appointment
    */
-  public void createAppointment(AppointmentWithNumberDTO appointment) {
-    this.appointmentSchedule = appointment.getCenter().getAppointmentList();
-    appointmentSchedule.create(appointment);
+  public void createAppointment(AppointmentWithNumberDTO appointmentDto) {
+    this.appointmentSchedule = appointmentDto.getCenter().getAppointmentList();
+    appointment = appointmentSchedule.create(appointmentDto);
   }
 
   public void createAppointment(AppointmentWithoutNumberDTO dto) {
     this.appointmentSchedule = dto.getCenter().getAppointmentList();
 
-    String userEmail = String.valueOf(userSession.getUserId());
+    SNSUser snsUser = getSnsUserByUserSession();
 
-    SNSUser snsUser = snsUserStore.findSNSUserByEmail(userEmail);
     String snsNumber = snsUser.getSnsNumber();
 
     appointment = appointmentSchedule.create(dto, snsNumber);
@@ -91,6 +96,11 @@ public class ScheduleVaccineController implements IRegisterController {
     return vaccinationCenterStore.getListOfVaccinationCentersWithVaccineType(vaccineType);
   }
 
+  private SNSUser getSnsUserByUserSession() {
+    String userEmail = String.valueOf(userSession.getUserId());
+    return snsUserStore.findSNSUserByEmail(userEmail);
+  }
+
   public VaccineType getVaccineTypeByCode(String code) {
     return vaccineTypeStore.getVaccineTypeByCode(code);
   }
@@ -116,5 +126,31 @@ public class ScheduleVaccineController implements IRegisterController {
 
   public boolean existsUser(String snsNumber) {
     return this.company.getSNSUserStore().checkSNSUserExists(snsNumber);
+  }
+
+  public boolean checkIfUserHasTakenVaccineType(VaccineType vt) {
+    SNSUser snsUser = getSnsUserByUserSession();
+    if (snsUser.getLastTakenVaccineFromType(vt) == null) return false;
+    else return true;
+  }
+
+  public boolean checkAdministrationProcessForVaccineType(VaccineType vt) {
+    List<Vaccine> vaccinesList = vaccineStore.getVaccinesByType(vt);
+    SNSUser snsUser = getSnsUserByUserSession();
+    Date birthDay = snsUser.getBirthDay();
+
+    int age = TimeUtils.calculateAge(birthDay);
+
+    for (Vaccine vaccine : vaccinesList) {
+      if (vaccine.hasAdministrationProcessForGivenAge(age)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  public boolean isCenterOpenAt(VaccinationCenter vacCenter, String hours) {
+    return vacCenter.isOpenAt(hours);
   }
 }

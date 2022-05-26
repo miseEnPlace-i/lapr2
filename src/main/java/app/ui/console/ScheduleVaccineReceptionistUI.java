@@ -9,12 +9,11 @@ import app.controller.App;
 import app.controller.ScheduleVaccineController;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
-import app.domain.model.dto.AppointmentWithNumberDTO;
-import app.domain.model.dto.VaccinationCenterListDTO;
-import app.domain.model.dto.VaccineTypeDTO;
 import app.domain.shared.FieldToValidate;
+import app.dto.AppointmentWithNumberDTO;
+import app.dto.VaccinationCenterListDTO;
+import app.dto.VaccineTypeDTO;
 import app.service.CalendarUtils;
-import app.session.EmployeeSession;
 import app.ui.console.utils.Utils;
 
 /**

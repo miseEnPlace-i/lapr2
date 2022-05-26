@@ -5,8 +5,10 @@ import static org.junit.Assert.assertNotNull;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
+import app.controller.App;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
+import app.domain.shared.Constants;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
 public class ListEmployeeByRoleTest {
@@ -14,10 +16,10 @@ public class ListEmployeeByRoleTest {
 
   @Before
   public void setUp() {
-    AuthFacade authFacade = new AuthFacade();
-
-    EmployeeRoleStore roleStore = new EmployeeRoleStore(authFacade);
-    this.employeeStore = new EmployeeStore(authFacade, roleStore);
+    Company company = new Company("abc", "12345", Constants.PARAMS_SENDER);
+    this.employeeStore = company.getEmployeeStore();
+    
+    EmployeeRoleStore roleStore = company.getEmployeeRoleStore();
 
     roleStore.addEmployeeRole("TEST_ROLE", "Test description");
     roleStore.addEmployeeRole("TEST_ROLE2", "Test description 2");

@@ -2,7 +2,7 @@ package app.ui.console;
 
 import app.controller.App;
 import app.controller.SelectEmployeeVaccinationCenterController;
-import app.domain.model.dto.VaccinationCenterListDTO;
+import app.dto.VaccinationCenterListDTO;
 import app.session.EmployeeSession;
 import app.ui.console.utils.Utils;
 

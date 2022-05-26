@@ -4,11 +4,10 @@ import java.util.List;
 import app.domain.model.Company;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.WaitingRoom;
-import app.domain.model.dto.ArrivalDTO;
-import app.domain.model.dto.VaccinationCenterListDTO;
 import app.domain.model.store.VaccinationCenterStore;
+import app.dto.ArrivalDTO;
 import app.exception.NotAuthorizedException;
-import app.mappers.WaitingRoomMapper;
+import app.mapper.WaitingRoomMapper;
 import app.session.EmployeeSession;
 
 public class ListUsersWaitingRoomController {

@@ -44,7 +44,6 @@ class VaccinationCenter {
   - closingHours: String
   - slotDuration: int
   - maximumVaccinesPerSlot: int
-  -createdAt: Date
   
   +VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
   +getWaitingRoom()
@@ -86,16 +85,6 @@ class SNSUser {
   + isEligibleForVaccine(vaccineType,nOfDose)
 }
 
-class UserHealthData {
-  - vaccinesTaken: List<VaccinationData>
-}
-
-class VaccinationData {
-  - batchNumber: int
-  - nOfDose: int
-  - date: Date
-}
-
 class WaitingRoom {
   - waitingRoom: Queue<Arrive>
 
@@ -111,19 +100,6 @@ class CenterEvents {
   +CenterEvents()
 }
 
-enum EventType {
-  ARRIVE,
-  VACCINATED,
-  LEAVE
-}
-
-class CenterEvent {
-  - eventType: EventType
-  - eventDate: Date
-
-  +CenterEvent(eventType, eventDate, user)
-}
-
 class AppointmentSchedule {
   -appointments: List<Appointment[][]>
   +createAppointment(date,user,vaccine)
@@ -134,16 +110,16 @@ class AppointmentSchedule {
 }
 
 class Appointment {
-  -Date appointmentDate
+  - appointmentDate: Date
 
   +Appointment(appointmentDate, user, vaccine)
 }
 
-class Vaccine{
-  -designation : String
-  -brand : String
-  -id : String
-  -vacType : VaccineType
+class Vaccine {
+  -designation: String
+  -brand: String
+  -id: String
+  -vacType: VaccineType
 
   +Vaccine(designation, id, brand, vacTypeId)
 }
@@ -151,16 +127,9 @@ class Vaccine{
 CheckWaitingRoomUI ..> CheckWaitingRoomController
 CheckWaitingRoomController ..> Company
 
-UserHealthData "1" -- "*" VaccinationData : stores >
-
-VaccinationData o-- Vaccine
-VaccinationData o-- VaccinationCenter
-
 Arrive o-- SNSUser
 Arrive o-- Appointment
 Appointment o-- SNSUser
-
-UserHealthData  --o SNSUser
 
 VaccinationCenter o-- Employee : coordinator
 VaccinationCenterStore "1" -- "*" VaccinationCenter : stores >
@@ -171,11 +140,7 @@ WaitingRoom "1" -- "*" Arrive : stores >
 
 Employee "1" -- "*" WaitingRoom : checks >
 VaccinationCenter *-- WaitingRoom
-VaccinationCenter *-- CenterEvents
 
-CenterEvents "1" -- "*" CenterEvent : stores >
-
-CenterEvent o-- SNSUser
 CheckWaitingRoomController ..> NurseSession
 
 AppointmentSchedule "1" -- "*" Appointment : stores >

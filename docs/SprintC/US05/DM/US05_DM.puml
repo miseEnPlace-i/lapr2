@@ -3,21 +3,50 @@ hide methods
 left to right direction
 skinparam classAttributeIconSize 0
 
-class Employee {}
+class Employee {
+  -id
+  -name
+  -email
+  -phone
+  -address
+  -citizenCardNumber
+  -roleId
+}
 
 class Nurse {}
 
 class Receptionist {}
 
-class VaccinationCenter {}
+class VaccinationCenter {
+  - name
+  - address
+  - emailAddress
+  - phoneNumber
+  - faxNumber
+  - websiteAddress
+  - openingHours
+  - closingHours
+  - slotDuration
+  - maximumVaccinesPerSlot
+}
 
 class WaitingRoom {}
 
-class SNSUser {}
+class SNSUser {
+  - citizenCard
+  - snsNumber
+  - birthDay
+  - gender
+  - phoneNumber
+  - address
+}
 
 class Company {}
 
-class Appointment {}
+class Appointment {
+  -appointmentDate
+
+}
 
 Employee <|-- Nurse
 Employee <|-- Receptionist
