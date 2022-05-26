@@ -8,7 +8,9 @@ import app.domain.model.VaccinationCenter;
 import app.domain.model.WaitingRoom;
 import app.domain.model.list.AppointmentScheduleList;
 import app.domain.model.store.SNSUserStore;
+import app.dto.AppointmentListDTO;
 import app.exception.AppointmentNotFoundException;
+import app.mapper.AppointmentListMapper;
 
 /**
  * Register SNS User Arrival Controller.
@@ -47,7 +49,10 @@ public class RegisterSNSUserArrivalController implements IRegisterController {
 
   @Override
   public String stringifyData() {
-    return this.appointment.toString();
+    // convert to dto and return a string of it
+    AppointmentListDTO dto = AppointmentListMapper.toDto(this.appointment);
+
+    return dto.toString();
   }
 
   @Override

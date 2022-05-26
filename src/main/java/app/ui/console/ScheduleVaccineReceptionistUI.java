@@ -10,7 +10,7 @@ import app.controller.ScheduleVaccineController;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
 import app.domain.shared.FieldToValidate;
-import app.dto.AppointmentWithNumberDTO;
+import app.dto.AppointmentInsertDTO;
 import app.dto.VaccinationCenterListDTO;
 import app.dto.VaccineTypeDTO;
 import app.service.CalendarUtils;
@@ -88,8 +88,8 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
       System.out.println("\n\nDate or Hour invalid.");
     }
 
-    AppointmentWithNumberDTO appointmentDto =
-        new AppointmentWithNumberDTO(SNSNumber, appointmentDate, vacCenter, vaccineType, sms);
+    AppointmentInsertDTO appointmentDto =
+        new AppointmentInsertDTO(SNSNumber, appointmentDate, vacCenter, vaccineType, sms);
 
     ctrl.createAppointment(appointmentDto);
   }

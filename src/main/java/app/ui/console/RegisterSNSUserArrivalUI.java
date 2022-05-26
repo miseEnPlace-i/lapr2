@@ -22,8 +22,7 @@ public class RegisterSNSUserArrivalUI extends RegisterUI<RegisterSNSUserArrivalC
     public void insertData() throws IllegalArgumentException, ParseException, AppointmentNotFoundException {
         System.out.println("\nRegister SNS User Arrival UI:");
 
-        String snsNumber = Utils.readLineFromConsoleWithValidation("SNS Number (xxxxxxxxx): ",
-                FieldToValidate.SNS_NUMBER);
+        String snsNumber = Utils.readLineFromConsoleWithValidation("SNS Number (xxxxxxxxx): ", FieldToValidate.SNS_NUMBER);
 
         try {
             // verify if the user exists

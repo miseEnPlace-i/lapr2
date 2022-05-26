@@ -8,7 +8,7 @@ import app.domain.model.Appointment;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
-import app.dto.AppointmentWithNumberDTO;
+import app.dto.AppointmentInsertDTO;
 import app.dto.AppointmentWithoutNumberDTO;
 import app.exception.AppointmentNotFoundException;
 
@@ -62,7 +62,7 @@ public class AppointmentScheduleList {
    * @param appointmentDTO
    * @return Appointment
    */
-  public Appointment create(AppointmentWithNumberDTO appointmentDTO) {
+  public Appointment create(AppointmentInsertDTO appointmentDTO) {
     String snsNumber = appointmentDTO.getSnsNumber();
     Calendar date = appointmentDTO.getDate();
     VaccinationCenter center = appointmentDTO.getCenter();

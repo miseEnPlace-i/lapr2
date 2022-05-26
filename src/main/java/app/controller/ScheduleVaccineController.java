@@ -14,7 +14,7 @@ import app.domain.model.store.SNSUserStore;
 import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineStore;
 import app.domain.model.store.VaccineTypeStore;
-import app.dto.AppointmentWithNumberDTO;
+import app.dto.AppointmentInsertDTO;
 import app.dto.AppointmentWithoutNumberDTO;
 import app.dto.VaccinationCenterListDTO;
 import app.dto.VaccineTypeDTO;
@@ -52,7 +52,7 @@ public class ScheduleVaccineController implements IRegisterController {
    * 
    * @param dto the appointment dto, containing all the information about the appointment
    */
-  public void createAppointment(AppointmentWithNumberDTO appointmentDto) {
+  public void createAppointment(AppointmentInsertDTO appointmentDto) {
     this.appointmentSchedule = appointmentDto.getCenter().getAppointmentList();
     appointment = appointmentSchedule.create(appointmentDto);
   }
