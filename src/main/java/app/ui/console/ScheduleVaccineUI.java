@@ -123,6 +123,10 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
 
     Object selectedCenter = Utils.showAndSelectOne(list, "\nSelect a Vaccination Center:\n");
 
+    if (selectedCenter == null) {
+      return null;
+    }
+
     try {
       VaccinationCenterListDTO centerDto = (VaccinationCenterListDTO) selectedCenter;
       return ctrl.getVaccinationCenterByEmail(centerDto.getEmail());
@@ -162,12 +166,12 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
       } catch (ParseException ex) {
         System.out.println("Invalid date format.\n");
       }
-      hours = Utils.readLineFromConsoleWithValidation("Hour (HH:MM)", FieldToValidate.HOURS);
+      hours = Utils.readLineFromConsoleWithValidation("Hour (HH:MM):", FieldToValidate.HOURS);
 
       if (!ctrl.isCenterOpenAt(center, hours)) {
         accepted = false;
-        System.out
-            .println("\nVaccination Center is closed at selected time. Please enter other date.\n");
+        System.out.println(
+            "\nVaccination Center is closed or does not accept appointments at selected time. Please enter other date.\n");
         continue;
       }
 

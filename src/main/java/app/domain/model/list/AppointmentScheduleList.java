@@ -103,6 +103,20 @@ public class AppointmentScheduleList {
     return -1;
   }
 
+  public String getRealClosingHours() {
+    String[] openingHours = vaccinationCenter.getOpeningHours().split(":");
+    int openingMinutesOfDay =
+        Integer.parseInt(openingHours[0]) * 60 + Integer.parseInt(openingHours[1]);
+
+    int realClosingMinutesOfDay = openingMinutesOfDay
+        + (calculateNOfSlotsPerDay(vaccinationCenter) * vaccinationCenter.getSlotDuration());
+
+    int hours = realClosingMinutesOfDay / 60;
+    int minutes = realClosingMinutesOfDay % 60;
+
+    return String.valueOf(hours) + ":" + String.valueOf(minutes);
+  }
+
   private boolean isValidSchedule(int scheduledMinutesOfDay, int openingMinutesOfDay,
       int closingMinutesOfDay) {
     if (scheduledMinutesOfDay < 0) return false;

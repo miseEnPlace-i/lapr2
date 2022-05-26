@@ -21,7 +21,7 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
 
   @Override
   public void run() {
-    System.out.println("\nRegister Vaccine UI:");
+    System.out.println("\nRegister Vaccine:");
 
     List<VaccineType> vacTypes = super.ctrl.getVacTypes(); // all available vaccine types
 

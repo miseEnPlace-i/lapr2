@@ -79,8 +79,8 @@ public class Appointment {
     sb.append("\nSNS Number: " + getSnsNumber());
     sb.append("\nDate: " + sdf.format(date.getTime()));
     sb.append("\nVaccination Center: " + center.getName());
-    sb.append("\nVaccine Type: " + getVaccineType());
-    sb.append("Send SMS: " + (sms ? "Yes" : "No"));
+    sb.append("\nVaccine Type: " + vaccineType.getDescription());
+    sb.append("\nSend SMS: " + (sms ? "Yes" : "No"));
 
     return sb.toString();
   }

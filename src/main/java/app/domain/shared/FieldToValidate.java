@@ -5,6 +5,8 @@ public enum FieldToValidate {
       "Email"), WEBSITE(
           "URL"), SNS_NUMBER("SNS Number"), VAC_CODE("Vaccine Code"), HOURS("Hours"), DATE("Date");
 
+  // A DATE NAO É PARA APAGAR !!!!!!!!!!!!!!!!!!!!!!
+
   private String value;
 
   private FieldToValidate(String value) {

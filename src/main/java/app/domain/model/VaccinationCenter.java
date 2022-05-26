@@ -410,13 +410,13 @@ public class VaccinationCenter {
 
     try {
       openingHours = sdf.parse(this.openingHours);
-      closingHours = sdf.parse(this.closingHours);
+      closingHours = sdf.parse(this.appointmentList.getRealClosingHours());
       hoursToCheck = sdf.parse(hours);
     } catch (ParseException ex) {
       return false;
     }
 
-    return ((hoursToCheck.equals(openingHours)) || (hoursToCheck.equals(closingHours))
+    return ((hoursToCheck.equals(openingHours))
         || (hoursToCheck.after(openingHours) && hoursToCheck.before(closingHours)));
   }
 
