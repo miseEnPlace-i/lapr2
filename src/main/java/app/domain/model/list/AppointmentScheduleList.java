@@ -209,6 +209,7 @@ public class AppointmentScheduleList {
     return key;
   }
 
+  // Deprecated
   private boolean hasAppointmentInDay(Appointment[][] appointments, String snsNumber) {
     for (int i = 0; i < appointments.length; i++)
       for (int j = 0; j < appointments[i].length; j++)
