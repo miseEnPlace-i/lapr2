@@ -1,7 +1,6 @@
 package app.controller;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Properties;
 import app.domain.model.AdminProcess;
@@ -11,7 +10,6 @@ import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.Vaccine;
 import app.domain.model.VaccineType;
-import app.domain.model.list.AdminProcList;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.SNSUserStore;

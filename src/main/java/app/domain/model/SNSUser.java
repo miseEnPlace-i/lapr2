@@ -214,4 +214,8 @@ public class SNSUser {
   public boolean hasAppointmentForVaccineType(VaccineType vaccineType) {
     return this.userHealthData.hasAppointmentForVaccineType(vaccineType);
   }
+
+  public boolean hasAppointmentForVaccineType(VaccineType vaccineType, String number) {
+    return this.userHealthData.hasAppointmentForVaccineType(vaccineType);
+  }
 }
