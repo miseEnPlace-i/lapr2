@@ -9,6 +9,7 @@ import java.util.Calendar;
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Before;
 import org.junit.Test;
+import app.controller.App;
 import app.domain.model.Appointment;
 import app.domain.model.Company;
 import app.domain.model.Employee;
@@ -19,6 +20,7 @@ import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.model.store.VaccineTypeStore;
+import app.domain.shared.Constants;
 import app.dto.AppointmentWithNumberDTO;
 
 public class AppointmentScheduleListTest {
@@ -28,7 +30,7 @@ public class AppointmentScheduleListTest {
 
   @Before
   public void setup() {
-    Company company = new Company("designation", "12345");
+    Company company = new Company("abc", "12345", Constants.PARAMS_SENDER);
     VaccinationCenterStore centerStore = company.getVaccinationCenterStore();
     EmployeeStore employeeStore = company.getEmployeeStore();
     EmployeeRoleStore employeeRoleStore = company.getEmployeeRoleStore();
