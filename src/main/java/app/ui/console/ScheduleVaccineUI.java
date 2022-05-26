@@ -9,10 +9,10 @@ import app.controller.App;
 import app.controller.ScheduleVaccineController;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
-import app.domain.model.dto.AppointmentWithoutNumberDTO;
-import app.domain.model.dto.VaccinationCenterListDTO;
-import app.domain.model.dto.VaccineTypeDTO;
 import app.domain.shared.FieldToValidate;
+import app.dto.AppointmentWithoutNumberDTO;
+import app.dto.VaccinationCenterListDTO;
+import app.dto.VaccineTypeDTO;
 import app.service.CalendarUtils;
 import app.ui.console.utils.Utils;
 
@@ -32,42 +32,33 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
 
     if (!accepted) {
       // Declines the suggested vaccine type
-      List<VaccineTypeDTO> list = ctrl.getListOfVaccineTypes();
-
-      Object selectedVt = Utils.showAndSelectOne(list, "\n\nSelect a Vaccine Type:\n");
-
-      try {
-        VaccineTypeDTO vtDto = (VaccineTypeDTO) selectedVt;
-        vaccineType = ctrl.getVaccineTypeByCode(vtDto.getCode());
-      } catch (ClassCastException e) {
-        System.out.println("\n\nInvalid selection.");
-      }
+      vaccineType = selectVaccineType();
     }
-
-    List<VaccinationCenterListDTO> list =
-        ctrl.getListOfVaccinationCentersWithVaccineType(vaccineType);
 
     VaccinationCenter vacCenter = null;
 
-    Object selectedCenter = Utils.showAndSelectOne(list, "\n\nSelect a Vaccination Center:\n");
-
-    try {
-      VaccinationCenterListDTO centerDto = (VaccinationCenterListDTO) selectedCenter;
-      vacCenter = ctrl.getVaccinationCenterByEmail(centerDto.getEmail());
-    } catch (ClassCastException e) {
-      System.out.println("\n\nInvalid selection.");
+    if (checkIfUserHasTakenVaccineType(vaccineType)) {
+      // ctrl.getVaccinesByType(vaccineType);
+      // ctrl.checkAdministrationProcessForNextDose();
+      // vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
+    } else {
+      if (ctrl.checkAdministrationProcessForVaccineType(vaccineType)) {
+        vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
+      } else {
+        // TODO RAIA MAXIMA SAI DAQUI PARA FORA; NAO HA VACINA PARA A TUA IDADE
+      }
     }
 
-    System.out.println("\nDo you want to receive an SMS with the appointment's info?\n");
-    List<String> options = new ArrayList<String>();
-    options.add("Yes, send me an SMS.");
-    options.add("No, don't send me an SMS.");
-    int index = Utils.showAndSelectIndex(options, "\nSelect an option: (1 or 2)  ");
+    if (!ctrl.isCenterOpenAt(vacCenter, hours)) {
+      // TODO RAIA MAXIMA DESAPARECE; CENTRO ENCERRADO
+    }
 
-    boolean sms = (index == 0);
+    // VERIFICAR A DISPONIBILIDADE DO SLOT.
+
+
+    boolean sms = selectSMS();
 
     Calendar appointmentDate = Calendar.getInstance();
-
     try {
       appointmentDate = CalendarUtils.parseDateTime(date, hours);
     } catch (ParseException e) {
@@ -80,7 +71,7 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
     ctrl.createAppointment(appointmentDto);
   }
 
-  public boolean showSuggestedVaccineType(VaccineType vt) {
+  private boolean showSuggestedVaccineType(VaccineType vt) {
     System.out.println("\nSuggested Vaccine Type:\n");
 
     System.out.println(vt.getDescription());
@@ -91,5 +82,47 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
     int index = Utils.showAndSelectIndex(options, "\nSelect an option: (1 or 2)  ");
 
     return index == 0;
+  }
+
+  private VaccineType selectVaccineType() {
+    List<VaccineTypeDTO> list = ctrl.getListOfVaccineTypes();
+
+    Object selectedVt = Utils.showAndSelectOne(list, "\n\nSelect a Vaccine Type:\n");
+
+    try {
+      VaccineTypeDTO vtDto = (VaccineTypeDTO) selectedVt;
+      return ctrl.getVaccineTypeByCode(vtDto.getCode());
+    } catch (ClassCastException e) {
+      System.out.println("\n\nInvalid selection.");
+      return null;
+    }
+  }
+
+  private VaccinationCenter selectVaccinationCenterWithVaccineType(VaccineType vt) {
+    List<VaccinationCenterListDTO> list = ctrl.getListOfVaccinationCentersWithVaccineType(vt);
+
+    Object selectedCenter = Utils.showAndSelectOne(list, "\nSelect a Vaccination Center:\n");
+
+    try {
+      VaccinationCenterListDTO centerDto = (VaccinationCenterListDTO) selectedCenter;
+      return ctrl.getVaccinationCenterByEmail(centerDto.getEmail());
+    } catch (ClassCastException e) {
+      System.out.println("\n\nInvalid selection.");
+      return null;
+    }
+  }
+
+  private boolean selectSMS() {
+    System.out.println("\nDo you want to receive an SMS with the appointment's info?");
+    List<String> options = new ArrayList<String>();
+    options.add("Yes, send me an SMS.");
+    options.add("No, don't send me an SMS.");
+    int index = Utils.showAndSelectIndex(options, "\nSelect an option: (1 or 2)  ");
+
+    return (index == 0);
+  }
+
+  private boolean checkIfUserHasTakenVaccineType(VaccineType vt) {
+    return ctrl.checkIfUserHasTakenVaccineType(vt);
   }
 }

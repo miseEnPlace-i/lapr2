@@ -76,6 +76,24 @@ public class Utils {
     } while (true);
   }
 
+  static public int readPositiveIntegerFromConsole(String prompt) {
+    while (true) {
+      int n = readIntegerFromConsole(prompt);
+
+      if (n > 0) return n;
+      else System.out.println("\nThe value must be positive!");
+    }
+  }
+
+  static public int readNonNegativeIntegerFromConsole(String prompt) {
+    while (true) {
+      int n = readIntegerFromConsole(prompt);
+
+      if (n >= 0) return n;
+      else System.out.println("\nThe value cannot be negative!");
+    }
+  }
+
   static public double readDoubleFromConsole(String prompt) {
     do {
       try {

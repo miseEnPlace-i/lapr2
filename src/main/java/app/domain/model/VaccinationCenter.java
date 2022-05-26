@@ -1,6 +1,8 @@
 package app.domain.model;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import app.domain.model.list.AppointmentScheduleList;
 import app.service.FormatVerifier;
 
@@ -389,6 +391,37 @@ public class VaccinationCenter {
     if (this.email.equals(center.email)) return true;
     if (this.phoneNum.equals(center.phoneNum)) return true;
     if (this.faxNum.equals(center.faxNum)) return true;
+
+    return false;
+  }
+
+  /**
+   * Checks if the center is open at a given time.
+   * 
+   * @param hours time (HH:mm) to check
+   * @return true if center is open, false otherwise
+   */
+  public boolean isOpenAt(String hours) {
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+    Date openingHours = new Date();
+    Date closingHours = new Date();
+    Date hoursToCheck = new Date();
+
+    try {
+      openingHours = sdf.parse(this.openingHours);
+      closingHours = sdf.parse(this.closingHours);
+      hoursToCheck = sdf.parse(hours);
+    } catch (ParseException ex) {
+      return false;
+    }
+
+    return ((hoursToCheck.equals(openingHours)) || (hoursToCheck.equals(closingHours))
+        || (hoursToCheck.after(openingHours) && hoursToCheck.before(closingHours)));
+  }
+
+  public boolean hasAvailabilityInSlot(String hours) {
+    // TODO
+    //
 
     return false;
   }

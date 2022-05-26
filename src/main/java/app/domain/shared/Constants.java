@@ -22,6 +22,9 @@ public class Constants {
   public static final String PARAMS_ONGOING_OUTBREAK_VACCINE_TYPE_CODE =
       "OngoingOutbreak.VaccineTypeCode";
 
+  public static final String PARAMS_SENDER = "MessageSender.DefaultSender";
+  public static final String PARAMS_DEFAULT_SENDER = "app.service.sender.ConsoleSender";
+
   public static final byte VACCINE_TYPE_CODE_LENGTH = 5;
 
   public static final String SMS_FILE = "SMS.txt";

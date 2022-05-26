@@ -5,12 +5,13 @@ import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.Company;
 import app.domain.model.store.VaccineTechnologyStore;
+import app.domain.shared.Constants;
 
 /**
  * @author André Barros <1211299@isep.ipp.pt>
  */
 public class RegisterVaccineTypeControllerTest {
-  Company company = new Company("designation", "12345");
+  Company company = new Company("designation", "12345", Constants.PARAMS_SENDER);
   RegisterNewVaccineTypeController controller = new RegisterNewVaccineTypeController(company);
   String vaccineType = "Vaccine Type";
 

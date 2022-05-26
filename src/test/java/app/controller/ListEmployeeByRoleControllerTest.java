@@ -8,13 +8,14 @@ import app.domain.model.Company;
 import app.domain.model.Employee;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
+import app.domain.shared.Constants;
 import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
 /**
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 public class ListEmployeeByRoleControllerTest {
-  Company company = new Company("designation", "12345");
+  Company company = new Company("designation", "12345", Constants.PARAMS_SENDER);
   private ListEmployeesByRoleController ctrl = new ListEmployeesByRoleController(company);
 
   @Before

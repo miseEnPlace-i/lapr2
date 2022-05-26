@@ -1,6 +1,9 @@
 package app.service;
 
 import java.lang.reflect.Method;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import org.apache.commons.lang3.StringUtils;
 import app.domain.shared.Constants;
 
@@ -135,6 +138,20 @@ public final class FormatVerifier {
 
   public static boolean validateHours(String expression) {
     return expression.matches("[0-9]{2}:[0-9]{2}");
+  }
+
+  public static boolean validateDate(String expression) {
+    try {
+      SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
+      Date date = df.parse(expression);
+
+      return date.after(df.parse(df.format(new Date())))
+          || date.equals(df.parse(df.format(new Date())));
+    } catch (ParseException ex) {
+      System.out.println("Invalid date format.\n");
+      return false;
+    }
   }
 
   public static boolean validateSlotDuration(String expression) {

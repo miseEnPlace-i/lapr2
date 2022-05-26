@@ -7,6 +7,7 @@ import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.Company;
+import app.domain.shared.Constants;
 
 public class RegisterSNSUserTest {
   private RegisterSNSUserController ctrl;
@@ -14,7 +15,7 @@ public class RegisterSNSUserTest {
 
   @Before
   public void setUp() {
-    ctrl = new RegisterSNSUserController(new Company("designation", "12345"));
+    ctrl = new RegisterSNSUserController(new Company("designation", "12345", Constants.PARAMS_SENDER));
   }
 
   @Test

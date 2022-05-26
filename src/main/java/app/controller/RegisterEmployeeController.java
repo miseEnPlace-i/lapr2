@@ -5,7 +5,6 @@ import app.domain.model.Company;
 import app.domain.model.Employee;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
-import app.service.PasswordGenerator;
 import pt.isep.lei.esoft.auth.AuthFacade;
 import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
@@ -58,15 +57,6 @@ public class RegisterEmployeeController implements IRegisterController {
   @Override
   public void save() {
     store.saveEmployee(this.employee);
-
-    String password = PasswordGenerator.generatePwd();
-    // String password = "123456";
-
-    this.authFacade.addUserWithRole(employee.getName(), employee.getEmail(), password,
-        employee.getRoleId());
-
-    // TODO: send password email
-    // this.emailSender.sendPasswordEmail(email, password);
   }
 
   /**
