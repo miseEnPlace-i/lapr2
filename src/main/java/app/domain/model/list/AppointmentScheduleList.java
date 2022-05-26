@@ -3,7 +3,9 @@ package app.domain.model.list;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import app.controller.App;
 import app.domain.model.Appointment;
+import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
 import app.dto.AppointmentWithNumberDTO;
@@ -37,10 +39,8 @@ public class AppointmentScheduleList {
     String[] openingHours = center.getOpeningHours().split(":");
     String[] closingHours = center.getClosingHours().split(":");
 
-    int openingMinutesOfDay =
-        Integer.parseInt(openingHours[0]) * 60 + Integer.parseInt(openingHours[1]);
-    int closingMinutesOfDay =
-        Integer.parseInt(closingHours[0]) * 60 + Integer.parseInt(closingHours[1]);
+    int openingMinutesOfDay = Integer.parseInt(openingHours[0]) * 60 + Integer.parseInt(openingHours[1]);
+    int closingMinutesOfDay = Integer.parseInt(closingHours[0]) * 60 + Integer.parseInt(closingHours[1]);
 
     return ((closingMinutesOfDay - openingMinutesOfDay) / center.getSlotDuration());
   }
@@ -69,7 +69,10 @@ public class AppointmentScheduleList {
     VaccineType vacType = appointmentDTO.getVaccineType();
     boolean sms = appointmentDTO.getSmsPermission();
 
-    Appointment appointment = new Appointment(snsNumber, date, center, vacType, sms);
+    // choura
+    SNSUser u = App.getInstance().getCompany().getSNSUserStore().findSNSUserByNumber(snsNumber);
+
+    Appointment appointment = new Appointment(u, date, center, vacType, sms);
 
     return appointment;
   }
@@ -80,7 +83,10 @@ public class AppointmentScheduleList {
     VaccineType vacType = appointmentDTO.getVaccineType();
     boolean sms = appointmentDTO.getSmsPermission();
 
-    Appointment appointment = new Appointment(snsNumber, date, center, vacType, sms);
+    // outra choura
+    SNSUser u = App.getInstance().getCompany().getSNSUserStore().findSNSUserByNumber(snsNumber);
+
+    Appointment appointment = new Appointment(u, date, center, vacType, sms);
 
     return appointment;
   }
@@ -89,27 +95,21 @@ public class AppointmentScheduleList {
     String[] openingHours = vaccinationCenter.getOpeningHours().split(":");
     String[] closingHours = vaccinationCenter.getClosingHours().split(":");
 
-    int openingMinutesOfDay =
-        Integer.parseInt(openingHours[0]) * 60 + Integer.parseInt(openingHours[1]);
-    int closingMinutesOfDay =
-        Integer.parseInt(closingHours[0]) * 60 + Integer.parseInt(closingHours[1]);
+    int openingMinutesOfDay = Integer.parseInt(openingHours[0]) * 60 + Integer.parseInt(openingHours[1]);
+    int closingMinutesOfDay = Integer.parseInt(closingHours[0]) * 60 + Integer.parseInt(closingHours[1]);
 
     int slotDuration = vaccinationCenter.getSlotDuration();
-    int scheduleMinutesOfDay =
-        (date.get(Calendar.HOUR_OF_DAY) * 60 + date.get(Calendar.MINUTE)) - openingMinutesOfDay;
+    int scheduleMinutesOfDay = (date.get(Calendar.HOUR_OF_DAY) * 60 + date.get(Calendar.MINUTE)) - openingMinutesOfDay;
 
-    if (isValidSchedule(scheduleMinutesOfDay, openingMinutesOfDay, closingMinutesOfDay))
-      return scheduleMinutesOfDay / slotDuration;
+    if (isValidSchedule(scheduleMinutesOfDay, openingMinutesOfDay, closingMinutesOfDay)) return scheduleMinutesOfDay / slotDuration;
     return -1;
   }
 
-  private boolean isValidSchedule(int scheduledMinutesOfDay, int openingMinutesOfDay,
-      int closingMinutesOfDay) {
+  private boolean isValidSchedule(int scheduledMinutesOfDay, int openingMinutesOfDay, int closingMinutesOfDay) {
     if (scheduledMinutesOfDay < 0) return false;
 
     // subtract slot duration because the last slot cannot be used
-    int workingHours =
-        closingMinutesOfDay - openingMinutesOfDay - vaccinationCenter.getSlotDuration();
+    int workingHours = closingMinutesOfDay - openingMinutesOfDay - vaccinationCenter.getSlotDuration();
 
     if (scheduledMinutesOfDay > workingHours) return false;
     return true;
@@ -192,8 +192,7 @@ public class AppointmentScheduleList {
 
     for (int i = 0; i < appointments.length; i++)
       for (int j = 0; j < appointments[i].length; j++)
-        if (appointments[i][j] != null && appointments[i][j].hasSnsNumber(snsNumber))
-          return appointments[i][j];
+        if (appointments[i][j] != null && appointments[i][j].hasSnsNumber(snsNumber)) return appointments[i][j];
 
     throw new AppointmentNotFoundException("This SNS User does not have an appointment for today.");
   }

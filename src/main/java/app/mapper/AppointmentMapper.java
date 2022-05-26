@@ -13,7 +13,7 @@ public class AppointmentMapper {
     private AppointmentMapper() {}
 
     public static AppointmentDTO toDto(Appointment appointment) {
-        return new AppointmentDTO(appointment.getSnsNumber(), appointment.getDate(),
+        return new AppointmentDTO(appointment.getSnsUser().getSnsNumber(), appointment.getDate(),
                 appointment.getVaccinationCenter(), appointment.getVaccineType(),
                 appointment.isSms());
     }
