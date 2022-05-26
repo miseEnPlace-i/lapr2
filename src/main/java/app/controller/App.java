@@ -1,5 +1,6 @@
 package app.controller;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
 import app.domain.model.Company;
@@ -85,7 +86,10 @@ public class App {
     this.authFacade.addUserWithRole("Test Administrator", "admin@admin.pt", "123456",
         Constants.ROLE_ADMIN);
 
-    SNSUser user = this.snsUserStore.createSNSUser("000000000ZZ4", "123456789", "name", new Date(),
+    Calendar date = Calendar.getInstance();
+    date.add(Calendar.YEAR, -22);
+
+    SNSUser user = this.snsUserStore.createSNSUser("000000000ZZ4", "123456789", "name", date.getTime(),
         'M', "+351212345678", "s@user.com", "address");
     this.snsUserStore.saveSNSUser(user);
 

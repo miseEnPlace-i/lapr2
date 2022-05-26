@@ -22,8 +22,8 @@ public class WaitingRoom implements Iterable<Arrival> {
    * @param snsNumber the SNS Number of the SNS User.
    * @return Arrival
    */
-  public Arrival createArrival(SNSUser snsUser) {
-    return new Arrival(snsUser);
+  public Arrival createArrival(SNSUser snsUser, Appointment appointment) {
+    return new Arrival(snsUser, appointment);
   }
 
   /**

@@ -10,14 +10,16 @@ import java.util.Calendar;
  */
 public class Arrival {
   private SNSUser snsUser;
+  private Appointment appointment;
   private Calendar arrivalTime;
-  // TODO: leaveTime for statistics
+  private Calendar departureTime;
 
   /**
    * Constructor for Arrival.
    */
-  public Arrival(SNSUser snsUser) {
+  public Arrival(SNSUser snsUser, Appointment appointment) {
     this.snsUser = snsUser;
+    this.appointment = appointment;
     this.arrivalTime = Calendar.getInstance();
   }
 
@@ -29,10 +31,31 @@ public class Arrival {
   }
 
   /**
-   * Gets the date.
+   * Gets the arrival time.
    */
   public Calendar getArrivalTime() {
     return arrivalTime;
+  }
+
+  /**
+   * Gets the appointment.
+   */
+  public Appointment getAppointment() {
+    return appointment;
+  }
+
+  /**
+   * Gets the departure time.
+   */
+  public Calendar getDepartureTime() {
+    return departureTime;
+  }
+
+  /**
+   * Sets the departure time.
+   */
+  public void setDepartureTime(Calendar departureTime) {
+    this.departureTime = departureTime;
   }
 
   /**

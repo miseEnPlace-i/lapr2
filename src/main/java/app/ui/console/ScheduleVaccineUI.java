@@ -55,7 +55,6 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
 
     // VERIFICAR A DISPONIBILIDADE DO SLOT.
 
-
     boolean sms = selectSMS();
 
     Calendar appointmentDate = Calendar.getInstance();
