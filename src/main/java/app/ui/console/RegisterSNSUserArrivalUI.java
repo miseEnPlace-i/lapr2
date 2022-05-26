@@ -24,16 +24,11 @@ public class RegisterSNSUserArrivalUI extends RegisterUI<RegisterSNSUserArrivalC
 
         String snsNumber = Utils.readLineFromConsoleWithValidation("SNS Number (xxxxxxxxx): ", FieldToValidate.SNS_NUMBER);
 
-        try {
-            // verify if the user exists
-            super.ctrl.findSNSUser(snsNumber);
+        // verify if the user exists
+        super.ctrl.findSNSUser(snsNumber);
 
-            // find the user appointment
-            super.ctrl.findSNSUserAppointment();
-        } catch (IllegalArgumentException | AppointmentNotFoundException e) {
-            System.out.println(e.getMessage());
-            return;
-        }
+        // find the user appointment
+        super.ctrl.findSNSUserAppointment();
 
         // create the arrival
         super.ctrl.create();

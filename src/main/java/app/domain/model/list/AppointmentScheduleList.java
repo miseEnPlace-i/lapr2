@@ -190,7 +190,7 @@ public class AppointmentScheduleList {
     Calendar key = this.generateKeyFromDate(Calendar.getInstance());
     Appointment[][] appointments = this.appointments.get(key);
 
-    for (int i = 0; i < appointments.length; i++)
+    if (appointments != null) for (int i = 0; i < appointments.length; i++)
       for (int j = 0; j < appointments[i].length; j++)
         if (appointments[i][j] != null && appointments[i][j].hasSnsNumber(snsNumber)) return appointments[i][j];
 
