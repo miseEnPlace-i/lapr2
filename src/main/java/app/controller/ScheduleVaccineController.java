@@ -129,7 +129,7 @@ public class ScheduleVaccineController implements IRegisterController {
   public void save() {
     appointmentSchedule.saveAppointment(appointment);
 
-    SNSUser snsUser = snsUserStore.findSNSUserByNumber(appointment.getSnsNumber());
+    SNSUser snsUser = snsUserStore.findSNSUserByNumber(appointment.getSnsUser().getSnsNumber());
     snsUser.addAppointmentToList(appointment);
   }
 

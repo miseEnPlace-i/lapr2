@@ -1,11 +1,6 @@
 package app.controller;
 
 import java.util.Calendar;
-<<<<<<< HEAD
-import java.util.Date;
-=======
-import java.util.GregorianCalendar;
->>>>>>> origin/feat-schedule
 import java.util.Properties;
 import app.domain.model.AdminProcess;
 import app.domain.model.Company;
@@ -91,23 +86,13 @@ public class App {
 
     this.authFacade.addUserWithRole("Test Administrator", "admin@user.com", "123456", Constants.ROLE_ADMIN);
 
-<<<<<<< HEAD
     Calendar date = Calendar.getInstance();
-    date.add(Calendar.YEAR, -22);
+    date.add(Calendar.YEAR, -18);
 
     SNSUser user = this.snsUserStore.createSNSUser("000000000ZZ4", "123456789", "name", date.getTime(), 'M', "+351212345678", "s@user.com", "address");
     this.snsUserStore.saveSNSUser(user);
 
     Employee e = this.employeeStore.createEmployee("Name", "+351916919169", "r@user.com", "address", "123456789ZZ1", Constants.ROLE_RECEPTIONIST);
-=======
-    SNSUser user = this.snsUserStore.createSNSUser("000000000ZZ4", "123456789", "name",
-        new GregorianCalendar(2004, Calendar.FEBRUARY, 12).getTime(), 'M', "+351212345678",
-        "s@user.com", "address");
-    this.snsUserStore.saveSNSUser(user);
-
-    Employee e = this.employeeStore.createEmployee("Name", "+351916919169", "r@user.com", "address",
-        "123456789ZZ1", Constants.ROLE_RECEPTIONIST);
->>>>>>> origin/feat-schedule
     this.employeeStore.saveEmployee(e);
     Employee e2 = this.employeeStore.createEmployee("Name2", "+351916919269", "c@user.com", "address", "155424041ZY0", Constants.ROLE_COORDINATOR);
     this.employeeStore.saveEmployee(e2);
@@ -124,10 +109,6 @@ public class App {
     VaccineType vacType = this.vacTypeStore.addVaccineType("00000", "COVID-19", "M_RNA_TECHNOLOGY");
     this.vacTypeStore.saveVaccineType(vacType);
 
-<<<<<<< HEAD
-    VaccinationCenter vc = this.vaccinationCenterStore.createCommunityMassCenter("name", "address", "test@gmail.com", "+351212345678", "+351212345679",
-        "http://www.test.com", "20:00", "21:00", 5, 5, e2, vacType);
-=======
     Vaccine vaccine = this.vaccineStore.createVaccine("BioNTech, Pfizer vaccine", "00001",
         "Pfizer, BioNTech", vacType);
 
@@ -148,7 +129,6 @@ public class App {
     VaccinationCenter vc = this.vaccinationCenterStore.createCommunityMassCenter(
         "Centro Vacinação de Teste", "Rua de Teste", "test@gmail.com", "+351212345678",
         "+351212345679", "http://www.test.com", "20:00", "21:00", 7, 5, e2, vacType);
->>>>>>> origin/feat-schedule
     this.vaccinationCenterStore.saveVaccinationCenter(vc);
 
     VaccinationCenter vc2 = this.vaccinationCenterStore.createHealthCareCenter(
