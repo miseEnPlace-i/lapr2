@@ -153,7 +153,7 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
   }
 
   /**
-   * Asks the user if he wants to recieve an SMS.
+   * Asks the user if he wants to receive an SMS.
    * 
    * @return true it does, false otherwise
    */
