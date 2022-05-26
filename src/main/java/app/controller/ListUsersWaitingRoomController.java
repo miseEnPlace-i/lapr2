@@ -30,7 +30,7 @@ public class ListUsersWaitingRoomController {
     // TODO refactor using equals
     // TODO refactor using Waiting Room DTO
     WaitingRoom waitingRoom =
-        vaccinationCenterStore.getWaitingRoom(nurseVaccinationCenter.getPhone());
+        vaccinationCenterStore.getWaitingRoomWithPhone(nurseVaccinationCenter.getPhone());
 
     List<ArrivalDTO> waitingRoomDTO = WaitingRoomMapper.toDto(waitingRoom);
 

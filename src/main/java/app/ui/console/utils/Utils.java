@@ -159,12 +159,7 @@ public class Utils {
   }
 
   static public Object selectsObject(List list) {
-    String input;
-    Integer value;
-    do {
-      input = Utils.readLineFromConsole("Type your option: ");
-      value = Integer.valueOf(input);
-    } while (value < 0 || value > list.size());
+    int value = Utils.readIntegerFromConsole("Type your option: ");
 
     if (value == 0) {
       return null;
