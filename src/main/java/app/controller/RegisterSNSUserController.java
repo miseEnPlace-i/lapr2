@@ -5,8 +5,6 @@ import java.util.Date;
 import app.domain.model.Company;
 import app.domain.model.SNSUser;
 import app.domain.model.store.SNSUserStore;
-import app.domain.shared.Constants;
-import app.service.PasswordGenerator;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
 /**
@@ -58,14 +56,7 @@ public class RegisterSNSUserController implements IRegisterController {
 
   @Override
   public void save() {
-    String pwd = PasswordGenerator.generatePwd();
-
     store.saveSNSUser(this.snsUser);
-    authFacade.addUserWithRole(snsUser.getName(), snsUser.getEmail(), pwd, Constants.ROLE_SNS_USER);
-
-    // TODO: send password email
-    // EmailSender emailSender = new EmailSender();
-    // emailSender.sendPasswordEmail(email, pwdStr);
   }
 
   @Override

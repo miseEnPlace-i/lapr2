@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
@@ -37,6 +38,13 @@ public class Appointment {
   }
 
   /**
+   * Compares the SNS number of this appointment with another number.
+   */
+  public String getSnsNumber() {
+    return snsNumber;
+  }
+
+  /**
    * Checks if the date of this appointment is in the next hour. TODO: the vaccination center will be the one who is going
    * to check if the appointment is in the next slot.
    */
@@ -44,5 +52,36 @@ public class Appointment {
     Calendar now = Calendar.getInstance();
     now.add(Calendar.HOUR, 1);
     return this.date.after(now);
+  }
+
+  public Calendar getDate() {
+    return date;
+  }
+
+  public VaccineType getVaccineType() {
+    return vaccineType;
+  }
+
+  public boolean isSms() {
+    return sms;
+  }
+
+  public VaccinationCenter getVaccinationCenter() {
+    return center;
+  }
+
+  @Override
+  public String toString() {
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+    StringBuilder sb = new StringBuilder();
+    sb.append("Appointment: \n");
+    sb.append("\nSNS Number: " + getSnsNumber());
+    sb.append("\nDate: " + sdf.format(date.getTime()));
+    sb.append("\nVaccination Center: " + center.getName());
+    sb.append("\nVaccine Type: " + getVaccineType());
+    sb.append("\nSend SMS: " + (sms ? "Yes" : "No"));
+
+    return sb.toString();
   }
 }

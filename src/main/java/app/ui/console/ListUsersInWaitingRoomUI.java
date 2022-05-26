@@ -1,9 +1,9 @@
 package app.ui.console;
 
+import java.util.List;
 import app.controller.App;
 import app.controller.ListUsersWaitingRoomController;
-import app.domain.model.Arrival;
-import app.domain.model.WaitingRoom;
+import app.dto.ArrivalDTO;
 import app.exception.NotAuthorizedException;
 import app.session.EmployeeSession;
 
@@ -29,7 +29,7 @@ public class ListUsersInWaitingRoomUI implements Runnable {
 
   private String getWaitingRoomDataForNurseCenter() {
     // TODO implement Waiting Room DTO
-    WaitingRoom waitingRoom = controller.getWaitingRoomListFromNurseCenter();
+    List<ArrivalDTO> waitingRoom = controller.getWaitingRoomListFromNurseCenter();
 
     if (waitingRoom.size() == 0) return null;
 
@@ -37,12 +37,11 @@ public class ListUsersInWaitingRoomUI implements Runnable {
     sb.append("\n\nWaiting Room:");
     sb.append("\n\n");
 
-    for (Arrival arrive : waitingRoom) {
+    for (ArrivalDTO arrive : waitingRoom) {
       sb.append(arrive.getTime());
       sb.append("\n");
     }
 
     return sb.toString();
-
   }
 }

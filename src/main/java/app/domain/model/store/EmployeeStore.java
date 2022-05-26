@@ -3,6 +3,10 @@ package app.domain.model.store;
 import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.Employee;
+import app.dto.UserNotificationDTO;
+import app.mapper.UserNotificationMapper;
+import app.service.PasswordGenerator;
+import app.service.sender.ISender;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
 /**
@@ -13,14 +17,16 @@ public class EmployeeStore {
   private AuthFacade authFacade;
   private List<Employee> employees;
   private EmployeeRoleStore roleStore;
+  private ISender sender;
 
   /**
    * Constructor for EmployeeStore.
    */
-  public EmployeeStore(AuthFacade authFacade, EmployeeRoleStore roleStore) {
-    this.authFacade = authFacade;
+  public EmployeeStore(AuthFacade authFacade, EmployeeRoleStore roleStore, ISender sender) {
     this.employees = new ArrayList<Employee>();
+    this.authFacade = authFacade;
     this.roleStore = roleStore;
+    this.sender = sender;
   }
 
   /**
@@ -80,23 +86,29 @@ public class EmployeeStore {
   }
 
   /**
-   * Inserts an employee into the store.
+   * Inserts an employee into the store and creates a system user.
    * 
    * @param employee the employee to be inserted
    */
   public void saveEmployee(Employee employee) {
-    String name = employee.getName();
-    String email = employee.getEmail();
-    String roleId = employee.getRoleId();
-    // String password = PasswordGenerator.generatePwd();
-    String password = "123456";
-
-    this.authFacade.addUserWithRole(name, email, password, roleId);
-
     this.employees.add(employee);
 
-    // TODO: send password email
-    // this.emailSender.sendPasswordEmail(email, password);
+    String email = employee.getEmail();
+    String phoneNumber = employee.getPhoneNumber();
+    String pwd = PasswordGenerator.generatePwd();
+
+    this.authFacade.addUserWithRole(employee.getName(), email, pwd, employee.getRoleId());
+
+    String message = String.format("A new user has been created.\nEmail: %s\nPassword: %s", email, pwd);
+    UserNotificationDTO notiDto = UserNotificationMapper.toDto(email, phoneNumber, message);
+
+    // send notification with the password
+    try {
+      this.sender.send(notiDto);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      e.printStackTrace();
+    }
   }
 
   /**

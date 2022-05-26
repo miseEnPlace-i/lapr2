@@ -70,6 +70,7 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
     } else {
       String ages = Utils.readLineFromConsole("AGES: ");
       String ars = Utils.readLineFromConsole("ARS: ");
+
       super.ctrl.createHealthCare(name, address, email, phone, fax, website, openHours, closHours,
           slotDur, maxVac, coordinator, ages, ars);
     }

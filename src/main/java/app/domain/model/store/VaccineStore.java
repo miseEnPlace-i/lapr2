@@ -35,4 +35,16 @@ public class VaccineStore {
   public int size() {
     return vaccines.size();
   }
+
+  public List<Vaccine> getVaccinesByType(VaccineType vt) {
+    List<Vaccine> vaccinesList = new ArrayList<Vaccine>();
+
+    for (Vaccine vaccine : vaccines) {
+      if (vaccine.getVacType().equals(vt)) {
+        vaccinesList.add(vaccine);
+      }
+    }
+
+    return vaccinesList;
+  }
 }

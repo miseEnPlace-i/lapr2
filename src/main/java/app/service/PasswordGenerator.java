@@ -32,17 +32,17 @@ public class PasswordGenerator {
     StringBuilder sb = new StringBuilder();
     Random random = new Random();
 
-    for (int i = 0; i < UPPER_CASE_LETTER_COUNT; i++) {
+    for (int i = 0; i < UPPER_CASE_LETTER_COUNT; i++)
       sb.append(UPPER_CASE_LETTERS.charAt(random.nextInt(UPPER_CASE_LETTERS.length())));
-    }
 
-    for (int i = 0; i < LOWER_CASE_LETTER_COUNT; i++) {
+
+    for (int i = 0; i < LOWER_CASE_LETTER_COUNT; i++)
       sb.append(LOWER_CASE_LETTERS.charAt(random.nextInt(LOWER_CASE_LETTERS.length())));
-    }
 
-    for (int i = 0; i < DIGIT_COUNT; i++) {
+
+    for (int i = 0; i < DIGIT_COUNT; i++)
       sb.append(DIGITS.charAt(random.nextInt(DIGITS.length())));
-    }
+
 
     // shuffle the string
     for (int i = 0; i < sb.length(); i++) {

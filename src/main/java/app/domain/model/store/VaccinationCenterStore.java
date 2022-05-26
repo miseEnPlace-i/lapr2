@@ -8,9 +8,9 @@ import app.domain.model.HealthCareCenter;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
 import app.domain.model.WaitingRoom;
-import app.domain.model.dto.VaccinationCenterListDTO;
 import app.domain.shared.Constants;
-import app.mappers.VaccinationCenterMapper;
+import app.dto.VaccinationCenterListDTO;
+import app.mapper.VaccinationCenterMapper;
 
 /**
  * Vaccination Center store
@@ -185,6 +185,15 @@ public class VaccinationCenterStore {
   private VaccinationCenter getVaccinationCenterByPhone(String phone) {
     for (VaccinationCenter center : vaccinationCenters) {
       if (center.getPhone().equals(phone)) {
+        return center;
+      }
+    }
+    return null;
+  }
+
+  public VaccinationCenter getVaccinationCenterByEmail(String email) {
+    for (VaccinationCenter center : vaccinationCenters) {
+      if (center.getEmail().equals(email)) {
         return center;
       }
     }
