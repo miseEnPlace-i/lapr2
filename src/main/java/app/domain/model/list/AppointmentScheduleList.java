@@ -15,6 +15,7 @@ import app.exception.AppointmentNotFoundException;
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
+ * @author Tomás Russo <1211288@isep.ipp.pt>
  */
 public class AppointmentScheduleList {
   private VaccinationCenter vaccinationCenter;

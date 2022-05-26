@@ -23,6 +23,12 @@ import app.mappers.VaccineTypeMapper;
 import app.service.TimeUtils;
 import pt.isep.lei.esoft.auth.UserSession;
 
+/**
+ * ScheduleVaccineController class.
+ * 
+ * @author André Barros <1211299@isep.ipp.pt>
+ * @author Tomás Russo <1211288@isep.ipp.pt>
+ */
 public class ScheduleVaccineController implements IRegisterController {
   private Company company;
   private VaccinationCenterStore vaccinationCenterStore;
@@ -129,26 +135,18 @@ public class ScheduleVaccineController implements IRegisterController {
     return this.company.getSNSUserStore().checkSNSUserExists(snsNumber);
   }
 
-  public boolean checkIfUserHasTakenVaccineType(VaccineType vt) {
+  public boolean userHasTakenAnyVaccineFromVaccineType(VaccineType vt) {
     SNSUser snsUser = getSnsUserByUserSession();
-    if (snsUser.getLastTakenVaccineFromType(vt) == null) return false;
-    else return true;
+    return snsUser.hasTakenAnyVaccineFromVaccineType(vt);
   }
 
   public boolean checkAdministrationProcessForVaccineType(VaccineType vt) {
-    List<Vaccine> vaccinesList = vaccineStore.getVaccinesByType(vt);
     SNSUser snsUser = getSnsUserByUserSession();
     Date birthDay = snsUser.getBirthDay();
 
     int age = TimeUtils.calculateAge(birthDay);
 
-    for (Vaccine vaccine : vaccinesList) {
-      if (vaccine.hasAdministrationProcessForGivenAge(age)) {
-        return true;
-      }
-    }
-
-    return false;
+    return vaccineStore.areVaccinesWithValidAdminProcessWithVaccineType(age, vt);
   }
 
   public boolean isCenterOpenAt(VaccinationCenter vacCenter, String hours) {
@@ -157,5 +155,12 @@ public class ScheduleVaccineController implements IRegisterController {
 
   public boolean hasSlotAvailability(VaccinationCenter vacCenter, Calendar date) {
     return vacCenter.hasAvailabilityInSlot(date);
+  }
+
+
+  public boolean userHasAppointmentForVaccineType(VaccineType vaccineType) {
+    SNSUser snsUser = getSnsUserByUserSession();
+    // return snsUser.hasAppointmentForVaccineType();
+    return false;
   }
 }

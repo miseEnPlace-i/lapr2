@@ -17,6 +17,11 @@ import app.dto.VaccineTypeDTO;
 import app.service.CalendarUtils;
 import app.ui.console.utils.Utils;
 
+/**
+ * ScheduleVaccineUI class.
+ * 
+ * @author Tomás Russo <1211288@isep.ipp.pt>
+ */
 public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
 
   public ScheduleVaccineUI() {
@@ -44,9 +49,14 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
       }
     }
 
+    if (userHasAppointmentForVaccineType(vaccineType)) {
+      System.out.println("\nYou can not have two appointments for the same vaccine type.\n");
+      return;
+    }
+
     VaccinationCenter vacCenter = null;
 
-    if (checkIfUserHasTakenVaccineType(vaccineType)) {
+    if (userHasTakenVaccineType(vaccineType)) {
       // ctrl.getVaccinesByType(vaccineType);
       // ctrl.checkAdministrationProcessForNextDose();
       // vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
@@ -118,6 +128,12 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
     return null;
   }
 
+  /**
+   * Asks the user to select a vaccination center that administers certain vaccine type.
+   * 
+   * @param vt the vaccine type that the centers administer
+   * @return the selected vaccination center
+   */
   private VaccinationCenter selectVaccinationCenterWithVaccineType(VaccineType vt) {
     List<VaccinationCenterListDTO> list = ctrl.getListOfVaccinationCentersWithVaccineType(vt);
 
@@ -136,6 +152,11 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
     }
   }
 
+  /**
+   * Asks the user if he wants to recieve an SMS.
+   * 
+   * @return true it does, false otherwise
+   */
   private boolean selectSMS() {
     System.out.println("\nDo you want to receive an SMS with the appointment's info?");
     List<String> options = new ArrayList<String>();
@@ -146,10 +167,17 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
     return (index == 0);
   }
 
-  private boolean checkIfUserHasTakenVaccineType(VaccineType vt) {
-    return ctrl.checkIfUserHasTakenVaccineType(vt);
+  private boolean userHasTakenVaccineType(VaccineType vt) {
+    return ctrl.userHasTakenAnyVaccineFromVaccineType(vt);
   }
 
+  /**
+   * Asks user to enter a date for his appointment. The function checks if the center has availability for the selected
+   * time: It checks for center schedule; It checks for slots availability.
+   * 
+   * @param center the center to be checked
+   * @return the date selected by the user; or null if there is an error
+   */
   private Calendar selectDateAndTimeInCenterAvailability(VaccinationCenter center) {
     boolean accepted = true;
     Date date = new Date();
@@ -195,8 +223,16 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
     return null;
   }
 
+  /**
+   * Checks if user is eligible for a certain vaccine type. It checks if it has already taken any vaccine from certain
+   * vaccine type: If it has taken, BY NOW THIS DOES NOTHING If it has not taken, checks if there is any vaccine with an
+   * administration process that includes his age.
+   * 
+   * @param vaccineType the vaccine type to be checked
+   * @return true if user is eligible, false otherwise
+   */
   private boolean isUserEligibleForVaccine(VaccineType vaccineType) {
-    if (checkIfUserHasTakenVaccineType(vaccineType)) {
+    if (userHasTakenVaccineType(vaccineType)) {
       // ctrl.getVaccinesByType(vaccineType);
       // ctrl.checkAdministrationProcessForNextDose();
       // vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
@@ -208,5 +244,15 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
         return false;
       }
     }
+  }
+
+  /**
+   * Checks if user has an appointment for a certain vaccine type.
+   * 
+   * @param vaccineType the vaccine type to be checked
+   * @return true if has an appointment, false otherwise
+   */
+  private boolean userHasAppointmentForVaccineType(VaccineType vaccineType) {
+    return ctrl.userHasAppointmentForVaccineType(vaccineType);
   }
 }

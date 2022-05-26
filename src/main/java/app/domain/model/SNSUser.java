@@ -111,6 +111,11 @@ public class SNSUser {
     return userHealthData.getLastVaccineTakenWithType(vaccineType);
   }
 
+  public boolean hasTakenAnyVaccineFromVaccineType(VaccineType vaccineType) {
+    if (getLastTakenVaccineFromType(vaccineType) == null) return false;
+    else return true;
+  }
+
   @Override
   public boolean equals(Object obj) {
     if (obj == null) return false;
