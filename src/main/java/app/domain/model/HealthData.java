@@ -2,11 +2,13 @@ package app.domain.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import app.domain.model.store.SNSUserStore;
 
 public class HealthData {
   SNSUser snsUser;
   List<Vaccine> vaccinesTaken;
   List<Appointment> appointments;
+  SNSUserStore store;
 
   public HealthData(SNSUser snsUser) {
     this.vaccinesTaken = new ArrayList<>();
@@ -38,6 +40,15 @@ public class HealthData {
     for (Appointment appointment : appointments) {
       if (appointment.hasSnsNumber(snsUser.getSnsNumber())
           && appointment.hasVaccineType(vaccineType)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public boolean hasAppointmentForVaccineType(VaccineType vaccineType, String number) {
+    for (Appointment appointment : appointments) {
+      if (appointment.hasSnsNumber(number) && appointment.hasVaccineType(vaccineType)) {
         return true;
       }
     }
