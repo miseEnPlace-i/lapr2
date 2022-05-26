@@ -103,6 +103,9 @@ public class App {
     Employee e2 = this.employeeStore.createEmployee("Name2", "+351916919269", "c@user.com",
         "address", "155424041ZY0", Constants.ROLE_COORDINATOR);
     this.employeeStore.saveEmployee(e2);
+    Employee e21 = this.employeeStore.createEmployee("Name21", "+351916919269", "c2@user.com",
+        "address", "155424041ZY0", Constants.ROLE_COORDINATOR);
+    this.employeeStore.saveEmployee(e21);
 
     Employee e3 = this.employeeStore.createEmployee("Name2", "+351916919269", "n@user.com",
         "address", "000000000ZZ4", Constants.ROLE_NURSE);
@@ -121,6 +124,12 @@ public class App {
     AdminProcess adminProcess1 = new AdminProcess(1, 16, 1);
     AdminProcess adminProcess2 = new AdminProcess(17, 89, 2);
 
+    // ********** IMPORTANT **********
+    // PLEASE DO NOT DELETE ANY INSTANTIATION OF OBJECTS ON THIS METHOD.
+    // THIS SAVES DEVELOPERS A LOT OF WORK.
+    // THANK YOU.
+    // *******************************
+
     vaccine.addAdminProc(adminProcess1);
     vaccine.addAdminProc(adminProcess2);
 
@@ -130,6 +139,11 @@ public class App {
         "Centro Vacinação de Teste", "Rua de Teste", "test@gmail.com", "+351212345678",
         "+351212345679", "http://www.test.com", "20:00", "21:00", 7, 5, e2, vacType);
     this.vaccinationCenterStore.saveVaccinationCenter(vc);
+
+    VaccinationCenter vc2 = this.vaccinationCenterStore.createHealthCareCenter(
+        "Unidade de Saúde de Teste", "Rua de Teste", "test2@gmail.com", "+351219876543",
+        "+351219876543", "https://teste.com", "20:00", "21:00", 7, 5, e21, "AGES", "AGS");
+    this.vaccinationCenterStore.saveVaccinationCenter(vc2);
   }
 
   // Extracted from

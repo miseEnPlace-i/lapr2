@@ -40,6 +40,13 @@ public class Appointment {
   /**
    * Compares the SNS number of this appointment with another number.
    */
+  public boolean hasVaccineType(VaccineType vaccineType) {
+    return this.vaccineType.equals(vaccineType);
+  }
+
+  /**
+   * Compares the SNS number of this appointment with another number.
+   */
   public String getSnsNumber() {
     return snsNumber;
   }

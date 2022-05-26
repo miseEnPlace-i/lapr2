@@ -8,7 +8,6 @@ import app.domain.model.Appointment;
 import app.domain.model.Company;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
-import app.domain.model.Vaccine;
 import app.domain.model.VaccineType;
 import app.domain.model.list.AppointmentScheduleList;
 import app.domain.model.store.SNSUserStore;
@@ -61,7 +60,7 @@ public class ScheduleVaccineController implements IRegisterController {
    */
   public void createAppointment(AppointmentWithNumberDTO appointmentDto) {
     this.appointmentSchedule = appointmentDto.getCenter().getAppointmentList();
-    appointment = appointmentSchedule.create(appointmentDto);
+    this.appointment = appointmentSchedule.create(appointmentDto);
   }
 
   public void createAppointment(AppointmentWithoutNumberDTO dto) {
@@ -71,7 +70,7 @@ public class ScheduleVaccineController implements IRegisterController {
 
     String snsNumber = snsUser.getSnsNumber();
 
-    appointment = appointmentSchedule.create(dto, snsNumber);
+    this.appointment = appointmentSchedule.create(dto, snsNumber);
   }
 
   /**
@@ -129,6 +128,9 @@ public class ScheduleVaccineController implements IRegisterController {
   @Override
   public void save() {
     appointmentSchedule.saveAppointment(appointment);
+
+    SNSUser snsUser = getSnsUserByUserSession();
+    snsUser.addAppointmentToList(appointment);
   }
 
   public boolean existsUser(String snsNumber) {
@@ -160,7 +162,6 @@ public class ScheduleVaccineController implements IRegisterController {
 
   public boolean userHasAppointmentForVaccineType(VaccineType vaccineType) {
     SNSUser snsUser = getSnsUserByUserSession();
-    // return snsUser.hasAppointmentForVaccineType();
-    return false;
+    return snsUser.hasAppointmentForVaccineType(vaccineType);
   }
 }

@@ -71,7 +71,7 @@ public class SNSUser {
     this.email = email;
     this.address = address;
 
-    this.userHealthData = new HealthData();
+    this.userHealthData = new HealthData(this);
   }
 
   // Getters
@@ -205,5 +205,13 @@ public class SNSUser {
     sb.append(String.format("Address: %s\n", this.address));
 
     return sb.toString();
+  }
+
+  public void addAppointmentToList(Appointment appointment) {
+    this.userHealthData.addAppointment(appointment);
+  }
+
+  public boolean hasAppointmentForVaccineType(VaccineType vaccineType) {
+    return this.userHealthData.hasAppointmentForVaccineType(vaccineType);
   }
 }
