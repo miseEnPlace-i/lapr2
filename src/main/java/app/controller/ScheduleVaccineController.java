@@ -1,13 +1,13 @@
 package app.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import app.domain.model.Appointment;
 import app.domain.model.Company;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
-import app.domain.model.Vaccine;
 import app.domain.model.VaccineType;
 import app.domain.model.list.AppointmentScheduleList;
 import app.domain.model.store.SNSUserStore;
@@ -22,6 +22,12 @@ import app.mapper.VaccineTypeMapper;
 import app.service.TimeUtils;
 import pt.isep.lei.esoft.auth.UserSession;
 
+/**
+ * ScheduleVaccineController class.
+ * 
+ * @author André Barros <1211299@isep.ipp.pt>
+ * @author Tomás Russo <1211288@isep.ipp.pt>
+ */
 public class ScheduleVaccineController implements IRegisterController {
   private Company company;
   private VaccinationCenterStore vaccinationCenterStore;
@@ -54,7 +60,7 @@ public class ScheduleVaccineController implements IRegisterController {
    */
   public void createAppointment(AppointmentInsertDTO appointmentDto) {
     this.appointmentSchedule = appointmentDto.getCenter().getAppointmentList();
-    appointment = appointmentSchedule.create(appointmentDto);
+    this.appointment = appointmentSchedule.create(appointmentDto);
   }
 
   public void createAppointment(AppointmentWithoutNumberDTO dto) {
@@ -64,7 +70,7 @@ public class ScheduleVaccineController implements IRegisterController {
 
     String snsNumber = snsUser.getSnsNumber();
 
-    appointment = appointmentSchedule.create(dto, snsNumber);
+    this.appointment = appointmentSchedule.create(dto, snsNumber);
   }
 
   /**
@@ -122,35 +128,59 @@ public class ScheduleVaccineController implements IRegisterController {
   @Override
   public void save() {
     appointmentSchedule.saveAppointment(appointment);
+
+    SNSUser snsUser = snsUserStore.findSNSUserByNumber(appointment.getSnsNumber());
+    snsUser.addAppointmentToList(appointment);
   }
 
   public boolean existsUser(String snsNumber) {
     return this.company.getSNSUserStore().checkSNSUserExists(snsNumber);
   }
 
-  public boolean checkIfUserHasTakenVaccineType(VaccineType vt) {
+  public boolean userHasTakenAnyVaccineFromVaccineType(VaccineType vt) {
     SNSUser snsUser = getSnsUserByUserSession();
-    if (snsUser.getLastTakenVaccineFromType(vt) == null) return false;
-    else return true;
+    return snsUser.hasTakenAnyVaccineFromVaccineType(vt);
+  }
+
+  public boolean userHasTakenAnyVaccineFromVaccineType(VaccineType vt, String SnsNumber) {
+    SNSUser user = snsUserStore.findSNSUserByNumber(SnsNumber);
+    return user.hasTakenAnyVaccineFromVaccineType(vt);
   }
 
   public boolean checkAdministrationProcessForVaccineType(VaccineType vt) {
-    List<Vaccine> vaccinesList = vaccineStore.getVaccinesByType(vt);
     SNSUser snsUser = getSnsUserByUserSession();
     Date birthDay = snsUser.getBirthDay();
 
     int age = TimeUtils.calculateAge(birthDay);
 
-    for (Vaccine vaccine : vaccinesList) {
-      if (vaccine.hasAdministrationProcessForGivenAge(age)) {
-        return true;
-      }
-    }
+    return vaccineStore.areVaccinesWithValidAdminProcessWithVaccineType(age, vt);
+  }
 
-    return false;
+  public boolean checkAdministrationProcessForVaccineType(VaccineType vt, String number) {
+    SNSUser snsUser = snsUserStore.findSNSUserByNumber(number);
+    Date birthDay = snsUser.getBirthDay();
+
+    int age = TimeUtils.calculateAge(birthDay);
+
+    return vaccineStore.areVaccinesWithValidAdminProcessWithVaccineType(age, vt);
   }
 
   public boolean isCenterOpenAt(VaccinationCenter vacCenter, String hours) {
     return vacCenter.isOpenAt(hours);
+  }
+
+  public boolean hasSlotAvailability(VaccinationCenter vacCenter, Calendar date) {
+    return vacCenter.hasAvailabilityInSlot(date);
+  }
+
+
+  public boolean userHasAppointmentForVaccineType(VaccineType vaccineType) {
+    SNSUser snsUser = getSnsUserByUserSession();
+    return snsUser.hasAppointmentForVaccineType(vaccineType);
+  }
+
+  public boolean userHasAppointmentForVaccineType(VaccineType vaccineType, String number) {
+    SNSUser snsUser = snsUserStore.findSNSUserByNumber(number);
+    return snsUser.hasAppointmentForVaccineType(vaccineType, number);
   }
 }

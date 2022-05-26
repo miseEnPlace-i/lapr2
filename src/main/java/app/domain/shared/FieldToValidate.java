@@ -2,7 +2,10 @@ package app.domain.shared;
 
 public enum FieldToValidate {
   CITIZEN_CARD("Citizen Card"), PHONE_NUMBER("Phone Number"), FAX("Fax Number"), EMAIL(
-      "Email"), WEBSITE("URL"), SNS_NUMBER("SNS Number"), VAC_CODE("Vaccine Code"), HOURS("Hours");
+      "Email"), WEBSITE(
+          "URL"), SNS_NUMBER("SNS Number"), VAC_CODE("Vaccine Code"), HOURS("Hours"), DATE("Date");
+
+  // A DATE NAO É PARA APAGAR !!!!!!!!!!!!!!!!!!!!!!
 
   private String value;
 

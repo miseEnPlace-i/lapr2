@@ -19,8 +19,9 @@ public class RegisterSNSUserArrivalUI extends RegisterUI<RegisterSNSUserArrivalC
     }
 
     @Override
-    public void insertData() throws IllegalArgumentException, ParseException, AppointmentNotFoundException {
-        System.out.println("\nRegister SNS User Arrival UI:");
+    public void insertData()
+            throws IllegalArgumentException, ParseException, AppointmentNotFoundException {
+        System.out.println("\nRegister SNS User Arrival:");
 
         String snsNumber = Utils.readLineFromConsoleWithValidation("SNS Number (xxxxxxxxx): ", FieldToValidate.SNS_NUMBER);
 

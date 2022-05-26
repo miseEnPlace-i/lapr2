@@ -17,6 +17,7 @@ import app.exception.AppointmentNotFoundException;
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
+ * @author Tomás Russo <1211288@isep.ipp.pt>
  */
 public class AppointmentScheduleList {
   private VaccinationCenter vaccinationCenter;
@@ -105,11 +106,26 @@ public class AppointmentScheduleList {
     return -1;
   }
 
-  private boolean isValidSchedule(int scheduledMinutesOfDay, int openingMinutesOfDay, int closingMinutesOfDay) {
+  public String getRealClosingHours() {
+    String[] openingHours = vaccinationCenter.getOpeningHours().split(":");
+    int openingMinutesOfDay =
+        Integer.parseInt(openingHours[0]) * 60 + Integer.parseInt(openingHours[1]);
+
+    int realClosingMinutesOfDay = openingMinutesOfDay
+        + (calculateNOfSlotsPerDay(vaccinationCenter) * vaccinationCenter.getSlotDuration());
+
+    int hours = realClosingMinutesOfDay / 60;
+    int minutes = realClosingMinutesOfDay % 60;
+
+    return String.valueOf(hours) + ":" + String.valueOf(minutes);
+  }
+
+  private boolean isValidSchedule(int scheduledMinutesOfDay, int openingMinutesOfDay,
+      int closingMinutesOfDay) {
     if (scheduledMinutesOfDay < 0) return false;
 
     // subtract slot duration because the last slot cannot be used
-    int workingHours = closingMinutesOfDay - openingMinutesOfDay - vaccinationCenter.getSlotDuration();
+    int workingHours = closingMinutesOfDay - openingMinutesOfDay;
 
     if (scheduledMinutesOfDay > workingHours) return false;
     return true;
@@ -153,6 +169,22 @@ public class AppointmentScheduleList {
     }
 
     listVaccinationSchedule(getAppointmentScheduleForDay(key));
+  }
+
+  public boolean checkSlotAvailability(Calendar date) {
+    Calendar key = generateKeyFromDate(date);
+    int slotIndex = getAppointmentSlotIndex(date);
+
+    if (appointments.containsKey(key)) {
+      Appointment[][] slots = appointments.get(key);
+
+      int i = getAvailableIndexInSlot(slots[slotIndex]);
+
+      if (i == -1) return false;
+      else return true;
+    } else {
+      return true;
+    }
   }
 
   public Appointment[][] getAppointmentScheduleForDay(Calendar date) {

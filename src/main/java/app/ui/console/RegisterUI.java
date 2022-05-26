@@ -25,7 +25,13 @@ public abstract class RegisterUI<T extends IRegisterController> implements Runna
     try {
       insertData();
 
-      boolean confirmed = confirmData(ctrl.stringifyData());
+      boolean confirmed;
+
+      try {
+        confirmed = confirmData(ctrl.stringifyData());
+      } catch (Exception ex) {
+        confirmed = false;
+      }
 
       if (confirmed) {
         try {
@@ -41,7 +47,8 @@ public abstract class RegisterUI<T extends IRegisterController> implements Runna
     }
   }
 
-  public abstract void insertData() throws IllegalArgumentException, ParseException, AppointmentNotFoundException;
+  public abstract void insertData()
+      throws IllegalArgumentException, ParseException, AppointmentNotFoundException;
 
   public boolean confirmData(String data) {
     System.out.println("\nPlease confirm the data below.\n");

@@ -1,17 +1,24 @@
 package app.controller;
 
 import java.util.Calendar;
+<<<<<<< HEAD
 import java.util.Date;
+=======
+import java.util.GregorianCalendar;
+>>>>>>> origin/feat-schedule
 import java.util.Properties;
+import app.domain.model.AdminProcess;
 import app.domain.model.Company;
 import app.domain.model.Employee;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
+import app.domain.model.Vaccine;
 import app.domain.model.VaccineType;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.SNSUserStore;
 import app.domain.model.store.VaccinationCenterStore;
+import app.domain.model.store.VaccineStore;
 import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.model.store.VaccineTypeStore;
 import app.domain.shared.Constants;
@@ -31,6 +38,7 @@ public class App {
   private VaccinationCenterStore vaccinationCenterStore;
   private VaccineTypeStore vacTypeStore;
   private SNSUserStore snsUserStore;
+  private VaccineStore vaccineStore;
 
   private App() {
     Properties props = PropertiesUtils.getProperties();
@@ -44,6 +52,7 @@ public class App {
     this.vaccinationCenterStore = this.company.getVaccinationCenterStore();
     this.vacTypeStore = this.company.getVaccineTypeStore();
     this.snsUserStore = this.company.getSNSUserStore();
+    this.vaccineStore = this.company.getVaccineStore();
 
     bootstrap();
   }
@@ -82,6 +91,7 @@ public class App {
 
     this.authFacade.addUserWithRole("Test Administrator", "admin@user.com", "123456", Constants.ROLE_ADMIN);
 
+<<<<<<< HEAD
     Calendar date = Calendar.getInstance();
     date.add(Calendar.YEAR, -22);
 
@@ -89,9 +99,21 @@ public class App {
     this.snsUserStore.saveSNSUser(user);
 
     Employee e = this.employeeStore.createEmployee("Name", "+351916919169", "r@user.com", "address", "123456789ZZ1", Constants.ROLE_RECEPTIONIST);
+=======
+    SNSUser user = this.snsUserStore.createSNSUser("000000000ZZ4", "123456789", "name",
+        new GregorianCalendar(2004, Calendar.FEBRUARY, 12).getTime(), 'M', "+351212345678",
+        "s@user.com", "address");
+    this.snsUserStore.saveSNSUser(user);
+
+    Employee e = this.employeeStore.createEmployee("Name", "+351916919169", "r@user.com", "address",
+        "123456789ZZ1", Constants.ROLE_RECEPTIONIST);
+>>>>>>> origin/feat-schedule
     this.employeeStore.saveEmployee(e);
     Employee e2 = this.employeeStore.createEmployee("Name2", "+351916919269", "c@user.com", "address", "155424041ZY0", Constants.ROLE_COORDINATOR);
     this.employeeStore.saveEmployee(e2);
+    Employee e21 = this.employeeStore.createEmployee("Name21", "+351916919269", "c2@user.com",
+        "address", "155424041ZY0", Constants.ROLE_COORDINATOR);
+    this.employeeStore.saveEmployee(e21);
 
     Employee e3 = this.employeeStore.createEmployee("Name2", "+351916919269", "n@user.com", "address", "000000000ZZ4", Constants.ROLE_NURSE);
     this.employeeStore.saveEmployee(e3);
@@ -102,9 +124,37 @@ public class App {
     VaccineType vacType = this.vacTypeStore.addVaccineType("00000", "COVID-19", "M_RNA_TECHNOLOGY");
     this.vacTypeStore.saveVaccineType(vacType);
 
+<<<<<<< HEAD
     VaccinationCenter vc = this.vaccinationCenterStore.createCommunityMassCenter("name", "address", "test@gmail.com", "+351212345678", "+351212345679",
         "http://www.test.com", "20:00", "21:00", 5, 5, e2, vacType);
+=======
+    Vaccine vaccine = this.vaccineStore.createVaccine("BioNTech, Pfizer vaccine", "00001",
+        "Pfizer, BioNTech", vacType);
+
+    AdminProcess adminProcess1 = new AdminProcess(1, 16, 1);
+    AdminProcess adminProcess2 = new AdminProcess(17, 89, 2);
+
+    // ********** IMPORTANT **********
+    // PLEASE DO NOT DELETE ANY INSTANTIATION OF OBJECTS ON THIS METHOD.
+    // THIS SAVES DEVELOPERS A LOT OF WORK.
+    // THANK YOU.
+    // *******************************
+
+    vaccine.addAdminProc(adminProcess1);
+    vaccine.addAdminProc(adminProcess2);
+
+    this.vaccineStore.saveVaccine(vaccine);
+
+    VaccinationCenter vc = this.vaccinationCenterStore.createCommunityMassCenter(
+        "Centro Vacinação de Teste", "Rua de Teste", "test@gmail.com", "+351212345678",
+        "+351212345679", "http://www.test.com", "20:00", "21:00", 7, 5, e2, vacType);
+>>>>>>> origin/feat-schedule
     this.vaccinationCenterStore.saveVaccinationCenter(vc);
+
+    VaccinationCenter vc2 = this.vaccinationCenterStore.createHealthCareCenter(
+        "Unidade de Saúde de Teste", "Rua de Teste", "test2@gmail.com", "+351219876543",
+        "+351219876543", "https://teste.com", "20:00", "21:00", 7, 5, e21, "AGES", "AGS");
+    this.vaccinationCenterStore.saveVaccinationCenter(vc2);
   }
 
   // Extracted from

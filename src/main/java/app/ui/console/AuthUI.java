@@ -53,7 +53,7 @@ public class AuthUI implements Runnable {
   }
 
   private boolean doLogin() {
-    System.out.println("\nLogin UI:");
+    System.out.println("\nLogin:");
 
     int maxAttempts = 3;
     boolean success = false;
