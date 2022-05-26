@@ -1,7 +1,6 @@
 package app.ui.console;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -24,8 +23,7 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
   }
 
   public void insertData() {
-    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-    Date dateStr = Utils.readDateFromConsole("Date (dd/MM/yyyy): ");
+    Date date = Utils.readDateFromConsole("Date (dd/MM/yyyy): ");
     String hours = Utils.readLineFromConsoleWithValidation("Hour (HH:MM)", FieldToValidate.HOURS);
 
     VaccineType vaccineType = ctrl.getSuggestedVaccineType();
