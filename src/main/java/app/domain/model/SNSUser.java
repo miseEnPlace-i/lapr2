@@ -1,7 +1,7 @@
 package app.domain.model;
 
 import java.util.Date;
-import app.domain.model.dto.SNSUserDTO;
+import app.dto.SNSUserDTO;
 import app.service.CCFormatVerifier;
 import app.service.FormatVerifier;
 import app.service.TimeUtils;
