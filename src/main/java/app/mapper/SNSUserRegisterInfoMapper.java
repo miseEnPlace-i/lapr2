@@ -1,4 +1,4 @@
-package app.mappers;
+package app.mapper;
 
 import app.domain.model.SNSUser;
 import app.dto.SNSUserRegisterInfoDTO;

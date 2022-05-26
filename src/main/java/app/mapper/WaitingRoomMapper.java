@@ -1,4 +1,4 @@
-package app.mappers;
+package app.mapper;
 
 import java.util.ArrayList;
 import java.util.List;

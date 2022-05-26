@@ -34,7 +34,8 @@ public class App {
   private App() {
     Properties props = PropertiesUtils.getProperties();
     this.company = new Company(props.getProperty(Constants.PARAMS_COMPANY_DESIGNATION),
-        props.getProperty(Constants.PARAMS_ONGOING_OUTBREAK_VACCINE_TYPE_CODE));
+        props.getProperty(Constants.PARAMS_ONGOING_OUTBREAK_VACCINE_TYPE_CODE), props.getProperty(Constants.PARAMS_SENDER));
+
     this.authFacade = this.company.getAuthFacade();
     this.employeeStore = this.company.getEmployeeStore();
     this.employeeRoleStore = this.company.getEmployeeRoleStore();

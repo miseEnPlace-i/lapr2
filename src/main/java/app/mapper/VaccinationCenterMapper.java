@@ -1,4 +1,4 @@
-package app.mappers;
+package app.mapper;
 
 import app.controller.App;
 import app.domain.model.VaccinationCenter;

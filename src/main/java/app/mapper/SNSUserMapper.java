@@ -1,4 +1,4 @@
-package app.mappers;
+package app.mapper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

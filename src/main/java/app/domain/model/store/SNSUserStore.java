@@ -7,13 +7,14 @@ import java.util.List;
 import app.domain.model.SNSUser;
 import app.dto.SNSUserDTO;
 import app.dto.SNSUserRegisterInfoDTO;
+import app.dto.UserNotificationDTO;
+import app.mapper.SNSUserMapper;
+import app.mapper.SNSUserRegisterInfoMapper;
+import app.mapper.UserNotificationMapper;
 import app.domain.shared.Constants;
-import app.mappers.SNSUserMapper;
-import app.mappers.SNSUserRegisterInfoMapper;
 import app.service.PasswordGenerator;
+import app.service.sender.ISender;
 import pt.isep.lei.esoft.auth.AuthFacade;
-import pt.isep.lei.esoft.auth.mappers.UserMapper;
-import pt.isep.lei.esoft.auth.mappers.dto.UserDTO;
 
 /**
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
@@ -26,12 +27,15 @@ public class SNSUserStore {
   // Auth Facade
   private AuthFacade authFacade;
 
+  private ISender sender;
+
   /**
    * Constructor for SNSUserStore.
    */
-  public SNSUserStore(AuthFacade authFacade) {
+  public SNSUserStore(AuthFacade authFacade, ISender sender) {
     this.snsUsers = new ArrayList<SNSUser>();
     this.authFacade = authFacade;
+    this.sender = sender;
   }
 
   /**
@@ -84,27 +88,33 @@ public class SNSUserStore {
   }
 
   /**
-   * Inserts a SNS User object to the list and adds a User to the AuthFacade.
+   * Inserts a SNS User object to the store and creates a system user.
    * 
-   * @param user
+   * @param snsUser the employee to be inserted.
    */
   public SNSUserRegisterInfoDTO saveSNSUser(SNSUser snsUser) {
-    SNSUserRegisterInfoDTO userRegisterInfoDTO = SNSUserRegisterInfoMapper.toDto(snsUser);
+    this.snsUsers.add(snsUser);
 
-    authFacade.addUserWithRole(userRegisterInfoDTO.getName(), userRegisterInfoDTO.getEmail(), userRegisterInfoDTO.getPass(), userRegisterInfoDTO.getRole());
+    String email = snsUser.getEmail();
+    String phoneNumber = snsUser.getPhoneNumber();
+    String pwd = PasswordGenerator.generatePwd();
 
-    addSNSUser(snsUser);
+    authFacade.addUserWithRole(snsUser.getName(), email, pwd, Constants.ROLE_SNS_USER);
 
-    return userRegisterInfoDTO;
+    SNSUserRegisterInfoDTO dto = SNSUserRegisterInfoMapper.toDto(snsUser);
 
-    // TODO: send password email
-    // EmailSender emailSender = new EmailSender();
-    // emailSender.sendPasswordEmail(email, pwdStr);
-  }
+    String message = String.format("A new user has been created.\nEmail: %s\nPassword: %s", email, pwd);
+    UserNotificationDTO notiDto = UserNotificationMapper.toDto(email, phoneNumber, message);
 
-  //adds SNS User
-  public void addSNSUser(SNSUser snsUser){
-    snsUsers.add(snsUser);
+    // send notification with the password
+    try {
+      this.sender.send(notiDto);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      e.printStackTrace();
+    }
+
+    return dto;
   }
 
   /**
@@ -173,7 +183,7 @@ public class SNSUserStore {
   }
 
   public List<SNSUserRegisterInfoDTO> registerListOfUsers(List<String[]> userDataList) throws ParseException{
-    List<SNSUserRegisterInfoDTO> userRegisterInfoList = new ArrayList<>();
+    List<SNSUserRegisterInfoDTO> userRegisterInfoList = new ArrayList<SNSUserRegisterInfoDTO>();
 
     for (int i = 0; i < userDataList.size(); i++) {
       SNSUserDTO userDto = SNSUserMapper.toDto(userDataList.get(i));
@@ -182,7 +192,7 @@ public class SNSUserStore {
 
       validateSNSUser(snsUser);
 
-      userRegisterInfoList.add(saveSNSUser(snsUser));;
+      userRegisterInfoList.add(saveSNSUser(snsUser));
     }
     return userRegisterInfoList;
   }

@@ -18,7 +18,7 @@ import app.dto.AppointmentWithNumberDTO;
 import app.dto.AppointmentWithoutNumberDTO;
 import app.dto.VaccinationCenterListDTO;
 import app.dto.VaccineTypeDTO;
-import app.mappers.VaccineTypeMapper;
+import app.mapper.VaccineTypeMapper;
 import app.service.TimeUtils;
 import pt.isep.lei.esoft.auth.UserSession;
 
