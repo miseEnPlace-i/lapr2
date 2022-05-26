@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Waiting Room class.
+ * 
+ * @author Ricardo Moreira <1211285@isep.ipp.pt>
+ * @author Tomás Lopes <1211289@isep.ipp.pt>
+ */
 public class WaitingRoom implements Iterable<Arrival> {
   List<Arrival> waitingRoom = new ArrayList<Arrival>();
 
@@ -31,6 +37,18 @@ public class WaitingRoom implements Iterable<Arrival> {
    */
   public void saveArrival(Arrival arrival) {
     waitingRoom.add(arrival);
+  }
+
+  /**
+   * Finds today's SNS User arrival.
+   */
+  public boolean hasSNSUserArrivedToday(SNSUser snsUser) {
+    for (Arrival arrival : waitingRoom) {
+      if (arrival.getSNSUser().equals(snsUser)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /**

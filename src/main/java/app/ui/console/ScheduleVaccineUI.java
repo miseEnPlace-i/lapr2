@@ -42,11 +42,12 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
       // ctrl.checkAdministrationProcessForNextDose();
       // vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
     } else {
-      if (ctrl.checkAdministrationProcessForVaccineType(vaccineType)) {
+      // * é só para testar uma cena senão não consigo dar schedule
+      // if (ctrl.checkAdministrationProcessForVaccineType(vaccineType)) {
         vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
-      } else {
+      // } else {
         // TODO RAIA MAXIMA SAI DAQUI PARA FORA; NAO HA VACINA PARA A TUA IDADE
-      }
+      // }
     }
 
     if (!ctrl.isCenterOpenAt(vacCenter, hours)) {

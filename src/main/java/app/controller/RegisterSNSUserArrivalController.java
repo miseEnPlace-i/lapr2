@@ -72,6 +72,13 @@ public class RegisterSNSUserArrivalController implements IRegisterController {
   }
 
   public void findSNSUserAppointment() throws AppointmentNotFoundException {
+    // acceptance criteria: validate if there is already an arrival for the user
+    WaitingRoom waitingRoomList = center.getWaitingRoom();
+    boolean hasArrived = waitingRoomList.hasSNSUserArrivedToday(this.snsUser);
+
+    if (hasArrived) throw new AppointmentNotFoundException("The SNS User has already arrived today.");
+
+    // search for appointment
     AppointmentScheduleList appointments = center.getAppointmentList();
     this.appointment = appointments.hasAppointmentToday(this.snsUser.getSnsNumber());
   }
