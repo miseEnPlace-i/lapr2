@@ -61,10 +61,7 @@ public class AppointmentScheduleList {
    * @param appointmentDTO
    * @return Appointment
    */
-  public Appointment create(String snsNumber, Calendar date, VaccinationCenter center, VaccineType vaccineType, boolean sms) {
-    // TODO get snsUser data
-    SNSUser snsUser = null;
-
+  public Appointment create(SNSUser snsUser, Calendar date, VaccinationCenter center, VaccineType vaccineType, boolean sms) {
     Appointment appointment = new Appointment(snsUser, date, center, vaccineType, sms);
 
     return appointment;
