@@ -9,11 +9,9 @@ import app.domain.model.dto.SNSUserDTO;
 import app.domain.model.dto.SNSUserRegisterInfoDTO;
 import app.domain.shared.Constants;
 import app.mappers.SNSUserMapper;
-import app.mappers.SNSUserRegisterInfoMapper;
 import app.service.PasswordGenerator;
 import pt.isep.lei.esoft.auth.AuthFacade;
-import pt.isep.lei.esoft.auth.mappers.UserMapper;
-import pt.isep.lei.esoft.auth.mappers.dto.UserDTO;
+
 
 /**
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
@@ -88,14 +86,15 @@ public class SNSUserStore {
    * 
    * @param user
    */
-  public SNSUserRegisterInfoDTO saveSNSUser(SNSUser snsUser) {
-    SNSUserRegisterInfoDTO userRegisterInfoDTO = SNSUserRegisterInfoMapper.toDto(snsUser);
+  public void saveSNSUser(SNSUser snsUser) {
 
-    authFacade.addUserWithRole(userRegisterInfoDTO.getName(), userRegisterInfoDTO.getEmail(), userRegisterInfoDTO.getPass(), userRegisterInfoDTO.getRole());
+    String name = snsUser.getName();
+    String email = snsUser.getEmail();
+    String pwd = PasswordGenerator.generatePwd();
+
+    authFacade.addUserWithRole(name, email, pwd, Constants.ROLE_SNS_USER);
 
     addSNSUser(snsUser);
-
-    return userRegisterInfoDTO;
 
     // TODO: send password email
     // EmailSender emailSender = new EmailSender();
@@ -182,7 +181,7 @@ public class SNSUserStore {
 
       validateSNSUser(snsUser);
 
-      userRegisterInfoList.add(saveSNSUser(snsUser));;
+      saveSNSUser(snsUser);;
     }
     return userRegisterInfoList;
   }

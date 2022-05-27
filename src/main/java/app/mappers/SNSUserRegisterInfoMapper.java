@@ -2,7 +2,6 @@ package app.mappers;
 
 import app.domain.model.SNSUser;
 import app.domain.model.dto.SNSUserRegisterInfoDTO;
-import app.service.PasswordGenerator;
 
 /**
  * Vaccination Center mapper
@@ -15,8 +14,8 @@ public class SNSUserRegisterInfoMapper {
     private SNSUserRegisterInfoMapper() {}
 
     // converts SNSUser to SNSUserRegisterInfoDTO
-    public static SNSUserRegisterInfoDTO toDto(SNSUser user){
-        return new SNSUserRegisterInfoDTO(user.getName(), user.getEmail(), PasswordGenerator.generatePwd(), "SNS_USER");
+    public static SNSUserRegisterInfoDTO toDto(SNSUser user, String pwd, String role){
+        return new SNSUserRegisterInfoDTO(user.getName(), user.getEmail(), pwd, role);
     }
 
 }
