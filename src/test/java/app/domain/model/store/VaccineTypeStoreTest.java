@@ -2,6 +2,7 @@ package app.domain.model.store;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
@@ -53,5 +54,24 @@ public class VaccineTypeStoreTest {
   @Test(expected = IllegalArgumentException.class)
   public void ensureNullCodeIsNotAllowed() {
     vaccineTypeStore.getVaccineTypeByCode(null);
+  }
+
+  @Test
+  public void ensureNonExistingTypeReturnNull() {
+    VaccineType vaccineType = vaccineTypeStore.getVaccineTypeByCode("non_existing_code");
+
+    assertNull(vaccineType);
+  }
+
+  @Test
+  public void ensureSizeIsWorking() {
+    assertEquals(vaccineTypeStore.size(), 0);
+
+    VaccineType vaccineType = vaccineTypeStore.addVaccineType("55555", "aa", "TEST_TECHNOLOGY");
+    assertNotNull(vaccineType);
+
+    vaccineTypeStore.saveVaccineType(vaccineType);
+
+    assertEquals(vaccineTypeStore.size(), 1);
   }
 }

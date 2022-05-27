@@ -1,93 +1,183 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1114px" preserveAspectRatio="none" style="width:2437px;height:1114px;background:#FFFFFF;" version="1.1" viewBox="0 0 2437 1114" width="2437px" zoomAndPan="magnify"><defs><filter height="300%" id="fsjttu1b60y09" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="911.6563" style="stroke:#A80036;stroke-width:1.0;" width="10" x="42" y="99.6094"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="30.3516" style="stroke:#A80036;stroke-width:1.0;" width="10" x="443" y="121.9609"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="30.3516" style="stroke:#A80036;stroke-width:1.0;" width="10" x="443" y="182.6641"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="569.8828" style="stroke:#A80036;stroke-width:1.0;" width="10" x="443" y="243.3672"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="167.6641" style="stroke:#A80036;stroke-width:1.0;" width="10" x="443" y="843.6016"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="224.1094" style="stroke:#A80036;stroke-width:1.0;" width="10" x="711" y="320.3281"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="224.1094" style="stroke:#A80036;stroke-width:1.0;" width="10" x="711" y="566.7891"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="106.9609" style="stroke:#A80036;stroke-width:1.0;" width="10" x="711" y="873.9531"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="923" y="350.6797"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="133.4063" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1071.5" y="411.0313"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="55.7031" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1360.5" y="466.7344"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1524" y="597.1406"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="133.4063" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1717.5" y="657.4922"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="55.7031" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2079.5" y="713.1953"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2341.5" y="950.9141"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="111.4063" style="stroke:#000000;stroke-width:2.0;" width="474" x="976" y="426.0313"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="48.7031" style="stroke:#000000;stroke-width:2.0;" width="454" x="986" y="481.7344"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="111.4063" style="stroke:#000000;stroke-width:2.0;" width="557" x="1608" y="672.4922"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="48.7031" style="stroke:#000000;stroke-width:2.0;" width="537" x="1618" y="728.1953"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="47" x2="47" y1="89.6094" y2="1029.2656"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="447.5" x2="447.5" y1="89.6094" y2="1029.2656"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="715.5" x2="715.5" y1="284.6719" y2="1029.2656"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="928" x2="928" y1="89.6094" y2="1029.2656"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1076" x2="1076" y1="89.6094" y2="1029.2656"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1365" x2="1365" y1="89.6094" y2="1029.2656"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1529" x2="1529" y1="89.6094" y2="1029.2656"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1722" x2="1722" y1="89.6094" y2="1029.2656"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="2084" x2="2084" y1="89.6094" y2="1029.2656"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="2205" x2="2205" y1="915.2578" y2="1029.2656"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="2346" x2="2346" y1="89.6094" y2="1029.2656"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78" x="5" y="86.5332">Receptionist</text><ellipse cx="47" cy="15" fill="#FEFECE" filter="url(#fsjttu1b60y09)" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M47,23 L47,50 M34,31 L60,31 M47,50 L34,65 M47,50 L60,65 " fill="none" filter="url(#fsjttu1b60y09)" style="stroke:#A80036;stroke-width:2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78" x="5" y="1042.7988">Receptionist</text><ellipse cx="47" cy="1055.875" fill="#FEFECE" filter="url(#fsjttu1b60y09)" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M47,1063.875 L47,1090.875 M34,1071.875 L60,1071.875 M47,1090.875 L34,1105.875 M47,1090.875 L60,1105.875 " fill="none" filter="url(#fsjttu1b60y09)" style="stroke:#A80036;stroke-width:2.0;"/><rect fill="#FEFECE" filter="url(#fsjttu1b60y09)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="179" x="356.5" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="165" x="363.5" y="74.5332">:RegisterSNSUserArrivalUI</text><rect fill="#FEFECE" filter="url(#fsjttu1b60y09)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="179" x="356.5" y="1028.2656"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="165" x="363.5" y="1049.7988">:RegisterSNSUserArrivalUI</text><rect fill="#FEFECE" filter="url(#fsjttu1b60y09)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="229" x="599.5" y="1028.2656"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="215" x="606.5" y="1049.7988">:RegisterSNSUserArrivalController</text><rect fill="#FEFECE" filter="url(#fsjttu1b60y09)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="112" x="870" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="98" x="877" y="74.5332">comp:Company</text><rect fill="#FEFECE" filter="url(#fsjttu1b60y09)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="112" x="870" y="1028.2656"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="98" x="877" y="1049.7988">comp:Company</text><rect fill="#FEFECE" filter="url(#fsjttu1b60y09)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="157" x="996" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="143" x="1003" y="74.5332">suStore:SNSUserStore</text><rect fill="#FEFECE" filter="url(#fsjttu1b60y09)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="157" x="996" y="1028.2656"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="143" x="1003" y="1049.7988">suStore:SNSUserStore</text><rect fill="#FEFECE" filter="url(#fsjttu1b60y09)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="125" x="1301" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="111" x="1308" y="74.5332">snsUser:SNSUser</text><rect fill="#FEFECE" filter="url(#fsjttu1b60y09)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="125" x="1301" y="1028.2656"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="111" x="1308" y="1049.7988">snsUser:SNSUser</text><rect fill="#FEFECE" filter="url(#fsjttu1b60y09)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="174" x="1440" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="160" x="1447" y="74.5332">center:VaccinationCenter</text><rect fill="#FEFECE" filter="url(#fsjttu1b60y09)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="174" x="1440" y="1028.2656"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="160" x="1447" y="1049.7988">center:VaccinationCenter</text><rect fill="#FEFECE" filter="url(#fsjttu1b60y09)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="185" x="1628" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="171" x="1635" y="74.5332">aptStore:AppointmentStore</text><rect fill="#FEFECE" filter="url(#fsjttu1b60y09)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="185" x="1628" y="1028.2656"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="171" x="1635" y="1049.7988">aptStore:AppointmentStore</text><rect fill="#FEFECE" filter="url(#fsjttu1b60y09)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="117" x="2024" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="103" x="2031" y="74.5332">apt:Appointment</text><rect fill="#FEFECE" filter="url(#fsjttu1b60y09)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="117" x="2024" y="1028.2656"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="103" x="2031" y="1049.7988">apt:Appointment</text><rect fill="#FEFECE" filter="url(#fsjttu1b60y09)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="97" x="2155" y="1028.2656"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="83" x="2162" y="1049.7988">arrival:Arrival</text><rect fill="#FEFECE" filter="url(#fsjttu1b60y09)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="157" x="2266" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="143" x="2273" y="74.5332">wrLst:WaitingRoomList</text><rect fill="#FEFECE" filter="url(#fsjttu1b60y09)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="157" x="2266" y="1028.2656"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="143" x="2273" y="1049.7988">wrLst:WaitingRoomList</text><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="911.6563" style="stroke:#A80036;stroke-width:1.0;" width="10" x="42" y="99.6094"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="30.3516" style="stroke:#A80036;stroke-width:1.0;" width="10" x="443" y="121.9609"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="30.3516" style="stroke:#A80036;stroke-width:1.0;" width="10" x="443" y="182.6641"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="569.8828" style="stroke:#A80036;stroke-width:1.0;" width="10" x="443" y="243.3672"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="167.6641" style="stroke:#A80036;stroke-width:1.0;" width="10" x="443" y="843.6016"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="224.1094" style="stroke:#A80036;stroke-width:1.0;" width="10" x="711" y="320.3281"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="224.1094" style="stroke:#A80036;stroke-width:1.0;" width="10" x="711" y="566.7891"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="106.9609" style="stroke:#A80036;stroke-width:1.0;" width="10" x="711" y="873.9531"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="923" y="350.6797"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="133.4063" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1071.5" y="411.0313"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="55.7031" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1360.5" y="466.7344"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1524" y="597.1406"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="133.4063" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1717.5" y="657.4922"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="55.7031" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2079.5" y="713.1953"/><rect fill="#FFFFFF" filter="url(#fsjttu1b60y09)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2341.5" y="950.9141"/><polygon fill="#A80036" points="431,117.9609,441,121.9609,431,125.9609,435,121.9609" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="52" x2="437" y1="121.9609" y2="121.9609"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="59" y="117.1045">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="361" x="70" y="117.1045">starts to register the SNS User arrival to the vaccination center</text><polygon fill="#A80036" points="63,148.3125,53,152.3125,63,156.3125,59,152.3125" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="57" x2="447" y1="152.3125" y2="152.3125"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="69" y="147.4561">2</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="177" x="80" y="147.4561">asks for the SNS User number</text><polygon fill="#A80036" points="431,178.6641,441,182.6641,431,186.6641,435,182.6641" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="52" x2="437" y1="182.6641" y2="182.6641"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="59" y="177.8076">3</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="144" x="70" y="177.8076">types the requested data</text><polygon fill="#A80036" points="63,209.0156,53,213.0156,63,217.0156,59,213.0156" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="57" x2="447" y1="213.0156" y2="213.0156"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="69" y="208.1592">4</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="212" x="80" y="208.1592">asks to select the vaccination center</text><polygon fill="#A80036" points="431,239.3672,441,243.3672,431,247.3672,435,243.3672" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="52" x2="437" y1="243.3672" y2="243.3672"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="59" y="238.5107">5</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="172" x="70" y="238.5107">selects the vaccination center</text><polygon fill="#A80036" points="587.5,269.7188,597.5,273.7188,587.5,277.7188,591.5,273.7188" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="453" x2="593.5" y1="273.7188" y2="273.7188"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="460" y="268.8623">6</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="97" x="471" y="268.8623">create(company)</text><rect fill="#FEFECE" filter="url(#fsjttu1b60y09)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="229" x="599.5" y="251.3672"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="215" x="606.5" y="272.9004">:RegisterSNSUserArrivalController</text><polygon fill="#A80036" points="699,316.3281,709,320.3281,699,324.3281,703,320.3281" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="453" x2="705" y1="320.3281" y2="320.3281"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="460" y="315.4717">7</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="209" x="471" y="315.4717">findSNSUserByNumber(snsNumber)</text><polygon fill="#A80036" points="911,346.6797,921,350.6797,911,354.6797,915,350.6797" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="721" x2="917" y1="350.6797" y2="350.6797"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="728" y="345.8232">8</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="172" x="739" y="345.8232">suStore = getSNSUserStore()</text><polygon fill="#A80036" points="1059.5,407.0313,1069.5,411.0313,1059.5,415.0313,1063.5,411.0313" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="721" x2="1065.5" y1="411.0313" y2="411.0313"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="728" y="406.1748">9</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="197" x="739" y="406.1748">suStore.findSNSUser(snsNumber)</text><path d="M976,426.0313 L1049,426.0313 L1049,434.0313 L1039,444.0313 L976,444.0313 L976,426.0313 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0;"/><rect fill="none" height="111.4063" style="stroke:#000000;stroke-width:2.0;" width="474" x="976" y="426.0313"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="28" x="991" y="440.5264">loop</text><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="103" x="1064" y="439.4502">[for each snsUser]</text><polygon fill="#A80036" points="1348.5,462.7344,1358.5,466.7344,1348.5,470.7344,1352.5,466.7344" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="1081.5" x2="1354.5" y1="466.7344" y2="466.7344"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="1088.5" y="461.8779">10</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="242" x="1106.5" y="461.8779">b = snsUser.hasSNSNumber(snsNumber)</text><path d="M986,481.7344 L1047,481.7344 L1047,489.7344 L1037,499.7344 L986,499.7344 L986,481.7344 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0;"/><rect fill="none" height="48.7031" style="stroke:#000000;stroke-width:2.0;" width="454" x="986" y="481.7344"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="16" x="1001" y="496.2295">alt</text><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="56" x="1062" y="495.1533">[b == true]</text><polygon fill="#A80036" points="1092.5,518.4375,1082.5,522.4375,1092.5,526.4375,1088.5,522.4375" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="1086.5" x2="1364.5" y1="522.4375" y2="522.4375"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="1098.5" y="517.5811">11</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="85" x="1116.5" y="517.5811">return snsUser</text><polygon fill="#A80036" points="699,562.7891,709,566.7891,699,570.7891,703,566.7891" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="453" x2="705" y1="566.7891" y2="566.7891"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="460" y="561.9326">12</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="221" x="478" y="561.9326">findSNSUserAppointment(snsNumber)</text><polygon fill="#A80036" points="1512,593.1406,1522,597.1406,1512,601.1406,1516,597.1406" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="721" x2="1518" y1="597.1406" y2="597.1406"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="728" y="592.2842">13</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="195" x="746" y="592.2842">aptStore = getAppointmentStore()</text><polygon fill="#A80036" points="1705.5,653.4922,1715.5,657.4922,1705.5,661.4922,1709.5,657.4922" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="721" x2="1711.5" y1="657.4922" y2="657.4922"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="728" y="652.6357">14</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="201" x="746" y="652.6357">apt = findAppointment(snsNumber)</text><path d="M1608,672.4922 L1681,672.4922 L1681,680.4922 L1671,690.4922 L1608,690.4922 L1608,672.4922 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0;"/><rect fill="none" height="111.4063" style="stroke:#000000;stroke-width:2.0;" width="557" x="1608" y="672.4922"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="28" x="1623" y="686.9873">loop</text><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="126" x="1696" y="685.9111">[for each appointment]</text><polygon fill="#A80036" points="2067.5,709.1953,2077.5,713.1953,2067.5,717.1953,2071.5,713.1953" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="1727.5" x2="2073.5" y1="713.1953" y2="713.1953"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="1734.5" y="708.3389">15</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="315" x="1752.5" y="708.3389">b = hasSNSNumber(snsNumber) &amp;&amp; isInTheNextSlot()</text><path d="M1618,728.1953 L1679,728.1953 L1679,736.1953 L1669,746.1953 L1618,746.1953 L1618,728.1953 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0;"/><rect fill="none" height="48.7031" style="stroke:#000000;stroke-width:2.0;" width="537" x="1618" y="728.1953"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="16" x="1633" y="742.6904">alt</text><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="56" x="1694" y="741.6143">[b == true]</text><polygon fill="#A80036" points="1738.5,764.8984,1728.5,768.8984,1738.5,772.8984,1734.5,768.8984" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="1732.5" x2="2083.5" y1="768.8984" y2="768.8984"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="1744.5" y="764.042">16</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="55" x="1762.5" y="764.042">return apt</text><polygon fill="#A80036" points="63,809.25,53,813.25,63,817.25,59,813.25" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="57" x2="447" y1="813.25" y2="813.25"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="69" y="808.3936">17</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="235" x="87" y="808.3936">asks for confirmation for the appointment</text><polygon fill="#A80036" points="431,839.6016,441,843.6016,431,847.6016,435,843.6016" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="52" x2="437" y1="843.6016" y2="843.6016"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="59" y="838.7451">18</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="100" x="77" y="838.7451">confirms the data</text><polygon fill="#A80036" points="699,869.9531,709,873.9531,699,877.9531,703,873.9531" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="453" x2="705" y1="873.9531" y2="873.9531"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="460" y="869.0967">19</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="141" x="478" y="869.0967">confirmAppointment(apt)</text><polygon fill="#A80036" points="2143,900.3047,2153,904.3047,2143,908.3047,2147,904.3047" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="721" x2="2149" y1="904.3047" y2="904.3047"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="728" y="899.4482">20</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="118" x="746" y="899.4482">create(snsUser, apt)</text><rect fill="#FEFECE" filter="url(#fsjttu1b60y09)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="97" x="2155" y="881.9531"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="83" x="2162" y="903.4863">arrival:Arrival</text><polygon fill="#A80036" points="2329.5,946.9141,2339.5,950.9141,2329.5,954.9141,2333.5,950.9141" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="721" x2="2335.5" y1="950.9141" y2="950.9141"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="728" y="946.0576">21</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="62" x="746" y="946.0576">add(arrival)</text><polygon fill="#A80036" points="58,1007.2656,48,1011.2656,58,1015.2656,54,1011.2656" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="52" x2="447" y1="1011.2656" y2="1011.2656"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="64" y="1006.4092">22</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="152" x="82" y="1006.4092">informs operation success</text><!--MD5=[4c8a8755fae76cbc77a1301d55b01c50]
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1901px" preserveAspectRatio="none" style="width:3420px;height:1901px;background:#FFFFFF;" version="1.1" viewBox="0 0 3420 1901" width="3420px" zoomAndPan="magnify"><defs><filter height="300%" id="fkwmcnv3ymqjp" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="1708.5078" style="stroke:#A80036;stroke-width:1.0;" width="10" x="61.5" y="98.2969"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="246.9609" style="stroke:#A80036;stroke-width:1.0;" width="10" x="507.5" y="119.4297"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="1249.75" style="stroke:#A80036;stroke-width:1.0;" width="10" x="507.5" y="395.5234"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="117.3984" style="stroke:#A80036;stroke-width:1.0;" width="10" x="507.5" y="1674.4063"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="719.5" y="148.5625"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="719.5" y="207.6953"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="186.5313" style="stroke:#A80036;stroke-width:1.0;" width="10" x="878.5" y="424.6563"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="177.3984" style="stroke:#A80036;stroke-width:1.0;" width="10" x="878.5" y="632.3203"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="117.3984" style="stroke:#A80036;stroke-width:1.0;" width="10" x="878.5" y="862.9844"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="590.4609" style="stroke:#A80036;stroke-width:1.0;" width="10" x="878.5" y="1025.6797"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="59.1328" style="stroke:#A80036;stroke-width:1.0;" width="10" x="878.5" y="1703.5391"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1120.5" y="453.7891"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1342" y="779.7188"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="29.1328" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1624.5" y="951.25"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1624.5" y="1732.6719"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="532.1953" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1984" y="1054.8125"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2217" y="1083.9453"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2217" y="1261.3438"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2217" y="1320.4766"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2217" y="1438.7422"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="98.2656" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2385" y="512.9219"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2650" y="566.1875"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2650" y="720.5859"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2650" y="1143.0781"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2650" y="1202.2109"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2827" y="661.4531"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2827" y="892.1172"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2827" y="1379.6094"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="3018" y="1497.875"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="3251.5" y="1557.0078"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="76.2656" style="stroke:#000000;stroke-width:2.0;" width="446" x="2289" y="527.9219"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="975.0859" style="stroke:#000000;stroke-width:2.0;" width="3396" x="10" y="824.7188"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="66" x2="66" y1="88.2969" y2="1816.8047"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="512.5" x2="512.5" y1="88.2969" y2="1816.8047"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="724.5" x2="724.5" y1="88.2969" y2="1816.8047"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="883.5" x2="883.5" y1="332.6094" y2="1816.8047"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1125" x2="1125" y1="88.2969" y2="1816.8047"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1347" x2="1347" y1="88.2969" y2="1816.8047"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1629" x2="1629" y1="88.2969" y2="1816.8047"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1834.5" x2="1834.5" y1="991.8984" y2="1816.8047"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1988.5" x2="1988.5" y1="88.2969" y2="1816.8047"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="2222" x2="2222" y1="88.2969" y2="1816.8047"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="2390" x2="2390" y1="88.2969" y2="1816.8047"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="2655" x2="2655" y1="88.2969" y2="1816.8047"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="2832" x2="2832" y1="88.2969" y2="1816.8047"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="3023" x2="3023" y1="88.2969" y2="1816.8047"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="3256" x2="3256" y1="88.2969" y2="1816.8047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="87" x="20" y="84.9951">Receptionist</text><ellipse cx="66.5" cy="15" fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M66.5,23 L66.5,50 M53.5,31 L79.5,31 M66.5,50 L53.5,65 M66.5,50 L79.5,65 " fill="none" filter="url(#fkwmcnv3ymqjp)" style="stroke:#A80036;stroke-width:2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="87" x="20" y="1828.7998">Receptionist</text><ellipse cx="66.5" cy="1842.1016" fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M66.5,1850.1016 L66.5,1877.1016 M53.5,1858.1016 L79.5,1858.1016 M66.5,1877.1016 L53.5,1892.1016 M66.5,1877.1016 L79.5,1892.1016 " fill="none" filter="url(#fkwmcnv3ymqjp)" style="stroke:#A80036;stroke-width:2.0;"/><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="190" x="415.5" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="176" x="422.5" y="72.9951">:RegisterSNSUserArrivalUI</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="190" x="415.5" y="1815.8047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="176" x="422.5" y="1835.7998">:RegisterSNSUserArrivalUI</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="46" x="699.5" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="706.5" y="72.9951">:App</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="46" x="699.5" y="1815.8047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="706.5" y="1835.7998">:App</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="244" x="759.5" y="1815.8047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="230" x="766.5" y="1835.7998">:RegisterSNSUserArrivalController</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="123" x="1062" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="109" x="1069" y="72.9951">comp:Company</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="123" x="1062" y="1815.8047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="109" x="1069" y="1835.7998">comp:Company</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="292" x="1199" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="278" x="1206" y="72.9951">appointments:AppointmentScheduleList</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="292" x="1199" y="1815.8047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="278" x="1206" y="1835.7998">appointments:AppointmentScheduleList</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="245" x="1505" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="231" x="1512" y="72.9951">waitingRoomList:WaitingRoomList</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="245" x="1505" y="1815.8047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="231" x="1512" y="1835.7998">waitingRoomList:WaitingRoomList</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="98" x="1783.5" y="1815.8047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="84" x="1790.5" y="1835.7998">arrival:Arrival</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="183" x="1895.5" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="169" x="1902.5" y="72.9951">:AppointmentListMapper</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="183" x="1895.5" y="1815.8047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="169" x="1902.5" y="1835.7998">:AppointmentListMapper</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="130" x="2155" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="116" x="2162" y="72.9951">apt:Appointment</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="130" x="2155" y="1815.8047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="116" x="2162" y="1835.7998">apt:Appointment</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="178" x="2299" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="164" x="2306" y="72.9951">snsStore:SNSUserStore</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="178" x="2299" y="1815.8047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="164" x="2306" y="1835.7998">snsStore:SNSUserStore</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="136" x="2585" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="122" x="2592" y="72.9951">snsUser:SNSUser</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="136" x="2585" y="1815.8047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="122" x="2592" y="1835.7998">snsUser:SNSUser</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="190" x="2735" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="176" x="2742" y="72.9951">center:VaccinationCenter</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="190" x="2735" y="1815.8047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="176" x="2742" y="1835.7998">center:VaccinationCenter</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="164" x="2939" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="150" x="2946" y="72.9951">vacType:VaccineType</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="164" x="2939" y="1815.8047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="150" x="2946" y="1835.7998">vacType:VaccineType</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="275" x="3117" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="261" x="3124" y="72.9951">appointmentDto:AppointmentListDTO</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="275" x="3117" y="1815.8047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="261" x="3124" y="1835.7998">appointmentDto:AppointmentListDTO</text><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="1708.5078" style="stroke:#A80036;stroke-width:1.0;" width="10" x="61.5" y="98.2969"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="246.9609" style="stroke:#A80036;stroke-width:1.0;" width="10" x="507.5" y="119.4297"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="1249.75" style="stroke:#A80036;stroke-width:1.0;" width="10" x="507.5" y="395.5234"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="117.3984" style="stroke:#A80036;stroke-width:1.0;" width="10" x="507.5" y="1674.4063"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="719.5" y="148.5625"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="719.5" y="207.6953"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="186.5313" style="stroke:#A80036;stroke-width:1.0;" width="10" x="878.5" y="424.6563"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="177.3984" style="stroke:#A80036;stroke-width:1.0;" width="10" x="878.5" y="632.3203"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="117.3984" style="stroke:#A80036;stroke-width:1.0;" width="10" x="878.5" y="862.9844"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="590.4609" style="stroke:#A80036;stroke-width:1.0;" width="10" x="878.5" y="1025.6797"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="59.1328" style="stroke:#A80036;stroke-width:1.0;" width="10" x="878.5" y="1703.5391"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1120.5" y="453.7891"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1342" y="779.7188"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="29.1328" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1624.5" y="951.25"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1624.5" y="1732.6719"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="532.1953" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1984" y="1054.8125"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2217" y="1083.9453"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2217" y="1261.3438"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2217" y="1320.4766"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2217" y="1438.7422"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="98.2656" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2385" y="512.9219"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2650" y="566.1875"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2650" y="720.5859"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2650" y="1143.0781"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2650" y="1202.2109"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2827" y="661.4531"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2827" y="892.1172"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2827" y="1379.6094"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="3018" y="1497.875"/><rect fill="#FFFFFF" filter="url(#fkwmcnv3ymqjp)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="3251.5" y="1557.0078"/><polygon fill="#A80036" points="495.5,115.4297,505.5,119.4297,495.5,123.4297,499.5,119.4297" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="71.5" x2="501.5" y1="119.4297" y2="119.4297"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="78.5" y="114.3638">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="404" x="91.5" y="114.3638">starts to register the SNS User arrival to the vaccination center</text><polygon fill="#A80036" points="707.5,144.5625,717.5,148.5625,707.5,152.5625,711.5,148.5625" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="517.5" x2="713.5" y1="148.5625" y2="148.5625"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="524.5" y="143.4966">2</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="157" x="537.5" y="143.4966">app = App.getInstance()</text><polygon fill="#A80036" points="707.5,203.6953,717.5,207.6953,707.5,211.6953,711.5,207.6953" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="517.5" x2="713.5" y1="207.6953" y2="207.6953"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="524.5" y="202.6294">3</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="170" x="537.5" y="202.6294">company = getCompany()</text><path d="M522,250.6953 L522,290.6953 L864,290.6953 L864,260.6953 L854,250.6953 L522,250.6953 " fill="#FBFB77" filter="url(#fkwmcnv3ymqjp)" style="stroke:#A80036;stroke-width:1.0;"/><path d="M854,250.6953 L854,260.6953 L864,260.6953 L854,250.6953 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-style="italic" font-weight="bold" lengthAdjust="spacing" textLength="47" x="528" y="267.7622">center</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="270" x="579" y="267.7622">is obtained through the employeeSession.</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="58" x="528" y="282.895">Also see:</text><text fill="#000000" font-family="sans-serif" font-size="13" font-style="italic" lengthAdjust="spacing" textLength="123" x="590" y="282.895">EmployeeLogin_SD</text><polygon fill="#A80036" points="747.5,317.0938,757.5,321.0938,747.5,325.0938,751.5,321.0938" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="517.5" x2="753.5" y1="321.0938" y2="321.0938"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="524.5" y="316.0278">4</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="159" x="537.5" y="316.0278">create(company, center)</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="244" x="759.5" y="299.9609"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="230" x="766.5" y="319.9561">:RegisterSNSUserArrivalController</text><polygon fill="#A80036" points="82.5,362.3906,72.5,366.3906,82.5,370.3906,78.5,366.3906" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="76.5" x2="511.5" y1="366.3906" y2="366.3906"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="88.5" y="361.3247">5</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="195" x="101.5" y="361.3247">asks for the SNS User number</text><polygon fill="#A80036" points="495.5,391.5234,505.5,395.5234,495.5,399.5234,499.5,395.5234" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="71.5" x2="501.5" y1="395.5234" y2="395.5234"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="78.5" y="390.4575">6</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="162" x="91.5" y="390.4575">types the requested data</text><polygon fill="#A80036" points="866.5,420.6563,876.5,424.6563,866.5,428.6563,870.5,424.6563" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="517.5" x2="872.5" y1="424.6563" y2="424.6563"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="524.5" y="419.5903">7</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="233" x="537.5" y="419.5903">findSNSUserByNumber(snsNumber)</text><polygon fill="#A80036" points="1108.5,449.7891,1118.5,453.7891,1108.5,457.7891,1112.5,453.7891" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="888.5" x2="1114.5" y1="453.7891" y2="453.7891"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="895.5" y="448.7231">8</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="200" x="908.5" y="448.7231">snsStore = getSNSUserStore()</text><polygon fill="#A80036" points="2373,508.9219,2383,512.9219,2373,516.9219,2377,512.9219" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="888.5" x2="2379" y1="512.9219" y2="512.9219"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="895.5" y="507.856">9</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="165" x="908.5" y="507.856">findSNSUser(snsNumber)</text><path d="M2289,527.9219 L2366,527.9219 L2366,534.9219 L2356,544.9219 L2289,544.9219 L2289,527.9219 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0;"/><rect fill="none" height="76.2656" style="stroke:#000000;stroke-width:2.0;" width="446" x="2289" y="527.9219"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="32" x="2304" y="540.9888">loop</text><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="108" x="2381" y="540.1323">[while b is false]</text><polygon fill="#A80036" points="2638,562.1875,2648,566.1875,2638,570.1875,2642,566.1875" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="2395" x2="2644" y1="566.1875" y2="566.1875"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="2402" y="561.1216">10</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="214" x="2424" y="561.1216">b = hasSNSNumber(snsNumber)</text><polygon fill="#A80036" points="866.5,628.3203,876.5,632.3203,866.5,636.3203,870.5,632.3203" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="517.5" x2="872.5" y1="632.3203" y2="632.3203"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="524.5" y="627.2544">11</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="174" x="546.5" y="627.2544">findSNSUserAppointment()</text><polygon fill="#A80036" points="2815,657.4531,2825,661.4531,2815,665.4531,2819,661.4531" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="888.5" x2="2821" y1="661.4531" y2="661.4531"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="895.5" y="656.3872">12</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="244" x="917.5" y="656.3872">appointments = getAppointmentList()</text><polygon fill="#A80036" points="2638,716.5859,2648,720.5859,2638,724.5859,2642,720.5859" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="888.5" x2="2644" y1="720.5859" y2="720.5859"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="895.5" y="715.52">13</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="200" x="917.5" y="715.52">snsNumber = getSnsNumber()</text><polygon fill="#A80036" points="1330,775.7188,1340,779.7188,1330,783.7188,1334,779.7188" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="888.5" x2="1336" y1="779.7188" y2="779.7188"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="895.5" y="774.6528">14</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="329" x="917.5" y="774.6528">appointment = hasAppointmentToday(snsNumber)</text><path d="M10,824.7188 L74,824.7188 L74,831.7188 L64,841.7188 L10,841.7188 L10,824.7188 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0;"/><rect fill="none" height="975.0859" style="stroke:#000000;stroke-width:2.0;" width="3396" x="10" y="824.7188"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="19" x="25" y="837.7856">alt</text><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="164" x="89" y="836.9292">[there is an appointment]</text><polygon fill="#A80036" points="866.5,858.9844,876.5,862.9844,866.5,866.9844,870.5,862.9844" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="517.5" x2="872.5" y1="862.9844" y2="862.9844"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="524.5" y="857.9185">15</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="51" x="546.5" y="857.9185">create()</text><polygon fill="#A80036" points="2815,888.1172,2825,892.1172,2815,896.1172,2819,892.1172" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="888.5" x2="2821" y1="892.1172" y2="892.1172"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="895.5" y="887.0513">16</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="258" x="917.5" y="887.0513">waitingRoomList = getWaitingRoomList()</text><polygon fill="#A80036" points="1612.5,947.25,1622.5,951.25,1612.5,955.25,1616.5,951.25" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="888.5" x2="1618.5" y1="951.25" y2="951.25"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="895.5" y="946.1841">17</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="201" x="917.5" y="946.1841">arrival = createArrival(snsUser)</text><polygon fill="#A80036" points="1771.5,976.3828,1781.5,980.3828,1771.5,984.3828,1775.5,980.3828" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="1629.5" x2="1777.5" y1="980.3828" y2="980.3828"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="1636.5" y="975.3169">18</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="103" x="1658.5" y="975.3169">create(snsUser)</text><rect fill="#FEFECE" filter="url(#fkwmcnv3ymqjp)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="98" x="1783.5" y="959.25"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="84" x="1790.5" y="979.2451">arrival:Arrival</text><polygon fill="#A80036" points="866.5,1021.6797,876.5,1025.6797,866.5,1029.6797,870.5,1025.6797" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="517.5" x2="872.5" y1="1025.6797" y2="1025.6797"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="524.5" y="1020.6138">19</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="91" x="546.5" y="1020.6138">stringifyData()</text><polygon fill="#A80036" points="1972,1050.8125,1982,1054.8125,1972,1058.8125,1976,1054.8125" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="888.5" x2="1978" y1="1054.8125" y2="1054.8125"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="895.5" y="1049.7466">20</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="252" x="917.5" y="1049.7466">appointmentDto = toDto(appointment)</text><polygon fill="#A80036" points="2205,1079.9453,2215,1083.9453,2205,1087.9453,2209,1083.9453" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="1994" x2="2211" y1="1083.9453" y2="1083.9453"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="2001" y="1078.8794">21</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="156" x="2023" y="1078.8794">snsUser = getSnsUser()</text><polygon fill="#A80036" points="2638,1139.0781,2648,1143.0781,2638,1147.0781,2642,1143.0781" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="1994" x2="2644" y1="1143.0781" y2="1143.0781"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="2001" y="1138.0122">22</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="200" x="2023" y="1138.0122">snsNumber = getSnsNumber()</text><polygon fill="#A80036" points="2638,1198.2109,2648,1202.2109,2638,1206.2109,2642,1202.2109" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="1994" x2="2644" y1="1202.2109" y2="1202.2109"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="2001" y="1197.145">23</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="126" x="2023" y="1197.145">name = getName()</text><polygon fill="#A80036" points="2205,1257.3438,2215,1261.3438,2205,1265.3438,2209,1261.3438" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="1994" x2="2211" y1="1261.3438" y2="1261.3438"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="2001" y="1256.2778">24</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="110" x="2023" y="1256.2778">date = getDate()</text><polygon fill="#A80036" points="2205,1316.4766,2215,1320.4766,2205,1324.4766,2209,1320.4766" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="1994" x2="2211" y1="1320.4766" y2="1320.4766"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="2001" y="1315.4106">25</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="134" x="2023" y="1315.4106">center = getCenter()</text><polygon fill="#A80036" points="2815,1375.6094,2825,1379.6094,2815,1383.6094,2819,1379.6094" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="1994" x2="2821" y1="1379.6094" y2="1379.6094"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="2001" y="1374.5435">26</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="169" x="2023" y="1374.5435">centerName = getName()</text><polygon fill="#A80036" points="2205,1434.7422,2215,1438.7422,2205,1442.7422,2209,1438.7422" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="1994" x2="2211" y1="1438.7422" y2="1438.7422"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="2001" y="1433.6763">27</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="182" x="2023" y="1433.6763">vacType = getVaccineType()</text><polygon fill="#A80036" points="3006,1493.875,3016,1497.875,3006,1501.875,3010,1497.875" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="1994" x2="3012" y1="1497.875" y2="1497.875"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="2001" y="1492.8091">28</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="254" x="2023" y="1492.8091">vacTypeDesignation = getDesignation()</text><polygon fill="#A80036" points="3239.5,1553.0078,3249.5,1557.0078,3239.5,1561.0078,3243.5,1557.0078" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="1994" x2="3245.5" y1="1557.0078" y2="1557.0078"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="2001" y="1551.9419">29</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="431" x="2023" y="1551.9419">create(snsNumber, name, date, centerName, vacTypeDesignation)</text><polygon fill="#A80036" points="528.5,1612.1406,518.5,1616.1406,528.5,1620.1406,524.5,1616.1406" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="522.5" x2="882.5" y1="1616.1406" y2="1616.1406"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="534.5" y="1611.0747">30</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="105" x="556.5" y="1611.0747">appointmentDto</text><polygon fill="#A80036" points="82.5,1641.2734,72.5,1645.2734,82.5,1649.2734,78.5,1645.2734" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="76.5" x2="511.5" y1="1645.2734" y2="1645.2734"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="88.5" y="1640.2075">31</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="261" x="110.5" y="1640.2075">asks for confirmation of the appointment</text><polygon fill="#A80036" points="495.5,1670.4063,505.5,1674.4063,495.5,1678.4063,499.5,1674.4063" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="71.5" x2="501.5" y1="1674.4063" y2="1674.4063"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="78.5" y="1669.3403">32</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="113" x="100.5" y="1669.3403">confirms the data</text><polygon fill="#A80036" points="866.5,1699.5391,876.5,1703.5391,866.5,1707.5391,870.5,1703.5391" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="517.5" x2="872.5" y1="1703.5391" y2="1703.5391"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="524.5" y="1698.4731">33</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="40" x="546.5" y="1698.4731">save()</text><polygon fill="#A80036" points="1612.5,1728.6719,1622.5,1732.6719,1612.5,1736.6719,1616.5,1732.6719" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="888.5" x2="1618.5" y1="1732.6719" y2="1732.6719"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="895.5" y="1727.606">34</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="119" x="917.5" y="1727.606">saveArrival(arrival)</text><polygon fill="#A80036" points="82.5,1787.8047,72.5,1791.8047,82.5,1795.8047,78.5,1791.8047" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="76.5" x2="511.5" y1="1791.8047" y2="1791.8047"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="88.5" y="1786.7388">35</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="168" x="110.5" y="1786.7388">informs operation success</text><!--MD5=[7682729c3f241a91c59151ea566bb36f]
 @startuml
 autonumber
 
 actor "Receptionist" as RECEPT
 
 participant ":RegisterSNSUserArrivalUI" as UI
+participant ":App" as APP
 participant ":RegisterSNSUserArrivalController" as CTRL
 participant "comp:Company" as COMP
-participant "suStore:SNSUserStore" as SUSTORE
-participant "snsUser:SNSUser" as SNSUSER
 participant "center:VaccinationCenter" as CENTER
-participant "aptStore:AppointmentStore" as APTSTORE
-participant "apt:Appointment" as APT
+participant "appointments:AppointmentScheduleList" as APPTS
+participant "waitingRoomList:WaitingRoomList" as WRLST
 participant "arrival:Arrival" as ARRIVAL
-participant "wrLst:WaitingRoomList" as WRLST
+participant ":AppointmentListMapper" as MAPPER
+participant "apt:Appointment" as APT
+participant "snsStore:SNSUserStore" as SUSTORE
+participant "snsUser:SNSUser" as SNSUSER
+participant "vacCenter:VaccinationCenter" as CENTER
+participant "vacType:VaccineType" as VACTYPE
+participant "appointmentDto:AppointmentListDTO" as DTO
 
 activate RECEPT
   RECEPT -> UI : starts to register the SNS User arrival to the vaccination center
   activate UI
+  
+    UI -> APP : app = App.getInstance()
+    activate APP
+    deactivate APP
+
+    UI -> APP : company = getCompany()
+    activate APP
+    deactivate APP
+    
+    note right of UI
+      <i><b>center</b></i> is obtained through the employeeSession.
+      Also see: <i>EmployeeLogin_SD</i>
+    end note
+
+    UI -> CTRL** : create(company, center)
   
   RECEPT <- - UI : asks for the SNS User number
   deactivate UI
 
   RECEPT -> UI : types the requested data
   activate UI
-  
-  RECEPT <- - UI : asks to select the vaccination center
-  deactivate UI
-
-  RECEPT -> UI : selects the vaccination center
-  activate UI
     
-    UI -> CTRL** : create(company)
 
     UI -> CTRL : findSNSUserByNumber(snsNumber)
     activate CTRL
 
-      CTRL -> COMP : suStore = getSNSUserStore()
+      CTRL -> COMP : snsStore = getSNSUserStore()
       activate COMP
       deactivate COMP
 
-      CTRL -> SUSTORE : suStore.findSNSUser(snsNumber)
+      CTRL -> SUSTORE : findSNSUser(snsNumber)
       activate SUSTORE
-        loop for each snsUser
-          SUSTORE -> SNSUSER : b = snsUser.hasSNSNumber(snsNumber)
+        ' loop for each snsUser
+        loop while b is false
+          SUSTORE -> SNSUSER : b = hasSNSNumber(snsNumber)
           activate SNSUSER
-          alt b == true
-            SUSTORE <- - SNSUSER : return snsUser
-            deactivate SNSUSER
-          end
+          ' alt b == true
+            ' SUSTORE <- - SNSUSER : return snsUser
+          deactivate SNSUSER
+          ' end
         end
       deactivate SUSTORE
 
     deactivate CTRL
 
-    UI -> CTRL : findSNSUserAppointment(snsNumber)
+    UI -> CTRL : findSNSUserAppointment()
     activate CTRL
 
-      CTRL -> CENTER : aptStore = getAppointmentStore()
+      CTRL -> CENTER : appointments = getAppointmentList()
       activate CENTER
       deactivate CENTER
 
-      CTRL -> APTSTORE : apt = findAppointment(snsNumber)
-      activate APTSTORE
+      CTRL -> SNSUSER : snsNumber = getSnsNumber()
+      activate SNSUSER
+      deactivate SNSUSER
 
-        loop for each appointment
-          APTSTORE -> APT : b = hasSNSNumber(snsNumber) && isInTheNextSlot()
-          activate APT
-          alt b == true
-            APTSTORE <- - APT : return apt
-            deactivate APT
-          end
-        end
+      CTRL -> APPTS : appointment = hasAppointmentToday(snsNumber)
+      activate APPTS
 
-      deactivate APTSTORE
+        ' note right of APPTS
+        '   today is an instance of Calendar
+        ' end note
+        ' APPTS -> APPTS : key = generateKeyFromDate(today)
+        
+        ' APPTS -> MAPPER : get(key)
+        ' activate MAPPER
+        ' deactivate MAPPER
+
+        ' loop for each appointment
+        ' loop while b is false
+          ' APPTS -> APT : b = hasSNSNumber(snsNumber)
+          ' activate APT
+          ' alt b == true
+            ' APPTS <- - APT : return apt
+          ' deactivate APT
+          ' end
+        ' end
+
+alt there is an appointment
+
+      deactivate APPTS
 
     deactivate CTRL
+
+    UI -> CTRL : create()
+    activate CTRL
+
+      CTRL -> CENTER : waitingRoomList = getWaitingRoomList()
+      activate CENTER
+      deactivate CENTER
+
+      CTRL -> WRLST : arrival = createArrival(snsUser)
+      activate WRLST
+        WRLST -> ARRIVAL** : create(snsUser)
+      deactivate WRLST
+
+    deactivate CTRL
+
+    UI -> CTRL : stringifyData()
+    activate CTRL
+
+      CTRL -> MAPPER : appointmentDto = toDto(appointment)
+      activate MAPPER
+
+        MAPPER -> APT : snsUser = getSnsUser()
+        activate APT
+        deactivate APT
+
+        MAPPER -> SNSUSER : snsNumber = getSnsNumber()
+        activate SNSUSER
+        deactivate SNSUSER
+
+        MAPPER -> SNSUSER : name = getName()
+        activate SNSUSER
+        deactivate SNSUSER
+
+        MAPPER -> APT : date = getDate()
+        activate APT
+        deactivate APT
+
+        MAPPER -> APT : center = getCenter()
+        activate APT
+        deactivate APT
+
+        MAPPER -> CENTER : centerName = getName()
+        activate CENTER
+        deactivate CENTER
+
+        MAPPER -> APT : vacType = getVaccineType()
+        activate APT
+        deactivate APT
+
+        MAPPER -> VACTYPE : vacTypeDesignation = getDesignation()
+        activate VACTYPE
+        deactivate VACTYPE
+
+        MAPPER -> DTO : create(snsNumber, name, date, centerName, vacTypeDesignation)
+        activate DTO
+        deactivate DTO
+
+      deactivate MAPPER
+
+    UI <- - CTRL : appointmentDto
+    deactivate CTRL
   
-  RECEPT <- - UI : asks for confirmation for the appointment
+  RECEPT <- - UI : asks for confirmation of the appointment
   deactivate UI
 
   RECEPT -> UI : confirms the data
   activate UI
 
-    UI -> CTRL : confirmAppointment(apt)
+    UI -> CTRL : save()
     activate CTRL
-      CTRL -> ARRIVAL** : create(snsUser, apt)
 
-      CTRL -> WRLST : add(arrival)
+      CTRL -> WRLST : saveArrival(arrival)
       activate WRLST
       deactivate WRLST
 
@@ -96,15 +186,190 @@ activate RECEPT
   RECEPT <- - UI : informs operation success
   deactivate UI
 
+end
+
+deactivate RECEPT
+
+@enduml
+
+@startuml
+autonumber
+
+actor "Receptionist" as RECEPT
+
+participant ":RegisterSNSUserArrivalUI" as UI
+participant ":App" as APP
+participant ":RegisterSNSUserArrivalController" as CTRL
+participant "comp:Company" as COMP
+participant "center:VaccinationCenter" as CENTER
+participant "appointments:AppointmentScheduleList" as APPTS
+participant "waitingRoomList:WaitingRoomList" as WRLST
+participant "arrival:Arrival" as ARRIVAL
+participant ":AppointmentListMapper" as MAPPER
+participant "apt:Appointment" as APT
+participant "snsStore:SNSUserStore" as SUSTORE
+participant "snsUser:SNSUser" as SNSUSER
+participant "vacCenter:VaccinationCenter" as CENTER
+participant "vacType:VaccineType" as VACTYPE
+participant "appointmentDto:AppointmentListDTO" as DTO
+
+activate RECEPT
+  RECEPT -> UI : starts to register the SNS User arrival to the vaccination center
+  activate UI
+  
+    UI -> APP : app = App.getInstance()
+    activate APP
+    deactivate APP
+
+    UI -> APP : company = getCompany()
+    activate APP
+    deactivate APP
+    
+    note right of UI
+      <i><b>center</b></i> is obtained through the employeeSession.
+      Also see: <i>EmployeeLogin_SD</i>
+    end note
+
+    UI -> CTRL** : create(company, center)
+  
+  RECEPT <- - UI : asks for the SNS User number
+  deactivate UI
+
+  RECEPT -> UI : types the requested data
+  activate UI
+    
+
+    UI -> CTRL : findSNSUserByNumber(snsNumber)
+    activate CTRL
+
+      CTRL -> COMP : snsStore = getSNSUserStore()
+      activate COMP
+      deactivate COMP
+
+      CTRL -> SUSTORE : findSNSUser(snsNumber)
+      activate SUSTORE
+        loop while b is false
+          SUSTORE -> SNSUSER : b = hasSNSNumber(snsNumber)
+          activate SNSUSER
+          deactivate SNSUSER
+        end
+      deactivate SUSTORE
+
+    deactivate CTRL
+
+    UI -> CTRL : findSNSUserAppointment()
+    activate CTRL
+
+      CTRL -> CENTER : appointments = getAppointmentList()
+      activate CENTER
+      deactivate CENTER
+
+      CTRL -> SNSUSER : snsNumber = getSnsNumber()
+      activate SNSUSER
+      deactivate SNSUSER
+
+      CTRL -> APPTS : appointment = hasAppointmentToday(snsNumber)
+      activate APPTS
+
+        
+
+
+alt there is an appointment
+
+      deactivate APPTS
+
+    deactivate CTRL
+
+    UI -> CTRL : create()
+    activate CTRL
+
+      CTRL -> CENTER : waitingRoomList = getWaitingRoomList()
+      activate CENTER
+      deactivate CENTER
+
+      CTRL -> WRLST : arrival = createArrival(snsUser)
+      activate WRLST
+        WRLST -> ARRIVAL** : create(snsUser)
+      deactivate WRLST
+
+    deactivate CTRL
+
+    UI -> CTRL : stringifyData()
+    activate CTRL
+
+      CTRL -> MAPPER : appointmentDto = toDto(appointment)
+      activate MAPPER
+
+        MAPPER -> APT : snsUser = getSnsUser()
+        activate APT
+        deactivate APT
+
+        MAPPER -> SNSUSER : snsNumber = getSnsNumber()
+        activate SNSUSER
+        deactivate SNSUSER
+
+        MAPPER -> SNSUSER : name = getName()
+        activate SNSUSER
+        deactivate SNSUSER
+
+        MAPPER -> APT : date = getDate()
+        activate APT
+        deactivate APT
+
+        MAPPER -> APT : center = getCenter()
+        activate APT
+        deactivate APT
+
+        MAPPER -> CENTER : centerName = getName()
+        activate CENTER
+        deactivate CENTER
+
+        MAPPER -> APT : vacType = getVaccineType()
+        activate APT
+        deactivate APT
+
+        MAPPER -> VACTYPE : vacTypeDesignation = getDesignation()
+        activate VACTYPE
+        deactivate VACTYPE
+
+        MAPPER -> DTO : create(snsNumber, name, date, centerName, vacTypeDesignation)
+        activate DTO
+        deactivate DTO
+
+      deactivate MAPPER
+
+    UI <- - CTRL : appointmentDto
+    deactivate CTRL
+  
+  RECEPT <- - UI : asks for confirmation of the appointment
+  deactivate UI
+
+  RECEPT -> UI : confirms the data
+  activate UI
+
+    UI -> CTRL : save()
+    activate CTRL
+
+      CTRL -> WRLST : saveArrival(arrival)
+      activate WRLST
+      deactivate WRLST
+
+    deactivate CTRL
+
+  RECEPT <- - UI : informs operation success
+  deactivate UI
+
+end
+
 deactivate RECEPT
 
 @enduml
 
 PlantUML version 1.2022.0(Tue Jan 11 16:16:42 WET 2022)
 (GPL source distribution)
-Java Runtime: Java(TM) SE Runtime Environment
-JVM: Java HotSpot(TM) 64-Bit Server VM
-Default Encoding: Cp1252
-Language: pt
-Country: PT
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
 --></g></svg>

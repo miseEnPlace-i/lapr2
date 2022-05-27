@@ -5,7 +5,6 @@ import app.domain.model.Company;
 import app.domain.model.Employee;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
-import app.service.PasswordGenerator;
 import pt.isep.lei.esoft.auth.AuthFacade;
 import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
@@ -14,7 +13,7 @@ import pt.isep.lei.esoft.auth.domain.model.UserRole;
  * 
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
-public class RegisterEmployeeController implements IRegisterController {
+public class RegisterEmployeeController implements IRegisterController<Employee> {
   private Company company;
   private AuthFacade authFacade;
   private Employee employee;
@@ -42,31 +41,19 @@ public class RegisterEmployeeController implements IRegisterController {
    * @param citizenCardNumber the employee citizenCardNumber
    * @param roleId the employee roleId
    */
-  public void create(String name, String address, String phoneNumber, String email,
-      String citizenCardNumber, String roleId) {
+  public void create(String name, String address, String phoneNumber, String email, String citizenCardNumber, String roleId) {
     // create an instance of an Employee
-    this.employee =
-        store.createEmployee(name, phoneNumber, email, address, citizenCardNumber, roleId);
+    this.employee = store.createEmployee(name, phoneNumber, email, address, citizenCardNumber, roleId);
 
     // validate the Employee
     store.validateEmployee(employee);
 
-    if (this.authFacade.existsUser(email))
-      throw new IllegalArgumentException("Email already exists.");
+    if (this.authFacade.existsUser(email)) throw new IllegalArgumentException("Email already exists.");
   }
 
   @Override
   public void save() {
     store.saveEmployee(this.employee);
-
-    String password = PasswordGenerator.generatePwd();
-    // String password = "123456";
-
-    this.authFacade.addUserWithRole(employee.getName(), employee.getEmail(), password,
-        employee.getRoleId());
-
-    // TODO: send password email
-    // this.emailSender.sendPasswordEmail(email, password);
   }
 
   /**
@@ -86,5 +73,10 @@ public class RegisterEmployeeController implements IRegisterController {
   @Override
   public String getResourceName() {
     return "Employee";
+  }
+
+  @Override
+  public Employee getRegisteredObject() {
+    return employee;
   }
 }

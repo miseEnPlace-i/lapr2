@@ -12,7 +12,7 @@ import app.domain.model.store.VaccineTypeStore;
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 
-public class RegisterNewVaccineTypeController implements IRegisterController {
+public class RegisterNewVaccineTypeController implements IRegisterController<VaccineType> {
   private Company company;
   private VaccineTypeStore vaccineTypeStore;
   private VaccineType vt;
@@ -60,5 +60,10 @@ public class RegisterNewVaccineTypeController implements IRegisterController {
 
   public List<String> getVaccineTechnologyList() {
     return vaccineTechnologyStore.getList();
+  }
+
+  @Override
+  public VaccineType getRegisteredObject() {
+    return vt;
   }
 }

@@ -1,4 +1,4 @@
-package app.domain.model.dto;
+package app.dto;
 
 public class VaccineTypeDTO {
   private String code;
@@ -21,5 +21,10 @@ public class VaccineTypeDTO {
 
   public String getTechnology() {
     return this.technology;
+  }
+
+  @Override
+  public String toString() {
+    return getDescription();
   }
 }

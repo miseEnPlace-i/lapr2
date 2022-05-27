@@ -1,22 +1,23 @@
-package app.domain.model.dto;
+package app.dto;
 
 import java.util.Date;
 
-public class WaitingRoomDTO {
+public class ArrivalDTO {
   // TODO Implement WaitingRoom DTO with Name, Sex, Birth Date, SNS User Number and Phone Number.
   private String name;
-  private String sex;
+  private char gender;
   private Date birthDate;
   private String snsUserNumber;
   private String phoneNumber;
+  private String time;
 
-  public WaitingRoomDTO(String name, String sex, Date birthDate, String snsUserNumber,
-      String phoneNumber) {
+  public ArrivalDTO(String name, char gender, Date birthDate, String snsUserNumber, String phoneNumber, String time) {
     this.name = name;
-    this.sex = sex;
+    this.gender = gender;
     this.birthDate = birthDate;
     this.snsUserNumber = snsUserNumber;
     this.phoneNumber = phoneNumber;
+    this.time = time;
   }
 
   /**
@@ -29,8 +30,8 @@ public class WaitingRoomDTO {
   /**
    * @return String return the sex
    */
-  public String getSex() {
-    return sex;
+  public char getSex() {
+    return gender;
   }
 
   /**
@@ -54,4 +55,10 @@ public class WaitingRoomDTO {
     return phoneNumber;
   }
 
+  /**
+   * @return String return the phoneNumber
+   */
+  public String getTime() {
+    return time;
+  }
 }

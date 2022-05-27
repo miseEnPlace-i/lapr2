@@ -16,7 +16,7 @@ public class NurseUI extends EmployeeWithCenterUI {
     EmployeeSession nurseSession = super.getEmployeeSession();
 
     options
-        .add(new MenuItem("Get users in Waiting Room", new ListUsersInWaitingRoomUI(nurseSession)));
+        .add(new MenuItem("Get Users in Waiting Room", new ListUsersInWaitingRoomUI(nurseSession)));
 
     int option = 0;
 

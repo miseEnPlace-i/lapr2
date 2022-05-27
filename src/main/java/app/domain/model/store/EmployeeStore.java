@@ -3,6 +3,12 @@ package app.domain.model.store;
 import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.Employee;
+import app.dto.UserNotificationDTO;
+import app.mapper.UserNotificationMapper;
+import app.service.password.IPasswordGenerator;
+import app.service.password.PasswordGeneratorFactory;
+import app.service.sender.ISender;
+import app.service.sender.SenderFactory;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
 /**
@@ -18,8 +24,8 @@ public class EmployeeStore {
    * Constructor for EmployeeStore.
    */
   public EmployeeStore(AuthFacade authFacade, EmployeeRoleStore roleStore) {
-    this.authFacade = authFacade;
     this.employees = new ArrayList<Employee>();
+    this.authFacade = authFacade;
     this.roleStore = roleStore;
   }
 
@@ -33,8 +39,7 @@ public class EmployeeStore {
    * @param citizenCard the employee citizenCard
    * @param roleId the employee roleId
    */
-  public Employee createEmployee(String name, String phoneNumber, String email, String address,
-      String citizenCard, String roleId) {
+  public Employee createEmployee(String name, String phoneNumber, String email, String address, String citizenCard, String roleId) {
     String id = generateId();
     Employee employee = new Employee(id, name, phoneNumber, email, address, citizenCard, roleId);
 
@@ -73,30 +78,37 @@ public class EmployeeStore {
 
     String email = employee.getEmail();
 
-    if (this.authFacade.existsUser(email))
-      throw new IllegalArgumentException("Email already exists.");
+    if (this.authFacade.existsUser(email)) throw new IllegalArgumentException("Email already exists.");
 
     checkDuplicates(employee);
   }
 
   /**
-   * Inserts an employee into the store.
+   * Inserts an employee into the store and creates a system user.
    * 
    * @param employee the employee to be inserted
    */
   public void saveEmployee(Employee employee) {
-    String name = employee.getName();
-    String email = employee.getEmail();
-    String roleId = employee.getRoleId();
-    // String password = PasswordGenerator.generatePwd();
-    String password = "123456";
-
-    this.authFacade.addUserWithRole(name, email, password, roleId);
-
     this.employees.add(employee);
 
-    // TODO: send password email
-    // this.emailSender.sendPasswordEmail(email, password);
+    String email = employee.getEmail();
+    String phoneNumber = employee.getPhoneNumber();
+    IPasswordGenerator pwdGenerator = PasswordGeneratorFactory.getPasswordGenerator();
+    String pwd = pwdGenerator.generatePwd();
+
+    this.authFacade.addUserWithRole(employee.getName(), email, pwd, employee.getRoleId());
+
+    String message = String.format("A new user has been created.\nEmail: %s\nPassword: %s", email, pwd);
+    UserNotificationDTO notification = UserNotificationMapper.toDto(email, phoneNumber, message);
+    ISender sender = SenderFactory.getSender();
+
+    // send notification with the password
+    try {
+      sender.send(notification);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      e.printStackTrace();
+    }
   }
 
   /**
@@ -105,8 +117,7 @@ public class EmployeeStore {
    * @param employee the employee to be checked
    */
   public void checkDuplicates(Employee employee) {
-    if (employees.contains(employee))
-      throw new IllegalArgumentException("Duplicate employee found.");
+    if (employees.contains(employee)) throw new IllegalArgumentException("Duplicate employee found.");
   }
 
   /**

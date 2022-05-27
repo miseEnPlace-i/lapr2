@@ -108,4 +108,20 @@ public class Vaccine {
   public void addAdminProc(AdminProcess adminProc) {
     adminProcList.addAdminProc(adminProc);
   }
+
+  /**
+   * Checks if the vaccine has an admin. process that includes the given age.
+   * 
+   * @param age the age given
+   * @return true if has an admin. process, false otherwise
+   */
+  public boolean hasAdministrationProcessForGivenAge(int age) {
+    for (AdminProcess adPr : adminProcList.getList()) {
+      if (adPr.admitsAge(age)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 }

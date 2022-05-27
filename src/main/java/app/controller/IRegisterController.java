@@ -5,7 +5,7 @@ package app.controller;
  * 
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
-public interface IRegisterController {
+public interface IRegisterController<T> {
   /**
    * Registers a resource.
    */
@@ -21,4 +21,9 @@ public interface IRegisterController {
    * @return a readable representation of the data
    */
   public String stringifyData();
+
+  /**
+   * @return the registered object
+   */
+  public T getRegisteredObject();
 }

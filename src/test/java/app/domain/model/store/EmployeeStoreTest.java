@@ -3,6 +3,7 @@ package app.domain.model.store;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
+import app.domain.model.Company;
 import app.domain.model.Employee;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
@@ -17,11 +18,11 @@ public class EmployeeStoreTest {
 
   @Before
   public void setUp() {
-    roleStore = new EmployeeRoleStore(authFacade);
-    store = new EmployeeStore(authFacade, roleStore);
+    Company company = new Company("abc", "12345");
+    roleStore = company.getEmployeeRoleStore();
+    store = company.getEmployeeStore();
 
-    employee = new Employee("00000001", "Joana Maria", "+351123456789", "email@email.com",
-        "Av. da Liberdade", "123456789ZZ1", "NURSE");
+    employee = new Employee("00000001", "Joana Maria", "+351123456789", "email@email.com", "Av. da Liberdade", "123456789ZZ1", "NURSE");
   }
 
   /**
@@ -42,6 +43,17 @@ public class EmployeeStoreTest {
   @Test(expected = IllegalArgumentException.class)
   public void ensureCheckDuplicatesIsWorkingCorrectly() {
     store.saveEmployee(employee);
+    store.validateEmployee(employee);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void ensureNullDuplicateIsWorking() {
+    store.validateEmployee(null);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void ensureDuplicateCheckInAuthFacadeIsWorking() {
+    authFacade.addUser("name", "email@email.com", "123456");
     store.validateEmployee(employee);
   }
 }

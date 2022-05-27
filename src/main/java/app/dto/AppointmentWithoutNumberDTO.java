@@ -1,4 +1,4 @@
-package app.domain.model.dto;
+package app.dto;
 
 
 import java.util.Calendar;
@@ -16,7 +16,7 @@ public class AppointmentWithoutNumberDTO {
   private VaccineType vaccineType;
   private boolean smsPermission;
 
-  public AppointmentWithoutNumberDTO(Calendar date, String time, VaccinationCenter center,
+  public AppointmentWithoutNumberDTO(Calendar date, VaccinationCenter center,
       VaccineType vaccineType, boolean sms) {
     this.date = date;
     // this.time = time;

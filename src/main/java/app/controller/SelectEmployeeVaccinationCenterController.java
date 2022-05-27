@@ -2,8 +2,8 @@ package app.controller;
 
 import java.util.List;
 import app.domain.model.Company;
-import app.domain.model.dto.VaccinationCenterListDTO;
 import app.domain.model.store.VaccinationCenterStore;
+import app.dto.VaccinationCenterListDTO;
 import app.session.EmployeeSession;
 
 public class SelectEmployeeVaccinationCenterController {

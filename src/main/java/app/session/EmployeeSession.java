@@ -1,22 +1,24 @@
 package app.session;
 
-import app.domain.model.dto.VaccinationCenterListDTO;
+import app.domain.model.VaccinationCenter;
+import app.dto.VaccinationCenterListDTO;
+import app.mapper.VaccinationCenterMapper;
 
 public class EmployeeSession {
-  private VaccinationCenterListDTO vaccinationCenter;
+  private VaccinationCenter vaccinationCenter;
 
   public EmployeeSession() {}
 
-  public EmployeeSession(VaccinationCenterListDTO vaccinationCenter) {
+  public EmployeeSession(VaccinationCenter vaccinationCenter) {
     this.vaccinationCenter = vaccinationCenter;
   }
 
-  public VaccinationCenterListDTO getVaccinationCenter() {
+  public VaccinationCenter getVaccinationCenter() {
     return vaccinationCenter;
   }
 
-  public void setVaccinationCenter(VaccinationCenterListDTO vaccinationCenter) {
-    this.vaccinationCenter = vaccinationCenter;
+  public void setVaccinationCenter(VaccinationCenterListDTO vaccinationCenterDTO) {
+    this.vaccinationCenter = VaccinationCenterMapper.toModel(vaccinationCenterDTO);
   }
 
   public boolean hasCenter() {

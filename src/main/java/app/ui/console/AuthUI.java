@@ -47,12 +47,13 @@ public class AuthUI implements Runnable {
     // To complete with other user roles and related RoleUI
     rolesUI.add(new MenuItem(Constants.ROLE_RECEPTIONIST, new ReceptionistUI()));
     rolesUI.add(new MenuItem(Constants.ROLE_NURSE, new NurseUI()));
+    rolesUI.add(new MenuItem(Constants.ROLE_SNS_USER, new SNSUserUI()));
     //
     return rolesUI;
   }
 
   private boolean doLogin() {
-    System.out.println("\nLogin UI:");
+    System.out.println("\nLogin:");
 
     int maxAttempts = 3;
     boolean success = false;

@@ -9,6 +9,7 @@ import app.domain.model.store.VaccineStore;
 import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.model.store.VaccineTypeStore;
 import pt.isep.lei.esoft.auth.AuthFacade;
+import pt.isep.lei.esoft.auth.UserSession;
 
 /**
  * @author Paulo Maio <pam@isep.ipp.pt>
@@ -29,6 +30,7 @@ public class Company {
   private VaccineStore vaccineStore;
   private VaccineTechnologyStore vaccineTechnologyStore;
   private VaccineTypeStore vaccineTypeStore;
+  private UserSession userSession;
 
   /**
    * Company constructor.
@@ -36,15 +38,15 @@ public class Company {
    * @param designation the designation of the company
    */
   public Company(String designation, String ongoingOutbreakVaccineTypeCode) {
-    if (StringUtils.isBlank(designation))
-      throw new IllegalArgumentException("Designation cannot be blank.");
+    if (StringUtils.isBlank(designation)) throw new IllegalArgumentException("Designation cannot be blank.");
 
-    if (ongoingOutbreakVaccineTypeCode == null)
-      throw new IllegalArgumentException("Ongoing outbreak vaccine type code cannot be null.");
+    if (ongoingOutbreakVaccineTypeCode == null) throw new IllegalArgumentException("Ongoing outbreak vaccine type code cannot be null.");
 
     this.designation = designation;
 
     this.authFacade = new AuthFacade();
+
+
 
     this.employeeRoleStore = new EmployeeRoleStore(this.authFacade);
     this.employeeStore = new EmployeeStore(this.authFacade, this.employeeRoleStore);
@@ -53,6 +55,7 @@ public class Company {
     this.vaccineStore = new VaccineStore();
     this.vaccineTechnologyStore = new VaccineTechnologyStore();
     this.vaccineTypeStore = new VaccineTypeStore(vaccineTechnologyStore);
+    this.userSession = new UserSession();
 
     this.ongoingOutbreakVaccineTypeCode = ongoingOutbreakVaccineTypeCode;
   }
@@ -120,5 +123,9 @@ public class Company {
 
   public String getOngoingOutbreakVaccineTypeCode() {
     return this.ongoingOutbreakVaccineTypeCode;
+  }
+
+  public UserSession getUserSession() {
+    return this.userSession;
   }
 }

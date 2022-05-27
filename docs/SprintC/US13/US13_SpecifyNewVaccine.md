@@ -50,10 +50,10 @@ doses (e.g.: between the 1st and 2nd doses 21 days might be required, while betw
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All required fiedls must be filled in.
-* **AC2:** When creating a vaccine, the vaccine type must existe.
+* **AC1:** All required fields must be filled in.
+* **AC2:** When creating a vaccine, the vaccine type must exist.
 * **AC3:** The age group intervals limits, the dosage, the time since last dose and the number of doses must be positive integers.
-* **AC4** In the age gorup interval, the minimum age must be smaller than the maximum age.
+* **AC4** In the age group interval, the minimum age must be smaller than the maximum age.
 * **AC5:** When creating a vaccine with an already existing designation, the system must reject such operation and the user must have the chance to modify the typed designation.
 
 
@@ -131,22 +131,22 @@ TODO : review, implement stores and lists
 | Step 4		 |  ... inform the  current state of the process | CreateVaccineUI | Pure Fabrication: Responsible for user interactions. |
 | Step 5		 |  |||
 | Step 6 		 |	... request data?| CreateVaccineUI | Pure Fabrication: Responsible for user interactions.                |
-| Step 7		 |	... instantiating a new adminsitration process	| AdminProcList	| Creator: R1. |
-|				 |	... validating data? |	AdminsitrationProcess	| IE: Owns the data. |
+| Step 7		 |	... instantiating a new administration process	| AdminProcList	| Creator: R1. |
+|				 |	... validating data? |	AdministrationProcess	| IE: Owns the data. |
 | Step 8		 |  ... show all the data and request confirmation?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
 | step 9 | ... add the administration process| AdminProcList | IE: stores administration processes|
-| Step 10		 |  ... inform operation sucess? | CreateVaccineUI | Pure Fabrication: Responsible for user interactions.	|
+| Step 10		 |  ... inform operation success? | CreateVaccineUI | Pure Fabrication: Responsible for user interactions.	|
 | step 11 ||||
 | Step 12 		 |	... request data? | CreateVaccineUI | Pure Fabrication: Responsible for user interactions.                  |
 | Step 13		 |	... instantiating a new dose information	| DoseInfoList	| Creator: R1 |
 |				 |	... validating data? |	DoseInfo	| IE: Owns the data. |
 | Step 14		 |  ... show all the data and request confirmation?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
-| step 15 | ... add the dose information| DoseInfoList | IE: Stores dose informations|
-| Step 16		 |  ... informing operation sucess?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
+| step 15 | ... add the dose information| DoseInfoList | IE: Stores dose information|
+| Step 16		 |  ... informing operation success?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
 | Step 17 ||||
 | Step 18		 |  ... show all the data and request confirmation?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
 | Step 19 | ...store the final result of the vaccine | VaccineStore| IE: Stores all vaccines|
-| Step 20		 |  ... informing operation sucess?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
+| Step 20		 |  ... informing operation success?	|	CreateVaccineUI	|  Pure Fabrication: Responsible for user interactions.	|
 
 
 
@@ -195,7 +195,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 **Test 2:** Check that it is not possible to create an instance of the Vaccine class with empty values. 
 
 	@Test(expected = IllegalArgumentException.class)
-		public void EmptyVacAgrumets() {
+		public void EmptyVacArguments() {
 		Vaccine instance = new Vaccine("", "", "", "");
 	}
 	

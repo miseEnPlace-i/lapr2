@@ -18,6 +18,13 @@ public class FormatVerifierTest {
     assertFalse(FormatVerifier.validateCitizenCard("123456789ZZ"));
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void ensureCCFormatWithInvalidLastDigit() {
+    CCFormatVerifier ccFormatVerifier = new CCFormatVerifier();
+
+    ccFormatVerifier.validate("000000000~'1");
+  }
+
   @Test
   public void ensureCCFormatWithMissingLetter() {
     assertFalse(FormatVerifier.validateCitizenCard("123456789Z1"));

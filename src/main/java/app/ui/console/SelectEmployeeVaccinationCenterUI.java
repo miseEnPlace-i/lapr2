@@ -2,7 +2,7 @@ package app.ui.console;
 
 import app.controller.App;
 import app.controller.SelectEmployeeVaccinationCenterController;
-import app.domain.model.dto.VaccinationCenterListDTO;
+import app.dto.VaccinationCenterListDTO;
 import app.session.EmployeeSession;
 import app.ui.console.utils.Utils;
 
@@ -23,7 +23,7 @@ public class SelectEmployeeVaccinationCenterUI implements Runnable {
 
     while (!employeeSession.hasCenter()) {
       Object center = Utils.showAndSelectOne(controller.getVaccinationCentersList(),
-          "\n\nVaccination Centers\n");
+          "\n\nSelect the Vaccination Center you are working in:\n");
 
       try {
         VaccinationCenterListDTO centerDTO = (VaccinationCenterListDTO) center;

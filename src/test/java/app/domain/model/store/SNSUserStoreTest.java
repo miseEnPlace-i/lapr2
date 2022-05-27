@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
+import app.domain.model.Company;
 import app.domain.model.SNSUser;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
@@ -11,16 +12,16 @@ import pt.isep.lei.esoft.auth.AuthFacade;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 public class SNSUserStoreTest {
-  SNSUserStore store;
-  SNSUser snsUser;
+  private SNSUserStore store;
+  private AuthFacade authFacade;
+  private SNSUser snsUser;
 
   @Before
   public void setUp() {
-    AuthFacade authFacade = new AuthFacade();
-    store = new SNSUserStore(authFacade);
+    Company company = new Company("abc", "12345");
+    store = company.getSNSUserStore();
     Date c = new Date();
-    snsUser = new SNSUser("123456789ZZ1", "123456789", "name", c, 'M', "+351211111111",
-        "email@email.com", "address");
+    snsUser = new SNSUser("123456789ZZ1", "123456789", "name", c, 'M', "+351211111111", "email@email.com", "address");
   }
 
   /**
@@ -52,5 +53,11 @@ public class SNSUserStoreTest {
   @Test(expected = Error.class)
   public void ensureValidateForNullWorksAsExpected() {
     store.validateSNSUser(null);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void ensureValidateForExistingEmailInAuthFacade() {
+    authFacade.addUser("name", "email@email.com", "123456");
+    store.validateSNSUser(snsUser);
   }
 }

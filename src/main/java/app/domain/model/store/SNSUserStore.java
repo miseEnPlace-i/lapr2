@@ -6,11 +6,21 @@ import java.util.Date;
 import java.util.List;
 import app.domain.model.SNSUser;
 import app.domain.shared.Constants;
-import app.service.PasswordGenerator;
+import app.dto.SNSUserDTO;
+import app.dto.SNSUserRegisterInfoDTO;
+import app.dto.UserNotificationDTO;
+import app.mapper.SNSUserMapper;
+import app.mapper.SNSUserRegisterInfoMapper;
+import app.mapper.UserNotificationMapper;
+import app.service.password.IPasswordGenerator;
+import app.service.password.PasswordGeneratorFactory;
+import app.service.sender.ISender;
+import app.service.sender.SenderFactory;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
 /**
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
+ * @author Carlos Lopes <1211277@isep.ipp.pt>
  */
 public class SNSUserStore {
   // User List
@@ -40,11 +50,17 @@ public class SNSUserStore {
    * @param address SNS User address
    * @return SNSUser
    */
-  public SNSUser createSNSUser(String citizenCard, String snsNumber, String name, Date birthDay,
-      char gender, String phoneNumber, String email, String address)
-      throws IllegalArgumentException, ParseException {
-    SNSUser snsUser =
-        new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
+  public SNSUser createSNSUser(String citizenCard, String snsNumber, String name, Date birthDay, char gender, String phoneNumber, String email,
+      String address) {
+    SNSUser snsUser = new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
+
+    return snsUser;
+  }
+
+
+  // creates SNS User instance.
+  public SNSUser createSNSUser(SNSUserDTO snsUserDto) {
+    SNSUser snsUser = new SNSUser(snsUserDto);
 
     return snsUser;
   }
@@ -55,9 +71,7 @@ public class SNSUserStore {
    * @param snsUser
    */
   public void validateSNSUser(SNSUser snsUser) {
-    if (snsUser == null) {
-      throw new Error("SNS User is null.");
-    }
+    if (snsUser == null) throw new Error("SNS User is null.");
 
     // get the SNS User email
     String email = snsUser.getEmail();
@@ -71,22 +85,35 @@ public class SNSUserStore {
   }
 
   /**
-   * Inserts a SNS User object to the list and adds a User to the AuthFacade.
+   * Inserts a SNS User object to the store and creates a system user.
    * 
-   * @param user
+   * @param snsUser the employee to be inserted.
    */
-  public void saveSNSUser(SNSUser snsUser) {
-    String name = snsUser.getName();
+  public SNSUserRegisterInfoDTO saveSNSUser(SNSUser snsUser) {
+    this.snsUsers.add(snsUser);
+
     String email = snsUser.getEmail();
-    String pwd = PasswordGenerator.generatePwd();
+    String phoneNumber = snsUser.getPhoneNumber();
+    IPasswordGenerator pwdGenerator = PasswordGeneratorFactory.getPasswordGenerator();
+    String pwd = pwdGenerator.generatePwd();
 
-    authFacade.addUserWithRole(name, email, pwd, Constants.ROLE_SNS_USER);
+    authFacade.addUserWithRole(snsUser.getName(), email, pwd, Constants.ROLE_SNS_USER);
 
-    snsUsers.add(snsUser);
+    SNSUserRegisterInfoDTO dto = SNSUserRegisterInfoMapper.toDto(snsUser);
 
-    // TODO: send password email
-    // EmailSender emailSender = new EmailSender();
-    // emailSender.sendPasswordEmail(email, pwdStr);
+    String message = String.format("A new user has been created.\nEmail: %s\nPassword: %s", email, pwd);
+    UserNotificationDTO notificationDto = UserNotificationMapper.toDto(email, phoneNumber, message);
+    ISender sender = SenderFactory.getSender();
+
+    // send notification with the password
+    try {
+      sender.send(notificationDto);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      e.printStackTrace();
+    }
+
+    return dto;
   }
 
   /**
@@ -117,17 +144,30 @@ public class SNSUserStore {
   }
 
   /**
+   * Checks if a SNS User exists.
+   * 
+   * @param snsNumber The SNS User Number.
+   * @return SNSUser
+   */
+  public boolean checkSNSUserExists(String snsNumber) {
+    for (SNSUser snsUser : snsUsers) {
+      if (snsUser.getSnsNumber().equals(snsNumber)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  /**
    * Finds a SNS User by Email.
    * 
    * @param email The SNS User email.
    * @return SNSUser
    */
   public SNSUser findSNSUserByEmail(String email) {
-    for (SNSUser snsUser : snsUsers) {
-      if (snsUser.getEmail().equals(email)) {
-        return snsUser;
-      }
-    }
+    for (SNSUser snsUser : snsUsers)
+      if (snsUser.getEmail().equals(email)) return snsUser;
 
     return null;
   }
@@ -140,4 +180,20 @@ public class SNSUserStore {
   public int size() {
     return snsUsers.size();
   }
+
+  public List<SNSUserRegisterInfoDTO> registerListOfUsers(List<String[]> userDataList) throws ParseException {
+    List<SNSUserRegisterInfoDTO> userRegisterInfoList = new ArrayList<SNSUserRegisterInfoDTO>();
+
+    for (int i = 0; i < userDataList.size(); i++) {
+      SNSUserDTO userDto = SNSUserMapper.toDto(userDataList.get(i));
+
+      SNSUser snsUser = createSNSUser(userDto);
+
+      validateSNSUser(snsUser);
+
+      userRegisterInfoList.add(saveSNSUser(snsUser));
+    }
+    return userRegisterInfoList;
+  }
+
 }

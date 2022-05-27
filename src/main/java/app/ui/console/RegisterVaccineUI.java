@@ -21,7 +21,7 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
 
   @Override
   public void run() {
-    System.out.println("\nRegister Vaccine UI:");
+    System.out.println("\nRegister Vaccine:");
 
     List<VaccineType> vacTypes = super.ctrl.getVacTypes(); // all available vaccine types
 
@@ -99,9 +99,9 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
 
   // ASKS TO INSERT THE ADMIN PROC DATA AND RETURN THE NUMBER OF DOSES
   public int insertAdminProcData() {
-    int minAge = Integer.parseInt(Utils.readLineFromConsole("Min age: "));
-    int maxAge = Integer.parseInt(Utils.readLineFromConsole("Max age: "));
-    int numberOfDoses = Integer.parseInt(Utils.readLineFromConsole("Number of doses: "));
+    int minAge = Utils.readNonNegativeIntegerFromConsole("Min age: ");
+    int maxAge = Utils.readPositiveIntegerFromConsole("Max age: ");
+    int numberOfDoses = Utils.readPositiveIntegerFromConsole("Number of doses: ");
 
     super.ctrl.createAdminProc(minAge, maxAge, numberOfDoses);
 
@@ -112,8 +112,8 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
 
   // ASKS TO INSERT THE DOSE INFO DATA
   public void insertDoseInfoData() {
-    int dosage = Integer.parseInt(Utils.readLineFromConsole("Dosage: "));
-    int timeSinceLastDose = Integer.parseInt(Utils.readLineFromConsole("Time since last dose: "));
+    int dosage = Utils.readPositiveIntegerFromConsole("Dosage: ");
+    int timeSinceLastDose = Utils.readNonNegativeIntegerFromConsole("Time since last dose: ");
 
     super.ctrl.createDoseInfo(dosage, timeSinceLastDose);
 

@@ -41,8 +41,7 @@ public class RegisterEmployeeControllerTest {
   @Test
   public void ensureStringifyDataWorking() {
     String empString = getEmployeeTestString();
-    ctrl.create("name", "address", "+351913456789", "example@gmail.com", "000000000ZZ4",
-        "COORDINATOR");
+    ctrl.create("name", "address", "+351913456789", "example@gmail.com", "000000000ZZ4", "COORDINATOR");
     ctrl.save();
     assertEquals(ctrl.stringifyData(), empString);
   }
