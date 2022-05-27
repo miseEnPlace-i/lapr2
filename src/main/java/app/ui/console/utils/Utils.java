@@ -126,6 +126,21 @@ public class Utils {
     } while (true);
   }
 
+  static public Date readDateInFutureFromConsole(String prompt) {
+    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
+    do {
+      Date date = readDateFromConsole(prompt);
+
+      try {
+        if (date.after(df.parse(df.format(new Date()))) || date.equals(df.parse(df.format(new Date())))) return date;
+        System.out.println("The date must be in the future!\n");
+      } catch (ParseException e) {
+        System.out.println("Invalid input! Please try again.\n");
+      }
+    } while (true);
+  }
+
   static public boolean confirm(String message) {
     String input;
     do {

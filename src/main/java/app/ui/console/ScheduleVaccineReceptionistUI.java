@@ -1,7 +1,6 @@
 package app.ui.console;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -234,14 +233,7 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
 
     do {
       accepted = true;
-
-      SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-      String dateStr = Utils.readLineFromConsoleWithValidation("Date (dd/MM/yyyy): ", FieldToValidate.DATE_IN_FUTURE);
-      try {
-        date = df.parse(dateStr);
-      } catch (ParseException ex) {
-        System.out.println("Invalid date format.\n");
-      }
+      date = Utils.readDateInFutureFromConsole("Date (dd/MM/yyyy): ");
       hours = Utils.readLineFromConsoleWithValidation("Hour (HH:MM):", FieldToValidate.HOURS);
 
       if (!ctrl.isCenterOpenAt(center, hours)) {
