@@ -57,8 +57,8 @@ public class ScheduleVaccineController implements IRegisterController<Appointmen
    */
   public void createAppointment(String snsNumber, Calendar date, VaccinationCenter center, VaccineType vaccineType, boolean sms) {
     this.appointmentSchedule = center.getAppointmentList();
-
-    this.appointment = appointmentSchedule.create(snsNumber, date, center, vaccineType, sms);
+    SNSUser user = snsUserStore.findSNSUserByNumber(snsNumber);
+    this.appointment = appointmentSchedule.create(user, date, center, vaccineType, sms);
   }
 
   /**
