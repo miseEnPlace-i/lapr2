@@ -178,7 +178,7 @@ public class VaccinationCenterStore {
     return returnList;
   }
 
-  public WaitingRoom getWaitingRoom(String phone) {
+  public WaitingRoom getWaitingRoomWithPhone(String phone) {
     return getVaccinationCenterByPhone(phone).getWaitingRoom();
   }
 
