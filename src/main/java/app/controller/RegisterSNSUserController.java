@@ -12,7 +12,7 @@ import pt.isep.lei.esoft.auth.AuthFacade;
  * 
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
-public class RegisterSNSUserController implements IRegisterController {
+public class RegisterSNSUserController implements IRegisterController<SNSUser> {
   private Company company;
   private AuthFacade authFacade;
   private SNSUserStore store;
@@ -40,18 +40,15 @@ public class RegisterSNSUserController implements IRegisterController {
    * @param email
    * @param address
    */
-  public void create(String citizenCard, String snsNumber, String name, Date birthDay, char gender,
-      String phoneNumber, String email, String address)
+  public void create(String citizenCard, String snsNumber, String name, Date birthDay, char gender, String phoneNumber, String email, String address)
       throws IllegalArgumentException, ParseException {
     // create an instance of an SNS User
-    this.snsUser = store.createSNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber,
-        email, address);
+    this.snsUser = store.createSNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
 
     // validate the SNS User
     store.validateSNSUser(snsUser);
 
-    if (authFacade.existsUser(snsUser.getEmail()))
-      throw new IllegalArgumentException("Email already in use.");
+    if (authFacade.existsUser(snsUser.getEmail())) throw new IllegalArgumentException("Email already in use.");
   }
 
   @Override
@@ -67,5 +64,10 @@ public class RegisterSNSUserController implements IRegisterController {
   @Override
   public String getResourceName() {
     return "SNS User";
+  }
+
+  @Override
+  public SNSUser getRegisteredObject() {
+    return snsUser;
   }
 }

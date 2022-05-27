@@ -13,7 +13,7 @@ import pt.isep.lei.esoft.auth.domain.model.UserRole;
  * 
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
-public class RegisterEmployeeController implements IRegisterController {
+public class RegisterEmployeeController implements IRegisterController<Employee> {
   private Company company;
   private AuthFacade authFacade;
   private Employee employee;
@@ -41,17 +41,14 @@ public class RegisterEmployeeController implements IRegisterController {
    * @param citizenCardNumber the employee citizenCardNumber
    * @param roleId the employee roleId
    */
-  public void create(String name, String address, String phoneNumber, String email,
-      String citizenCardNumber, String roleId) {
+  public void create(String name, String address, String phoneNumber, String email, String citizenCardNumber, String roleId) {
     // create an instance of an Employee
-    this.employee =
-        store.createEmployee(name, phoneNumber, email, address, citizenCardNumber, roleId);
+    this.employee = store.createEmployee(name, phoneNumber, email, address, citizenCardNumber, roleId);
 
     // validate the Employee
     store.validateEmployee(employee);
 
-    if (this.authFacade.existsUser(email))
-      throw new IllegalArgumentException("Email already exists.");
+    if (this.authFacade.existsUser(email)) throw new IllegalArgumentException("Email already exists.");
   }
 
   @Override
@@ -76,5 +73,10 @@ public class RegisterEmployeeController implements IRegisterController {
   @Override
   public String getResourceName() {
     return "Employee";
+  }
+
+  @Override
+  public Employee getRegisteredObject() {
+    return employee;
   }
 }

@@ -18,6 +18,7 @@ import app.dto.AppointmentInsertDTO;
 import app.dto.AppointmentWithoutNumberDTO;
 import app.dto.VaccinationCenterListDTO;
 import app.dto.VaccineTypeDTO;
+import app.mapper.AppointmentInsertMapper;
 import app.mapper.VaccineTypeMapper;
 import app.service.TimeUtils;
 import pt.isep.lei.esoft.auth.UserSession;
@@ -28,7 +29,7 @@ import pt.isep.lei.esoft.auth.UserSession;
  * @author André Barros <1211299@isep.ipp.pt>
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
-public class ScheduleVaccineController implements IRegisterController {
+public class ScheduleVaccineController implements IRegisterController<AppointmentInsertDTO> {
   private Company company;
   private VaccinationCenterStore vaccinationCenterStore;
   private AppointmentScheduleList appointmentSchedule;
@@ -79,8 +80,7 @@ public class ScheduleVaccineController implements IRegisterController {
    * @return the suggested vaccine type
    */
   public VaccineType getSuggestedVaccineType() {
-    VaccineType vaccineType =
-        vaccineTypeStore.getVaccineTypeByCode(company.getOngoingOutbreakVaccineTypeCode());
+    VaccineType vaccineType = vaccineTypeStore.getVaccineTypeByCode(company.getOngoingOutbreakVaccineTypeCode());
 
     return vaccineType;
   }
@@ -96,8 +96,7 @@ public class ScheduleVaccineController implements IRegisterController {
     return list;
   }
 
-  public List<VaccinationCenterListDTO> getListOfVaccinationCentersWithVaccineType(
-      VaccineType vaccineType) {
+  public List<VaccinationCenterListDTO> getListOfVaccinationCentersWithVaccineType(VaccineType vaccineType) {
 
     return vaccinationCenterStore.getListOfVaccinationCentersWithVaccineType(vaccineType);
   }
@@ -182,5 +181,10 @@ public class ScheduleVaccineController implements IRegisterController {
   public boolean userHasAppointmentForVaccineType(VaccineType vaccineType, String number) {
     SNSUser snsUser = snsUserStore.findSNSUserByNumber(number);
     return snsUser.hasAppointmentForVaccineType(vaccineType, number);
+  }
+
+  @Override
+  public AppointmentInsertDTO getRegisteredObject() {
+    return AppointmentInsertMapper.toDto(appointment);
   }
 }

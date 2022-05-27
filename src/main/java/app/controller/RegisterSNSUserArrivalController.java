@@ -9,15 +9,17 @@ import app.domain.model.WaitingRoom;
 import app.domain.model.list.AppointmentScheduleList;
 import app.domain.model.store.SNSUserStore;
 import app.dto.AppointmentListDTO;
+import app.dto.ArrivalDTO;
 import app.exception.AppointmentNotFoundException;
 import app.mapper.AppointmentListMapper;
+import app.mapper.ArrivalMapper;
 
 /**
  * Register SNS User Arrival Controller.
  * 
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
-public class RegisterSNSUserArrivalController implements IRegisterController {
+public class RegisterSNSUserArrivalController implements IRegisterController<ArrivalDTO> {
   private Company company;
   private VaccinationCenter center;
   private SNSUser snsUser;
@@ -83,4 +85,8 @@ public class RegisterSNSUserArrivalController implements IRegisterController {
     this.appointment = appointments.hasAppointmentToday(this.snsUser.getSnsNumber());
   }
 
+  @Override
+  public ArrivalDTO getRegisteredObject() {
+    return ArrivalMapper.toDto(arrival);
+  }
 }
