@@ -19,6 +19,7 @@ public class SNSUserStoreTest {
   @Before
   public void setUp() {
     Company company = new Company("abc", "12345");
+    authFacade = company.getAuthFacade();
     store = company.getSNSUserStore();
     Date c = new Date();
     snsUser = new SNSUser("123456789ZZ1", "123456789", "name", c, 'M', "+351211111111", "email@email.com", "address");

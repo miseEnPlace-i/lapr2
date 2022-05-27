@@ -42,9 +42,8 @@ public abstract class VaccinationCenter {
    * @param maxVacSlot the vaccination center maximum vaccines per slot
    * @param coordinator the vaccination center coordinator
    */
-  public VaccinationCenter(String name, String address, String email, String phoneNum,
-      String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration,
-      int maxVacSlot, Employee coordinator) {
+  public VaccinationCenter(String name, String address, String email, String phoneNum, String faxNum, String webAddress, String openingHours,
+      String closingHours, int slotDuration, int maxVacSlot, Employee coordinator) {
     setName(name);
     setAddress(address);
     setEmail(email);
@@ -264,11 +263,9 @@ public abstract class VaccinationCenter {
     int hours = Integer.parseInt(timeString[0]);
     int minutes = Integer.parseInt(timeString[1]);
 
-    if (timeString == null || timeString[0].isEmpty() || timeString[1].isEmpty())
-      throw new IllegalArgumentException("Time cannot be null or empty.");
+    if (timeString == null || timeString[0].isEmpty() || timeString[1].isEmpty()) throw new IllegalArgumentException("Time cannot be null or empty.");
 
-    if (hours < 0 || hours >= 24 || minutes < 0 || minutes > 60)
-      throw new IllegalArgumentException("Opening hours is not valid.");
+    if (hours < 0 || hours >= 24 || minutes < 0 || minutes > 60) throw new IllegalArgumentException("Opening hours is not valid.");
   }
 
   /**
@@ -325,8 +322,7 @@ public abstract class VaccinationCenter {
    */
   private void setMaxVacSlot(int maxVacSlot) {
     if (maxVacSlot <= 0) {
-      throw new IllegalArgumentException(
-          "Maximum number of vaccines per slot is not valid. Enter a positive number.");
+      throw new IllegalArgumentException("Maximum number of vaccines per slot is not valid. Enter a positive number.");
     }
     this.maxVacSlot = maxVacSlot;
   }
@@ -369,10 +365,10 @@ public abstract class VaccinationCenter {
     if (obj == null) return false;
     if (obj == this) return false;
 
-    // For now, only email, phone number, fax number should be unique for each Center
+    // name, email & phone number should be unique for each Center
+    if (this.name.equals(center.name)) return true;
     if (this.email.equals(center.email)) return true;
     if (this.phoneNum.equals(center.phoneNum)) return true;
-    if (this.faxNum.equals(center.faxNum)) return true;
 
     return false;
   }
@@ -397,8 +393,7 @@ public abstract class VaccinationCenter {
       return false;
     }
 
-    return ((hoursToCheck.equals(openingHours))
-        || (hoursToCheck.after(openingHours) && hoursToCheck.before(closingHours)));
+    return ((hoursToCheck.equals(openingHours)) || (hoursToCheck.after(openingHours) && hoursToCheck.before(closingHours)));
   }
 
   public boolean hasAvailabilityInSlot(Calendar date) {
