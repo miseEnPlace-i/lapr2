@@ -251,7 +251,7 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
     do {
       accepted = true;
       date = Utils.readDateInFutureFromConsole("Date (dd/MM/yyyy): ");
-      hours = Utils.readLineFromConsoleWithValidation("Hour (HH:MM):", FieldToValidate.HOURS);
+      hours = Utils.readLineFromConsoleWithValidation("Hour (" + center.getOpeningHours() + " - " + center.getClosingHours() + "):", FieldToValidate.HOURS);
 
       if (!ctrl.isCenterOpenAt(center, hours)) {
         accepted = false;
