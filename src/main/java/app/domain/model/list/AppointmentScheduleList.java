@@ -4,11 +4,8 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import app.domain.model.Appointment;
-import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
-import app.dto.AppointmentWithNumberDTO;
-import app.dto.AppointmentWithoutNumberDTO;
 import app.exception.AppointmentNotFoundException;
 
 /**
@@ -17,6 +14,7 @@ import app.exception.AppointmentNotFoundException;
  * @author André Barros <1211299@isep.ipp.pt>
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  * @author Tomás Russo <1211288@isep.ipp.pt>
+ * @author Tomás Lopes <1211289@isep.ip.pt>
  */
 public class AppointmentScheduleList {
   private VaccinationCenter vaccinationCenter;
@@ -25,7 +23,7 @@ public class AppointmentScheduleList {
   private int vaccinesPerSlot = 0;
 
   /**
-   * Constructor for AppointmentStore.
+   * Constructor for AppointmentScheduleList.
    */
   public AppointmentScheduleList(VaccinationCenter vaccinationCenter) {
     this.vaccinationCenter = vaccinationCenter;
@@ -64,25 +62,10 @@ public class AppointmentScheduleList {
    * @param appointmentDTO
    * @return Appointment
    */
-  public Appointment create(AppointmentWithNumberDTO appointmentDTO) {
-    String snsNumber = appointmentDTO.getSnsNumber();
-    Calendar date = appointmentDTO.getDate();
-    VaccinationCenter center = appointmentDTO.getCenter();
-    VaccineType vacType = appointmentDTO.getVaccineType();
-    boolean sms = appointmentDTO.getSmsPermission();
+  public Appointment create(String snsNumber, Calendar date, VaccinationCenter center,
+      VaccineType vaccineType, boolean sms) {
 
-    Appointment appointment = new Appointment(snsNumber, date, center, vacType, sms);
-
-    return appointment;
-  }
-
-  public Appointment create(AppointmentWithoutNumberDTO appointmentDTO, String snsNumber) {
-    Calendar date = appointmentDTO.getDate();
-    VaccinationCenter center = appointmentDTO.getCenter();
-    VaccineType vacType = appointmentDTO.getVaccineType();
-    boolean sms = appointmentDTO.getSmsPermission();
-
-    Appointment appointment = new Appointment(snsNumber, date, center, vacType, sms);
+    Appointment appointment = new Appointment(snsNumber, date, center, vaccineType, sms);
 
     return appointment;
   }
@@ -161,7 +144,7 @@ public class AppointmentScheduleList {
 
       slots[slotIndex][i] = appointment;
     } else {
-      Appointment[][] slots = new Appointment[slotsPerDay][vaccinationCenter.getMaxVacSlot()];
+      Appointment[][] slots = new Appointment[slotsPerDay][vaccinesPerSlot];
 
       slots[slotIndex][0] = appointment;
       appointments.put(key, slots);
