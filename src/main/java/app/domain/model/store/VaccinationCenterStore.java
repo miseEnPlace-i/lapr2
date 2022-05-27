@@ -8,9 +8,9 @@ import app.domain.model.HealthCareCenter;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
 import app.domain.model.WaitingRoom;
-import app.domain.model.dto.VaccinationCenterListDTO;
-import app.mappers.VaccinationCenterMapper;
 import app.domain.shared.Constants;
+import app.dto.VaccinationCenterListDTO;
+import app.mapper.VaccinationCenterMapper;
 
 /**
  * Vaccination Center store
@@ -178,7 +178,7 @@ public class VaccinationCenterStore {
     return returnList;
   }
 
-  public WaitingRoom getWaitingRoom(String phone) {
+  public WaitingRoom getWaitingRoomWithPhone(String phone) {
     return getVaccinationCenterByPhone(phone).getWaitingRoom();
   }
 

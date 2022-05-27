@@ -76,6 +76,24 @@ public class Utils {
     } while (true);
   }
 
+  static public int readPositiveIntegerFromConsole(String prompt) {
+    while (true) {
+      int n = readIntegerFromConsole(prompt);
+
+      if (n > 0) return n;
+      else System.out.println("\nThe value must be positive!");
+    }
+  }
+
+  static public int readNonNegativeIntegerFromConsole(String prompt) {
+    while (true) {
+      int n = readIntegerFromConsole(prompt);
+
+      if (n >= 0) return n;
+      else System.out.println("\nThe value cannot be negative!");
+    }
+  }
+
   static public double readDoubleFromConsole(String prompt) {
     do {
       try {
@@ -104,6 +122,21 @@ public class Utils {
       } catch (ParseException ex) {
         System.out.println("Invalid input! Please try again.\n");
         // Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
+      }
+    } while (true);
+  }
+
+  static public Date readDateInFutureFromConsole(String prompt) {
+    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
+    do {
+      Date date = readDateFromConsole(prompt);
+
+      try {
+        if (date.after(df.parse(df.format(new Date()))) || date.equals(df.parse(df.format(new Date())))) return date;
+        System.out.println("The date must be in the future!\n");
+      } catch (ParseException e) {
+        System.out.println("Invalid input! Please try again.\n");
       }
     } while (true);
   }
@@ -141,12 +174,7 @@ public class Utils {
   }
 
   static public Object selectsObject(List list) {
-    String input;
-    Integer value;
-    do {
-      input = Utils.readLineFromConsole("Type your option: ");
-      value = Integer.valueOf(input);
-    } while (value < 0 || value > list.size());
+    int value = Utils.readIntegerFromConsole("Type your option: ");
 
     if (value == 0) {
       return null;

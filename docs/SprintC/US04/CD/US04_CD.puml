@@ -7,10 +7,14 @@ class Appointment {
   - VaccineType vaccineType
   ---
   + Appointment(appointmentTime, snsUser, vaccineType)
+  + getCenter()
+  + getDate()
+  + getSNSUser()
+  + getVaccineType()
 }
 
 class AppointmentScheduleList {
-  + Appointment findSNSUserAppointment(snsUser)
+  + hasAppointmentToday(snsNumber)
 }
 
 class Arrival {
@@ -21,7 +25,9 @@ class Arrival {
 class Company {
   - String designation
   ---
-  + String getDesignation()
+  + Company(designation)
+  + getSNSUserStore()
+  + getVaccinationCenterStore()
 }
 
 class Employee {
@@ -46,12 +52,20 @@ class EmployeeSession {
   - String vaccinationCenterId
   ---
   + EmployeeSession(employeeName, vaccinationCenterId)
-  + String getVaccinationCenterId()  
+  + String getVaccinationCenterId()
+  + hasVaccinationCenter()
 }
 
 class RegisterSNSUserArrivalUI {}
 
-class RegisterSNSUserArrivalController {}
+class RegisterSNSUserArrivalController {
+  ---
+  + create()
+  + findSNSUserAppointment()
+  + findSNSUserByNumber(snsNumber)
+  + save()
+  + stringifyData()
+}
 
 class SNSUser {
   - String citizenCard
@@ -62,10 +76,14 @@ class SNSUser {
   - String address
   ---
   + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
+  + getName()
+  + getSNSNumber()
+  + hasSNSUser(snsNumber)
 }
 
 class SNSUserStore {
   + SNSUser findSNSUserByNumber(snsNumber)
+  + findSNSUser(snsNumber)
 }
 
 class Receptionist {}
@@ -86,6 +104,9 @@ class VaccinationCenter {
   - coordinator: EMPLOYEE
   ---
   + VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
+  + getAppointmentList()
+  + getName()
+  + getWaitingRoomList()
 }
 
 class VaccinationCenterStore {
@@ -102,6 +123,7 @@ class VaccineType {
   - technology : String
   ---
   + VaccineType(code, description, technology)
+  + getDesignation()
 }
 
 class VaccineTypeStore {
@@ -113,8 +135,6 @@ class VaccineTypeStore {
 class WaitingRoomList {
   + createArrival(arrivalTime, snsUser, appointment)
   + saveArrival(arrival)
-  + removeArrival(arrival)
-  + checkDuplicates(arrival)
 }
 
 
@@ -131,7 +151,7 @@ Company "1" --> "*" Employee : knows
 
 Employee <|-- Receptionist
 
-Receptionist "1" --> "*" Appointment : related to
+Receptionist "1" --> "*" Appointment : schedules
 
 RegisterSNSUserArrivalController ..> Company
 RegisterSNSUserArrivalController ..> EmployeeSession

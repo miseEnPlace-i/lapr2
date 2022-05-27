@@ -104,6 +104,15 @@ public class Employee {
   }
 
   /**
+   * Gets the employee phone number.
+   * 
+   * @return the employee phone number.
+   */
+  public String getPhoneNumber() {
+    return this.phoneNumber;
+  }
+
+  /**
    * Gets the employee email.
    * 
    * @return the employee email

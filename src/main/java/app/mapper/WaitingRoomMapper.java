@@ -1,10 +1,10 @@
-package app.mappers;
+package app.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.Arrival;
 import app.domain.model.WaitingRoom;
-import app.domain.model.dto.ArrivalDTO;
+import app.dto.ArrivalDTO;
 
 public class WaitingRoomMapper {
   // Private constructor to prevent instantiation from other classes

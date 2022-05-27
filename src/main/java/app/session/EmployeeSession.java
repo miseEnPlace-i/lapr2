@@ -1,10 +1,8 @@
 package app.session;
 
-import app.controller.App;
 import app.domain.model.VaccinationCenter;
-import app.domain.model.dto.VaccinationCenterListDTO;
-import app.domain.model.store.VaccinationCenterStore;
-import app.mappers.VaccinationCenterMapper;
+import app.dto.VaccinationCenterListDTO;
+import app.mapper.VaccinationCenterMapper;
 
 public class EmployeeSession {
   private VaccinationCenter vaccinationCenter;

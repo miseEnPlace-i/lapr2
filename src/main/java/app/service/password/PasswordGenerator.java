@@ -1,4 +1,4 @@
-package app.service;
+package app.service.password;
 
 import java.util.Random;
 
@@ -11,7 +11,7 @@ import java.util.Random;
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
-public class PasswordGenerator {
+public class PasswordGenerator implements IPasswordGenerator {
   private final static String UPPER_CASE_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   private final static String LOWER_CASE_LETTERS = "abcdefghijklmnopqrstuvwxyz";
   private final static String DIGITS = "0123456789";
@@ -24,7 +24,7 @@ public class PasswordGenerator {
    * 
    * @return the generated password.
    */
-  public static String generatePwd() {
+  public String generatePwd() {
     // Generate a random string
     // It should have 7 alphanumeric characters, 3 of them being upper case and 2 of
     // them must be digits.
@@ -52,7 +52,6 @@ public class PasswordGenerator {
       sb.setCharAt(i, temp);
     }
 
-    // return sb.toString();
-    return "123456";
+    return sb.toString();
   }
 }

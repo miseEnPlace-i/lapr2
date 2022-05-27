@@ -1,9 +1,9 @@
-package app.mappers;
+package app.mapper;
 
 import app.controller.App;
 import app.domain.model.VaccinationCenter;
-import app.domain.model.dto.VaccinationCenterListDTO;
 import app.domain.model.store.VaccinationCenterStore;
+import app.dto.VaccinationCenterListDTO;
 
 /**
  * Vaccination Center mapper
@@ -16,7 +16,8 @@ public class VaccinationCenterMapper {
 
   public static VaccinationCenterListDTO toDto(VaccinationCenter vaccinationCenter) {
     return new VaccinationCenterListDTO(vaccinationCenter.getName(), vaccinationCenter.getAddress(),
-        vaccinationCenter.getEmail(), vaccinationCenter.getPhone());
+        vaccinationCenter.getEmail(), vaccinationCenter.getPhone(),
+        vaccinationCenter.getOpeningHours(), vaccinationCenter.getClosingHours());
   }
 
   public static VaccinationCenter toModel(VaccinationCenterListDTO vaccinationCenterDTO) {
