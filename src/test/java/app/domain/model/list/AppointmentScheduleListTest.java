@@ -19,9 +19,11 @@ import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.model.store.VaccineTypeStore;
-import app.dto.AppointmentWithNumberDTO;
+import app.dto.AppointmentDto;
+import app.mappers.AppointmentMapper;
 
 public class AppointmentScheduleListTest {
+  private AppointmentMapper mapper;
   private VaccinationCenter vaccinationCenter;
   private AppointmentScheduleList appointments;
   private VaccineType vaccineType;
@@ -64,8 +66,9 @@ public class AppointmentScheduleListTest {
       Calendar appointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 10:00"));
       Calendar nextDay = DateUtils.toCalendar(DateUtils.addDays(sdf.parse("01/01/2022 10:00"), 1));
 
-      AppointmentWithNumberDTO appointmentDTO = new AppointmentWithNumberDTO("123456789",
-          appointmentDate, vaccinationCenter, vaccineType, true);
+
+      AppointmentDto appointmentDTO = mapper.toDto("123456789");
+
 
       Appointment appointment = appointments.create(appointmentDTO);
 

@@ -60,8 +60,8 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
     }
 
     if (userHasAppointmentForVaccineType(vaccineType, this.snsNumber)) {
-      System.out.println("\nYou can not have two appointments for the same vaccine type.\n");
-      return;
+      throw new IllegalArgumentException(
+          "\nYou can not have two appointments for the same vaccine type.\n");
     }
 
     VaccinationCenter vacCenter = null;
@@ -74,8 +74,8 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
       if (ctrl.checkAdministrationProcessForVaccineType(vaccineType, this.snsNumber)) {
         vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
       } else {
-        System.out.println("\nYou are not eligible for any vaccine of this type.\n");
-        return;
+        throw new IllegalArgumentException(
+            "\nYou are not eligible for any vaccine of this type.\n");
       }
     }
 
