@@ -52,7 +52,7 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
     }
 
     if (userHasAppointmentForVaccineType(vaccineType, this.snsNumber)) {
-      throw new IllegalArgumentException("\nYou can not have two appointments for the same vaccine type.\n");
+      throw new IllegalArgumentException("You can not have two appointments for the same vaccine type.");
     }
 
     VaccinationCenter vacCenter = checkUserTakenVaccinesAndSelectsCenter(vaccineType);
@@ -90,17 +90,12 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
   public VaccinationCenter checkUserTakenVaccinesAndSelectsCenter(VaccineType vaccineType) {
     VaccinationCenter center = null;
 
-    if (userHasTakenVaccineType(vaccineType, this.snsNumber)) {
-      // ctrl.getVaccinesByType(vaccineType);
-      // ctrl.checkAdministrationProcessForNextDose();
-      // vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
+    if (isUserEligibleForVaccine(vaccineType, this.snsNumber)) {
+      center = selectVaccinationCenterWithVaccineType(vaccineType);
     } else {
-      if (ctrl.checkAdministrationProcessForVaccineType(vaccineType, this.snsNumber)) {
-        center = selectVaccinationCenterWithVaccineType(vaccineType);
-      } else {
-        throw new IllegalArgumentException("\nYou are not eligible for any vaccine of this type.\n");
-      }
+      throw new IllegalArgumentException("You are not eligible for any vaccine of this type.");
     }
+
     return center;
   }
 

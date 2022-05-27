@@ -50,7 +50,7 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
     }
 
     if (userHasAppointmentForVaccineType(vaccineType)) {
-      throw new IllegalArgumentException("\nYou can not have two appointments for the same vaccine type.\n");
+      throw new IllegalArgumentException("You can not have two appointments for the same vaccine type.");
     }
 
     VaccinationCenter vacCenter = checkUserTakenVaccinesAndSelectsCenter(vaccineType);
@@ -60,31 +60,6 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
     boolean sms = selectSMS();
 
     ctrl.createAppointment(snsUserNumber, appointmentDate, vacCenter, vaccineType, sms);
-  }
-
-  /**
-   * Check that if user has already taken a specific vaccine type, if it is eligible for that administration process and
-   * selects center
-   * 
-   * @param vaccineType the vaccineType requested
-   * 
-   * @return the vaccination center selected
-   */
-  public VaccinationCenter checkUserTakenVaccinesAndSelectsCenter(VaccineType vaccineType) {
-    VaccinationCenter center = null;
-
-    if (userHasTakenVaccineType(vaccineType, this.snsUserNumber)) {
-      // ctrl.getVaccinesByType(vaccineType);
-      // ctrl.checkAdministrationProcessForNextDose();
-      // vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
-    } else {
-      if (ctrl.checkAdministrationProcessForVaccineType(vaccineType, this.snsUserNumber)) {
-        center = selectVaccinationCenterWithVaccineType(vaccineType);
-      } else {
-        throw new IllegalArgumentException("\nYou are not eligible for any vaccine of this type.\n");
-      }
-    }
-    return center;
   }
 
   private boolean showSuggestedVaccineType(VaccineType vt) {
@@ -133,6 +108,26 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
     } while (!accepted);
 
     return null;
+  }
+
+  /**
+   * Check that if user has already taken a specific vaccine type, if it is eligible for that administration process and
+   * selects center
+   * 
+   * @param vaccineType the vaccineType requested
+   * 
+   * @return the vaccination center selected
+   */
+  public VaccinationCenter checkUserTakenVaccinesAndSelectsCenter(VaccineType vaccineType) {
+    VaccinationCenter center = null;
+
+    if (isUserEligibleForVaccine(vaccineType, this.snsUserNumber)) {
+      center = selectVaccinationCenterWithVaccineType(vaccineType);
+    } else {
+      throw new IllegalArgumentException("You are not eligible for any vaccine of this type.");
+    }
+
+    return center;
   }
 
   /**
