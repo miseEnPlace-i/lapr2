@@ -7,6 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.Calendar;
 import org.junit.Test;
 
+/**
+ * @author Tomás Lopes <1211289@isep.ipp.pt>
+ */
 public class TimeTest {
   @Test(expected = IllegalArgumentException.class)
   public void ensureEmptyIsNotAllowed() {
