@@ -12,7 +12,7 @@ public class PasswordGeneratorFactory {
     Properties props = PropertiesUtils.getProperties();
     boolean isTest = props.getProperty(Constants.PARAMS_TEST_ENVIRONMENT).equals("true") ? true : false;
 
-    String generatorName = isTest ? "app.service.TestGenerator" : "app.service.PasswordGenerator";
+    String generatorName = isTest ? "app.service.password.TestGenerator" : "app.service.password.PasswordGenerator";
 
     try {
       Class<?> generatorClass = Class.forName(generatorName);
