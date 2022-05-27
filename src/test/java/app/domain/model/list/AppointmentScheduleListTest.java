@@ -9,7 +9,6 @@ import java.util.Calendar;
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Before;
 import org.junit.Test;
-import app.controller.App;
 import app.domain.model.Appointment;
 import app.domain.model.Company;
 import app.domain.model.Employee;
@@ -20,8 +19,7 @@ import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.model.store.VaccineTypeStore;
-import app.domain.shared.Constants;
-import app.dto.AppointmentWithNumberDTO;
+import app.dto.AppointmentInsertDTO;
 
 public class AppointmentScheduleListTest {
   private VaccinationCenter vaccinationCenter;
@@ -30,7 +28,7 @@ public class AppointmentScheduleListTest {
 
   @Before
   public void setup() {
-    Company company = new Company("abc", "12345", Constants.PARAMS_SENDER);
+    Company company = new Company("abc", "12345");
     VaccinationCenterStore centerStore = company.getVaccinationCenterStore();
     EmployeeStore employeeStore = company.getEmployeeStore();
     EmployeeRoleStore employeeRoleStore = company.getEmployeeRoleStore();
@@ -44,12 +42,10 @@ public class AppointmentScheduleListTest {
 
     employeeRoleStore.addEmployeeRole("COORDINATOR", "COORDINATOR");
 
-    Employee coordinator = employeeStore.createEmployee("name", "+35122345678", "email@email.com",
-        "address", "000000000ZZ4", "COORDINATOR");
+    Employee coordinator = employeeStore.createEmployee("name", "+35122345678", "email@email.com", "address", "000000000ZZ4", "COORDINATOR");
 
-    vaccinationCenter = centerStore.createHealthCareCenter("name", "address", "email@emai.com",
-        "+351212345678", "+351212345678", "https://www.wedb.com", "10:00", "11:00", 5, 5,
-        coordinator, "ages", "ags");
+    vaccinationCenter = centerStore.createHealthCareCenter("name", "address", "email@emai.com", "+351212345678", "+351212345678", "https://www.wedb.com",
+        "10:00", "11:00", 5, 5, coordinator, "ages", "ags");
     centerStore.saveVaccinationCenter(vaccinationCenter);
     appointments = vaccinationCenter.getAppointmentList();
   }
@@ -66,10 +62,9 @@ public class AppointmentScheduleListTest {
       Calendar appointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 10:00"));
       Calendar nextDay = DateUtils.toCalendar(DateUtils.addDays(sdf.parse("01/01/2022 10:00"), 1));
 
-      AppointmentWithNumberDTO appointmentDTO = new AppointmentWithNumberDTO("123456789",
-          appointmentDate, vaccinationCenter, vaccineType, true);
+      AppointmentInsertDTO AppointmentInsertDTO = new AppointmentInsertDTO("123456789", appointmentDate, vaccinationCenter, vaccineType, true);
 
-      Appointment appointment = appointments.create(appointmentDTO);
+      Appointment appointment = appointments.create(AppointmentInsertDTO);
 
       assertNotNull(appointment);
 
@@ -90,10 +85,9 @@ public class AppointmentScheduleListTest {
     try {
       Calendar appointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 10:00"));
 
-      AppointmentWithNumberDTO appointmentDTO = new AppointmentWithNumberDTO("123456789",
-          appointmentDate, vaccinationCenter, vaccineType, true);
+      AppointmentInsertDTO AppointmentInsertDTO = new AppointmentInsertDTO("123456789", appointmentDate, vaccinationCenter, vaccineType, true);
 
-      Appointment appointment = appointments.create(appointmentDTO);
+      Appointment appointment = appointments.create(AppointmentInsertDTO);
 
       appointments.saveAppointment(appointment);
 
@@ -113,24 +107,21 @@ public class AppointmentScheduleListTest {
       Calendar secondAppointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 10:05"));
       Calendar thirdAppointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 10:30"));
 
-      AppointmentWithNumberDTO appointmentDTO = new AppointmentWithNumberDTO("123456789",
-          appointmentDate, vaccinationCenter, vaccineType, true);
+      AppointmentInsertDTO AppointmentInsertDTO = new AppointmentInsertDTO("123456789", appointmentDate, vaccinationCenter, vaccineType, true);
 
-      Appointment appointment = appointments.create(appointmentDTO);
+      Appointment appointment = appointments.create(AppointmentInsertDTO);
 
       appointments.saveAppointment(appointment);
 
-      AppointmentWithNumberDTO secondAppointmentDTO = new AppointmentWithNumberDTO("111111111",
-          secondAppointmentDate, vaccinationCenter, vaccineType, true);
+      AppointmentInsertDTO secondAppointmentInsertDTO = new AppointmentInsertDTO("111111111", secondAppointmentDate, vaccinationCenter, vaccineType, true);
 
-      Appointment secondAppointment = appointments.create(secondAppointmentDTO);
+      Appointment secondAppointment = appointments.create(secondAppointmentInsertDTO);
 
       appointments.saveAppointment(secondAppointment);
 
-      AppointmentWithNumberDTO thirdAppointmentDTO = new AppointmentWithNumberDTO("999999999",
-          thirdAppointmentDate, vaccinationCenter, vaccineType, true);
+      AppointmentInsertDTO thirdAppointmentInsertDTO = new AppointmentInsertDTO("999999999", thirdAppointmentDate, vaccinationCenter, vaccineType, true);
 
-      Appointment thirdAppointment = appointments.create(thirdAppointmentDTO);
+      Appointment thirdAppointment = appointments.create(thirdAppointmentInsertDTO);
 
       appointments.saveAppointment(thirdAppointment);
 
@@ -150,17 +141,15 @@ public class AppointmentScheduleListTest {
       Calendar appointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 10:00"));
       Calendar secondAppointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 10:00"));
 
-      AppointmentWithNumberDTO appointmentDTO = new AppointmentWithNumberDTO("123456789",
-          appointmentDate, vaccinationCenter, vaccineType, true);
+      AppointmentInsertDTO AppointmentInsertDTO = new AppointmentInsertDTO("123456789", appointmentDate, vaccinationCenter, vaccineType, true);
 
-      Appointment appointment = appointments.create(appointmentDTO);
+      Appointment appointment = appointments.create(AppointmentInsertDTO);
 
       appointments.saveAppointment(appointment);
 
-      AppointmentWithNumberDTO secondAppointmentDTO = new AppointmentWithNumberDTO("111111111",
-          secondAppointmentDate, vaccinationCenter, vaccineType, true);
+      AppointmentInsertDTO secondAppointmentInsertDTO = new AppointmentInsertDTO("111111111", secondAppointmentDate, vaccinationCenter, vaccineType, true);
 
-      Appointment secondAppointment = appointments.create(secondAppointmentDTO);
+      Appointment secondAppointment = appointments.create(secondAppointmentInsertDTO);
 
       appointments.saveAppointment(secondAppointment);
 
@@ -178,10 +167,9 @@ public class AppointmentScheduleListTest {
     try {
       Calendar appointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 10:58"));
 
-      AppointmentWithNumberDTO appointmentDTO = new AppointmentWithNumberDTO("123456789",
-          appointmentDate, vaccinationCenter, vaccineType, true);
+      AppointmentInsertDTO AppointmentInsertDTO = new AppointmentInsertDTO("123456789", appointmentDate, vaccinationCenter, vaccineType, true);
 
-      Appointment appointment = appointments.create(appointmentDTO);
+      Appointment appointment = appointments.create(AppointmentInsertDTO);
 
       appointments.saveAppointment(appointment);
 
@@ -198,10 +186,9 @@ public class AppointmentScheduleListTest {
     try {
       Calendar appointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 10:55"));
 
-      AppointmentWithNumberDTO appointmentDTO = new AppointmentWithNumberDTO("123456789",
-          appointmentDate, vaccinationCenter, vaccineType, true);
+      AppointmentInsertDTO AppointmentInsertDTO = new AppointmentInsertDTO("123456789", appointmentDate, vaccinationCenter, vaccineType, true);
 
-      Appointment appointment = appointments.create(appointmentDTO);
+      Appointment appointment = appointments.create(AppointmentInsertDTO);
 
       appointments.saveAppointment(appointment);
 
@@ -218,10 +205,9 @@ public class AppointmentScheduleListTest {
     try {
       Calendar appointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 10:00"));
 
-      AppointmentWithNumberDTO appointmentDTO = new AppointmentWithNumberDTO("123456789",
-          appointmentDate, vaccinationCenter, vaccineType, true);
+      AppointmentInsertDTO AppointmentInsertDTO = new AppointmentInsertDTO("123456789", appointmentDate, vaccinationCenter, vaccineType, true);
 
-      Appointment appointment = appointments.create(appointmentDTO);
+      Appointment appointment = appointments.create(AppointmentInsertDTO);
 
       appointments.saveAppointment(appointment);
       appointments.saveAppointment(appointment);
@@ -246,10 +232,9 @@ public class AppointmentScheduleListTest {
     try {
       Calendar appointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 10:00"));
 
-      AppointmentWithNumberDTO appointmentDTO = new AppointmentWithNumberDTO("123456789",
-          appointmentDate, vaccinationCenter, vaccineType, true);
+      AppointmentInsertDTO AppointmentInsertDTO = new AppointmentInsertDTO("123456789", appointmentDate, vaccinationCenter, vaccineType, true);
 
-      Appointment appointment = appointments.create(appointmentDTO);
+      Appointment appointment = appointments.create(AppointmentInsertDTO);
 
       appointments.saveAppointment(appointment);
       appointments.saveAppointment(appointment);
@@ -267,10 +252,9 @@ public class AppointmentScheduleListTest {
     try {
       Calendar appointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 08:00"));
 
-      AppointmentWithNumberDTO appointmentDTO = new AppointmentWithNumberDTO("123456789",
-          appointmentDate, vaccinationCenter, vaccineType, true);
+      AppointmentInsertDTO AppointmentInsertDTO = new AppointmentInsertDTO("123456789", appointmentDate, vaccinationCenter, vaccineType, true);
 
-      Appointment appointment = appointments.create(appointmentDTO);
+      Appointment appointment = appointments.create(AppointmentInsertDTO);
 
       appointments.saveAppointment(appointment);
     } catch (ParseException e) {
@@ -283,10 +267,9 @@ public class AppointmentScheduleListTest {
     try {
       Calendar appointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 11:30"));
 
-      AppointmentWithNumberDTO appointmentDTO = new AppointmentWithNumberDTO("123456789",
-          appointmentDate, vaccinationCenter, vaccineType, true);
+      AppointmentInsertDTO AppointmentInsertDTO = new AppointmentInsertDTO("123456789", appointmentDate, vaccinationCenter, vaccineType, true);
 
-      Appointment appointment = appointments.create(appointmentDTO);
+      Appointment appointment = appointments.create(AppointmentInsertDTO);
 
       appointments.saveAppointment(appointment);
     } catch (ParseException e) {

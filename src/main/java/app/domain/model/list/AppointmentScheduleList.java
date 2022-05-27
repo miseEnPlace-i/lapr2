@@ -3,10 +3,12 @@ package app.domain.model.list;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import app.controller.App;
 import app.domain.model.Appointment;
+import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
-import app.dto.AppointmentWithNumberDTO;
+import app.dto.AppointmentInsertDTO;
 import app.dto.AppointmentWithoutNumberDTO;
 import app.exception.AppointmentNotFoundException;
 
@@ -15,6 +17,7 @@ import app.exception.AppointmentNotFoundException;
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
+ * @author Tomás Russo <1211288@isep.ipp.pt>
  */
 public class AppointmentScheduleList {
   private VaccinationCenter vaccinationCenter;
@@ -37,10 +40,8 @@ public class AppointmentScheduleList {
     String[] openingHours = center.getOpeningHours().split(":");
     String[] closingHours = center.getClosingHours().split(":");
 
-    int openingMinutesOfDay =
-        Integer.parseInt(openingHours[0]) * 60 + Integer.parseInt(openingHours[1]);
-    int closingMinutesOfDay =
-        Integer.parseInt(closingHours[0]) * 60 + Integer.parseInt(closingHours[1]);
+    int openingMinutesOfDay = Integer.parseInt(openingHours[0]) * 60 + Integer.parseInt(openingHours[1]);
+    int closingMinutesOfDay = Integer.parseInt(closingHours[0]) * 60 + Integer.parseInt(closingHours[1]);
 
     return ((closingMinutesOfDay - openingMinutesOfDay) / center.getSlotDuration());
   }
@@ -62,14 +63,17 @@ public class AppointmentScheduleList {
    * @param appointmentDTO
    * @return Appointment
    */
-  public Appointment create(AppointmentWithNumberDTO appointmentDTO) {
+  public Appointment create(AppointmentInsertDTO appointmentDTO) {
     String snsNumber = appointmentDTO.getSnsNumber();
     Calendar date = appointmentDTO.getDate();
     VaccinationCenter center = appointmentDTO.getCenter();
     VaccineType vacType = appointmentDTO.getVaccineType();
     boolean sms = appointmentDTO.getSmsPermission();
 
-    Appointment appointment = new Appointment(snsNumber, date, center, vacType, sms);
+    // choura
+    SNSUser u = App.getInstance().getCompany().getSNSUserStore().findSNSUserByNumber(snsNumber);
+
+    Appointment appointment = new Appointment(u, date, center, vacType, sms);
 
     return appointment;
   }
@@ -80,7 +84,10 @@ public class AppointmentScheduleList {
     VaccineType vacType = appointmentDTO.getVaccineType();
     boolean sms = appointmentDTO.getSmsPermission();
 
-    Appointment appointment = new Appointment(snsNumber, date, center, vacType, sms);
+    // outra choura
+    SNSUser u = App.getInstance().getCompany().getSNSUserStore().findSNSUserByNumber(snsNumber);
+
+    Appointment appointment = new Appointment(u, date, center, vacType, sms);
 
     return appointment;
   }
@@ -89,18 +96,28 @@ public class AppointmentScheduleList {
     String[] openingHours = vaccinationCenter.getOpeningHours().split(":");
     String[] closingHours = vaccinationCenter.getClosingHours().split(":");
 
-    int openingMinutesOfDay =
-        Integer.parseInt(openingHours[0]) * 60 + Integer.parseInt(openingHours[1]);
-    int closingMinutesOfDay =
-        Integer.parseInt(closingHours[0]) * 60 + Integer.parseInt(closingHours[1]);
+    int openingMinutesOfDay = Integer.parseInt(openingHours[0]) * 60 + Integer.parseInt(openingHours[1]);
+    int closingMinutesOfDay = Integer.parseInt(closingHours[0]) * 60 + Integer.parseInt(closingHours[1]);
 
     int slotDuration = vaccinationCenter.getSlotDuration();
-    int scheduleMinutesOfDay =
-        (date.get(Calendar.HOUR_OF_DAY) * 60 + date.get(Calendar.MINUTE)) - openingMinutesOfDay;
+    int scheduleMinutesOfDay = (date.get(Calendar.HOUR_OF_DAY) * 60 + date.get(Calendar.MINUTE)) - openingMinutesOfDay;
 
-    if (isValidSchedule(scheduleMinutesOfDay, openingMinutesOfDay, closingMinutesOfDay))
-      return scheduleMinutesOfDay / slotDuration;
+    if (isValidSchedule(scheduleMinutesOfDay, openingMinutesOfDay, closingMinutesOfDay)) return scheduleMinutesOfDay / slotDuration;
     return -1;
+  }
+
+  public String getRealClosingHours() {
+    String[] openingHours = vaccinationCenter.getOpeningHours().split(":");
+    int openingMinutesOfDay =
+        Integer.parseInt(openingHours[0]) * 60 + Integer.parseInt(openingHours[1]);
+
+    int realClosingMinutesOfDay = openingMinutesOfDay
+        + (calculateNOfSlotsPerDay(vaccinationCenter) * vaccinationCenter.getSlotDuration());
+
+    int hours = realClosingMinutesOfDay / 60;
+    int minutes = realClosingMinutesOfDay % 60;
+
+    return String.valueOf(hours) + ":" + String.valueOf(minutes);
   }
 
   private boolean isValidSchedule(int scheduledMinutesOfDay, int openingMinutesOfDay,
@@ -108,8 +125,7 @@ public class AppointmentScheduleList {
     if (scheduledMinutesOfDay < 0) return false;
 
     // subtract slot duration because the last slot cannot be used
-    int workingHours =
-        closingMinutesOfDay - openingMinutesOfDay - vaccinationCenter.getSlotDuration();
+    int workingHours = closingMinutesOfDay - openingMinutesOfDay;
 
     if (scheduledMinutesOfDay > workingHours) return false;
     return true;
@@ -155,6 +171,22 @@ public class AppointmentScheduleList {
     listVaccinationSchedule(getAppointmentScheduleForDay(key));
   }
 
+  public boolean checkSlotAvailability(Calendar date) {
+    Calendar key = generateKeyFromDate(date);
+    int slotIndex = getAppointmentSlotIndex(date);
+
+    if (appointments.containsKey(key)) {
+      Appointment[][] slots = appointments.get(key);
+
+      int i = getAvailableIndexInSlot(slots[slotIndex]);
+
+      if (i == -1) return false;
+      else return true;
+    } else {
+      return true;
+    }
+  }
+
   public Appointment[][] getAppointmentScheduleForDay(Calendar date) {
     return appointments.get(generateKeyFromDate(date));
   }
@@ -177,6 +209,7 @@ public class AppointmentScheduleList {
     return key;
   }
 
+  // Deprecated
   private boolean hasAppointmentInDay(Appointment[][] appointments, String snsNumber) {
     for (int i = 0; i < appointments.length; i++)
       for (int j = 0; j < appointments[i].length; j++)
@@ -190,10 +223,9 @@ public class AppointmentScheduleList {
     Calendar key = this.generateKeyFromDate(Calendar.getInstance());
     Appointment[][] appointments = this.appointments.get(key);
 
-    for (int i = 0; i < appointments.length; i++)
+    if (appointments != null) for (int i = 0; i < appointments.length; i++)
       for (int j = 0; j < appointments[i].length; j++)
-        if (appointments[i][j] != null && appointments[i][j].hasSnsNumber(snsNumber))
-          return appointments[i][j];
+        if (appointments[i][j] != null && appointments[i][j].hasSnsNumber(snsNumber)) return appointments[i][j];
 
     throw new AppointmentNotFoundException("This SNS User does not have an appointment for today.");
   }

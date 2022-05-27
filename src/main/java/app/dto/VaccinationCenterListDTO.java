@@ -5,12 +5,17 @@ public class VaccinationCenterListDTO {
   private String address;
   private String email;
   private String phone;
+  private String openingHours;
+  private String closingHours;
 
-  public VaccinationCenterListDTO(String name, String address, String email, String phone) {
+  public VaccinationCenterListDTO(String name, String address, String email, String phone,
+      String openingHours, String closingHours) {
     this.name = name;
     this.address = address;
     this.email = email;
     this.phone = phone;
+    this.openingHours = openingHours;
+    this.closingHours = closingHours;
   }
 
   public String getName() {
@@ -29,6 +34,14 @@ public class VaccinationCenterListDTO {
     return phone;
   }
 
+  public String getOpeningHours() {
+    return openingHours;
+  }
+
+  public String getClosingHours() {
+    return closingHours;
+  }
+
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -37,6 +50,7 @@ public class VaccinationCenterListDTO {
     sb.append(String.format("Address: %s\n", this.address));
     sb.append(String.format("Email: %s\n", this.email));
     sb.append(String.format("Phone number: %s\n", this.phone));
+    sb.append(String.format("Schedule: %s - %s\n", this.openingHours, this.closingHours));
 
     return sb.toString();
   }

@@ -2,6 +2,7 @@ package app.domain.model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import app.domain.model.list.AppointmentScheduleList;
 import app.service.FormatVerifier;
@@ -409,20 +410,17 @@ public class VaccinationCenter {
 
     try {
       openingHours = sdf.parse(this.openingHours);
-      closingHours = sdf.parse(this.closingHours);
+      closingHours = sdf.parse(this.appointmentList.getRealClosingHours());
       hoursToCheck = sdf.parse(hours);
     } catch (ParseException ex) {
       return false;
     }
 
-    return ((hoursToCheck.equals(openingHours)) || (hoursToCheck.equals(closingHours))
+    return ((hoursToCheck.equals(openingHours))
         || (hoursToCheck.after(openingHours) && hoursToCheck.before(closingHours)));
   }
 
-  public boolean hasAvailabilityInSlot(String hours) {
-    // TODO
-    //
-
-    return false;
+  public boolean hasAvailabilityInSlot(Calendar date) {
+    return appointmentList.checkSlotAvailability(date);
   }
 }

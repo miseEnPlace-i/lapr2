@@ -4,10 +4,8 @@ import static org.junit.Assert.assertEquals;
 import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
-import app.controller.App;
 import app.domain.model.Company;
 import app.domain.model.SNSUser;
-import app.domain.shared.Constants;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
 /**
@@ -20,11 +18,10 @@ public class SNSUserStoreTest {
 
   @Before
   public void setUp() {
-    Company company = new Company("abc", "12345", Constants.PARAMS_SENDER);
+    Company company = new Company("abc", "12345");
     store = company.getSNSUserStore();
     Date c = new Date();
-    snsUser = new SNSUser("123456789ZZ1", "123456789", "name", c, 'M', "+351211111111",
-        "email@email.com", "address");
+    snsUser = new SNSUser("123456789ZZ1", "123456789", "name", c, 'M', "+351211111111", "email@email.com", "address");
   }
 
   /**

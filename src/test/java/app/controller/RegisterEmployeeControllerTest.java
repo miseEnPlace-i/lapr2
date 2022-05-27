@@ -6,11 +6,10 @@ import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.Company;
 import app.domain.model.store.EmployeeRoleStore;
-import app.domain.shared.Constants;
 import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
 public class RegisterEmployeeControllerTest {
-  Company company = new Company("designation", "12345", Constants.PARAMS_SENDER);
+  Company company = new Company("designation", "12345");
   private RegisterEmployeeController ctrl = new RegisterEmployeeController(company);
 
   @Before
@@ -42,8 +41,7 @@ public class RegisterEmployeeControllerTest {
   @Test
   public void ensureStringifyDataWorking() {
     String empString = getEmployeeTestString();
-    ctrl.create("name", "address", "+351913456789", "example@gmail.com", "000000000ZZ4",
-        "COORDINATOR");
+    ctrl.create("name", "address", "+351913456789", "example@gmail.com", "000000000ZZ4", "COORDINATOR");
     ctrl.save();
     assertEquals(ctrl.stringifyData(), empString);
   }

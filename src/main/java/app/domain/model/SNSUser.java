@@ -72,7 +72,7 @@ public class SNSUser {
     this.email = email;
     this.address = address;
 
-    this.userHealthData = new HealthData();
+    this.userHealthData = new HealthData(this);
   }
 
   public SNSUser(SNSUserDTO snsUserDTO) {
@@ -129,6 +129,11 @@ public class SNSUser {
 
   public Vaccine getLastTakenVaccineFromType(VaccineType vaccineType) {
     return userHealthData.getLastVaccineTakenWithType(vaccineType);
+  }
+
+  public boolean hasTakenAnyVaccineFromVaccineType(VaccineType vaccineType) {
+    if (getLastTakenVaccineFromType(vaccineType) == null) return false;
+    else return true;
   }
 
   @Override
@@ -220,5 +225,17 @@ public class SNSUser {
     sb.append(String.format("Address: %s\n", this.address));
 
     return sb.toString();
+  }
+
+  public void addAppointmentToList(Appointment appointment) {
+    this.userHealthData.addAppointment(appointment);
+  }
+
+  public boolean hasAppointmentForVaccineType(VaccineType vaccineType) {
+    return this.userHealthData.hasAppointmentForVaccineType(vaccineType);
+  }
+
+  public boolean hasAppointmentForVaccineType(VaccineType vaccineType, String number) {
+    return this.userHealthData.hasAppointmentForVaccineType(vaccineType);
   }
 }

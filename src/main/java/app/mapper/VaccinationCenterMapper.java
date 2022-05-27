@@ -16,7 +16,8 @@ public class VaccinationCenterMapper {
 
   public static VaccinationCenterListDTO toDto(VaccinationCenter vaccinationCenter) {
     return new VaccinationCenterListDTO(vaccinationCenter.getName(), vaccinationCenter.getAddress(),
-        vaccinationCenter.getEmail(), vaccinationCenter.getPhone());
+        vaccinationCenter.getEmail(), vaccinationCenter.getPhone(),
+        vaccinationCenter.getOpeningHours(), vaccinationCenter.getClosingHours());
   }
 
   public static VaccinationCenter toModel(VaccinationCenterListDTO vaccinationCenterDTO) {

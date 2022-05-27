@@ -5,15 +5,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import app.domain.model.SNSUser;
+import app.domain.shared.Constants;
 import app.dto.SNSUserDTO;
 import app.dto.SNSUserRegisterInfoDTO;
 import app.dto.UserNotificationDTO;
 import app.mapper.SNSUserMapper;
 import app.mapper.SNSUserRegisterInfoMapper;
 import app.mapper.UserNotificationMapper;
-import app.domain.shared.Constants;
-import app.service.PasswordGenerator;
+import app.service.password.IPasswordGenerator;
+import app.service.password.PasswordGeneratorFactory;
 import app.service.sender.ISender;
+import app.service.sender.SenderFactory;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
 /**
@@ -27,15 +29,12 @@ public class SNSUserStore {
   // Auth Facade
   private AuthFacade authFacade;
 
-  private ISender sender;
-
   /**
    * Constructor for SNSUserStore.
    */
-  public SNSUserStore(AuthFacade authFacade, ISender sender) {
+  public SNSUserStore(AuthFacade authFacade) {
     this.snsUsers = new ArrayList<SNSUser>();
     this.authFacade = authFacade;
-    this.sender = sender;
   }
 
   /**
@@ -51,19 +50,17 @@ public class SNSUserStore {
    * @param address SNS User address
    * @return SNSUser
    */
-  public SNSUser createSNSUser(String citizenCard, String snsNumber, String name, Date birthDay,
-      char gender, String phoneNumber, String email, String address) {
-    SNSUser snsUser =
-        new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
+  public SNSUser createSNSUser(String citizenCard, String snsNumber, String name, Date birthDay, char gender, String phoneNumber, String email,
+      String address) {
+    SNSUser snsUser = new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
 
     return snsUser;
   }
 
 
-  //creates SNS User instance.
+  // creates SNS User instance.
   public SNSUser createSNSUser(SNSUserDTO snsUserDto) {
-    SNSUser snsUser =
-        new SNSUser(snsUserDto);
+    SNSUser snsUser = new SNSUser(snsUserDto);
 
     return snsUser;
   }
@@ -97,18 +94,20 @@ public class SNSUserStore {
 
     String email = snsUser.getEmail();
     String phoneNumber = snsUser.getPhoneNumber();
-    String pwd = PasswordGenerator.generatePwd();
+    IPasswordGenerator pwdGenerator = PasswordGeneratorFactory.getPasswordGenerator();
+    String pwd = pwdGenerator.generatePwd();
 
     authFacade.addUserWithRole(snsUser.getName(), email, pwd, Constants.ROLE_SNS_USER);
 
     SNSUserRegisterInfoDTO dto = SNSUserRegisterInfoMapper.toDto(snsUser);
 
     String message = String.format("A new user has been created.\nEmail: %s\nPassword: %s", email, pwd);
-    UserNotificationDTO notiDto = UserNotificationMapper.toDto(email, phoneNumber, message);
+    UserNotificationDTO notificationDto = UserNotificationMapper.toDto(email, phoneNumber, message);
+    ISender sender = SenderFactory.getSender();
 
     // send notification with the password
     try {
-      this.sender.send(notiDto);
+      sender.send(notificationDto);
     } catch (Exception e) {
       System.out.println(e.getMessage());
       e.printStackTrace();
@@ -182,7 +181,7 @@ public class SNSUserStore {
     return snsUsers.size();
   }
 
-  public List<SNSUserRegisterInfoDTO> registerListOfUsers(List<String[]> userDataList) throws ParseException{
+  public List<SNSUserRegisterInfoDTO> registerListOfUsers(List<String[]> userDataList) throws ParseException {
     List<SNSUserRegisterInfoDTO> userRegisterInfoList = new ArrayList<SNSUserRegisterInfoDTO>();
 
     for (int i = 0; i < userDataList.size(); i++) {
