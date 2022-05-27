@@ -37,6 +37,16 @@ public class TimeTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
+  public void ensureStringWithSpacesInMinutesIsNotAllowed() {
+    new Time("10: ");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void ensureStringWithSpacesInHoursIsNotAllowed() {
+    new Time(" :10");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
   public void ensureMalformedStringIsNotAllowed() {
     new Time("1000");
   }
@@ -130,6 +140,13 @@ public class TimeTest {
   }
 
   @Test
+  public void ensureIsBeforeIsFalseWhenDateIsAfter() {
+    Time time1 = new Time(10, 59);
+    Time time2 = new Time(23, 59);
+    assertFalse(time2.isBefore(time1));
+  }
+
+  @Test
   public void ensureIsAfterIsFalseWhenDatesAreEqual() {
     Time time = new Time(23, 59);
     assertFalse(time.isAfter(time));
@@ -140,6 +157,12 @@ public class TimeTest {
     Time time1 = new Time(0, 0);
     Time time2 = new Time(0, 0);
     assertTrue(time2.equals(time1));
+  }
+
+  @Test
+  public void ensureEqualIsWorkingWithDifferentClasses() {
+    Time time = new Time(0, 0);
+    assertFalse(time.equals("00:00"));
   }
 
   @Test
@@ -167,6 +190,24 @@ public class TimeTest {
     Time time3 = new Time(0, 59);
 
     assertTrue(time2.isBetween(time1, time3));
+  }
+
+  @Test
+  public void ensureIsBetweenIsWorkingWhenDateIsAfter() {
+    Time time1 = new Time(0, 0);
+    Time time2 = new Time(0, 30);
+    Time time3 = new Time(0, 59);
+
+    assertFalse(time3.isBetween(time1, time2));
+  }
+
+  @Test
+  public void ensureIsBetweenIsWorkingWhenDateIsBefore() {
+    Time time1 = new Time(0, 0);
+    Time time2 = new Time(0, 30);
+    Time time3 = new Time(0, 59);
+
+    assertFalse(time1.isBetween(time2, time3));
   }
 
   @Test
