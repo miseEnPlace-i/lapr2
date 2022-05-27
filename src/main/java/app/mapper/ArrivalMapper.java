@@ -13,7 +13,7 @@ public class ArrivalMapper {
   public static ArrivalDTO toDto(Arrival arrival) {
     SNSUser user = arrival.getSNSUser();
 
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     String formattedDate = sdf.format(arrival.getArrivalTime().getTime());
 
     return new ArrivalDTO(user.getName(), user.getGender(), user.getBirthDay(), user.getSnsNumber(), user.getPhoneNumber(), formattedDate);
