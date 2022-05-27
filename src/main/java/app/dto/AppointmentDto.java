@@ -1,21 +1,22 @@
 package app.dto;
 
-import java.util.Calendar;
-import app.domain.model.VaccinationCenter;
-import app.domain.model.VaccineType;
-
+/**
+ * AppointmentDto from domain to UI
+ * 
+ * @author André Barros <1211299@isep.ipp.pt>
+ */
 public class AppointmentDto {
   private String snsNumber;
-  private Calendar date;
-  private VaccinationCenter center;
-  private VaccineType vaccineType;
-  private boolean smsPermission;
+  private String date;
+  private String centerName;
+  private String vaccineType;
+  private String smsPermission;
 
-  public AppointmentDto(String snsNumber, Calendar date, VaccinationCenter center,
-      VaccineType vaccineType, boolean sms) {
+  public AppointmentDto(String snsNumber, String date, String centerName, String vaccineType,
+      String sms) {
     this.snsNumber = snsNumber;
     this.date = date;
-    this.center = center;
+    this.centerName = centerName;
     this.vaccineType = vaccineType;
     this.smsPermission = sms;
   }
@@ -30,28 +31,42 @@ public class AppointmentDto {
   /**
    * @return Date return the date
    */
-  public Calendar getDate() {
+  public String getDate() {
     return date;
   }
 
   /**
    * @return VaccinationCenter return the center
    */
-  public VaccinationCenter getCenter() {
-    return center;
+  public String getCenter() {
+    return centerName;
   }
 
   /**
    * @return VaccineType return the vaccineType
    */
-  public VaccineType getVaccineType() {
+  public String getVaccineType() {
     return vaccineType;
   }
 
   /**
    * @return boolean return the sms
    */
-  public boolean getSmsPermission() {
+  public String getSmsPermission() {
     return smsPermission;
+  }
+
+  @Override
+  public String toString() {
+
+    StringBuilder sb = new StringBuilder();
+    sb.append("Appointment: \n");
+    sb.append("\nSNS Number: " + getSnsNumber());
+    sb.append("\nDate: " + getDate());
+    sb.append("\nVaccination Center: " + getCenter());
+    sb.append("\nVaccine Type: " + getVaccineType());
+    sb.append("\nSend SMS: " + getSmsPermission());
+
+    return sb.toString();
   }
 }
