@@ -19,9 +19,12 @@ public class Constants {
   public static final String PARAMS_FILENAME = "config.properties";
   public static final String PARAMS_COMPANY_DESIGNATION = "Company.Designation";
 
-  public static final String PARAMS_ONGOING_OUTBREAK_VACCINE_TYPE_CODE =
-      "OngoingOutbreak.VaccineTypeCode";
+  public static final String PARAMS_ONGOING_OUTBREAK_VACCINE_TYPE_CODE = "OngoingOutbreak.VaccineTypeCode";
 
+  public static final String PARAMS_SENDER = "MessageSender.Sender";
+  public static final String PARAMS_DEFAULT_SENDER = "app.service.sender.ConsoleSender";
+
+  public static final String PARAMS_TEST_ENVIRONMENT = "Environment.Test";
   public static final byte VACCINE_TYPE_CODE_LENGTH = 5;
 
   public static final String SMS_FILE = "SMS.txt";

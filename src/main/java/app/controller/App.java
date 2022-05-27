@@ -1,7 +1,6 @@
 package app.controller;
 
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Properties;
 import app.domain.model.AdminProcess;
 import app.domain.model.Company;
@@ -38,8 +37,8 @@ public class App {
 
   private App() {
     Properties props = PropertiesUtils.getProperties();
-    this.company = new Company(props.getProperty(Constants.PARAMS_COMPANY_DESIGNATION),
-        props.getProperty(Constants.PARAMS_ONGOING_OUTBREAK_VACCINE_TYPE_CODE));
+    this.company = new Company(props.getProperty(Constants.PARAMS_COMPANY_DESIGNATION), props.getProperty(Constants.PARAMS_ONGOING_OUTBREAK_VACCINE_TYPE_CODE));
+
     this.authFacade = this.company.getAuthFacade();
     this.employeeStore = this.company.getEmployeeStore();
     this.employeeRoleStore = this.company.getEmployeeRoleStore();
@@ -73,8 +72,7 @@ public class App {
     // purposes
     this.authFacade.addUserRole(Constants.ROLE_ADMIN, Constants.ROLE_ADMIN);
     this.authFacade.addUserRole(Constants.ROLE_SNS_USER, Constants.ROLE_SNS_USER);
-    this.employeeRoleStore.addEmployeeRole(Constants.ROLE_RECEPTIONIST,
-        Constants.ROLE_RECEPTIONIST);
+    this.employeeRoleStore.addEmployeeRole(Constants.ROLE_RECEPTIONIST, Constants.ROLE_RECEPTIONIST);
     this.employeeRoleStore.addEmployeeRole(Constants.ROLE_NURSE, Constants.ROLE_NURSE);
     this.employeeRoleStore.addEmployeeRole(Constants.ROLE_COORDINATOR, Constants.ROLE_COORDINATOR);
 
@@ -85,39 +83,31 @@ public class App {
     this.vaccineTechnologyStore.addVaccineTechnology("VIRAL_VECTOR_TECHNOLOGY");
     this.vaccineTechnologyStore.addVaccineTechnology("M_RNA_TECHNOLOGY");
 
-    this.authFacade.addUserWithRole("Main Administrator", "admin@lei.sem2.pt", "123456",
-        Constants.ROLE_ADMIN);
-    this.authFacade.addUserWithRole("Test Administrator", "admin@admin.pt", "123456",
-        Constants.ROLE_ADMIN);
+    this.authFacade.addUserWithRole("Test Administrator", "admin@user.com", "123456", Constants.ROLE_ADMIN);
 
-    SNSUser user = this.snsUserStore.createSNSUser("000000000ZZ4", "123456789", "name",
-        new GregorianCalendar(2004, Calendar.FEBRUARY, 12).getTime(), 'M', "+351212345678",
-        "s@user.com", "address");
+    Calendar date = Calendar.getInstance();
+    date.add(Calendar.YEAR, -18);
+
+    SNSUser user = this.snsUserStore.createSNSUser("000000000ZZ4", "123456789", "name", date.getTime(), 'M', "+351212345678", "s@user.com", "address");
     this.snsUserStore.saveSNSUser(user);
 
-    Employee e = this.employeeStore.createEmployee("Name", "+351916919169", "r@user.com", "address",
-        "123456789ZZ1", Constants.ROLE_RECEPTIONIST);
+    Employee e = this.employeeStore.createEmployee("Name", "+351916919169", "r@user.com", "address", "123456789ZZ1", Constants.ROLE_RECEPTIONIST);
     this.employeeStore.saveEmployee(e);
-    Employee e2 = this.employeeStore.createEmployee("Name2", "+351916919269", "c@user.com",
-        "address", "155424041ZY0", Constants.ROLE_COORDINATOR);
+    Employee e2 = this.employeeStore.createEmployee("Name2", "+351916919269", "c@user.com", "address", "155424041ZY0", Constants.ROLE_COORDINATOR);
     this.employeeStore.saveEmployee(e2);
-    Employee e21 = this.employeeStore.createEmployee("Name21", "+351916919269", "c2@user.com",
-        "address", "155424041ZY0", Constants.ROLE_COORDINATOR);
+    Employee e21 = this.employeeStore.createEmployee("Name21", "+351916919269", "c2@user.com", "address", "155424041ZY0", Constants.ROLE_COORDINATOR);
     this.employeeStore.saveEmployee(e21);
 
-    Employee e3 = this.employeeStore.createEmployee("Name2", "+351916919269", "n@user.com",
-        "address", "000000000ZZ4", Constants.ROLE_NURSE);
+    Employee e3 = this.employeeStore.createEmployee("Name2", "+351916919269", "n@user.com", "address", "000000000ZZ4", Constants.ROLE_NURSE);
     this.employeeStore.saveEmployee(e3);
 
-    Employee e4 = this.employeeStore.createEmployee("Name2", "+351916919269", "teste@coor.pt",
-        "address", "000000000ZZ4", Constants.ROLE_COORDINATOR);
+    Employee e4 = this.employeeStore.createEmployee("Name2", "+351916919269", "teste@coor.pt", "address", "000000000ZZ4", Constants.ROLE_COORDINATOR);
     this.employeeStore.saveEmployee(e4);
 
     VaccineType vacType = this.vacTypeStore.addVaccineType("00000", "COVID-19", "M_RNA_TECHNOLOGY");
     this.vacTypeStore.saveVaccineType(vacType);
 
-    Vaccine vaccine = this.vaccineStore.createVaccine("BioNTech, Pfizer vaccine", "00001",
-        "Pfizer, BioNTech", vacType);
+    Vaccine vaccine = this.vaccineStore.createVaccine("BioNTech, Pfizer vaccine", "00001", "Pfizer, BioNTech", vacType);
 
     AdminProcess adminProcess1 = new AdminProcess(1, 16, 1);
     AdminProcess adminProcess2 = new AdminProcess(17, 89, 2);
@@ -133,13 +123,11 @@ public class App {
 
     this.vaccineStore.saveVaccine(vaccine);
 
-    VaccinationCenter vc = this.vaccinationCenterStore.createCommunityMassCenter(
-        "Centro Vacinação de Teste", "Rua de Teste", "test@gmail.com", "+351212345678",
+    VaccinationCenter vc = this.vaccinationCenterStore.createCommunityMassCenter("Centro Vacinação de Teste", "Rua de Teste", "test@gmail.com", "+351212345678",
         "+351212345679", "http://www.test.com", "20:00", "21:00", 7, 5, e2, vacType);
     this.vaccinationCenterStore.saveVaccinationCenter(vc);
 
-    VaccinationCenter vc2 = this.vaccinationCenterStore.createHealthCareCenter(
-        "Unidade de Saúde de Teste", "Rua de Teste", "test2@gmail.com", "+351219876543",
+    VaccinationCenter vc2 = this.vaccinationCenterStore.createHealthCareCenter("Unidade de Saúde de Teste", "Rua de Teste", "test2@gmail.com", "+351219876543",
         "+351219876543", "https://teste.com", "20:00", "21:00", 7, 5, e21, "AGES", "AGS");
     this.vaccinationCenterStore.saveVaccinationCenter(vc2);
   }

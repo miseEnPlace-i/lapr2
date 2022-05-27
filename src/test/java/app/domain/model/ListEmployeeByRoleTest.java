@@ -7,23 +7,21 @@ import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
-import pt.isep.lei.esoft.auth.AuthFacade;
 
 public class ListEmployeeByRoleTest {
   EmployeeStore employeeStore;
 
   @Before
   public void setUp() {
-    AuthFacade authFacade = new AuthFacade();
+    Company company = new Company("abc", "12345");
+    this.employeeStore = company.getEmployeeStore();
 
-    EmployeeRoleStore roleStore = new EmployeeRoleStore(authFacade);
-    this.employeeStore = new EmployeeStore(authFacade, roleStore);
+    EmployeeRoleStore roleStore = company.getEmployeeRoleStore();
 
     roleStore.addEmployeeRole("TEST_ROLE", "Test description");
     roleStore.addEmployeeRole("TEST_ROLE2", "Test description 2");
 
-    Employee e = employeeStore.createEmployee("name", "+351212345678", "email@email.com", "address",
-        "000000000ZZ4", "TEST_ROLE");
+    Employee e = employeeStore.createEmployee("name", "+351212345678", "email@email.com", "address", "000000000ZZ4", "TEST_ROLE");
 
     employeeStore.saveEmployee(e);
   }

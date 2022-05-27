@@ -3,36 +3,59 @@ package app.domain.model;
 import java.util.Calendar;
 
 /**
- * Appointment class.
+ * Arrival class.
  * 
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 public class Arrival {
-  private String snsNumber;
+  private SNSUser snsUser;
+  private Appointment appointment;
   private Calendar arrivalTime;
-  // TODO: leaveTime
+  private Calendar departureTime;
 
   /**
    * Constructor for Arrival.
    */
-  public Arrival(String snsNumber) {
-    this.snsNumber = snsNumber;
+  public Arrival(SNSUser snsUser, Appointment appointment) {
+    this.snsUser = snsUser;
+    this.appointment = appointment;
     this.arrivalTime = Calendar.getInstance();
   }
 
   /**
    * Gets the snsNumber.
    */
-  public String getSnsNumber() {
-    return snsNumber;
+  public SNSUser getSNSUser() {
+    return this.snsUser;
   }
 
   /**
-   * Gets the date.
+   * Gets the arrival time.
    */
   public Calendar getArrivalTime() {
     return arrivalTime;
+  }
+
+  /**
+   * Gets the appointment.
+   */
+  public Appointment getAppointment() {
+    return appointment;
+  }
+
+  /**
+   * Gets the departure time.
+   */
+  public Calendar getDepartureTime() {
+    return departureTime;
+  }
+
+  /**
+   * Sets the departure time.
+   */
+  public void setDepartureTime(Calendar departureTime) {
+    this.departureTime = departureTime;
   }
 
   /**
@@ -40,7 +63,6 @@ public class Arrival {
    */
   @Override
   public String toString() {
-    return "Arrival: " + this.snsNumber + " @ " + this.arrivalTime.getTime();
+    return "Arrival: " + this.snsUser.getSnsNumber() + " @ " + this.arrivalTime.getTime();
   }
-
 }

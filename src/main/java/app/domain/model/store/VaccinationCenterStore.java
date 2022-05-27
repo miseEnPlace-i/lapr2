@@ -10,7 +10,7 @@ import app.domain.model.VaccineType;
 import app.domain.model.WaitingRoom;
 import app.domain.shared.Constants;
 import app.dto.VaccinationCenterListDTO;
-import app.mappers.VaccinationCenterMapper;
+import app.mapper.VaccinationCenterMapper;
 
 /**
  * Vaccination Center store

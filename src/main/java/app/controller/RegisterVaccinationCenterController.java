@@ -14,7 +14,7 @@ import app.domain.shared.Constants;
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  */
-public class RegisterVaccinationCenterController implements IRegisterController {
+public class RegisterVaccinationCenterController implements IRegisterController<VaccinationCenter> {
   private Company company;
   private EmployeeStore employeeStore;
   private VaccinationCenter center;
@@ -44,16 +44,15 @@ public class RegisterVaccinationCenterController implements IRegisterController 
    * @param maxVacSlot the vaccination center maximum vaccines per slot
    * @param coordinator the vaccination center coordinator
    */
-  public void createCommunityMass(String name, String address, String emailAddress, String phoneNum,
-      String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration,
-      int maxVacSlot, Employee coordinator) {
+  public void createCommunityMass(String name, String address, String emailAddress, String phoneNum, String faxNum, String webAddress, String openingHours,
+      String closingHours, int slotDuration, int maxVacSlot, Employee coordinator) {
 
     String vaccineTypeCode = this.company.getOngoingOutbreakVaccineTypeCode();
     VaccineType vaccineType = company.getVaccineTypeStore().getVaccineTypeByCode(vaccineTypeCode);
 
     // creates a vaccination center instance
-    this.center = vacStore.createCommunityMassCenter(name, address, emailAddress, phoneNum, faxNum,
-        webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator, vaccineType);
+    this.center = vacStore.createCommunityMassCenter(name, address, emailAddress, phoneNum, faxNum, webAddress, openingHours, closingHours, slotDuration,
+        maxVacSlot, coordinator, vaccineType);
 
     // validates the center
     vacStore.validateVaccinationCenter(center);
@@ -76,13 +75,12 @@ public class RegisterVaccinationCenterController implements IRegisterController 
    * @param ages the vaccination center AGES
    * @param ars the vaccination center ARS
    */
-  public void createHealthCare(String name, String address, String emailAddress, String phoneNum,
-      String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration,
-      int maxVacSlot, Employee coordinator, String ages, String ars) {
+  public void createHealthCare(String name, String address, String emailAddress, String phoneNum, String faxNum, String webAddress, String openingHours,
+      String closingHours, int slotDuration, int maxVacSlot, Employee coordinator, String ages, String ars) {
 
     // creates a vaccination center instance
-    this.center = vacStore.createHealthCareCenter(name, address, emailAddress, phoneNum, faxNum,
-        webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator, ages, ars);
+    this.center = vacStore.createHealthCareCenter(name, address, emailAddress, phoneNum, faxNum, webAddress, openingHours, closingHours, slotDuration,
+        maxVacSlot, coordinator, ages, ars);
 
     // validates the center
     vacStore.validateVaccinationCenter(center);
@@ -108,5 +106,10 @@ public class RegisterVaccinationCenterController implements IRegisterController 
   @Override
   public String getResourceName() {
     return "Vaccination Center";
+  }
+
+  @Override
+  public VaccinationCenter getRegisteredObject() {
+    return center;
   }
 }

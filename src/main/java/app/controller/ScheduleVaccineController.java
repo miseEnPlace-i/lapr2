@@ -14,11 +14,11 @@ import app.domain.model.store.SNSUserStore;
 import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineStore;
 import app.domain.model.store.VaccineTypeStore;
-import app.dto.AppointmentDto;
+import app.dto.AppointmentInsertDTO;
 import app.dto.VaccinationCenterListDTO;
 import app.dto.VaccineTypeDTO;
-import app.mappers.AppointmentMapper;
-import app.mappers.VaccineTypeMapper;
+import app.mapper.AppointmentInsertMapper;
+import app.mapper.VaccineTypeMapper;
 import app.service.TimeUtils;
 
 /**
@@ -27,7 +27,7 @@ import app.service.TimeUtils;
  * @author André Barros <1211299@isep.ipp.pt>
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
-public class ScheduleVaccineController implements IRegisterController {
+public class ScheduleVaccineController implements IRegisterController<AppointmentInsertDTO> {
   private Company company;
   private VaccinationCenterStore vaccinationCenterStore;
   private AppointmentScheduleList appointmentSchedule;
@@ -55,8 +55,7 @@ public class ScheduleVaccineController implements IRegisterController {
    * 
    * @param dto the appointment dto, containing all the information about the appointment
    */
-  public void createAppointment(String snsNumber, Calendar date, VaccinationCenter center,
-      VaccineType vaccineType, boolean sms) {
+  public void createAppointment(String snsNumber, Calendar date, VaccinationCenter center, VaccineType vaccineType, boolean sms) {
     this.appointmentSchedule = center.getAppointmentList();
 
     this.appointment = appointmentSchedule.create(snsNumber, date, center, vaccineType, sms);
@@ -68,8 +67,7 @@ public class ScheduleVaccineController implements IRegisterController {
    * @return the suggested vaccine type
    */
   public VaccineType getSuggestedVaccineType() {
-    VaccineType vaccineType =
-        vaccineTypeStore.getVaccineTypeByCode(company.getOngoingOutbreakVaccineTypeCode());
+    VaccineType vaccineType = vaccineTypeStore.getVaccineTypeByCode(company.getOngoingOutbreakVaccineTypeCode());
 
     return vaccineType;
   }
@@ -90,8 +88,7 @@ public class ScheduleVaccineController implements IRegisterController {
     return list;
   }
 
-  public List<VaccinationCenterListDTO> getListOfVaccinationCentersWithVaccineType(
-      VaccineType vaccineType) {
+  public List<VaccinationCenterListDTO> getListOfVaccinationCentersWithVaccineType(VaccineType vaccineType) {
 
     return vaccinationCenterStore.getListOfVaccinationCentersWithVaccineType(vaccineType);
   }
@@ -106,7 +103,7 @@ public class ScheduleVaccineController implements IRegisterController {
 
   @Override
   public String stringifyData() {
-    AppointmentDto dto = AppointmentMapper.toDto(appointment);
+    AppointmentInsertDTO dto = AppointmentInsertMapper.toDto(appointment);
     return dto.toString();
   }
 
@@ -119,7 +116,7 @@ public class ScheduleVaccineController implements IRegisterController {
   public void save() {
     appointmentSchedule.saveAppointment(appointment);
 
-    SNSUser snsUser = snsUserStore.findSNSUserByNumber(appointment.getSnsNumber());
+    SNSUser snsUser = snsUserStore.findSNSUserByNumber(appointment.getSnsUser().getSnsNumber());
     snsUser.addAppointmentToList(appointment);
   }
 
@@ -152,5 +149,10 @@ public class ScheduleVaccineController implements IRegisterController {
   public boolean userHasAppointmentForVaccineType(VaccineType vaccineType, String number) {
     SNSUser snsUser = snsUserStore.findSNSUserByNumber(number);
     return snsUser.hasAppointmentForVaccineType(vaccineType, number);
+  }
+
+  @Override
+  public AppointmentInsertDTO getRegisteredObject() {
+    return AppointmentInsertMapper.toDto(appointment);
   }
 }

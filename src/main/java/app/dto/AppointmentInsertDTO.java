@@ -1,19 +1,13 @@
 package app.dto;
 
-/**
- * AppointmentDto from domain to UI
- * 
- * @author André Barros <1211299@isep.ipp.pt>
- */
-public class AppointmentDto {
+public class AppointmentInsertDTO {
   private String snsNumber;
   private String date;
   private String centerName;
   private String vaccineType;
   private String smsPermission;
 
-  public AppointmentDto(String snsNumber, String date, String centerName, String vaccineType,
-      String sms) {
+  public AppointmentInsertDTO(String snsNumber, String date, String centerName, String vaccineType, String sms) {
     this.snsNumber = snsNumber;
     this.date = date;
     this.centerName = centerName;

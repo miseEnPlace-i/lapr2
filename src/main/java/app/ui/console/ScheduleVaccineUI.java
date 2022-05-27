@@ -40,8 +40,7 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
       // Declines the suggested vaccine type or is not eligible for vaccine type selected
 
       if (!isEligible) {
-        System.out.println(
-            "\nYou are not eligible for any vaccine of this type. Please select other type.");
+        System.out.println("\nYou are not eligible for any vaccine of this type. Please select other type.");
       }
 
       vaccineType = selectVaccineType();
@@ -52,8 +51,7 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
     }
 
     if (userHasAppointmentForVaccineType(vaccineType)) {
-      throw new IllegalArgumentException(
-          "\nYou can not have two appointments for the same vaccine type.\n");
+      throw new IllegalArgumentException("\nYou can not have two appointments for the same vaccine type.\n");
     }
 
     VaccinationCenter vacCenter = null;
@@ -66,13 +64,11 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
       if (ctrl.checkAdministrationProcessForVaccineType(vaccineType, snsUserNumber)) {
         vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
       } else {
-        throw new IllegalArgumentException(
-            "\nYou are not eligible for any vaccine of this type.\n");
+        throw new IllegalArgumentException("\nYou are not eligible for any vaccine of this type.\n");
       }
     }
 
     Calendar appointmentDate = selectDateAndTimeInCenterAvailability(vacCenter);
-
     boolean sms = selectSMS();
 
     ctrl.createAppointment(snsUserNumber, appointmentDate, vacCenter, vaccineType, sms);
@@ -114,8 +110,7 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
           accepted = true;
           return vaccineType;
         } else {
-          System.out.println(
-              "\nYou are not eligible for any vaccine of this type. Please select other type.");
+          System.out.println("\nYou are not eligible for any vaccine of this type. Please select other type.");
           accepted = false;
         }
       } catch (ClassCastException e) {
@@ -186,8 +181,7 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
       accepted = true;
 
       SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-      String dateStr =
-          Utils.readLineFromConsoleWithValidation("Date (dd/MM/yyyy): ", FieldToValidate.DATE);
+      String dateStr = Utils.readLineFromConsoleWithValidation("Date (dd/MM/yyyy): ", FieldToValidate.DATE_IN_FUTURE);
       try {
         date = df.parse(dateStr);
       } catch (ParseException ex) {
@@ -197,8 +191,7 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
 
       if (!ctrl.isCenterOpenAt(center, hours)) {
         accepted = false;
-        System.out.println(
-            "\nVaccination Center is closed or does not accept appointments at selected time. Please enter other date.\n");
+        System.out.println("\nVaccination Center is closed or does not accept appointments at selected time. Please enter other date.\n");
         continue;
       }
 
@@ -211,8 +204,7 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
 
       if (!ctrl.hasSlotAvailability(center, appointmentDate)) {
         accepted = false;
-        System.out.println(
-            "\nVaccination Center does not support more appointments at selected time. Please enter other date.\n");
+        System.out.println("\nVaccination Center does not support more appointments at selected time. Please enter other date.\n");
         continue;
       }
 

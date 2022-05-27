@@ -1,4 +1,4 @@
-package app.mappers;
+package app.mapper;
 
 import app.domain.model.VaccineType;
 import app.dto.VaccineTypeDTO;

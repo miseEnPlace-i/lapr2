@@ -23,19 +23,13 @@ public class RegisterSNSUserArrivalUI extends RegisterUI<RegisterSNSUserArrivalC
             throws IllegalArgumentException, ParseException, AppointmentNotFoundException {
         System.out.println("\nRegister SNS User Arrival:");
 
-        String snsNumber = Utils.readLineFromConsoleWithValidation("SNS Number (xxxxxxxxx): ",
-                FieldToValidate.SNS_NUMBER);
+        String snsNumber = Utils.readLineFromConsoleWithValidation("SNS Number (xxxxxxxxx): ", FieldToValidate.SNS_NUMBER);
 
-        // try {
         // verify if the user exists
         super.ctrl.findSNSUser(snsNumber);
 
         // find the user appointment
         super.ctrl.findSNSUserAppointment();
-        // } catch (IllegalArgumentException | AppointmentNotFoundException e) {
-        // System.out.println(e.getMessage());
-        // return;
-        // }
 
         // create the arrival
         super.ctrl.create();

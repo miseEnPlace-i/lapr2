@@ -9,7 +9,7 @@ import java.util.Calendar;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 public class Appointment {
-  private String snsNumber;
+  private SNSUser snsUser;
   private Calendar date;
   private VaccinationCenter center;
   private VaccineType vaccineType;
@@ -21,9 +21,8 @@ public class Appointment {
    * @param snsNumber The SNS number of the user this appointment is related to.
    * @param date The date of the appointment.
    */
-  public Appointment(String snsNumber, Calendar date, VaccinationCenter center,
-      VaccineType vaccineType, boolean sms) {
-    this.snsNumber = snsNumber;
+  public Appointment(SNSUser snsUser, Calendar date, VaccinationCenter center, VaccineType vaccineType, boolean sms) {
+    this.snsUser = snsUser;
     this.date = date;
     this.center = center;
     this.vaccineType = vaccineType;
@@ -34,7 +33,7 @@ public class Appointment {
    * Compares the SNS number of this appointment with another number.
    */
   public boolean hasSnsNumber(String snsNumber) {
-    return this.snsNumber.equals(snsNumber);
+    return this.snsUser.getSnsNumber().equals(snsNumber);
   }
 
   /**
@@ -44,21 +43,12 @@ public class Appointment {
     return this.vaccineType.equals(vaccineType);
   }
 
-  /**
-   * Compares the SNS number of this appointment with another number.
-   */
-  public String getSnsNumber() {
-    return snsNumber;
-  }
 
   /**
-   * Checks if the date of this appointment is in the next hour. TODO: the vaccination center will be the one who is going
-   * to check if the appointment is in the next slot.
+   * Returns the SNS User.
    */
-  public boolean isInTheNextHour() {
-    Calendar now = Calendar.getInstance();
-    now.add(Calendar.HOUR, 1);
-    return this.date.after(now);
+  public SNSUser getSnsUser() {
+    return this.snsUser;
   }
 
   public Calendar getDate() {
@@ -83,7 +73,7 @@ public class Appointment {
 
     StringBuilder sb = new StringBuilder();
     sb.append("Appointment: \n");
-    sb.append("\nSNS Number: " + getSnsNumber());
+    sb.append("\nSNS Number: " + this.snsUser.getSnsNumber());
     sb.append("\nDate: " + sdf.format(date.getTime()));
     sb.append("\nVaccination Center: " + center);
     sb.append("\nVaccine Type: " + vaccineType);

@@ -38,15 +38,15 @@ public class Company {
    * @param designation the designation of the company
    */
   public Company(String designation, String ongoingOutbreakVaccineTypeCode) {
-    if (StringUtils.isBlank(designation))
-      throw new IllegalArgumentException("Designation cannot be blank.");
+    if (StringUtils.isBlank(designation)) throw new IllegalArgumentException("Designation cannot be blank.");
 
-    if (ongoingOutbreakVaccineTypeCode == null)
-      throw new IllegalArgumentException("Ongoing outbreak vaccine type code cannot be null.");
+    if (ongoingOutbreakVaccineTypeCode == null) throw new IllegalArgumentException("Ongoing outbreak vaccine type code cannot be null.");
 
     this.designation = designation;
 
     this.authFacade = new AuthFacade();
+
+
 
     this.employeeRoleStore = new EmployeeRoleStore(this.authFacade);
     this.employeeStore = new EmployeeStore(this.authFacade, this.employeeRoleStore);

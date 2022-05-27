@@ -2,7 +2,7 @@ package app.session;
 
 import app.domain.model.VaccinationCenter;
 import app.dto.VaccinationCenterListDTO;
-import app.mappers.VaccinationCenterMapper;
+import app.mapper.VaccinationCenterMapper;
 
 public class EmployeeSession {
   private VaccinationCenter vaccinationCenter;
