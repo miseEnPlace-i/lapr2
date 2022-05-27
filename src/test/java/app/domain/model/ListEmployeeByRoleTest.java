@@ -5,27 +5,23 @@ import static org.junit.Assert.assertNotNull;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
-import app.controller.App;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
-import app.domain.shared.Constants;
-import pt.isep.lei.esoft.auth.AuthFacade;
 
 public class ListEmployeeByRoleTest {
   EmployeeStore employeeStore;
 
   @Before
   public void setUp() {
-    Company company = new Company("abc", "12345", Constants.PARAMS_SENDER);
+    Company company = new Company("abc", "12345");
     this.employeeStore = company.getEmployeeStore();
-    
+
     EmployeeRoleStore roleStore = company.getEmployeeRoleStore();
 
     roleStore.addEmployeeRole("TEST_ROLE", "Test description");
     roleStore.addEmployeeRole("TEST_ROLE2", "Test description 2");
 
-    Employee e = employeeStore.createEmployee("name", "+351212345678", "email@email.com", "address",
-        "000000000ZZ4", "TEST_ROLE");
+    Employee e = employeeStore.createEmployee("name", "+351212345678", "email@email.com", "address", "000000000ZZ4", "TEST_ROLE");
 
     employeeStore.saveEmployee(e);
   }

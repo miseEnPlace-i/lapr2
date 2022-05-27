@@ -8,14 +8,13 @@ import app.domain.model.Company;
 import app.domain.model.Employee;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
-import app.domain.shared.Constants;
 import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
 /**
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 public class ListEmployeeByRoleControllerTest {
-  Company company = new Company("designation", "12345", Constants.PARAMS_SENDER);
+  Company company = new Company("designation", "12345");
   private ListEmployeesByRoleController ctrl = new ListEmployeesByRoleController(company);
 
   @Before
@@ -25,8 +24,7 @@ public class ListEmployeeByRoleControllerTest {
     roleStore.addEmployeeRole("TEST1", "TEST1");
 
     EmployeeStore employeeStore = company.getEmployeeStore();
-    Employee employee = new Employee("00000001", "Joana Maria", "+351123456789", "email@email.com",
-        "Av. da Liberdade", "123456789ZZ1", "TEST");
+    Employee employee = new Employee("00000001", "Joana Maria", "+351123456789", "email@email.com", "Av. da Liberdade", "123456789ZZ1", "TEST");
     employeeStore.saveEmployee(employee);
   }
 

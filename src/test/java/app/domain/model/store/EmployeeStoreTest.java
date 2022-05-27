@@ -3,10 +3,8 @@ package app.domain.model.store;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
-import app.controller.App;
 import app.domain.model.Company;
 import app.domain.model.Employee;
-import app.domain.shared.Constants;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
 /**
@@ -20,12 +18,11 @@ public class EmployeeStoreTest {
 
   @Before
   public void setUp() {
-    Company company = new Company("abc", "12345", Constants.PARAMS_SENDER);
+    Company company = new Company("abc", "12345");
     roleStore = company.getEmployeeRoleStore();
     store = company.getEmployeeStore();
 
-    employee = new Employee("00000001", "Joana Maria", "+351123456789", "email@email.com",
-        "Av. da Liberdade", "123456789ZZ1", "NURSE");
+    employee = new Employee("00000001", "Joana Maria", "+351123456789", "email@email.com", "Av. da Liberdade", "123456789ZZ1", "NURSE");
   }
 
   /**

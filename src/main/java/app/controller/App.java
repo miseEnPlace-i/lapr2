@@ -37,8 +37,7 @@ public class App {
 
   private App() {
     Properties props = PropertiesUtils.getProperties();
-    this.company = new Company(props.getProperty(Constants.PARAMS_COMPANY_DESIGNATION), props.getProperty(Constants.PARAMS_ONGOING_OUTBREAK_VACCINE_TYPE_CODE),
-        props.getProperty(Constants.PARAMS_SENDER));
+    this.company = new Company(props.getProperty(Constants.PARAMS_COMPANY_DESIGNATION), props.getProperty(Constants.PARAMS_ONGOING_OUTBREAK_VACCINE_TYPE_CODE));
 
     this.authFacade = this.company.getAuthFacade();
     this.employeeStore = this.company.getEmployeeStore();
@@ -96,8 +95,7 @@ public class App {
     this.employeeStore.saveEmployee(e);
     Employee e2 = this.employeeStore.createEmployee("Name2", "+351916919269", "c@user.com", "address", "155424041ZY0", Constants.ROLE_COORDINATOR);
     this.employeeStore.saveEmployee(e2);
-    Employee e21 = this.employeeStore.createEmployee("Name21", "+351916919269", "c2@user.com",
-        "address", "155424041ZY0", Constants.ROLE_COORDINATOR);
+    Employee e21 = this.employeeStore.createEmployee("Name21", "+351916919269", "c2@user.com", "address", "155424041ZY0", Constants.ROLE_COORDINATOR);
     this.employeeStore.saveEmployee(e21);
 
     Employee e3 = this.employeeStore.createEmployee("Name2", "+351916919269", "n@user.com", "address", "000000000ZZ4", Constants.ROLE_NURSE);
@@ -109,8 +107,7 @@ public class App {
     VaccineType vacType = this.vacTypeStore.addVaccineType("00000", "COVID-19", "M_RNA_TECHNOLOGY");
     this.vacTypeStore.saveVaccineType(vacType);
 
-    Vaccine vaccine = this.vaccineStore.createVaccine("BioNTech, Pfizer vaccine", "00001",
-        "Pfizer, BioNTech", vacType);
+    Vaccine vaccine = this.vaccineStore.createVaccine("BioNTech, Pfizer vaccine", "00001", "Pfizer, BioNTech", vacType);
 
     AdminProcess adminProcess1 = new AdminProcess(1, 16, 1);
     AdminProcess adminProcess2 = new AdminProcess(17, 89, 2);
@@ -126,13 +123,11 @@ public class App {
 
     this.vaccineStore.saveVaccine(vaccine);
 
-    VaccinationCenter vc = this.vaccinationCenterStore.createCommunityMassCenter(
-        "Centro Vacinação de Teste", "Rua de Teste", "test@gmail.com", "+351212345678",
+    VaccinationCenter vc = this.vaccinationCenterStore.createCommunityMassCenter("Centro Vacinação de Teste", "Rua de Teste", "test@gmail.com", "+351212345678",
         "+351212345679", "http://www.test.com", "20:00", "21:00", 7, 5, e2, vacType);
     this.vaccinationCenterStore.saveVaccinationCenter(vc);
 
-    VaccinationCenter vc2 = this.vaccinationCenterStore.createHealthCareCenter(
-        "Unidade de Saúde de Teste", "Rua de Teste", "test2@gmail.com", "+351219876543",
+    VaccinationCenter vc2 = this.vaccinationCenterStore.createHealthCareCenter("Unidade de Saúde de Teste", "Rua de Teste", "test2@gmail.com", "+351219876543",
         "+351219876543", "https://teste.com", "20:00", "21:00", 7, 5, e21, "AGES", "AGS");
     this.vaccinationCenterStore.saveVaccinationCenter(vc2);
   }

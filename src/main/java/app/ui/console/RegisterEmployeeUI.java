@@ -57,12 +57,9 @@ public class RegisterEmployeeUI extends RegisterUI<RegisterEmployeeController> {
 
     String name = Utils.readLineFromConsole("Name: ");
     String address = Utils.readLineFromConsole("Address: ");
-    String phoneNumber = Utils.readLineFromConsoleWithValidation("Phone Number (+351xxxxxxxxx): ",
-        FieldToValidate.PHONE_NUMBER);
-    String email = Utils.readLineFromConsoleWithValidation("Email (example@example.com): ",
-        FieldToValidate.EMAIL);
-    String citizenCard = Utils.readLineFromConsoleWithValidation(
-        "Citizen Card Number (xxxxxxxxxLLx): ", FieldToValidate.CITIZEN_CARD);
+    String phoneNumber = Utils.readLineFromConsoleWithValidation("Phone Number (+351xxxxxxxxx): ", FieldToValidate.PHONE_NUMBER);
+    String email = Utils.readLineFromConsoleWithValidation("Email (example@example.com): ", FieldToValidate.EMAIL);
+    String citizenCard = Utils.readLineFromConsoleWithValidation("Citizen Card Number (xxxxxxxxxLLx): ", FieldToValidate.CITIZEN_CARD);
 
     super.ctrl.create(name, address, phoneNumber, email, citizenCard, this.roleId);
   }

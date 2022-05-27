@@ -6,10 +6,9 @@ import java.text.ParseException;
 import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.Company;
-import app.domain.shared.Constants;
 
 public class RegisterSNSUserControllerTest {
-  Company company = new Company("designation", "12345", Constants.PARAMS_SENDER);
+  Company company = new Company("designation", "12345");
   private RegisterSNSUserController ctrl = new RegisterSNSUserController(company);
 
   @Before
