@@ -34,7 +34,6 @@ class VaccinationCenter{
   -slotDuration
   -maximumVaccinesPerSlot
   -coordinator
-  -createdAt
 }
 
 class Company{
@@ -55,6 +54,12 @@ class Employee {
 
 class SMSSender {}
 
+class CenterCoordinator {}
+
+class CommunityMassVaccinationCenter {}
+
+class HealthCareCenter {}
+
 
 Appointment "1"  -- "1" VaccineType : has >
 Appointment "*" -- "1" VaccinationCenter : is held in >
@@ -62,9 +67,13 @@ Company "1" -- "*" VaccinationCenter : knows >
 Appointment "*" -- "1" Receptionist : scheduled by >
 Receptionist "1" -- "1" SNSUser : schedules for >
 Appointment "1" -- "1" SNSUser : has >
-Employee "1" -- "0..1" Receptionist : play as >
+Employee <|-- Receptionist
+Employee <|-- CenterCoordinator
 Company -- Employee : knows >
 Appointment "1" -- "0..1" SMSSender : triggers >
+CenterCoordinator "1" -- "1" VaccinationCenter : has >
+VaccinationCenter <|-- CommunityMassVaccinationCenter
+VaccinationCenter <|-- HealthCareCenter
 
 
 @enduml
