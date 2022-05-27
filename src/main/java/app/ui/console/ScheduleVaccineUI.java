@@ -11,7 +11,6 @@ import app.controller.ScheduleVaccineController;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
 import app.domain.shared.FieldToValidate;
-import app.dto.AppointmentWithoutNumberDTO;
 import app.dto.VaccinationCenterListDTO;
 import app.dto.VaccineTypeDTO;
 import app.service.CalendarUtils;
@@ -23,9 +22,12 @@ import app.ui.console.utils.Utils;
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
 public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
+  private String snsUserNumber = "";
 
   public ScheduleVaccineUI() {
     super(new ScheduleVaccineController(App.getInstance().getCompany()));
+    String email = App.getInstance().getCurrentUserSession().getUserId().getEmail();
+    snsUserNumber = ctrl.getSNSUserNumberWithEmail(email);
   }
 
   public void insertData() {
@@ -61,7 +63,7 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
       // ctrl.checkAdministrationProcessForNextDose();
       // vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
     } else {
-      if (ctrl.checkAdministrationProcessForVaccineType(vaccineType)) {
+      if (ctrl.checkAdministrationProcessForVaccineType(vaccineType, snsUserNumber)) {
         vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
       } else {
         System.out.println("\nYou are not eligible for any vaccine of this type.\n");
@@ -73,10 +75,7 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
 
     boolean sms = selectSMS();
 
-    AppointmentWithoutNumberDTO appointmentDto =
-        new AppointmentWithoutNumberDTO(appointmentDate, vacCenter, vaccineType, sms);
-
-    ctrl.createAppointment(appointmentDto);
+    ctrl.createAppointment(snsUserNumber, appointmentDate, vacCenter, vaccineType, sms);
   }
 
   private boolean showSuggestedVaccineType(VaccineType vt) {
@@ -168,7 +167,7 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
   }
 
   private boolean userHasTakenVaccineType(VaccineType vt) {
-    return ctrl.userHasTakenAnyVaccineFromVaccineType(vt);
+    return ctrl.userHasTakenAnyVaccineFromVaccineType(vt, snsUserNumber);
   }
 
   /**
@@ -238,7 +237,7 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
       // vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
       return false;
     } else {
-      if (ctrl.checkAdministrationProcessForVaccineType(vaccineType)) {
+      if (ctrl.checkAdministrationProcessForVaccineType(vaccineType, snsUserNumber)) {
         return true;
       } else {
         return false;
@@ -253,6 +252,6 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
    * @return true if has an appointment, false otherwise
    */
   private boolean userHasAppointmentForVaccineType(VaccineType vaccineType) {
-    return ctrl.userHasAppointmentForVaccineType(vaccineType);
+    return ctrl.userHasAppointmentForVaccineType(vaccineType, snsUserNumber);
   }
 }

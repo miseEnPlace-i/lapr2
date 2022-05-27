@@ -11,7 +11,6 @@ import app.controller.ScheduleVaccineController;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
 import app.domain.shared.FieldToValidate;
-import app.dto.AppointmentWithNumberDTO;
 import app.dto.VaccinationCenterListDTO;
 import app.dto.VaccineTypeDTO;
 import app.service.CalendarUtils;
@@ -23,7 +22,7 @@ import app.ui.console.utils.Utils;
  * @author André Barros <1211299@isep.ipp.pt>
  */
 public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineController> {
-  String SNSNumber;
+  String snsNumber;
 
   public ScheduleVaccineReceptionistUI() {
     super(new ScheduleVaccineController(App.getInstance().getCompany()));
@@ -35,15 +34,15 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
     boolean existsUser;
 
     do {
-      SNSNumber = Utils.readLineFromConsoleWithValidation("\nSNS Number (xxxxxxxxx):",
+      snsNumber = Utils.readLineFromConsoleWithValidation("\nSNS Number (xxxxxxxxx):",
           FieldToValidate.SNS_NUMBER);
-      existsUser = ctrl.existsUser(this.SNSNumber);
+      existsUser = ctrl.existsUser(this.snsNumber);
     } while (!existsUser);
 
     VaccineType vaccineType = ctrl.getSuggestedVaccineType();
 
     boolean accepted = showSuggestedVaccineType(vaccineType);
-    boolean isEligible = isUserEligibleForVaccine(vaccineType, this.SNSNumber);
+    boolean isEligible = isUserEligibleForVaccine(vaccineType, this.snsNumber);
 
     if (!accepted || !isEligible) {
       // Declines the suggested vaccine type or is not eligible for vaccine type selected
@@ -60,19 +59,19 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
       }
     }
 
-    if (userHasAppointmentForVaccineType(vaccineType, this.SNSNumber)) {
+    if (userHasAppointmentForVaccineType(vaccineType, this.snsNumber)) {
       System.out.println("\nYou can not have two appointments for the same vaccine type.\n");
       return;
     }
 
     VaccinationCenter vacCenter = null;
 
-    if (userHasTakenVaccineType(vaccineType, this.SNSNumber)) {
+    if (userHasTakenVaccineType(vaccineType, this.snsNumber)) {
       // ctrl.getVaccinesByType(vaccineType);
       // ctrl.checkAdministrationProcessForNextDose();
       // vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
     } else {
-      if (ctrl.checkAdministrationProcessForVaccineType(vaccineType, this.SNSNumber)) {
+      if (ctrl.checkAdministrationProcessForVaccineType(vaccineType, this.snsNumber)) {
         vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
       } else {
         System.out.println("\nYou are not eligible for any vaccine of this type.\n");
@@ -84,10 +83,7 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
 
     boolean sms = selectSMS();
 
-    AppointmentWithNumberDTO appointmentDto =
-        new AppointmentWithNumberDTO(this.SNSNumber, appointmentDate, vacCenter, vaccineType, sms);
-
-    ctrl.createAppointment(appointmentDto);
+    ctrl.createAppointment(snsNumber, appointmentDate, vacCenter, vaccineType, sms);
   }
 
 
@@ -168,7 +164,7 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
         VaccineTypeDTO vtDto = (VaccineTypeDTO) selectedVt;
         vaccineType = ctrl.getVaccineTypeByCode(vtDto.getCode());
 
-        if (isUserEligibleForVaccine(vaccineType, this.SNSNumber)) {
+        if (isUserEligibleForVaccine(vaccineType, this.snsNumber)) {
           accepted = true;
           return vaccineType;
         } else {
