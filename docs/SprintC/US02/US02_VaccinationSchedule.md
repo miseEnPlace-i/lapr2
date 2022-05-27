@@ -38,10 +38,10 @@ _"As a receptionist at one vaccination center, I want to schedule a vaccination.
 * **AC1:** SNS Number must be filled in.
 * **AC2:** Date must be filled in.
 * **AC3:** Time must be filled in.
-* **AC1:** All required fields must be filled in.
-* **AC2:** The algorithm should check if the SNS User is within the age and time since the last vaccine.
-* **AC3:** The SNS User number must have 9 digits.
-* **AC4:** A receptionist cannot schedule the same vaccine more than once for the same SNS User.
+* **AC4:** All required fields must be filled in.
+* **AC5:** The algorithm should check if the SNS User is within the age and time since the last vaccine.
+* **AC6:** The SNS User number must have 9 digits.
+* **AC7:** A receptionist cannot schedule the same vaccine more than once for the same SNS User.
 
 ### 1.4. Found out Dependencies
 
@@ -151,12 +151,29 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 4. Tests 
 
-**Test 1:** Check that it is not possible to create an instance of the Task class with null values. 
+**Test 1:** Check that it is possible to schedule an appointment. 
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Task instance = new Task(null, null, null, null, null, null, null);
-	}
+	@Test
+  public void ensureThatIsPossibleToScheduleAppointment() {
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:MM");
+    try {
+      Calendar appointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 10:00"));
+      Calendar nextDay = DateUtils.toCalendar(DateUtils.addDays(sdf.parse("01/01/2022 10:00"), 1));
+
+      Appointment appointment = appointments.create(user, appointmentDate, vaccinationCenter, vaccineType, true);
+
+      assertNotNull(appointment);
+
+      appointments.saveAppointment(appointment);
+
+      Appointment[][] list = appointments.getAppointmentScheduleForDay(appointmentDate);
+      Appointment[][] emptyList = appointments.getAppointmentScheduleForDay(nextDay);
+
+      assertNotNull(list);
+      assertNull(emptyList);
+    } catch (ParseException e) {
+    }
+  }
 	
 
 **Test 2:** Check that it is not possible to create an instance of the Task class with a reference containing less than five chars - AC2. 
@@ -174,41 +191,38 @@ Other software classes (i.e. Pure Fabrication) identified:
 # 5. Construction (Implementation)
 
 
-## Class CreateTaskController 
+## Class ScheduleVaccineController 
 
-		public boolean createTask(String ref, String designation, String informalDesc, 
-			String technicalDesc, Integer duration, Double cost, Integer catId)() {
-		
-			Category cat = this.platform.getCategoryById(catId);
-			
-			Organization org;
-			// ... (omitted)
-			
-			this.task = org.createTask(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
-			
-			return (this.task != null);
-		}
+  public ScheduleVaccineController(Company company) {
+    this.company = company;
+    this.vaccinationCenterStore = company.getVaccinationCenterStore();
+    this.vaccineTypeStore = company.getVaccineTypeStore();
+    this.snsUserStore = company.getSNSUserStore();
+    this.vaccineStore = company.getVaccineStore();
+  }
 
-
-## Class Organization
+	public void createAppointment(String snsNumber, Calendar date, VaccinationCenter center, VaccineType vaccineType, boolean sms) {
+    this.appointmentSchedule = center.getAppointmentList();
+    SNSUser user = snsUserStore.findSNSUserByNumber(snsNumber);
+    this.appointment = appointmentSchedule.create(user, date, center, vaccineType, sms);
+  }
 
 
-		public Task createTask(String ref, String designation, String informalDesc, 
-			String technicalDesc, Integer duration, Double cost, Category cat)() {
-		
-	
-			Task task = new Task(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
-			if (this.validateTask(task))
-				return task;
-			return null;
-		}
+## Class Appointment
+
+	public Appointment(SNSUser snsUser, Calendar date, VaccinationCenter center, VaccineType vaccineType, boolean sms) {
+    this.snsUser = snsUser;
+    this.date = date;
+    this.center = center;
+    this.vaccineType = vaccineType;
+    this.sms = sms;
+  }
 
 
 
 # 6. Integration and Demo 
 
-* A new option on the Receptionist menu options was added.
-
+* A new option on the Receptionist menu options was added (Schedule a vaccine).
 
 
 # 7. Observations
