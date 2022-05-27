@@ -31,13 +31,8 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
   @Override
   public void insertData() {
     System.out.println("\nEnter the appointment data:");
-    boolean existsUser;
 
-    do {
-      snsNumber = Utils.readLineFromConsoleWithValidation("\nSNS Number (xxxxxxxxx):",
-          FieldToValidate.SNS_NUMBER);
-      existsUser = ctrl.existsUser(this.snsNumber);
-    } while (!existsUser);
+    snsNumber = getSNSUserNumberValid();
 
     VaccineType vaccineType = ctrl.getSuggestedVaccineType();
 
@@ -45,7 +40,6 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
     boolean isEligible = isUserEligibleForVaccine(vaccineType, this.snsNumber);
 
     if (!accepted || !isEligible) {
-      // Declines the suggested vaccine type or is not eligible for vaccine type selected
 
       if (!isEligible) {
         System.out.println(
@@ -64,20 +58,7 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
           "\nYou can not have two appointments for the same vaccine type.\n");
     }
 
-    VaccinationCenter vacCenter = null;
-
-    if (userHasTakenVaccineType(vaccineType, this.snsNumber)) {
-      // ctrl.getVaccinesByType(vaccineType);
-      // ctrl.checkAdministrationProcessForNextDose();
-      // vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
-    } else {
-      if (ctrl.checkAdministrationProcessForVaccineType(vaccineType, this.snsNumber)) {
-        vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
-      } else {
-        throw new IllegalArgumentException(
-            "\nYou are not eligible for any vaccine of this type.\n");
-      }
-    }
+    VaccinationCenter vacCenter = checkUserTakenVaccinesAndSelectsCenter(vaccineType);
 
     Calendar appointmentDate = selectDateAndTimeInCenterAvailability(vacCenter);
 
@@ -86,6 +67,47 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
     ctrl.createAppointment(snsNumber, appointmentDate, vacCenter, vaccineType, sms);
   }
 
+  /**
+   * CHecks if the sns user exists in the system by its sns user number
+   * 
+   * @return the SNSNumber valid
+   */
+  public String getSNSUserNumberValid() {
+    boolean existsUser;
+    do {
+      snsNumber = Utils.readLineFromConsoleWithValidation("\nSNS Number (xxxxxxxxx):",
+          FieldToValidate.SNS_NUMBER);
+      existsUser = ctrl.existsUser(this.snsNumber);
+    } while (!existsUser);
+
+    return snsNumber;
+  }
+
+  /**
+   * Check that if user has already taken a specific vaccine type, if it is eligible for that administration process and
+   * selects center
+   * 
+   * @param vaccineType the vaccineType requested
+   * 
+   * @return the vaccination center selected
+   */
+  public VaccinationCenter checkUserTakenVaccinesAndSelectsCenter(VaccineType vaccineType) {
+    VaccinationCenter center = null;
+
+    if (userHasTakenVaccineType(vaccineType, this.snsNumber)) {
+      // ctrl.getVaccinesByType(vaccineType);
+      // ctrl.checkAdministrationProcessForNextDose();
+      // vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
+    } else {
+      if (ctrl.checkAdministrationProcessForVaccineType(vaccineType, this.snsNumber)) {
+        center = selectVaccinationCenterWithVaccineType(vaccineType);
+      } else {
+        throw new IllegalArgumentException(
+            "\nYou are not eligible for any vaccine of this type.\n");
+      }
+    }
+    return center;
+  }
 
   /**
    * Shows suggested vaccine type and asks to select one option
