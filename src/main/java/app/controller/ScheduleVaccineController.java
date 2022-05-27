@@ -20,6 +20,7 @@ import app.dto.VaccineTypeDTO;
 import app.mapper.AppointmentInsertMapper;
 import app.mapper.VaccineTypeMapper;
 import app.service.TimeUtils;
+import app.utils.Time;
 
 /**
  * ScheduleVaccineController class.
@@ -139,7 +140,8 @@ public class ScheduleVaccineController implements IRegisterController<Appointmen
   }
 
   public boolean isCenterOpenAt(VaccinationCenter vacCenter, String hours) {
-    return vacCenter.isOpenAt(hours);
+    Time t = new Time(hours);
+    return vacCenter.isOpenAt(t);
   }
 
   public boolean hasSlotAvailability(VaccinationCenter vacCenter, Calendar date) {
