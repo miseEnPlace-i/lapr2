@@ -35,8 +35,7 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
     boolean existsUser;
 
     do {
-      SNSNumber = Utils.readLineFromConsoleWithValidation("\nSNS Number (xxxxxxxxx):",
-          FieldToValidate.SNS_NUMBER);
+      SNSNumber = Utils.readLineFromConsoleWithValidation("\nSNS Number (xxxxxxxxx):", FieldToValidate.SNS_NUMBER);
       existsUser = ctrl.existsUser(this.SNSNumber);
     } while (!existsUser);
 
@@ -49,8 +48,7 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
       // Declines the suggested vaccine type or is not eligible for vaccine type selected
 
       if (!isEligible) {
-        System.out.println(
-            "\nYou are not eligible for any vaccine of this type. Please select other type.");
+        System.out.println("\nYou are not eligible for any vaccine of this type. Please select other type.");
       }
 
       vaccineType = selectVaccineType();
@@ -84,8 +82,7 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
 
     boolean sms = selectSMS();
 
-    AppointmentInsertDTO appointmentDto =
-        new AppointmentInsertDTO(SNSNumber, appointmentDate, vacCenter, vaccineType, sms);
+    AppointmentInsertDTO appointmentDto = new AppointmentInsertDTO(SNSNumber, appointmentDate, vacCenter, vaccineType, sms);
 
     ctrl.createAppointment(appointmentDto);
   }
@@ -172,8 +169,7 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
           accepted = true;
           return vaccineType;
         } else {
-          System.out.println(
-              "\nYou are not eligible for any vaccine of this type. Please select other type.");
+          System.out.println("\nYou are not eligible for any vaccine of this type. Please select other type.");
           accepted = false;
         }
       } catch (ClassCastException e) {
@@ -240,8 +236,7 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
       accepted = true;
 
       SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-      String dateStr =
-          Utils.readLineFromConsoleWithValidation("Date (dd/MM/yyyy): ", FieldToValidate.DATE);
+      String dateStr = Utils.readLineFromConsoleWithValidation("Date (dd/MM/yyyy): ", FieldToValidate.DATE_IN_FUTURE);
       try {
         date = df.parse(dateStr);
       } catch (ParseException ex) {
@@ -251,8 +246,7 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
 
       if (!ctrl.isCenterOpenAt(center, hours)) {
         accepted = false;
-        System.out.println(
-            "\nVaccination Center is closed or does not accept appointments at selected time. Please enter other date.\n");
+        System.out.println("\nVaccination Center is closed or does not accept appointments at selected time. Please enter other date.\n");
         continue;
       }
 
@@ -265,8 +259,7 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
 
       if (!ctrl.hasSlotAvailability(center, appointmentDate)) {
         accepted = false;
-        System.out.println(
-            "\nVaccination Center does not support more appointments at selected time. Please enter other date.\n");
+        System.out.println("\nVaccination Center does not support more appointments at selected time. Please enter other date.\n");
         continue;
       }
 
