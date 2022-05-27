@@ -19,8 +19,9 @@ import app.service.sender.SenderFactory;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
 /**
- * @author Ricardo Moreira <1211285@isep.ipp.pt>
  * @author Carlos Lopes <1211277@isep.ipp.pt>
+ * @author Ricardo Moreira <1211285@isep.ipp.pt>
+ * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 public class SNSUserStore {
   // User List
@@ -103,17 +104,21 @@ public class SNSUserStore {
 
     String message = String.format("A new user has been created.\nEmail: %s\nPassword: %s", email, pwd);
     UserNotificationDTO notificationDto = UserNotificationMapper.toDto(email, phoneNumber, message);
+
+    sendNotification(notificationDto);
+
+    return dto;
+  }
+
+  private void sendNotification(UserNotificationDTO notificationDto) {
     ISender sender = SenderFactory.getSender();
 
-    // send notification with the password
     try {
       sender.send(notificationDto);
     } catch (Exception e) {
       System.out.println(e.getMessage());
       e.printStackTrace();
     }
-
-    return dto;
   }
 
   /**
@@ -122,9 +127,7 @@ public class SNSUserStore {
    * @param snsUser
    */
   public void checkDuplicates(SNSUser snsUser) {
-    if (snsUsers.contains(snsUser)) {
-      throw new IllegalArgumentException("Duplicate SNS User.");
-    }
+    if (snsUsers.contains(snsUser)) throw new IllegalArgumentException("Duplicate SNS User.");
   }
 
   /**
@@ -134,11 +137,8 @@ public class SNSUserStore {
    * @return SNSUser
    */
   public SNSUser findSNSUserByNumber(String snsNumber) {
-    for (SNSUser snsUser : snsUsers) {
-      if (snsUser.getSnsNumber().equals(snsNumber)) {
-        return snsUser;
-      }
-    }
+    for (SNSUser snsUser : snsUsers)
+      if (snsUser.getSnsNumber().equals(snsNumber)) return snsUser;
 
     return null;
   }
@@ -150,11 +150,8 @@ public class SNSUserStore {
    * @return SNSUser
    */
   public boolean checkSNSUserExists(String snsNumber) {
-    for (SNSUser snsUser : snsUsers) {
-      if (snsUser.getSnsNumber().equals(snsNumber)) {
-        return true;
-      }
-    }
+    for (SNSUser snsUser : snsUsers)
+      if (snsUser.getSnsNumber().equals(snsNumber)) return true;
 
     return false;
   }

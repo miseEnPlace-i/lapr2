@@ -1,5 +1,6 @@
 package app.dto;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ArrivalDTO {
@@ -30,7 +31,7 @@ public class ArrivalDTO {
   /**
    * @return String return the sex
    */
-  public char getSex() {
+  public char getGender() {
     return gender;
   }
 
@@ -60,5 +61,20 @@ public class ArrivalDTO {
    */
   public String getTime() {
     return time;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+
+    sb.append(String.format("Name: %s%n", name));
+    sb.append(String.format("Gender: %s%n", gender));
+    sb.append(String.format("BirthDate: %s%n", sdf.format(birthDate)));
+    sb.append(String.format("SNS User Number: %s%n", snsUserNumber));
+    sb.append(String.format("Phone Number: %s%n", phoneNumber));
+    sb.append(String.format("Time: %s%n", time));
+
+    return sb.toString();
   }
 }
