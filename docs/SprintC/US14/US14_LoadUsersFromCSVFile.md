@@ -26,6 +26,15 @@ As an administrator, I want to load a set of users from a CSV file.
 > **Question:** What would be the sequence of parameters to be read on the CSV?
 >  
 > **Answer:** Name, Sex, Birth Date, Address, Phone Number, E-mail, SNS User Number and Citizen Card Number.
+>
+> **Question:** "is there any specific format that should be validated for the address, or we can assume it is just of string type?"
+>
+> **Answer:** The address contained in the CSV file is a string and should not contain commas or semicolons.
+>
+> **Question:** "how should the admin receive the login data/passwords for all registered users?"
+>
+> **Answer:** During this sprint, login and password data should be presented in the console application.
+In US14 the application is used to register a batch of users. For each user, all the data required to register a user should be presented in the console.
 
 ### 1.3. Acceptance Criteria
 

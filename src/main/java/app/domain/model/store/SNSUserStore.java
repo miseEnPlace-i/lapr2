@@ -9,6 +9,7 @@ import app.domain.model.dto.SNSUserDTO;
 import app.domain.model.dto.SNSUserRegisterInfoDTO;
 import app.domain.shared.Constants;
 import app.mappers.SNSUserMapper;
+import app.mappers.SNSUserRegisterInfoMapper;
 import app.service.PasswordGenerator;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
@@ -86,15 +87,18 @@ public class SNSUserStore {
    * 
    * @param user
    */
-  public void saveSNSUser(SNSUser snsUser) {
+  public SNSUserRegisterInfoDTO saveSNSUser(SNSUser snsUser) {
 
-    String name = snsUser.getName();
-    String email = snsUser.getEmail();
     String pwd = PasswordGenerator.generatePwd();
+    String role = Constants.ROLE_SNS_USER;
 
-    authFacade.addUserWithRole(name, email, pwd, Constants.ROLE_SNS_USER);
+    SNSUserRegisterInfoDTO snsUserDto = SNSUserRegisterInfoMapper.toDto(snsUser, pwd, role);
+
+    authFacade.addUserWithRole(snsUserDto.getName(), snsUserDto.getEmail(), pwd, Constants.ROLE_SNS_USER);
 
     addSNSUser(snsUser);
+
+    return snsUserDto;
 
     // TODO: send password email
     // EmailSender emailSender = new EmailSender();
@@ -181,8 +185,10 @@ public class SNSUserStore {
 
       validateSNSUser(snsUser);
 
-      saveSNSUser(snsUser);;
+      SNSUserRegisterInfoDTO snsUserDto = saveSNSUser(snsUser);
+      userRegisterInfoList.add(snsUserDto);
     }
+
     return userRegisterInfoList;
   }
 
