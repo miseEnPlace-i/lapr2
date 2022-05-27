@@ -52,7 +52,6 @@ public class PasswordGenerator implements IPasswordGenerator {
       sb.setCharAt(i, temp);
     }
 
-    // return sb.toString();
-    return "123456";
+    return sb.toString();
   }
 }
