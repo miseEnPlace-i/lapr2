@@ -5,8 +5,8 @@ actor "Administrator" as ADM
 
 participant ":UploadUsersFromFileUI" as UI
 participant ":UploadUsersFromFileController" as CTRL
-participant "csvR:CSVReader" as CSVR
-participant "userSt :SNSUserStore" as USR_STR
+participant "csvReader:CSVReader" as CSVR
+participant "store :SNSUserStore" as USR_STR
 participant "comp :Company" as COMP
 participant "mapper: SNSUserMapper" as MAPPER
 participant "dto: SNSUserDTO" as DTO
@@ -39,7 +39,7 @@ deactivate UI
 ADM -> UI : confirms action
 activate UI
 
-    UI -> CTRL : userRegisterInfoList = readAndUpload()
+    UI -> CTRL : userRegisterInfoList = readAndUpload(csvReader)
     activate CTRL
 
         CTRL -> COMP : store = getSNSUserStore()
