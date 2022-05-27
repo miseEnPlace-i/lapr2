@@ -28,7 +28,7 @@ deactivate UI
 ADM -> UI : types requested data
 activate UI
 
-    UI -> CTRL : csvReader = createCsvReader(filePathName)
+    UI -> CTRL : createCsvReader(filePathName)
     activate CTRL
         CTRL -> CSVR ** : csvReader = create(filePathName)
     deactivate CTRL
@@ -39,7 +39,7 @@ deactivate UI
 ADM -> UI : confirms action
 activate UI
 
-    UI -> CTRL : userRegisterInfoList = readAndUpload(csvReader)
+    UI -> CTRL : userRegisterInfoList = readAndUpload()
     activate CTRL
 
         CTRL -> COMP : store = getSNSUserStore()

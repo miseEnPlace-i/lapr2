@@ -15,20 +15,22 @@ import app.domain.model.store.SNSUserStore;
 public class UploadUsersFromFileController {
 
     private Company company;
+    private CSVReader csvReader;
 
     public UploadUsersFromFileController(Company company) {
         this.company = company;
+        this.csvReader = null;
     }
 
     public CSVReader createCsvReader(String filePathName){
         return new CSVReader(filePathName);
     }
 
-    public List<SNSUserRegisterInfoDTO> readAndUpload(CSVReader csv) throws ParseException{
+    public List<SNSUserRegisterInfoDTO> readAndUpload() throws ParseException{
 
         SNSUserStore store = this.company.getSNSUserStore();
 
-        List<String[]> userDataList = csv.readSNSUserData();
+        List<String[]> userDataList = csvReader.readSNSUserData();
 
         List<SNSUserRegisterInfoDTO> userRegisterInfoList = store.registerListOfUsers(userDataList);
 
