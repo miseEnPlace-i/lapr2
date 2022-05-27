@@ -5,7 +5,8 @@ import java.util.List;
 import app.domain.model.Employee;
 import app.dto.UserNotificationDTO;
 import app.mapper.UserNotificationMapper;
-import app.service.password.PasswordGenerator;
+import app.service.password.IPasswordGenerator;
+import app.service.password.PasswordGeneratorFactory;
 import app.service.sender.ISender;
 import app.service.sender.SenderFactory;
 import pt.isep.lei.esoft.auth.AuthFacade;
@@ -92,7 +93,8 @@ public class EmployeeStore {
 
     String email = employee.getEmail();
     String phoneNumber = employee.getPhoneNumber();
-    String pwd = PasswordGenerator.generatePwd();
+    IPasswordGenerator pwdGenerator = PasswordGeneratorFactory.getPasswordGenerator();
+    String pwd = pwdGenerator.generatePwd();
 
     this.authFacade.addUserWithRole(employee.getName(), email, pwd, employee.getRoleId());
 
