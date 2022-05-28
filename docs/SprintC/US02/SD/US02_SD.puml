@@ -4,7 +4,8 @@ autonumber
 actor "Receptionist" as RECEPT
 
 participant ":AppointmentUI" as UI
-participant ":Application" as APP
+participant "APP" as APPCLASS
+participant "app:APP" as APPINSTANCE
 participant ":AppointmentController" as CTRL
 participant "comp\n:Company" as COMP
 participant "store\n:SNSUserStore" as USERSTORE
@@ -31,13 +32,13 @@ activate RECEPT
 RECEPT -> UI : asks to schedule a vaccination
 activate UI
 
-UI -> APP : app=getInstance()
-activate APP
-deactivate APP
+UI -> APPCLASS : app=getInstance()
+activate APPCLASS
+deactivate APPCLASS
 
-UI -> APP : company=app.getCompany()
-activate APP
-deactivate APP
+UI -> APPINSTANCE : company=app.getCompany()
+activate APPINSTANCE
+deactivate APPINSTANCE
 
 UI -> CTRL** : create(company)
 
@@ -64,16 +65,30 @@ deactivate CTRL
 UI -> CTRL : suggestedVaccineType = getSuggestedVaccineType()
 activate CTRL
 
-CTRL -> COMP : suggestedVaccineType = getSuggestedVaccineType()
+CTRL -> COMP : vaccineTypeStore = getVaccineTypeStore()
 activate COMP
-deactivate CTRL
 deactivate COMP
+
+CTRL -> COMP : vaccineTypeCode = getOngoingOutbreakVaccineTypeCode()
+activate COMP
+deactivate COMP
+
+CTRL -> VACSTORE : vaccineType = getVaccineTypeCode()
+activate VACSTORE
+deactivate VACSTORE
+
+CTRL --> UI : vaccineType
+deactivate CTRL
 
 UI --> RECEPT : shows suggested vaccine type and asks to accept it
 deactivate UI
 
 RECEPT -> UI : accepts the suggested vaccine type
 activate UI
+
+UI -> CTRL : checkAdministrationProcessForVaccineType(vaccineType)
+activate CTRL
+deactivate CTRL
 
 opt declines the suggested vaccine type
 UI -> CTRL : getListOfVaccineTypes()
