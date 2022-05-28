@@ -2,6 +2,7 @@ package app.controller;
 
 import java.util.List;
 import app.domain.model.Company;
+import app.domain.model.VaccinationCenter;
 import app.domain.model.store.VaccinationCenterStore;
 import app.dto.VaccinationCenterListDTO;
 import app.session.EmployeeSession;
@@ -21,8 +22,8 @@ public class SelectEmployeeVaccinationCenterController {
     return vaccinationCenterStore.exists(vaccinationCenter.getPhone());
   }
 
-  public void selectVaccinationCenter(VaccinationCenterListDTO vaccinationCenter,
-      EmployeeSession employeeSession) {
-    employeeSession.setVaccinationCenter(vaccinationCenter);
+  public void selectVaccinationCenter(VaccinationCenterListDTO vaccinationCenter, EmployeeSession employeeSession) {
+    VaccinationCenter center = vaccinationCenterStore.getVaccinationCenterWithEmail(vaccinationCenter.getEmail());
+    employeeSession.setVaccinationCenter(center);
   }
 }

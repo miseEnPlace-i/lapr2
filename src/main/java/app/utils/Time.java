@@ -2,6 +2,9 @@ package app.utils;
 
 import java.util.Calendar;
 
+/**
+ * @author Tomás Lopes <1211289@isep.ipp.pt>
+ */
 public class Time {
   private int hours;
   private int minutes;
