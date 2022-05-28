@@ -35,8 +35,8 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
 
     VaccineType vaccineType = ctrl.getSuggestedVaccineType();
 
-    boolean accepted = showSuggestedVaccineType(vaccineType);
-    boolean isEligible = isUserEligibleForVaccine(vaccineType, this.snsNumber);
+    boolean accepted = ctrl.showSuggestedVaccineType(vaccineType);
+    boolean isEligible = ctrl.isUserEligibleForVaccine(vaccineType, this.snsNumber);
 
     if (!accepted || !isEligible) {
 
@@ -51,7 +51,7 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
       }
     }
 
-    if (userHasAppointmentForVaccineType(vaccineType, this.snsNumber)) {
+    if (ctrl.userHasAppointmentForVaccineType(vaccineType, this.snsNumber)) {
       throw new IllegalArgumentException("You can not have two appointments for the same vaccine type.");
     }
 
@@ -90,66 +90,13 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
   public VaccinationCenter checkUserTakenVaccinesAndSelectsCenter(VaccineType vaccineType) {
     VaccinationCenter center = null;
 
-    if (isUserEligibleForVaccine(vaccineType, this.snsNumber)) {
+    if (ctrl.isUserEligibleForVaccine(vaccineType, this.snsNumber)) {
       center = selectVaccinationCenterWithVaccineType(vaccineType);
     } else {
       throw new IllegalArgumentException("You are not eligible for any vaccine of this type.");
     }
 
     return center;
-  }
-
-  /**
-   * Shows suggested vaccine type and asks to select one option
-   * 
-   * @param vt the vaccine type suggested by the system
-   * @return "true" if accepted, "false" otherwise
-   */
-  public boolean showSuggestedVaccineType(VaccineType vt) {
-    System.out.println("\nSuggested Vaccine Type:\n");
-
-    System.out.println(vt.getDescription());
-
-    List<String> options = new ArrayList<String>();
-    options.add("Yes, accept suggestion.");
-    options.add("No, choose other vaccine type.");
-    int index = Utils.showAndSelectIndex(options, "\nSelect an option: (1 or 2)  ");
-
-    return index == 0;
-  }
-
-  /**
-   * Checks if user is eligible for a certain vaccine type. It checks if it has already taken any vaccine from certain
-   * vaccine type: If it has taken, BY NOW THIS DOES NOTHING If it has not taken, checks if there is any vaccine with an
-   * administration process that includes his age.
-   * 
-   * @param vaccineType the vaccine type to be checked
-   * @return "true" if user is eligible, "false" otherwise
-   */
-  private boolean isUserEligibleForVaccine(VaccineType vaccineType, String number) {
-    if (userHasTakenVaccineType(vaccineType, number)) {
-      // ctrl.getVaccinesByType(vaccineType);
-      // ctrl.checkAdministrationProcessForNextDose();
-      // vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
-      return false;
-    } else {
-      if (ctrl.checkAdministrationProcessForVaccineType(vaccineType, number)) {
-        return true;
-      } else {
-        return false;
-      }
-
-    }
-  }
-
-  /**
-   * Checks if the user has already taken a specific vaccine type
-   * 
-   * @param vt the vaccineType to be checked
-   * @return "true" if already taken, "false" otherwise
-   */
-  private boolean userHasTakenVaccineType(VaccineType vt, String number) {
-    return ctrl.userHasTakenAnyVaccineFromVaccineType(vt, number);
   }
 
   /**
@@ -176,7 +123,7 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
         VaccineTypeDTO vtDto = (VaccineTypeDTO) selectedVt;
         vaccineType = ctrl.getVaccineTypeByCode(vtDto.getCode());
 
-        if (isUserEligibleForVaccine(vaccineType, this.snsNumber)) {
+        if (ctrl.isUserEligibleForVaccine(vaccineType, this.snsNumber)) {
           accepted = true;
           return vaccineType;
         } else {
@@ -271,16 +218,6 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
     } while (!accepted);
 
     return null;
-  }
-
-  /**
-   * Checks if user has an appointment for a certain vaccine type.
-   * 
-   * @param vaccineType the vaccine type to be checked
-   * @return true if has an appointment, false otherwise
-   */
-  private boolean userHasAppointmentForVaccineType(VaccineType vaccineType, String number) {
-    return ctrl.userHasAppointmentForVaccineType(vaccineType, number);
   }
 }
 

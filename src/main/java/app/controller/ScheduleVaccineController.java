@@ -20,6 +20,7 @@ import app.dto.VaccineTypeDTO;
 import app.mapper.AppointmentInsertMapper;
 import app.mapper.VaccineTypeMapper;
 import app.service.TimeUtils;
+import app.ui.console.utils.Utils;
 import app.utils.Time;
 
 /**
@@ -156,5 +157,48 @@ public class ScheduleVaccineController implements IRegisterController<Appointmen
   @Override
   public AppointmentInsertDTO getRegisteredObject() {
     return AppointmentInsertMapper.toDto(appointment);
+  }
+
+  /**
+   * Shows suggested vaccine type and asks to select one option
+   * 
+   * @param vt the vaccine type suggested by the system
+   * @return "true" if accepted, "false" otherwise
+   */
+  public boolean showSuggestedVaccineType(VaccineType vt) {
+    System.out.println("\nSuggested Vaccine Type:\n");
+
+    System.out.println(vt.getDescription());
+
+    List<String> options = new ArrayList<String>();
+    options.add("Yes, accept suggestion.");
+    options.add("No, choose other vaccine type.");
+    int index = Utils.showAndSelectIndex(options, "\nSelect an option: (1 or 2)  ");
+
+    return index == 0;
+  }
+
+
+  /**
+   * Checks if user is eligible for a certain vaccine type. It checks if it has already taken any vaccine from certain
+   * vaccine type: If it has taken, BY NOW THIS DOES NOTHING If it has not taken, checks if there is any vaccine with an
+   * administration process that includes his age.
+   * 
+   * @param vaccineType the vaccine type to be checked
+   * @return "true" if user is eligible, "false" otherwise
+   */
+  public boolean isUserEligibleForVaccine(VaccineType vaccineType, String number) {
+    if (userHasTakenAnyVaccineFromVaccineType(vaccineType, number)) {
+      // ctrl.getVaccinesByType(vaccineType);
+      // ctrl.checkAdministrationProcessForNextDose();
+      // vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
+      return false;
+    } else {
+      if (checkAdministrationProcessForVaccineType(vaccineType, number)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
 }
