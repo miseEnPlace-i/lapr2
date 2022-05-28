@@ -331,7 +331,7 @@ public abstract class VaccinationCenter {
    * @return true if center is open, false otherwise
    */
   public boolean isOpenAt(Time hours) {
-    return hours.isBetween(openingHours, closingHours);
+    return hours.isBetween(openingHours, getRealClosingHours());
   }
 
   /**
@@ -340,7 +340,7 @@ public abstract class VaccinationCenter {
    * 
    * It is calculated adding the closing hours of the center with the slot duration.
    */
-  public String getRealClosingHours() {
+  public Time getRealClosingHours() {
     int openingMinutesOfDay = openingHours.convertToMinutes();
     int realClosingMinutesOfDay = openingMinutesOfDay + (appointmentList.getNOfSlotsPerDay() * slot.getDuration());
 
@@ -349,7 +349,7 @@ public abstract class VaccinationCenter {
 
     Time realClosingHours = new Time(hours, minutes);
 
-    return realClosingHours.toString();
+    return realClosingHours;
   }
 
   public boolean hasAvailabilityInSlot(Calendar date) {
