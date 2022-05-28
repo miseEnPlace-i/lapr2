@@ -93,6 +93,8 @@ class Time {
   closingHours
 }
 
+class Notification {}
+
 DoseInformation "*" -- "1" AdministrationProccess : has <
 
 Vaccine "*" -- "1" VaccineType : has <
@@ -113,8 +115,7 @@ HealthCareCenter "*" -- "1" ARS : belongs to >
 
 Appointment "*" -- "1" VaccinationCenter : is held in >
 Appointment "1" -- "1" VaccineType : has a specefic >
-Appointment "1" -- "0..1" SMSSender : triggers >
-Appointment "1" -- "0..1" EmailSender : triggers >
+Appointment "1" -- "0..1" Notification : triggers >
 
 Receptionist "1" -- "*" WaitingRoom : manages >
 Receptionist "1" -- "*" ArrivedUsersList : manages >
@@ -157,6 +158,10 @@ CenterCoordinator "1" -- "*" VaccinationReport : analyses >
 CenterCoordinator "1" -- "*" VaccinationReport : generates >
 
 Nurse "1" -- "*" AdministrationProccess : checks >
+
+Notification <|-- SMSSender
+Notification <|-- EmailSender
+Notification <|-- ConsoleSender
 
 AdverseReaction "*" -- "1" Appointment : has <
 
