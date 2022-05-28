@@ -3,6 +3,8 @@ package app.domain.model;
 import java.util.ArrayList;
 import java.util.List;
 import app.service.FileUtils;
+import app.service.readCSV.ICSVReader;
+import app.service.readCSV.MissingHeaderCSVReader;
 
 /**
  * Vaccination Center mapper
@@ -17,19 +19,19 @@ public class CSVReader {
         this.path = path;
     }
 
-    public List<String[]> readSNSUserData(){
+    public List<String[]> readSNSUserData() throws ClassNotFoundException, InstantiationException, IllegalAccessException{
         List<String> fileData = FileUtils.readFromFile(this.path);
 
+        
         //checks separator
-        String separator = fileData.get(0).contains(";") ? ";" : ",";
+        String className = fileData.get(0).contains(",") ? "app.service.readCSV.MissingHeaderCSVReader" : "app.service.readCSV.HeaderCSVReader";
 
-        List<String[]> result = new ArrayList<String[]>();
+        Class<?> oClass = Class.forName(className);
 
-        //if the separator is ";" then the file contains a header
-        for ( int i = separator.equals(";") ? 0 : 1 ; i < fileData.size(); i++) { 
-            //splits the user data around the separator and adds the data to the result list
-            result.add(fileData.get(i).split(separator)); 
-        }
+        ICSVReader reader = (ICSVReader) oClass.newInstance();
+
+        List<String[]> result = reader.read(fileData);
+
 
         return result;
 

@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.List;
 import app.controller.App;
 import app.controller.UploadUsersFromFileController;
+import app.domain.model.SNSUser;
 import app.dto.SNSUserRegisterInfoDTO;
 import app.ui.console.utils.Utils;
 
@@ -26,22 +27,25 @@ public class UploadUsersFromFileUI implements Runnable {
 
     insertData(); // asks to insert file path and instantiates CSVReader
 
-    List<SNSUserRegisterInfoDTO> userRegisterInfoList = null;
-    try {
-      userRegisterInfoList = ctrl.readAndUpload();
-    } catch (ParseException e) {
-      e.printStackTrace();
-    }
+    List<SNSUser> userList = null;
+  
+      try {
+        userList = ctrl.readAndUpload();
+      } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | ParseException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    
 
-    if (userRegisterInfoList == null) {
+    if (userList == null) {
       System.out.println("No users registered!");
     } else {
-      displayRegisteredUsers(userRegisterInfoList);
+      displayRegisteredUsers(userList);
     }
   }
 
-  private void displayRegisteredUsers(List<SNSUserRegisterInfoDTO> userRegisterInfoList) {
-    Utils.showList(userRegisterInfoList, "\nUser Successfully registered:");
+  private void displayRegisteredUsers(List<SNSUser> userList) {
+    Utils.showList(userList, "\nRegistered Users:\n");
   }
 
   public void insertData() {

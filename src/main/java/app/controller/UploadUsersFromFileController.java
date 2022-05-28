@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.List;
 import app.domain.model.CSVReader;
 import app.domain.model.Company;
+import app.domain.model.SNSUser;
 import app.domain.model.store.SNSUserStore;
 import app.dto.SNSUserRegisterInfoDTO;
 
@@ -23,18 +24,19 @@ public class UploadUsersFromFileController {
   }
 
   public CSVReader createCsvReader(String filePathName) {
-    return new CSVReader(filePathName);
+    this.csvReader = new CSVReader(filePathName);
+    return csvReader;
   }
 
-  public List<SNSUserRegisterInfoDTO> readAndUpload() throws ParseException {
+  public List<SNSUser> readAndUpload() throws ParseException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
     SNSUserStore store = this.company.getSNSUserStore();
 
     List<String[]> userDataList = csvReader.readSNSUserData();
 
-    List<SNSUserRegisterInfoDTO> userRegisterInfoList = store.registerListOfUsers(userDataList);
+    List<SNSUser> userList = store.registerListOfUsers(userDataList);
 
-    return userRegisterInfoList;
+    return userList;
   }
 
 }
