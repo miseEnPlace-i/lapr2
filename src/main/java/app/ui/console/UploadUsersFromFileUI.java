@@ -5,7 +5,6 @@ import java.util.List;
 import app.controller.App;
 import app.controller.UploadUsersFromFileController;
 import app.domain.model.SNSUser;
-import app.dto.SNSUserRegisterInfoDTO;
 import app.ui.console.utils.Utils;
 
 /**
@@ -45,7 +44,20 @@ public class UploadUsersFromFileUI implements Runnable {
   }
 
   private void displayRegisteredUsers(List<SNSUser> userList) {
-    Utils.showList(userList, "\nRegistered Users:\n");
+    System.out.println("\nRegistered Users:\n");
+
+    int index = 0;
+    for (Object o : userList) {
+      if(o==null){
+        System.out.println(index + ". vailed to regist");
+      }else{
+      index++;
+
+      System.out.println(index + ". " + o.toString());
+      }
+    }
+    System.out.println("");
+    System.out.println("0 - Cancel");
   }
 
   public void insertData() {

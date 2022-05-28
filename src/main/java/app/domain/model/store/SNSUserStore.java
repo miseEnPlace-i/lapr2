@@ -17,6 +17,7 @@ import app.service.password.PasswordGeneratorFactory;
 import app.service.sender.ISender;
 import app.service.sender.SenderFactory;
 import javafx.print.PrintColor;
+import javafx.scene.shape.TriangleMesh;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
 /**
@@ -183,17 +184,21 @@ public class SNSUserStore {
   public List<SNSUser> registerListOfUsers(List<String[]> userDataList) throws ParseException {
     List<SNSUser> userList = new ArrayList<SNSUser>();
 
-    for (int i = 0; i < userDataList.size(); i++) {
-      
-      SNSUserDTO userDto = SNSUserMapper.toDto(userDataList.get(i));
-
-      SNSUser snsUser = createSNSUser(userDto);
-      validateSNSUser(snsUser);
-
-      saveSNSUser(snsUser);
-
-      userList.add(snsUser);
-    }
+      for (int i = 0; i < userDataList.size(); i++) {
+        try{
+          SNSUserDTO userDto = SNSUserMapper.toDto(userDataList.get(i));
+    
+          SNSUser snsUser = createSNSUser(userDto);
+          validateSNSUser(snsUser);
+    
+          saveSNSUser(snsUser);
+    
+          userList.add(snsUser);
+        }catch(Exception e){
+          userList.add(null);
+        }
+      }
+    
 
     return userList;
   }
