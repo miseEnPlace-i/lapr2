@@ -153,36 +153,30 @@ Other software classes (i.e. Pure Fabrication) identified:
     	Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
     }
 
-_It is also recommended to organize this content by subsections._
-
 # 5. Construction (Implementation)
 
-## Class CreateTaskController
+## Class ListUsersWaitingRoomController
 
-    	public boolean createTask(String ref, String designation, String informalDesc,
-    		String technicalDesc, Integer duration, Double cost, Integer catId)() {
+    public ListUsersWaitingRoomController(Company company, EmployeeSession nurseSession) throws NotAuthorizedException {
+      if (!nurseSession.hasCenter()) throw new NotAuthorizedException("Nurse is not logged in");
+      this.nurseSession = nurseSession;
+      this.vaccinationCenterStore = company.getVaccinationCenterStore();
+    }
 
-    		Category cat = this.platform.getCategoryById(catId);
+## Class WaitingRoom
 
-    		Organization org;
-    		// ... (omitted)
+    public class WaitingRoom implements Iterable<Arrival> {
+        Queue<Arrival> waitingRoom;
 
-    		this.task = org.createTask(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
+        public WaitingRoom() {
+          this.waitingRoom = new LinkedList<Arrival>();
+        }
 
-    		return (this.task != null);
-    	}
-
-## Class Organization
-
-    	public Task createTask(String ref, String designation, String informalDesc,
-    		String technicalDesc, Integer duration, Double cost, Category cat)() {
-
-
-    		Task task = new Task(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
-    		if (this.validateTask(task))
-    			return task;
-    		return null;
-    	}
+        @Override
+        public Iterator<Arrival> iterator() {
+          return waitingRoom.iterator();
+        }
+    }
 
 # 6. Integration and Demo
 
