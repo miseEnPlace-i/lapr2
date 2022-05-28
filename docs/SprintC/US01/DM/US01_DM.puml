@@ -4,7 +4,11 @@ skinparam classAttributeIconSize 0
 
 class Appointment {}
 
-class VaccineType {}
+class VaccineType {
+  -code
+  -description
+  -technology
+}
 
 class SNSUser {
   -citizenCard
@@ -24,22 +28,49 @@ class VaccinationCenter {
   -phoneNumber
   -faxNumber
   -websiteAddress
-  -openingHours  
-  -closingHours
-  -slotDuration
-  -maximumVaccinesPerSlot
   -coordinator
 }
+
+class Time {}
+
+class Slot {}
+
+class CommunityMassVaccinationCenter {}
+
+class HealthCareCenter {}
 
 class Company {
   -designation
 }
 
+class Notification {}
+
+class ConsoleSender {}
+
+class EmailSender {}
+
+class SMSSender {}
+
 Appointment "1"  -- "1" VaccineType : has >
 Appointment "*" -- "1" VaccinationCenter : is held at >
+Appointment "1" -- "0..1" Notification : triggers >
 
 Company "1" -- "*" VaccinationCenter : knows >
 
 SNSUser "1" -- "*" Appointment : schedules >
+
+CommunityMassVaccinationCenter --|> VaccinationCenter
+CommunityMassVaccinationCenter "1" -- "1" VaccineType : administers >
+
+VaccinationCenter "1" -- "1" Time : has >
+VaccinationCenter "1" -- "1" Slot : has >
+
+HealthCareCenter --|> VaccinationCenter
+
+ConsoleSender --|> Notification
+
+SMSSender --|> Notification
+
+EmailSender --|> Notification
 
 @enduml

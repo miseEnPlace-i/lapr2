@@ -1,0 +1,214 @@
+@startuml US01_SD
+autonumber
+' hide footbox
+actor "SNS User" as user
+
+participant ":AppointmentUI" as ui
+participant ":App" as app
+participant ":AppointmentController" as controller
+participant "comp\n:Company" as company
+participant "appointmentStore\n:AppointmentStore" as appointmentStore
+participant "appointment\n:Appointment" as appointment
+participant ":SMSSender" as smsSender
+participant "vaccinationCenterStore\n:VaccinationCenterStore" as vacCenterStore
+participant "vaccineTypeStore\n:VaccineTypeStore" as vacTypeStore
+participant "vaccinationCenter\n:VaccinationCenter" as vacCenter
+participant "availableVaccinationCenters\n:List<VaccinationCenter>" as vacCenterList
+participant "vaccine\n:Vaccine" as vaccine
+participant "userHealthData\n:UserHealthData" as userHealthData
+participant "snsUser\n:SNSUser" as snsUser
+participant "snsUserStore\n:SNSUserStore" as snsUserStore
+participant "userSession\n:UserSession" as userSession
+participant ":VaccineTypeMapper" as vacTypeMapper
+participant ":VaccinationCenterMapper" as vacCenterMapper
+participant ":AppointmentDto" as appointmentDto
+participant "vaccineTypes\n:List<VaccineType>"
+participant "vaccineTypesDto\n:List<VaccineTypeDto>"
+participant "administeredVaccines\n:List<Vaccine>"
+
+activate user
+
+user -> ui : asks to schedule a vaccine
+
+activate ui
+    ui -> app : app = getInstance()
+    activate app
+    deactivate app
+    ui -> app : company = app.getCompany()
+    activate app
+    deactivate app
+    ui -> controller** : create(company)
+    ui --> user : requests data (date)
+deactivate ui
+
+user -> ui : types requested data
+
+activate ui
+    ui -> controller : suggestedVaccineType = getSuggestedVaccineType()
+    activate controller
+        controller -> company : suggestedVaccineType = getSuggestedVaccineType()
+        activate company
+        deactivate company
+    deactivate controller
+    ui --> user : shows suggested vaccine type and asks to accept it
+deactivate ui
+
+user -> ui : accepts the suggested vaccine type
+
+opt declines the suggested vaccine type
+    activate ui
+        ui -> controller : getListOfVaccineTypes()
+        activate controller
+            controller -> company : vaccineTypeStore = getVaccineTypeStore()
+            activate company
+            deactivate company
+            controller -> vacTypeStore : vaccineTypes = getVaccineTypes()
+            activate vacTypeStore
+            deactivate vacTypeStore
+            controller -> vacTypeMapper : vaccineTypesDto = toDto(vaccineTypes)
+            activate vacTypeMapper
+            deactivate vacTypeMapper
+        deactivate controller
+        ui --> user : shows a list of all vaccine types and asks to select one
+    deactivate ui
+
+user -> ui : selects a vaccine type
+
+activate ui
+end
+    ui -> controller : getListOfVaccinationCentersWithVaccineType(vaccineType)
+    activate controller
+        controller -> company : vaccinationCenterStore = getVaccinationCenterStore()
+        activate company
+        deactivate company
+        controller -> vacCenterStore : availableVaccinationCenters = getVaccinationCentersByVaccineType(vaccineType)
+        activate vacCenterStore
+            vacCenterStore --> vacCenterList**
+            loop for each vaccinationCenter
+                vacCenterStore -> vacCenter : administeredVaccines = getAdministeredVaccines()
+                activate vacCenter
+                deactivate vacCenter
+                loop for each administeredVaccine
+                    vacCenterStore -> vaccine : v = hasVaccineType(vaccineType)
+                    activate vaccine
+                        vaccine --> vacCenterStore : true/false
+                    deactivate vaccine
+                    alt v == true
+                        vacCenterStore -> vacCenterList : add(vaccinationCenter)
+                        activate vacCenterList
+                        deactivate vacCenterList
+                    end
+                end
+            end
+        deactivate vacCenterStore
+        controller -> vacCenterMapper : availableVaccinationCentersDto = toDto(availableVaccinationCenters)
+        activate vacCenterMapper
+        deactivate vacCenterMapper
+    deactivate controller
+    ui --> user : shows a list of all available vaccination centers and asks to select one
+deactivate ui
+
+user -> ui : selects a vaccination center
+
+activate ui
+    ui --> user : requests to send information about the scheduled vaccine
+deactivate ui
+
+user -> ui : accepts or declines the request
+
+activate ui
+    ui -> controller : createAppointment(appointmentDto)
+    note right
+        appointmentDto has all the information 
+        needed to create an appointment (date, 
+        vaccine type, vaccination center, sms)
+    end note
+    activate controller
+        controller -> company : appointmentStore = getAppointmentStore()
+        activate company
+        deactivate company
+        controller -> company : userSession = getUserSession()
+        activate company
+        deactivate company
+        controller -> company : snsUserStore = getSNSUserStore()
+        activate company
+        deactivate company
+        controller -> appointmentStore : appointment = createAppointment(appointmentDto)
+        activate appointmentStore
+            appointmentStore -> userSession : email = getUserId()
+            activate userSession
+            deactivate userSession
+            appointmentStore -> snsUserStore : snsUser = findUserByEmail(email)
+            activate snsUserStore
+            deactivate snsUserStore
+            appointmentStore -> snsUser : snsUserNumber = getSnsNumber()
+            activate snsUser
+            deactivate snsUser
+            appointmentStore -> appointmentDto : date = getDate()
+            activate appointmentDto
+            deactivate appointmentDto
+            appointmentStore -> appointmentStore : checkDuplicateAppointment(snsUserNumber, date)
+            activate appointmentStore
+            deactivate appointmentStore
+            appointmentStore -> appointmentDto : vaccineType = getVaccineType()
+            activate appointmentDto
+            deactivate appointmentDto
+            appointmentStore -> snsUser : userHealthData = getUserHealthData()
+            activate snsUser
+            deactivate snsUser
+            appointmentStore -> userHealthData : isEligibleForVaccine(vaccineType)
+            activate userHealthData
+            deactivate userHealthData
+            appointmentStore -> appointmentDto : vaccinationCenter = getVaccinationCenter()
+            activate appointmentDto
+            deactivate appointmentDto
+            appointmentStore -> vacCenter : checkAvailability(date, vaccineType)
+            activate vacCenter
+            deactivate vacCenter
+            appointmentStore -> appointment** : create(snsUserNumber, date, vaccineType, vaccinationCenter)
+        deactivate appointmentStore
+    deactivate controller
+    ui --> user : shows all data and requests confirmation
+deactivate ui
+
+user -> ui : confirms the data
+
+activate ui 
+    ui -> controller : saveAppointment()
+    activate controller
+        controller -> appointmentStore : saveAppointment(appointment)
+        activate appointmentStore
+            appointmentStore -> appointmentStore : validateAppointment(appointment)
+            activate appointmentStore
+            deactivate appointmentStore
+            appointmentStore -> appointment : vaccinationCenter = getVaccinationCenter()
+            activate appointment
+            deactivate appointment
+            appointmentStore -> vacCenter : addAppointmentToList(appointment)
+            activate vacCenter
+            deactivate vacCenter         
+            appointmentStore -> appointmentStore : addAppointment(appointment)
+            activate appointmentStore
+            deactivate appointmentStore
+            appointmentStore -> appointment : sendSMS()
+            activate appointment
+                alt sms == true
+                    appointment -> appointment : smsContent = getSmsContent()
+                    activate appointment
+                    deactivate appointment
+                    appointment -> snsUser : phoneNumber = getPhoneNumber()
+                    activate snsUser
+                    deactivate snsUser
+                    appointment -> smsSender : sendSMS(phoneNumber, smsContent)
+                    activate smsSender
+                    deactivate smsSender
+                end
+            deactivate appointment
+        deactivate appointmentStore
+    deactivate controller
+    ui --> user : informs operation success
+deactivate ui
+
+deactivate user
+
+@enduml
