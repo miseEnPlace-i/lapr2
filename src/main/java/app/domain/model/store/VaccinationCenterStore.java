@@ -193,11 +193,9 @@ public class VaccinationCenterStore {
   }
 
   public VaccinationCenter getVaccinationCenterByEmail(String email) {
-    for (VaccinationCenter center : vaccinationCenters) {
-      if (center.getEmail().equals(email)) {
-        return center;
-      }
-    }
+    for (VaccinationCenter center : vaccinationCenters)
+      if (center.getEmail().equals(email)) return center;
+
     return null;
   }
 
