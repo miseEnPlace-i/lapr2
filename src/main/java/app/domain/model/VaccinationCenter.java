@@ -314,7 +314,6 @@ public abstract class VaccinationCenter {
   public boolean equals(Object obj) {
     VaccinationCenter center = (VaccinationCenter) obj;
     if (obj == null) return false;
-    if (obj == this) return false;
 
     // name, email & phone number should be unique for each Center
     if (this.name.equals(center.name)) return true;
