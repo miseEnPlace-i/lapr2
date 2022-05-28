@@ -1,14 +1,18 @@
 package app.domain.model.list;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import app.domain.model.Appointment;
-import app.domain.model.INotifiable;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
+import app.dto.UserNotificationDTO;
 import app.exception.AppointmentNotFoundException;
+import app.mapper.UserNotificationMapper;
+import app.service.sender.ISender;
+import app.service.sender.SenderFactory;
 import app.utils.Time;
 
 /**
@@ -19,7 +23,7 @@ import app.utils.Time;
  * @author Tomás Russo <1211288@isep.ipp.pt>
  * @author Tomás Lopes <1211289@isep.ip.pt>
  */
-public class AppointmentScheduleList implements INotifiable {
+public class AppointmentScheduleList {
   private VaccinationCenter vaccinationCenter;
   private Map<Calendar, Appointment[][]> appointments;
   private int slotsPerDay = 0;
@@ -152,7 +156,42 @@ public class AppointmentScheduleList implements INotifiable {
       appointments.put(key, slots);
     }
 
-    sendNotification();
+    if (!appointment.isSms()) return;
+
+    String message = generateMessage(appointment);
+
+    SNSUser appointmentUser = appointment.getSnsUser();
+    String email = appointmentUser.getEmail();
+    String phone = appointmentUser.getPhoneNumber();
+
+    UserNotificationDTO notificationDto = UserNotificationMapper.toDto(email, phone, message);
+
+    sendNotification(notificationDto);
+  }
+
+  private String generateMessage(Appointment appointment) {
+    StringBuilder sb = new StringBuilder();
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+    sb.append("\nYou have an appointment scheduled with the following data:\n\n");
+    sb.append(appointment.getVaccineType().getDescription());
+    sb.append("\nCenter:\n");
+    sb.append(String.format("  Name: %s%n", vaccinationCenter.getName()));
+    sb.append(String.format("  Address: %s%n", vaccinationCenter.getAddress()));
+    sb.append(String.format("Date: %s%n", sdf.format(appointment.getDate().getTime())));
+
+    return sb.toString();
+  }
+
+  private void sendNotification(UserNotificationDTO notificationDto) {
+    ISender sender = SenderFactory.getSender();
+
+    try {
+      sender.send(notificationDto);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      e.printStackTrace();
+    }
   }
 
   private boolean existsScheduleForDay(Calendar date) {
@@ -169,16 +208,14 @@ public class AppointmentScheduleList implements INotifiable {
     Calendar key = generateKeyFromDate(date);
     int slotIndex = getAppointmentSlotIndex(date);
 
-    if (appointments.containsKey(key)) {
-      Appointment[][] slots = appointments.get(key);
+    if (!existsScheduleForDay(key)) return true;
 
-      int i = getAvailableIndexInSlot(slots[slotIndex]);
+    Appointment[][] slots = appointments.get(key);
+    int i = getAvailableIndexInSlot(slots[slotIndex]);
 
-      if (i == -1) return false;
-      else return true;
-    } else {
-      return true;
-    }
+    if (i == -1) return false;
+
+    return true;
   }
 
   /**
@@ -224,7 +261,6 @@ public class AppointmentScheduleList implements INotifiable {
    * @return the appointment of the user with the given sns number
    * @throws AppointmentNotFoundException if the user has no appointment
    */
-
   public Appointment hasAppointmentToday(String snsNumber) throws AppointmentNotFoundException {
     // get today's appointments
     Calendar key = this.generateKeyFromDate(Calendar.getInstance());

@@ -116,6 +116,8 @@ public class Time {
    * @return true if the time is between the given times, false otherwise.
    */
   public boolean isBetween(Time startTime, Time endTime) {
+    if (equals(startTime) || equals(endTime)) return true;
+
     return isAfter(startTime) && isBefore(endTime);
   }
 
