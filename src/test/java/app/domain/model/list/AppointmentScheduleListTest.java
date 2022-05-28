@@ -28,7 +28,7 @@ public class AppointmentScheduleListTest {
   @Before
   public void setup() {
     Employee coordinator = new Employee("123456789", "name", "+351212345678", "email@email.com", "address", "000000000ZZ4", "ROLE");
-
+    vaccineType = new VaccineType("12345", "description", "technology");
     Time openingHours = new Time(10, 0);
     Time closingHours = new Time(11, 0);
     Slot slot = new Slot(5, 5);

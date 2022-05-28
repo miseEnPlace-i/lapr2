@@ -156,6 +156,8 @@ public class AppointmentScheduleList {
       appointments.put(key, slots);
     }
 
+    if (!appointment.isSms()) return;
+
     String message = generateMessage(appointment);
 
     SNSUser appointmentUser = appointment.getSnsUser();
@@ -171,8 +173,8 @@ public class AppointmentScheduleList {
     StringBuilder sb = new StringBuilder();
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-    sb.append("You have an appointment scheduled with the following data:\n");
-    sb.append(appointment.getVaccineType());
+    sb.append("\nYou have an appointment scheduled with the following data:\n\n");
+    sb.append(appointment.getVaccineType().getDescription());
     sb.append("\nCenter:\n");
     sb.append(String.format("  Name: %s%n", vaccinationCenter.getName()));
     sb.append(String.format("  Address: %s%n", vaccinationCenter.getAddress()));
@@ -206,16 +208,14 @@ public class AppointmentScheduleList {
     Calendar key = generateKeyFromDate(date);
     int slotIndex = getAppointmentSlotIndex(date);
 
-    if (appointments.containsKey(key)) {
-      Appointment[][] slots = appointments.get(key);
+    if (!existsScheduleForDay(key)) return true;
 
-      int i = getAvailableIndexInSlot(slots[slotIndex]);
+    Appointment[][] slots = appointments.get(key);
+    int i = getAvailableIndexInSlot(slots[slotIndex]);
 
-      if (i == -1) return false;
-      else return true;
-    } else {
-      return true;
-    }
+    if (i == -1) return false;
+
+    return true;
   }
 
   /**
@@ -261,7 +261,6 @@ public class AppointmentScheduleList {
    * @return the appointment of the user with the given sns number
    * @throws AppointmentNotFoundException if the user has no appointment
    */
-
   public Appointment hasAppointmentToday(String snsNumber) throws AppointmentNotFoundException {
     // get today's appointments
     Calendar key = this.generateKeyFromDate(Calendar.getInstance());
