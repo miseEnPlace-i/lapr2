@@ -174,13 +174,14 @@ public class Utils {
   }
 
   static public Object selectsObject(List list) {
-    int value = Utils.readIntegerFromConsole("Type your option: ");
+    int value = 0;
 
-    if (value == 0) {
-      return null;
-    } else {
-      return list.get(value - 1);
-    }
+    do {
+      value = Utils.readIntegerFromConsole("Type your option: ");
+    } while (value < 0 || value > list.size());
+
+    if (value == 0) return null;
+    else return list.get(value - 1);
   }
 
   static public int selectsIndex(List list) {

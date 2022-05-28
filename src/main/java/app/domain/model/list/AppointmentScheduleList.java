@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import app.domain.model.Appointment;
+import app.domain.model.INotifiable;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
@@ -18,7 +19,7 @@ import app.utils.Time;
  * @author Tomás Russo <1211288@isep.ipp.pt>
  * @author Tomás Lopes <1211289@isep.ip.pt>
  */
-public class AppointmentScheduleList {
+public class AppointmentScheduleList implements INotifiable {
   private VaccinationCenter vaccinationCenter;
   private Map<Calendar, Appointment[][]> appointments;
   private int slotsPerDay = 0;
@@ -137,11 +138,10 @@ public class AppointmentScheduleList {
 
     if (slotIndex == -1) throw new IllegalArgumentException("Appointment schedule is not valid.");
 
-    if (appointments.containsKey(key)) {
+    if (existsScheduleForDay(key)) {
       Appointment[][] slots = appointments.get(key);
 
       int i = getAvailableIndexInSlot(slots[slotIndex]);
-
       if (i == -1) throw new IllegalArgumentException("No available slot");
 
       slots[slotIndex][i] = appointment;
@@ -151,6 +151,13 @@ public class AppointmentScheduleList {
       slots[slotIndex][0] = appointment;
       appointments.put(key, slots);
     }
+
+    sendNotification();
+  }
+
+  private boolean existsScheduleForDay(Calendar date) {
+    Calendar key = generateKeyFromDate(date);
+    return appointments.containsKey(key);
   }
 
   /**
