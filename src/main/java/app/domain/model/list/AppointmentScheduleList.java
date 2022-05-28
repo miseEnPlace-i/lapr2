@@ -169,16 +169,14 @@ public class AppointmentScheduleList implements INotifiable {
     Calendar key = generateKeyFromDate(date);
     int slotIndex = getAppointmentSlotIndex(date);
 
-    if (appointments.containsKey(key)) {
-      Appointment[][] slots = appointments.get(key);
+    if (!existsScheduleForDay(key)) return true;
 
-      int i = getAvailableIndexInSlot(slots[slotIndex]);
+    Appointment[][] slots = appointments.get(key);
+    int i = getAvailableIndexInSlot(slots[slotIndex]);
 
-      if (i == -1) return false;
-      else return true;
-    } else {
-      return true;
-    }
+    if (i == -1) return false;
+
+    return true;
   }
 
   /**
@@ -224,7 +222,6 @@ public class AppointmentScheduleList implements INotifiable {
    * @return the appointment of the user with the given sns number
    * @throws AppointmentNotFoundException if the user has no appointment
    */
-
   public Appointment hasAppointmentToday(String snsNumber) throws AppointmentNotFoundException {
     // get today's appointments
     Calendar key = this.generateKeyFromDate(Calendar.getInstance());
