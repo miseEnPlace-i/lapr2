@@ -176,7 +176,7 @@ public class AppointmentScheduleList {
     sb.append("Center:\n");
     sb.append(String.format("  Name: %s%n", vaccinationCenter.getName()));
     sb.append(String.format("  Address: %s%n", vaccinationCenter.getAddress()));
-    sb.append(String.format("Date: %s%n", sdf.format(appointment.getDate())));
+    sb.append(String.format("Date: %s%n", sdf.format(appointment.getDate().getTime())));
 
     return sb.toString();
   }
