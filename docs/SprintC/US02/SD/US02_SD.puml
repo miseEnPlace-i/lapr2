@@ -12,7 +12,7 @@ participant "store\n:SNSUserStore" as USERSTORE
 participant "store\n:VaccinationCenterStore" as CENTERSTORE
 participant "vaccinationCenter\n:VaccinationCenter" as CENTER
 participant "availableVaccinationCenters\n:List<VaccinationCenter>" as LISTCENTER
-participant "vaccine\n:Vaccine" as VACCINE
+participant "store\n:VaccineStore" as VACCINESTORE
 participant "mapper\n:VaccineTypeMapper" as VACTYPEMAPPER
 participant "mapper\n:vaccinationCenterMapper" as VACMAPPER
 participant "mapper\n:AppointmentMapper" as APPMAPPER
@@ -23,6 +23,7 @@ participant "userHealthData\n:UserHealthData" as USERDATA
 participant "appointment\n:Appointment" as APPOINT
 participant "snsUser\n:SNSUser" as SNSUSER
 participant "vaccinationCenter\n:VaccinationCenter" as VACCENTER
+participant ":TimeUtils" as TIMEUTILS
 participant "vaccinesTypes\n:List<VaccineType>"
 participant "administeredVaccines\n:List<Vaccines>"
 participant "vaccineTypesDto\n:List<VaccineTypeDto>"
@@ -47,8 +48,6 @@ deactivate UI
 
 RECEPT -> UI : types requested data
 activate UI
-
-UI -> CTRL : snsUserStore = getSNSUserStore()
 activate CTRL
 
 CTRL -> COMP : snsUserStore = getSNSUserStore()
@@ -86,11 +85,38 @@ deactivate UI
 RECEPT -> UI : accepts the suggested vaccine type
 activate UI
 
-UI -> CTRL : checkAdministrationProcessForVaccineType(vaccineType)
+UI -> CTRL : isUserEligibleForVaccine(vaccineType,snsNumber)
 activate CTRL
+
+CTRL -> CTRL : checkAdministrationProcessForVaccineType(vaccineType)
+activate CTRL
+
+CTRL -> USERSTORE : findUserByNumber(snsNumber)
+activate USERSTORE
+deactivate USERSTORE
+
+CTRL -> SNSUSER : birthDay = getBirthDay()
+activate SNSUSER
+deactivate SNSUSER
+
+CTRL -> TIMEUTILS : age = calculateAge(birthDay)
+activate TIMEUTILS
+deactivate TIMEUTILS
+
+CTRL -> COMP : vaccineStore = getVaccineStore()
+activate COMP
+deactivate COMP
+
+CTRL -> VACCINESTORE : areVaccinesWithValidAdminProcessWithVaccineType(age,vaccineType)
+activate VACCINESTORE
+deactivate VACCINESTORE
 deactivate CTRL
 
-opt declines the suggested vaccine type
+CTRL --> UI : true/false
+
+deactivate CTRL
+
+opt declines the suggested vaccine type or message 24 returns false
 UI -> CTRL : getListOfVaccineTypes()
 activate CTRL
 
@@ -109,12 +135,12 @@ deactivate CTRL
 
 UI --> RECEPT : shows all vaccine types and asks to select one
 deactivate UI
-end
 
 RECEPT -> UI : selects a vaccine type
 activate UI
+end
 
-UI -> CTRL : getListOfVaccinationCentersWithVaccineType(vaccineType)
+UI -> CTRL : checkUserTakenVaccinesAndSelectsCenter(vaccineType)
 activate CTRL
 
 CTRL -> COMP : vaccinationCenterStore = getVaccinationCenterStore()
