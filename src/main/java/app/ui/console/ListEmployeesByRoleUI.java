@@ -21,7 +21,7 @@ public class ListEmployeesByRoleUI implements Runnable {
   }
 
   public void run() {
-    System.out.println("\nList Employees By Role UI:");
+    System.out.println("\nList Employees By Role:");
 
     List<UserRole> employeeRoles = ctrl.getEmployeeRoles();
 

@@ -1,7 +1,7 @@
 package app.domain.model;
 
 import java.util.Date;
-import app.domain.model.dto.SNSUserDTO;
+import app.dto.SNSUserDTO;
 import app.service.CCFormatVerifier;
 import app.service.FormatVerifier;
 import app.service.TimeUtils;
@@ -10,6 +10,7 @@ import app.service.TimeUtils;
  * SNSUser model class.
  * 
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
+ * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 public class SNSUser {
 
@@ -40,6 +41,8 @@ public class SNSUser {
   // SNS User address
   private String address;
 
+  private HealthData userHealthData;
+
   /**
    * Constructor for SNSUser.
    * 
@@ -68,6 +71,8 @@ public class SNSUser {
     this.phoneNumber = phoneNumber;
     this.email = email;
     this.address = address;
+
+    this.userHealthData = new HealthData(this);
   }
 
   public SNSUser(SNSUserDTO snsUserDTO) {
@@ -120,6 +125,15 @@ public class SNSUser {
 
   public String getAddress() {
     return address;
+  }
+
+  public Vaccine getLastTakenVaccineFromType(VaccineType vaccineType) {
+    return userHealthData.getLastVaccineTakenWithType(vaccineType);
+  }
+
+  public boolean hasTakenAnyVaccineFromVaccineType(VaccineType vaccineType) {
+    if (getLastTakenVaccineFromType(vaccineType) == null) return false;
+    else return true;
   }
 
   @Override
@@ -211,5 +225,17 @@ public class SNSUser {
     sb.append(String.format("Address: %s\n", this.address));
 
     return sb.toString();
+  }
+
+  public void addAppointmentToList(Appointment appointment) {
+    this.userHealthData.addAppointment(appointment);
+  }
+
+  public boolean hasAppointmentForVaccineType(VaccineType vaccineType) {
+    return this.userHealthData.hasAppointmentForVaccineType(vaccineType);
+  }
+
+  public boolean hasAppointmentForVaccineType(VaccineType vaccineType, String number) {
+    return this.userHealthData.hasAppointmentForVaccineType(vaccineType);
   }
 }

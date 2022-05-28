@@ -1,4 +1,4 @@
-package app.domain.model.dto;
+package app.dto;
 
 import java.util.Date;
 

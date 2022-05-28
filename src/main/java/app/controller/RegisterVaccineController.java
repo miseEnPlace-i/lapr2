@@ -15,7 +15,7 @@ import app.domain.model.store.VaccineTypeStore;
  * 
  * @author Carlos Lopes <1211277@isep.ipp.pt>
  */
-public class RegisterVaccineController implements IRegisterController {
+public class RegisterVaccineController implements IRegisterController<Vaccine> {
   private Company company;
   private VaccineStore vaccineStore;
   private VaccineTypeStore vaccineTypeStore;
@@ -84,12 +84,10 @@ public class RegisterVaccineController implements IRegisterController {
     String result = vac.toString();
     List<AdminProcess> adminProcList = vac.getAdminProcList().getList();
     for (int i = 0; i < adminProcList.size(); i++) {
-      result +=
-          "\n\nAdministration process number: " + (i + 1) + "\n" + adminProcList.get(i).toString();
+      result += "\n\nAdministration process number: " + (i + 1) + "\n" + adminProcList.get(i).toString();
       List<DoseInfo> doseInfoList = adminProcList.get(i).getDoseInfoList().getList();
       for (int j = 0; j < doseInfoList.size(); j++) {
-        result +=
-            "\n\nInformation of dose number: " + (j + 1) + "\n" + doseInfoList.get(j).toString();
+        result += "\n\nInformation of dose number: " + (j + 1) + "\n" + doseInfoList.get(j).toString();
       }
     }
 
@@ -99,5 +97,10 @@ public class RegisterVaccineController implements IRegisterController {
   @Override
   public String getResourceName() {
     return "Vaccine";
+  }
+
+  @Override
+  public Vaccine getRegisteredObject() {
+    return vac;
   }
 }

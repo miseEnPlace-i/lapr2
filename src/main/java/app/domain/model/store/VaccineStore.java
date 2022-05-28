@@ -35,4 +35,28 @@ public class VaccineStore {
   public int size() {
     return vaccines.size();
   }
+
+  public List<Vaccine> getVaccinesByType(VaccineType vt) {
+    List<Vaccine> vaccinesList = new ArrayList<Vaccine>();
+
+    for (Vaccine vaccine : vaccines) {
+      if (vaccine.getVacType().equals(vt)) {
+        vaccinesList.add(vaccine);
+      }
+    }
+
+    return vaccinesList;
+  }
+
+  public boolean areVaccinesWithValidAdminProcessWithVaccineType(int age, VaccineType vaccineType) {
+    List<Vaccine> vaccinesList = getVaccinesByType(vaccineType);
+
+    for (Vaccine vaccine : vaccinesList) {
+      if (vaccine.hasAdministrationProcessForGivenAge(age)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 }

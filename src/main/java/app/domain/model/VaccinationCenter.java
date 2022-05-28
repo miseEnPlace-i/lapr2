@@ -1,24 +1,26 @@
 package app.domain.model;
 
+import java.text.ParseException;
+import java.util.Calendar;
 import app.domain.model.list.AppointmentScheduleList;
 import app.service.FormatVerifier;
+import app.utils.Time;
 
 /**
  * Vaccination Center super class
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  */
-public class VaccinationCenter {
+public abstract class VaccinationCenter {
   private String name;
   private String address;
   private String email;
   private String phoneNum;
   private String faxNum;
   private String webAddress;
-  private String openingHours;
-  private String closingHours;
-  private int slotDuration;
-  private int maxVacSlot;
+  private Time openingHours;
+  private Time closingHours;
+  private Slot slot;
   private Employee coordinator;
   private WaitingRoom waitingRoom;
   private AppointmentScheduleList appointmentList;
@@ -35,13 +37,11 @@ public class VaccinationCenter {
    * @param openingHours the vaccination center opening hours
    * @param closingHours the vaccination center closing hours
    * @param slotDuration the vaccination center slot duration
-   * @param maxVacSlot the vaccination center maximum vaccines per slot
+   * @param maxVaccinesPerSlot the vaccination center maximum vaccines per slot
    * @param coordinator the vaccination center coordinator
    */
-  public VaccinationCenter(String name, String address, String email, String phoneNum,
-      String faxNum, String webAddress, String openingHours, String closingHours, int slotDuration,
-      int maxVacSlot, Employee coordinator) {
-
+  public VaccinationCenter(String name, String address, String email, String phoneNum, String faxNum, String webAddress, Time openingHours, Time closingHours,
+      Slot slot, Employee coordinator) {
     setName(name);
     setAddress(address);
     setEmail(email);
@@ -50,8 +50,7 @@ public class VaccinationCenter {
     setWebAddress(webAddress);
     setOpeningHours(openingHours);
     setClosingHours(closingHours);
-    setSlotDuration(slotDuration);
-    setMaxVacSlot(maxVacSlot);
+    setSlot(slot);
     setCoordinator(coordinator);
     this.waitingRoom = new WaitingRoom();
     this.appointmentList = new AppointmentScheduleList(this);
@@ -103,7 +102,7 @@ public class VaccinationCenter {
    * @return the maximum number of vaccines given per slot
    */
   public int getMaxVacSlot() {
-    return maxVacSlot;
+    return slot.getMaxVaccinesPerSlot();
   }
 
   /**
@@ -125,7 +124,7 @@ public class VaccinationCenter {
    * 
    * @return the opening hours.
    */
-  public String getOpeningHours() {
+  public Time getOpeningHours() {
     return this.openingHours;
   }
 
@@ -134,7 +133,7 @@ public class VaccinationCenter {
    * 
    * @return the closing hours.
    */
-  public String getClosingHours() {
+  public Time getClosingHours() {
     return this.closingHours;
   }
 
@@ -144,7 +143,7 @@ public class VaccinationCenter {
    * @return the slot duration.
    */
   public int getSlotDuration() {
-    return this.slotDuration;
+    return this.slot.getDuration();
   }
 
   /**
@@ -250,17 +249,7 @@ public class VaccinationCenter {
    * 
    * @throws IllegalArgumentException if the opening hours are null, empty or not valid.
    */
-  private void setOpeningHours(String openingHours) {
-    String[] openHours = openingHours.split(":");
-    int hours = Integer.parseInt(openHours[0]);
-    int minutes = Integer.parseInt(openHours[1]);
-
-    if (openingHours == null || openingHours.isEmpty()) {
-      throw new IllegalArgumentException("Opening hours cannot be null or empty.");
-    }
-    if (hours < 0 || hours > 24 || minutes < 0 || minutes > 60) {
-      throw new IllegalArgumentException("Opening hours is not valid.");
-    }
+  private void setOpeningHours(Time openingHours) {
     this.openingHours = openingHours;
   }
 
@@ -268,20 +257,13 @@ public class VaccinationCenter {
    * Sets the center closing hours.
    * 
    * @param closingHours the vaccination center closing hours.
+   * @throws ParseException
    * 
    * @throws IllegalArgumentException if the closing hours are null, empty or not valid.
    */
-  private void setClosingHours(String closingHours) {
-    String[] closHours = closingHours.split(":");
-    int hours = Integer.parseInt(closHours[0]);
-    int minutes = Integer.parseInt(closHours[1]);
+  private void setClosingHours(Time closingHours) {
+    if (!closingHours.isAfter(openingHours)) throw new IllegalArgumentException("Closing hours must be after the opening hours.");
 
-    if (closingHours == null || closingHours.isEmpty()) {
-      throw new IllegalArgumentException("Closing hours cannot be null or empty.");
-    }
-    if (hours < 0 || hours > 24 || minutes < 0 || minutes > 60) {
-      throw new IllegalArgumentException("Closing hours is not valid.");
-    }
     this.closingHours = closingHours;
   }
 
@@ -292,26 +274,8 @@ public class VaccinationCenter {
    * 
    * @throws IllegalArgumentException if the slot duration is null or not valid.
    */
-  private void setSlotDuration(int slotDuration) {
-    if (slotDuration <= 0) {
-      throw new IllegalArgumentException("Slot duration is not valid. Enter a positive number.");
-    }
-    this.slotDuration = slotDuration;
-  }
-
-  /**
-   * Sets the center maximum vaccines per slot.
-   * 
-   * @param maxVacSlot the vaccination center maximum vaccines per slot.
-   * 
-   * @throws IllegalArgumentException if the maximum vaccines per slot are null or not valid.
-   */
-  private void setMaxVacSlot(int maxVacSlot) {
-    if (maxVacSlot <= 0) {
-      throw new IllegalArgumentException(
-          "Maximum number of vaccines per slot is not valid. Enter a positive number.");
-    }
-    this.maxVacSlot = maxVacSlot;
+  private void setSlot(Slot slot) {
+    this.slot = slot;
   }
 
   /**
@@ -343,39 +307,51 @@ public class VaccinationCenter {
     return appointmentList;
   }
 
-  /**
-   * Shows all vaccination center data
-   */
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("Vaccination Center data:\n");
-    sb.append(String.format("Name: %s\n", this.name));
-    sb.append(String.format("Address: %s\n", this.address));
-    sb.append(String.format("Email: %s\n", this.email));
-    sb.append(String.format("Phone number: %s\n", this.phoneNum));
-    sb.append(String.format("Fax number: %s\n", this.faxNum));
-    sb.append(String.format("Web address: %s\n", this.webAddress));
-    sb.append(String.format("Opening hours: %s\n", this.openingHours));
-    sb.append(String.format("Closing hours: %s\n", this.closingHours));
-    sb.append(String.format("Slot duration: %s\n", this.slotDuration));
-    sb.append(String.format("Maximum vaccines per slot: %s\n", this.maxVacSlot));
-    sb.append(String.format("Coordinator: %s\n", this.coordinator.getName()));
+  public abstract String toString();
 
-    return sb.toString();
-  }
 
   @Override
   public boolean equals(Object obj) {
     VaccinationCenter center = (VaccinationCenter) obj;
     if (obj == null) return false;
-    if (obj == this) return false;
 
-    // For now, only email, phone number, fax number should be unique for each Center
+    // name, email & phone number should be unique for each Center
+    if (this.name.equals(center.name)) return true;
     if (this.email.equals(center.email)) return true;
     if (this.phoneNum.equals(center.phoneNum)) return true;
-    if (this.faxNum.equals(center.faxNum)) return true;
 
     return false;
+  }
+
+  /**
+   * Checks if the center is open at a given time.
+   * 
+   * @param hours time (HH:mm) to check
+   * @return true if center is open, false otherwise
+   */
+  public boolean isOpenAt(Time hours) {
+    return hours.isBetween(openingHours, getRealClosingHours());
+  }
+
+  /**
+   * Get the real closing hours of the center. The real closing hours represent the maximum schedule the staff can stay in
+   * the center.
+   * 
+   * It is calculated adding the closing hours of the center with the slot duration.
+   */
+  public Time getRealClosingHours() {
+    int openingMinutesOfDay = openingHours.convertToMinutes();
+    int realClosingMinutesOfDay = openingMinutesOfDay + (appointmentList.getNOfSlotsPerDay() * slot.getDuration());
+
+    int hours = realClosingMinutesOfDay / 60;
+    int minutes = realClosingMinutesOfDay % 60;
+
+    Time realClosingHours = new Time(hours, minutes);
+
+    return realClosingHours;
+  }
+
+  public boolean hasAvailabilityInSlot(Calendar date) {
+    return appointmentList.checkSlotAvailability(date);
   }
 }

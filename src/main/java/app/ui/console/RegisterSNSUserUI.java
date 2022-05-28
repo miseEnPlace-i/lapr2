@@ -21,7 +21,7 @@ public class RegisterSNSUserUI extends RegisterUI<RegisterSNSUserController> {
 
   @Override
   public void insertData() throws IllegalArgumentException, ParseException {
-    System.out.println("\nRegister SNS User UI:");
+    System.out.println("\nRegister SNS User:");
 
     String citizenCard = Utils.readLineFromConsoleWithValidation("Citizen Card (xxxxxxxxxLLx): ",
         FieldToValidate.CITIZEN_CARD);

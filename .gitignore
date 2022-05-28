@@ -48,3 +48,6 @@ Thumbs.db
 *.flv
 *.mov
 *.wmv
+
+# SMS Output File
+SMS.txt

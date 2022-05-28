@@ -1,4 +1,4 @@
-package app.domain.model.dto;
+package app.dto;
 
 public class VaccineTypeDTO {
   private String code;

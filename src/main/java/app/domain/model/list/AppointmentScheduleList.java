@@ -1,104 +1,132 @@
 package app.domain.model.list;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import app.domain.model.Appointment;
+import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
-import app.domain.model.dto.AppointmentWithNumberDTO;
-import app.domain.model.dto.AppointmentWithoutNumberDTO;
+import app.dto.UserNotificationDTO;
 import app.exception.AppointmentNotFoundException;
+import app.mapper.UserNotificationMapper;
+import app.service.sender.ISender;
+import app.service.sender.SenderFactory;
+import app.utils.Time;
 
 /**
  * AppointmentStore class.
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
+ * @author Tomás Russo <1211288@isep.ipp.pt>
+ * @author Tomás Lopes <1211289@isep.ip.pt>
  */
 public class AppointmentScheduleList {
   private VaccinationCenter vaccinationCenter;
   private Map<Calendar, Appointment[][]> appointments;
   private int slotsPerDay = 0;
+  private int vaccinesPerSlot = 0;
 
   /**
-   * Constructor for AppointmentStore.
+   * Constructor for AppointmentScheduleList.
    */
   public AppointmentScheduleList(VaccinationCenter vaccinationCenter) {
     this.vaccinationCenter = vaccinationCenter;
-    slotsPerDay = calculateNOfSlotsPerDay(vaccinationCenter);
+    slotsPerDay = getNOfSlotsPerDay();
+    vaccinesPerSlot = vaccinationCenter.getMaxVacSlot();
 
     this.appointments = new HashMap<Calendar, Appointment[][]>();
   }
 
-  private int calculateNOfSlotsPerDay(VaccinationCenter center) {
-    String[] openingHours = center.getOpeningHours().split(":");
-    String[] closingHours = center.getClosingHours().split(":");
+  /**
+   * 
+   * @param center the vaccination center
+   * @return the number of slots the center can have per day
+   */
+  public int getNOfSlotsPerDay() {
+    int openingMinutesOfDay = vaccinationCenter.getOpeningHours().convertToMinutes();
+    int closingMinutesOfDay = vaccinationCenter.getClosingHours().convertToMinutes();
 
-    int openingMinutesOfDay =
-        Integer.parseInt(openingHours[0]) * 60 + Integer.parseInt(openingHours[1]);
-    int closingMinutesOfDay =
-        Integer.parseInt(closingHours[0]) * 60 + Integer.parseInt(closingHours[1]);
-
-    return (closingMinutesOfDay - openingMinutesOfDay) / center.getSlotDuration();
+    return (closingMinutesOfDay - openingMinutesOfDay) / vaccinationCenter.getSlotDuration();
   }
 
   /**
-   * Creates a new appointment.
-   *
-   * @param appointmentDTO
-   * @return Appointment
+   * Prints a list representing the schedule of appointments.
+   * 
+   * Used for developer purposes
    */
-  public Appointment create(AppointmentWithNumberDTO appointmentDTO) {
-    String snsNumber = appointmentDTO.getSnsNumber();
-    Calendar date = appointmentDTO.getDate();
-    VaccinationCenter center = appointmentDTO.getCenter();
-    VaccineType vacType = appointmentDTO.getVaccineType();
-    boolean sms = appointmentDTO.getSmsPermission();
+  private void listVaccinationSchedule(Appointment[][] list) {
+    for (int i = 0; i < list.length; i++) {
+      for (int j = 0; j < list[0].length; j++) {
+        System.out.print("[");
+        if (list[i][j] != null) System.out.print("x]");
+        else System.out.print(" ]");
+      }
+      System.out.println("");
+    }
+  }
 
-    Appointment appointment = new Appointment(snsNumber, date, center, vacType, sms);
+  /**
+   * Creates a new appointment
+   * 
+   * @param snsUser the SNSUser
+   * @param date the date
+   * @param center the vaccination center
+   * @param vaccineType the vaccine type
+   * @param sms if the user wants to receive a SMS
+   * @return
+   */
+  public Appointment create(SNSUser snsUser, Calendar date, VaccinationCenter center, VaccineType vaccineType, boolean sms) {
+    Appointment appointment = new Appointment(snsUser, date, center, vaccineType, sms);
 
     return appointment;
   }
 
-  public Appointment create(AppointmentWithoutNumberDTO appointmentDTO, String snsNumber) {
-    Calendar date = appointmentDTO.getDate();
-    VaccinationCenter center = appointmentDTO.getCenter();
-    VaccineType vacType = appointmentDTO.getVaccineType();
-    boolean sms = appointmentDTO.getSmsPermission();
-
-    Appointment appointment = new Appointment(snsNumber, date, center, vacType, sms);
-
-    return appointment;
-  }
-
+  /**
+   * 
+   * @param date the date of the appointment
+   * @return the index of the appointment in the center schedule list
+   */
   private int getAppointmentSlotIndex(Calendar date) {
-    String[] openingHours = vaccinationCenter.getOpeningHours().split(":");
-    String[] closingHours = vaccinationCenter.getClosingHours().split(":");
-
-    int openingMinutesOfDay =
-        Integer.parseInt(openingHours[0]) * 60 + Integer.parseInt(openingHours[1]);
-    int closingMinutesOfDay =
-        Integer.parseInt(closingHours[0]) * 60 + Integer.parseInt(closingHours[1]);
+    int openingMinutesOfDay = vaccinationCenter.getOpeningHours().convertToMinutes();
+    int closingMinutesOfDay = vaccinationCenter.getClosingHours().convertToMinutes();
 
     int slotDuration = vaccinationCenter.getSlotDuration();
-    int minutesOfDay =
-        (date.get(Calendar.HOUR_OF_DAY) * 60 + date.get(Calendar.MINUTE)) - openingMinutesOfDay;
 
-    if (minutesOfDay > closingMinutesOfDay) throw new IllegalArgumentException("Invalid schedule");
+    Time appointmentTime = new Time(date);
 
-    return minutesOfDay / slotDuration;
+    int scheduleMinutesOfDay = appointmentTime.convertToMinutes() - openingMinutesOfDay;
+
+    if (isValidSchedule(scheduleMinutesOfDay, openingMinutesOfDay, closingMinutesOfDay)) return scheduleMinutesOfDay / slotDuration;
+    return -1;
   }
 
   /**
-   * Validates an appointment.
    * 
-   * @param appointmentDto
+   * @param scheduledMinutesOfDay the minutes of the scheduled appointment
+   * @param openingMinutesOfDay the opening schedule, in minutes, of the center
+   * @param closingMinutesOfDay the closing schedule, in minutes, of the center
+   * @return
+   */
+  private boolean isValidSchedule(int scheduledMinutesOfDay, int openingMinutesOfDay, int closingMinutesOfDay) {
+    if (scheduledMinutesOfDay < 0) return false;
+
+    int workingHours = closingMinutesOfDay - openingMinutesOfDay;
+
+    if (scheduledMinutesOfDay > workingHours) return false;
+    return true;
+  }
+
+  /**
+   * Validates the appointment.
+   * 
+   * @param appointment the appointment to be added
    */
   public void validateAppointment(Appointment appointment) {
+    // TODO validate sns user with health data
     if (appointment == null) throw new IllegalArgumentException("Appointment is not valid.");
-
-    checkDuplicates(appointment);
   }
 
   /**
@@ -112,31 +140,110 @@ public class AppointmentScheduleList {
     Calendar key = generateKeyFromDate(appointment.getDate());
     int slotIndex = getAppointmentSlotIndex(appointment.getDate());
 
-    if (appointments.containsKey(key)) {
+    if (slotIndex == -1) throw new IllegalArgumentException("Appointment schedule is not valid.");
+
+    if (existsScheduleForDay(key)) {
       Appointment[][] slots = appointments.get(key);
 
       int i = getAvailableIndexInSlot(slots[slotIndex]);
-
       if (i == -1) throw new IllegalArgumentException("No available slot");
 
       slots[slotIndex][i] = appointment;
     } else {
-      Appointment[][] slots = new Appointment[slotsPerDay][vaccinationCenter.getMaxVacSlot()];
+      Appointment[][] slots = new Appointment[slotsPerDay][vaccinesPerSlot];
 
       slots[slotIndex][0] = appointment;
       appointments.put(key, slots);
     }
+
+    if (!appointment.isSms()) return;
+
+    String message = generateMessage(appointment);
+
+    SNSUser appointmentUser = appointment.getSnsUser();
+    String email = appointmentUser.getEmail();
+    String phone = appointmentUser.getPhoneNumber();
+
+    UserNotificationDTO notificationDto = UserNotificationMapper.toDto(email, phone, message);
+
+    sendNotification(notificationDto);
   }
 
+  private String generateMessage(Appointment appointment) {
+    StringBuilder sb = new StringBuilder();
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+    sb.append("\nYou have an appointment scheduled with the following data:\n\n");
+    sb.append(appointment.getVaccineType().getDescription());
+    sb.append("\nCenter:\n");
+    sb.append(String.format("  Name: %s%n", vaccinationCenter.getName()));
+    sb.append(String.format("  Address: %s%n", vaccinationCenter.getAddress()));
+    sb.append(String.format("Date: %s%n", sdf.format(appointment.getDate().getTime())));
+
+    return sb.toString();
+  }
+
+  private void sendNotification(UserNotificationDTO notificationDto) {
+    ISender sender = SenderFactory.getSender();
+
+    try {
+      sender.send(notificationDto);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      e.printStackTrace();
+    }
+  }
+
+  private boolean existsScheduleForDay(Calendar date) {
+    Calendar key = generateKeyFromDate(date);
+    return appointments.containsKey(key);
+  }
+
+  /**
+   * 
+   * @param date the date of the appointment
+   * @return true if the slot of the given date is available
+   */
+  public boolean checkSlotAvailability(Calendar date) {
+    Calendar key = generateKeyFromDate(date);
+    int slotIndex = getAppointmentSlotIndex(date);
+
+    if (!existsScheduleForDay(key)) return true;
+
+    Appointment[][] slots = appointments.get(key);
+    int i = getAvailableIndexInSlot(slots[slotIndex]);
+
+    if (i == -1) return false;
+
+    return true;
+  }
+
+  /**
+   * 
+   * @param date the date of the appointment
+   * @return the appointment matrix representing the schedule of the given date in the center
+   */
+  public Appointment[][] getAppointmentScheduleForDay(Calendar date) {
+    return appointments.get(generateKeyFromDate(date));
+  }
+
+  /**
+   * 
+   * @param slot the slot of the appointment
+   * @return the index of the first available index in the given slot
+   */
   private int getAvailableIndexInSlot(Appointment[] slot) {
-    int i = 0;
+    for (int i = 0; i < slot.length; i++)
+      if (slot[i] == null) return i;
 
-    while (slot[i] == null && i < slotsPerDay)
-      i++;
-
-    return i < slot.length ? i : -1;
+    return -1;
   }
 
+  /**
+   * 
+   * @param date the date of the appointment
+   * @return the key of the appointment in the map of the center's appointments
+   */
   private Calendar generateKeyFromDate(Calendar date) {
     Calendar key = Calendar.getInstance();
     key.setTime(date.getTime());
@@ -149,39 +256,19 @@ public class AppointmentScheduleList {
   }
 
   /**
-   * Checks if an appointment is duplicated.
    * 
-   * @param appointment
+   * @param snsNumber the sns number of the user
+   * @return the appointment of the user with the given sns number
+   * @throws AppointmentNotFoundException if the user has no appointment
    */
-  private void checkDuplicates(Appointment appointment) {
-    if (appointments.containsKey(appointment.getDate())) {
-      Calendar key = generateKeyFromDate(appointment.getDate());
-
-      Appointment[][] slots = appointments.get(key);
-      String snsUserNumber = appointment.getSnsNumber();
-
-      if (hasAppointmentInDay(slots, snsUserNumber))
-        throw new IllegalArgumentException("Appointment is duplicated.");
-    }
-  }
-
-  private boolean hasAppointmentInDay(Appointment[][] appointments, String snsNumber) {
-    for (int i = 0; i < appointments.length; i++)
-      for (int j = 0; j < appointments[i].length; j++)
-        if (appointments[i][j] != null && appointments[i][j].hasSnsNumber(snsNumber)) return true;
-
-    return false;
-  }
-
   public Appointment hasAppointmentToday(String snsNumber) throws AppointmentNotFoundException {
     // get today's appointments
     Calendar key = this.generateKeyFromDate(Calendar.getInstance());
     Appointment[][] appointments = this.appointments.get(key);
 
-    for (int i = 0; i < appointments.length; i++)
+    if (appointments != null) for (int i = 0; i < appointments.length; i++)
       for (int j = 0; j < appointments[i].length; j++)
-        if (appointments[i][j] != null && appointments[i][j].hasSnsNumber(snsNumber))
-          return appointments[i][j];
+        if (appointments[i][j] != null && appointments[i][j].hasSnsNumber(snsNumber)) return appointments[i][j];
 
     throw new AppointmentNotFoundException("This SNS User does not have an appointment for today.");
   }

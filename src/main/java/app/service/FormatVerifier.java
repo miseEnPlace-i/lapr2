@@ -81,7 +81,7 @@ public final class FormatVerifier {
    * @return True if the expression is a valid phone number, false otherwise.
    */
   public static boolean validatePhoneNumber(String expression) {
-    return expression.matches("\\+[0-9]{1,3}[2|3|9][0-9]{8}");
+    return expression.matches("\\+[0-9]{1,3}[2|3|8|9][0-9]{8}");
   }
 
   /**
@@ -105,8 +105,7 @@ public final class FormatVerifier {
    * @return True if the expression is a valid URL, false otherwise.
    */
   public static boolean validateURL(String expression) {
-    return expression.matches(
-        "http[s]?://(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)");
+    return expression.matches("http[s]?://(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)");
   }
 
   /**

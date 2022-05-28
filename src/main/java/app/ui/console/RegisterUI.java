@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import app.controller.IRegisterController;
+import app.exception.AppointmentNotFoundException;
 import app.ui.console.utils.Utils;
 
 /**
@@ -24,7 +25,13 @@ public abstract class RegisterUI<T extends IRegisterController> implements Runna
     try {
       insertData();
 
-      boolean confirmed = confirmData(ctrl.stringifyData());
+      boolean confirmed;
+
+      try {
+        confirmed = confirmData(ctrl.stringifyData());
+      } catch (Exception ex) {
+        confirmed = false;
+      }
 
       if (confirmed) {
         try {
@@ -40,7 +47,8 @@ public abstract class RegisterUI<T extends IRegisterController> implements Runna
     }
   }
 
-  public abstract void insertData() throws IllegalArgumentException, ParseException;
+  public abstract void insertData()
+      throws IllegalArgumentException, ParseException, AppointmentNotFoundException;
 
   public boolean confirmData(String data) {
     System.out.println("\nPlease confirm the data below.\n");

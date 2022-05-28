@@ -5,12 +5,14 @@ import java.util.List;
 import app.domain.model.CommunityMassVaccinationCenter;
 import app.domain.model.Employee;
 import app.domain.model.HealthCareCenter;
+import app.domain.model.Slot;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
 import app.domain.model.WaitingRoom;
-import app.domain.model.dto.VaccinationCenterListDTO;
-import app.mappers.VaccinationCenterMapper;
 import app.domain.shared.Constants;
+import app.dto.VaccinationCenterListDTO;
+import app.mapper.VaccinationCenterMapper;
+import app.utils.Time;
 
 /**
  * Vaccination Center store
@@ -44,32 +46,36 @@ public class VaccinationCenterStore {
    * @param coordinator the vaccination center coordinator
    * @return VaccinationCenter
    */
-  public VaccinationCenter createCommunityMassCenter(String name, String address,
-      String emailAddress, String phoneNum, String faxNum, String webAddress, String openingHours,
-      String closingHours, int slotDuration, int maxVacSlot, Employee coordinator,
-      VaccineType vaccineType) {
+  public VaccinationCenter createCommunityMassCenter(String name, String address, String emailAddress, String phoneNum, String faxNum, String webAddress,
+      String openingHours, String closingHours, int slotDuration, int maxVacSlot, Employee coordinator, VaccineType vaccineType) {
 
     boolean isCoordinatorValid = validateCoordinator(coordinator);
 
     if (!isCoordinatorValid) throw new IllegalArgumentException("Coordinator is not valid");
 
-    CommunityMassVaccinationCenter center = new CommunityMassVaccinationCenter(name, address,
-        emailAddress, phoneNum, faxNum, webAddress, openingHours, closingHours, slotDuration,
-        maxVacSlot, coordinator, vaccineType);
+    Slot slot = new Slot(slotDuration, maxVacSlot);
+    Time openingHoursTime = new Time(openingHours);
+    Time closingHoursTime = new Time(closingHours);
+
+    CommunityMassVaccinationCenter center = new CommunityMassVaccinationCenter(name, address, emailAddress, phoneNum, faxNum, webAddress, openingHoursTime,
+        closingHoursTime, slot, coordinator, vaccineType);
 
     return center;
   }
 
-  public VaccinationCenter createHealthCareCenter(String name, String address, String emailAddress,
-      String phoneNum, String faxNum, String webAddress, String openingHours, String closingHours,
-      int slotDuration, int maxVacSlot, Employee coordinator, String ages, String ags) {
+  public VaccinationCenter createHealthCareCenter(String name, String address, String emailAddress, String phoneNum, String faxNum, String webAddress,
+      String openingHours, String closingHours, int slotDuration, int maxVacSlot, Employee coordinator, String ages, String ags) {
 
     boolean isCoordinatorValid = validateCoordinator(coordinator);
 
     if (!isCoordinatorValid) throw new IllegalArgumentException("Coordinator is not valid");
 
-    HealthCareCenter center = new HealthCareCenter(name, address, emailAddress, phoneNum, faxNum,
-        webAddress, openingHours, closingHours, slotDuration, maxVacSlot, coordinator, ages, ags);
+    Slot slot = new Slot(slotDuration, maxVacSlot);
+    Time openingHoursTime = new Time(openingHours);
+    Time closingHoursTime = new Time(closingHours);
+
+    HealthCareCenter center =
+        new HealthCareCenter(name, address, emailAddress, phoneNum, faxNum, webAddress, openingHoursTime, closingHoursTime, slot, coordinator, ages, ags);
 
     return center;
   }
@@ -101,8 +107,7 @@ public class VaccinationCenterStore {
    * @param center the vaccination center
    */
   private void checkDuplicates(VaccinationCenter center) {
-    if (vaccinationCenters.contains(center))
-      throw new IllegalArgumentException("\nDuplicated Vaccination Center.");
+    if (vaccinationCenters.contains(center)) throw new IllegalArgumentException("\nDuplicated Vaccination Center.");
   }
 
   /**
@@ -130,8 +135,7 @@ public class VaccinationCenterStore {
     List<VaccinationCenterListDTO> centers = new ArrayList<VaccinationCenterListDTO>();
 
     for (VaccinationCenter vaccinationCenter : vaccinationCenters) {
-      VaccinationCenterListDTO vaccinationCenterDTO =
-          VaccinationCenterMapper.toDto(vaccinationCenter);
+      VaccinationCenterListDTO vaccinationCenterDTO = VaccinationCenterMapper.toDto(vaccinationCenter);
 
       centers.add(vaccinationCenterDTO);
     }
@@ -146,8 +150,7 @@ public class VaccinationCenterStore {
    * 
    * @return the list of Vaccination Centers
    */
-  public List<VaccinationCenterListDTO> getListOfVaccinationCentersWithVaccineType(
-      VaccineType vaccineType) {
+  public List<VaccinationCenterListDTO> getListOfVaccinationCentersWithVaccineType(VaccineType vaccineType) {
     List<VaccinationCenter> availableVaccinationCenters = new ArrayList<VaccinationCenter>();
     List<VaccinationCenterListDTO> returnList = new ArrayList<VaccinationCenterListDTO>();
 
@@ -155,8 +158,7 @@ public class VaccinationCenterStore {
       if (vaccinationCenter instanceof CommunityMassVaccinationCenter) {
         // Vaccination center is a CMVC, so we check if it administers the vaccine type given
 
-        CommunityMassVaccinationCenter vacCenter =
-            (CommunityMassVaccinationCenter) vaccinationCenter;
+        CommunityMassVaccinationCenter vacCenter = (CommunityMassVaccinationCenter) vaccinationCenter;
 
         if (vacCenter.administersVaccineType(vaccineType)) {
           availableVaccinationCenters.add(vaccinationCenter);
@@ -169,8 +171,7 @@ public class VaccinationCenterStore {
     }
 
     for (VaccinationCenter vaccinationCenter : availableVaccinationCenters) {
-      VaccinationCenterListDTO vaccinationCenterDTO =
-          VaccinationCenterMapper.toDto(vaccinationCenter);
+      VaccinationCenterListDTO vaccinationCenterDTO = VaccinationCenterMapper.toDto(vaccinationCenter);
 
       returnList.add(vaccinationCenterDTO);
     }
@@ -178,7 +179,7 @@ public class VaccinationCenterStore {
     return returnList;
   }
 
-  public WaitingRoom getWaitingRoom(String phone) {
+  public WaitingRoom getWaitingRoomWithPhone(String phone) {
     return getVaccinationCenterByPhone(phone).getWaitingRoom();
   }
 
@@ -191,12 +192,10 @@ public class VaccinationCenterStore {
     return null;
   }
 
-  public VaccinationCenter getVaccinationCenterByEmail(String email) {
-    for (VaccinationCenter center : vaccinationCenters) {
-      if (center.getEmail().equals(email)) {
-        return center;
-      }
-    }
+  public VaccinationCenter getVaccinationCenterWithEmail(String email) {
+    for (VaccinationCenter center : vaccinationCenters)
+      if (center.getEmail().equals(email)) return center;
+
     return null;
   }
 

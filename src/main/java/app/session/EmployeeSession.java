@@ -1,10 +1,6 @@
 package app.session;
 
-import app.controller.App;
 import app.domain.model.VaccinationCenter;
-import app.domain.model.dto.VaccinationCenterListDTO;
-import app.domain.model.store.VaccinationCenterStore;
-import app.mappers.VaccinationCenterMapper;
 
 public class EmployeeSession {
   private VaccinationCenter vaccinationCenter;
@@ -19,8 +15,8 @@ public class EmployeeSession {
     return vaccinationCenter;
   }
 
-  public void setVaccinationCenter(VaccinationCenterListDTO vaccinationCenterDTO) {
-    this.vaccinationCenter = VaccinationCenterMapper.toModel(vaccinationCenterDTO);
+  public void setVaccinationCenter(VaccinationCenter vaccinationCenter) {
+    this.vaccinationCenter = vaccinationCenter;
   }
 
   public boolean hasCenter() {

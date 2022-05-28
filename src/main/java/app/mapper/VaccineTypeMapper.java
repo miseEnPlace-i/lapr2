@@ -1,7 +1,7 @@
-package app.mappers;
+package app.mapper;
 
 import app.domain.model.VaccineType;
-import app.domain.model.dto.VaccineTypeDTO;
+import app.dto.VaccineTypeDTO;
 
 /**
  * Vaccine type Mapper.

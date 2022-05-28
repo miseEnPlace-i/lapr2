@@ -1,9 +1,9 @@
-package app.mappers;
+package app.mapper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import app.domain.model.dto.SNSUserDTO;
+import app.dto.SNSUserDTO;
 
 /**
  * Vaccination Center mapper

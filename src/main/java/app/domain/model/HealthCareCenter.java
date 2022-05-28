@@ -1,5 +1,7 @@
 package app.domain.model;
 
+import app.utils.Time;
+
 /**
  * @author André Barros <1211299@isep.ipp.pt>
  */
@@ -25,12 +27,10 @@ public class HealthCareCenter extends VaccinationCenter {
    * @param ages the health care center ages
    * @param ars the health care center ars
    */
-  public HealthCareCenter(String name, String address, String email, String phoneNum, String faxNum,
-      String webAddress, String openingHours, String closingHours, int slotDuration, int maxVacSlot,
-      Employee coordinator, String ages, String ars) {
+  public HealthCareCenter(String name, String address, String email, String phoneNum, String faxNum, String webAddress, Time openingHours, Time closingHours,
+      Slot slot, Employee coordinator, String ages, String ars) {
 
-    super(name, address, email, phoneNum, faxNum, webAddress, openingHours, closingHours,
-        slotDuration, maxVacSlot, coordinator);
+    super(name, address, email, phoneNum, faxNum, webAddress, openingHours, closingHours, slot, coordinator);
 
     setAges(ages);
     setArs(ars);

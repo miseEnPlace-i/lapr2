@@ -31,9 +31,10 @@ participant "comp\n:Company" as COMP
 participant "vaccinationCenterStore\n:VaccinationCenterStore" as VACS
 participant "vaccinationCenter\n:VaccinationCenter" as VACC
 participant "vaccinationCenterDto:\nList<VaccinationCenterDTO>" as VACCDTO
-participant ":ArriveMapper" as ARRM
-participant "arriveHistory\n:ArriveHistory" as ARR
-participant "arrive:Arrive" as ARR
+participant ":WaitingRoomMapper" as WAITM
+participant ":ArrivalMapper" as ARRM
+participant "snsUser\n:SNSUser" as SNSU
+participant "arrival:Arrival" as ARR
 
 
 UI -> CTRL : getWaitingRoomListFromNurseCenter()
@@ -59,36 +60,55 @@ CTRL -> VACC : waitingRoom=vaccinationCenter.getWaitingRoom()
 activate VACC
 deactivate VACC
 
-CTRL -> ARRM : waitingRoomDto=toDto(waitingRoom)
-activate ARRM
+CTRL -> WAITM : waitingRoomDto=toDto(waitingRoom)
+activate WAITM
 
-create "waitingRoomDto:\nList<ArriveDto>" as WAITDTO
+create "waitingRoomDto:\nList<ArrivalDto>" as WAITDTO
 
-ARRM -> WAITDTO
+WAITM -> WAITDTO
 
-loop for each arrive in waitingRoom
+
+loop for each arrival in waitingRoom
 |||
-  ARRM -> ARRM : placeInLine=i
-  ARRM -> ARR : username=arrive.getUserName()
+  WAITM -> ARRM : arrivalDto=toDto(arrival)
+  activate ARRM
+  ARRM -> SNSU : snsUser=getSNSUser()
+  activate SNSU
+  deactivate SNSU
+  ARRM -> ARR : name=snsUser.getName()
   activate ARR
   deactivate ARR
-  ARRM -> ARR : arriveTime=arrive.getArriveTime()
+  ARRM -> ARR : gender=snsUser.getGender()
+  activate ARR
+  deactivate ARR
+  ARRM -> ARR : birthDate=snsUser.getBirthDate()
+  activate ARR
+  deactivate ARR
+  ARRM -> ARR : snsUserNumber=snsUser.getSnsUserNumber()
+  activate ARR
+  deactivate ARR
+  ARRM -> ARR : phoneNumber=snsUser.getPhoneNumber()()
+  activate ARR
+  deactivate ARR
+  ARRM -> ARR : time=arrival.getArrivalTime().getTime()
   activate ARR
   deactivate ARR
 
-  create "arriveDto\n:ArriveDto" as APODTO
-  ARRM -> APODTO : create(placeInLine,username,arriveTime)
+  create "arrivalDto\n:ArrivalDto" as APODTO
+  ARRM -> APODTO : create(name,gender,birthDate,snsUserNumber,phoneNumber,time)
+  ARRM --> WAITM : arrivalDto
+  deactivate ARRM
 
-  ARRM -> WAITDTO : add(arriveDto)
+  WAITM -> WAITDTO : add(arrivalDto)
   activate WAITDTO
   deactivate WAITDTO
 |||
 end
 
 |||
-ARRM --> CTRL : waitingRoomDto 
+WAITM --> CTRL : waitingRoomDto 
 
-deactivate ARRM
+deactivate WAITM
 
 CTRL --> UI: waitingRoomDto
 

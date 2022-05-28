@@ -1,11 +1,21 @@
 package app.domain.model;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
 
+/**
+ * Waiting Room class.
+ * 
+ * @author Ricardo Moreira <1211285@isep.ipp.pt>
+ * @author Tomás Lopes <1211289@isep.ipp.pt>
+ */
 public class WaitingRoom implements Iterable<Arrival> {
-  List<Arrival> waitingRoom = new ArrayList<Arrival>();
+  Queue<Arrival> waitingRoom;
+
+  public WaitingRoom() {
+    this.waitingRoom = new LinkedList<Arrival>();
+  }
 
   @Override
   public Iterator<Arrival> iterator() {
@@ -22,8 +32,8 @@ public class WaitingRoom implements Iterable<Arrival> {
    * @param snsNumber the SNS Number of the SNS User.
    * @return Arrival
    */
-  public Arrival createArrival(String snsNumber) {
-    return new Arrival(snsNumber);
+  public Arrival createArrival(Appointment appointment) {
+    return new Arrival(appointment);
   }
 
   /**
@@ -31,5 +41,28 @@ public class WaitingRoom implements Iterable<Arrival> {
    */
   public void saveArrival(Arrival arrival) {
     waitingRoom.add(arrival);
+  }
+
+  /**
+   * Finds today's SNS User arrival.
+   */
+  public boolean hasSNSUserArrivedToday(SNSUser snsUser) {
+    for (Arrival arrival : waitingRoom)
+      if (arrival.getSNSUser().equals(snsUser)) return true;
+
+    return false;
+  }
+
+  /**
+   * Prints the waiting room as a string
+   */
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("\nWaiting Room:");
+
+    for (Arrival arrival : waitingRoom)
+      sb.append("\n\t" + arrival.toString());
+
+    return sb.toString();
   }
 }

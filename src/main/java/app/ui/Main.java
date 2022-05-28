@@ -9,7 +9,6 @@ import app.ui.console.MainMenuUI;
 
 // Teste
 public class Main {
-
   public static void main(String[] args) {
     try {
       MainMenuUI menu = new MainMenuUI();

@@ -4,8 +4,7 @@ import java.text.ParseException;
 import java.util.List;
 import app.controller.App;
 import app.controller.UploadUsersFromFileController;
-import app.domain.model.dto.SNSUserRegisterInfoDTO;
-import app.mappers.SNSUserRegisterInfoMapper;
+import app.dto.SNSUserRegisterInfoDTO;
 import app.ui.console.utils.Utils;
 
 /**
@@ -15,41 +14,41 @@ import app.ui.console.utils.Utils;
  */
 public class UploadUsersFromFileUI implements Runnable {
 
-    private UploadUsersFromFileController ctrl;
+  private UploadUsersFromFileController ctrl;
 
-    public UploadUsersFromFileUI() {
-        ctrl = new UploadUsersFromFileController(App.getInstance().getCompany());
+  public UploadUsersFromFileUI() {
+    ctrl = new UploadUsersFromFileController(App.getInstance().getCompany());
+  }
+
+  @Override
+  public void run() {
+    System.out.println("\nRegister Vaccine UI:");
+
+    insertData(); // asks to insert file path and instantiates CSVReader
+
+    List<SNSUserRegisterInfoDTO> userRegisterInfoList = null;
+    try {
+      userRegisterInfoList = ctrl.readAndUpload();
+    } catch (ParseException e) {
+      e.printStackTrace();
     }
 
-    @Override
-    public void run() {
-        System.out.println("\nRegister Vaccine UI:");
-
-        insertData(); // asks to insert file path and instantiates CSVReader
-
-        List<SNSUserRegisterInfoDTO> userRegisterInfoList = null;
-        try {
-            userRegisterInfoList = ctrl.readAndUpload();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }        
-
-        if(userRegisterInfoList == null){
-            System.out.println("No users registered!");
-        }else{
-        displayRegisteredUsers(userRegisterInfoList);
-        }
+    if (userRegisterInfoList == null) {
+      System.out.println("No users registered!");
+    } else {
+      displayRegisteredUsers(userRegisterInfoList);
     }
+  }
 
-    private void displayRegisteredUsers(List<SNSUserRegisterInfoDTO> userRegisterInfoList) {
-        Utils.showList(userRegisterInfoList, "\nUser Successfully registered:");
-    }
+  private void displayRegisteredUsers(List<SNSUserRegisterInfoDTO> userRegisterInfoList) {
+    Utils.showList(userRegisterInfoList, "\nUser Successfully registered:");
+  }
 
-    public void insertData() {
-        String filePath = Utils.readLineFromConsole("File Path: ");
-    
-        ctrl.createCsvReader(filePath);
-      }
-    
+  public void insertData() {
+    String filePath = Utils.readLineFromConsole("File Path: ");
+
+    ctrl.createCsvReader(filePath);
+  }
+
 }
 

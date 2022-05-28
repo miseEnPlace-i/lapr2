@@ -44,11 +44,8 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
         Utils.readLineFromConsoleWithValidation("Opening hours (HH:MM): ", FieldToValidate.HOURS);
     String closHours =
         Utils.readLineFromConsoleWithValidation("Closing hours (HH:MM): ", FieldToValidate.HOURS);
-    int slotDur = Integer.parseInt(Utils.readLineFromConsoleWithValidation("Slot duration (min): ",
-        FieldToValidate.SLOT_DURATION));
-    int maxVac =
-        Integer.parseInt(Utils.readLineFromConsoleWithValidation("Maximum vaccines per slot: ",
-            FieldToValidate.MAX_VAC_PER_SLOT));
+    int slotDur = Utils.readPositiveIntegerFromConsole("Slot duration (min): ");
+    int maxVac = Utils.readPositiveIntegerFromConsole("Maximum vaccines per slot: ");
     Employee coordinator;
 
     // select coordinator
@@ -73,6 +70,7 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
     } else {
       String ages = Utils.readLineFromConsole("AGES: ");
       String ars = Utils.readLineFromConsole("ARS: ");
+
       super.ctrl.createHealthCare(name, address, email, phone, fax, website, openHours, closHours,
           slotDur, maxVac, coordinator, ages, ars);
     }
