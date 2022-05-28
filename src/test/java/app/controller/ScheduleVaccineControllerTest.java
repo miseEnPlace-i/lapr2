@@ -13,9 +13,13 @@ import app.domain.model.Employee;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
+import app.domain.model.list.AppointmentScheduleList;
 import app.domain.model.store.EmployeeStore;
+import app.domain.model.store.SNSUserStore;
 import app.domain.model.store.VaccinationCenterStore;
+import app.domain.model.store.VaccineTypeStore;
 import app.dto.AppointmentInsertDTO;
+import app.dto.VaccinationCenterListDTO;
 import app.mapper.AppointmentInsertMapper;
 import app.service.CalendarUtils;
 
@@ -30,7 +34,10 @@ public class ScheduleVaccineControllerTest {
   private Appointment appointment;
   private Calendar calendar;
   private boolean sms = true;
-  private VaccinationCenterStore store;
+  private VaccinationCenterStore vacStore;
+  private VaccineTypeStore vaccineTypeStore;
+  private SNSUserStore snsUserStore;
+  private AppointmentScheduleList appointmentSchedule;
 
   @Before
   public void setUp() throws ParseException {
@@ -38,15 +45,20 @@ public class ScheduleVaccineControllerTest {
     Employee coordinator = employeeStore.createEmployee("name", "+351212345678", "email@email.com", "address", "000000000ZZ4", "COORDINATOR");
     employeeStore.saveEmployee(coordinator);
 
-    store = company.getVaccinationCenterStore();
-    vaccinationCenter = store.createHealthCareCenter("name", "address", "email@email.com", "+351212345678", "+351212345678", "http://www.com", "20:00", "21:00",
-        5, 5, coordinator, "ages", "ags");
-    store.saveVaccinationCenter(vaccinationCenter);
+    vacStore = company.getVaccinationCenterStore();
+    vaccinationCenter = vacStore.createHealthCareCenter("name", "address", "email@email.com", "+351212345678", "+351212345678", "http://www.com", "20:00",
+        "21:00", 5, 5, coordinator, "ages", "ags");
+    vacStore.saveVaccinationCenter(vaccinationCenter);
 
+    snsUserStore = company.getSNSUserStore();
     user = new SNSUser("000000000ZZ4", "123456789", "name", new Date(), 'M', "+351212345678", "email@email.com", "address");
-    Date date = new Date();
-    calendar = CalendarUtils.parseDateTime(date, "20:40");
+    snsUserStore.saveSNSUser(user);
+
+    calendar = CalendarUtils.parseDateTime(new Date(), "20:40");
+
+    vaccineTypeStore = company.getVaccineTypeStore();
     vaccineType = new VaccineType("12345", "TEST", "TEST_TECHNOLOGY");
+    vaccineTypeStore.saveVaccineType(vaccineType);
 
     appointment = new Appointment(user, calendar, vaccinationCenter, vaccineType, sms);
     dto = AppointmentInsertMapper.toDto(appointment);
@@ -84,4 +96,53 @@ public class ScheduleVaccineControllerTest {
 
     assertNull(center);
   }
+
+  @Test
+  public void ensureGetSNSUserNumberWithEmailWorks() {
+    assertEquals("123456789", controller.getSNSUserNumberWithEmail(user.getEmail()));
+  }
+
+  @Test
+  public void ensureGetVaccineTypeByCodeWorks() {
+    assertEquals(vaccineType, controller.getVaccineTypeByCode(vaccineType.getCode()));
+  }
+
+  @Test
+  public void ensureExistsUserWorksWithValidUser() {
+    assertEquals(true, controller.existsUser(user.getSnsNumber()));
+  }
+
+  @Test
+  public void ensureExistsUserWorksWithInvalidUser() {
+    assertEquals(false, controller.existsUser("111111111"));
+  }
+
+  @Test
+  public void ensureIsCenterOpenAtWorksWithValidCenterHours() {
+    assertEquals(controller.isCenterOpenAt(vaccinationCenter, "20:20"), true);
+  }
+
+  @Test
+  public void ensureIsCenterOpenAtWorksWithInvalidCenterHours() {
+    assertEquals(controller.isCenterOpenAt(vaccinationCenter, "08:20"), false);
+  }
+
+  @Test
+  public void ensureUserHasAppointmentWorksWithNonAppointment() {
+    assertEquals(controller.userHasAppointmentForVaccineType(vaccineType, user.getSnsNumber()), false);
+  }
+
+  // @Test
+  public void ensureUserHasAppointmentWorksWithAppointment() {
+    appointment = new Appointment(user, calendar, vaccinationCenter, vaccineType, sms);
+    controller.save();
+
+    assertEquals(controller.userHasAppointmentForVaccineType(vaccineType, user.getSnsNumber()), true);
+  }
+
+  @Test
+  public void ensureHasSlotAvailabilityWorks() {
+    assertEquals(controller.hasSlotAvailability(vaccinationCenter, calendar), true);
+  }
+
 }
