@@ -1,6 +1,8 @@
 package app.mapper;
 
 import app.controller.App;
+import app.domain.model.CommunityMassVaccinationCenter;
+import app.domain.model.HealthCareCenter;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.store.VaccinationCenterStore;
 import app.dto.VaccinationCenterListDTO;
@@ -15,8 +17,19 @@ public class VaccinationCenterMapper {
   private VaccinationCenterMapper() {}
 
   public static VaccinationCenterListDTO toDto(VaccinationCenter vaccinationCenter) {
-    return new VaccinationCenterListDTO(vaccinationCenter.getName(), vaccinationCenter.getAddress(), vaccinationCenter.getEmail(), vaccinationCenter.getPhone(),
-        vaccinationCenter.getOpeningHours().toString(), vaccinationCenter.getClosingHours().toString());
+    String type = "";
+
+    if (vaccinationCenter instanceof HealthCareCenter) type = "Health Care Center";
+    else if (vaccinationCenter instanceof CommunityMassVaccinationCenter) type = "Community Mass Vaccination Center";
+
+    String name = vaccinationCenter.getName();
+    String address = vaccinationCenter.getAddress();
+    String email = vaccinationCenter.getEmail();
+    String phone = vaccinationCenter.getPhone();
+    String openingHours = vaccinationCenter.getOpeningHours().toString();
+    String closingHours = vaccinationCenter.getClosingHours().toString();
+
+    return new VaccinationCenterListDTO(type, name, address, email, phone, openingHours, closingHours);
   }
 
   public static VaccinationCenter toModel(VaccinationCenterListDTO vaccinationCenterDTO) {
