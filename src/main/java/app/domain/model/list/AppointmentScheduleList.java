@@ -171,9 +171,9 @@ public class AppointmentScheduleList {
     StringBuilder sb = new StringBuilder();
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-    sb.append("You have an appointment scheduled at:\n");
-    sb.append(String.format("Vaccine: %s%n", appointment.getVaccineType()));
-    sb.append("Center:\n");
+    sb.append("You have an appointment scheduled with the following data:\n");
+    sb.append(appointment.getVaccineType());
+    sb.append("\nCenter:\n");
     sb.append(String.format("  Name: %s%n", vaccinationCenter.getName()));
     sb.append(String.format("  Address: %s%n", vaccinationCenter.getAddress()));
     sb.append(String.format("Date: %s%n", sdf.format(appointment.getDate().getTime())));
