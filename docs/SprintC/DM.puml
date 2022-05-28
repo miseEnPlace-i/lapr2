@@ -1,4 +1,4 @@
-@startuml Domain Model
+@startuml DM
 
 hide methods
 left to right direction
@@ -20,10 +20,6 @@ class VaccinationCenter {
   email
   fax
   website
-  openingHours
-  closingHours
-  slotDuration
-  nOfVaccinesPerSlot
 }
 
 class Vaccine {}
@@ -65,8 +61,11 @@ class Receptionist {}
 class CenterCoordinator {}
 
 class Appointment {
+  snsUser
   date
-  doseNumber
+  vaccinationCenter
+  vaccineType
+  sms
 }
 
 class AdministrationProccess {
@@ -84,6 +83,16 @@ class DoseInformation {
   doseNumber
 }
 
+class Slot {
+  slotDuration
+  maxVacPerSlot
+}
+
+class Time {
+  openingHours
+  closingHours
+}
+
 DoseInformation "*" -- "1" AdministrationProccess : has <
 
 Vaccine "*" -- "1" VaccineType : has <
@@ -96,23 +105,26 @@ VaccinationCenter <|-- CommunityMassVaccinationCenter
 VaccinationCenter <|-- HealthCareCenter
 
 VaccinationCenter "1" -- "1" CenterCoordinator : has < 
+VaccinationCenter "1" -- "1" Slot : has >
+VaccinationCenter "1" -- "1" Time : has >
 
 HealthCareCenter "*" -- "1" AGES : belongs to > 
 HealthCareCenter "*" -- "1" ARS : belongs to > 
 
 Appointment "*" -- "1" VaccinationCenter : is held in >
-Appointment "1" -- "1" Vaccine : has a specefic >
-Appointment "1" -- "1" Notification : triggers >
+Appointment "1" -- "1" VaccineType : has a specefic >
+Appointment "1" -- "0..1" SMSSender : triggers >
+Appointment "1" -- "0..1" EmailSender : triggers >
 
-Receptionist "1" -- "*" ReadyUsersList : manages >
+Receptionist "1" -- "*" WaitingRoom : manages >
 Receptionist "1" -- "*" ArrivedUsersList : manages >
 Receptionist "1" -- "*" SNSUser : registers >
 
-ReadyUsersList "1" -- "*" SNSUser : is composed by >
+WaitingRoom "1" -- "*" SNSUser : is composed by >
 ArrivedUsersList "1" -- "*" SNSUser : is composed by > 
 RecoveringUsersList "1" -- "*" SNSUser : is composed by >
 
-ReadyUsersList "*" -- "1" Nurse : checks <
+WaitingRoom "*" -- "1" Nurse : checks <
 RecoveringUsersList "*" -- "1" Nurse : manages <
 
 Administrator "1" -- "*" Employee : registers >
@@ -132,7 +144,8 @@ SNSUser "0..1" -- "1" User : becomes >
 VaccinationCertificate "1" -- "1" Vaccine : corresponds >
 
 Company "1" -- "*" VaccinationCertificate : emmits >
-Company "1" -- "*" Receptionist : knows >
+Company "1" -- "*" Employee : knows >
+Company "1" -- "*" VaccinationCenter : knows >
 
 Receptionist "0,1" -- "1" Appointment : schedules >
 
@@ -144,9 +157,6 @@ CenterCoordinator "1" -- "*" VaccinationReport : analyses >
 CenterCoordinator "1" -- "*" VaccinationReport : generates >
 
 Nurse "1" -- "*" AdministrationProccess : checks >
-
-Notification <|-- SMS
-Notification <|-- Email
 
 AdverseReaction "*" -- "1" Appointment : has <
 
