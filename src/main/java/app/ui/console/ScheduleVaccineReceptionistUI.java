@@ -74,6 +74,9 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
     do {
       snsNumber = Utils.readLineFromConsoleWithValidation("\nSNS Number (xxxxxxxxx):", FieldToValidate.SNS_NUMBER);
       existsUser = ctrl.existsUser(this.snsNumber);
+      if (!existsUser) {
+        System.out.println("SNS User not found. Try again.");
+      }
     } while (!existsUser);
 
     return snsNumber;
