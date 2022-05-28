@@ -140,8 +140,25 @@ RECEPT -> UI : selects a vaccine type
 activate UI
 end
 
-UI -> CTRL : checkUserTakenVaccinesAndSelectsCenter(vaccineType)
+UI -> CTRL : isUserEligibleForVaccine(vaccineType,snsNumber)
 activate CTRL
+
+CTRL -> CTRL : userHasTakenAnyVaccineFromVaccineType(vaccineType)
+activate CTRL 
+
+CTRL -> USERSTORE : snsUser = findSNSUserByNumber(snsNumber)
+activate USERSTORE
+deactivate USERSTORE
+
+CTRL -> SNSUSER : hasTakenAnyVaccineFromVaccineType(vaccineType)
+activate SNSUSER
+
+SNSUSER -> SNSUSER : hasTakenAnyVaccineFromVaccineType(vaccineType)
+activate SNSUSER
+
+SNSUSER -> USERDATA : vaccine = getLastTakenVaccineFromType(vaccineType)
+deactivate SNSUSER
+deactivate SNSUSER
 
 CTRL -> COMP : vaccinationCenterStore = getVaccinationCenterStore()
 activate COMP
