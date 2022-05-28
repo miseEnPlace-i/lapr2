@@ -156,6 +156,8 @@ public class AppointmentScheduleList {
       appointments.put(key, slots);
     }
 
+    if (!appointment.isSms()) return;
+
     String message = generateMessage(appointment);
 
     SNSUser appointmentUser = appointment.getSnsUser();
@@ -171,8 +173,8 @@ public class AppointmentScheduleList {
     StringBuilder sb = new StringBuilder();
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-    sb.append("You have an appointment scheduled with the following data:\n");
-    sb.append(appointment.getVaccineType());
+    sb.append("\nYou have an appointment scheduled with the following data:\n\n");
+    sb.append(appointment.getVaccineType().getDescription());
     sb.append("\nCenter:\n");
     sb.append(String.format("  Name: %s%n", vaccinationCenter.getName()));
     sb.append(String.format("  Address: %s%n", vaccinationCenter.getAddress()));

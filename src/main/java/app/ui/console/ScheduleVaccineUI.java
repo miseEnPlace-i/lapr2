@@ -49,9 +49,7 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
       }
     }
 
-    if (userHasAppointmentForVaccineType(vaccineType)) {
-      throw new IllegalArgumentException("You can not have two appointments for the same vaccine type.");
-    }
+    if (userHasAppointmentForVaccineType(vaccineType)) throw new IllegalArgumentException("You can not have two appointments for the same vaccine type.");
 
     VaccinationCenter vacCenter = checkUserTakenVaccinesAndSelectsCenter(vaccineType);
 
