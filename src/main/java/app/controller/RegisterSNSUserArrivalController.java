@@ -33,12 +33,11 @@ public class RegisterSNSUserArrivalController implements IRegisterController<Arr
   public RegisterSNSUserArrivalController(Company company, VaccinationCenter center) {
     this.company = company;
     this.center = center;
-    this.snsUser = null;
   }
 
   public void create() {
     this.waitingRoom = center.getWaitingRoom();
-    this.arrival = waitingRoom.createArrival(this.snsUser, this.appointment);
+    this.arrival = waitingRoom.createArrival(this.appointment);
   }
 
   @Override
@@ -66,9 +65,7 @@ public class RegisterSNSUserArrivalController implements IRegisterController<Arr
     SNSUserStore snsUserStore = company.getSNSUserStore();
     SNSUser snsUser = snsUserStore.findSNSUserByNumber(snsNumber);
 
-    if (snsUser == null) {
-      throw new IllegalArgumentException("There is no SNS User with this SNS number.");
-    }
+    if (snsUser == null) throw new IllegalArgumentException("There is no SNS User with this SNS number.");
 
     this.snsUser = snsUser;
   }

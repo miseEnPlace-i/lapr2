@@ -1,8 +1,8 @@
 package app.domain.model;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * Waiting Room class.
@@ -11,7 +11,11 @@ import java.util.List;
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 public class WaitingRoom implements Iterable<Arrival> {
-  List<Arrival> waitingRoom = new ArrayList<Arrival>();
+  Queue<Arrival> waitingRoom;
+
+  public WaitingRoom() {
+    this.waitingRoom = new LinkedList<Arrival>();
+  }
 
   @Override
   public Iterator<Arrival> iterator() {
@@ -28,8 +32,8 @@ public class WaitingRoom implements Iterable<Arrival> {
    * @param snsNumber the SNS Number of the SNS User.
    * @return Arrival
    */
-  public Arrival createArrival(SNSUser snsUser, Appointment appointment) {
-    return new Arrival(snsUser, appointment);
+  public Arrival createArrival(Appointment appointment) {
+    return new Arrival(appointment);
   }
 
   /**
@@ -43,11 +47,9 @@ public class WaitingRoom implements Iterable<Arrival> {
    * Finds today's SNS User arrival.
    */
   public boolean hasSNSUserArrivedToday(SNSUser snsUser) {
-    for (Arrival arrival : waitingRoom) {
-      if (arrival.getSNSUser().equals(snsUser)) {
-        return true;
-      }
-    }
+    for (Arrival arrival : waitingRoom)
+      if (arrival.getSNSUser().equals(snsUser)) return true;
+
     return false;
   }
 
@@ -57,10 +59,10 @@ public class WaitingRoom implements Iterable<Arrival> {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("\nWaiting Room:");
-    for (Arrival arrival : waitingRoom) {
+
+    for (Arrival arrival : waitingRoom)
       sb.append("\n\t" + arrival.toString());
-    }
+
     return sb.toString();
   }
-
 }

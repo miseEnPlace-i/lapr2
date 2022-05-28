@@ -15,16 +15,13 @@ public class VaccinationCenterMapper {
   private VaccinationCenterMapper() {}
 
   public static VaccinationCenterListDTO toDto(VaccinationCenter vaccinationCenter) {
-    return new VaccinationCenterListDTO(vaccinationCenter.getName(), vaccinationCenter.getAddress(),
-        vaccinationCenter.getEmail(), vaccinationCenter.getPhone(),
-        vaccinationCenter.getOpeningHours(), vaccinationCenter.getClosingHours());
+    return new VaccinationCenterListDTO(vaccinationCenter.getName(), vaccinationCenter.getAddress(), vaccinationCenter.getEmail(), vaccinationCenter.getPhone(),
+        vaccinationCenter.getOpeningHours().toString(), vaccinationCenter.getClosingHours().toString());
   }
 
   public static VaccinationCenter toModel(VaccinationCenterListDTO vaccinationCenterDTO) {
-    VaccinationCenterStore vaccinationCenterStore =
-        App.getInstance().getCompany().getVaccinationCenterStore();
-    VaccinationCenter vaccinationCenter =
-        vaccinationCenterStore.getVaccinationCenterByEmail(vaccinationCenterDTO.getEmail());
+    VaccinationCenterStore vaccinationCenterStore = App.getInstance().getCompany().getVaccinationCenterStore();
+    VaccinationCenter vaccinationCenter = vaccinationCenterStore.getVaccinationCenterByEmail(vaccinationCenterDTO.getEmail());
 
     return vaccinationCenter;
   }

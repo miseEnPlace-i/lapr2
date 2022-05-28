@@ -14,8 +14,10 @@ import app.domain.model.Appointment;
 import app.domain.model.Employee;
 import app.domain.model.HealthCareCenter;
 import app.domain.model.SNSUser;
+import app.domain.model.Slot;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
+import app.utils.Time;
 
 public class AppointmentScheduleListTest {
   private VaccinationCenter vaccinationCenter;
@@ -27,8 +29,12 @@ public class AppointmentScheduleListTest {
   public void setup() {
     Employee coordinator = new Employee("123456789", "name", "+351212345678", "email@email.com", "address", "000000000ZZ4", "ROLE");
 
-    vaccinationCenter = new HealthCareCenter("name", "address", "email@email.com", "+351212345678", "+351212345678", "http://www.site.com", "10:00", "11:00", 5,
-        5, coordinator, "ages", "ars");
+    Time openingHours = new Time(10, 0);
+    Time closingHours = new Time(11, 0);
+    Slot slot = new Slot(5, 5);
+
+    vaccinationCenter = new HealthCareCenter("name", "address", "email@email.com", "+351212345678", "+351212345678", "http://www.site.com", openingHours,
+        closingHours, slot, coordinator, "ages", "ars");
     appointments = vaccinationCenter.getAppointmentList();
     user = new SNSUser("000000000ZZ4", "123456789", "name", new Date(), 'M', "+351212345678", "email@email.com", "address");
   }
