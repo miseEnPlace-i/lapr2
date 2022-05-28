@@ -83,6 +83,12 @@ public class App {
     this.vaccineTechnologyStore.addVaccineTechnology("VIRAL_VECTOR_TECHNOLOGY");
     this.vaccineTechnologyStore.addVaccineTechnology("M_RNA_TECHNOLOGY");
 
+    // ********** IMPORTANT **********
+    // PLEASE DO NOT DELETE ANY INSTANTIATION OF OBJECTS ON THIS METHOD.
+    // THIS SAVES DEVELOPERS A LOT OF WORK.
+    // THANK YOU.
+    // *******************************
+
     this.authFacade.addUserWithRole("Test Administrator", "admin@user.com", "123456", Constants.ROLE_ADMIN);
 
     Calendar date = Calendar.getInstance();
@@ -107,21 +113,20 @@ public class App {
     VaccineType vacType = this.vacTypeStore.addVaccineType("00000", "COVID-19", "M_RNA_TECHNOLOGY");
     this.vacTypeStore.saveVaccineType(vacType);
 
-    Vaccine vaccine = this.vaccineStore.createVaccine("BioNTech, Pfizer vaccine", "00001", "Pfizer, BioNTech", vacType);
+    VaccineType vacType2 = this.vacTypeStore.addVaccineType("00010", "Monkeypox", "VIRAL_VECTOR_TECHNOLOGY");
+    this.vacTypeStore.saveVaccineType(vacType2);
 
+    Vaccine vaccine = this.vaccineStore.createVaccine("BioNTech, Pfizer vaccine", "00001", "Pfizer, BioNTech", vacType);
     AdminProcess adminProcess1 = new AdminProcess(1, 16, 1);
     AdminProcess adminProcess2 = new AdminProcess(17, 89, 2);
-
-    // ********** IMPORTANT **********
-    // PLEASE DO NOT DELETE ANY INSTANTIATION OF OBJECTS ON THIS METHOD.
-    // THIS SAVES DEVELOPERS A LOT OF WORK.
-    // THANK YOU.
-    // *******************************
-
     vaccine.addAdminProc(adminProcess1);
     vaccine.addAdminProc(adminProcess2);
-
     this.vaccineStore.saveVaccine(vaccine);
+
+    Vaccine vaccine2 = this.vaccineStore.createVaccine("Monkeypox vaccine", "00002", "PTVaccines", vacType2);
+    vaccine2.addAdminProc(adminProcess1);
+    vaccine2.addAdminProc(adminProcess2);
+    this.vaccineStore.saveVaccine(vaccine2);
 
     VaccinationCenter vc = this.vaccinationCenterStore.createCommunityMassCenter("Centro Vacinação de Teste", "Rua de Teste", "test@gmail.com", "+351212345678",
         "+351212345679", "http://www.test.com", "20:00", "21:00", 7, 5, e2, vacType);

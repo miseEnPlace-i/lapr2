@@ -99,12 +99,16 @@ public class EmployeeStore {
     this.authFacade.addUserWithRole(employee.getName(), email, pwd, employee.getRoleId());
 
     String message = String.format("A new user has been created.\nEmail: %s\nPassword: %s", email, pwd);
-    UserNotificationDTO notification = UserNotificationMapper.toDto(email, phoneNumber, message);
+    UserNotificationDTO notificationDto = UserNotificationMapper.toDto(email, phoneNumber, message);
+
+    sendNotification(notificationDto);
+  }
+
+  private void sendNotification(UserNotificationDTO notificationDto) {
     ISender sender = SenderFactory.getSender();
 
-    // send notification with the password
     try {
-      sender.send(notification);
+      sender.send(notificationDto);
     } catch (Exception e) {
       System.out.println(e.getMessage());
       e.printStackTrace();

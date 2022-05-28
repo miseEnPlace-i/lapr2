@@ -10,7 +10,6 @@ import app.controller.ScheduleVaccineController;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
 import app.domain.shared.FieldToValidate;
-import app.dto.AppointmentWithoutNumberDTO;
 import app.dto.VaccinationCenterListDTO;
 import app.dto.VaccineTypeDTO;
 import app.service.CalendarUtils;
@@ -22,16 +21,19 @@ import app.ui.console.utils.Utils;
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
 public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
+  private String snsUserNumber = "";
 
   public ScheduleVaccineUI() {
     super(new ScheduleVaccineController(App.getInstance().getCompany()));
+    String email = App.getInstance().getCurrentUserSession().getUserId().getEmail();
+    snsUserNumber = ctrl.getSNSUserNumberWithEmail(email);
   }
 
   public void insertData() {
     VaccineType vaccineType = ctrl.getSuggestedVaccineType();
 
     boolean accepted = showSuggestedVaccineType(vaccineType);
-    boolean isEligible = isUserEligibleForVaccine(vaccineType);
+    boolean isEligible = isUserEligibleForVaccine(vaccineType, this.snsUserNumber);
 
     if (!accepted || !isEligible) {
       // Declines the suggested vaccine type or is not eligible for vaccine type selected
@@ -48,31 +50,16 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
     }
 
     if (userHasAppointmentForVaccineType(vaccineType)) {
-      System.out.println("\nYou can not have two appointments for the same vaccine type.\n");
-      return;
+      throw new IllegalArgumentException("You can not have two appointments for the same vaccine type.");
     }
 
-    VaccinationCenter vacCenter = null;
-
-    if (userHasTakenVaccineType(vaccineType)) {
-      // ctrl.getVaccinesByType(vaccineType);
-      // ctrl.checkAdministrationProcessForNextDose();
-      // vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
-    } else {
-      if (ctrl.checkAdministrationProcessForVaccineType(vaccineType)) {
-        vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
-      } else {
-        System.out.println("\nYou are not eligible for any vaccine of this type.\n");
-        return;
-      }
-    }
+    VaccinationCenter vacCenter = checkUserTakenVaccinesAndSelectsCenter(vaccineType);
 
     Calendar appointmentDate = selectDateAndTimeInCenterAvailability(vacCenter);
+
     boolean sms = selectSMS();
 
-    AppointmentWithoutNumberDTO appointmentDto = new AppointmentWithoutNumberDTO(appointmentDate, vacCenter, vaccineType, sms);
-
-    ctrl.createAppointment(appointmentDto);
+    ctrl.createAppointment(snsUserNumber, appointmentDate, vacCenter, vaccineType, sms);
   }
 
   private boolean showSuggestedVaccineType(VaccineType vt) {
@@ -107,7 +94,7 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
         VaccineTypeDTO vtDto = (VaccineTypeDTO) selectedVt;
         vaccineType = ctrl.getVaccineTypeByCode(vtDto.getCode());
 
-        if (isUserEligibleForVaccine(vaccineType)) {
+        if (isUserEligibleForVaccine(vaccineType, this.snsUserNumber)) {
           accepted = true;
           return vaccineType;
         } else {
@@ -121,6 +108,26 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
     } while (!accepted);
 
     return null;
+  }
+
+  /**
+   * Check that if user has already taken a specific vaccine type, if it is eligible for that administration process and
+   * selects center
+   * 
+   * @param vaccineType the vaccineType requested
+   * 
+   * @return the vaccination center selected
+   */
+  public VaccinationCenter checkUserTakenVaccinesAndSelectsCenter(VaccineType vaccineType) {
+    VaccinationCenter center = null;
+
+    if (isUserEligibleForVaccine(vaccineType, this.snsUserNumber)) {
+      center = selectVaccinationCenterWithVaccineType(vaccineType);
+    } else {
+      throw new IllegalArgumentException("You are not eligible for any vaccine of this type.");
+    }
+
+    return center;
   }
 
   /**
@@ -162,8 +169,8 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
     return (index == 0);
   }
 
-  private boolean userHasTakenVaccineType(VaccineType vt) {
-    return ctrl.userHasTakenAnyVaccineFromVaccineType(vt);
+  private boolean userHasTakenVaccineType(VaccineType vt, String snsUserNumber) {
+    return ctrl.userHasTakenAnyVaccineFromVaccineType(vt, snsUserNumber);
   }
 
   /**
@@ -182,7 +189,7 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
       accepted = true;
 
       date = Utils.readDateInFutureFromConsole("Date (dd/MM/yyyy): ");
-      hours = Utils.readLineFromConsoleWithValidation("Hour (HH:MM):", FieldToValidate.HOURS);
+      hours = Utils.readLineFromConsoleWithValidation("Hour (" + center.getOpeningHours() + " - " + center.getClosingHours() + "):", FieldToValidate.HOURS);
 
       if (!ctrl.isCenterOpenAt(center, hours)) {
         accepted = false;
@@ -217,14 +224,14 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
    * @param vaccineType the vaccine type to be checked
    * @return true if user is eligible, false otherwise
    */
-  private boolean isUserEligibleForVaccine(VaccineType vaccineType) {
-    if (userHasTakenVaccineType(vaccineType)) {
+  private boolean isUserEligibleForVaccine(VaccineType vaccineType, String snsNumber) {
+    if (userHasTakenVaccineType(vaccineType, this.snsUserNumber)) {
       // ctrl.getVaccinesByType(vaccineType);
       // ctrl.checkAdministrationProcessForNextDose();
       // vacCenter = selectVaccinationCenterWithVaccineType(vaccineType);
       return false;
     } else {
-      if (ctrl.checkAdministrationProcessForVaccineType(vaccineType)) {
+      if (ctrl.checkAdministrationProcessForVaccineType(vaccineType, snsUserNumber)) {
         return true;
       } else {
         return false;
@@ -239,6 +246,6 @@ public class ScheduleVaccineUI extends RegisterUI<ScheduleVaccineController> {
    * @return true if has an appointment, false otherwise
    */
   private boolean userHasAppointmentForVaccineType(VaccineType vaccineType) {
-    return ctrl.userHasAppointmentForVaccineType(vaccineType);
+    return ctrl.userHasAppointmentForVaccineType(vaccineType, snsUserNumber);
   }
 }

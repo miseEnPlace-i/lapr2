@@ -9,7 +9,6 @@ import java.util.Calendar;
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 public class Arrival {
-  private SNSUser snsUser;
   private Appointment appointment;
   private Calendar arrivalTime;
   private Calendar departureTime;
@@ -17,8 +16,7 @@ public class Arrival {
   /**
    * Constructor for Arrival.
    */
-  public Arrival(SNSUser snsUser, Appointment appointment) {
-    this.snsUser = snsUser;
+  public Arrival(Appointment appointment) {
     this.appointment = appointment;
     this.arrivalTime = Calendar.getInstance();
   }
@@ -27,7 +25,7 @@ public class Arrival {
    * Gets the snsNumber.
    */
   public SNSUser getSNSUser() {
-    return this.snsUser;
+    return this.appointment.getSnsUser();
   }
 
   /**
@@ -63,6 +61,6 @@ public class Arrival {
    */
   @Override
   public String toString() {
-    return "Arrival: " + this.snsUser.getSnsNumber() + " @ " + this.arrivalTime.getTime();
+    return "Arrival: " + this.getSNSUser().getSnsNumber() + " @ " + this.arrivalTime.getTime();
   }
 }
