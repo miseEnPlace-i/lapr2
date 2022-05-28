@@ -29,11 +29,13 @@ class VaccinationCenter{
   -phoneNumber
   -faxNumber
   -websiteAddress
-  -openingHours  
-  -closingHours
-  -slotDuration
-  -maximumVaccinesPerSlot
-  -coordinator
+}
+
+class Time {}
+
+class Slot {
+  slotDuration
+  maxVacPerSlot
 }
 
 class Company{
@@ -52,7 +54,7 @@ class Employee {
   -roleId
 }
 
-class SMSSender {}
+class Notification {}
 
 class CenterCoordinator {}
 
@@ -63,17 +65,28 @@ class HealthCareCenter {}
 
 Appointment "1"  -- "1" VaccineType : has >
 Appointment "*" -- "1" VaccinationCenter : is held in >
-Company "1" -- "*" VaccinationCenter : knows >
-Appointment "*" -- "1" Receptionist : scheduled by >
-Receptionist "1" -- "1" SNSUser : schedules for >
 Appointment "1" -- "1" SNSUser : has >
+Appointment "*" -- "1" Receptionist : scheduled by >
+Appointment "1" -- "0..1" Notification : triggers >
+
+Receptionist "1" -- "1" SNSUser : schedules for >
 Employee <|-- Receptionist
 Employee <|-- CenterCoordinator
+
 Company -- Employee : knows >
-Appointment "1" -- "0..1" SMSSender : triggers >
+Company "1" -- "*" VaccinationCenter : knows >
+
 CenterCoordinator "1" -- "1" VaccinationCenter : has >
+
 VaccinationCenter <|-- CommunityMassVaccinationCenter
 VaccinationCenter <|-- HealthCareCenter
+VaccinationCenter "1" -- "1" Slot : has >
+VaccinationCenter "1" -- "1" Time : has >
+
+Notification <|-- SMSSender
+Notification <|-- EmailSender
+Notification <|-- ConsoleSender
+
 
 
 @enduml
