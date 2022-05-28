@@ -100,7 +100,7 @@ public class ScheduleVaccineController implements IRegisterController<Appointmen
   }
 
   public VaccinationCenter getVaccinationCenterByEmail(String email) {
-    return vaccinationCenterStore.getVaccinationCenterByEmail(email);
+    return vaccinationCenterStore.getVaccinationCenterWithEmail(email);
   }
 
   @Override
