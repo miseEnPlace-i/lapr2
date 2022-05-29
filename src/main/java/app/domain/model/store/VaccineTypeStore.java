@@ -3,6 +3,8 @@ package app.domain.model.store;
 import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.VaccineType;
+import app.dto.VaccineTypeDTO;
+import app.mapper.VaccineTypeMapper;
 
 
 /**
@@ -49,6 +51,15 @@ public class VaccineTypeStore {
   }
 
   /**
+   * Gets list
+   * 
+   * @return list of vaccine types
+   */
+  public List<VaccineTypeDTO> getVaccineTypes() {
+    return VaccineTypeMapper.toDto(vaccineTypes);
+  }
+
+  /**
    * Adds a new vaccine type
    * 
    * @param code the vaccine type code
@@ -57,8 +68,7 @@ public class VaccineTypeStore {
    * @return the new vaccine type
    */
   public VaccineType addVaccineType(String code, String description, String technology) {
-    if (!vaccineTechnologyStore.existsType(technology))
-      throw new IllegalArgumentException("Technology must exist.");
+    if (!vaccineTechnologyStore.existsType(technology)) throw new IllegalArgumentException("Technology must exist.");
 
     VaccineType vaccineType = new VaccineType(code, description, technology);
 

@@ -100,7 +100,7 @@ class VaccineType {}
 
 class VaccineTypeStore {
   -vaccineTypes : List<VaccineType>
-  +getList()
+  +getVaccineTypes()
   +getVaccineTypeByCode(code)
 }
 
@@ -117,6 +117,8 @@ class VaccineTypeMapper {
 class VaccinationCenterMapper {
   +toDto(vaccinationCenters)
 }
+
+interface ISender {}
 
 class SNSUserStore {
   +findSnsUserByEmail(email)                           
@@ -150,11 +152,12 @@ AppointmentScheduleList "1" --> "*" Appointment : stores
 
 Appointment o-- VaccineType
 
-Notification "0..1" <-- "1" Appointment : triggers <
+ISender "0..1" <-- "1" Appointment : triggers <
 
-Notification <|-- SMSSender
-Notification <|-- EmailSender
-Notification <|-- ConsoleSender
+SenderFactory --> ISender : creates >
+ISender <|.. SMSSender
+ISender <|.. EmailSender
+ISender <|.. ConsoleSender
 
 VaccineType --o Vaccine 
 

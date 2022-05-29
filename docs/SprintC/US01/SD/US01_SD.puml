@@ -72,16 +72,17 @@ activate ui
   opt declines the suggested vaccine type
     ui -> controller : getListOfVaccineTypes()
     activate controller
-      controller -> vacTypeStore : vaccineTypes = getList()
+      controller -> vacTypeStore : vaccineTypes = getVaccineTypes()
       activate vacTypeStore
+        vacTypeStore -> vacTypeMapper  : toDto(vaccineTypes)
+        activate vacTypeMapper
+          ref over vacTypeMapper
+            SD_VaccineTypesList_toDto.puml
+          end ref
+          vacTypeMapper --> vacTypeStore : vaccineTypesDto
+        deactivate vacTypeMapper
+        vacTypeStore --> controller : vaccineTypesDto
       deactivate vacTypeStore
-      controller -> vacTypeMapper : toDto(vaccineTypes)
-      activate vacTypeMapper
-        ref over vacTypeMapper
-          SD_VaccineTypesList_toDto.puml
-        end ref
-        vacTypeMapper --> controller : vaccineTypesDto
-      deactivate vacTypeMapper
       controller --> ui : vaccineTypesDto
     deactivate controller
     ui --> user : shows a list of all vaccine types and asks to select one
