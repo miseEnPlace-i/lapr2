@@ -49,9 +49,6 @@ activate ui
     controller -> company : snsUserStore = getSnsUserStore()
     activate company
     deactivate company
-    controller -> company : vaccineStore = getVaccineStoreStore()
-    activate company
-    deactivate company
   deactivate controller
   ui -> controller : getSuggestedVaccineType()
   activate controller 
@@ -160,16 +157,16 @@ activate ui
     controller -> snsUserStore : snsUser = findSnsUserByEmail(email)
     activate snsUserStore
     deactivate snsUserStore
-    controller -> appointmentScheduleList : appointment = createAppointment(snsUser, date, time, vaccineTypeDto, sms)
+    controller -> appointmentScheduleList : appointment = createAppointment(snsUser, date, vaccineTypeDto, sms)
+    note right
+      date represents a Calendar object that 
+      contains the date and time of the appointment
+    end note
     activate appointmentScheduleList
       appointmentScheduleList -> vacTypeMapper : vaccineType = toModel(vaccineTypeDto)
       activate vacTypeMapper
       deactivate vacTypeMapper
-      appointmentScheduleList -> appointment** : create(snsUser, date, vaccineType, sms)
-      note left
-        date represents a Calendar object that 
-        contains the date and time of the appointment
-      end note
+      appointmentScheduleList -> appointment** : create(snsUser, date, vaccinationCenter, vaccineType, sms)
     deactivate appointmentScheduleList
     controller -> appointmentScheduleList : validateAppointment(appointment)
     activate appointmentScheduleList
