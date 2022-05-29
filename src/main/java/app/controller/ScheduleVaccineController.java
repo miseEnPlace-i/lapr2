@@ -1,5 +1,6 @@
 package app.controller;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,8 +20,7 @@ import app.dto.VaccinationCenterListDTO;
 import app.dto.VaccineTypeDTO;
 import app.mapper.AppointmentInsertMapper;
 import app.mapper.VaccineTypeMapper;
-import app.service.TimeUtils;
-import app.utils.Time;
+import app.service.CalendarUtils;
 
 /**
  * ScheduleVaccineController class.
@@ -52,30 +52,61 @@ public class ScheduleVaccineController implements IRegisterController<Appointmen
   }
 
   /**
-   * Creates an appointment instance.
-   * 
-   * @param dto the appointment dto, containing all the information about the appointment
+   * Creates an appointment instance. (Used in US01)
    */
-  public void createAppointment(String snsNumber, Calendar date, VaccinationCenter center, VaccineType vaccineType, boolean sms) {
+  public void createAppointment(Date date, String time, VaccinationCenterListDTO centerDto, VaccineTypeDTO vaccineTypeDto, boolean sms) {
+    VaccinationCenter center = vaccinationCenterStore.getVaccinationCenterWithEmail(centerDto.getEmail());
+
     this.appointmentSchedule = center.getAppointmentList();
-    SNSUser user = snsUserStore.findSNSUserByNumber(snsNumber);
-    this.appointment = appointmentSchedule.create(user, date, center, vaccineType, sms);
+
+    String email = App.getInstance().getCurrentUserSession().getUserId().getEmail();
+    SNSUser snsUser = snsUserStore.findSNSUserByEmail(email);
+
+    try {
+      Calendar dateAndTime = CalendarUtils.parseDateTime(date, time);
+
+      this.appointment = appointmentSchedule.createAppointment(snsUser, dateAndTime, vaccineTypeDto, sms);
+    } catch (ParseException ex) {
+      throw new IllegalArgumentException("Date or time invalid.");
+    }
+
+    appointmentSchedule.validateAppointment(this.appointment);
+  }
+
+  /**
+   * Creates an appointment instance. (Used in US02)
+   */
+  public void createAppointment(String snsNumber, Date date, String time, VaccinationCenterListDTO centerDto, VaccineTypeDTO vaccineTypeDto, boolean sms) {
+    VaccinationCenter center = vaccinationCenterStore.getVaccinationCenterWithEmail(centerDto.getEmail());
+
+    this.appointmentSchedule = center.getAppointmentList();
+
+    SNSUser snsUser = snsUserStore.findSNSUserByNumber(snsNumber);
+
+    if (snsUser == null) throw new IllegalArgumentException("SNS User Number not found.");
+
+    try {
+      Calendar dateAndTime = CalendarUtils.parseDateTime(date, time);
+
+      this.appointment = appointmentSchedule.createAppointment(snsUser, dateAndTime, vaccineTypeDto, sms);
+    } catch (ParseException ex) {
+      throw new IllegalArgumentException("Date or time invalid.");
+    }
+
+    appointmentSchedule.validateAppointment(this.appointment);
   }
 
   /**
    * Gets the suggested vaccine type.
    * 
-   * @return the suggested vaccine type
+   * @return the suggested vaccine type dto
    */
-  public VaccineType getSuggestedVaccineType() {
+  public VaccineTypeDTO getSuggestedVaccineType() {
     VaccineType vaccineType = vaccineTypeStore.getVaccineTypeByCode(company.getOngoingOutbreakVaccineTypeCode());
 
-    return vaccineType;
-  }
+    VaccineTypeDTO vaccineTypeDto = VaccineTypeMapper.toDto(vaccineType);
 
-  public String getSNSUserNumberWithEmail(String email) {
-    SNSUser user = snsUserStore.findSNSUserByEmail(email);
-    return user.getSnsNumber();
+    return vaccineTypeDto;
   }
 
   public List<VaccineTypeDTO> getListOfVaccineTypes() {
@@ -89,17 +120,8 @@ public class ScheduleVaccineController implements IRegisterController<Appointmen
     return list;
   }
 
-  public List<VaccinationCenterListDTO> getListOfVaccinationCentersWithVaccineType(VaccineType vaccineType) {
-
+  public List<VaccinationCenterListDTO> getListOfVaccinationCentersWithVaccineType(VaccineTypeDTO vaccineType) {
     return vaccinationCenterStore.getListOfVaccinationCentersWithVaccineType(vaccineType);
-  }
-
-  public VaccineType getVaccineTypeByCode(String code) {
-    return vaccineTypeStore.getVaccineTypeByCode(code);
-  }
-
-  public VaccinationCenter getVaccinationCenterByEmail(String email) {
-    return vaccinationCenterStore.getVaccinationCenterByEmail(email);
   }
 
   @Override
@@ -116,41 +138,6 @@ public class ScheduleVaccineController implements IRegisterController<Appointmen
   @Override
   public void save() {
     appointmentSchedule.saveAppointment(appointment);
-
-    SNSUser snsUser = snsUserStore.findSNSUserByNumber(appointment.getSnsUser().getSnsNumber());
-    snsUser.addAppointmentToList(appointment);
-  }
-
-  public boolean existsUser(String snsNumber) {
-    return this.company.getSNSUserStore().checkSNSUserExists(snsNumber);
-  }
-
-  public boolean userHasTakenAnyVaccineFromVaccineType(VaccineType vt, String SnsNumber) {
-    SNSUser user = snsUserStore.findSNSUserByNumber(SnsNumber);
-    return user.hasTakenAnyVaccineFromVaccineType(vt);
-  }
-
-  public boolean checkAdministrationProcessForVaccineType(VaccineType vt, String number) {
-    SNSUser snsUser = snsUserStore.findSNSUserByNumber(number);
-    Date birthDay = snsUser.getBirthDay();
-
-    int age = TimeUtils.calculateAge(birthDay);
-
-    return vaccineStore.areVaccinesWithValidAdminProcessWithVaccineType(age, vt);
-  }
-
-  public boolean isCenterOpenAt(VaccinationCenter vacCenter, String hours) {
-    Time t = new Time(hours);
-    return vacCenter.isOpenAt(t);
-  }
-
-  public boolean hasSlotAvailability(VaccinationCenter vacCenter, Calendar date) {
-    return vacCenter.hasAvailabilityInSlot(date);
-  }
-
-  public boolean userHasAppointmentForVaccineType(VaccineType vaccineType, String number) {
-    SNSUser snsUser = snsUserStore.findSNSUserByNumber(number);
-    return snsUser.hasAppointmentForVaccineType(vaccineType, number);
   }
 
   @Override

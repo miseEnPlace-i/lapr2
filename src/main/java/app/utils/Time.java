@@ -2,6 +2,9 @@ package app.utils;
 
 import java.util.Calendar;
 
+/**
+ * @author Tomás Lopes <1211289@isep.ipp.pt>
+ */
 public class Time {
   private int hours;
   private int minutes;
@@ -116,6 +119,8 @@ public class Time {
    * @return true if the time is between the given times, false otherwise.
    */
   public boolean isBetween(Time startTime, Time endTime) {
+    if (equals(startTime) || equals(endTime)) return true;
+
     return isAfter(startTime) && isBefore(endTime);
   }
 

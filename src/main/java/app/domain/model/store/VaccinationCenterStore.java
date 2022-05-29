@@ -11,7 +11,9 @@ import app.domain.model.VaccineType;
 import app.domain.model.WaitingRoom;
 import app.domain.shared.Constants;
 import app.dto.VaccinationCenterListDTO;
+import app.dto.VaccineTypeDTO;
 import app.mapper.VaccinationCenterMapper;
+import app.mapper.VaccineTypeMapper;
 import app.utils.Time;
 
 /**
@@ -150,9 +152,11 @@ public class VaccinationCenterStore {
    * 
    * @return the list of Vaccination Centers
    */
-  public List<VaccinationCenterListDTO> getListOfVaccinationCentersWithVaccineType(VaccineType vaccineType) {
+  public List<VaccinationCenterListDTO> getListOfVaccinationCentersWithVaccineType(VaccineTypeDTO vaccineTypeDto) {
     List<VaccinationCenter> availableVaccinationCenters = new ArrayList<VaccinationCenter>();
     List<VaccinationCenterListDTO> returnList = new ArrayList<VaccinationCenterListDTO>();
+
+    VaccineType vaccineType = VaccineTypeMapper.toModel(vaccineTypeDto);
 
     for (VaccinationCenter vaccinationCenter : this.vaccinationCenters) {
       if (vaccinationCenter instanceof CommunityMassVaccinationCenter) {
@@ -192,12 +196,10 @@ public class VaccinationCenterStore {
     return null;
   }
 
-  public VaccinationCenter getVaccinationCenterByEmail(String email) {
-    for (VaccinationCenter center : vaccinationCenters) {
-      if (center.getEmail().equals(email)) {
-        return center;
-      }
-    }
+  public VaccinationCenter getVaccinationCenterWithEmail(String email) {
+    for (VaccinationCenter center : vaccinationCenters)
+      if (center.getEmail().equals(email)) return center;
+
     return null;
   }
 

@@ -100,8 +100,7 @@ public class Vaccine {
   // TO STRING
   @Override
   public String toString() {
-    return "Designation: " + this.designation + "\nBrand: " + this.brand + "\nId: " + this.id
-        + "\nVaccine Type: " + this.vacType.getCode();
+    return "Designation: " + this.designation + "\nBrand: " + this.brand + "\nId: " + this.id + "\nVaccine Type: " + this.vacType.getCode();
   }
 
   // ADD A NEW AP

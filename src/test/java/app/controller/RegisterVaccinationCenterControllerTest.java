@@ -18,7 +18,7 @@ import app.domain.model.store.VaccineTypeStore;
 public class RegisterVaccinationCenterControllerTest {
   Company company = new Company("designation", "12345");
   RegisterVaccinationCenterController controller = new RegisterVaccinationCenterController(company);
-  String centerName = "Vaccination Center";
+  String resourceName = "Vaccination Center";
   Employee coordinator;
 
   /**
@@ -94,7 +94,7 @@ public class RegisterVaccinationCenterControllerTest {
    */
   @Test
   public void ensureGetResourceNameIsWorkingCorrectly() {
-    assertEquals(centerName, controller.getResourceName());
+    assertEquals(resourceName, controller.getResourceName());
   }
 
   /**

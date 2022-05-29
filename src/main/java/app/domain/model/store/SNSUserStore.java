@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import app.domain.model.INotifiable;
 import app.domain.model.SNSUser;
 import app.domain.shared.Constants;
 import app.dto.SNSUserDTO;
@@ -24,7 +23,7 @@ import pt.isep.lei.esoft.auth.AuthFacade;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
-public class SNSUserStore implements INotifiable {
+public class SNSUserStore {
   // User List
   private List<SNSUser> snsUsers;
 

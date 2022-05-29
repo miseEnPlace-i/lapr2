@@ -45,7 +45,7 @@ public class RegisterSNSUserArrivalController implements IRegisterController<Arr
     this.waitingRoom.saveArrival(this.arrival);
 
     // DEBUG: print the waiting room
-    System.out.println(this.waitingRoom);
+    // System.out.println(this.waitingRoom);
   }
 
   @Override
