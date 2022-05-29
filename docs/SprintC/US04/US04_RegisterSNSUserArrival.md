@@ -42,19 +42,22 @@ _"As a receptionist at a vaccination center, I want to register the arrival of a
 ### 1.3. Acceptance Criteria
 
 -   **AC1:** No duplicate entries should be possible for the same SNS user on the same day or vaccine period.
--   
+
 ### 1.4. Found out Dependencies
 
 -   There is a dependency to "US03 Receptionist registers a SNS User" since at least one SNS User must exist to be able to check the appointments and register arrivals.
-
-<!-- TODO: add missing dependencies -->
+-   There is dependency with the implementation of the EmployeeSession, this component is needed to know the vaccination center the receptionist is working on.
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 -   Typed data:
+
     -   the SNS Users' number
+
+-   Selected data:
+    -   the vaccination center the receptionist is working on
 
 **Output Data:**
 
@@ -71,8 +74,7 @@ _"As a receptionist at a vaccination center, I want to register the arrival of a
 
 ### 1.7 Other Relevant Remarks
 
-<!-- TODO -->
-<!-- -   The created task stays in a "not published" state in order to distinguish from "published" tasks. -->
+-   The arrival is only created after confirmation that the given SNS User has an appointment for that day.
 
 ## 2. OO Analysis
 
@@ -88,34 +90,38 @@ n/a
 
 ### 3.1. Rationale
 
-<!-- **SSD - Alternative 1 is adopted.** -->
+**SSD - Alternative 1 is adopted.**
 
-<!-- TODO -->
-
-| Interaction ID | Question: Which class is responsible for...            | Answer               | Justification (with patterns)                                                                                 |
-| :------------- | :----------------------------------------------------- | :------------------- | :------------------------------------------------------------------------------------------------------------ |
-| Step 1         | ... interacting with the actor?                        | CreateTaskUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-|                | ... coordinating the US?                               | CreateTaskController | Controller                                                                                                    |
-|                | ... instantiating a new Task?                          | Organization         | Creator (Rule 1): in the DM Organization has a Task.                                                          |
-|                | ... knowing the user using the system?                 | UserSession          | IE: cf. A&A component documentation.                                                                          |
-|                | ... knowing to which organization the user belongs to? | Platform             | IE: has registed all Organizations                                                                            |
-|                |                                                        | Organization         | IE: knows/has its own Employees                                                                               |
-|                |                                                        | Employee             | IE: knows its own data (e.g. email)                                                                           |
-| Step 2         |                                                        |                      |                                                                                                               |
-| Step 3         | ...saving the inputted data?                           | Task                 | IE: object created in step 1 has its own data.                                                                |
-| Step 4         | ...knowing the task categories to show?                | Platform             | IE: Task Categories are defined by the Platform.                                                              |
-| Step 5         | ... saving the selected category?                      | Task                 | IE: object created in step 1 is classified in one Category.                                                   |
-| Step 6         |                                                        |                      |                                                                                                               |
-| Step 7         | ... validating all data (local validation)?            | Task                 | IE: owns its data.                                                                                            |
-|                | ... validating all data (global validation)?           | Organization         | IE: knows all its tasks.                                                                                      |
-|                | ... saving the created task?                           | Organization         | IE: owns all its tasks.                                                                                       |
-| Step 8         | ... informing operation success?                       | CreateTaskUI         | IE: is responsible for user interactions.                                                                     |
+| Interaction ID                                                    | Question: Which class is responsible for...                        | Answer                           | Justification (with patterns)                                                                                 |
+| :---------------------------------------------------------------- | :----------------------------------------------------------------- | :------------------------------- | :------------------------------------------------------------------------------------------------------------ |
+| starts to register the SNS User arrival to the vaccination center | ... interacting with the receptionist?                             | RegisterSNSUserArrivalUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+|                                                                   | ... coordinating the US?                                           | RegisterSNSUserArrivalController | Controller                                                                                                    |
+|                                                                   | ... instantiating a new Task?                                      | Organization                     | Creator (Rule 1): in the DM Organization has a Task.                                                          |
+|                                                                   | ... knowing the vaccination center the receptionist is working on? | EmployeeSession                  | Pure Fabrication: Is not specified in the domain model but is needed to accomplish low coupling.              |
+|                                                                   | ... getting the nurse vaccination center data?                     | VaccinationCenterStore           | IE: knows all the vaccination centers                                                                         |
+| types the SNS User number                                         |                                                                    |                                  |                                                                                                               |
+|                                                                   | ... knowing the SNS Users existent?                                | Company                          | IE: knows all their SNS Users                                                                                 |
+|                                                                   | ... knowing the vaccination center appointment list?               | VaccinationCenter                | IE: has its appointmentss                                                                                     |
+|                                                                   | ... validating all data (local validation)?                        | AppointmentScheduleList          | IE: knows all its appointments.                                                                               |
+|                                                                   | ... knowing the vaccination center waiting room?                   | VaccinationCenter                | IE: has its waiting room                                                                                      |
+|                                                                   | ... knowing the properties of the arrival to show?                 | AppointmentListDTO               | DTO: filters the properties to be shown for confirmation                                                      |
+| confirms the appointment                                          |                                                                    |                                  |                                                                                                               |
+|                                                                   | ... saving the created arrival?                                    | Organization                     | IE: owns all its tasks.                                                                                       |
+| informs operation success                                         | ... informing operation success?                                   | RegisterSNSUserArrivalUI         | IE: is responsible for user interactions.                                                                     |
 
 ### Systematization
 
 According to the taken rationale, the conceptual classes promoted to software classes are:
 
+-   Appointment
+-   AppointmentDTO
 -   Arrival
+-   Company
+-   EmployeeSession
+-   VaccinationCenter
+-   VaccinationCenterStore
+-   WaitingRoom
+-   WaitingRoomList
 
 Other software classes (i.e. Pure Fabrication) identified:
 
@@ -135,52 +141,74 @@ Other software classes (i.e. Pure Fabrication) identified:
 ![US04_CD](CD/US04_CD.svg)
 
 # 4. Tests
-<!-- TODO -->
-**Test 1:** Check that it is not possible to create an instance of the Task class with null values.
 
-    @Test(expected = IllegalArgumentException.class)
-    	public void ensureNullIsNotAllowed() {
-    	Task instance = new Task(null, null, null, null, null, null, null);
+**Test 1:** Check that an SNS User has already arrived today.
+
+    @Test
+    public void ensureHasSnsUserArrivedTodayIsWorking() {
+    	Arrival arrival = waitingRoom.createArrival(appointment);
+
+    	waitingRoom.saveArrival(arrival);
+    	assertTrue(waitingRoom.hasSNSUserArrivedToday(appointment.getSnsUser()));
     }
 
-**Test 2:** Check that it is not possible to create an instance of the Task class with a reference containing less than five chars - AC2.
+**Test 2:** Check that duplicated arrivals are not allowed.
 
-    @Test(expected = IllegalArgumentException.class)
-    	public void ensureReferenceMeetsAC2() {
-    	Category cat = new Category(10, "Category 10");
-
-    	Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
+    @Test(expected = AppointmentNotFoundException.class)
+    public void ensureSNSUserDoesntArriveTwice() throws AppointmentNotFoundException {
+        this.createAppointment();
+        ctrl.findSNSUser("123456789");
+        ctrl.findSNSUserAppointment();
+        ctrl.create();
+        ctrl.save();
+        ctrl.findSNSUserAppointment();
     }
 
-_It is also recommended to organize this content by subsections._
+**Test 3:** Check that the arrival returns the correct appointment.
+
+    @Test
+    public void ensureGetAppointmentWorksAsExpected() {
+        SNSUser snsUser = this.snsUserStore.findSNSUserByNumber("123456789");
+        Calendar date = Calendar.getInstance();
+        date.set(Calendar.HOUR_OF_DAY, 20);
+        date.set(Calendar.MINUTE, 30);
+
+        Appointment appointment = new Appointment(snsUser, date, center, this.vacType, true);
+        Arrival arrival = new Arrival(appointment);
+
+        assertEquals(arrival.getAppointment(), appointment);
+    }
+
+**Test 4:** Check that it is not possible to create an instance of the Task class with null values.
+
+    @Test
+    public void ensureHasVaccineTypeWorks() {
+        SNSUser snsUser = this.snsUserStore.findSNSUserByNumber("123456789");
+        Calendar date = Calendar.getInstance();
+        date.set(Calendar.HOUR_OF_DAY, 20);
+        date.set(Calendar.MINUTE, 30);
+
+        Appointment appointment = new Appointment(snsUser, date, center, this.vacType, true);
+
+        assertEquals(true, appointment.hasVaccineType(this.vacType));
+        assertEquals(false, appointment.hasVaccineType(null));
+    }
+
+<!-- _It is also recommended to organize this content by subsections._ -->
 
 # 5. Construction (Implementation)
-<!-- TODO -->
-## Class CreateTaskController
 
-    	public boolean createTask(String ref, String designation, String informalDesc,
-    		String technicalDesc, Integer duration, Double cost, Integer catId)() {
+## Class RegisterSNSUserArrivalController
 
-    		Category cat = this.platform.getCategoryById(catId);
-
-    		Organization org;
-    		// ... (omitted)
-
-    		this.task = org.createTask(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
-
-    		return (this.task != null);
+    	public RegisterSNSUserArrivalController(Company company, VaccinationCenter center) {
+    		this.company = company;
+    		this.center = center;
     	}
 
 ## Class Organization
 
-    	public Task createTask(String ref, String designation, String informalDesc,
-    		String technicalDesc, Integer duration, Double cost, Category cat)() {
-
-
-    		Task task = new Task(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
-    		if (this.validateTask(task))
-    			return task;
-    		return null;
+    	public Arrival createArrival(Appointment appointment) {
+    		return new Arrival(appointment);
     	}
 
 # 6. Integration and Demo
@@ -189,7 +217,7 @@ _It is also recommended to organize this content by subsections._
 -   This Arrival will appear in the Waiting Room List, checked by the nurse.
 
 # 7. Observations
-<!-- TODO -->
-Platform and Organization classes are getting too many responsibilities due to IE pattern and, therefore, they are becoming huge and harder to maintain.
 
-Is there any way to avoid this to happen?
+The receptionist selects the vaccination center she is currently working on at login time.
+
+![EmployeeLogin_SD](SD/EmployeeLogin_SD.svg)
