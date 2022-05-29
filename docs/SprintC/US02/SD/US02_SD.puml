@@ -98,16 +98,12 @@ activate CTRL
 CTRL -> VACSTORE : listVaccineType = getVaccineTypes()
 activate VACSTORE
 
-VACSTORE -> VACTYPEMAPPER : vaccineTypeDto = toDto(vaccineType)
-activate VACTYPEMAPPER
-deactivate VACSTORE
-
-ref over VACTYPEMAPPER
+ref over VACSTORE
 SD_VaccineTypeList_toDto.puml
 end ref
 
-VACTYPEMAPPER --> CTRL : vaccineTypeListDto
-deactivate VACTYPEMAPPER
+VACSTORE --> CTRL : vaccineTypeListDto
+deactivate VACSTORE
 
 CTRL --> UI : vaccineTypeListDto
 deactivate CTRL
@@ -127,9 +123,9 @@ activate CENTERSTORE
 
 CENTERSTORE -> CENTERLIST** : create()
 
-CENTERSTORE -> VACCINEMAPPER : vaccineType = toModel(vaccineTypeDto)
-activate VACCINEMAPPER
-deactivate VACCINEMAPPER
+CENTERSTORE -> VACTYPEMAPPER : vaccineType = toModel(vaccineTypeDto)
+activate VACTYPEMAPPER
+deactivate VACTYPEMAPPER
 
 loop for each VaccinationCenter registered in the system
 opt vaccinationCenter instanceof CMVC

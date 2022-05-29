@@ -122,6 +122,9 @@ According to the taken rationale, the conceptual classes promoted to software cl
 
  * Appointment
  * AppointmentScheduleList
+ * VaccinationCenterStore
+ * VaccineTypeStore
+ * Company
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
@@ -192,3 +195,11 @@ For demo purposes, there are multiple objects of all classes created in the prev
 # 7. Observations
 
 There are validations needed for this US that are not implemented in the system yet. Therefore, those validations are not implemented yet.
+
+##### VaccineType toDto List
+
+![US01_SD](SD/SD_VaccineTypesList_toDto.svg)
+
+##### VaccinationCenter toDto List
+
+![US01_SD](SD/SD_VaccinationCentersList_toDto.svg)
