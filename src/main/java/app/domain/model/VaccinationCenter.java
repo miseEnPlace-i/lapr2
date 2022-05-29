@@ -343,6 +343,8 @@ public abstract class VaccinationCenter {
     int openingMinutesOfDay = openingHours.convertToMinutes();
     int realClosingMinutesOfDay = openingMinutesOfDay + (appointmentList.getNOfSlotsPerDay() * slot.getDuration());
 
+    realClosingMinutesOfDay--;
+
     int hours = realClosingMinutesOfDay / 60;
     int minutes = realClosingMinutesOfDay % 60;
 
