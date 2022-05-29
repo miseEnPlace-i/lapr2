@@ -5,6 +5,7 @@ import java.util.Date;
 import app.domain.model.Company;
 import app.domain.model.SNSUser;
 import app.domain.model.store.SNSUserStore;
+import app.domain.shared.Gender;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
 /**
@@ -40,7 +41,7 @@ public class RegisterSNSUserController implements IRegisterController<SNSUser> {
    * @param email
    * @param address
    */
-  public void create(String citizenCard, String snsNumber, String name, Date birthDay, char gender, String phoneNumber, String email, String address)
+  public void create(String citizenCard, String snsNumber, String name, Date birthDay, Gender gender, String phoneNumber, String email, String address)
       throws IllegalArgumentException, ParseException {
     // create an instance of an SNS User
     this.snsUser = store.createSNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
