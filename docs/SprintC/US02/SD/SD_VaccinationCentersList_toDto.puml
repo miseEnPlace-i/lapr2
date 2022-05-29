@@ -1,0 +1,30 @@
+@startuml SD_VaccinationCentersList_toDto
+autonumber
+'hide footbox
+
+participant "mapper\n:VaccinationCenterMapper" as MAPPER
+participant "vaccinationCentersDto\n:List<VaccinationCenterDto>" as VACLISTDTO
+participant "vaccinationCenters\n:List<VaccinationCenter>" as VACTYPELIST
+
+[o-> MAPPER : toDto(vaccinationCenters)
+activate MAPPER
+
+MAPPER --> VACLISTDTO** : create()
+
+loop for each object in vaccinationCenters
+MAPPER -> VACTYPELIST : vaccinationCenter = get(i)
+activate VACTYPELIST
+deactivate VACTYPELIST
+
+MAPPER -> MAPPER : vaccinationCenterDto = toDto(vaccinationCenter)
+activate MAPPER
+deactivate MAPPER
+
+MAPPER -> VACLISTDTO : add(vaccinationCenterDto)
+activate VACLISTDTO
+deactivate VACLISTDTO
+end
+
+[<- MAPPER : vaccinationCentersDto
+deactivate MAPPER
+@enduml

@@ -75,8 +75,12 @@ activate ui
       controller -> vacTypeStore : vaccineTypes = getList()
       activate vacTypeStore
       deactivate vacTypeStore
-      controller -> vacTypeMapper : vaccineTypesDto = toDto(vaccineTypes)
+      controller -> vacTypeMapper : toDto(vaccineTypes)
       activate vacTypeMapper
+        ref over vacTypeMapper
+          SD_VaccineTypesList_toDto.puml
+        end ref
+        vacTypeMapper --> controller : vaccineTypesDto
       deactivate vacTypeMapper
       controller --> ui : vaccineTypesDto
     deactivate controller
@@ -109,8 +113,12 @@ activate ui
           deactivate vacCenterList
         end
       end
-      vacCenterStore -> vacCenterMapper : availableVaccinationCentersDto = toDto(availableVaccinationCenters)
+      vacCenterStore -> vacCenterMapper : toDto(availableVaccinationCenters)
       activate vacCenterMapper
+        ref over vacCenterMapper
+          SD_VaccinationCentersList_toDto.puml
+        end ref
+        vacCenterMapper --> vacCenterStore : availableVaccinationCentersDto
       deactivate vacCenterMapper
       vacCenterStore --> controller : availableVaccinationCentersDto
     deactivate vacCenterStore
