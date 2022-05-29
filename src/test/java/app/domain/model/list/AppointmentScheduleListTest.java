@@ -17,10 +17,14 @@ import app.domain.model.SNSUser;
 import app.domain.model.Slot;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
+import app.domain.shared.Gender;
 import app.dto.VaccineTypeDTO;
 import app.mapper.VaccineTypeMapper;
 import app.utils.Time;
 
+/**
+ * @author Tomás Lopes <1211289@isep.ipp.pt>
+ */
 public class AppointmentScheduleListTest {
   private VaccinationCenter vaccinationCenter;
   private AppointmentScheduleList appointments;
@@ -41,11 +45,10 @@ public class AppointmentScheduleListTest {
     vaccinationCenter = new HealthCareCenter("name", "address", "email@email.com", "+351212345678", "+351212345678", "http://www.site.com", openingHours,
         closingHours, slot, coordinator, "ages", "ars");
     appointments = vaccinationCenter.getAppointmentList();
-    // javardatings maximus sao 2 da manha pff
-    user1 = new SNSUser("000000000ZZ4", "123456788", "name", new Date(), 'M', "+351212345675", "email1@email.com", "address");
-    user2 = new SNSUser("185352901ZZ6", "123456789", "name", new Date(), 'M', "+351212345678", "email2@email.com", "address");
-    user3 = new SNSUser("191052469ZZ5", "123456787", "name", new Date(), 'M', "+351212345671", "email3@email.com", "address");
-    user4 = new SNSUser("332952754ZW7", "123456786", "name", new Date(), 'M', "+351212345670", "email4@email.com", "address");
+    user1 = new SNSUser("000000000ZZ4", "123456788", "name", new Date(), Gender.MALE, "+351212345675", "email1@email.com", "address");
+    user2 = new SNSUser("185352901ZZ6", "123456789", "name", new Date(), Gender.MALE, "+351212345678", "email2@email.com", "address");
+    user3 = new SNSUser("191052469ZZ5", "123456787", "name", new Date(), Gender.MALE, "+351212345671", "email3@email.com", "address");
+    user4 = new SNSUser("332952754ZW7", "123456786", "name", new Date(), Gender.MALE, "+351212345670", "email4@email.com", "address");
   }
 
   @Test

@@ -6,6 +6,7 @@ import java.text.ParseException;
 import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.Company;
+import app.domain.shared.Gender;
 
 public class RegisterSNSUserControllerTest {
   Company company = new Company("designation", "12345");
@@ -20,7 +21,7 @@ public class RegisterSNSUserControllerTest {
     String snsNumber = "323456789";
     String name = "test";
     Date birthDay = new Date(20000);
-    char gender = 'm';
+    Gender gender = Gender.MALE;
     String phoneNumber = "+351910000002";
     String email = "example3@example.com";
     String address = "test";
@@ -34,7 +35,7 @@ public class RegisterSNSUserControllerTest {
     String snsNumber = "223456789";
     String name = "test";
     Date birthDay = new Date(20000);
-    char gender = 'm';
+    Gender gender = Gender.MALE;
     String phoneNumber = "+351910000001";
     String email = "example2@example.com";
     String address = "test";
@@ -54,7 +55,7 @@ public class RegisterSNSUserControllerTest {
     String snsNumber = "123456789";
     String name = "test";
     Date birthDay = new Date(20000);
-    char gender = 'm';
+    Gender gender = Gender.MALE;
     String phoneNumber = "+351910000000";
     String email = "example@example.com";
     String address = "test";
