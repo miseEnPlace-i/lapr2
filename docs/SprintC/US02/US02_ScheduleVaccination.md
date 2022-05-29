@@ -35,13 +35,12 @@ _"As a receptionist at one vaccination center, I want to schedule a vaccination.
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** SNS Number must be filled in.
-* **AC2:** Date must be filled in.
-* **AC3:** Time must be filled in.
+* **AC1:** SNS Number must be filled in. Should follow the portuguese format (9 digits).
+* **AC2:** Date must be filled in. Should follow the portuguese format (dd/mm/yyyy).
+* **AC3:** Time must be filled in. Should follow the following format (HH:mm).
 * **AC4:** All required fields must be filled in.
 * **AC5:** The algorithm should check if the SNS User is within the age and time since the last vaccine.
-* **AC6:** The SNS User number must have 9 digits.
-* **AC7:** A receptionist cannot schedule the same vaccine more than once for the same SNS User.
+* **AC6:** A receptionist cannot schedule the same vaccine more than once for the same SNS User.
 
 ### 1.4. Found out Dependencies
 
@@ -130,6 +129,8 @@ According to the taken rationale, the conceptual classes promoted to software cl
  * AppointmentScheduleList
  * VaccineTypeStore
  * SNSUserStore
+ * ISender
+ * SenderFactory
   
 Other software classes (i.e. Pure Fabrication) identified: 
 
