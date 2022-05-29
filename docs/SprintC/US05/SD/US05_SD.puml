@@ -14,49 +14,27 @@ after the nurse logging in
 end note
 
 activate UI
-participant ":App" as APP
-UI -> APP : app=getInstance()
-activate APP
-deactivate APP
-UI -> APP : company=app.getCompany()
-activate APP
-deactivate APP
 
 create ":ListUsersInWaitingRoomController" as CTRL
 
-UI -> CTRL : create(company,nurseSession)
+UI -> CTRL : create(nurseSession)
 
 participant "nurseSession\n:NurseSession" as FAC
 participant "comp\n:Company" as COMP
-participant "vaccinationCenterStore\n:VaccinationCenterStore" as VACS
 participant "vaccinationCenter\n:VaccinationCenter" as VACC
-participant "vaccinationCenterDto:\nList<VaccinationCenterDTO>" as VACCDTO
 participant ":WaitingRoomMapper" as WAITM
 participant ":ArrivalMapper" as ARRM
 participant "snsUser\n:SNSUser" as SNSU
 participant "arrival:Arrival" as ARR
 
-
 UI -> CTRL : getWaitingRoomListFromNurseCenter()
 activate CTRL
-CTRL -> FAC : nurseVaccinationCenter=getVaccinationCenter()
+CTRL -> FAC : vaccinationCenter=getVaccinationCenter()
 activate FAC
 deactivate FAC
 |||
 
-CTRL -> COMP : vaccinationCenterStore=getVaccinationCenterStore()
-activate COMP
-deactivate
-
-CTRL -> VACCDTO : phone=getPhone()
-activate VACCDTO
-deactivate VACCDTO
-
-CTRL -> VACS : vaccinationCenter=getVaccinationCenterWithPhone(phone)
-activate VACS
-deactivate VACS
-
-CTRL -> VACC : waitingRoom=vaccinationCenter.getWaitingRoom()
+CTRL -> VACC : waitingRoom=getWaitingRoom()
 activate VACC
 deactivate VACC
 
@@ -95,6 +73,16 @@ loop for each arrival in waitingRoom
   deactivate ARR
 
   create "arrivalDto\n:ArrivalDto" as APODTO
+  note left
+   birthDate & time must be parsed 
+   to string before the DTO is created
+   
+   Here we used SimpleDateFormat.
+
+   Formats: 
+   "dd/MM/yyyy"
+   "dd/MM/yyyy HH:mm"
+  end note
   ARRM -> APODTO : create(name,gender,birthDate,snsUserNumber,phoneNumber,time)
   ARRM --> WAITM : arrivalDto
   deactivate ARRM
