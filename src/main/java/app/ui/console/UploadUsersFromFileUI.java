@@ -27,7 +27,13 @@ public class UploadUsersFromFileUI implements Runnable {
   public void run() {
     System.out.println("\nRegister Vaccine UI:");
 
-    insertData(); // asks to insert file path and instantiates CSVReader
+    String filePath = insertData(); // asks to insert file path and instantiates CSVReader
+
+    String message = "Are u sure you want to upload users from file: ";
+
+    message += (filePath.substring(filePath.lastIndexOf("/") + 1) + " s/n");
+
+    if(!Utils.confirm(message)) return;
 
     List<SNSUser> userList = null;
   
@@ -63,10 +69,12 @@ public class UploadUsersFromFileUI implements Runnable {
     System.out.println("0 - Cancel");
   }
 
-  public void insertData() {
+  public String insertData() {
     String filePath = Utils.readLineFromConsole("File Path: ");
 
     ctrl.createCsvReader(filePath);
+
+    return filePath;
   }
 
 }
