@@ -13,6 +13,10 @@ class Employee {
   -roleId
 }
 
+class Role {
+  -designation
+}
+
 class Nurse {}
 
 class Receptionist {}
@@ -24,10 +28,6 @@ class VaccinationCenter {
   - phoneNumber
   - faxNumber
   - websiteAddress
-  - openingHours
-  - closingHours
-  - slotDuration
-  - maximumVaccinesPerSlot
 }
 
 class WaitingRoom {}
@@ -44,15 +44,32 @@ class SNSUser {
 class Company {}
 
 class Appointment {
-  -appointmentDate
+  -date
+}
 
+class Time {
+  -hours
+  -minutes
+}
+
+class Slot {
+  -duration
+  -nOfVaccinesPerSlot
 }
 
 Employee <|-- Nurse
 Employee <|-- Receptionist
 
+Employee "*" -- "1" Role : has >
+
 VaccinationCenter "1" -- "1" WaitingRoom : has >
 WaitingRoom "1" -- "*" SNSUser : waits <
+
+Appointment "1" -- "1" Time : is scheduled at >
+
+VaccinationCenter "1" -- "1" Time : has closing hours >
+VaccinationCenter "1" -- "1" Time : has opening hours >
+VaccinationCenter "1" -- "1" Slot : has >
 
 Nurse "1" -- "*" WaitingRoom : consults list >
 Receptionist "1" -- "*" WaitingRoom : sends to >
