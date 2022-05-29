@@ -19,15 +19,20 @@ participant "mapper\n:vaccinationCenterMapper" as VACMAPPER
 participant "mapper\n:AppointmentMapper" as APPMAPPER
 participant "appDto:AppointmentDto" as DTO
 participant "appointmentScheduleList\n:AappointmentScheduleList" as APPLIST
-participant "userHealthData\n:UserHealthData" as USERDATA
 participant "appointment\n:Appointment" as APPOINT
 participant "snsUser\n:SNSUser" as SNSUSER
 participant "vaccinationCenter\n:VaccinationCenter" as VACCENTER
+participant "mapper\n:UserNotificationMapper" as USERNOTIMAPPER
+participant "userNotificationDto\n:UserNofiticationDto" as USERNOTIDTO
+participant "userHealthData\n:UserHealthData" as USERDATA
 participant ":TimeUtils" as TIMEUTILS
+participant "senderFactory\n:SenderFactory" as SENDERFACTORY
+participant "isender\n:ISender" as ISENDER
 participant "vaccinesTypes\n:List<VaccineType>"
 participant "administeredVaccines\n:List<Vaccines>"
 participant "vaccineTypesDto\n:List<VaccineTypeDto>"
-
+participant "vaccinationCenterDto\n:List<VaccinationCenterDto>"
+participant "appointment\n:List<Appointment>"
 
 activate RECEPT
 RECEPT -> UI : asks to schedule a vaccination
@@ -198,17 +203,67 @@ APPLIST -> APPOINT : slotIndex = getAppoitmentSlotIndex(appointment.getDate())
 activate APPOINT
 deactivate APPOINT
 
-opt exists schedule for that day 
 APPLIST -> APPLIST : i = getAvailableIndexInSlot(slots[slotIndex])
 activate APPLIST
-APPLIST -> APPLIST : appointment = slots[slotIndex][i]
-activate APPLIST
-alt
-APPLIST -> APPLIST : appointment = slots[slotIndex][0]
+deactivate APPLIST
+
+APPLIST -> APPOINT : appointment = slots[slotIndex][i]
+activate APPOINT
+deactivate APPOINT
+
+APPLIST -> APPOINT : snsUser = appointment.getSnsUser()
+activate APPOINT
+deactivate APPOINT
+
+APPLIST -> SNSUSER : addAppointmentToList(appointment)
+activate SNSUSER
+
+SNSUSER -> USERDATA : addAppointment(appointment)
+activate USERDATA
+
+USERDATA -> USERDATA : appointments.add(appointment)
+activate USERDATA
+deactivate USERDATA
+deactivate USERDATA
+deactivate SNSUSER
+
+opt user wants to receive SMS about the scheduled vaccine
+
+APPLIST -> APPLIST : message = generateMessage(appointment)
 activate APPLIST
 deactivate APPLIST
+
+APPLIST -> APPOINT : appointmentUser = getSnSuser()
+activate APPOINT
+deactivate APPOINT
+
+APPLIST -> SNSUSER : email = getEmail()
+activate SNSUSER
+deactivate SNSUSER
+
+APPLIST -> SNSUSER : phone = getPhoneNumber()
+activate SNSUSER
+deactivate SNSUSER
+
+APPLIST -> USERNOTIMAPPER : notificationDto = toDto(email,phone,message)
+activate USERNOTIMAPPER
+
+USERNOTIMAPPER --> APPLIST : notificationDto
+deactivate USERNOTIMAPPER
+
+APPLIST -> APPLIST : sendNotification(notificationDto)
+activate APPLIST
+
+APPLIST -> SENDERFACTORY : sender = getSender()
+activate SENDERFACTORY
+deactivate SENDERFACTORY
+
+APPLIST -> ISENDER : send(notifcationDto)
+activate ISENDER
+deactivate ISENDER
+deactivate APPLIST
 end
-end
+
 deactivate CTRL
 
 UI --> RECEPT : informs operation success
