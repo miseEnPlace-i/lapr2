@@ -54,7 +54,7 @@ public class CommunityMassVaccinationCenter extends VaccinationCenter {
    * @return true if it administers, false otherwise
    */
   public boolean administersVaccineType(VaccineType vaccineType) {
-    return vaccineType == this.vaccineType;
+    return this.vaccineType.equals(vaccineType);
   }
 
   /**

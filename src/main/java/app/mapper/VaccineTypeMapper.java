@@ -13,7 +13,10 @@ public class VaccineTypeMapper {
   private VaccineTypeMapper() {}
 
   public static VaccineTypeDTO toDto(VaccineType vaccineType) {
-    return new VaccineTypeDTO(vaccineType.getCode(), vaccineType.getDescription(),
-        vaccineType.getTechnology());
+    return new VaccineTypeDTO(vaccineType.getCode(), vaccineType.getDescription(), vaccineType.getTechnology());
+  }
+
+  public static VaccineType toModel(VaccineTypeDTO vaccineTypeDto) {
+    return new VaccineType(vaccineTypeDto.getCode(), vaccineTypeDto.getDescription(), vaccineTypeDto.getTechnology());
   }
 }
