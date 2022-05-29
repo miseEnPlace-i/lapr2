@@ -44,28 +44,21 @@ class Vaccine   {
 class ScheduleVaccineReceptionistUI {}
 
 class ScheduleVaccineController {
+  +ScheduleVaccineController(company)
   +createAppointment(snsNumber,date,center,vaccineType,sms)
   +getSuggestedVaccineType()
-  +existsUser(snsNumber)
-  +userHasTakenAnyVaccineFromVaccineType(vaccineType,snsNumber)
-  +checkAdministrationProcessForVaccineType(vaccineType)
-  +isCenterOpenAt(center,hours)
-  +hasSlotAvailability(center,date)
-  +userHasAppointmentForVaccineType(vaccineType,snsNumber)
-  +getVaccineTypeByCode(code)
-  +getVaccinationCenterByEmail(email)
-  +getListOfVaccinationCentersWithVaccineType(vaccineType)
+  +getListOfVaccinationCentersWithVaccineType(vaccineTypeDto)
   +getListOfVaccineTypes()
   +save()
-  +stringifyData()
 
 }
 
 class Company {
   -designation: String
-  +getSuggestedVaccineType()
+  +getOngoingOutbreakVaccineTypeCode()
   +getVaccinationCenterStore()
   +getVaccineTypeStore()
+  +getSnsUserStore()
 }
 
 class SNSUser {
@@ -78,6 +71,7 @@ class SNSUser {
   - userHealthData : UserHealthData
   + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
   +addAppointmentToList(appointment)
+  +hasAppointmentForVaccineType(vaccineType)
   }
 
 class UserHealthData {
@@ -96,6 +90,7 @@ class VaccinationCenter{
   +isOpenAt(hours)
   +getRealClosingHours()
   +hasAvailabilityInSlot(date)
+  +administersVaccineType(vaccineType)
 }
 
 class Time {
@@ -111,7 +106,8 @@ class Slot {
 
 class VaccinationCenterStore {
 -availableVaccinationCentersList: List<VaccinationCenter>
-+getVaccinationCenterByVaccineType(vaccineType)
++getVaccinationCenterWithEmail(email)
++getVaccinationCentersWithVaccineType(vaccineType)
 }
 
 class VaccineType {}
@@ -127,6 +123,8 @@ class SMSSender {
 
 class VaccineTypeMapper {
 +toDto(vaccineTypes)
++toDto(vaccineType)
++toModel(vaccineTypeDto)
 }
 
 class VaccinationCenterMapper {
@@ -152,13 +150,19 @@ class AppointmentInsertDto {
 }
 
 class SNSUserStore {
-  +checkSNSUserExists(snsNumber)                           
+  +checkSNSUserExists(snsNumber)
+  +findSnsUserByNumber(snsNumber)                           
 }
 
 class CommunityMassVaccinationCenter {}
 
 class HealthCareCenter {}
 
+interface ISender {}
+
+class ConsoleSender {
+  +sendNotification(notificationDto)
+}
 
 ScheduleVaccineReceptionistUI ..> ScheduleVaccineController
 
@@ -179,19 +183,16 @@ SNSUser "1" --o "*" Appointment
 
 AppointmentScheduleList "1" --> "*" Appointment : stores
 
-VaccinationData o-- Vaccine
-VaccinationData o--  VaccinationCenter
-
 UserHealthData  --o SNSUser
-UserHealthData "1" -- "*" VaccinationData : stores >
 
 Appointment o-- VaccineType
 
-Notification "0..1" <-- "1" Appointment : triggers <
+ISender "0..1" <-- "1" Appointment : triggers <
 
-Notification <|-- SMSSender
-Notification <|-- EmailSender
-Notification <|-- ConsoleSender
+SenderFactory --> ISender : creates >
+ISender <|-- SMSSender
+ISender <|-- EmailSender
+ISender <|-- ConsoleSender
 
 VaccineType --o Vaccine 
 
