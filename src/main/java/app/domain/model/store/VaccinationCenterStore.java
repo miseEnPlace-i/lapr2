@@ -183,10 +183,6 @@ public class VaccinationCenterStore {
     return returnList;
   }
 
-  public WaitingRoom getWaitingRoomWithPhone(String phone) {
-    return getVaccinationCenterByPhone(phone).getWaitingRoom();
-  }
-
   private VaccinationCenter getVaccinationCenterByPhone(String phone) {
     for (VaccinationCenter center : vaccinationCenters) {
       if (center.getPhone().equals(phone)) {
@@ -199,6 +195,13 @@ public class VaccinationCenterStore {
   public VaccinationCenter getVaccinationCenterWithEmail(String email) {
     for (VaccinationCenter center : vaccinationCenters)
       if (center.getEmail().equals(email)) return center;
+
+    return null;
+  }
+
+  public VaccinationCenter getVaccinationCenterWithPhone(String phone) {
+    for (VaccinationCenter center : vaccinationCenters)
+      if (center.getPhone().equals(phone)) return center;
 
     return null;
   }

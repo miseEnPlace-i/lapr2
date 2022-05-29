@@ -5,15 +5,14 @@ import java.util.Date;
 import app.domain.shared.Gender;
 
 public class ArrivalDTO {
-  // TODO Implement WaitingRoom DTO with Name, Sex, Birth Date, SNS User Number and Phone Number.
   private String name;
   private Gender gender;
-  private Date birthDate;
+  private String birthDate;
   private String snsUserNumber;
   private String phoneNumber;
   private String time;
 
-  public ArrivalDTO(String name, Gender gender, Date birthDate, String snsUserNumber, String phoneNumber, String time) {
+  public ArrivalDTO(String name, Gender gender, String birthDate, String snsUserNumber, String phoneNumber, String time) {
     this.name = name;
     this.gender = gender;
     this.birthDate = birthDate;
