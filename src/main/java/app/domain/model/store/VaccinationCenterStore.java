@@ -165,7 +165,7 @@ public class VaccinationCenterStore {
       }
     }
 
-    return VaccinationCenterMapper.toDto(vaccinationCenters);
+    return VaccinationCenterMapper.toDto(availableVaccinationCenters);
   }
 
   private VaccinationCenter getVaccinationCenterByPhone(String phone) {
