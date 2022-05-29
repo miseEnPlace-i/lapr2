@@ -1,12 +1,11 @@
 package app.ui.console;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import app.controller.App;
 import app.controller.RegisterSNSUserController;
 import app.domain.shared.FieldToValidate;
+import app.domain.shared.Gender;
 import app.ui.console.utils.Utils;
 
 /**
@@ -23,35 +22,16 @@ public class RegisterSNSUserUI extends RegisterUI<RegisterSNSUserController> {
   public void insertData() throws IllegalArgumentException, ParseException {
     System.out.println("\nRegister SNS User:");
 
-    String citizenCard = Utils.readLineFromConsoleWithValidation("Citizen Card (xxxxxxxxxLLx): ",
-        FieldToValidate.CITIZEN_CARD);
-    String snsNumber = Utils.readLineFromConsoleWithValidation("SNS Number (xxxxxxxxx): ",
-        FieldToValidate.SNS_NUMBER);
+    String citizenCard = Utils.readLineFromConsoleWithValidation("Citizen Card (xxxxxxxxxLLx): ", FieldToValidate.CITIZEN_CARD);
+    String snsNumber = Utils.readLineFromConsoleWithValidation("SNS Number (xxxxxxxxx): ", FieldToValidate.SNS_NUMBER);
     String name = Utils.readLineFromConsole("Name: ");
     Date birthDay = Utils.readDateFromConsole("Birthday (dd/MM/yyyy): ");
-    String phoneNumber = Utils.readLineFromConsoleWithValidation("Phone Number (+351xxxxxxxxx): ",
-        FieldToValidate.PHONE_NUMBER);
-    String email = Utils.readLineFromConsoleWithValidation("Email (example@example.com): ",
-        FieldToValidate.EMAIL);
+    String phoneNumber = Utils.readLineFromConsoleWithValidation("Phone Number (+351xxxxxxxxx): ", FieldToValidate.PHONE_NUMBER);
+    String email = Utils.readLineFromConsoleWithValidation("Email (example@example.com): ", FieldToValidate.EMAIL);
     String address = Utils.readLineFromConsole("Address: ");
-    char gender = 'm';
 
-    // select gender
-    boolean flag = false;
-    List<String> validGenders = new ArrayList<String>();
-    validGenders.add("m");
-    validGenders.add("f");
+    Gender g = (Gender) Utils.showAndSelectOneEnum(Gender.values(), "\nSelect a gender:");
 
-    do {
-      String input = Utils.readLineFromConsole("Select a gender (M/F): ").toLowerCase();
-      if (validGenders.contains(input)) {
-        gender = input.charAt(0);
-        flag = true;
-      } else {
-        System.out.println("\nInvalid gender.");
-      }
-    } while (!flag);
-
-    super.ctrl.create(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
+    super.ctrl.create(citizenCard, snsNumber, name, birthDay, g, phoneNumber, email, address);
   }
 }

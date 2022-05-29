@@ -6,9 +6,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
+import app.domain.shared.Gender;
 
 /**
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
+ * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 public class SNSUserTest {
 
@@ -19,7 +21,7 @@ public class SNSUserTest {
    */
   @Test(expected = Exception.class)
   public void ensureNullArgumentsAreNotAllowed() {
-    new SNSUser(null, null, null, null, ' ', null, null, null);
+    new SNSUser(null, null, null, null, null, null, null, null);
   }
 
   /**
@@ -32,7 +34,7 @@ public class SNSUserTest {
     String citizenCard = "123456789";
     String snsNumber = "123456789";
     String name = "Teste";
-    char gender = 'm';
+    Gender gender = Gender.MALE;
     String phoneNumber = "+351900000000";
     String email = "example@example.com";
     String address = "Test Address 101";
@@ -53,7 +55,7 @@ public class SNSUserTest {
     String citizenCard = "123456789";
     String snsNumber = "123456789";
     String name = "Teste";
-    char gender = 'm';
+    Gender gender = Gender.MALE;
     String phoneNumber = "+351900000000";
     String email = "example@example.com";
     String address = "Test Address 101";
@@ -72,7 +74,7 @@ public class SNSUserTest {
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidPhoneNumbersAreNotAllowed() {
     Date c = new Date();
-    new SNSUser("123456789ZZ1", "123456789", "name", c, 'M', "0", "email@email.com", "address");
+    new SNSUser("123456789ZZ1", "123456789", "name", c, Gender.MALE, "0", "email@email.com", "address");
   }
 
   /**
@@ -83,8 +85,7 @@ public class SNSUserTest {
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidCCLengthIsntAllowed() {
     Date c = new Date();
-    new SNSUser("987987", "123456789", "name", c, 'M', "+351912345678", "email@email.com",
-        "address");
+    new SNSUser("987987", "123456789", "name", c, Gender.MALE, "+351912345678", "email@email.com", "address");
   }
 
   /**
@@ -95,8 +96,7 @@ public class SNSUserTest {
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidCCIsNotAllowed() {
     Date c = new Date();
-    new SNSUser("000000000ZZ0", "123456789", "name", c, 'M', "+351912345678", "email@email.com",
-        "address");
+    new SNSUser("000000000ZZ0", "123456789", "name", c, Gender.MALE, "+351912345678", "email@email.com", "address");
   }
 
   /**
@@ -107,8 +107,7 @@ public class SNSUserTest {
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidEmailIsntAllowed() {
     Date c = new Date();
-    new SNSUser("123456789ZZ1", "123456789", "name", c, 'M', "+351912345678", "2h1125h1q5as",
-        "address");
+    new SNSUser("123456789ZZ1", "123456789", "name", c, Gender.MALE, "+351912345678", "2h1125h1q5as", "address");
   }
 
   /**
@@ -119,8 +118,7 @@ public class SNSUserTest {
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidSNSNumberIsntAllowed() {
     Date c = new Date();
-    new SNSUser("123456789ZZ1", "1111111111111111111", "name", c, 'M', "+351912345678",
-        "2h1125h1q5as", "address");
+    new SNSUser("123456789ZZ1", "1111111111111111111", "name", c, Gender.MALE, "+351912345678", "2h1125h1q5as", "address");
   }
 
   /**
@@ -131,8 +129,7 @@ public class SNSUserTest {
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidNameIsntAllowed() {
     Date c = new Date();
-    new SNSUser("123456789ZZ1", "222222222", "", c, 'M', "+351912345678", "example@example.com",
-        "address");
+    new SNSUser("123456789ZZ1", "222222222", "", c, Gender.MALE, "+351912345678", "example@example.com", "address");
   }
 
   /**
@@ -143,8 +140,7 @@ public class SNSUserTest {
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidAddressIsNotAllowed() {
     Date c = new Date();
-    new SNSUser("123456789ZZ1", "222222222", "test", c, 'M', "+351912345678", "example@example.com",
-        "");
+    new SNSUser("123456789ZZ1", "222222222", "test", c, Gender.MALE, "+351912345678", "example@example.com", "");
   }
 
   /**
@@ -153,8 +149,7 @@ public class SNSUserTest {
   @Test
   public void ensureIsPossibleToCreateSNSUser() {
     Date c = new Date();
-    SNSUser instance = new SNSUser("123456789ZZ1", "123456789", "name", c, 'M', "+351211111111",
-        "email@email.com", "address");
+    SNSUser instance = new SNSUser("123456789ZZ1", "123456789", "name", c, Gender.MALE, "+351211111111", "email@email.com", "address");
 
     assertEquals(instance.getCitizenCard(), "123456789ZZ1");
     assertEquals(instance.getSnsNumber(), "123456789");
@@ -167,14 +162,13 @@ public class SNSUserTest {
   @Test
   public void ensureGetsWorkAsExpected() {
     Date c = new Date();
-    SNSUser instance = new SNSUser("123456789ZZ1", "123456789", "name", c, 'M', "+351211111111",
-        "email@email.com", "address");
+    SNSUser instance = new SNSUser("123456789ZZ1", "123456789", "name", c, Gender.MALE, "+351211111111", "email@email.com", "address");
 
     assert instance.getAddress().equals("address");
     assert instance.getBirthDay().equals(c);
     assert instance.getCitizenCard().equals("123456789ZZ1");
     assert instance.getEmail().equals("email@email.com");
-    assert instance.getGender() == 'M';
+    assert instance.getGender() == Gender.MALE;
     assert instance.getName().equals("name");
     assert instance.getPhoneNumber().equals("+351211111111");
     assert instance.getSnsNumber().equals("123456789");
@@ -188,13 +182,10 @@ public class SNSUserTest {
     Date c = new Date();
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-    SNSUser instance = new SNSUser("123456789ZZ1", "123456789", "name", c, 'F', "+351211111111",
-        "email@email.com", "address");
+    SNSUser instance = new SNSUser("123456789ZZ1", "123456789", "name", c, Gender.FEMALE, "+351211111111", "email@email.com", "address");
 
-    String expected =
-        "SNS User name: name\nCitizen card number: 123456789ZZ1\nSNS number: 123456789\nBirthday: "
-            + sdf.format(new Date())
-            + "\nGender: Female\nPhone number: +351211111111\nEmail: email@email.com\nAddress: address\n";
+    String expected = "SNS User name: name\nCitizen card number: 123456789ZZ1\nSNS number: 123456789\nBirthday: " + sdf.format(new Date())
+        + "\nGender: Female\nPhone number: +351211111111\nEmail: email@email.com\nAddress: address\n";
 
     assertEquals(instance.toString(), expected);
   }
@@ -205,19 +196,13 @@ public class SNSUserTest {
   @Test
   public void ensureEqualsWorksAsExpected() {
     Date c = new Date();
-    SNSUser instance = new SNSUser("123456789ZZ1", "123456789", "name", c, 'F', "+351211111111",
-        "email@email.com", "address");
-    SNSUser instance2 = new SNSUser("135510490ZX8", "323456789", "name", c, 'F', "+351211111112",
-        "email2@email.com", "address");
+    SNSUser instance = new SNSUser("123456789ZZ1", "123456789", "name", c, Gender.FEMALE, "+351211111111", "email@email.com", "address");
+    SNSUser instance2 = new SNSUser("135510490ZX8", "323456789", "name", c, Gender.FEMALE, "+351211111112", "email2@email.com", "address");
     Object randomObject = new Object();
-    SNSUser emailEquals = new SNSUser("346715253ZY4", "523456789", "name", c, 'F', "+351211111117",
-        "email@email.com", "address");
-    SNSUser phoneEquals = new SNSUser("346715253ZY4", "523456789", "name", c, 'F', "+351211111111",
-        "email3@email.com", "address");
-    SNSUser ccEquals = new SNSUser("123456789ZZ1", "523456789", "name", c, 'F', "+351211111115",
-        "email3@email.com", "address");
-    SNSUser snsNumberEquals = new SNSUser("346715253ZY4", "123456789", "name", c, 'F',
-        "+351211111115", "email3@email.com", "address");
+    SNSUser emailEquals = new SNSUser("346715253ZY4", "523456789", "name", c, Gender.FEMALE, "+351211111117", "email@email.com", "address");
+    SNSUser phoneEquals = new SNSUser("346715253ZY4", "523456789", "name", c, Gender.FEMALE, "+351211111111", "email3@email.com", "address");
+    SNSUser ccEquals = new SNSUser("123456789ZZ1", "523456789", "name", c, Gender.FEMALE, "+351211111115", "email3@email.com", "address");
+    SNSUser snsNumberEquals = new SNSUser("346715253ZY4", "123456789", "name", c, Gender.FEMALE, "+351211111115", "email3@email.com", "address");
 
     assert instance.equals(instance);
     assert !instance.equals(instance2);

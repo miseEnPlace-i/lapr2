@@ -1,7 +1,6 @@
 package app.controller;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
@@ -18,8 +17,8 @@ import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.SNSUserStore;
 import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineTypeStore;
+import app.domain.shared.Gender;
 import app.dto.AppointmentInsertDTO;
-import app.dto.VaccinationCenterListDTO;
 import app.mapper.AppointmentInsertMapper;
 import app.service.CalendarUtils;
 
@@ -51,7 +50,7 @@ public class ScheduleVaccineControllerTest {
     vacStore.saveVaccinationCenter(vaccinationCenter);
 
     snsUserStore = company.getSNSUserStore();
-    user = new SNSUser("000000000ZZ4", "123456789", "name", new Date(), 'M', "+351212345678", "email@email.com", "address");
+    user = new SNSUser("000000000ZZ4", "123456789", "name", new Date(), Gender.MALE, "+351212345678", "email@email.com", "address");
     snsUserStore.saveSNSUser(user);
 
     calendar = CalendarUtils.parseDateTime(new Date(), "20:40");

@@ -2,17 +2,17 @@ package app.dto;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import app.domain.shared.Gender;
 
 public class ArrivalDTO {
-  // TODO Implement WaitingRoom DTO with Name, Sex, Birth Date, SNS User Number and Phone Number.
   private String name;
-  private char gender;
-  private Date birthDate;
+  private Gender gender;
+  private String birthDate;
   private String snsUserNumber;
   private String phoneNumber;
   private String time;
 
-  public ArrivalDTO(String name, char gender, Date birthDate, String snsUserNumber, String phoneNumber, String time) {
+  public ArrivalDTO(String name, Gender gender, String birthDate, String snsUserNumber, String phoneNumber, String time) {
     this.name = name;
     this.gender = gender;
     this.birthDate = birthDate;
@@ -31,14 +31,14 @@ public class ArrivalDTO {
   /**
    * @return String return the sex
    */
-  public char getGender() {
+  public Gender getGender() {
     return gender;
   }
 
   /**
    * @return Date return the birthDate
    */
-  public Date getBirthDate() {
+  public String getBirthDate() {
     return birthDate;
   }
 

@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import app.domain.model.SNSUser;
 import app.domain.shared.Constants;
+import app.domain.shared.Gender;
 import app.dto.SNSUserDTO;
 import app.dto.SNSUserRegisterInfoDTO;
 import app.dto.UserNotificationDTO;
@@ -51,7 +52,7 @@ public class SNSUserStore {
    * @param address SNS User address
    * @return SNSUser
    */
-  public SNSUser createSNSUser(String citizenCard, String snsNumber, String name, Date birthDay, char gender, String phoneNumber, String email,
+  public SNSUser createSNSUser(String citizenCard, String snsNumber, String name, Date birthDay, Gender gender, String phoneNumber, String email,
       String address) {
     SNSUser snsUser = new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
 

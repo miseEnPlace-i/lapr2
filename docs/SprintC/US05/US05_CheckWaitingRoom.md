@@ -137,20 +137,40 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 4. Tests
 
-**Test 1:** Check that it is not possible to create an instance of the Task class with null values.
+**Test 1:** Ensure that a non authenticated nurse could not access any center's waiting room
 
-    @Test(expected = IllegalArgumentException.class)
-    	public void ensureNullIsNotAllowed() {
-    	Task instance = new Task(null, null, null, null, null, null, null);
+    @Test(expected = NotAuthorizedException.class)
+    public void ensureNonAuthenticatedEmployeeCannotListWaitingRoom() throws NotAuthorizedException {
+      EmployeeSession nurseSession = new EmployeeSession();
+      new ListUsersInWaitingRoomController(nurseSession);
     }
 
-**Test 2:** Check that it is not possible to create an instance of the Task class with a reference containing less than five chars - AC2.
+**Test 2** Ensure that the vaccination center selected by the nurse is being saved in session
 
-    @Test(expected = IllegalArgumentException.class)
-    	public void ensureReferenceMeetsAC2() {
-    	Category cat = new Category(10, "Category 10");
+    @Test
+    public void ensureAuthenticatedCenterIsReflectedInSession() throws NotAuthorizedException {
+      EmployeeSession session = new EmployeeSession();
+      session.setVaccinationCenter(center);
+      new ListUsersInWaitingRoomController(session);
 
-    	Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
+      assertTrue(session.hasCenter());
+      assertEquals(session.getVaccinationCenter(), center);
+    }
+
+**Test 3:** Ensure that the list of the vaccination center waiting room is being reflected
+
+    @Test
+    public void ensureAuthenticatedEmployeeCanListWaitingRoom() throws NotAuthorizedException {
+      ...
+
+      List<ArrivalDTO> list = ctrl.getWaitingRoomListFromNurseCenter();
+      assertEquals(list.size(), 0);
+
+      ...
+      center.getWaitingRoom().saveArrival(arrival);
+      ...
+
+      assertEquals(list.size(), 1);
     }
 
 # 5. Construction (Implementation)

@@ -17,6 +17,7 @@ import app.domain.model.store.VaccineStore;
 import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.model.store.VaccineTypeStore;
 import app.domain.shared.Constants;
+import app.domain.shared.Gender;
 import app.service.PropertiesUtils;
 import pt.isep.lei.esoft.auth.AuthFacade;
 import pt.isep.lei.esoft.auth.UserSession;
@@ -94,7 +95,7 @@ public class App {
     Calendar date = Calendar.getInstance();
     date.add(Calendar.YEAR, -18);
 
-    SNSUser user = this.snsUserStore.createSNSUser("000000000ZZ4", "123456789", "name", date.getTime(), 'M', "+351212345678", "s@user.com", "address");
+    SNSUser user = this.snsUserStore.createSNSUser("000000000ZZ4", "123456789", "name", date.getTime(), Gender.MALE, "+351212345678", "s@user.com", "address");
     this.snsUserStore.saveSNSUser(user);
 
     Employee e = this.employeeStore.createEmployee("Name", "+351916919169", "r@user.com", "address", "123456789ZZ1", Constants.ROLE_RECEPTIONIST);
