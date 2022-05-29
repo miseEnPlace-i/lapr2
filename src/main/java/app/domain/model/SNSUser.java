@@ -1,6 +1,7 @@
 package app.domain.model;
 
 import java.util.Date;
+import app.domain.shared.Gender;
 import app.dto.SNSUserDTO;
 import app.service.CCFormatVerifier;
 import app.service.FormatVerifier;
@@ -30,7 +31,7 @@ public class SNSUser {
   private Date birthDay;
 
   // SNS User gender
-  private char gender;
+  private Gender gender;
 
   // SNS User phone number
   private String phoneNumber;
@@ -53,8 +54,7 @@ public class SNSUser {
    * @param phoneNumber
    * @param email
    */
-  public SNSUser(String citizenCard, String snsNumber, String name, Date birthDay, char gender,
-      String phoneNumber, String email, String address) {
+  public SNSUser(String citizenCard, String snsNumber, String name, Date birthDay, Gender gender, String phoneNumber, String email, String address) {
     validateBirthday(birthDay);
     validateCitizenCard(citizenCard);
     validateSNSNumber(snsNumber);
@@ -111,7 +111,7 @@ public class SNSUser {
     return email;
   }
 
-  public char getGender() {
+  public Gender getGender() {
     return gender;
   }
 
@@ -169,21 +169,18 @@ public class SNSUser {
     int age = TimeUtils.calculateAge(birthDay);
 
     if (age > MAX_AGE) {
-      throw new IllegalArgumentException(
-          String.format("Birthday cannot be more than %d years ago.", MAX_AGE));
+      throw new IllegalArgumentException(String.format("Birthday cannot be more than %d years ago.", MAX_AGE));
     }
   }
 
   private static void validateCitizenCard(String citizenCard) {
     CCFormatVerifier verifier = new CCFormatVerifier();
 
-    if (!verifier.validate(citizenCard))
-      throw new IllegalArgumentException("Citizen Card is not valid.");
+    if (!verifier.validate(citizenCard)) throw new IllegalArgumentException("Citizen Card is not valid.");
   }
 
   private static void validateSNSNumber(String snsNumber) {
-    if (!FormatVerifier.validateSNSNumber(snsNumber))
-      throw new IllegalArgumentException("SNS Number is not valid.");
+    if (!FormatVerifier.validateSNSNumber(snsNumber)) throw new IllegalArgumentException("SNS Number is not valid.");
   }
 
   private static void validateName(String name) {
@@ -195,13 +192,11 @@ public class SNSUser {
   }
 
   private static void validatePhoneNumber(String phoneNumber) {
-    if (!FormatVerifier.validatePhoneNumber(phoneNumber))
-      throw new IllegalArgumentException("Phone Number is not valid.");
+    if (!FormatVerifier.validatePhoneNumber(phoneNumber)) throw new IllegalArgumentException("Phone Number is not valid.");
   }
 
   private static void validateEmail(String email) {
-    if (!FormatVerifier.validateEmail(email))
-      throw new IllegalArgumentException("Email is not valid.");
+    if (!FormatVerifier.validateEmail(email)) throw new IllegalArgumentException("Email is not valid.");
   }
 
   private static void validateAddress(String address) {
@@ -219,7 +214,7 @@ public class SNSUser {
     sb.append(String.format("Citizen card number: %s\n", this.citizenCard));
     sb.append(String.format("SNS number: %s\n", this.snsNumber));
     sb.append(String.format("Birthday: %s\n", TimeUtils.dateToString(this.birthDay)));
-    sb.append(String.format("Gender: %s\n", this.gender == 'm' ? "Male" : "Female"));
+    sb.append(String.format("Gender: %s\n", this.gender.toString()));
     sb.append(String.format("Phone number: %s\n", this.phoneNumber));
     sb.append(String.format("Email: %s\n", this.email));
     sb.append(String.format("Address: %s\n", this.address));
