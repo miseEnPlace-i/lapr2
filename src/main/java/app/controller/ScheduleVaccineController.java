@@ -110,9 +110,7 @@ public class ScheduleVaccineController implements IRegisterController<Appointmen
   }
 
   public List<VaccineTypeDTO> getListOfVaccineTypes() {
-    List<VaccineType> vaccineTypes = vaccineTypeStore.getList();
-
-    return VaccineTypeMapper.toDto(vaccineTypes);
+    return vaccineTypeStore.getVaccineTypes();
   }
 
   public List<VaccinationCenterListDTO> getListOfVaccinationCentersWithVaccineType(VaccineTypeDTO vaccineType) {
