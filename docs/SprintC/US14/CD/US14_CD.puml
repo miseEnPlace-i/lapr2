@@ -44,13 +44,32 @@ interface IPasswordGenerator {
   + generatePwd()
 }
 
+class PasswordGenerator {
+  + generatePwd()
+}
+class TestGenerator {
+  + generatePwd()
+}
+
 class PasswordGeneratorFactory {
   + getPasswordGenerator()
 }
 
 interface ISender {
+  send(notificationDTO)
+}
+
+class ConsoleSender {
   + send(notificationDTO)
-}´
+}
+class EmailSender {
+  + send(notificationDTO)
+}
+class SMSSender {
+  + send(notificationDTO)
+}
+
+
 
 class SenderFactory {
   + getSender()
@@ -66,8 +85,12 @@ interface ICSVReader{
   read(filedata)
 }
 
-class HeaderCSVReader {}
-class MissingHeaderCSVReader{}
+class HeaderCSVReader { 
+  + read(filedata)
+}
+class MissingHeaderCSVReader{
+  + read(filedata)
+}
 
 class SNSUserMapper{
   + toDto(snsUserData)
@@ -83,7 +106,7 @@ class SNSUserDto{
 }
 
 class SNSUserNotificationMapper{
-  +toDto(email, phoneNumber, message)
+  + toDto(email, phoneNumber, message)
 }
 
 class SNSUserNotificationDTO{
@@ -101,15 +124,20 @@ UploadUsersFromFileController --> CSVReader : uses
 CSVReader --> ICSVReader : uses
 SNSUserStore --> AuthFacade : uses
 SNSUserStore --> IPasswordGenerator : uses
-IPasswordGenerator --> PasswordGeneratorFactory : uses
+IPasswordGenerator <-- PasswordGeneratorFactory : creates
 SNSUserStore --> ISender : uses
-ISender --> SenderFactory : uses
+ISender <-- SenderFactory : creates
 SNSUserStore --> SNSUser
 SNSUserStore --> SNSUserMapper : uses
 SNSUserMapper --> SNSUserDto : converts to
 SNSUserStore --> SNSUserNotificationDTO : uses
 SNSUserNotificationMapper --> SNSUserNotificationDTO : converts to
-HeaderCSVReader ..> ICSVReader : implements
-MissingHeaderCSVReader ..> ICSVReader : implements
+HeaderCSVReader --|> ICSVReader
+MissingHeaderCSVReader --|> ICSVReader
+SMSSender --|> ISender
+EmailSender --|> ISender
+ConsoleSender --|> ISender
+PasswordGenerator --|> IPasswordGenerator 
+TestGenerator --|> IPasswordGenerator 
 
 @enduml
