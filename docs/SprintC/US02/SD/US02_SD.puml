@@ -43,6 +43,21 @@ deactivate APPINSTANCE
 
 UI -> CTRL** : create(company)
 
+activate CTRL
+CTRL -> COMP : vaccineTypeStore = getVaccineTypeStore()
+activate COMP
+deactivate COMP
+CTRL -> COMP : vaccinationCenterStore = getVaccinationCenterStore()
+activate COMP
+deactivate COMP
+CTRL -> COMP : snsUserStore = getSnsUserStore()
+activate COMP
+deactivate COMP
+CTRL -> COMP : vaccineStore = getVaccineStoreStore()
+activate COMP
+deactivate COMP
+deactivate CTRL
+
 UI --> RECEPT : requests data (SNSUserNumber)
 deactivate UI
 
@@ -50,33 +65,17 @@ RECEPT -> UI : types requested data
 activate UI
 activate CTRL
 
-CTRL -> COMP : snsUserStore = getSNSUserStore()
-activate COMP
-deactivate COMP
+UI -> CTRL : vaccineTypeDto = getSuggestedVaccineType()
 
-
-CTRL -> USERSTORE : exists = checkSNSUserExists()
-activate USERSTORE
-deactivate USERSTORE 
-deactivate CTRL
-
-
-UI -> CTRL : suggestedVaccineType = getSuggestedVaccineType()
-activate CTRL
-
-CTRL -> COMP : vaccineTypeStore = getVaccineTypeStore()
-activate COMP
-deactivate COMP
-
-CTRL -> COMP : vaccineTypeCode = getOngoingOutbreakVaccineTypeCode()
-activate COMP
-deactivate COMP
-
-CTRL -> VACSTORE : vaccineType = getVaccineTypeCode()
+CTRL -> VACSTORE : vaccineType = getVaccineTypeByCode(company.getOngoingOutBreakVaccineTypeCode())
 activate VACSTORE
 deactivate VACSTORE
 
-CTRL --> UI : vaccineType
+CTRL -> VACMAPPER : vaccineTypeDto = toDto(vaccineType)
+activate VACMAPPER
+deactivate VACMAPPER
+
+CTRL --> UI : vaccineTypeDto
 deactivate CTRL
 
 UI --> RECEPT : shows suggested vaccine type and asks to accept it
@@ -85,46 +84,13 @@ deactivate UI
 RECEPT -> UI : accepts the suggested vaccine type
 activate UI
 
-UI -> CTRL : isUserEligibleForVaccine(vaccineType,snsNumber)
-activate CTRL
-
-CTRL -> CTRL : checkAdministrationProcessForVaccineType(vaccineType)
-activate CTRL
-
-CTRL -> USERSTORE : findUserByNumber(snsNumber)
-activate USERSTORE
-deactivate USERSTORE
-
-CTRL -> SNSUSER : birthDay = getBirthDay()
-activate SNSUSER
-deactivate SNSUSER
-
-CTRL -> TIMEUTILS : age = calculateAge(birthDay)
-activate TIMEUTILS
-deactivate TIMEUTILS
-
-CTRL -> COMP : vaccineStore = getVaccineStore()
-activate COMP
-deactivate COMP
-
-CTRL -> VACCINESTORE : areVaccinesWithValidAdminProcessWithVaccineType(age,vaccineType)
-activate VACCINESTORE
-deactivate VACCINESTORE
 deactivate CTRL
 
-CTRL --> UI : true/false
-
-deactivate CTRL
-
-opt declines the suggested vaccine type or message 24 returns false
-UI -> CTRL : getListOfVaccineTypes()
+opt declines the suggested vaccine type
+UI -> CTRL : listVaccineTypeDto = getListOfVaccineTypes()
 activate CTRL
 
-CTRL -> COMP : getVaccineTypeStore()
-activate COMP
-deactivate COMP
-
-CTRL -> VACSTORE : vaccineTypes = getVaccineTypes()
+CTRL -> VACSTORE : listVaccineType = getList()
 activate VACSTORE
 deactivate VACSTORE
 
