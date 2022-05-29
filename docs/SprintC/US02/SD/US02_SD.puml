@@ -10,7 +10,7 @@ participant ":AppointmentController" as CTRL
 participant "comp\n:Company" as COMP
 participant "store\n:SNSUserStore" as USERSTORE
 participant "store\n:VaccinationCenterStore" as CENTERSTORE
-participant "availableVaccinationCenters\n:List<VaccinationCenter>" as LISTCENTER
+participant "availableVaccinationCenters\n:List<VaccinationCenter>" as CENTERLIST
 participant "store\n:VaccineStore" as VACCINESTORE
 participant "store\n:VaccineTypeStore" as VACSTORE
 participant "mapper\n:vaccinationCenterMapper" as VACMAPPER
@@ -95,15 +95,15 @@ opt declines the suggested vaccine type
 UI -> CTRL : listVaccineTypeDto = getListOfVaccineTypes()
 activate CTRL
 
-CTRL -> VACSTORE : listVaccineType = getList()
+CTRL -> VACSTORE : listVaccineType = getVaccineTypes()
 activate VACSTORE
 
-VACSTORE -> VACTYPEMAPPER : vaccineDto = toDto(vaccineType)
+VACSTORE -> VACTYPEMAPPER : vaccineTypeDto = toDto(vaccineType)
 activate VACTYPEMAPPER
 deactivate VACSTORE
 
 ref over VACTYPEMAPPER
-SD_VaccineType_toDto_List.puml
+SD_VaccineTypeList_toDto.puml
 end ref
 
 VACTYPEMAPPER --> CTRL : vaccineTypeListDto
@@ -125,14 +125,49 @@ activate CTRL
 CTRL -> CENTERSTORE :  listVaccinationCenterListDto = getListOfVaccinationCentersWithVaccineType(vaccineTypeDto)
 activate CENTERSTORE
 
-ref over CENTERSTORE
-SD_VaccinationCenter_toDto_List.puml
+CENTERSTORE -> CENTERLIST** : create()
+
+CENTERSTORE -> VACCINEMAPPER : vaccineType = toModel(vaccineTypeDto)
+activate VACCINEMAPPER
+deactivate VACCINEMAPPER
+
+loop for each VaccinationCenter registered in the system
+opt vaccinationCenter instanceof CMVC
+
+CENTERSTORE -> CENTER : a = administersVaccineType(vaccineType)
+activate CENTER 
+deactivate CENTER
+
+opt a==true
+CENTERSTORE -> CENTERLIST : add(vaccinationCenter)
+activate CENTERLIST
+deactivate CENTERLIST
+deactivate CENTER
+end
+
+alt vaccinationCenter instanceof HCC
+CENTERSTORE -> CENTERLIST : add(vaccinationCenter)
+activate CENTERLIST
+deactivate CENTERLIST
+deactivate CENTER
+end
+end
+end
+
+CENTERSTORE -> VACMAPPER : toDto(availableVaccinationCenters)
+activate VACMAPPER
+
+ref over VACMAPPER
+SD_VaccinationCenterList_toDto.puml
 end ref
 
-CENTERSTORE --> CTRL : vaccinationCenterListDto
+VACMAPPER -> CENTERSTORE : availableVaccinationCentersDto
+deactivate VACMAPPER
+
+CENTERSTORE --> CTRL : availableVaccinationCentersDto
 deactivate CENTERSTORE
 
-CTRL --> UI : vaccinationCenterListDto
+CTRL --> UI : availableVaccinationCentersDto
 deactivate CTRL
 
 UI --> RECEPT : shows all available vaccination centers with that vaccine type and asks to select one

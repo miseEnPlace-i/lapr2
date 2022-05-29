@@ -241,11 +241,11 @@ Other software classes (i.e. Pure Fabrication) identified:
 # 7. Observations
 ##### VaccineType toDto List
 
-![US02_SD](SD/SD_VaccineType_toDto_List.svg)
+![US02_SD](SD/SD_VaccineTypesList_toDto.svg)
 
 ##### VaccinationCenter toDto List
 
-![US02_SD](SD/SD_VaccinationCenter_toDto_List.svg)
+![US02_SD](SD/SD_VaccinationCentersList_toDto.svg)
 
 
 
