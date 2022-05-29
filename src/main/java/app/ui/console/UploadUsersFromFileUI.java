@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.List;
 import app.controller.App;
 import app.controller.UploadUsersFromFileController;
+import app.domain.model.Company;
 import app.domain.model.SNSUser;
 import app.ui.console.utils.Utils;
 
@@ -17,7 +18,9 @@ public class UploadUsersFromFileUI implements Runnable {
   private UploadUsersFromFileController ctrl;
 
   public UploadUsersFromFileUI() {
-    ctrl = new UploadUsersFromFileController(App.getInstance().getCompany());
+    App app = App.getInstance();
+    Company comp = app.getCompany();
+    ctrl = new UploadUsersFromFileController(comp);
   }
 
   @Override
@@ -31,7 +34,6 @@ public class UploadUsersFromFileUI implements Runnable {
       try {
         userList = ctrl.readAndUpload();
       } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | ParseException e) {
-        // TODO Auto-generated catch block
         e.printStackTrace();
       }
     
@@ -44,17 +46,18 @@ public class UploadUsersFromFileUI implements Runnable {
   }
 
   private void displayRegisteredUsers(List<SNSUser> userList) {
-    System.out.println("\nRegistered Users:\n");
+    System.out.println("\nRegistered Users Info:\n");
 
     int index = 0;
     for (Object o : userList) {
-      if(o==null){
-        System.out.println(index + ". vailed to regist");
-      }else{
       index++;
 
-      System.out.println(index + ". " + o.toString());
+      if(o==null){
+        System.out.println(index + ". Failed to register\n  ");
+      }else{
+        System.out.println(index + ". " + o.toString());
       }
+
     }
     System.out.println("");
     System.out.println("0 - Cancel");

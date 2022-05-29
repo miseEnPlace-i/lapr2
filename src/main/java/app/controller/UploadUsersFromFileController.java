@@ -6,7 +6,6 @@ import app.domain.model.CSVReader;
 import app.domain.model.Company;
 import app.domain.model.SNSUser;
 import app.domain.model.store.SNSUserStore;
-import app.dto.SNSUserRegisterInfoDTO;
 
 /**
  * Vaccination Center mapper

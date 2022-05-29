@@ -7,17 +7,13 @@ import java.util.List;
 import app.domain.model.SNSUser;
 import app.domain.shared.Constants;
 import app.dto.SNSUserDTO;
-import app.dto.SNSUserRegisterInfoDTO;
 import app.dto.UserNotificationDTO;
 import app.mapper.SNSUserMapper;
-import app.mapper.SNSUserRegisterInfoMapper;
 import app.mapper.UserNotificationMapper;
 import app.service.password.IPasswordGenerator;
 import app.service.password.PasswordGeneratorFactory;
 import app.service.sender.ISender;
 import app.service.sender.SenderFactory;
-import javafx.print.PrintColor;
-import javafx.scene.shape.TriangleMesh;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
 /**

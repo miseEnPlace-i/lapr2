@@ -30,10 +30,10 @@ public class CSVReader {
 
         ICSVReader reader = (ICSVReader) oClass.newInstance();
 
-        List<String[]> result = reader.read(fileData);
+        List<String[]> userDataList = reader.read(fileData);
 
 
-        return result;
+        return userDataList;
 
     }
 

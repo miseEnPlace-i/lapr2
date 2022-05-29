@@ -4,24 +4,37 @@ autonumber
 actor "Administrator" as ADM
 
 participant ":UploadUsersFromFileUI" as UI
+participant "app :App" as APP
 participant ":UploadUsersFromFileController" as CTRL
 participant "csvReader:CSVReader" as CSVR
+participant "reader :CSVReader" as ICSVR
 participant "store :SNSUserStore" as USR_STR
 participant "comp :Company" as COMP
-participant "mapper: SNSUserMapper" as MAPPER
+participant ":SNSUserMapper" as MAPPER
 participant "dto: SNSUserDTO" as DTO
-participant "mapper: SNSUserRegisterInfoMapper" as USER_INFO_MAPPER
-participant "dto: SNSUserRegisterInfoDTO" as USER_INFO_DTO
+participant ":SNSUserRegisterInfoMapper" as NOT_MAPPER
+participant "notificationDto: UserNotificationDTO" as NOT_DTO
 participant "user :SNSUser" as USR
-participant ":PasswordGenerator" as PWDGEN
+participant "pwdGenerator :IPasswordGenerator" as IPWDGEN
+participant ":PasswordGeneratorFactory" as PWDGEN_FAC
 participant "auth :AuthFacade" as AUTH
-participant ":EmailSender" as EMAIl
-participant "userDataList :List<Array<String>>" as LIST
-participant "userRegisterInfoList: List<SNSUserRegisterInfoDTO>" as USER_INFO_LIST
+participant "sender :ISender" as ISENDER
+participant ":SenderFactory" as SENDER_FAC
+participant "userDataList :List<String[]>" as LIST
+participant "userList: List<SNSUser>" as USER_INFO_LIST
+participant "fileData: List<String>" as FILE_DATA
+
 
 activate ADM
 ADM -> UI : asks to load users from a file
 activate UI
+UI -> APP : app=getInstance()
+activate APP
+deactivate APP
+UI -> APP : comp=app.getCompany()
+activate APP
+deactivate APP
+UI -> CTRL ** : create(company)
 UI --> ADM : requests data (file path name)
 deactivate UI
 
@@ -39,7 +52,7 @@ deactivate UI
 ADM -> UI : confirms action
 activate UI
 
-    UI -> CTRL : userRegisterInfoList = readAndUpload()
+    UI -> CTRL : userList = readAndUpload()
     activate CTRL
 
         CTRL -> COMP : store = getSNSUserStore()
@@ -48,9 +61,13 @@ activate UI
 
         CTRL -> CSVR : userDataList = readSNSUsersData()
         activate CSVR
+            CSVR -> ICSVR ** : reader = newInstance();
+            CSVR -> ICSVR : userDataList = read(fileData) 
+            activate ICSVR
+            deactivate ICSVR       
         deactivate CSVR
 
-        CTRL -> USR_STR : userRegisterInfoList = registerListOfUsers(userDataList)
+        CTRL -> USR_STR : userList = registerListOfUsers(userDataList)
         activate USR_STR
 
         loop for each SNSUser register
@@ -74,10 +91,6 @@ activate UI
                 activate USR
                 deactivate USR
 
-                USR_STR -> COMP : auth = getAuthFacade()
-                activate COMP
-                deactivate COMP
-
                 USR_STR -> AUTH : existsUser(email)
                 activate AUTH
                 deactivate AUTH
@@ -88,40 +101,53 @@ activate UI
 
             deactivate USR_STR
 
-            USR_STR -> USR_STR : userRegisterInfoDto = saveSNSUser(snsUser)
+            USR_STR -> USR_STR : saveSNSUser(snsUser)
             activate USR_STR
+                
+                USR_STR -> USR_STR : addSNSUser(snsUser)
+                activate USR_STR
+                deactivate USR_STR
 
-                USR_STR -> USER_INFO_MAPPER : userRegisterInfoDto = toDto(snsUser)
-                activate USER_INFO_MAPPER
+                USR_STR -> USR : email = getEmail()
+                activate USR
+                deactivate USR
 
-                    USER_INFO_MAPPER -> USR : name = getName()
-                    activate USR
-                    deactivate USR
+                USR_STR -> USR : phoneNumber = getPhoneNumber()
+                activate USR
+                deactivate USR
 
-                    USER_INFO_MAPPER -> USR : email = getEmail()
-                    activate USR
-                    deactivate USR
+                USR_STR -> PWDGEN_FAC : pwdGenerator = getPasswordGenerator()
+                activate PWDGEN_FAC
+                deactivate PWDGEN_FAC
 
-                    USER_INFO_MAPPER -> PWDGEN : pwd = generatePwd()
-                    activate PWDGEN
-                    deactivate PWDGEN
+                USR_STR -> IPWDGEN : pwd = generatePwd()
+                activate IPWDGEN
+                deactivate IPWDGEN
 
-                    USER_INFO_MAPPER -> USER_INFO_DTO ** : create(name, email, pwd, "SNS_USER")
+                USR_STR -> AUTH : addUserWithRole(name, email, pwd, role)
+                activate AUTH
+                deactivate AUTH
 
-                deactivate USER_INFO_MAPPER
+                USR_STR -> NOT_MAPPER : notificationDto = toDto(email, phone number, message)
+                activate NOT_MAPPER
 
-            USR_STR -> AUTH : addUserWithRole(userRegisterInfoDto)
-            activate AUTH
-            deactivate AUTH
 
-            USR_STR -> USR_STR : addSNSUser(snsUser)
-            activate USR_STR
-            deactivate USR_STR
-           
-            USR_STR -> EMAIl : sendEmail(email)
-      
-            activate EMAIl
-            deactivate EMAIl
+                    NOT_MAPPER -> NOT_DTO ** : create(email, phone number, message)
+
+                deactivate NOT_MAPPER
+            
+                USR_STR -> USR_STR : sendNotification(notificationDto)
+                activate USR_STR
+
+                    USR_STR -> SENDER_FAC : sender = getSender() 
+                    activate SENDER_FAC
+                    deactivate SENDER_FAC
+
+                    USR_STR -> ISENDER : send(notificationDto) 
+                    activate ISENDER
+                    deactivate ISENDER
+
+                deactivate USR_STR
 
             deactivate USR_STR
         deactivate USR_STR
