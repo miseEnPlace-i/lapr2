@@ -103,7 +103,7 @@ activate VACTYPEMAPPER
 deactivate VACSTORE
 
 ref over VACTYPEMAPPER
-SD_VaccineType_toDto_List
+SD_VaccineType_toDto_List.puml
 end ref
 
 VACTYPEMAPPER --> CTRL : vaccineTypeListDto
@@ -126,7 +126,7 @@ CTRL -> CENTERSTORE :  listVaccinationCenterListDto = getListOfVaccinationCenter
 activate CENTERSTORE
 
 ref over CENTERSTORE
-SD_VaccinationCenter_toDto_List
+SD_VaccinationCenter_toDto_List.puml
 end ref
 
 CENTERSTORE --> CTRL : vaccinationCenterListDto
