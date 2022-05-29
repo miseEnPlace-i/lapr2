@@ -1,5 +1,7 @@
 package app.mapper;
 
+import java.util.ArrayList;
+import java.util.List;
 import app.domain.model.CommunityMassVaccinationCenter;
 import app.domain.model.HealthCareCenter;
 import app.domain.model.VaccinationCenter;
@@ -28,5 +30,17 @@ public class VaccinationCenterMapper {
     String closingHours = vaccinationCenter.getClosingHours().toString();
 
     return new VaccinationCenterListDTO(type, name, address, email, phone, openingHours, closingHours);
+  }
+
+  public static List<VaccinationCenterListDTO> toDto(List<VaccinationCenter> vaccinationCenters) {
+    List<VaccinationCenterListDTO> centers = new ArrayList<VaccinationCenterListDTO>();
+
+    for (VaccinationCenter vaccinationCenter : vaccinationCenters) {
+      VaccinationCenterListDTO vaccinationCenterDTO = VaccinationCenterMapper.toDto(vaccinationCenter);
+
+      centers.add(vaccinationCenterDTO);
+    }
+
+    return centers;
   }
 }
