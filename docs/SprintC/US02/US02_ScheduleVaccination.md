@@ -79,7 +79,7 @@ _"As a receptionist at one vaccination center, I want to schedule a vaccination.
 
 ### 1.7 Other Relevant Remarks
 
-* --
+* Not found.
 
 ## 2. OO Analysis
 
@@ -89,7 +89,7 @@ _"As a receptionist at one vaccination center, I want to schedule a vaccination.
 
 ### 2.2. Other Remarks
 
-n/a
+Not found.
 
 ## 3. Design - User Story Realization 
 
@@ -103,21 +103,24 @@ n/a
 |                | ... coordinating the US?                    | ScheduleVaccineController     | Controller                                                                                                    |
 |                | ... instantiating a new Appointment?        | Appointment                   | Creator: R1/2                                                                                                 |
 | Step 2         | n/a                                         | n/a                           | n/a                                                                                                           |
-| Step 3         | ... validate SNS User Number?               | SNSUserStore                  | IE: object created in step 1 has its own data.                                                                |
+| Step 3         | ... validate SNS User Number format?        | FieldsToValidate              | IE: knows all data formats.                                                                                   |
 | Step 4         | ... knows the suggested vaccine?            | Company                       | IE: knows the ongoing outbreak.                                                                               |
 | Step 5         | n/a                                         | n/a                           | n/a                                                                                                           |
-| opt Step 6     | ... listing all vaccine types?              | VaccineTypeStore              | IE: knows all the existing vaccine types                                                                      |
+| opt Step 6     | ... gets all vaccine types?                 | VaccineTypeStore              | IE: knows all the existing vaccine types.                                                                     |
+|                | ... listing all vaccine types?              | VaccineTypeDtoList            | Dto:knows relevant information about vaccine types.                                                           |
 | opt Step 7     | n/a                                         | n/a                           | n/a                                                                                                           |
-| step 8         | ... listing all vaccination centers?        | VaccinationCenterStore        | IE: knows all the existing vaccination centers                                                                |
-| step 9         | ... saving vaccination center?              | Appointment                   | IE:                                                                                                           |
+| step 8         | ... gets all available vaccination centers? | VaccinationCenterStore        | IE: knows all available vaccination centers.                                                                  |
+|                | ... listing all vaccination centers?        | VaccinationCenterDtoList      | Dto: knows relevant information about vaccination centers.                                                    |
+| step 9         | ... saving vaccination center selected?     | Appointment                   | IE:                                                                                                           |
 | step 10        | n/a                                         | n/a                           | n/a                                                                                                           |
-| step 11        | ... saving date and time?                   | Appointment                   | IE:                                                                                                           |
+| step 11        | ... saving date and time selected?          | Appointment                   | IE:                                                                                                           |
 |                | ... validating center availability?         | VaccinationCenter             | IE: knows vaccination center appointments.                                                                    |
 | Step 12        | n/a                                         | n/a                           | n/a                                                                                                           |
-| Step 13        | ... send SMS message?                       | SMSSender                     | IE:                                                                                                           |
+| Step 13        | ... knows the method to notify user?        | SenderFactory                 | Factory: knows the logic to notify user.                                                                      |
+|                | ... send the SMS notification?              | ISender                       | IE: knows how to notify user.                                                                                 |
 | Step 14        | ... gets relevant information to the user?  | AppointmentDto                | Dto: knows relevant information.                                                                              |
-|                | ... check for duplicates appointment?       | VaccinationCenter             | IE: holds every information about the schedules.                                                              |
-| Step 15        | ... saving the new appointment?             | VaccinationCenter             | IE: holds every information about the schedules.                                                              |
+|                | ... check for duplicates appointment?       | AppointmentScheduleList       | IE: holds every information about the schedules.                                                              |
+| Step 15        | ... saving the new appointment?             | AppointmentScheduleList       | IE: holds every information about the schedules.                                                              |
 | Step 16        | ... informing operation success?            | ScheduleVaccineReceptionistUI | IE: is responsible for user interactions.                                                                     |
 
 ### Systematization ##

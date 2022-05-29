@@ -31,7 +31,10 @@ class VaccinationCenter{
   -websiteAddress
 }
 
-class Time {}
+class Time {
+  hours
+  minutes
+}
 
 class Slot {
   slotDuration
@@ -62,12 +65,15 @@ class CommunityMassVaccinationCenter {}
 
 class HealthCareCenter {}
 
+class AppointmentScheduleList {}
+
 
 Appointment "1"  -- "1" VaccineType : has >
-Appointment "*" -- "1" VaccinationCenter : is held in >
 Appointment "1" -- "1" SNSUser : has >
 Appointment "*" -- "1" Receptionist : scheduled by >
 Appointment "1" -- "0..1" Notification : triggers >
+
+AppointmentScheduleList "1" -- "*" Appointment : has >
 
 Receptionist "1" -- "1" SNSUser : schedules for >
 Employee <|-- Receptionist
@@ -82,6 +88,7 @@ VaccinationCenter <|-- CommunityMassVaccinationCenter
 VaccinationCenter <|-- HealthCareCenter
 VaccinationCenter "1" -- "1" Slot : has >
 VaccinationCenter "1" -- "1" Time : has >
+VaccinationCenter "1" -- "1" AppointmentScheduleList : has >
 
 Notification <|-- SMSSender
 Notification <|-- EmailSender
