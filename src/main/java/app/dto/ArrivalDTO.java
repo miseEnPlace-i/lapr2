@@ -38,7 +38,7 @@ public class ArrivalDTO {
   /**
    * @return Date return the birthDate
    */
-  public Date getBirthDate() {
+  public String getBirthDate() {
     return birthDate;
   }
 

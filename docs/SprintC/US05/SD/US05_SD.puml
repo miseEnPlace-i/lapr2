@@ -14,32 +14,18 @@ after the nurse logging in
 end note
 
 activate UI
-participant ":App" as APP
-UI -> APP : app=getInstance()
-activate APP
-deactivate APP
-UI -> APP : company=app.getCompany()
-activate APP
-deactivate APP
 
 create ":ListUsersInWaitingRoomController" as CTRL
 
-UI -> CTRL : create(company,nurseSession)
+UI -> CTRL : create(nurseSession)
 
 participant "nurseSession\n:NurseSession" as FAC
 participant "comp\n:Company" as COMP
-participant "vaccinationCenterStore\n:VaccinationCenterStore" as VACS
 participant "vaccinationCenter\n:VaccinationCenter" as VACC
 participant ":WaitingRoomMapper" as WAITM
 participant ":ArrivalMapper" as ARRM
 participant "snsUser\n:SNSUser" as SNSU
 participant "arrival:Arrival" as ARR
-
-activate CTRL
-CTRL -> COMP : vaccinationCenterStore=getVaccinationCenterStore()
-activate COMP
-deactivate
-deactivate CTRL
 
 UI -> CTRL : getWaitingRoomListFromNurseCenter()
 activate CTRL
