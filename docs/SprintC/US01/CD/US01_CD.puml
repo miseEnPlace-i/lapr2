@@ -77,7 +77,6 @@ class VaccinationCenter{
   +VaccinationCenter(name, address, emailAddress, phoneNumber, faxNumber, websiteAddress, openingHours, closingHours, slotDuration, maximumVaccinesPerSlot, coordinator)
   +isOpenAt(hours)
   +hasAvailabilityInSlot(date)
-  +administersVaccineType(vaccineType)
   +getAppointmentList()
 }
 
@@ -123,7 +122,10 @@ class SNSUserStore {
   +findSnsUserByEmail(email)                           
 }
 
-class CommunityMassVaccinationCenter {}
+class CommunityMassVaccinationCenter {
+  -administeredVaccineType : VaccineType
+  +administersVaccineType(vaccineType)
+}
 
 class HealthCareCenter {}
 
