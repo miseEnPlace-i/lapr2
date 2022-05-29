@@ -3,6 +3,7 @@ package app.service;
 import java.lang.reflect.Method;
 import org.apache.commons.lang3.StringUtils;
 import app.domain.shared.Constants;
+import app.utils.Time;
 
 /**
  * Format Verifier with all the rules for the application.
@@ -133,6 +134,11 @@ public final class FormatVerifier {
   }
 
   public static boolean validateHours(String expression) {
-    return expression.matches("[0-9]{2}:[0-9]{2}");
+    try {
+      new Time(expression);
+      return true;
+    } catch (IllegalArgumentException e) {
+      return false;
+    }
   }
 }
