@@ -15,7 +15,7 @@ deactivate ":System"
 
 ADMIN -> ":System" : confirms action
 activate ":System"
-":System" --> ADMIN : informs operation success
+":System" --> ADMIN : shows registered users information
 deactivate ":System"
 
 deactivate ADMIN

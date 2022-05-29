@@ -7,12 +7,12 @@ participant ":UploadUsersFromFileUI" as UI
 participant "app :App" as APP
 participant ":UploadUsersFromFileController" as CTRL
 participant "csvReader:CSVReader" as CSVR
-participant "reader :CSVReader" as ICSVR
+participant "reader :ICSVReader" as ICSVR
 participant "store :SNSUserStore" as USR_STR
 participant "comp :Company" as COMP
 participant ":SNSUserMapper" as MAPPER
 participant "dto: SNSUserDTO" as DTO
-participant ":SNSUserRegisterInfoMapper" as NOT_MAPPER
+participant ":UserNotificationMapper" as NOT_MAPPER
 participant "notificationDto: UserNotificationDTO" as NOT_DTO
 participant "user :SNSUser" as USR
 participant "pwdGenerator :IPasswordGenerator" as IPWDGEN
@@ -154,7 +154,7 @@ activate UI
         end
     deactivate CTRL
 
-UI --> ADM : informs operation success
+UI --> ADM : shows registered users information
 deactivate UI
 
 deactivate ADM

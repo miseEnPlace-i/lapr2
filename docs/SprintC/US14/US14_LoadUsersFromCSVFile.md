@@ -51,7 +51,7 @@ using “,” character.
 * **AC7:** SNS number must have 9 digits.
 * **AC8:** Phone numbers should follow the portuguese format ("+351" + 9 digits).
 * **AC9:** Email address must be validated using a regular expression.
-* **AC10:** Gender options: Male/Female.
+* **AC10:** Gender options: Male, Female or n/a.
 * **AC11:** The password should be randomly generated. It should have 7 alphanumeric characters, 3 of them being upper case and 2 of them must be digits.
 * **AC12:** All input fields are required except gender.
 * **AC13:** The email, phone number, citizen card number and SNS User number must be unique for each SNS User.
@@ -72,7 +72,7 @@ using “,” character.
 
 **Output Data:**
 
-* (In)Success of the operation
+* Registered Users Information
 
 ### 1.6. System Sequence Diagram (SSD)
 
@@ -106,17 +106,25 @@ n/a
 | Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
 |:-------------  |:--------------------- |:------------|:---------------------------- |
 | Step 1  		 |	... interacting with the actor? | UploadUsersFromFileUI   |  Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.           |
-| 			  		 |	... coordinating the US? | UploadUsersFromFileController | Controller                             |
+| 			  	 |	... coordinating the US? | UploadUsersFromFileController | Controller                             |
 | Step 2  		 |							 |             |                              |
 | Step 3  		 |	...saving the inputted data? | CSVReader  | IE: owns the data.  |
 |  		 |	...validate CSV path? | CSVReader  | IE: owns the data.  |
-|  		 |	...validate CSV file and check is type? | CSVReader  | IE: is responsible for the CSV.  |
 | Step 4  		 |							 |             |                              |
-| Step 5  		 |	...instantiating SNSUser? | SNSUserStore  | Creator: SNSUserStore has a SNSUser.  |  		 
+| Step 5  		 |	...read the file? | ICSVReader  | Protected Variation: There are more than 1 variation of file types. |
+| 		 |	...store user data? | SNSUserDto  | DTO: stores user data.  |
+| 		 |	...convert string of user data to SNSUserDTO? | SNSUserMapper  | IE: can convert user data to DTO.  |  
+| 		 |	...instantiating SNSUserDTO? | SNSUserStore  | Creator: SNSUserStore needs a SNSUserDTO to create SNSUser.  |  		 
+| 		 |	...instantiating SNSUser? | SNSUserStore  | Creator: SNSUserStore has a SNSUser.  |  		 
 |  		 |	...validating SNSUser data?(locally) | SNSUser  | IE: owns the data.  |
 |  		 |	...validating SNSUser data?(globally) | SNSUserStore  | IE: knows every SNSUsers registered.  |
+| 		 |	...know the method to generate password? | PasswordGeneratorFactory  | Factory: knows the logic to generate password.  |  
+| 		 |	...generate password? | IPasswordGenerator  | IE: knows how to generate password.  |  		 
 |  		 |	...saving created SNSUser? | SNSUserStore  | IE: owns every SNSUsers.  |
-|  		 |	...know the attributes necessary to add user to the system | UserDto  | DTO: knows necessary attributes.  |
+|  		 |	...store the information to notify the user? | notificationDTO  | DTO: store information to notify user.  |
+|  		 |	...convert snsUser to notificationDTO? | notificationMapper  | DTO: knows relevant data for notificationDTO.  |
+|  		 |	...know the method to notify user? | SenderFactory  | Factory: knows the logic to notify user.  |
+|  		 |	...notify user? | ISender  | IE: knows how to notify user.  |
 |  		 |	...add the user to the system? | authFacade  | IE: owns every Users.  |
 | Step 6  		 |	... informing operation success?| UploadUserFromFileUI  | IE: is responsible for user interactions.  |
 
@@ -126,10 +134,19 @@ n/a
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
  * Company
+ * App
  * SNSUserStore
  * SNSUser
  * CSVReader
- * UserDto
+ * ICSVReader
+ * SNSUserDto
+ * SNSUserMapper
+ * notificationDTO
+ * notificationMapper
+ * IPasswordGenerator
+ * AuthFacade
+ * ISender
+ * SenderFactory
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
