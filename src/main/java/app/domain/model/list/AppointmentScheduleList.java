@@ -162,19 +162,14 @@ public class AppointmentScheduleList {
 
     if (slotIndex == -1) throw new IllegalArgumentException("Appointment schedule is not valid.");
 
-    if (existsScheduleForDay(key)) {
-      Appointment[][] slots = appointments.get(key);
+    Appointment[][] slots = addScheduleToKey(key);
 
-      int i = getAvailableIndexInSlot(slots[slotIndex]);
-      if (i == -1) throw new IllegalArgumentException("No available slot");
+    int i = getAvailableIndexInSlot(slots[slotIndex]);
+    if (i == -1) throw new IllegalArgumentException("No available slot");
 
-      slots[slotIndex][i] = appointment;
-    } else {
-      Appointment[][] slots = new Appointment[slotsPerDay][vaccinesPerSlot];
+    slots[slotIndex][i] = appointment;
 
-      slots[slotIndex][0] = appointment;
-      appointments.put(key, slots);
-    }
+    // listVaccinationSchedule(slots);
 
     SNSUser snsUser = appointment.getSnsUser();
     snsUser.addAppointmentToList(appointment);
@@ -190,6 +185,15 @@ public class AppointmentScheduleList {
     UserNotificationDTO notificationDto = UserNotificationMapper.toDto(email, phone, message);
 
     sendNotification(notificationDto);
+  }
+
+  private Appointment[][] addScheduleToKey(Calendar key) {
+    if (existsScheduleForDay(key)) return appointments.get(key);
+
+    Appointment[][] slots = new Appointment[slotsPerDay][vaccinesPerSlot];
+    appointments.put(key, slots);
+
+    return slots;
   }
 
   private String generateMessage(Appointment appointment) {
