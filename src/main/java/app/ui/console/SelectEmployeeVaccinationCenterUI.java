@@ -21,9 +21,8 @@ public class SelectEmployeeVaccinationCenterUI implements Runnable {
       return;
     }
 
-    while (!employeeSession.hasCenter()) {
-      Object center = Utils.showAndSelectOne(controller.getVaccinationCentersList(),
-          "\n\nSelect the Vaccination Center you are working in:\n");
+    while (!controller.employeeHasCenter()) {
+      Object center = Utils.showAndSelectOne(controller.getVaccinationCentersList(), "\n\nSelect the Vaccination Center you are working in:\n");
 
       try {
         VaccinationCenterListDTO centerDTO = (VaccinationCenterListDTO) center;

@@ -9,9 +9,11 @@ import app.session.EmployeeSession;
 
 public class SelectEmployeeVaccinationCenterController {
   private VaccinationCenterStore vaccinationCenterStore;
+  private EmployeeSession session;
 
-  public SelectEmployeeVaccinationCenterController(Company company) {
+  public SelectEmployeeVaccinationCenterController(Company company, EmployeeSession session) {
     this.vaccinationCenterStore = company.getVaccinationCenterStore();
+    this.session = session;
   }
 
   public List<VaccinationCenterListDTO> getVaccinationCentersList() {
@@ -25,5 +27,9 @@ public class SelectEmployeeVaccinationCenterController {
   public void selectVaccinationCenter(VaccinationCenterListDTO vaccinationCenter, EmployeeSession employeeSession) {
     VaccinationCenter center = vaccinationCenterStore.getVaccinationCenterWithEmail(vaccinationCenter.getEmail());
     employeeSession.setVaccinationCenter(center);
+  }
+
+  public boolean employeeHasCenter() {
+    return session.hasCenter();
   }
 }
