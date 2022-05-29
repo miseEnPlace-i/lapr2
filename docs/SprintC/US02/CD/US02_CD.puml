@@ -190,9 +190,9 @@ Appointment o-- VaccineType
 ISender "0..1" <-- "1" Appointment : triggers <
 
 SenderFactory --> ISender : creates >
-ISender <|-- SMSSender
-ISender <|-- EmailSender
-ISender <|-- ConsoleSender
+ISender <|.. SMSSender
+ISender <|.. EmailSender
+ISender <|.. ConsoleSender
 
 VaccineType --o Vaccine 
 
