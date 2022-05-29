@@ -87,7 +87,7 @@ activate UI
 
             USR_STR -> USR_STR : validateSNSUser(snsUser)
             activate USR_STR
-                USR_STR -> USR : email = getEmail(snsUser)
+                USR_STR -> USR : email = getEmail()
                 activate USR
                 deactivate USR
 
@@ -132,7 +132,7 @@ activate UI
                 activate NOT_MAPPER
 
 
-                    NOT_MAPPER -> NOT_DTO ** : create(email, phone number, message)
+                    NOT_MAPPER -> NOT_DTO ** : create(email, phoneNumber, message)
 
                 deactivate NOT_MAPPER
             

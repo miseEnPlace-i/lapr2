@@ -121,8 +121,8 @@ n/a
 | 		 |	...know the method to generate password? | PasswordGeneratorFactory  | Factory: knows the logic to generate password.  |  
 | 		 |	...generate password? | IPasswordGenerator  | IE: knows how to generate password.  |  		 
 |  		 |	...saving created SNSUser? | SNSUserStore  | IE: owns every SNSUsers.  |
-|  		 |	...store the information to notify the user? | notificationDTO  | DTO: store information to notify user.  |
-|  		 |	...convert snsUser to notificationDTO? | notificationMapper  | DTO: knows relevant data for notificationDTO.  |
+|  		 |	...store the information to notify the user? | SNSUserNotificationDTO  | DTO: store information to notify user.  |
+|  		 |	...convert snsUser to notificationDTO? | SNSUserNotificationMapper  | DTO: knows relevant data for notificationDTO.  |
 |  		 |	...know the method to notify user? | SenderFactory  | Factory: knows the logic to notify user.  |
 |  		 |	...notify user? | ISender  | IE: knows how to notify user.  |
 |  		 |	...add the user to the system? | authFacade  | IE: owns every Users.  |
@@ -141,8 +141,8 @@ According to the taken rationale, the conceptual classes promoted to software cl
  * ICSVReader
  * SNSUserDto
  * SNSUserMapper
- * notificationDTO
- * notificationMapper
+ * SNSUserNotificationDTO
+ * SNSUserNotificationMapper
  * IPasswordGenerator
  * AuthFacade
  * ISender

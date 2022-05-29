@@ -9,7 +9,6 @@ class AuthFacade {
 class Company {
   - String designation
   + getSNSUserStore()
-  + getAuthFacade()
 }
 
 class UploadUsersFromFileController {
@@ -26,6 +25,9 @@ class SNSUser {
   - Char gender
   - String phoneNumber
   - String address
+
+  +getEmail()
+  +getPhoneNumer()
 }
 
 class SNSUserStore {
@@ -35,14 +37,23 @@ class SNSUserStore {
   + checkDuplicates(snsUser)
   + registListOfUsers(userDataList)
   + addSNSUser(snsUser)
+  + sendNotification(notificationDTO)
 }
 
-class PasswordGenerator {
-  + generatePassword()
+interface IPasswordGenerator {
+  + generatePwd()
 }
 
-class EmailSender {
-  + sendEmail(email)
+class PasswordGeneratorFactory {
+  + getPasswordGenerator()
+}
+
+interface ISender {
+  + send(notificationDTO)
+}´
+
+class SenderFactory {
+  + getSender()
 }
 
 class CSVReader {
@@ -51,15 +62,34 @@ class CSVReader {
   + readSNSUsersData()
 }
 
-class UserMapper{
-  + toDto(snsUser)
+interface ICSVReader{
+  read(filedata)
 }
 
-class UserDto{
-  + name
-  + email
-  + password 
-  + roleId
+class HeaderCSVReader {}
+class MissingHeaderCSVReader{}
+
+class SNSUserMapper{
+  + toDto(snsUserData)
+}
+
+class SNSUserDto{
+  - String citizenCard
+  - String snsNumber
+  - Date birthDay
+  - Char gender
+  - String phoneNumber
+  - String address
+}
+
+class SNSUserNotificationMapper{
+  +toDto(email, phoneNumber, message)
+}
+
+class SNSUserNotificationDTO{
+  -email
+  -phoneNumber
+  -message
 }
 
 Company ..> SNSUserStore
@@ -68,12 +98,18 @@ Company "1" --> "*" SNSUser : knows
 UploadUsersFromFileController ..> Company
 UploadUsersFromFileUI ..> UploadUsersFromFileController
 UploadUsersFromFileController --> CSVReader : uses
+CSVReader --> ICSVReader : uses
 SNSUserStore --> AuthFacade : uses
-SNSUserStore --> PasswordGenerator : uses
-SNSUserStore --> EmailSender : uses
-SNSUserStore ..> SNSUser
-SNSUserStore --> UserMapper : user
-UserMapper --> UserDto : converts to
-
+SNSUserStore --> IPasswordGenerator : uses
+IPasswordGenerator --> PasswordGeneratorFactory : uses
+SNSUserStore --> ISender : uses
+ISender --> SenderFactory : uses
+SNSUserStore --> SNSUser
+SNSUserStore --> SNSUserMapper : uses
+SNSUserMapper --> SNSUserDto : converts to
+SNSUserStore --> SNSUserNotificationDTO : uses
+SNSUserNotificationMapper --> SNSUserNotificationDTO : converts to
+HeaderCSVReader ..> ICSVReader : implements
+MissingHeaderCSVReader ..> ICSVReader : implements
 
 @enduml
