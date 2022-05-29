@@ -8,10 +8,8 @@ import app.domain.model.SNSUser;
 import app.domain.shared.Constants;
 import app.domain.shared.Gender;
 import app.dto.SNSUserDTO;
-import app.dto.SNSUserRegisterInfoDTO;
 import app.dto.UserNotificationDTO;
 import app.mapper.SNSUserMapper;
-import app.mapper.SNSUserRegisterInfoMapper;
 import app.mapper.UserNotificationMapper;
 import app.service.password.IPasswordGenerator;
 import app.service.password.PasswordGeneratorFactory;
@@ -91,8 +89,8 @@ public class SNSUserStore {
    * 
    * @param snsUser the employee to be inserted.
    */
-  public SNSUserRegisterInfoDTO saveSNSUser(SNSUser snsUser) {
-    this.snsUsers.add(snsUser);
+  public void saveSNSUser(SNSUser snsUser) {
+    addSNSUser(snsUser);
 
     String email = snsUser.getEmail();
     String phoneNumber = snsUser.getPhoneNumber();
@@ -101,14 +99,15 @@ public class SNSUserStore {
 
     authFacade.addUserWithRole(snsUser.getName(), email, pwd, Constants.ROLE_SNS_USER);
 
-    SNSUserRegisterInfoDTO dto = SNSUserRegisterInfoMapper.toDto(snsUser);
-
     String message = String.format("A new user has been created.\nEmail: %s\nPassword: %s", email, pwd);
     UserNotificationDTO notificationDto = UserNotificationMapper.toDto(email, phoneNumber, message);
 
     sendNotification(notificationDto);
 
-    return dto;
+  }
+
+  public void addSNSUser(SNSUser snsUser){
+    this.snsUsers.add(snsUser);
   }
 
   private void sendNotification(UserNotificationDTO notificationDto) {
@@ -179,19 +178,26 @@ public class SNSUserStore {
     return snsUsers.size();
   }
 
-  public List<SNSUserRegisterInfoDTO> registerListOfUsers(List<String[]> userDataList) throws ParseException {
-    List<SNSUserRegisterInfoDTO> userRegisterInfoList = new ArrayList<SNSUserRegisterInfoDTO>();
+  public List<SNSUser> registerListOfUsers(List<String[]> userDataList) throws ParseException {
+      List<SNSUser> userList = new ArrayList<SNSUser>();
 
-    for (int i = 0; i < userDataList.size(); i++) {
-      SNSUserDTO userDto = SNSUserMapper.toDto(userDataList.get(i));
+      for (int i = 0; i < userDataList.size(); i++) {
+        try{
+          SNSUserDTO userDto = SNSUserMapper.toDto(userDataList.get(i));
 
-      SNSUser snsUser = createSNSUser(userDto);
+          SNSUser snsUser = createSNSUser(userDto);
+          validateSNSUser(snsUser);
+    
+          saveSNSUser(snsUser);
+    
+          userList.add(snsUser);
+        }catch(Exception e){
+          userList.add(null);
+        }
+      }
+    
 
-      validateSNSUser(snsUser);
-
-      userRegisterInfoList.add(saveSNSUser(snsUser));
-    }
-    return userRegisterInfoList;
+    return userList;
   }
 
 }

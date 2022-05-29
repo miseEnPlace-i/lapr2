@@ -2,9 +2,13 @@
 hide methods
 skinparam classAttributeIconSize 0
 
-class VaccinationSchedule {}
+class Appointment {}
 
-class VaccineType {}
+class VaccineType {
+  -code
+  -description
+  -technology
+}
 
 class SNSUser {
   -citizenCard
@@ -17,29 +21,56 @@ class SNSUser {
   -address
 }
 
-class VaccinationCenter{
+class VaccinationCenter {
   -name
   -address
   -emailAddress
   -phoneNumber
   -faxNumber
   -websiteAddress
-  -openingHours  
-  -closingHours
-  -slotDuration
-  -maximumVaccinesPerSlot
   -coordinator
 }
 
-class Company{
+class Time {}
+
+class Slot {}
+
+class CommunityMassVaccinationCenter {}
+
+class HealthCareCenter {}
+
+class Company {
   -designation
 }
 
-Company "1" -- "*" VaccinationSchedule : knows >
-VaccinationSchedule "1"  -- "1" VaccineType : has >
-VaccinationSchedule "*" -- "1" VaccinationCenter : has >
+class Notification {}
+
+class ConsoleSender {}
+
+class EmailSender {}
+
+class SMSSender {}
+
+Appointment "1"  -- "1" VaccineType : has >
+Appointment "*" -- "1" VaccinationCenter : is held at >
+Appointment "1" -- "0..1" Notification : triggers >
+
 Company "1" -- "*" VaccinationCenter : knows >
-VaccinationSchedule "1" -- "1" SNSUser : schedules <
-Company "1" -- "*" SNSUser : knows >
+
+SNSUser "1" -- "*" Appointment : schedules >
+
+CommunityMassVaccinationCenter --|> VaccinationCenter
+CommunityMassVaccinationCenter "1" -- "1" VaccineType : administers >
+
+VaccinationCenter "1" -- "1" Time : has >
+VaccinationCenter "1" -- "1" Slot : has >
+
+HealthCareCenter --|> VaccinationCenter
+
+ConsoleSender --|> Notification
+
+SMSSender --|> Notification
+
+EmailSender --|> Notification
 
 @enduml

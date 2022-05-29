@@ -134,15 +134,7 @@ public class VaccinationCenterStore {
    * @return all Vaccination Centers List
    */
   public List<VaccinationCenterListDTO> getVaccinationCenters() {
-    List<VaccinationCenterListDTO> centers = new ArrayList<VaccinationCenterListDTO>();
-
-    for (VaccinationCenter vaccinationCenter : vaccinationCenters) {
-      VaccinationCenterListDTO vaccinationCenterDTO = VaccinationCenterMapper.toDto(vaccinationCenter);
-
-      centers.add(vaccinationCenterDTO);
-    }
-
-    return centers;
+    return VaccinationCenterMapper.toDto(vaccinationCenters);
   }
 
   /**
@@ -154,7 +146,6 @@ public class VaccinationCenterStore {
    */
   public List<VaccinationCenterListDTO> getListOfVaccinationCentersWithVaccineType(VaccineTypeDTO vaccineTypeDto) {
     List<VaccinationCenter> availableVaccinationCenters = new ArrayList<VaccinationCenter>();
-    List<VaccinationCenterListDTO> returnList = new ArrayList<VaccinationCenterListDTO>();
 
     VaccineType vaccineType = VaccineTypeMapper.toModel(vaccineTypeDto);
 
@@ -174,17 +165,7 @@ public class VaccinationCenterStore {
       }
     }
 
-    for (VaccinationCenter vaccinationCenter : availableVaccinationCenters) {
-      VaccinationCenterListDTO vaccinationCenterDTO = VaccinationCenterMapper.toDto(vaccinationCenter);
-
-      returnList.add(vaccinationCenterDTO);
-    }
-
-    return returnList;
-  }
-
-  public WaitingRoom getWaitingRoomWithPhone(String phone) {
-    return getVaccinationCenterByPhone(phone).getWaitingRoom();
+    return VaccinationCenterMapper.toDto(availableVaccinationCenters);
   }
 
   private VaccinationCenter getVaccinationCenterByPhone(String phone) {
@@ -199,6 +180,13 @@ public class VaccinationCenterStore {
   public VaccinationCenter getVaccinationCenterWithEmail(String email) {
     for (VaccinationCenter center : vaccinationCenters)
       if (center.getEmail().equals(email)) return center;
+
+    return null;
+  }
+
+  public VaccinationCenter getVaccinationCenterWithPhone(String phone) {
+    for (VaccinationCenter center : vaccinationCenters)
+      if (center.getPhone().equals(phone)) return center;
 
     return null;
   }

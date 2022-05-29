@@ -10,15 +10,14 @@ public class WaitingRoomMapper {
   // Private constructor to prevent instantiation from other classes
   private WaitingRoomMapper() {}
 
-  // TODO implement this method
   public static List<ArrivalDTO> toDto(WaitingRoom waitingRoom) {
-    List<ArrivalDTO> waitingRoomDTO = new ArrayList<>();
+    List<ArrivalDTO> waitingRoomDto = new ArrayList<>();
 
     for (Arrival arrival : waitingRoom) {
       ArrivalDTO arrivalDto = ArrivalMapper.toDto(arrival);
-      waitingRoomDTO.add(arrivalDto);
+      waitingRoomDto.add(arrivalDto);
     }
 
-    return waitingRoomDTO;
+    return waitingRoomDto;
   }
 }

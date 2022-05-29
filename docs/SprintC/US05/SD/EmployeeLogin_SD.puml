@@ -13,6 +13,9 @@ AUTHUI -> EUI **
 create ":SelectEmployeeVaccinationCenterUI" as UI
 participant ":SelectEmployeeVaccinationCenterController" as CTRL
 participant "employeeSession\n:EmployeeSession" as SESSION
+participant "company\n:Company" as COMP
+participant "vaccinationCenterStore\n:VaccinationCenterStore" as VACCS
+participant "centerDTO\n:VaccinationCenterListDTO" as CDTO
 activate EUI
 EUI -> SESSION **
 EUI -> UI **
@@ -27,14 +30,27 @@ deactivate APP
 
 
 UI -> CTRL ** : create(company,employeeSession)
+activate CTRL
+CTRL -> COMP : vaccinationCenterStore=getVaccinationCenterStore()
+activate COMP
+deactivate COMP
+deactivate CTRL
 
 UI -> CTRL : vaccinationCenters=getVaccinationCentersList()
 activate CTRL
+CTRL -> VACCS : getVaccinationCenters()
+activate VACCS
+deactivate VACCS
+
 deactivate CTRL
 
 loop while valid is false
-UI -> SESSION : valid=hasCenter()
+UI -> CTRL : valid=employeeHasCenter()
+activate CTRL
+CTRL -> SESSION : hasCenter()
 activate SESSION
+SESSION --> CTRL : true / false
+deactivate CTRL
 deactivate SESSION
 
 UI --> NUR : lists all the available vaccination centers
@@ -47,6 +63,12 @@ activate UI
 UI -> CTRL : selectVaccinationCenter(centerDTO, employeeSession)
 activate CTRL
 deactivate UI
+CTRL -> CDTO : email=getEmail()
+activate CDTO
+deactivate CDTO
+CTRL -> VACCS : vaccinationCenter=getVaccinationCenterWithEmail(email)
+activate VACCS
+deactivate VACCS
 CTRL -> SESSION : setVaccinationCenter(vaccinationCenter)
 activate SESSION
 deactivate SESSION
@@ -61,8 +83,8 @@ deactivate UI
 
 deactivate NUR
 
+participant "vaccinationCenter\n:VaccinationCenter" 
 participant "vaccinationCenters\n:List<VaccinationCenterListDTO>" 
-participant "centerDTO\n:VaccinationCenterListDTO" 
 
 |||
 

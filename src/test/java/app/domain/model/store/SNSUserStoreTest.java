@@ -1,7 +1,10 @@
 package app.domain.model.store;
 
 import static org.junit.Assert.assertEquals;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.Company;
@@ -10,7 +13,8 @@ import app.domain.shared.Gender;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
 /**
- * @author Ricardo Moreira <1211285@isep.ipp.pt>
+ * @author Ricardo Moreira <1211285@isep.ipp.pt>~
+ * @author Carlos Lopes <1211277@isep.ipp.pt>
  */
 public class SNSUserStoreTest {
   private SNSUserStore store;
@@ -62,4 +66,65 @@ public class SNSUserStoreTest {
     authFacade.addUser("name", "email@email.com", "123456");
     store.validateSNSUser(snsUser);
   }
+
+
+
+  //Check that it is possible to read and upload from a list with a repeated user in the middle
+  //There are 2 valid users, so it should read 2 users and not stop when failing to register
+  @Test
+  public void ensureReadAndUploadFromListWhitRepeatedUser() throws ParseException {
+    int size = store.size();
+
+    List<String[]> list = new ArrayList<>();
+    String[] user1Data = {"joao","Male","14/12/2003","rua das flores","+351919993999","joao@gmail.com","123263189","155424041ZY0"};
+    list.add(user1Data);
+    list.add(user1Data);
+    String[] user2Data = {"paulo","Male","14/12/2003","rua das flores","+351919999999","paulito@gmail.com","123789456","096824379ZX8"};
+    list.add(user2Data);
+
+    store.registerListOfUsers(list);
+
+    assertEquals(store.size() - size, 2);
+
+  }
+
+  //Check that it is possible to read and upload from a list with a invalid user in the middle
+  //There are 2 valid users, so it should read 2 users and not stop when failing to register
+  @Test
+  public void ensureReadAndUploadFromListWhitInvalidUser() throws ParseException {
+    int size = store.size();
+
+    List<String[]> list = new ArrayList<>();
+    String[] user1Data = {"joao","Male","14/12/2003","rua das flores","+351919993999","joao@gmail.com","123263189","155424041ZY0"};
+    list.add(user1Data);
+    String[] user2Data = {"","","","","","","",""};
+    list.add(user2Data);
+    String[] user3Data = {"paulo","Male","14/12/2003","rua das flores","+351919999999","paulito@gmail.com","123789456","096824379ZX8"};
+    list.add(user3Data);
+
+    store.registerListOfUsers(list);
+
+    assertEquals(store.size() - size, 2);
+
+  }
+
+
+  //Check that it is possible to read and upload from a list with only valid user in the middle
+  @Test
+  public void ensureReadAndUploadFromListWhitValidUser() throws ParseException {
+    int size = store.size();
+
+    List<String[]> list = new ArrayList<>();
+    String[] user1Data = {"joao","Male","14/12/2003","rua das flores","+351919993999","joao@gmail.com","123263189","155424041ZY0"};
+    list.add(user1Data);
+    String[] user2Data = {"paulo","Male","14/12/2003","rua das flores","+351919999999","paulito@gmail.com","123789456","096824379ZX8"};
+    list.add(user2Data);
+
+    store.registerListOfUsers(list);
+
+    assertEquals(store.size() - size, 2);
+
+  }
+
+
 }

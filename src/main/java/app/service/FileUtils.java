@@ -37,24 +37,20 @@ public class FileUtils {
 
     /**
      * Read from a file.
+     * @throws FileNotFoundException
      */
-    public static List<String> readFromFile(String filename) {
-        try {
-            File file = new File(filename);
-            if (!file.exists()) throw new FileNotFoundException("This file does not exist.");
-            Scanner scanner = new Scanner(file);
-            List<String> lines = new ArrayList<String>();
+    public static List<String> readFromFile(String filename) throws FileNotFoundException {
+        File file = new File(filename);
+        if (!file.exists()) throw new FileNotFoundException("This file does not exist.");
+        Scanner scanner = new Scanner(file);
+        List<String> lines = new ArrayList<String>();
 
-            while (scanner.hasNextLine())
-                lines.add(scanner.nextLine());
+        while (scanner.hasNextLine())
+            lines.add(scanner.nextLine());
 
-            scanner.close();
+        scanner.close();
 
-            return lines;
-        } catch (IOException e) {
-            System.err.println(e);
-            e.printStackTrace();
-        }
-        return null;
+        return lines;
+
     }
 }

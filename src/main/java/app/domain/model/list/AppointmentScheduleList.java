@@ -155,8 +155,6 @@ public class AppointmentScheduleList {
    * @param appointment the appointment
    */
   public void saveAppointment(Appointment appointment) {
-    validateAppointment(appointment);
-
     Calendar key = generateKeyFromDate(appointment.getDate());
     int slotIndex = getAppointmentSlotIndex(appointment.getDate());
 

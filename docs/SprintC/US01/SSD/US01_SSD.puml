@@ -6,11 +6,6 @@ activate user
 
 user -> ":System" : asks to schedule a vaccine
 activate ":System"
-":System" --> user : requests data (SNS user number, date, time)
-deactivate ":System"
-
-user -> ":System" : types requested data
-activate ":System"
 ":System" --> user : shows suggested vaccine type and asks to accept it
 deactivate ":System"
 
@@ -26,17 +21,22 @@ end
 deactivate ":System"
 
 user -> ":System" : selects a vaccination center
-opt vaccine scheduled successfully
-    activate ":System"
-    ":System" --> user : asks to send sms with information about the scheduled vaccine
-    deactivate ":System"
-    user -> ":System" : accepts or declines the sending of the sms
-    activate ":System"
-    ":System" --> user : shows all data and requests confirmation
-    deactivate ":System"
-    user -> ":System" : confirms the data
-    activate ":System"
-end
+activate ":System"
+":System" --> user : requests data (date, time)
+deactivate ":System"
+
+user -> ":System" : types requested data
+activate ":System"
+":System" --> user : asks permission to send sms about the scheduled vaccine
+deactivate ":System"
+  
+user -> ":System" : accepts or declines the request
+activate ":System"
+":System" --> user : shows all data and requests confirmation
+deactivate ":System"
+
+user -> ":System" : confirms the data
+activate ":System"
 ":System" --> user : informs operation success
 deactivate ":System"
 
