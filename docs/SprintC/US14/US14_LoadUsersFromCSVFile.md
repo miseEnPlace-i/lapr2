@@ -122,10 +122,11 @@ n/a
 | 		 |	...generate password? | IPasswordGenerator  | IE: knows how to generate password.  |  		 
 |  		 |	...saving created SNSUser? | SNSUserStore  | IE: owns every SNSUsers.  |
 |  		 |	...store the information to notify the user? | SNSUserNotificationDTO  | DTO: store information to notify user.  |
-|  		 |	...convert snsUser to notificationDTO? | SNSUserNotificationMapper  | DTO: knows relevant data for notificationDTO.  |
+|  		 |	...convert snsUser to notificationDTO? | SNSUserNotificationMapper  | IE: knows relevant data for notificationDTO.  |
 |  		 |	...know the method to notify user? | SenderFactory  | Factory: knows the logic to notify user.  |
 |  		 |	...notify user? | ISender  | IE: knows how to notify user.  |
 |  		 |	...add the user to the system? | authFacade  | IE: owns every Users.  |
+|  		 |	...saving the SNS user created? | SNSUserStore  | IE: owns every SNS Users.  |
 | Step 6  		 |	... informing operation success?| UploadUserFromFileUI  | IE: is responsible for user interactions.  |
 
 
