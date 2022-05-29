@@ -2,20 +2,34 @@
 skinparam classAttributeIconSize 0
 
 class Appointment {
-  - date: Date
-  - time: String
-  +Appointment(SNSUserNumber, date, time, center, vaccineType)
-  +sendSMS()
+  - snsUser : SNSUser
+  - date : Date
+  - center : VaccinationCenter
+  - vaccineType : VaccineType
+  - sms : boolean
+  +Appointment(SNSUserNumber, date, center, vaccineType, sms)
+  +isSMS()
   +getVaccinationCenter()
+  +getSnsUser()
+  +getDate()
+  +getVaccineType()
 }
 
 class AppointmentScheduleList {
-  -appointments: List<Appointment[][]>
-  +createAppointment(date,user,vaccine)
+  -appointments: Map<Calendar, Appointment[][]>
+  -slotsPerDay : int
+  -vaccinesPerSlot: int
+  +createAppointment(snsUser,date,vaccineTypeDto,sms)
   +saveAppointment(appointment)
+  +hasAppointmentToday(snsNumber)
+  +validateAppointment(appointment)
+  +checkSlotAvailability(date)
 
-  -getAppointmentDayIndex(date)
-  -getAppointmentSlotIndex(hour)
+  -isValdSchedule(date)
+  -existsScheduleForDay(date)
+  -getAppointmentSlotIndex(date)
+  -generateMessage(appointment)
+  -sendNotification(notifcationDto)
 }
 
 class Vaccine   {
@@ -27,19 +41,24 @@ class Vaccine   {
   +Vaccine(designation, id, brand, vacTypeId)
 }
 
-class AppointmentUI {}
+class ScheduleVaccineReceptionistUI {}
 
-class AppointmentController {
-  +createAppointment(SNSUserNumber, date, time, center, vaccineType,sms)
-  +saveAppointment(appointment)
+class ScheduleVaccineController {
+  +ScheduleVaccineController(company)
+  +createAppointment(snsNumber,date,center,vaccineType,sms)
+  +getSuggestedVaccineType()
+  +getListOfVaccinationCentersWithVaccineType(vaccineTypeDto)
+  +getListOfVaccineTypes()
+  +save()
+
 }
 
 class Company {
   -designation: String
-  +getSuggestedVaccineType()
+  +getOngoingOutbreakVaccineTypeCode()
   +getVaccinationCenterStore()
   +getVaccineTypeStore()
-  +getAppointmentScheduleList()
+  +getSnsUserStore()
 }
 
 class SNSUser {
@@ -51,17 +70,13 @@ class SNSUser {
   - address: String
   - userHealthData : UserHealthData
   + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
+  +addAppointmentToList(appointment)
+  +hasAppointmentForVaccineType(vaccineType)
   }
 
 class UserHealthData {
- - vaccinesTaken: List<VaccinationData>
- +isEligibleForVaccine(vaccineType)
-}
-
-class VaccinationData {
-  - batchNumber: int
-  - nOfDose: int
-  - date: Date
+ - appointments: List<Appointment>
+ + addAppointment(appointment)
 }
 
 class VaccinationCenter{
@@ -71,21 +86,28 @@ class VaccinationCenter{
   - phoneNumber: String
   - faxNumber: String
   - websiteAddress: String
-  - openingHours: String
-  - closingHours: String
-  - slotDuration: int
-  - maximumVaccinesPerSlot: int
-  - createdAt: Date
-  - administeredVaccines : List<Vaccine>
   +VaccinationCenter(name,address,emailAddres,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
-  +getAdministeredVaccines()
-  +checkAvailability(date,time,vaccineType)
-  +addAppointmentToList(appointment)
+  +isOpenAt(hours)
+  +getRealClosingHours()
+  +hasAvailabilityInSlot(date)
+  +administersVaccineType(vaccineType)
+}
+
+class Time {
+  - hours : int
+  - minutes : int
+  +isBetween(openingHours,getRealClosingHours())
+}
+
+class Slot {
+  - slotDuration : int
+  - maxVacPerSlot : int
 }
 
 class VaccinationCenterStore {
 -availableVaccinationCentersList: List<VaccinationCenter>
-+getVaccinationCenterByVaccineType(vaccineType)
++getVaccinationCenterWithEmail(email)
++getVaccinationCentersWithVaccineType(vaccineType)
 }
 
 class VaccineType {}
@@ -101,48 +123,91 @@ class SMSSender {
 
 class VaccineTypeMapper {
 +toDto(vaccineTypes)
++toDto(vaccineType)
++toModel(vaccineTypeDto)
 }
 
 class VaccinationCenterMapper {
   +toDto(vaccinationCenters)
 }
 
-class AppointmentDto {
-  -snsUser : SNSUser
-  -vaccineType : VaccineType
-  -center : VaccinationCenter
-  -date : Calendar
-  -time : String
-  +getVaccineType()
-  +getVaccinationCenter()
-  +getDate()
-  +getTime()
-  +getSNSNumber()
+class AppointmentInsertMapper {
+  +toDto(appointment)
 }
 
-class AppointmentMapper {}
+class AppointmentInsertDto {
+  -snsUserNumber : String
+  -vaccineTypeDescription : String
+  -centerName : String
+  -date : String
+  -sms: String
+  +getSNSNumber()
+  +getDate()
+  +getCenter()
+  +getVaccineType()
+  +getSmsPermission()
+  +toString()
+}
 
-AppointmentUI ..> AppointmentController
-AppointmentController ..> Company
+class SNSUserStore {
+  +checkSNSUserExists(snsNumber)
+  +findSnsUserByNumber(snsNumber)                           
+}
+
+class CommunityMassVaccinationCenter {}
+
+class HealthCareCenter {}
+
+interface ISender {}
+
+class ConsoleSender {
+  +sendNotification(notificationDto)
+}
+
+ScheduleVaccineReceptionistUI ..> ScheduleVaccineController
+
+ScheduleVaccineController ..> Company
+ScheduleVaccineController <-- AppointmentInsertDto
+ScheduleVaccineController ..> VaccinationCenterMapper
+ScheduleVaccineController ..> VaccineTypeMapper 
+
 Company ..> VaccinationCenterStore
 Company ..> VaccineTypeStore
 Company ..> AppointmentScheduleList
+Company ..> SNSUserStore
+
 VaccinationCenterStore "1" --> "*" VaccinationCenter : stores
-VaccinationCenter "1" --o "*" Appointment
-SNSUser "1" --o "*" Appointment
-AppointmentScheduleList "1" --> "*" Appointment : stores
-VaccinationData o-- Vaccine
-VaccinationData o--  VaccinationCenter
-UserHealthData  --o SNSUser
-UserHealthData "1" -- "*" VaccinationData : stores >
-Appointment o-- VaccineType
-SMSSender <.. Appointment
-VaccineType --o Vaccine 
 VaccinationCenterStore ..> Vaccine
-AppointmentMapper ..> AppointmentDto
-AppointmentController ..> AppointmentMapper
-AppointmentController ..> VaccinationCenterMapper
-AppointmentController ..> VaccineTypeMapper 
+
+SNSUser "1" --o "*" Appointment
+
+AppointmentScheduleList "1" --> "*" Appointment : stores
+
+UserHealthData  --o SNSUser
+
+Appointment o-- VaccineType
+
+ISender "0..1" <-- "1" Appointment : triggers <
+
+SenderFactory --> ISender : creates >
+ISender <|.. SMSSender
+ISender <|.. EmailSender
+ISender <|.. ConsoleSender
+
+VaccineType --o Vaccine 
+
 VaccineTypeStore --> VaccineType : stores > 
+
+SNSUserStore --> SNSUser : stores
+
+VaccinationCenter <|-- CommunityMassVaccinationCenter
+VaccinationCenter <|-- HealthCareCenter
+VaccinationCenter "1" --o "*" Appointment
+VaccinationCenter "1" --> "1" Slot : has >
+VaccinationCenter "1" --> "1" Time : has >
+
+AppointmentInsertMapper --> AppointmentInsertDto
+Appointment --> AppointmentInsertMapper
+
 
 @enduml
