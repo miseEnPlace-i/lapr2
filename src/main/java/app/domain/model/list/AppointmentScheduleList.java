@@ -8,9 +8,12 @@ import app.domain.model.Appointment;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
+import app.domain.model.store.VaccineStore;
 import app.dto.UserNotificationDTO;
+import app.dto.VaccineTypeDTO;
 import app.exception.AppointmentNotFoundException;
 import app.mapper.UserNotificationMapper;
+import app.mapper.VaccineTypeMapper;
 import app.service.sender.ISender;
 import app.service.sender.SenderFactory;
 import app.utils.Time;
@@ -26,6 +29,7 @@ import app.utils.Time;
 public class AppointmentScheduleList {
   private VaccinationCenter vaccinationCenter;
   private Map<Calendar, Appointment[][]> appointments;
+  private VaccineStore vaccineStore;
   private int slotsPerDay = 0;
   private int vaccinesPerSlot = 0;
 
@@ -78,8 +82,10 @@ public class AppointmentScheduleList {
    * @param sms if the user wants to receive a SMS
    * @return
    */
-  public Appointment create(SNSUser snsUser, Calendar date, VaccinationCenter center, VaccineType vaccineType, boolean sms) {
-    Appointment appointment = new Appointment(snsUser, date, center, vaccineType, sms);
+  public Appointment createAppointment(SNSUser snsUser, Calendar date, VaccineTypeDTO vaccineTypeDto, boolean sms) {
+    VaccineType vaccineType = VaccineTypeMapper.toModel(vaccineTypeDto);
+
+    Appointment appointment = new Appointment(snsUser, date, this.vaccinationCenter, vaccineType, sms);
 
     return appointment;
   }
@@ -125,8 +131,22 @@ public class AppointmentScheduleList {
    * @param appointment the appointment to be added
    */
   public void validateAppointment(Appointment appointment) {
-    // TODO validate sns user with health data
     if (appointment == null) throw new IllegalArgumentException("Appointment is not valid.");
+
+    Time hours = new Time(appointment.getDate());
+
+    if (!vaccinationCenter.isOpenAt(hours)) {
+      throw new IllegalArgumentException("Vaccination center is closed or does not accept appointments at selected time.");
+    }
+    if (!vaccinationCenter.hasAvailabilityInSlot(appointment.getDate())) {
+      throw new IllegalArgumentException("Vaccination center does not accept any more appointments at selected time.");
+    }
+
+    SNSUser snsUser = appointment.getSnsUser();
+
+    if (snsUser.hasAppointmentForVaccineType(appointment.getVaccineType())) {
+      throw new IllegalArgumentException("SNS User has already an appointment for the selected vaccine type.");
+    }
   }
 
   /**
@@ -155,6 +175,9 @@ public class AppointmentScheduleList {
       slots[slotIndex][0] = appointment;
       appointments.put(key, slots);
     }
+
+    SNSUser snsUser = appointment.getSnsUser();
+    snsUser.addAppointmentToList(appointment);
 
     if (!appointment.isSms()) return;
 

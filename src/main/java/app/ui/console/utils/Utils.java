@@ -160,11 +160,29 @@ public class Utils {
     return selectsIndex(list);
   }
 
+  static public Object showAndSelectOneEnum(Enum[] list, String header) {
+    showEnumItems(list, header);
+    return selectEnumObject(list);
+  }
+
   static public void showList(List list, String header) {
     System.out.println(header);
 
     int index = 0;
     for (Object o : list) {
+      index++;
+
+      System.out.println(index + ". " + o.toString());
+    }
+    System.out.println("");
+    System.out.println("0 - Cancel");
+  }
+
+  static public void showEnumItems(Enum[] items, String header) {
+    System.out.println(header);
+
+    int index = 0;
+    for (Enum o : items) {
       index++;
 
       System.out.println(index + ". " + o.toString());
@@ -182,6 +200,17 @@ public class Utils {
 
     if (value == 0) return null;
     else return list.get(value - 1);
+  }
+
+  static public Object selectEnumObject(Enum[] list) {
+    int value = 0;
+
+    do {
+      value = Utils.readIntegerFromConsole("Type your option: ");
+    } while (value < 0 || value > list.length);
+
+    if (value == 0) return null;
+    else return list[value - 1];
   }
 
   static public int selectsIndex(List list) {

@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Calendar;
 import org.junit.Before;
 import org.junit.Test;
+import app.domain.shared.Gender;
 import app.utils.Time;
 
 public class WaitingRoomTest {
@@ -15,7 +16,8 @@ public class WaitingRoomTest {
   @Before
   public void setup() {
     waitingRoom = new WaitingRoom();
-    SNSUser snsUser = new SNSUser("000000000ZZ4", "123456789", "name", Calendar.getInstance().getTime(), 'M', "+351212345678", "email@email.com", "address");
+    SNSUser snsUser =
+        new SNSUser("000000000ZZ4", "123456789", "name", Calendar.getInstance().getTime(), Gender.MALE, "+351212345678", "email@email.com", "address");
     Employee coordinator = new Employee("123456789", "name", "+351212345678", "email@email.com", "address", "000000000ZZ4", "COORDINATOR");
 
     Time openingHours = new Time(8, 0);

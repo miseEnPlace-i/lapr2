@@ -1,7 +1,6 @@
 package app.controller;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
@@ -18,8 +17,8 @@ import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.SNSUserStore;
 import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineTypeStore;
+import app.domain.shared.Gender;
 import app.dto.AppointmentInsertDTO;
-import app.dto.VaccinationCenterListDTO;
 import app.mapper.AppointmentInsertMapper;
 import app.service.CalendarUtils;
 
@@ -51,7 +50,7 @@ public class ScheduleVaccineControllerTest {
     vacStore.saveVaccinationCenter(vaccinationCenter);
 
     snsUserStore = company.getSNSUserStore();
-    user = new SNSUser("000000000ZZ4", "123456789", "name", new Date(), 'M', "+351212345678", "email@email.com", "address");
+    user = new SNSUser("000000000ZZ4", "123456789", "name", new Date(), Gender.MALE, "+351212345678", "email@email.com", "address");
     snsUserStore.saveSNSUser(user);
 
     calendar = CalendarUtils.parseDateTime(new Date(), "20:40");
@@ -77,72 +76,7 @@ public class ScheduleVaccineControllerTest {
    */
   @Test
   public void ensureItIsPossibleToCreateAppointment() {
-    controller.createAppointment(this.user.getSnsNumber(), this.calendar, this.vaccinationCenter, this.vaccineType, this.sms);
+    // controller.createAppointment(this.user.getSnsNumber(), this.calendar, this.vaccinationCenter, this.vaccineType,
+    // this.sms);
   }
-
-  /**
-   * Check that getVaccinationCenterByEmail method is working properly
-   */
-  @Test
-  public void ensureItIsPossibleToGetCenterByEmail() {
-    VaccinationCenter center = controller.getVaccinationCenterByEmail("email@email.com");
-
-    assertEquals(center, vaccinationCenter);
-  }
-
-  @Test
-  public void ensureGetCenterByEmailWithoutResultWorks() {
-    VaccinationCenter center = controller.getVaccinationCenterByEmail("non_existing@email.com");
-
-    assertNull(center);
-  }
-
-  @Test
-  public void ensureGetSNSUserNumberWithEmailWorks() {
-    assertEquals("123456789", controller.getSNSUserNumberWithEmail(user.getEmail()));
-  }
-
-  @Test
-  public void ensureGetVaccineTypeByCodeWorks() {
-    assertEquals(vaccineType, controller.getVaccineTypeByCode(vaccineType.getCode()));
-  }
-
-  @Test
-  public void ensureExistsUserWorksWithValidUser() {
-    assertEquals(true, controller.existsUser(user.getSnsNumber()));
-  }
-
-  @Test
-  public void ensureExistsUserWorksWithInvalidUser() {
-    assertEquals(false, controller.existsUser("111111111"));
-  }
-
-  @Test
-  public void ensureIsCenterOpenAtWorksWithValidCenterHours() {
-    assertEquals(controller.isCenterOpenAt(vaccinationCenter, "20:20"), true);
-  }
-
-  @Test
-  public void ensureIsCenterOpenAtWorksWithInvalidCenterHours() {
-    assertEquals(controller.isCenterOpenAt(vaccinationCenter, "08:20"), false);
-  }
-
-  @Test
-  public void ensureUserHasAppointmentWorksWithNonAppointment() {
-    assertEquals(controller.userHasAppointmentForVaccineType(vaccineType, user.getSnsNumber()), false);
-  }
-
-  // @Test
-  public void ensureUserHasAppointmentWorksWithAppointment() {
-    appointment = new Appointment(user, calendar, vaccinationCenter, vaccineType, sms);
-    controller.save();
-
-    assertEquals(controller.userHasAppointmentForVaccineType(vaccineType, user.getSnsNumber()), true);
-  }
-
-  @Test
-  public void ensureHasSlotAvailabilityWorks() {
-    assertEquals(controller.hasSlotAvailability(vaccinationCenter, calendar), true);
-  }
-
 }

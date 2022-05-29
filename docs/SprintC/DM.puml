@@ -95,6 +95,20 @@ class Time {
 
 class Notification {}
 
+class Arrival {
+  - arrivalDate
+}
+
+class AppointmentScheduleList {}
+
+class WaitingRoomList {}
+
+
+Arrival "1" -- "0..1" Appointment : related to >
+Arrival "*" -- "*" WaitingRoom : is in >
+
+AppointmentScheduleList "1" -- "*" Appointment : has >
+
 DoseInformation "*" -- "1" AdministrationProccess : has <
 
 Vaccine "*" -- "1" VaccineType : has <
@@ -136,6 +150,7 @@ Administrator "1" -- "*" Vaccine : manages >
 Vaccine "1" -- "1..*" AdministrationProccess : has >
 
 SNSUser "1" -- "*" Appointment : schedules >
+SNSUser "1" -- "*" Arrival : associated to >
 SNSUser "1" -- "1" HealthInformation : has >
 SNSUser "1" -- "*" Notification : receives >
 SNSUser "1" -- "*" VaccinationCertificate : requests >
@@ -148,12 +163,17 @@ Company "1" -- "*" VaccinationCertificate : emmits >
 Company "1" -- "*" Employee : knows >
 Company "1" -- "*" VaccinationCenter : knows >
 
-Receptionist "0,1" -- "1" Appointment : schedules >
+Receptionist "0..1" -- "1" Appointment : schedules >
+Receptionist "1" -- "*" Appointment : related to >
+Receptionist "1" -- "*" Arrival : registers >
 
 Nurse "1" -- "*" AdverseReaction : reports >
 Nurse "1" -- "*" HealthInformation : checks >
 
 VaccinationCenter "1" -- "1" VaccinationReport : has >
+VaccinationCenter "1" -- "1" WaitingRoom : has >
+VaccinationCenter "1" -- "1" AppointmentScheduleList : has >
+
 CenterCoordinator "1" -- "*" VaccinationReport : analyses >
 CenterCoordinator "1" -- "*" VaccinationReport : generates >
 
