@@ -162,6 +162,8 @@ VaccinationCertificate "1" -- "1" Vaccine : corresponds >
 Company "1" -- "*" VaccinationCertificate : emmits >
 Company "1" -- "*" Employee : knows >
 Company "1" -- "*" VaccinationCenter : knows >
+Company "1" -- "*" SNSUser : knows >
+Company "1" -- "*" Administrator : knows >
 
 Receptionist "0..1" -- "1" Appointment : schedules >
 Receptionist "1" -- "*" Appointment : related to >

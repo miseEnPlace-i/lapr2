@@ -20,8 +20,10 @@ class Company {
 
 class Administrator {}
 
-Administrator "1" -- "*" SNSUser : loads >
+
+
 Company "1" -- "*" Administrator : knows >
+Administrator "1" -- "*" SNSUser : loads >
 Company "1" -- "*" SNSUser : knows >
 
 

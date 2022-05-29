@@ -127,7 +127,7 @@ n/a
 |  		 |	...notify user? | ISender  | IE: knows how to notify user.  |
 |  		 |	...add the user to the system? | authFacade  | IE: owns every Users.  |
 |  		 |	...saving the SNS user created? | SNSUserStore  | IE: owns every SNS Users.  |
-| Step 6  		 |	... informing operation success?| UploadUserFromFileUI  | IE: is responsible for user interactions.  |
+| Step 6 		 |							 |             |                              |
 
 
 ### Systematization ##

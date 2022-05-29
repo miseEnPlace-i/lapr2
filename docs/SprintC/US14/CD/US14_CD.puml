@@ -117,7 +117,6 @@ class SNSUserNotificationDTO{
 
 Company ..> SNSUserStore
 Company ..> AuthFacade
-Company "1" --> "*" SNSUser : knows
 UploadUsersFromFileController ..> Company
 UploadUsersFromFileUI ..> UploadUsersFromFileController
 UploadUsersFromFileController --> CSVReader : uses
@@ -127,17 +126,17 @@ SNSUserStore --> IPasswordGenerator : uses
 IPasswordGenerator <-- PasswordGeneratorFactory : creates
 SNSUserStore --> ISender : uses
 ISender <-- SenderFactory : creates
-SNSUserStore --> SNSUser
+SNSUserStore "1" --> "*" SNSUser: stores
 SNSUserStore --> SNSUserMapper : uses
 SNSUserMapper --> SNSUserDto : converts to
-SNSUserStore --> SNSUserNotificationDTO : uses
+SNSUserStore --> SNSUserNotificationMapper : uses
 SNSUserNotificationMapper --> SNSUserNotificationDTO : converts to
-HeaderCSVReader --|> ICSVReader
-MissingHeaderCSVReader --|> ICSVReader
-SMSSender --|> ISender
-EmailSender --|> ISender
-ConsoleSender --|> ISender
-PasswordGenerator --|> IPasswordGenerator 
-TestGenerator --|> IPasswordGenerator 
+HeaderCSVReader ..|>ICSVReader
+MissingHeaderCSVReader ..|>ICSVReader
+SMSSender ..|>ISender
+EmailSender ..|>ISender
+ConsoleSender ..|>ISender
+PasswordGenerator ..|>IPasswordGenerator 
+TestGenerator ..|> IPasswordGenerator 
 
 @enduml
