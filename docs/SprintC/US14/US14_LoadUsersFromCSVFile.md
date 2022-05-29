@@ -196,8 +196,21 @@ Other software classes (i.e. Pure Fabrication) identified:
         assertEquals(store.size() - size, 2);
     }
 
+**Test 3:** Check that is not possible to create CSVReader with null file path
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureNullPathNotAllowed() throws ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException {
+        String path = null;
+        new CSVReader(path);
+    }
 
-*It is also recommended to organize this content by subsections.* 
+**Test 4:** Check that is not possible to create CSVReader with empty file path
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureEmptyPathNotAllowed() throws ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException {
+        String path = "";
+        new CSVReader(path);
+    }
+
+
 
 # 5. Construction (Implementation)
 
