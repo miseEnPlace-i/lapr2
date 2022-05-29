@@ -168,22 +168,32 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 4. Tests 
 
-**Test 1:** Check that it is not possible to create an instance of the Task class with null values. 
+**Test 1:** Check that it is possible to read and upload from a list with a repeated user in the middle of the file.
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Task instance = new Task(null, null, null, null, null, null, null);
-	}
+    @Test
+    public void ensureReadAndUploadFromListWhitRepeatedUser() throws ParseException, ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException {
+        int size = store.size();
+
+        ctrl.createCsvReader("src/test/java/app/domain/model/SNSUserFilesToTests/UsersFileWithRepeatedUser.csv");
+
+        ctrl.readAndUpload();
+
+        assertEquals(store.size() - size, 2);
+    }
 	
 
-**Test 2:** Check that it is not possible to create an instance of the Task class with a reference containing less than five chars - AC2. 
+**Test 2:** Check that it is possible to read and upload from a list with a invalid user in the middle of the file.
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureReferenceMeetsAC2() {
-		Category cat = new Category(10, "Category 10");
-		
-		Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
-	}
+    @Test
+    public void ensureReadAndUploadFromListWhitInvalidUser() throws ParseException, ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException {
+        int size = store.size();
+
+        ctrl.createCsvReader("src/test/java/app/domain/model/SNSUserFilesToTests/UsersFileWithInvalidUser.csv");
+
+        ctrl.readAndUpload();
+
+        assertEquals(store.size() - size, 2);
+    }
 
 
 *It is also recommended to organize this content by subsections.* 
@@ -191,49 +201,61 @@ Other software classes (i.e. Pure Fabrication) identified:
 # 5. Construction (Implementation)
 
 
-## Class CreateTaskController 
+## Class CSVReader 
 
-		public boolean createTask(String ref, String designation, String informalDesc, 
-			String technicalDesc, Integer duration, Double cost, Integer catId)() {
-		
-			Category cat = this.platform.getCategoryById(catId);
+		public List<String[]> readSNSUserData() throws ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException{
+			List<String> fileData = FileUtils.readFromFile(this.path);
+
 			
-			Organization org;
-			// ... (omitted)
+			//checks separator
+			String className = fileData.get(0).contains(",") ? "app.service.readCSV.MissingHeaderCSVReader" : "app.service.readCSV.HeaderCSVReader";
+
+			Class<?> oClass = Class.forName(className);
+
+			ICSVReader reader = (ICSVReader) oClass.newInstance();
+
+			List<String[]> userDataList = reader.read(fileData);
+
+
+			return userDataList;
+
+    	}
+
+
+## Class SNSUserStore
+
+
+		public List<SNSUser> registerListOfUsers(List<String[]> userDataList) throws ParseException {
+		List<SNSUser> userList = new ArrayList<SNSUser>();
+
+			for (int i = 0; i < userDataList.size(); i++) {
+				try{
+				SNSUserDTO userDto = SNSUserMapper.toDto(userDataList.get(i));
+
+				SNSUser snsUser = createSNSUser(userDto);
+				validateSNSUser(snsUser);
 			
-			this.task = org.createTask(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
+				saveSNSUser(snsUser);
 			
-			return (this.task != null);
-		}
-
-
-## Class Organization
-
-
-		public Task createTask(String ref, String designation, String informalDesc, 
-			String technicalDesc, Integer duration, Double cost, Category cat)() {
-		
-	
-			Task task = new Task(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
-			if (this.validateTask(task))
-				return task;
-			return null;
+				userList.add(snsUser);
+				}catch(Exception e){
+				userList.add(null);
+				}
+			}
+			
+			return userList;
 		}
 
 
 
 # 6. Integration and Demo 
 
-* A new option on the Employee menu options was added.
-
-* Some demo purposes some tasks are bootstrapped while system starts.
+* A new option on the Admin menu options was added.
 
 
 # 7. Observations
 
-Platform and Organization classes are getting too many responsibilities due to IE pattern and, therefore, they are becoming huge and harder to maintain. 
-
-Is there any way to avoid this to happen?
+The SNS users registered information output is not perfect, but it will be changed when changing to GUI (Graphical User Interface).
 
 
 
