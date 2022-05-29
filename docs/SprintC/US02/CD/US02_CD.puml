@@ -19,15 +19,17 @@ class AppointmentScheduleList {
   -appointments: Map<Calendar, Appointment[][]>
   -slotsPerDay : int
   -vaccinesPerSlot: int
-  +create(snsUser,date,center,vaccineType,sms)
+  +createAppointment(snsUser,date,vaccineTypeDto,sms)
   +saveAppointment(appointment)
   +hasAppointmentToday(snsNumber)
-  +isValdSchedule(date)
   +validateAppointment(appointment)
   +checkSlotAvailability(date)
 
+  -isValdSchedule(date)
   -existsScheduleForDay(date)
   -getAppointmentSlotIndex(date)
+  -generateMessage(appointment)
+  -sendNotification(notifcationDto)
 }
 
 class Vaccine   {
@@ -75,17 +77,12 @@ class SNSUser {
   - address: String
   - userHealthData : UserHealthData
   + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
+  +addAppointmentToList(appointment)
   }
 
 class UserHealthData {
- - vaccinesTaken: List<VaccinationData>
- +isEligibleForVaccine(vaccineType)
-}
-
-class VaccinationData {
-  - batchNumber: int
-  - nOfDose: int
-  - date: Date
+ - appointments: List<Appointment>
+ + addAppointment(appointment)
 }
 
 class VaccinationCenter{
@@ -96,14 +93,15 @@ class VaccinationCenter{
   - faxNumber: String
   - websiteAddress: String
   +VaccinationCenter(name,address,emailAddres,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
-  +getAdministeredVaccines()
-  +checkAvailability(date,time,vaccineType)
-  +addAppointmentToList(appointment)
+  +isOpenAt(hours)
+  +getRealClosingHours()
+  +hasAvailabilityInSlot(date)
 }
 
 class Time {
   - hours : int
   - minutes : int
+  +isBetween(openingHours,getRealClosingHours())
 }
 
 class Slot {
@@ -166,7 +164,6 @@ ScheduleVaccineReceptionistUI ..> ScheduleVaccineController
 
 ScheduleVaccineController ..> Company
 ScheduleVaccineController <-- AppointmentInsertDto
-ScheduleVaccineController --> ScheduleVaccineReceptionistUI
 ScheduleVaccineController ..> VaccinationCenterMapper
 ScheduleVaccineController ..> VaccineTypeMapper 
 

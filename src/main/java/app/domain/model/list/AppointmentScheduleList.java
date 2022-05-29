@@ -19,7 +19,7 @@ import app.service.sender.SenderFactory;
 import app.utils.Time;
 
 /**
- * AppointmentStore class.
+ * AppointmentScheduleList class.
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
