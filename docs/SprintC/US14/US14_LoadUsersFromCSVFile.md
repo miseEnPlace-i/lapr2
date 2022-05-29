@@ -51,7 +51,7 @@ using “,” character.
 * **AC7:** SNS number must have 9 digits.
 * **AC8:** Phone numbers should follow the portuguese format ("+351" + 9 digits).
 * **AC9:** Email address must be validated using a regular expression.
-* **AC10:** Gender options: Male, Female or n/a.
+* **AC10:** Gender options: Male, Female or Not Specified.
 * **AC11:** The password should be randomly generated. It should have 7 alphanumeric characters, 3 of them being upper case and 2 of them must be digits.
 * **AC12:** All input fields are required except gender.
 * **AC13:** The email, phone number, citizen card number and SNS User number must be unique for each SNS User.

@@ -179,12 +179,12 @@ public class SNSUserStore {
   }
 
   public List<SNSUser> registerListOfUsers(List<String[]> userDataList) throws ParseException {
-    List<SNSUser> userList = new ArrayList<SNSUser>();
+      List<SNSUser> userList = new ArrayList<SNSUser>();
 
       for (int i = 0; i < userDataList.size(); i++) {
         try{
           SNSUserDTO userDto = SNSUserMapper.toDto(userDataList.get(i));
-    
+
           SNSUser snsUser = createSNSUser(userDto);
           validateSNSUser(snsUser);
     

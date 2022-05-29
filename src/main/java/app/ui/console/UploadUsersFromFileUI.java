@@ -32,8 +32,13 @@ public class UploadUsersFromFileUI implements Runnable {
 
     String message = "Are u sure you want to upload users from file: ";
 
-    message += (filePath.substring(filePath.lastIndexOf("/") + 1) + " s/n");
+    //Get just the file name
+    String fileName = filePath.substring(filePath.lastIndexOf("\\") + 1);
+    fileName = fileName.substring(fileName.lastIndexOf("/") + 1);;
 
+    message += (fileName + " (s/n)");
+
+    //asks to confirm the action 
     if(!Utils.confirm(message)) return;
 
     List<SNSUser> userList = null;
@@ -47,7 +52,7 @@ public class UploadUsersFromFileUI implements Runnable {
         e.printStackTrace();
       }
     
-
+    //Lists SNS users registered information
     if (userList == null) {
       System.out.println("No users registered!");
     } else {
@@ -55,6 +60,7 @@ public class UploadUsersFromFileUI implements Runnable {
     }
   }
 
+  //Lists SNS users registered information
   private void displayRegisteredUsers(List<SNSUser> userList) {
     System.out.println("\nRegistered Users Info:\n");
 
@@ -73,6 +79,7 @@ public class UploadUsersFromFileUI implements Runnable {
     System.out.println("0 - Cancel");
   }
 
+  // asks to insert file path and instantiates CSVReader
   public String insertData() {
     String filePath = Utils.readLineFromConsole("File Path: ");
 
