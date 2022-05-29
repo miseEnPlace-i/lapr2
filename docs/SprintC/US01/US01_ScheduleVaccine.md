@@ -35,10 +35,10 @@ _"As an SNS user, I intend to use the application to schedule a vaccine."_
 ### 1.3. Acceptance Criteria
 
 
-* **AC1:** All required fields must be filled in. (SNS user Number, ).
-* **AC2:** The SNS user number must have 9 digits.
-* **AC3:** A SNS user cannot schedule the same vaccine more than once.
-* **AC4:** The algorithm should check if the SNS user is within the age and time since the last vaccine.
+* **AC1:** All required fields must be filled in (date, time).
+* **AC2:** The date should follow the Portuguese format (dd/mm/yyyy).
+* **AC3:** The time should follow the 24-hour format (HH:mm).
+* **AC4:** A SNS user cannot schedule the same vaccine more than once.
 
 
 ### 1.4. Found out Dependencies
