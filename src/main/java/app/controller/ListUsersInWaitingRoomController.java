@@ -8,13 +8,13 @@ import app.exception.NotAuthorizedException;
 import app.mapper.WaitingRoomMapper;
 import app.session.EmployeeSession;
 
-public class ListUsersWaitingRoomController {
+public class ListUsersInWaitingRoomController {
   private EmployeeSession nurseSession;
 
   /**
    * Constructor for ListUsersWaitingRoomController.
    */
-  public ListUsersWaitingRoomController(EmployeeSession nurseSession) throws NotAuthorizedException {
+  public ListUsersInWaitingRoomController(EmployeeSession nurseSession) throws NotAuthorizedException {
     if (!nurseSession.hasCenter()) throw new NotAuthorizedException("Nurse is not logged in");
     this.nurseSession = nurseSession;
   }

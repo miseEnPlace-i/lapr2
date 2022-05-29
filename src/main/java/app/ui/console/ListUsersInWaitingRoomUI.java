@@ -1,17 +1,17 @@
 package app.ui.console;
 
 import java.util.List;
-import app.controller.ListUsersWaitingRoomController;
+import app.controller.ListUsersInWaitingRoomController;
 import app.dto.ArrivalDTO;
 import app.exception.NotAuthorizedException;
 import app.session.EmployeeSession;
 
 public class ListUsersInWaitingRoomUI implements Runnable {
-  ListUsersWaitingRoomController controller;
+  ListUsersInWaitingRoomController controller;
 
   public ListUsersInWaitingRoomUI(EmployeeSession nurseSession) {
     try {
-      this.controller = new ListUsersWaitingRoomController(nurseSession);
+      this.controller = new ListUsersInWaitingRoomController(nurseSession);
     } catch (NotAuthorizedException e) {
       System.out.println("Nurse is not logged in");
       return;
