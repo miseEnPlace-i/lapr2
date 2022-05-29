@@ -17,16 +17,14 @@ public class CSVReaderTest {
     @Test(expected = IllegalArgumentException.class)
     public void ensureNullPathNotAllowed() throws ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException {
         String path = null;
-        CSVReader csvReader = new CSVReader(path);
-        csvReader.readSNSUserData();
+        new CSVReader(path);
     }
 
     //Check is not possible to create CSVReader with empty file path
     @Test(expected = IllegalArgumentException.class)
     public void ensureEmptyPathNotAllowed() throws ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException {
         String path = "";
-        CSVReader csvReader = new CSVReader(path);
-        csvReader.readSNSUserData();
+        new CSVReader(path);
     }
 
     //Check is not possible to read a file with CSVReader with wrong file path
@@ -44,9 +42,9 @@ public class CSVReaderTest {
         CSVReader csvReader = new CSVReader(path);
         List<String[]> list = csvReader.readSNSUserData();
 
-        String[] expected = {"joao","M","14/12/2003","rua das flores","+351919999999","joao@gmail.com","123456789","155424041ZY0"};
-
+        String[] expected = {"joao","Male","14/12/2003","rua das flores","+351919993999","joao@gmail.com","123263189","155424041ZY0"};
         assertArrayEquals(list.get(0), expected);
+
     }
 
     //Check is possible to read a file without header and ";" as separator (TYPE 2)
@@ -56,7 +54,7 @@ public class CSVReaderTest {
         CSVReader csvReader = new CSVReader(path);
         List<String[]> list = csvReader.readSNSUserData();
 
-        String[] expected = {"joao","M","14/12/2003","rua das flores","+351919999999","joao@gmail.com","123456789","155424041ZY0"};
+        String[] expected = {"joao","Male","14/12/2003","rua das flores","+351919993999","joao@gmail.com","123263189","155424041ZY0"};
 
         assertArrayEquals(list.get(0), expected);
     }

@@ -103,10 +103,6 @@ activate UI
 
             USR_STR -> USR_STR : saveSNSUser(snsUser)
             activate USR_STR
-                
-                USR_STR -> USR_STR : addSNSUser(snsUser)
-                activate USR_STR
-                deactivate USR_STR
 
                 USR_STR -> USR : email = getEmail()
                 activate USR
@@ -127,6 +123,10 @@ activate UI
                 USR_STR -> AUTH : addUserWithRole(name, email, pwd, role)
                 activate AUTH
                 deactivate AUTH
+
+                USR_STR -> USR_STR : addSNSUser(snsUser)
+                activate USR_STR
+                deactivate USR_STR
 
                 USR_STR -> NOT_MAPPER : notificationDto = toDto(email, phone number, message)
                 activate NOT_MAPPER

@@ -90,7 +90,6 @@ public class SNSUserStore {
    * @param snsUser the employee to be inserted.
    */
   public void saveSNSUser(SNSUser snsUser) {
-    addSNSUser(snsUser);
 
     String email = snsUser.getEmail();
     String phoneNumber = snsUser.getPhoneNumber();
@@ -98,6 +97,8 @@ public class SNSUserStore {
     String pwd = pwdGenerator.generatePwd();
 
     authFacade.addUserWithRole(snsUser.getName(), email, pwd, Constants.ROLE_SNS_USER);
+
+    addSNSUser(snsUser);
 
     String message = String.format("A new user has been created.\nEmail: %s\nPassword: %s", email, pwd);
     UserNotificationDTO notificationDto = UserNotificationMapper.toDto(email, phoneNumber, message);

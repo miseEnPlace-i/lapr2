@@ -69,7 +69,7 @@ public class SNSUserStoreTest {
 
 
 
-  //Check that it is possible to read and upload from a list with a repeated user in the middle
+  //Check that it is possible to upload a list with a repeated user in the middle
   //There are 2 valid users, so it should read 2 users and not stop when failing to register
   @Test
   public void ensureReadAndUploadFromListWhitRepeatedUser() throws ParseException {
@@ -88,7 +88,7 @@ public class SNSUserStoreTest {
 
   }
 
-  //Check that it is possible to read and upload from a list with a invalid user in the middle
+  //Check that it is possible to upload a list with a invalid user in the middle
   //There are 2 valid users, so it should read 2 users and not stop when failing to register
   @Test
   public void ensureReadAndUploadFromListWhitInvalidUser() throws ParseException {
@@ -109,7 +109,7 @@ public class SNSUserStoreTest {
   }
 
 
-  //Check that it is possible to read and upload from a list with only valid user in the middle
+  //Check that it is possible to upload a list with only valid user in the middle
   @Test
   public void ensureReadAndUploadFromListWhitValidUser() throws ParseException {
     int size = store.size();
