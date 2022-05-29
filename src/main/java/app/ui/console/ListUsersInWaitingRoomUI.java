@@ -33,8 +33,8 @@ public class ListUsersInWaitingRoomUI implements Runnable {
     sb.append("\n\nWaiting Room:");
     sb.append("\n\n");
 
-    for (ArrivalDTO arrive : waitingRoom)
-      sb.append(arrive + "\n");
+    for (int i = 0; i < waitingRoom.size(); i++)
+      sb.append(String.format("%d. %n%s%n%n", i + 1, waitingRoom.get(i)));
 
     return sb.toString();
   }

@@ -12,8 +12,6 @@ public class ArrivalMapper {
   private ArrivalMapper() {}
 
   public static ArrivalDTO toDto(Arrival arrival) {
-    SNSUser user = arrival.getSNSUser();
-
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     SimpleDateFormat sdfWithHour = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
