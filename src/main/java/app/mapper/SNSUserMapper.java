@@ -3,11 +3,10 @@ package app.mapper;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import app.domain.shared.Gender;
 import app.dto.SNSUserDTO;
 
 /**
- * Vaccination Center mapper
- * 
  * @autor Carlos Lopes <1211277@isep.ipp.pt>
  */
 public class SNSUserMapper {
@@ -22,7 +21,9 @@ public class SNSUserMapper {
     SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
     Date birthDay = df.parse(userData[2]);
 
+    Gender gender = Gender.valueOf(userData[1]);
+
     // userData: Name, Sex, Birth Date, Address, Phone Number, E-mail, SNS User Number and Citizen Card Number.
-    return new SNSUserDTO(userData[7], userData[6], userData[0], birthDay, userData[1].charAt(0), userData[4], userData[5], userData[3]);
+    return new SNSUserDTO(userData[7], userData[6], userData[0], birthDay, gender, userData[4], userData[5], userData[3]);
   }
 }

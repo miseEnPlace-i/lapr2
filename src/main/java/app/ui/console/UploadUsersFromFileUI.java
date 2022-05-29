@@ -1,5 +1,6 @@
 package app.ui.console;
 
+import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.util.List;
 import app.controller.App;
@@ -40,6 +41,9 @@ public class UploadUsersFromFileUI implements Runnable {
       try {
         userList = ctrl.readAndUpload();
       } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | ParseException e) {
+        e.printStackTrace();
+      } catch (FileNotFoundException e) {
+        // TODO Auto-generated catch block
         e.printStackTrace();
       }
     

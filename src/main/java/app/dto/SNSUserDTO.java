@@ -4,8 +4,6 @@ import java.util.Date;
 import app.domain.shared.Gender;
 
 /**
- * Vaccination Center mapper
- * 
  * @autor Carlos Lopes <1211277@isep.ipp.pt>
  */
 public class SNSUserDTO {

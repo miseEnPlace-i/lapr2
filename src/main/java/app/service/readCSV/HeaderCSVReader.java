@@ -3,6 +3,9 @@ package app.service.readCSV;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Carlos Lopes <1211277@isep.ipp.pt>
+ */
 public class HeaderCSVReader implements ICSVReader{
 
     @Override
