@@ -1,5 +1,7 @@
 package app.mapper;
 
+import java.util.ArrayList;
+import java.util.List;
 import app.domain.model.VaccineType;
 import app.dto.VaccineTypeDTO;
 
@@ -18,5 +20,15 @@ public class VaccineTypeMapper {
 
   public static VaccineType toModel(VaccineTypeDTO vaccineTypeDto) {
     return new VaccineType(vaccineTypeDto.getCode(), vaccineTypeDto.getDescription(), vaccineTypeDto.getTechnology());
+  }
+
+  public static List<VaccineTypeDTO> toDto(List<VaccineType> vaccineTypes) {
+    List<VaccineTypeDTO> list = new ArrayList<VaccineTypeDTO>();
+
+    for (VaccineType vaccineType : vaccineTypes) {
+      list.add(VaccineTypeMapper.toDto(vaccineType));
+    }
+
+    return list;
   }
 }
