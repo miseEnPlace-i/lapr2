@@ -12,31 +12,28 @@ participant "healthCareCenter\n:HealthCareCenter"
 [o-> CENTERSTORE : getListOfVaccinationCentersWithVaccineType(vaccineTypeDto)
 activate CENTERSTORE
 
+CENTERSTORE -> CENTERLIST** : create()
+
 CENTERSTORE -> VACCINEMAPPER : vaccineType = toModel(vaccineTypeDto)
 activate VACCINEMAPPER
-
-VACCINEMAPPER --> CENTERSTORE : vaccineType
 deactivate VACCINEMAPPER
 
-
-
 loop for each VaccinationCenter registered in the system
-opt center instanceof CMVC
+opt vaccinationCenter instanceof CMVC
 
-CENTERSTORE -> CENTER : vaccinationCenter instanceof CMVC
+CENTERSTORE -> CENTER : a = administersVaccineType(vaccineType)
 activate CENTER 
+deactivate CENTER
 
-opt CMVC administers the vaccineType selected
-CENTER -> CENTERLIST : availableVaccinationCentersList.add(vaccinationCenter)
+opt a==true
+CENTERSTORE -> CENTERLIST : add(vaccinationCenter)
 activate CENTERLIST
 deactivate CENTERLIST
 deactivate CENTER
 end
 
-alt center instanceof HCC
-CENTERSTORE -> CENTER :  vaccinationCenter instance of HCC
-activate CENTER
-CENTER -> CENTERLIST : availableVaccinationCentersList.add(vaccinationCenter)
+alt vaccinationCenter instanceof HCC
+CENTERSTORE -> CENTERLIST : add(vaccinationCenter)
 activate CENTERLIST
 deactivate CENTERLIST
 deactivate CENTER
@@ -44,17 +41,10 @@ end
 end
 end
 
-loop for each available vaccinationCenters
-
-CENTERSTORE -> CENTERMAPPER : vaccinationCenterDto = toDto(vaccinationCenter)
+CENTERSTORE -> CENTERMAPPER : availableVaccinationCentersDto = toDto(availableVaccinationCenters)
 activate CENTERMAPPER
 deactivate CENTERMAPPER
 
-CENTERSTORE -> CENTERSTORE : vaccinationCenterDtoList.add(vaccinationCenterDto)
-activate CENTERSTORE
-deactivate CENTERSTORE
-
-end
 [<-CENTERSTORE : vaccinationCenterDtoList
 deactivate CENTERSTORE
 

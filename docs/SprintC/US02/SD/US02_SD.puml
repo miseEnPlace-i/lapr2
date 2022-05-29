@@ -10,16 +10,16 @@ participant ":AppointmentController" as CTRL
 participant "comp\n:Company" as COMP
 participant "store\n:SNSUserStore" as USERSTORE
 participant "store\n:VaccinationCenterStore" as CENTERSTORE
-participant "vaccinationCenter\n:VaccinationCenter" as CENTER
 participant "availableVaccinationCenters\n:List<VaccinationCenter>" as LISTCENTER
 participant "store\n:VaccineStore" as VACCINESTORE
 participant "store\n:VaccineTypeStore" as VACSTORE
-participant "mapper\n:VaccineTypeMapper" as VACTYPEMAPPER
 participant "mapper\n:vaccinationCenterMapper" as VACMAPPER
 participant "mapper\n:AppointmentMapper" as APPMAPPER
 participant "appDto:AppointmentDto" as DTO
 participant "appointmentScheduleList\n:AappointmentScheduleList" as APPLIST
 participant "appointment\n:Appointment" as APPOINT
+participant "mapper\n:VaccineTypeMapper" as VACTYPEMAPPER
+participant "vaccinationCenter\n:VaccinationCenter" as CENTER
 participant "snsUser\n:SNSUser" as SNSUSER
 participant "vaccinationCenter\n:VaccinationCenter" as VACCENTER
 participant "mapper\n:UserNotificationMapper" as USERNOTIMAPPER
@@ -171,11 +171,47 @@ deactivate USERSTORE
 CTRL -> APPLIST : appointment = createAppointment(snsUser,dateAndTime,vaccineTypeDto,sms)
 activate APPLIST
 
+APPLIST -> VACTYPEMAPPER : vaccineType = toModel(vaccineTypeDto)
+activate VACTYPEMAPPER
+deactivate VACTYPEMAPPER
+
+note over APPLIST
+date represents a Calendar object that
+contains the date and time of the appointment
+end note
+
 APPLIST -> APPOINT** : create(snsUser,date,vaccinationCenter,vaccineType,sms)
 deactivate APPLIST
 
 CTRL -> APPLIST : validateAppointment(appointment)
 activate APPLIST
+
+APPLIST -> APPOINT : date = getDate()
+activate APPOINT
+deactivate APPOINT
+
+APPLIST -> CENTER : isOpenAt(date)
+activate CENTER
+deactivate CENTER
+
+APPLIST -> CENTER : hasAvailabilityInSlot(date)
+activate CENTER
+deactivate CENTER  
+
+APPLIST -> APPOINT : snsUser = getSnsUser()
+activate APPOINT
+ deactivate APPOINT
+
+APPLIST -> APPOINT : vaccineType = getVaccineType()
+activate APPOINT
+deactivate APPOINT
+
+APPLIST -> SNSUSER : hasAppointmentForVaccineType(vaccineType)
+activate SNSUSER
+deactivate SNSUSER
+deactivate APPLIST
+deactivate CTRL
+
 deactivate APPLIST
 deactivate CTRL
 
@@ -227,7 +263,11 @@ deactivate USERDATA
 deactivate USERDATA
 deactivate SNSUSER
 
-opt user wants to receive SMS about the scheduled vaccine
+APPLIST -> APPOINT : sms = isSms()
+activate APPOINT
+deactivate APPOINT
+
+opt [sms == true ] user wants to receive SMS about the scheduled vaccine
 
 APPLIST -> APPLIST : message = generateMessage(appointment)
 activate APPLIST
@@ -247,9 +287,6 @@ deactivate SNSUSER
 
 APPLIST -> USERNOTIMAPPER : notificationDto = toDto(email,phone,message)
 activate USERNOTIMAPPER
-
-USERNOTIMAPPER --> APPLIST : notificationDto
-deactivate USERNOTIMAPPER
 
 APPLIST -> APPLIST : sendNotification(notificationDto)
 activate APPLIST
