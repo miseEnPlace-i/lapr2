@@ -97,31 +97,31 @@ Not found.
 
 **SSD - Alternative 1 is adopted.**
 
-| Interaction ID | Question: Which class is responsible for... | Answer                        | Justification (with patterns)                                                                                 |
-| :------------- | :------------------------------------------ | :---------------------------- | :------------------------------------------------------------------------------------------------------------ |
-| Step 1         | ... interacting with the actor?             | ScheduleVaccineReceptionistUI | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-|                | ... coordinating the US?                    | ScheduleVaccineController     | Controller                                                                                                    |
-|                | ... instantiating a new Appointment?        | Appointment                   | Creator: R1/2                                                                                                 |
-| Step 2         | n/a                                         | n/a                           | n/a                                                                                                           |
-| Step 3         | ... validate SNS User Number format?        | FieldsToValidate              | IE: knows all data formats.                                                                                   |
-| Step 4         | ... knows the suggested vaccine?            | Company                       | IE: knows the ongoing outbreak.                                                                               |
-| Step 5         | n/a                                         | n/a                           | n/a                                                                                                           |
-| opt Step 6     | ... gets all vaccine types?                 | VaccineTypeStore              | IE: knows all the existing vaccine types.                                                                     |
-|                | ... listing all vaccine types?              | VaccineTypeDtoList            | Dto:knows relevant information about vaccine types.                                                           |
-| opt Step 7     | n/a                                         | n/a                           | n/a                                                                                                           |
-| step 8         | ... gets all available vaccination centers? | VaccinationCenterStore        | IE: knows all available vaccination centers.                                                                  |
-|                | ... listing all vaccination centers?        | VaccinationCenterDtoList      | Dto: knows relevant information about vaccination centers.                                                    |
-| step 9         | ... saving vaccination center selected?     | Appointment                   | IE:                                                                                                           |
-| step 10        | n/a                                         | n/a                           | n/a                                                                                                           |
-| step 11        | ... saving date and time selected?          | Appointment                   | IE:                                                                                                           |
-|                | ... validating center availability?         | VaccinationCenter             | IE: knows vaccination center appointments.                                                                    |
-| Step 12        | n/a                                         | n/a                           | n/a                                                                                                           |
-| Step 13        | ... knows the method to notify user?        | SenderFactory                 | Factory: knows the logic to notify user.                                                                      |
-|                | ... send the SMS notification?              | ISender                       | IE: knows how to notify user.                                                                                 |
-| Step 14        | ... gets relevant information to the user?  | AppointmentDto                | Dto: knows relevant information.                                                                              |
-|                | ... check for duplicates appointment?       | AppointmentScheduleList       | IE: holds every information about the schedules.                                                              |
-| Step 15        | ... saving the new appointment?             | AppointmentScheduleList       | IE: holds every information about the schedules.                                                              |
-| Step 16        | ... informing operation success?            | ScheduleVaccineReceptionistUI | IE: is responsible for user interactions.                                                                     |
+| Interaction ID | Question: Which class is responsible for... | Answer                        | Justification (with patterns)                                                                                |
+| :------------- | :------------------------------------------ | :---------------------------- | :----------------------------------------------------------------------------------------------------------- |
+| Step 1         | ... interacting with the actor?             | ScheduleVaccineReceptionistUI | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model |
+|                | ... coordinating the US?                    | ScheduleVaccineController     | Controller                                                                                                   |
+|                | ... instantiating a new Appointment?        | AppointmentScheduleList       | Creator: it contains all appointment objects                                                                 |
+| Step 2         | n/a                                         | n/a                           | n/a                                                                                                          |
+| Step 3         | ... validate SNS User Number?               | SNSUserStore                  | IE: knows all SNS Users registered                                                                           |
+| Step 4         | ... knows the suggested vaccine?            | Company                       | IE: knows the suggested vaccine type defined in the configuration file                                       |
+| Step 5         | n/a                                         | n/a                           | n/a                                                                                                          |
+| opt Step 6     | ... gets all vaccine types?                 | VaccineTypeStore              | IE: knows all the existing vaccine types                                                                     |
+|                | ... listing all vaccine types?              | VaccineTypeDtoList            | Dto: gets relevant information about vaccine types                                                           |
+| opt Step 7     | n/a                                         | n/a                           | n/a                                                                                                          |
+| step 8         | ... gets all available vaccination centers? | VaccinationCenterStore        | IE: knows all available vaccination centers                                                                  |
+|                | ... listing all vaccination centers?        | VaccinationCenterDtoList      | Dto: gets relevant information about vaccination centers                                                     |
+| step 9         | ... saving vaccination center selected?     | Appointment                   | IE: object created in step 1 has one vaccination center                                                      |
+| step 10        | n/a                                         | n/a                           | n/a                                                                                                          |
+| step 11        | ... saving date and time selected?          | Appointment                   | IE: object created in step 1 has date and time                                                               |
+|                | ... validating center availability?         | VaccinationCenter             | IE: knows vaccination center appointments                                                                    |
+| Step 12        | n/a                                         | n/a                           | n/a                                                                                                          |
+| Step 13        | ... saving the selected option?             | Appointment                   | IE: object created in step 1 has the information about the sending of the sms                                |
+| Step 14        | ... gets relevant information to the user?  | AppointmentDto                | Dto: gets all relevant information needed                                                                    |
+|                | ... validate the data introduced?           | AppointmentScheduleList       | IE: knows all information needed to validate the appointment                                                 |
+|                | ... check for duplicates appointment?       | AppointmentScheduleList       | IE: holds every information about the schedules                                                              |
+| Step 15        | ... saving the new appointment?             | AppointmentScheduleList       | IE: holds every information about the schedules                                                              |
+| Step 16        | ... informing operation success?            | ScheduleVaccineReceptionistUI | IE: is responsible for user interactions                                                                     |
 
 ### Systematization ##
 
@@ -132,8 +132,11 @@ According to the taken rationale, the conceptual classes promoted to software cl
  * AppointmentScheduleList
  * VaccineTypeStore
  * SNSUserStore
- * ISender
- * SenderFactory
+ * VaccinationCenter
+ * VaccinationCenterStore
+ * AppointmentDto
+ * VaccineTypeDtoList 
+ * VaccinationCenterDtoList
   
 Other software classes (i.e. Pure Fabrication) identified: 
 
@@ -157,8 +160,8 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 **Test 1:** Check that it is possible to schedule an appointment. 
 
-	@Test
   public void ensureThatIsPossibleToScheduleAppointment() {
+
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:MM");
     try {
       Calendar appointmentDate = DateUtils.toCalendar(sdf.parse("01/01/2022 10:00"));
@@ -180,17 +183,23 @@ Other software classes (i.e. Pure Fabrication) identified:
   }
 	
 
-**Test 2:** Check that it is not possible to create an instance of the Task class with a reference containing less than five chars - AC2. 
-
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureReferenceMeetsAC2() {
-		Category cat = new Category(10, "Category 10");
-		
-		Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
-	}
+**Test 2:** Check that ensureHasVaccineType method works properly
 
 
-*It is also recommended to organize this content by subsections.* 
+  public void ensureHasVaccineTypeWorks() {
+
+    SNSUser snsUser = this.snsUserStore.findSNSUserByNumber("123456789");
+    Calendar date = Calendar.getInstance();
+
+    date.set(Calendar.HOUR_OF_DAY, 20);
+    date.set(Calendar.MINUTE, 30);
+
+    Appointment appointment = new Appointment(snsUser, date, center, this.vacType, true);
+
+    assertEquals(true, appointment.hasVaccineType(this.vacType));
+    assertEquals(false, appointment.hasVaccineType(null));
+  }
+
 
 # 5. Construction (Implementation)
 
@@ -230,10 +239,13 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 
 # 7. Observations
+##### VaccineType toDto List
 
-Platform and Organization classes are getting too many responsibilities due to IE pattern and, therefore, they are becoming huge and harder to maintain. 
+![US02_SD](SD/SD_VaccineType_toDto_List.svg)
 
-Is there any way to avoid this to happen?
+##### VaccinationCenter toDto List
+
+![US02_SD](SD/SD_VaccinationCenter_toDto_List.svg)
 
 
 
