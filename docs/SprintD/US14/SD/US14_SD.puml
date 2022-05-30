@@ -1,0 +1,162 @@
+@startuml
+autonumber
+'hide footbox
+actor "Administrator" as ADM
+
+participant ":UploadUsersFromFileUI" as UI
+participant "app :App" as APP
+participant ":UploadUsersFromFileController" as CTRL
+participant "csvReader:CSVReader" as CSVR
+participant "reader :ICSVReader" as ICSVR
+participant "store :SNSUserStore" as USR_STR
+participant "comp :Company" as COMP
+participant ":SNSUserMapper" as MAPPER
+participant "dto: SNSUserDTO" as DTO
+participant ":UserNotificationMapper" as NOT_MAPPER
+participant "notificationDto: UserNotificationDTO" as NOT_DTO
+participant "user :SNSUser" as USR
+participant "pwdGenerator :IPasswordGenerator" as IPWDGEN
+participant ":PasswordGeneratorFactory" as PWDGEN_FAC
+participant "auth :AuthFacade" as AUTH
+participant "sender :ISender" as ISENDER
+participant ":SenderFactory" as SENDER_FAC
+participant "userDataList :List<String[]>" as LIST
+participant "userList: List<SNSUser>" as USER_INFO_LIST
+participant "fileData: List<String>" as FILE_DATA
+
+
+activate ADM
+ADM -> UI : asks to load users from a file
+activate UI
+UI -> APP : app=getInstance()
+activate APP
+deactivate APP
+UI -> APP : comp=app.getCompany()
+activate APP
+deactivate APP
+UI -> CTRL ** : create(company)
+UI --> ADM : requests data (file path name)
+deactivate UI
+
+ADM -> UI : types requested data
+activate UI
+
+    UI -> CTRL : createCsvReader(filePathName)
+    activate CTRL
+        CTRL -> CSVR ** : csvReader = create(filePathName)
+    deactivate CTRL
+
+UI --> ADM : asks to confirm action
+deactivate UI
+
+ADM -> UI : confirms action
+activate UI
+
+    UI -> CTRL : userList = readAndUpload()
+    activate CTRL
+
+        CTRL -> COMP : store = getSNSUserStore()
+        activate COMP
+        deactivate COMP
+
+        CTRL -> CSVR : userDataList = readSNSUsersData()
+        activate CSVR
+            CSVR -> ICSVR ** : reader = newInstance();
+            CSVR -> ICSVR : userDataList = read(fileData) 
+            activate ICSVR
+            deactivate ICSVR       
+        deactivate CSVR
+
+        CTRL -> USR_STR : userList = registerListOfUsers(userDataList)
+        activate USR_STR
+
+        loop for each SNSUser register
+        note right of USR_STR
+            snsUserData is String[Name, Sex, Birth Date, Address, Phone Number, E-mail, SNS User Number and Citizen Card Number] 
+        end note
+            USR_STR -> MAPPER : userDto = toDto(snsUserData)
+            activate MAPPER
+                MAPPER -> DTO ** : create(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
+            deactivate MAPPER
+
+
+            USR_STR -> USR_STR : snsUser = createSNSUser(userDto)
+            activate USR_STR
+                USR_STR -> USR** : create(userDto)
+            deactivate USR_STR
+
+            USR_STR -> USR_STR : validateSNSUser(snsUser)
+            activate USR_STR
+                USR_STR -> USR : email = getEmail()
+                activate USR
+                deactivate USR
+
+                USR_STR -> AUTH : existsUser(email)
+                activate AUTH
+                deactivate AUTH
+
+                USR_STR -> USR_STR : checkDuplicates(snsUser)
+                activate USR_STR
+            deactivate USR_STR
+
+            deactivate USR_STR
+
+            USR_STR -> USR_STR : saveSNSUser(snsUser)
+            activate USR_STR
+
+                USR_STR -> USR : email = getEmail()
+                activate USR
+                deactivate USR
+
+                USR_STR -> USR : phoneNumber = getPhoneNumber()
+                activate USR
+                deactivate USR
+
+                USR_STR -> PWDGEN_FAC : pwdGenerator = getPasswordGenerator()
+                activate PWDGEN_FAC
+                deactivate PWDGEN_FAC
+
+                USR_STR -> IPWDGEN : pwd = generatePwd()
+                activate IPWDGEN
+                deactivate IPWDGEN
+
+                USR_STR -> AUTH : addUserWithRole(name, email, pwd, role)
+                activate AUTH
+                deactivate AUTH
+
+                USR_STR -> USR_STR : addSNSUser(snsUser)
+                activate USR_STR
+                deactivate USR_STR
+
+                USR_STR -> NOT_MAPPER : notificationDto = toDto(email, phone number, message)
+                activate NOT_MAPPER
+
+
+                    NOT_MAPPER -> NOT_DTO ** : create(email, phoneNumber, message)
+
+                deactivate NOT_MAPPER
+            
+                USR_STR -> USR_STR : sendNotification(notificationDto)
+                activate USR_STR
+
+                    USR_STR -> SENDER_FAC : sender = getSender() 
+                    activate SENDER_FAC
+                    deactivate SENDER_FAC
+
+                    USR_STR -> ISENDER : send(notificationDto) 
+                    activate ISENDER
+                    deactivate ISENDER
+
+                deactivate USR_STR
+
+            deactivate USR_STR
+        deactivate USR_STR
+        end
+    deactivate CTRL
+
+UI --> ADM : shows registered users information
+deactivate UI
+
+deactivate ADM
+
+@enduml

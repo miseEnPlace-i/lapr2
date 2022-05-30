@@ -1,0 +1,177 @@
+@startuml US04_CD
+skinparam classAttributeIconSize 0
+
+class Appointment {
+  - Date appointmentTime
+  - SNSUser snsUser
+  - VaccineType vaccineType
+  ---
+  + Appointment(appointmentTime, snsUser, vaccineType)
+  + getCenter()
+  + getDate()
+  + getSNSUser()
+  + getVaccineType()
+}
+
+class AppointmentScheduleList {
+  + hasAppointmentToday(snsNumber)
+}
+
+class Arrival {
+  - Date arrivalTime
+  - int status
+}
+
+class Company {
+  - String designation
+  ---
+  + Company(designation)
+  + getSNSUserStore()
+  + getVaccinationCenterStore()
+}
+
+class Employee {
+  - id: String
+  - address: String
+  - phoneNumber: String
+  - citizenCardNumber: String
+  ---
+  + Employee(id, name, address, phoneNumber, email, citizenCardNumber, roleId)
+  + getId()
+  + getName()
+  + getAddress()
+  + getPhoneNumber()
+  + getEmail()
+  + getCitizenCardNumber()
+  + getPassword()
+  + getRoleId()
+}
+
+class EmployeeSession {
+  - String employeeName
+  - String vaccinationCenterId
+  ---
+  + EmployeeSession(employeeName, vaccinationCenterId)
+  + String getVaccinationCenterId()
+  + hasVaccinationCenter()
+}
+
+class RegisterSNSUserArrivalUI {}
+
+class RegisterSNSUserArrivalController {
+  ---
+  + create()
+  + findSNSUserAppointment()
+  + findSNSUserByNumber(snsNumber)
+  + save()
+  + stringifyData()
+}
+
+class SNSUser {
+  - String citizenCard
+  - String snsNumber
+  - Date birthDay
+  - Char gender
+  - String phoneNumber
+  - String address
+  ---
+  + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
+  + getName()
+  + getSNSNumber()
+  + hasSNSUser(snsNumber)
+}
+
+class SNSUserStore {
+  + SNSUser findSNSUserByNumber(snsNumber)
+  + findSNSUser(snsNumber)
+}
+
+class Receptionist {}
+
+class SMSSender {}
+
+class VaccinationCenter {
+  - name: String
+  - address: String
+  - emailAddress: String
+  - phoneNumber: String
+  - faxNumber: String
+  - websiteAddress: String
+  - openingHours: String
+  - closingHours: String
+  - slotDuration: int
+  - maximumVaccinesPerSlot: int
+  - coordinator: EMPLOYEE
+  ---
+  + VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
+  + getAppointmentList()
+  + getName()
+  + getWaitingRoomList()
+}
+
+class VaccinationCenterStore {
+  + createVaccinationCenter(centerData, coordinator)
+  + validateVaccinatonCenter(center)
+  + saveVaccinationCenter(center)
+  + checkDuplicates(center)
+  + addVaccinationCenter(center)
+}
+
+class VaccineType {
+  - code: String
+  - description : String
+  - technology : String
+  ---
+  + VaccineType(code, description, technology)
+  + getDesignation()
+}
+
+class VaccineTypeStore {
+  + getVaccineTypeByCode()
+  + addVaccineType()
+  + saveVaccineType()
+}
+
+class WaitingRoomList {
+  + createArrival(arrivalTime, snsUser, appointment)
+  + saveArrival(arrival)
+}
+
+
+Appointment "1" --> "0..1" SMSSender : triggers
+
+AppointmentScheduleList "1" --> "*" Appointment : stores
+
+Arrival "1" --> "1" Appointment : has
+
+Company ..> SNSUserStore
+Company ..> VaccinationCenterStore
+Company ..> VaccineTypeStore
+Company "1" --> "*" Employee : knows
+
+Employee <|-- Receptionist
+
+Receptionist "1" --> "*" Appointment : schedules
+
+RegisterSNSUserArrivalController ..> Company
+RegisterSNSUserArrivalController ..> EmployeeSession
+
+RegisterSNSUserArrivalUI ..> RegisterSNSUserArrivalController
+
+SNSUser --o Arrival
+SNSUser --o Appointment
+
+SNSUserStore "1" --> "*" SNSUser : stores
+
+VaccinationCenter ..> WaitingRoomList
+VaccinationCenter ..> AppointmentScheduleList
+
+VaccinationCenterStore "1" --> "*" VaccinationCenter : stores
+
+VaccineType --o Appointment
+
+VaccineTypeStore "1" --> "*" VaccineType : stores
+
+WaitingRoomList "1" --> "*" Arrival : has
+
+@enduml

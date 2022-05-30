@@ -1,0 +1,174 @@
+@startuml US01_CD
+skinparam classAttributeIconSize 0
+
+class Appointment {
+  - snsUser : SNSUser
+  - date : Date
+  - center : VaccinationCenter
+  - vaccineType : VaccineType
+  - sms : boolean
+  +Appointment(snsUser, date, vaccinationCenter, vaccineType, sms)
+  +hasSMS()
+  +getSnsUser()
+  +getDate()
+  +getVaccineType()
+}
+
+class AppointmentScheduleList {
+  -appointments: Map<Calendar, Appointment[][]>
+  -slotsPerDay : int
+  -vaccinesPerSlot: int
+  +createAppointment(snsUser, date, vaccineTypeDto, sms)
+  +saveAppointment(appointment)
+  +hasAppointmentToday(snsNumber)
+  +validateAppointment(appointment)
+  -generateMessage(appointment)
+}
+
+class Vaccine   {
+  -designation : String
+  -brand : String
+  -id : String
+  -vacType : VaccineType
+
+  +Vaccine(designation, id, brand, vaccineType)
+}
+
+class ScheduleVaccineUI {}
+
+class ScheduleVaccineController {
+  +ScheduleVaccineController(company)
+  +createAppointment(snsNumber, date, center, vaccineType, sms)
+  +getSuggestedVaccineType()
+  +getListOfVaccinationCentersWithVaccineType(vaccineTypeDto)
+  +getListOfVaccineTypes()
+  +save()
+}
+
+class Company {
+  -designation : String
+  +getOngoingOutbreakVaccineTypeCode()
+  +getVaccinationCenterStore()
+  +getVaccineTypeStore()
+  +getSnsUserStore()
+}
+
+class SNSUser {
+  -citizenCard : String 
+  -snsNumber : String 
+  -birthDay : Date 
+  -gender : Char
+  -phoneNumber : String 
+  -address : String
+  -userHealthData : UserHealthData
+  +SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
+  +addAppointmentToList(appointment)
+  +hasAppointmentForVaccineType(vaccineType)
+  +getPhoneNumber()
+}
+
+class VaccinationCenter{
+  -name : String
+  -address : String
+  -emailAddress : String
+  -phoneNumber : String
+  -faxNumber : String
+  -websiteAddress : String
+  +VaccinationCenter(name, address, emailAddress, phoneNumber, faxNumber, websiteAddress, openingHours, closingHours, slotDuration, maximumVaccinesPerSlot, coordinator)
+  +isOpenAt(hours)
+  +hasAvailabilityInSlot(date)
+  +getAppointmentList()
+}
+
+class Time {
+  -hours : int
+  -minutes : int
+}
+
+class Slot {
+  -slotDuration : int
+  -maxVacPerSlot : int
+}
+
+class VaccinationCenterStore {
+  -availableVaccinationCentersList: List<VaccinationCenter>
+  +getVaccinationCentersWithVaccineType(vaccineType)
+  +getVaccinationCenterWithEmail(email)
+}
+
+class VaccineType {}
+
+class VaccineTypeStore {
+  -vaccineTypes : List<VaccineType>
+  +getVaccineTypes()
+  +getVaccineTypeByCode(code)
+}
+
+class SMSSender {
+  +sendSMS(phoneNumber, message)
+}
+
+class VaccineTypeMapper {
+  +toDto(vaccineTypes)
+  +toDto(vaccineType)
+  +toModel(vaccineTypeDto)
+}
+
+class VaccinationCenterMapper {
+  +toDto(vaccinationCenters)
+}
+
+interface ISender {}
+
+class SNSUserStore {
+  +findSnsUserByEmail(email)                           
+}
+
+class CommunityMassVaccinationCenter {
+  -administeredVaccineType : VaccineType
+  +administersVaccineType(vaccineType)
+}
+
+class HealthCareCenter {}
+
+
+ScheduleVaccineUI ..> ScheduleVaccineController
+
+ScheduleVaccineController ..> Company
+ScheduleVaccineController ..> VaccinationCenterMapper
+ScheduleVaccineController ..> VaccineTypeMapper 
+
+Company ..> VaccinationCenterStore
+Company ..> VaccineTypeStore
+Company ..> AppointmentScheduleList
+Company ..> SNSUserStore
+
+VaccinationCenterStore "1" --> "*" VaccinationCenter : stores
+VaccinationCenterStore ..> Vaccine
+
+SNSUser "1" --o "*" Appointment
+
+AppointmentScheduleList "1" --> "*" Appointment : stores
+
+Appointment o-- VaccineType
+
+ISender "0..1" <-- "1" Appointment : triggers <
+
+SenderFactory --> ISender : creates >
+ISender <|.. SMSSender
+ISender <|.. EmailSender
+ISender <|.. ConsoleSender
+
+VaccineType --o Vaccine 
+
+VaccineTypeStore --> VaccineType : stores > 
+
+SNSUserStore --> SNSUser : stores
+
+VaccinationCenter <|-- CommunityMassVaccinationCenter
+VaccinationCenter <|-- HealthCareCenter
+VaccinationCenter "1" --o "*" Appointment
+VaccinationCenter "1" --> "1" Slot : has >
+VaccinationCenter "1" --> "1" Time : has >
+
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+autonumber
+actor "Administrator" as ADMIN
+
+activate ADMIN
+ADMIN -> ":System" : asks to load users from a file
+activate ":System"
+":System" --> ADMIN : requests data (file path name)
+deactivate ":System"
+
+ADMIN -> ":System" : types requested data
+activate ":System"
+":System" --> ADMIN : asks to confirm action
+deactivate ":System"
+
+ADMIN -> ":System" : confirms action
+activate ":System"
+":System" --> ADMIN : shows registered users information
+deactivate ":System"
+
+deactivate ADMIN
+
+@enduml

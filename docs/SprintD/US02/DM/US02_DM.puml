@@ -1,0 +1,100 @@
+@startuml  US02_DM
+hide methods
+skinparam classAttributeIconSize 0
+
+
+class Appointment {
+  snsUser
+  date
+  vaccinationCenter
+  vaccineType
+  sms
+}
+
+class VaccineType {
+  -code 
+  -description
+  -technology
+}
+
+class SNSUser {
+  - citizenCard
+  - snsNumber
+  - name
+  - birthDay
+  - gender
+  - phoneNumber
+  - email
+  - address
+}
+
+class VaccinationCenter{
+  -name
+  -address
+  -emailAddress
+  -phoneNumber
+  -faxNumber
+  -websiteAddress
+}
+
+class Time {
+  hours
+  minutes
+}
+
+class Slot {
+  slotDuration
+  maxVacPerSlot
+}
+
+class Company{
+  -designation
+}
+
+class Receptionist {}
+
+class Employee {
+  -id
+  -name
+  -email
+  -phone
+  -address
+  -citizenCardNumber
+  -roleId
+}
+
+class Notification {}
+
+class CenterCoordinator {}
+
+class CommunityMassVaccinationCenter {}
+
+class HealthCareCenter {}
+
+Appointment "1"  -- "1" VaccineType : has >
+Appointment "1" -- "1" SNSUser : has >
+Appointment "*" -- "1" Receptionist : scheduled by >
+Appointment "1" -- "0..1" Notification : triggers >
+
+Receptionist "1" -- "1" SNSUser : schedules for >
+Employee <|-- Receptionist
+Employee <|-- CenterCoordinator
+
+Company -- Employee : knows >
+Company "1" -- "*" VaccinationCenter : knows >
+
+CenterCoordinator "1" -- "1" VaccinationCenter : has >
+
+VaccinationCenter <|-- CommunityMassVaccinationCenter
+VaccinationCenter <|-- HealthCareCenter
+VaccinationCenter "1" -- "1" Slot : has >
+VaccinationCenter "1" -- "1" Time : has >
+VaccinationCenter "1" -- "1" AppointmentScheduleList : has >
+
+Notification <|-- SMSSender
+Notification <|-- EmailSender
+Notification <|-- ConsoleSender
+
+
+
+@enduml

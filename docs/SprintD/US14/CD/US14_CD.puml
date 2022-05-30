@@ -1,0 +1,142 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class AuthFacade {
+  + existsUser(email)
+  + addUserWithRole(name, email, pwd, roleId)
+}
+
+class Company {
+  - String designation
+  + getSNSUserStore()
+}
+
+class UploadUsersFromFileController {
+  + createCsvReader()
+  + readAndUpload()
+}
+
+class UploadUsersFromFileUI { }
+
+class SNSUser {
+  - String citizenCard
+  - String snsNumber
+  - Date birthDay
+  - Char gender
+  - String phoneNumber
+  - String address
+
+  +getEmail()
+  +getPhoneNumer()
+}
+
+class SNSUserStore {
+  + createSNSUser(name, email, pwd, roleId)
+  + validateSNSUser(snsUser)
+  + saveSNSUser(snsUser)
+  + checkDuplicates(snsUser)
+  + registListOfUsers(userDataList)
+  + addSNSUser(snsUser)
+  + sendNotification(notificationDTO)
+}
+
+interface IPasswordGenerator {
+  + generatePwd()
+}
+
+class PasswordGenerator {
+  + generatePwd()
+}
+class TestGenerator {
+  + generatePwd()
+}
+
+class PasswordGeneratorFactory {
+  + getPasswordGenerator()
+}
+
+interface ISender {
+  send(notificationDTO)
+}
+
+class ConsoleSender {
+  + send(notificationDTO)
+}
+class EmailSender {
+  + send(notificationDTO)
+}
+class SMSSender {
+  + send(notificationDTO)
+}
+
+
+
+class SenderFactory {
+  + getSender()
+}
+
+class CSVReader {
+  - String filePathName
+
+  + readSNSUsersData()
+}
+
+interface ICSVReader{
+  read(filedata)
+}
+
+class HeaderCSVReader { 
+  + read(filedata)
+}
+class MissingHeaderCSVReader{
+  + read(filedata)
+}
+
+class SNSUserMapper{
+  + toDto(snsUserData)
+}
+
+class SNSUserDto{
+  - String citizenCard
+  - String snsNumber
+  - Date birthDay
+  - Char gender
+  - String phoneNumber
+  - String address
+}
+
+class SNSUserNotificationMapper{
+  + toDto(email, phoneNumber, message)
+}
+
+class SNSUserNotificationDTO{
+  -email
+  -phoneNumber
+  -message
+}
+
+Company ..> SNSUserStore
+Company ..> AuthFacade
+UploadUsersFromFileController ..> Company
+UploadUsersFromFileUI ..> UploadUsersFromFileController
+UploadUsersFromFileController --> CSVReader : uses
+CSVReader --> ICSVReader : uses
+SNSUserStore --> AuthFacade : uses
+SNSUserStore --> IPasswordGenerator : uses
+IPasswordGenerator <-- PasswordGeneratorFactory : creates
+SNSUserStore --> ISender : uses
+ISender <-- SenderFactory : creates
+SNSUserStore "1" --> "*" SNSUser: stores
+SNSUserStore --> SNSUserMapper : uses
+SNSUserMapper --> SNSUserDto : converts to
+SNSUserStore --> SNSUserNotificationMapper : uses
+SNSUserNotificationMapper --> SNSUserNotificationDTO : converts to
+HeaderCSVReader ..|>ICSVReader
+MissingHeaderCSVReader ..|>ICSVReader
+SMSSender ..|>ISender
+EmailSender ..|>ISender
+ConsoleSender ..|>ISender
+PasswordGenerator ..|>IPasswordGenerator 
+TestGenerator ..|> IPasswordGenerator 
+
+@enduml

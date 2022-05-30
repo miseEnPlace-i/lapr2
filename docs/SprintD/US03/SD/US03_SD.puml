@@ -1,0 +1,113 @@
+@startuml Sequence Diagram
+autonumber
+'hide footbox
+actor "Receptionist" as RECEPT
+
+participant ":RegisterSNSUserUI" as UI
+participant ":RegisterSNSUserController" as CTRL
+participant "store\n:SNSUserStore" as STORE
+participant "comp\n:Company" as COMP
+participant "suser\n:SNSUser" as SUSER
+participant ":PasswordGenerator" as PWDGEN
+participant ":EmailSender" as EMAIL
+participant "auth\n:AuthFacade" as AUTH
+
+activate RECEPT
+  RECEPT -> UI : starts to register a new SNS User
+  activate UI
+    RECEPT <-- UI : requests data (citizenCard, snsNumber, name, birthDay, phoneNumber, email, address)
+  deactivate UI
+
+  RECEPT -> UI : types requested data
+  activate UI
+    RECEPT <-- UI : asks to select sex
+  deactivate UI
+
+  RECEPT -> UI : selects sex
+  activate UI
+    note right of UI
+      snsUserData implies citizenCard, snsNumber, name, birthDay, phoneNumber, email, address, sex
+    end note
+
+    UI -> CTRL : snsUser = createSNSUser(snsUserData)
+    activate CTRL
+      CTRL -> COMP : store = getSNSUserStore()
+      activate COMP
+      deactivate COMP
+
+      CTRL -> STORE : snsUser = createSNSUser()
+      activate STORE
+        STORE -> SUSER** : create()
+      deactivate STORE
+
+      CTRL -> STORE : validateSNSUser(snsUser)
+      activate STORE
+        STORE -> SUSER : email = getEmail(snsUser)
+        activate SUSER
+        deactivate SUSER
+
+        STORE -> COMP : auth = getAuthFacade()
+        activate COMP
+        deactivate COMP
+
+        STORE -> AUTH : existsUser(email)
+        activate AUTH
+        deactivate AUTH
+
+        STORE -> STORE : checkDuplicates(snsUser)
+        activate STORE
+        deactivate STORE
+
+      deactivate STORE
+    deactivate CTRL
+
+  RECEPT <-- UI : shows data and asks for confirmation
+  deactivate UI
+
+  RECEPT -> UI : confirms the data
+  activate UI
+    UI -> CTRL : saveSNSUser()
+    activate CTRL
+      CTRL -> STORE : saveSNSUser(snsUser)
+      activate STORE
+
+' STORE --> STORE : validateSNSUser(snsUser)
+' activate STORE
+' deactivate STORE
+
+        STORE -> SUSER : name = snsUser.getName()
+        activate SUSER
+        deactivate SUSER
+
+        STORE -> SUSER : email = snsUser.getEmail()
+        activate SUSER
+        deactivate SUSER
+
+        STORE -> PWDGEN : pwd = generatePwd()
+        activate PWDGEN
+        deactivate PWDGEN
+
+' STORE --> COMP : auth = getAuthFacade()
+' activate COMP
+' deactivate COMP
+
+        STORE -> AUTH : addUserWithRole(name, email, pwd, "SNS_USER")
+        activate AUTH
+        deactivate AUTH
+
+        STORE -> STORE : addSNSUser(snsUser)
+        activate STORE
+        deactivate STORE
+
+        STORE -> EMAIL : sendEmail(email)
+        activate EMAIL
+        deactivate EMAIL
+      deactivate STORE
+    deactivate CTRL
+
+    RECEPT <-- UI : informs operation success
+  deactivate UI
+
+deactivate RECEPT
+
+@enduml

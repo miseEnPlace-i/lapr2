@@ -1,0 +1,32 @@
+@startuml US09_DM
+hide methods
+skinparam classAttributeIconSize 0
+
+class Company {
+  -designation 
+}
+
+class VaccinationCenter {
+  -name
+  -address
+  -emailAddress
+  -phoneNumber
+  -faxNumber
+  -websiteAddress
+  -openingHours  
+  -closingHours
+  -slotDuration
+  -maximumVaccinesPerSlot
+}
+
+class Administrator {
+}
+
+class CenterCoordinator {
+}
+
+Company "1" -- "*" Administrator : knows >
+Administrator "1" -- "*" VaccinationCenter : creates > 
+VaccinationCenter "*" -- "1" Company : belongs to >
+CenterCoordinator "1" -- "1" VaccinationCenter : has >
+@enduml
