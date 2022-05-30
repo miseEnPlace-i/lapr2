@@ -1,0 +1,70 @@
+@startuml US03_CD
+skinparam classAttributeIconSize 0
+
+class AuthFacade {
+  + existsUser(email)
+  + addUserWithRole(name, email, pwd, roleId)
+}
+
+class Company {
+  - String designation
+  + getAuthFacade()
+  + getDesignation()
+  + createUser(snsNumber, name, email, birthDay, phoneNumber)
+}
+
+class RegisterSNSUserController {
+  + createSNSUser(snsNumber, name, birthDay, gender, phoneNumber, email)
+  + saveSNSUser(user)
+}
+
+class RegisterSNSUserUI { }
+
+class SNSUser {
+  - String citizenCard
+  - String snsNumber
+  - Date birthDay
+  - Char gender
+  - String phoneNumber
+  - String address
+  + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
+}
+
+class User {
+  - String name
+  - String email
+  - String pwd
+  - String roleId
+}
+
+class SNSUserStore {
+  + createUser(name, email, pwd, roleId)
+  + validateUser(user)
+  + saveUser(user)
+  + checkDuplicates(user)
+}
+
+class PasswordGenerator {
+  + generatePassword()
+}
+
+class EmailSender {}
+
+
+Company ..> SNSUserStore
+Company ..> AuthFacade
+Company "1" --> "*" SNSUser : knows
+
+RegisterSNSUserController ..> Company
+
+RegisterSNSUserUI ..> RegisterSNSUserController
+
+' SNSUser --|> User
+SNSUser ..> User
+
+SNSUserStore --> AuthFacade : uses
+SNSUserStore --> PasswordGenerator : uses
+SNSUserStore --> EmailSender : uses
+SNSUserStore ..> SNSUser
+
+@enduml

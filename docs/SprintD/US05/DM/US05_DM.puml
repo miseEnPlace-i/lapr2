@@ -1,0 +1,84 @@
+@startuml
+hide methods
+left to right direction
+skinparam classAttributeIconSize 0
+
+class Employee {
+  -id
+  -name
+  -email
+  -phone
+  -address
+  -citizenCardNumber
+  -roleId
+}
+
+class Role {
+  -designation
+}
+
+class Nurse {}
+
+class Receptionist {}
+
+class VaccinationCenter {
+  - name
+  - address
+  - emailAddress
+  - phoneNumber
+  - faxNumber
+  - websiteAddress
+}
+
+class WaitingRoom {}
+
+class SNSUser {
+  - citizenCard
+  - snsNumber
+  - birthDay
+  - gender
+  - phoneNumber
+  - address
+}
+
+class Company {}
+
+class Appointment {
+  -date
+}
+
+class Time {
+  -hours
+  -minutes
+}
+
+class Slot {
+  -duration
+  -nOfVaccinesPerSlot
+}
+
+Employee <|-- Nurse
+Employee <|-- Receptionist
+
+Employee "*" -- "1" Role : has >
+
+VaccinationCenter "1" -- "1" WaitingRoom : has >
+WaitingRoom "1" -- "*" SNSUser : waits <
+
+Appointment "1" -- "1" Time : is scheduled at >
+
+VaccinationCenter "1" -- "1" Time : has closing hours >
+VaccinationCenter "1" -- "1" Time : has opening hours >
+VaccinationCenter "1" -- "1" Slot : has >
+
+Nurse "1" -- "*" WaitingRoom : consults list >
+Receptionist "1" -- "*" WaitingRoom : sends to >
+
+Company "1" -- "*" VaccinationCenter : knows > 
+Company "1" -- "*" SNSUser : knows > 
+Company "1" -- "*" Employee : knows > 
+
+SNSUser "1" -- "*" Appointment : schedules >
+Appointment "*" -- "1" VaccinationCenter : is held >
+
+@enduml

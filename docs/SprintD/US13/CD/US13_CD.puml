@@ -1,0 +1,92 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class CreateVaccineUI{
+
+}
+
+class CreateVaccineController{
+    +getVacTypes()
+    +getVaccines()
+    +createVaccine(designation, id, brand, vacTypeId)
+    +createAdminProc(minAge, maxAge, numberOfDoses)
+    +saveAdminProc()
+    +createDoseInfo(dosage, timaToNextDose)
+    +saveDoseInfo()
+    +saveVaccine()
+}
+
+class Company{
+    -designation : String
+
+    +getVaccineTypeStore()
+    +getVaccineStore()
+}
+
+class VaccineTypeStore{
+    +getVacTypeById(vacTypeId)
+}
+
+class VaccineStore{
+    +createVaccine(designation, id, brand, vacType)
+    +validateVaccine(vac)
+}
+
+class Vaccine{
+    -designation : String
+    -brand : String
+    -id : String
+    -vacType : VaccineType
+
+    +Vaccine(designation, id, brand, vacTypeId)
+    +createAdminProc(minAge, maxAge, numberOfDoses)
+}
+
+class VaccineType{
+    -code : String
+    -description : String
+    -tecnhology : String
+}
+
+class AdminProccess{
+    -numberOfDoses : int
+    -minAge : int
+    -maxAge : int
+
+    +AdminProcess(minAge, maxAge, numberOfDoses)
+    +createDoseInfo(dosage, timeSinceLastDose)
+    +validateAdminProc(adminProc)
+}
+
+class AdminProcList{
+    +addAdminProc(adminProc)
+}
+
+class DoseInfo{
+    -dosage : int
+    -timeSinceLastDose : int
+
+    +DoseInfo(dosage, timeSinceLastDose)
+    +validateDoseInfo(doseInfo)
+}
+
+class DoseInfoList{
+    +addDoseInfo(doseInfo)
+}
+
+CreateVaccineUI ..> CreateVaccineController
+CreateVaccineController ..> VaccineStore
+CreateVaccineController ..> VaccineTypeStore
+CreateVaccineController ..> Company
+VaccineStore ..> Company
+VaccineStore "1" -> "*" Vaccine : stores
+VaccineTypeStore ..> Company
+VaccineTypeStore "1" -> "*" VaccineType : stores
+Company "1" -> "*" Vaccine : knows
+Vaccine "1" -> "1" AdminProcList : has
+Vaccine "1" -> "1" VaccineType : has
+AdminProcList "1" -> "*" AdminProc : has
+AdminProc "1" -> "1" DoseInfoList : has
+DoseInfoList "1" -> "*" DoseInfo : has
+
+@enduml

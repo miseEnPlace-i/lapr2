@@ -1,0 +1,115 @@
+@startuml
+autonumber
+'hide footbox
+actor "Nurse" as NURSE
+
+participant ":ListUsersInWaitingRoomUI" as UI
+activate NURSE
+NURSE -> UI : asks to list users in waiting room for a given vaccination center
+
+note right of NURSE
+**nurseSession** has the data of the vaccination center
+the nurse is working on, this data is selected right
+after the nurse logging in
+end note
+
+activate UI
+
+create ":ListUsersInWaitingRoomController" as CTRL
+
+UI -> CTRL : create(nurseSession)
+
+participant "nurseSession\n:NurseSession" as FAC
+participant "comp\n:Company" as COMP
+participant "vaccinationCenter\n:VaccinationCenter" as VACC
+participant ":WaitingRoomMapper" as WAITM
+participant ":ArrivalMapper" as ARRM
+participant "snsUser\n:SNSUser" as SNSU
+participant "arrival:Arrival" as ARR
+
+UI -> CTRL : getWaitingRoomListFromNurseCenter()
+activate CTRL
+CTRL -> FAC : vaccinationCenter=getVaccinationCenter()
+activate FAC
+deactivate FAC
+|||
+
+CTRL -> VACC : waitingRoom=getWaitingRoom()
+activate VACC
+deactivate VACC
+
+CTRL -> WAITM : waitingRoomDto=toDto(waitingRoom)
+activate WAITM
+
+create "waitingRoomDto:\nList<ArrivalDto>" as WAITDTO
+
+WAITM -> WAITDTO
+
+
+loop for each arrival in waitingRoom
+|||
+  WAITM -> ARRM : arrivalDto=toDto(arrival)
+  activate ARRM
+  ARRM -> SNSU : snsUser=getSNSUser()
+  activate SNSU
+  deactivate SNSU
+  ARRM -> ARR : name=snsUser.getName()
+  activate ARR
+  deactivate ARR
+  ARRM -> ARR : gender=snsUser.getGender()
+  activate ARR
+  deactivate ARR
+  ARRM -> ARR : birthDate=snsUser.getBirthDate()
+  activate ARR
+  deactivate ARR
+  ARRM -> ARR : snsUserNumber=snsUser.getSnsUserNumber()
+  activate ARR
+  deactivate ARR
+  ARRM -> ARR : phoneNumber=snsUser.getPhoneNumber()()
+  activate ARR
+  deactivate ARR
+  ARRM -> ARR : time=arrival.getArrivalTime().getTime()
+  activate ARR
+  deactivate ARR
+
+  create "arrivalDto\n:ArrivalDto" as APODTO
+  note left
+   birthDate & time must be parsed 
+   to string before the DTO is created
+   
+   Here we used SimpleDateFormat.
+
+   Formats: 
+   "dd/MM/yyyy"
+   "dd/MM/yyyy HH:mm"
+  end note
+  ARRM -> APODTO : create(name,gender,birthDate,snsUserNumber,phoneNumber,time)
+  ARRM --> WAITM : arrivalDto
+  deactivate ARRM
+
+  WAITM -> WAITDTO : add(arrivalDto)
+  activate WAITDTO
+  deactivate WAITDTO
+|||
+end
+
+|||
+WAITM --> CTRL : waitingRoomDto 
+
+deactivate WAITM
+
+CTRL --> UI: waitingRoomDto
+
+deactivate COMP
+deactivate CTRL
+UI --> NURSE: shows list of users waiting in vaccination center
+deactivate UI
+
+deactivate UI
+deactivate CTRL
+deactivate NURSE
+
+participant "vaccinationCenters:\nList<VaccinationCenter>"
+participant "waitingRoom:\nList<Appointment>"
+
+@enduml

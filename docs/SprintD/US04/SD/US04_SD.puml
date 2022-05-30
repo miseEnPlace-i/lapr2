@@ -1,0 +1,192 @@
+@startuml
+autonumber
+
+actor "Receptionist" as RECEPT
+
+participant ":RegisterSNSUserArrivalUI" as UI
+participant ":App" as APP
+participant ":RegisterSNSUserArrivalController" as CTRL
+participant "comp:Company" as COMP
+participant "center:VaccinationCenter" as CENTER
+participant "appointments:AppointmentScheduleList" as APPTS
+participant "waitingRoomList:WaitingRoomList" as WRLST
+participant "arrival:Arrival" as ARRIVAL
+participant ":AppointmentListMapper" as MAPPER
+participant "apt:Appointment" as APT
+participant "snsStore:SNSUserStore" as SUSTORE
+participant "snsUser:SNSUser" as SNSUSER
+participant "vacCenter:VaccinationCenter" as CENTER
+participant "vacType:VaccineType" as VACTYPE
+participant "appointmentDto:AppointmentListDTO" as DTO
+
+activate RECEPT
+  RECEPT -> UI : starts to register the SNS User arrival to the vaccination center
+  activate UI
+  
+    UI -> APP : app = App.getInstance()
+    activate APP
+    deactivate APP
+
+    UI -> APP : company = getCompany()
+    activate APP
+    deactivate APP
+    
+    note right of UI
+      <i><b>center</b></i> is obtained through the employeeSession.
+      Also see: <i>EmployeeLogin_SD</i>
+    end note
+
+    UI -> CTRL** : create(company, center)
+  
+  RECEPT <-- UI : asks for the SNS User number
+  deactivate UI
+
+  RECEPT -> UI : types the requested data
+  activate UI
+    
+
+    UI -> CTRL : findSNSUserByNumber(snsNumber)
+    activate CTRL
+
+      CTRL -> COMP : snsStore = getSNSUserStore()
+      activate COMP
+      deactivate COMP
+
+      CTRL -> SUSTORE : findSNSUser(snsNumber)
+      activate SUSTORE
+        ' loop for each snsUser
+        loop while b is false
+          SUSTORE -> SNSUSER : b = hasSNSNumber(snsNumber)
+          activate SNSUSER
+          ' alt b == true
+            ' SUSTORE <-- SNSUSER : return snsUser
+          deactivate SNSUSER
+          ' end
+        end
+      deactivate SUSTORE
+
+    deactivate CTRL
+
+    UI -> CTRL : findSNSUserAppointment()
+    activate CTRL
+
+      CTRL -> CENTER : appointments = getAppointmentList()
+      activate CENTER
+      deactivate CENTER
+
+      CTRL -> SNSUSER : snsNumber = getSnsNumber()
+      activate SNSUSER
+      deactivate SNSUSER
+
+      CTRL -> APPTS : appointment = hasAppointmentToday(snsNumber)
+      activate APPTS
+
+        ' note right of APPTS
+        '   today is an instance of Calendar
+        ' end note
+        ' APPTS -> APPTS : key = generateKeyFromDate(today)
+        
+        ' APPTS -> MAPPER : get(key)
+        ' activate MAPPER
+        ' deactivate MAPPER
+
+        ' loop for each appointment
+        ' loop while b is false
+          ' APPTS -> APT : b = hasSNSNumber(snsNumber)
+          ' activate APT
+          ' alt b == true
+            ' APPTS <-- APT : return apt
+          ' deactivate APT
+          ' end
+        ' end
+
+alt there is an appointment
+
+      deactivate APPTS
+
+    deactivate CTRL
+
+    UI -> CTRL : create()
+    activate CTRL
+
+      CTRL -> CENTER : waitingRoomList = getWaitingRoomList()
+      activate CENTER
+      deactivate CENTER
+
+      CTRL -> WRLST : arrival = createArrival(snsUser)
+      activate WRLST
+        WRLST -> ARRIVAL** : create(snsUser)
+      deactivate WRLST
+
+    deactivate CTRL
+
+    UI -> CTRL : stringifyData()
+    activate CTRL
+
+      CTRL -> MAPPER : appointmentDto = toDto(appointment)
+      activate MAPPER
+
+        MAPPER -> APT : snsUser = getSnsUser()
+        activate APT
+        deactivate APT
+
+        MAPPER -> SNSUSER : snsNumber = getSnsNumber()
+        activate SNSUSER
+        deactivate SNSUSER
+
+        MAPPER -> SNSUSER : name = getName()
+        activate SNSUSER
+        deactivate SNSUSER
+
+        MAPPER -> APT : date = getDate()
+        activate APT
+        deactivate APT
+
+        MAPPER -> APT : center = getCenter()
+        activate APT
+        deactivate APT
+
+        MAPPER -> CENTER : centerName = getName()
+        activate CENTER
+        deactivate CENTER
+
+        MAPPER -> APT : vacType = getVaccineType()
+        activate APT
+        deactivate APT
+
+        MAPPER -> VACTYPE : vacTypeDesignation = getDesignation()
+        activate VACTYPE
+        deactivate VACTYPE
+
+        MAPPER -> DTO : create(snsNumber, name, date, centerName, vacTypeDesignation)
+        activate DTO
+        deactivate DTO
+
+      deactivate MAPPER
+
+    UI <-- CTRL : appointmentDto
+    deactivate CTRL
+  
+  RECEPT <-- UI : asks for confirmation of the appointment
+  deactivate UI
+
+  RECEPT -> UI : confirms the data
+  activate UI
+
+    UI -> CTRL : save()
+    activate CTRL
+
+      CTRL -> WRLST : saveArrival(arrival)
+      activate WRLST
+      deactivate WRLST
+
+    deactivate CTRL
+
+  RECEPT <-- UI : informs operation success
+  deactivate UI
+
+end
+
+deactivate RECEPT
+
+@enduml

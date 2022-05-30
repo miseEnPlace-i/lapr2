@@ -1,0 +1,33 @@
+@startuml US04_SSD
+autonumber
+
+actor "Receptionist" as RECEPT
+
+activate RECEPT
+RECEPT -> ":System" : wants to register a user arrival
+
+activate ":System"
+":System" --> RECEPT : asks for the SNS User number
+deactivate ":System"
+
+RECEPT -> ":System" : types the SNS User number
+
+alt there is an appointment
+  activate ":System"
+  ":System" --> RECEPT : shows appointment data and asks for confirmation
+  deactivate ":System"
+
+  RECEPT -> ":System" : confirms the appointment
+
+  activate ":System"
+  ":System" --> RECEPT : informs operation success
+  ":System" --> RECEPT : informs user has been added to the waiting room list
+  deactivate ":System"
+
+else there is not an appointment
+  ":System" --> RECEPT : informs there isn't an appointment
+end
+
+deactivate RECEPT
+
+@enduml

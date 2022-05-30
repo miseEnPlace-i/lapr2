@@ -1,0 +1,150 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Arrive {
+  -arriveTime: Date
+}
+
+class NurseSession {
+  -vaccinationCenter: VaccinationCenterDTO
+
+  + NurseSession()
+  + getVaccinationCenterId()
+  + setVaccinationCenterId(center)
+  + hasCenter()
+}
+
+class Company {
+  -designation: String
+  -authFacade: AuthFacade
+  -vaccinationCenterStore: VaccinationCenterStore
+  
+  +Company(designation)
+
+  +getAuthFacade()
+  +getVaccinationCenterStore()
+}
+
+class CheckWaitingRoomController {
+  +getCategories()
+  +CheckWaitingRoom(ref,designation,informalDesc,technicalDesc,duration,cost,categoryId)
+  +saveTask()
+}
+
+class CheckWaitingRoomUI {}
+
+class VaccinationCenter {
+  - name: String
+  - address: String
+  - emailAddress: String
+  - phoneNumber: String
+  - faxNumber: String
+  - websiteAddress: String
+  - openingHours: String
+  - closingHours: String
+  - slotDuration: int
+  - maximumVaccinesPerSlot: int
+  
+  +VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
+  +getWaitingRoom()
+
+  -calculateNOfSlotsPerDay()
+}
+
+class VaccinationCenterStore {
+  +createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
+  +validateVaccinatonCenter(center)
+  +saveVaccinationCenter(center)
+  +checkDuplicates(center)
+  +getVaccinationCenterWithPhone(phone)
+
+  -addVaccinationCenter(center)
+}
+
+class Employee {
+  -id: String 
+  -name: String 
+  -email: String 
+  -phone: String 
+  -address: String 
+  -citizenCardNumber: int 
+  -roleId: String 
+
+  +Employee(name,email,phone,address,citizenCardNumber,roleId)
+}
+
+class SNSUser {
+  - citizenCard: String
+  - snsNumber: String
+  - birthDay: Date
+  - gender: Char
+  - phoneNumber: String
+  - address: String
+
+  + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
+  + isEligibleForVaccine(vaccineType,nOfDose)
+}
+
+class WaitingRoom {
+  - waitingRoom: Queue<Arrive>
+
+  +createArrive(user, appointment)
+  +saveArrive(arrive)
+  +removeArrive(arrive)
+  -checkDuplicates(arrive)
+}
+
+class CenterEvents {
+  - events: List<CenterEvent>
+
+  +CenterEvents()
+}
+
+class AppointmentSchedule {
+  -appointments: List<Appointment[][]>
+  +createAppointment(date,user,vaccine)
+  +saveAppointment(appointment)
+
+  -getAppointmentDayIndex(date)
+  -getAppointmentSlotIndex(hour)
+}
+
+class Appointment {
+  - appointmentDate: Date
+
+  +Appointment(appointmentDate, user, vaccine)
+}
+
+class Vaccine {
+  -designation: String
+  -brand: String
+  -id: String
+  -vacType: VaccineType
+
+  +Vaccine(designation, id, brand, vacTypeId)
+}
+
+CheckWaitingRoomUI ..> CheckWaitingRoomController
+CheckWaitingRoomController ..> Company
+
+Arrive o-- SNSUser
+Arrive o-- Appointment
+Appointment o-- SNSUser
+
+VaccinationCenter o-- Employee : coordinator
+VaccinationCenterStore "1" -- "*" VaccinationCenter : stores >
+
+Company ..> VaccinationCenterStore
+
+WaitingRoom "1" -- "*" Arrive : stores >
+
+Employee "1" -- "*" WaitingRoom : checks >
+VaccinationCenter *-- WaitingRoom
+
+CheckWaitingRoomController ..> NurseSession
+
+AppointmentSchedule "1" -- "*" Appointment : stores >
+VaccinationCenter *-- AppointmentSchedule
+Appointment o-- Vaccine
+
+@enduml

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="492px" preserveAspectRatio="none" style="width:670px;height:492px;background:#FFFFFF;" version="1.1" viewBox="0 0 670 492" width="670px" zoomAndPan="magnify"><defs><filter height="300%" id="fieprw957bxoq" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" filter="url(#fieprw957bxoq)" height="320.9766" style="stroke:#A80036;stroke-width:1.0;" width="10" x="155" y="91.5703"/><rect fill="#FFFFFF" filter="url(#fieprw957bxoq)" height="28" style="stroke:#A80036;stroke-width:1.0;" width="10" x="160" y="279.8438"/><rect fill="#FFFFFF" filter="url(#fieprw957bxoq)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="407" y="345.1953"/><rect fill="#FFFFFF" filter="url(#fieprw957bxoq)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="570" y="211.4922"/><rect fill="#FFFFFF" filter="url(#fieprw957bxoq)" height="212.4063" style="stroke:#000000;stroke-width:2.0;" width="582" x="74" y="170.7891"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="160" x2="160" y1="59.2188" y2="430.5469"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="412" x2="412" y1="141.6797" y2="430.5469"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="575" x2="575" y1="59.2188" y2="430.5469"/><rect fill="#FEFECE" filter="url(#fieprw957bxoq)" height="49.2188" style="stroke:#A80036;stroke-width:1.5;" width="148" x="84" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="48" x="134" y="26.5332">mapper</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="134" x="91" y="44.1426">:VaccineTypeMapper</text><rect fill="#FEFECE" filter="url(#fieprw957bxoq)" height="49.2188" style="stroke:#A80036;stroke-width:1.5;" width="148" x="84" y="429.5469"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="48" x="134" y="451.0801">mapper</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="134" x="91" y="468.6895">:VaccineTypeMapper</text><rect fill="#FEFECE" filter="url(#fieprw957bxoq)" height="49.2188" style="stroke:#A80036;stroke-width:1.5;" width="160" x="330" y="429.5469"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="109" x="355.5" y="451.0801">vaccineTypesDto</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="146" x="337" y="468.6895">:List&lt;VaccineTypeDto&gt;</text><rect fill="#FEFECE" filter="url(#fieprw957bxoq)" height="49.2188" style="stroke:#A80036;stroke-width:1.5;" width="138" x="504" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="87" x="529.5" y="26.5332">vaccineTypes</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="124" x="511" y="44.1426">:List&lt;VaccineType&gt;</text><rect fill="#FEFECE" filter="url(#fieprw957bxoq)" height="49.2188" style="stroke:#A80036;stroke-width:1.5;" width="138" x="504" y="429.5469"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="87" x="529.5" y="451.0801">vaccineTypes</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="124" x="511" y="468.6895">:List&lt;VaccineType&gt;</text><rect fill="#FFFFFF" filter="url(#fieprw957bxoq)" height="320.9766" style="stroke:#A80036;stroke-width:1.0;" width="10" x="155" y="91.5703"/><rect fill="#FFFFFF" filter="url(#fieprw957bxoq)" height="28" style="stroke:#A80036;stroke-width:1.0;" width="10" x="160" y="279.8438"/><rect fill="#FFFFFF" filter="url(#fieprw957bxoq)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="407" y="345.1953"/><rect fill="#FFFFFF" filter="url(#fieprw957bxoq)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="570" y="211.4922"/><ellipse cx="7.5" cy="90.8203" rx="4" ry="4" style="stroke:#A80036;stroke-width:1.5;fill:none;"/><polygon fill="#A80036" points="143,87.5703,153,91.5703,143,95.5703,147,91.5703" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="12" x2="149" y1="91.5703" y2="91.5703"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="15" y="86.7139">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="117" x="26" y="86.7139">toDto(vaccineTypes)</text><polygon fill="#A80036" points="318,117.9219,328,121.9219,318,125.9219,322,121.9219" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="165" x2="324" y1="121.9219" y2="121.9219"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="172" y="117.0654">2</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="44" x="183" y="117.0654">create()</text><rect fill="#FEFECE" filter="url(#fieprw957bxoq)" height="49.2188" style="stroke:#A80036;stroke-width:1.5;" width="160" x="330" y="99.5703"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="109" x="355.5" y="121.1035">vaccineTypesDto</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="146" x="337" y="138.7129">:List&lt;VaccineTypeDto&gt;</text><path d="M74,170.7891 L147,170.7891 L147,178.7891 L137,188.7891 L74,188.7891 L74,170.7891 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0;"/><rect fill="none" height="212.4063" style="stroke:#000000;stroke-width:2.0;" width="582" x="74" y="170.7891"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="28" x="89" y="185.2842">loop</text><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="181" x="162" y="184.208">[for each object in vaccineTypes]</text><polygon fill="#A80036" points="558,207.4922,568,211.4922,558,215.4922,562,211.4922" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="165" x2="564" y1="211.4922" y2="211.4922"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="172" y="206.6357">3</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="116" x="183" y="206.6357">vaccineType = get(i)</text><line style="stroke:#A80036;stroke-width:1.0;" x1="170" x2="212" y1="271.8438" y2="271.8438"/><line style="stroke:#A80036;stroke-width:1.0;" x1="212" x2="212" y1="271.8438" y2="284.8438"/><line style="stroke:#A80036;stroke-width:1.0;" x1="171" x2="212" y1="284.8438" y2="284.8438"/><polygon fill="#A80036" points="181,280.8438,171,284.8438,181,288.8438,177,284.8438" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="177" y="266.9873">4</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="217" x="188" y="266.9873">vaccineTypeDto = toDto(vaccineType)</text><polygon fill="#A80036" points="395,341.1953,405,345.1953,395,349.1953,399,345.1953" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="165" x2="401" y1="345.1953" y2="345.1953"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="172" y="340.3389">5</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="120" x="183" y="340.3389">add(vaccineTypeDto)</text><polygon fill="#A80036" points="11,408.5469,1,412.5469,11,416.5469,7,412.5469" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="5" x2="159" y1="412.5469" y2="412.5469"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="17" y="407.6904">6</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="98" x="28" y="407.6904">vaccineTypesDto</text><!--MD5=[e6cb22bd4f49d9290dcb87d8aa3f7f5c]
+@startuml SD_VaccineTypesList_toDto
+autonumber
+'hide footbox
+
+participant "mapper\n:VaccineTypeMapper" as MAPPER
+participant "vaccineTypesDto\n:List<VaccineTypeDto>" as VACLISTDTO
+participant "vaccineTypes\n:List<VaccineType>" as VACTYPELIST
+
+[o-> MAPPER : toDto(vaccineTypes)
+activate MAPPER
+
+MAPPER - -> VACLISTDTO** : create()
+
+loop for each object in vaccineTypes
+MAPPER -> VACTYPELIST : vaccineType = get(i)
+activate VACTYPELIST
+deactivate VACTYPELIST
+
+MAPPER -> MAPPER : vaccineTypeDto = toDto(vaccineType)
+activate MAPPER
+deactivate MAPPER
+
+MAPPER -> VACLISTDTO : add(vaccineTypeDto)
+activate VACLISTDTO
+deactivate VACLISTDTO
+end
+
+[<- MAPPER : vaccineTypesDto
+deactivate MAPPER
+@enduml
+
+@startuml SD_VaccineTypesList_toDto
+autonumber
+
+participant "mapper\n:VaccineTypeMapper" as MAPPER
+participant "vaccineTypesDto\n:List<VaccineTypeDto>" as VACLISTDTO
+participant "vaccineTypes\n:List<VaccineType>" as VACTYPELIST
+
+[o-> MAPPER : toDto(vaccineTypes)
+activate MAPPER
+
+MAPPER - -> VACLISTDTO** : create()
+
+loop for each object in vaccineTypes
+MAPPER -> VACTYPELIST : vaccineType = get(i)
+activate VACTYPELIST
+deactivate VACTYPELIST
+
+MAPPER -> MAPPER : vaccineTypeDto = toDto(vaccineType)
+activate MAPPER
+deactivate MAPPER
+
+MAPPER -> VACLISTDTO : add(vaccineTypeDto)
+activate VACLISTDTO
+deactivate VACLISTDTO
+end
+
+[<- MAPPER : vaccineTypesDto
+deactivate MAPPER
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 16:16:42 WET 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: Cp1252
+Language: pt
+Country: PT
+--></g></svg>
