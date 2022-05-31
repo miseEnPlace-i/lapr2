@@ -1,0 +1,18 @@
+@startuml US15_SSD
+autonumber
+actor "Center Coordinator" as COOR
+
+activate COOR
+COOR -> ":System" : asks to export his center statistics
+activate ":System"
+":System" --> COOR : requests data (File path)
+deactivate ":System"
+
+COOR -> ":System" : types requested
+activate ":System"
+
+":System" --> COOR : informs operation success
+deactivate ":System"
+deactivate COOR
+
+@enduml
