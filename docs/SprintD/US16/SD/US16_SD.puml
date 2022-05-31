@@ -1,12 +1,14 @@
 @startuml
 
 actor "Center Coordinator" AS COORD
-
+participant ":System" as SYS
 activate COORD
-COORD -> ":System" : asks to list all present users in the waiting room for the vaccination the nurse is working on
-activate ":System"
-":System" --> COORD : lists all the users present on the waiting room
-deactivate ":System"
+COORD -> SYS : asks to list all present users in the waiting room for the vaccination the nurse is working on
+activate SYS
+SYS --> COORD : requests data (date & time interval)
+COORD -> SYS : types the requested data
+SYS --> COORD : the list with the differences of arrived and left users, maximum continuous sublist, its sum, the time inteval corresponding to this continuous sublist 
+deactivate SYS
 
 deactivate COORD
 
