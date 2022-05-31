@@ -1,0 +1,13 @@
+@startuml
+
+actor "Center Coordinator" AS COORD
+
+activate COORD
+COORD -> ":System" : asks to list all present users in the waiting room for the vaccination the nurse is working on
+activate ":System"
+":System" --> COORD : lists all the users present on the waiting room
+deactivate ":System"
+
+deactivate COORD
+
+@enduml

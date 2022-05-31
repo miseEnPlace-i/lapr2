@@ -1,50 +1,67 @@
-# US XXX - XXXX XXXX
+# US 16 - Analyse center performance
 
 ## 1. Requirements Engineering
 
-_In this section, it is suggested to capture the requirement description and specifications as provided by the client as well as any further clarification on it. It is also suggested to capture the requirements acceptance criteria and existing dependencies to other requirements. At last, identify the involved input and output data and depicted an Actor-System interaction in order to fulfill the requirement._
-
 ### 1.1. User Story Description
 
-_Insert here the User Story as described by the client._
+As a center coordinator, I intend to analyse the performance of a center.
 
 ### 1.2. Customer Specifications and Clarifications
 
-_Insert here any related specification and/or clarification provided by the client together with **your interpretation**. When possible, provide a link to such specifications/clarifications._
+**From the specifications document:**
+
+> "The Center Coordinator wants to monitor the vaccination process, [...], to evaluate the performance of the vaccination process"
+
+> "The goal of the performance analysis is to decrease the number of clients in the center, from the moment they register at the arrival, until the moment they receive the SMS informing they can leave the vaccination center"
+
+> "To evaluate this [...]: [...] for any time interval on one day, the difference between the number of new clients arrival and the number of clients leaving the center [...] is computed."
+
+> "In the case of a working day, with a center open from 8 a.m. until 8 p.m., a list with 144 integers is obtained, where a positive integer means that in such a five-minute slot more clients arrive at the center for vaccination than clients leave with the vaccination process completed. A negative integer means the opposite."
+
+> "The output should be the input list, the maximum sum contiguous sublist and its sum, and the time interval corresponding to this contiguous sublist"
+
+> **From the client clarifications:**
+
+> **Question:** "[...]"
+>
+> **Answer:** "[...]"
 
 ### 1.3. Acceptance Criteria
 
-_Insert here the client acceptance criteria._
+**AC1**: Time interval must be less than the total amount of minutes that a centers is open.
 
 ### 1.4. Found out Dependencies
 
-_Identify here any found out dependency to other US and/or requirements._
+There is a dependency found to US17 or US8. Only with one of those implemented there is enough data to analyse the performance of the center.
 
 ### 1.5 Input and Output Data
 
-_Identity here the data to be inputted by the system actor as well as the output data that the system have/needs to present in order to properly support the actor actions. Regarding the inputted data, it is suggested to distinguish between typed data and selected data (e.g. from a list)_
+**Input Data:**
+
+- Typed Data:
+  - Date
+  - Time Interval
+
+**Output Data:**
+
+- Input list
+- Maximum sum contiguous sublist
+- The sum of the maximum sum contiguous sublist
+- The time interval corresponding to the maximum sum contiguous sublist
 
 ### 1.6. System Sequence Diagram (SSD)
 
-_Insert here a SSD depicting the envisioned Actor-System interactions and throughout which data is inputted and outputted to fulfill the requirement. All interactions must be numbered._
-
-![USXXX-SSD](USXXX-SSD.svg)
+![US16-SSD](SSD/US16_SSD.svg)
 
 ### 1.7 Other Relevant Remarks
-
-_Use this section to capture other relevant information that is related with this US such as (i) special requirements ; (ii) data and/or technology variations; (iii) how often this US is held._
 
 ## 2. OO Analysis
 
 ### 2.1. Relevant Domain Model Excerpt
 
-_In this section, it is suggested to present an excerpt of the domain model that is seen as relevant to fulfill this requirement._
-
-![USXXX-MD](USXXX-MD.svg)
+![US16-DM](DM/US16_DM.svg)
 
 ### 2.2. Other Remarks
-
-_Use this section to capture some aditional notes/remarks that must be taken into consideration into the design activity. In some case, it might be usefull to add other analysis artifacts (e.g. activity or state diagrams)._
 
 ## 3. Design - User Story Realization
 
@@ -80,21 +97,13 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ## 3.2. Sequence Diagram (SD)
 
-_In this section, it is suggested to present an UML dynamic view stating the sequence of domain related software objects' interactions that allows to fulfill the requirement._
-
-![USXXX-SD](USXXX-SD.svg)
+![USSD-SD](SD/US16_SD.svg)
 
 ## 3.3. Class Diagram (CD)
 
-_In this section, it is suggested to present an UML static view representing the main domain related software classes that are involved in fulfilling the requirement as well as and their relations, attributes and methods._
-
-![USXXX-CD](USXXX-CD.svg)
+![US16-CD](CD/US16_CD.svg)
 
 # 4. Tests
-
-_In this section, it is suggested to systematize how the tests were designed to allow a correct measurement of requirements fulfilling._
-
-**_DO NOT COPY ALL DEVELOPED TESTS HERE_**
 
 **Test 1:** Check that it is not possible to create an instance of the Example class with null values.
 
@@ -102,8 +111,6 @@ _In this section, it is suggested to systematize how the tests were designed to 
     	public void ensureNullIsNotAllowed() {
     	Exemplo instance = new Exemplo(null, null);
     }
-
-_It is also recommended to organize this content by subsections._
 
 # 5. Construction (Implementation)
 
