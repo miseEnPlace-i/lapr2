@@ -3,12 +3,20 @@ hide methods
 skinparam classAttributeIconSize 0
 
 class Company {
-    - designation
+  -designation
 }
 
 class CenterCoordinator {}
 
-class Employee {}
+class Employee {
+  -name
+  -phoneNumber
+  -email
+  -password
+  -address
+  -citizenCardNumber
+  -roleId
+}
 
 class VaccinationCenter{
   -name
@@ -17,18 +25,23 @@ class VaccinationCenter{
   -phoneNumber
   -faxNumber
   -websiteAddress
+  -time
+  -slot
+  -coordinator
 }
 
-class VaccinationCenterStore {}
+class VaccinationCenterStore {
+  -List<VaccinationCenter> vaccinationCenters
+}
 
 class Time {
-  hours
-  minutes
+  -hours
+  -minutes
 }
 
 class Slot {
-  slotDuration
-  maxVacPerSlot
+  -slotDuration
+  -maxVacPerSlot
 }
 
 class FileReport {}
