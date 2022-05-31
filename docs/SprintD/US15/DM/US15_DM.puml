@@ -1,0 +1,46 @@
+@startuml US15_DM
+hide methods
+skinparam classAttributeIconSize 0
+
+class Company {
+    - designation
+}
+
+class CenterCoordinator {}
+
+class Employee {}
+
+class VaccinationCenter{
+  -name
+  -address
+  -emailAddress
+  -phoneNumber
+  -faxNumber
+  -websiteAddress
+}
+
+class VaccinationCenterStore {}
+
+class Time {
+  hours
+  minutes
+}
+
+class Slot {
+  slotDuration
+  maxVacPerSlot
+}
+
+class FileReport {}
+
+Company "1" -- "*" Employee : knows >
+Employee <|-- CenterCoordinator
+CenterCoordinator -- VaccinationCenter : has >
+VaccinationCenter "1" -- "1" Time : has >
+VaccinationCenter "1"-- "1" Slot : has >
+VaccinationCenterStore "1" -- "*" VaccinationCenter : stores >
+Company "1" -- "1" VaccinationCenterStore : knows >
+FileReport "1" -- "1" CenterCoordinator : generates <
+
+
+@enduml
