@@ -1,0 +1,52 @@
+@startuml
+
+class VaccinationCenter {
+  - name
+  - address
+  - emailAddress
+  - phoneNumber
+  - faxNumber
+  - websiteAddress
+}
+
+class Time {
+  -hours
+  -minutes
+}
+
+class Slot {
+  -duration
+  -nOfVaccinesPerSlot
+}
+
+class Employee {
+  -id
+  -name
+  -email
+  -phone
+  -address
+  -citizenCardNumber
+  -roleId
+}
+
+class Role {
+  -designation
+}
+
+class Company {}
+
+class CenterCoordinator {}
+
+class VaccinationCenterStore {}
+
+VaccinationCenter "1" -- "1" Time : has closing hours >
+VaccinationCenter "1" -- "1" Time : has opening hours >
+VaccinationCenter "1" -- "1" Slot : has >
+
+Employee <|-- CenterCoordinator
+Employee "1" -- "*" Role : has >
+
+Company "1" -- "1" VaccinationCenterStore : knows >
+VaccinationCenterStore "1" -- "*" VaccinationCenter : knows >
+
+@enduml
