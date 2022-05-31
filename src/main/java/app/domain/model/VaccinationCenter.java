@@ -3,6 +3,7 @@ package app.domain.model;
 import java.text.ParseException;
 import java.util.Calendar;
 import app.domain.model.list.AppointmentScheduleList;
+import app.domain.model.list.CenterEventList;
 import app.service.FormatVerifier;
 import app.utils.Time;
 
@@ -24,6 +25,7 @@ public abstract class VaccinationCenter {
   private Employee coordinator;
   private WaitingRoom waitingRoom;
   private AppointmentScheduleList appointmentList;
+  private CenterEventList eventList;
 
   /**
    * Constructor for the Vaccination Center
@@ -54,6 +56,7 @@ public abstract class VaccinationCenter {
     setCoordinator(coordinator);
     this.waitingRoom = new WaitingRoom();
     this.appointmentList = new AppointmentScheduleList(this);
+    this.eventList = new CenterEventList();
   }
 
   /**
@@ -144,6 +147,14 @@ public abstract class VaccinationCenter {
    */
   public int getSlotDuration() {
     return this.slot.getDuration();
+  }
+  
+  /**
+   * Gets the events.
+   * 
+   */
+  public CenterEventList getEvents() {
+    return this.eventList;
   }
 
   /**

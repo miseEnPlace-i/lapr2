@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -33,7 +34,7 @@ public class WaitingRoom implements Iterable<Arrival> {
    * @return Arrival
    */
   public Arrival createArrival(Appointment appointment) {
-    return new Arrival(appointment);
+    return new Arrival(appointment, Calendar.getInstance());
   }
 
   /**
@@ -41,6 +42,13 @@ public class WaitingRoom implements Iterable<Arrival> {
    */
   public void saveArrival(Arrival arrival) {
     waitingRoom.add(arrival);
+  }
+
+  /**
+   * Removes the last Arrival from the Waiting Room.
+   */
+  public void removeLastArrival() {
+    waitingRoom.remove();
   }
 
   /**
