@@ -64,7 +64,7 @@ public class ListUsersInWaitingRoomControllerTest {
     assertEquals(list.size(), 0);
 
     Appointment appointment = new Appointment(snsUser, Calendar.getInstance(), center, vaccineType, true);
-    Arrival arrival = new Arrival(appointment);
+    Arrival arrival = new Arrival(appointment, Calendar.getInstance());
     center.getWaitingRoom().saveArrival(arrival);
 
     list = ctrl.getWaitingRoomListFromNurseCenter();

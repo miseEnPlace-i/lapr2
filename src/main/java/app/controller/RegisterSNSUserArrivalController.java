@@ -8,6 +8,7 @@ import app.domain.model.VaccinationCenter;
 import app.domain.model.WaitingRoom;
 import app.domain.model.list.AppointmentScheduleList;
 import app.domain.model.store.SNSUserStore;
+import app.domain.shared.CenterEventType;
 import app.dto.AppointmentListDTO;
 import app.dto.ArrivalDTO;
 import app.exception.AppointmentNotFoundException;
@@ -43,7 +44,8 @@ public class RegisterSNSUserArrivalController implements IRegisterController<Arr
   @Override
   public void save() {
     this.waitingRoom.saveArrival(this.arrival);
-
+    this.center.getEvents().create(this.arrival.getArrivalTime(), CenterEventType.ARRIVAL, this.snsUser);
+    
     // DEBUG: print the waiting room
     // System.out.println(this.waitingRoom);
   }
