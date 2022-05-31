@@ -1,28 +1,33 @@
-# US XXX - XXXX XXXX
+# US 15 - Check and export vaccination statistic.
 
 ## 1. Requirements Engineering
 
-_In this section, it is suggested to capture the requirement description and specifications as provided by the client as well as any further clarification on it. It is also suggested to capture the requirements acceptance criteria and existing dependencies to other requirements. At last, identify the involved input and output data and depicted an Actor-System interaction in order to fulfill the requirement._
-
 ### 1.1. User Story Description
 
-_Insert here the User Story as described by the client._
+"As a center coordinator, I intend to check and export vaccination statistic. I want to export, to a csv file, the total number of fully vaccinated users per day."
 
 ### 1.2. Customer Specifications and Clarifications
 
-_Insert here any related specification and/or clarification provided by the client together with **your interpretation**. When possible, provide a link to such specifications/clarifications._
+"The Center Coordinator wants to monitor the vaccination process, to see statistics and charts, to evaluate the performance of the vaccination process generate reports and analyze data (...)"
 
 ### 1.3. Acceptance Criteria
 
-_Insert here the client acceptance criteria._
+* **AC01** - Export statistics to a csv file.
 
 ### 1.4. Found out Dependencies
 
-_Identify here any found out dependency to other US and/or requirements._
+Not found.
 
 ### 1.5 Input and Output Data
 
-_Identity here the data to be inputted by the system actor as well as the output data that the system have/needs to present in order to properly support the actor actions. Regarding the inputted data, it is suggested to distinguish between typed data and selected data (e.g. from a list)_
+**Input Data:**
+
+* Typed data:
+	* File path name
+
+**Output Data:**
+
+* Registered statistics of a center into a CSV file.
 
 ### 1.6. System Sequence Diagram (SSD)
 
