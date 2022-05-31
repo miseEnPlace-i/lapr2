@@ -1,0 +1,23 @@
+@startuml US15_SD
+
+actor "Center Coordinator" as COORDINATOR
+
+participant ":ExportCenterStatisticsUI" as UI
+participant ":App" as APP
+participant ":ExportCenterStatisticsController" as CTRL
+
+activate COORDINATOR
+COORDINATOR -> UI : asks to export center statistics
+activate UI
+
+UI --> COORDINATOR : requests data (file path)
+deactivate UI
+
+COORDINATOR -> UI : types requested data
+activate UI
+
+UI --> COORDINATOR : informs operation success
+
+deactivate COORDINATOR 
+
+@enduml

@@ -1,0 +1,23 @@
+@startuml SD_GetCoordinatorCenter
+
+participant "vaccinationCenter\n:VaccinationCenter" as CENTER
+participant "store\n:VaccinationCenterStore" as CENTERSTORE
+participant "vaccinationCenters\n:List<VaccinationCenter>" as LIST
+
+[o-> CENTERSTORE : coordinatorCenter = getCoordinatorCenter()  
+activate CENTERSTORE
+
+loop for each vaccinationCenters
+
+CENTERSTORE -> LIST : centerCoordinatorEmail == getVaccinationCenterCoordinatorEmail()
+activate LIST
+
+opt coordinator email corresponds to the email of the center coordinator
+LIST --> CENTERSTORE : vaccinationCenter
+deactivate LIST
+end
+end
+
+[<--CENTERSTORE : vaccinationCenter
+
+@enduml
