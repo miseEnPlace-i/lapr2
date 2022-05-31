@@ -11,14 +11,13 @@ import java.util.Calendar;
 public class Arrival {
   private Appointment appointment;
   private Calendar arrivalTime;
-  private Calendar departureTime;
 
   /**
    * Constructor for Arrival.
    */
-  public Arrival(Appointment appointment) {
+  public Arrival(Appointment appointment, Calendar arrivalTime) {
     this.appointment = appointment;
-    this.arrivalTime = Calendar.getInstance();
+    this.arrivalTime = arrivalTime;
   }
 
   /**
@@ -40,20 +39,6 @@ public class Arrival {
    */
   public Appointment getAppointment() {
     return appointment;
-  }
-
-  /**
-   * Gets the departure time.
-   */
-  public Calendar getDepartureTime() {
-    return departureTime;
-  }
-
-  /**
-   * Sets the departure time.
-   */
-  public void setDepartureTime(Calendar departureTime) {
-    this.departureTime = departureTime;
   }
 
   /**
