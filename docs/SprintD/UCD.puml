@@ -27,6 +27,7 @@ rectangle System {
   usecase "UC15. Check and export vaccination statistics." as UC15
   usecase "UC16. Analyse the performance of a center." as UC16
   usecase "UC17. Import data from a legacy system that was used in the past to manage centers." as UC17  
+  usecase "UC18. Get list of all vaccines." as UC18
 }
 
 user -- UC01
@@ -46,5 +47,5 @@ admin -- UC14
 coordinator -- UC15
 coordinator -- UC16
 coordinator -- UC17
-
+coordinator -- UC18
 @enduml
