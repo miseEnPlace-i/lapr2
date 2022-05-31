@@ -1,0 +1,93 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Company {
+  -designation: String
+  -authFacade: AuthFacade
+  -vaccinationCenterStore: VaccinationCenterStore
+  
+  +Company(designation)
+
+  +getAuthFacade()
+  +getVaccinationCenterStore()
+}
+
+class AnalyseCenterPerformanceController {
+  +getCategories()
+  +CheckWaitingRoom(ref,designation,informalDesc,technicalDesc,duration,cost,categoryId)
+  +saveTask()
+}
+
+class AnalyseCenterPerformanceUI {}
+
+class VaccinationCenter {
+  - name: String
+  - address: String
+  - emailAddress: String
+  - phoneNumber: String
+  - faxNumber: String
+  - websiteAddress: String
+  - openingHours: String
+  - closingHours: String
+  - slotDuration: int
+  - maximumVaccinesPerSlot: int
+  
+  +VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slot,coordinator)
+}
+
+class Time {
+  - hour: int
+  - minute: int
+  
+  +Time(hour,minute)
+  +Time(time)
+}
+
+class Slot {
+  -duration: int
+  -maxVaccinesPerSlot: int
+
+  +Slot(duration,maxVaccinesPerSlot)
+}
+
+class VaccinationCenterStore {
+  +createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
+  +validateVaccinatonCenter(center)
+  +saveVaccinationCenter(center)
+  +checkDuplicates(center)
+  +getVaccinationCenterWithPhone(phone)
+
+  -addVaccinationCenter(center)
+}
+
+class Employee {
+  -id: String 
+  -name: String 
+  -email: String 
+  -phone: String 
+  -address: String 
+  -citizenCardNumber: int 
+  -roleId: String 
+
+  +Employee(name,email,phone,address,citizenCardNumber,roleId)
+}
+
+class CenterEvents {
+  - events: List<CenterEvent>
+
+  +CenterEvents()
+}
+
+AnalyseCenterPerformanceUI ..> AnalyseCenterPerformanceController
+AnalyseCenterPerformanceController ..> Company
+
+VaccinationCenter o-- Employee : coordinator
+VaccinationCenter o-- Time : openingHours
+VaccinationCenter o-- Time : closingHours
+VaccinationCenter o-- Slot
+VaccinationCenter *-- CenterEvents
+
+VaccinationCenterStore "1" -- "*" VaccinationCenter : stores >
+
+Company "1" -- "1" VaccinationCenterStore : knows >
+@enduml

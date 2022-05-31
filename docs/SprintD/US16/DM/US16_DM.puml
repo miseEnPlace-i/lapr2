@@ -1,4 +1,7 @@
 @startuml
+hide methods
+left to right direction
+skinparam classAttributeIconSize 0
 
 class VaccinationCenter {
   - name
@@ -10,8 +13,8 @@ class VaccinationCenter {
 }
 
 class Time {
-  -hours
-  -minutes
+  - hours
+  - minutes
 }
 
 class Slot {
@@ -39,14 +42,22 @@ class CenterCoordinator {}
 
 class VaccinationCenterStore {}
 
+class EmployeeStore {}
+
 VaccinationCenter "1" -- "1" Time : has closing hours >
 VaccinationCenter "1" -- "1" Time : has opening hours >
 VaccinationCenter "1" -- "1" Slot : has >
 
 Employee <|-- CenterCoordinator
-Employee "1" -- "*" Role : has >
+Employee "*" -- "1" Role : has <
 
 Company "1" -- "1" VaccinationCenterStore : knows >
+Company "1" -- "1" EmployeeStore : knows >
 VaccinationCenterStore "1" -- "*" VaccinationCenter : knows >
+
+EmployeeStore "1" -- "*" Employee : knows >
+
+CenterCoordinator "1" -- "1" VaccinationCenter : analyses >
+CenterCoordinator "1" -- "1" VaccinationCenter : is associated to >
 
 @enduml
