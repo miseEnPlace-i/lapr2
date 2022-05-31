@@ -1,0 +1,16 @@
+@startuml US17_SD
+autonumber
+
+actor "Center Coordinator" as COORDINATOR
+
+participant ":XXXXXUI" as UI
+participant ":App" as APP
+participant ":XXXXXController" as CTRL
+
+activate COORDINATOR
+  COORDINATOR -> UI : starts to import legacy data
+  activate UI
+    
+  deactivate UI
+deactivate COORDINATOR
+@enduml

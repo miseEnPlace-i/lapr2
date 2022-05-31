@@ -1,0 +1,40 @@
+@startuml US17_DM
+hide methods
+' left to right direction
+skinparam classAttributeIconSize 0
+
+class Company {
+  - designation
+}
+
+class Coordinator {}
+
+class Employee {
+  - name
+  - phoneNumber
+  - email
+  - password
+  - address
+  - citizenCardNumber
+  - roleId
+}
+
+class VaccinationCenter {
+  - name
+  - address
+  - emailAddress
+  - phoneNumber
+  - faxNumber
+  - websiteAddress
+  - openingHours
+  - closingHours
+  - slotDuration
+  - maximumVaccinesPerSlot
+}
+
+
+Company "1" -- "*" Employee : knows >
+Company "1" -- "*" VaccinationCenter : knows >
+Employee <|-- Company
+
+@enduml

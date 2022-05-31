@@ -1,0 +1,78 @@
+@startuml US17_CD
+skinparam classAttributeIconSize 0
+
+class Company {
+  - String designation
+  ---
+  + Company(designation)
+  + getVaccinationCenterStore()
+}
+
+class Coordinator {}
+
+class Employee {
+  - id: String
+  - address: String
+  - phoneNumber: String
+  - citizenCardNumber: String
+  ---
+  + Employee(id, name, address, phoneNumber, email, citizenCardNumber, roleId)
+  + getId()
+  + getName()
+  + getAddress()
+  + getPhoneNumber()
+  + getEmail()
+  + getCitizenCardNumber()
+  + getPassword()
+  + getRoleId()
+}
+
+class ImportLegacyDataUI {}
+
+class ImportLegacyDataController {
+  ---
+  + create()
+  + save()
+  + stringifyData()
+}
+
+class VaccinationCenter {
+  - name: String
+  - address: String
+  - emailAddress: String
+  - phoneNumber: String
+  - faxNumber: String
+  - websiteAddress: String
+  - openingHours: String
+  - closingHours: String
+  - slotDuration: int
+  - maximumVaccinesPerSlot: int
+  - coordinator: EMPLOYEE
+  ---
+  + VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
+  + getAppointmentList()
+  + getName()
+  + getWaitingRoomList()
+}
+
+class VaccinationCenterStore {
+  + createVaccinationCenter(centerData, coordinator)
+  + validateVaccinatonCenter(center)
+  + saveVaccinationCenter(center)
+  + checkDuplicates(center)
+  + addVaccinationCenter(center)
+}
+
+
+Company ..> VaccinationCenterStore
+Company "1" --> "*" Employee : knows
+
+Employee <|-- Coordinator
+
+ImportLegacyDataController ..> Company
+
+ImportLegacyDataUI ..> ImportLegacyDataController
+
+VaccinationCenterStore "1" --> "*" VaccinationCenter : stores
+
+@enduml
