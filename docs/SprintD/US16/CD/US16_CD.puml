@@ -1,81 +1,95 @@
 @startuml
 skinparam classAttributeIconSize 0
 
-class Company {
-  -designation: String
-  -authFacade: AuthFacade
-  -vaccinationCenterStore: VaccinationCenterStore
-  
-  +Company(designation)
-
-  +getAuthFacade()
-  +getVaccinationCenterStore()
+package UI {
+  class AnalyseCenterPerformanceUI {}
 }
 
-class AnalyseCenterPerformanceController {
-  +getCategories()
-  +CheckWaitingRoom(ref,designation,informalDesc,technicalDesc,duration,cost,categoryId)
-  +saveTask()
-}
+package core {
+  package domain {
+    package stores {
+      class VaccinationCenterStore {
+        +createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
+        +validateVaccinatonCenter(center)
+        +saveVaccinationCenter(center)
+        +checkDuplicates(center)
+        +getVaccinationCenterWithPhone(phone)
 
-class AnalyseCenterPerformanceUI {}
+        -addVaccinationCenter(center)
+      }
+    }
 
-class VaccinationCenter {
-  - name: String
-  - address: String
-  - emailAddress: String
-  - phoneNumber: String
-  - faxNumber: String
-  - websiteAddress: String
-  - openingHours: String
-  - closingHours: String
-  - slotDuration: int
-  - maximumVaccinesPerSlot: int
-  
-  +VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slot,coordinator)
-}
+    package lists {
+      class CenterEvents {
+        - events: List<CenterEvent>
 
-class Time {
-  - hour: int
-  - minute: int
-  
-  +Time(hour,minute)
-  +Time(time)
-}
+        +CenterEvents()
+      }
+    }
 
-class Slot {
-  -duration: int
-  -maxVaccinesPerSlot: int
+    class Company {
+      -designation: String
+      -authFacade: AuthFacade
+      -vaccinationCenterStore: VaccinationCenterStore
+      
+      +Company(designation)
 
-  +Slot(duration,maxVaccinesPerSlot)
-}
+      +getAuthFacade()
+      +getVaccinationCenterStore()
+    }
 
-class VaccinationCenterStore {
-  +createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
-  +validateVaccinatonCenter(center)
-  +saveVaccinationCenter(center)
-  +checkDuplicates(center)
-  +getVaccinationCenterWithPhone(phone)
+    class VaccinationCenter {
+      - name: String
+      - address: String
+      - emailAddress: String
+      - phoneNumber: String
+      - faxNumber: String
+      - websiteAddress: String
+      - openingHours: String
+      - closingHours: String
+      - slotDuration: int
+      - maximumVaccinesPerSlot: int
+      
+      +VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slot,coordinator)
+    }
 
-  -addVaccinationCenter(center)
-}
+    class Employee {
+      -id: String 
+      -name: String 
+      -email: String 
+      -phone: String 
+      -address: String 
+      -citizenCardNumber: int 
+      -roleId: String 
 
-class Employee {
-  -id: String 
-  -name: String 
-  -email: String 
-  -phone: String 
-  -address: String 
-  -citizenCardNumber: int 
-  -roleId: String 
+      +Employee(name,email,phone,address,citizenCardNumber,roleId)
+    }
 
-  +Employee(name,email,phone,address,citizenCardNumber,roleId)
-}
+    class Slot {
+      -duration: int
+      -maxVaccinesPerSlot: int
 
-class CenterEvents {
-  - events: List<CenterEvent>
+      +Slot(duration,maxVaccinesPerSlot)
+    }
+  }
 
-  +CenterEvents()
+  package controllers {
+    class AnalyseCenterPerformanceController {
+      +getCategories()
+      +CheckWaitingRoom(ref,designation,informalDesc,technicalDesc,duration,cost,categoryId)
+      +saveTask()
+    }
+  }
+
+  package utils {
+    class Time {
+      - hour: int
+      - minute: int
+      
+      +Time(hour,minute)
+      +Time(time)
+    }
+  }
 }
 
 AnalyseCenterPerformanceUI ..> AnalyseCenterPerformanceController
