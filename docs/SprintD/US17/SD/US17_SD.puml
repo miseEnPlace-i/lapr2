@@ -3,13 +3,17 @@ autonumber
 
 actor "Center Coordinator" as COORDINATOR
 
-participant ":XXXXXUI" as UI
+participant ":ImportLegacyDataUI" as UI
 participant ":App" as APP
-participant ":XXXXXController" as CTRL
+participant ":ImportLegacyDataController" as CTRL
 
 activate COORDINATOR
   COORDINATOR -> UI : starts to import legacy data
   activate UI
+    UI -> APP : company = getCompany()
+    activate APP
+    deactivate APP
+
     
   deactivate UI
 deactivate COORDINATOR
