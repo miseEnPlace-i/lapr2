@@ -33,7 +33,7 @@ Not found.
 
 _Insert here a SSD depicting the envisioned Actor-System interactions and throughout which data is inputted and outputted to fulfill the requirement. All interactions must be numbered._
 
-![USXXX-SSD](USXXX-SSD.svg)
+![US15_SSD](SSD/US15_SSD.svg)
 
 ### 1.7 Other Relevant Remarks
 
@@ -45,11 +45,11 @@ _Use this section to capture other relevant information that is related with thi
 
 _In this section, it is suggested to present an excerpt of the domain model that is seen as relevant to fulfill this requirement._
 
-![USXXX-MD](USXXX-MD.svg)
+![US15_DM](DM/US15_DM.svg)
 
 ### 2.2. Other Remarks
 
-_Use this section to capture some aditional notes/remarks that must be taken into consideration into the design activity. In some case, it might be usefull to add other analysis artifacts (e.g. activity or state diagrams)._
+n/a.
 
 ## 3. Design - User Story Realization
 
