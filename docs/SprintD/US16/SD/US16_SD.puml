@@ -1,18 +1,35 @@
 @startuml
+autonumber
 
 actor "Center Coordinator" AS COORD
 participant ":AnalyseCenterPerformanceUI" as UI
-participant ":AnalyseCenterPerformanceController" as CTRL
-participant "vaccinationCenterStore:VaccinationCenterStore" as VACCS
+participant ":App" as APP
 
 activate COORD
+activate UI
+UI -> APP : getInstance()
+activate APP
+deactivate APP
+UI -> APP : company=getCompany()
+activate APP
+deactivate APP
+create ":AnalyseCenterPerformanceController" as CTRL
+
+UI --> CTRL : create(company,session)
+deactivate UI
 COORD -> UI : asks to list all present users in the waiting room for the vaccination the nurse is working on
 activate UI
 UI --> COORD : requests data (date & time interval)
-COORD -> UI : types the requested data
-UI --> COORD : the list with the differences of arrived and left users, maximum continuous sublist, its sum, the time inteval corresponding to this continuous sublist 
 deactivate UI
+COORD -> UI : types the requested data
 
 deactivate COORD
+participant "employeeSession:EmployeeSession" as SESSION
+participant "vaccinationCenterStore:VaccinationCenterStore" as VACCS
+participant "company:Company" as COMP
+
+activate UI
+UI --> COORD : the list with the differences of arrived and left users, maximum continuous sublist, its sum, the time inteval corresponding to this continuous sublist 
+deactivate UI
 
 @enduml
