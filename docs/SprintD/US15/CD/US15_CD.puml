@@ -1,16 +1,95 @@
 @startuml US15_CD
 skinparam classAttributeIconSize 0
 
+package UI {
 class ExportCenterStatisticsUI {}
+}
 
-class ExportCenterStatisticsController {}
+package controllers {
+     class ExportCenterStatisticsController {
 
-class VaccinationCenter {}
+     }
 
-class VaccinationCenterStore {}
+   package utils {
+     class Time {
+       - hour: int
+       - minute: int
+       +Time(hour,minute)
+
+       +Time(time)
+     }
+   }
+
+
+package core {
+  package domain {
+
+class Company {
+    +getDesignation()
+}
+
+    package model {
+
+class FileReport {}
+
+class VaccinationCenter {
+    - name: String
+    - address: String
+    - emailAddress: String
+    - phoneNumber: String
+    - faxNumber: String
+    - websiteAddress: String
+    - openingHours: String
+    - closingHours: String
+    - slotDuration: int
+    - maximumVaccinesPerSlot: int
+    - coordinator
+        
+    +VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slot,coordinator)
+}
+
+
+class Employee {
+    -id: String 
+    -name: String 
+    -email: String 
+    -phone: String 
+    -address: String 
+    -citizenCardNumber: int 
+    -roleId: String 
+
+    +Employee(name,email,phone,address,citizenCardNumber,roleId)
+}
+
+class Slot {
+    -duration: int
+    -maxVaccinesPerSlot: int
+
+    +Slot(duration,maxVaccinesPerSlot)
+}
+
+}
+
+package stores {
+      class VaccinationCenterStore {}
+      }
+    }
+
+
+
+
 
 ExportCenterStatisticsUI ..> ExportCenterStatisticsController
-VaccinationCenterStore --> VaccinationCenter : stores >
 
+ExportCenterStatisticsController ..> Company
 
+Company "1" -- "1" VaccinationCenterStore : knows >
+
+VaccinationCenter o-- Employee
+VaccinationCenter o-- Time 
+VaccinationCenter o-- Slot
+Employee --o FileReport : coordinator
+FileReport "1" --> "1" VaccinationCenter : analyzes >
+
+VaccinationCenterStore "1" --> "*" VaccinationCenter : stores >
 @enduml
