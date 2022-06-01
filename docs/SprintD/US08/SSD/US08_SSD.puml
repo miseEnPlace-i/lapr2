@@ -1,4 +1,4 @@
-@startuml US01_SSD
+@startuml US08_SSD
 autonumber
 actor "Nurse" as nurse
 
