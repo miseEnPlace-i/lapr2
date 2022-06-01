@@ -8,6 +8,8 @@ public abstract class EmployeeWithCenterUI implements Runnable {
   public EmployeeWithCenterUI() {}
 
   public void run() {
+    // TODO: users with the coordinator role don't select the center
+    // new FindEmployeeVaccinationCenter(employeeSession).run();
     new SelectEmployeeVaccinationCenterUI(employeeSession).run();
 
     if (!employeeSession.hasCenter()) return;

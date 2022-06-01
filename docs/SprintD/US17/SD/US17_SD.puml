@@ -1,0 +1,39 @@
+@startuml US17_SD
+autonumber
+
+actor "Center Coordinator" as COORDINATOR
+
+participant ":ImportLegacyDataUI" as UI
+participant ":App" as APP
+participant ":ImportLegacyDataController" as CTRL
+
+activate COORDINATOR
+  ref over COORDINATOR
+    ' !include ../../CoordinatorLogin_SD.puml!
+    ' ![[../../CoordinatorLogin_SD.puml]]
+    ' ![[../../CoordinatorLogin_SD.svg]]
+    CoordinatorLogin_SD
+  end ref
+
+  COORDINATOR -> UI : starts to import legacy data
+  activate UI
+    UI -> APP : company = getCompany()
+    activate APP
+    deactivate APP
+
+    |||
+
+    note right of UI
+      <i><b>center</b></i> is obtained through the employeeSession.
+' Also see: <i>CoordinatorLogin_SD</i>
+    end note
+
+    |||
+
+    UI --> CTRL ** : create(company, center)
+    
+    
+
+  deactivate UI
+deactivate COORDINATOR
+@enduml
