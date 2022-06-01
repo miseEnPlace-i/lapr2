@@ -12,7 +12,7 @@
 
 ### 1.3. Acceptance Criteria
 
-* **AC01** - Export statistics to a csv file.
+n/a.
 
 ### 1.4. Found out Dependencies
 
@@ -28,22 +28,19 @@ Not found.
 **Output Data:**
 
 * Registered statistics of a center into a CSV file.
+* Operation (in)success.
 
 ### 1.6. System Sequence Diagram (SSD)
-
-_Insert here a SSD depicting the envisioned Actor-System interactions and throughout which data is inputted and outputted to fulfill the requirement. All interactions must be numbered._
 
 ![US15_SSD](SSD/US15_SSD.svg)
 
 ### 1.7 Other Relevant Remarks
 
-_Use this section to capture other relevant information that is related with this US such as (i) special requirements ; (ii) data and/or technology variations; (iii) how often this US is held._
+n/a.
 
 ## 2. OO Analysis
 
 ### 2.1. Relevant Domain Model Excerpt
-
-_In this section, it is suggested to present an excerpt of the domain model that is seen as relevant to fulfill this requirement._
 
 ![US15_DM](DM/US15_DM.svg)
 
@@ -85,15 +82,11 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ## 3.2. Sequence Diagram (SD)
 
-_In this section, it is suggested to present an UML dynamic view stating the sequence of domain related software objects' interactions that allows to fulfill the requirement._
-
-![USXXX-SD](USXXX-SD.svg)
+![US15_SD](USXXX-SD.svg)
 
 ## 3.3. Class Diagram (CD)
 
-_In this section, it is suggested to present an UML static view representing the main domain related software classes that are involved in fulfilling the requirement as well as and their relations, attributes and methods._
-
-![USXXX-CD](USXXX-CD.svg)
+![US15_CD](CD/US15_CD.svg)
 
 # 4. Tests
 
@@ -118,7 +111,7 @@ _It is also recommended to organize this content by subsections._
 
 # 6. Integration and Demo
 
-_In this section, it is suggested to describe the efforts made to integrate this functionality with the other features of the system._
+* A new option on the Center Coordinator menu options was added (export statistics to a csv file).
 
 # 7. Observations
 
