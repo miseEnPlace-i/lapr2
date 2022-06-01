@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="820px" preserveAspectRatio="none" style="width:1520px;height:820px;background:#FFFFFF;" version="1.1" viewBox="0 0 1520 820" width="1520px" zoomAndPan="magnify"><defs><filter height="300%" id="f2nkdvh51d8dn" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" filter="url(#f2nkdvh51d8dn)" height="449.2891" style="stroke:#A80036;stroke-width:1.0;" width="10" x="206" y="202.5703"/><rect fill="#FFFFFF" filter="url(#f2nkdvh51d8dn)" height="626.6016" style="stroke:#A80036;stroke-width:1.0;" width="10" x="311.5" y="99.6094"/><rect fill="#FFFFFF" filter="url(#f2nkdvh51d8dn)" height="495.8984" style="stroke:#A80036;stroke-width:1.0;" width="10" x="407.5" y="155.9609"/><rect fill="#FFFFFF" filter="url(#f2nkdvh51d8dn)" height="66.6094" style="stroke:#A80036;stroke-width:1.0;" width="10" x="696" y="343.4922"/><rect fill="#FFFFFF" filter="url(#f2nkdvh51d8dn)" height="120.7031" style="stroke:#A80036;stroke-width:1.0;" width="10" x="696" y="440.4531"/><rect fill="#FFFFFF" filter="url(#f2nkdvh51d8dn)" height="60.3516" style="stroke:#A80036;stroke-width:1.0;" width="10" x="696" y="591.5078"/><rect fill="#FFFFFF" filter="url(#f2nkdvh51d8dn)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="959" y="470.8047"/><rect fill="#FFFFFF" filter="url(#f2nkdvh51d8dn)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="959" y="621.8594"/><rect fill="#FFFFFF" filter="url(#f2nkdvh51d8dn)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1122" y="531.1563"/><rect fill="#FFFFFF" filter="url(#f2nkdvh51d8dn)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1259" y="380.1016"/><rect fill="#FFFFFF" filter="url(#f2nkdvh51d8dn)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1333.5" y="273.1406"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="211" x2="211" y1="89.6094" y2="735.2109"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="316" x2="316" y1="89.6094" y2="735.2109"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="412" x2="412" y1="173.2656" y2="735.2109"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="700.5" x2="700.5" y1="344.4453" y2="735.2109"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="964" x2="964" y1="228.6797" y2="735.2109"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1127" x2="1127" y1="89.6094" y2="735.2109"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1264" x2="1264" y1="89.6094" y2="735.2109"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1338" x2="1338" y1="89.6094" y2="735.2109"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1441" x2="1441" y1="89.6094" y2="735.2109"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="122" x="147" y="86.5332">Center Coordinator</text><ellipse cx="211" cy="15" fill="#FEFECE" filter="url(#f2nkdvh51d8dn)" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M211,23 L211,50 M198,31 L224,31 M211,50 L198,65 M211,50 L224,65 " fill="none" filter="url(#f2nkdvh51d8dn)" style="stroke:#A80036;stroke-width:2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="122" x="147" y="748.7441">Center Coordinator</text><ellipse cx="211" cy="761.8203" fill="#FEFECE" filter="url(#f2nkdvh51d8dn)" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M211,769.8203 L211,796.8203 M198,777.8203 L224,777.8203 M211,796.8203 L198,811.8203 M211,796.8203 L224,811.8203 " fill="none" filter="url(#f2nkdvh51d8dn)" style="stroke:#A80036;stroke-width:2.0;"/><rect fill="#FEFECE" filter="url(#f2nkdvh51d8dn)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="59" x="285" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="45" x="292" y="74.5332">:AuthUI</text><rect fill="#FEFECE" filter="url(#f2nkdvh51d8dn)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="59" x="285" y="734.2109"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="45" x="292" y="755.7441">:AuthUI</text><rect fill="#FEFECE" filter="url(#f2nkdvh51d8dn)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="105" x="358" y="734.2109"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="91" x="365" y="755.7441">:CoordinatorUI</text><rect fill="#FEFECE" filter="url(#f2nkdvh51d8dn)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="299" x="549.5" y="734.2109"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="285" x="556.5" y="755.7441">:FindCoordinatorVaccinationCenterController</text><rect fill="#FEFECE" filter="url(#f2nkdvh51d8dn)" height="49.2188" style="stroke:#A80036;stroke-width:1.5;" width="130" x="897" y="734.2109"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="111" x="906.5" y="755.7441">employeeSession</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="116" x="904" y="773.3535">:EmployeeSession</text><rect fill="#FEFECE" filter="url(#f2nkdvh51d8dn)" height="49.2188" style="stroke:#A80036;stroke-width:1.5;" width="168" x="1041" y="35.3906"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="148" x="1051" y="56.9238">vaccinationCenterStore</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="154" x="1048" y="74.5332">:VaccinationCenterStore</text><rect fill="#FEFECE" filter="url(#f2nkdvh51d8dn)" height="49.2188" style="stroke:#A80036;stroke-width:1.5;" width="168" x="1041" y="734.2109"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="148" x="1051" y="755.7441">vaccinationCenterStore</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="154" x="1048" y="773.3535">:VaccinationCenterStore</text><rect fill="#FEFECE" filter="url(#f2nkdvh51d8dn)" height="49.2188" style="stroke:#A80036;stroke-width:1.5;" width="78" x="1223" y="35.3906"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="57" x="1233.5" y="56.9238">company</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="64" x="1230" y="74.5332">:Company</text><rect fill="#FEFECE" filter="url(#f2nkdvh51d8dn)" height="49.2188" style="stroke:#A80036;stroke-width:1.5;" width="78" x="1223" y="734.2109"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="57" x="1233.5" y="755.7441">company</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="64" x="1230" y="773.3535">:Company</text><rect fill="#FEFECE" filter="url(#f2nkdvh51d8dn)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="43" x="1315" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="29" x="1322" y="74.5332">:App</text><rect fill="#FEFECE" filter="url(#f2nkdvh51d8dn)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="43" x="1315" y="734.2109"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="29" x="1322" y="755.7441">:App</text><rect fill="#FEFECE" filter="url(#f2nkdvh51d8dn)" height="49.2188" style="stroke:#A80036;stroke-width:1.5;" width="134" x="1372" y="35.3906"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="114" x="1382" y="56.9238">vaccinationCenter</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="120" x="1379" y="74.5332">:VaccinationCenter</text><rect fill="#FEFECE" filter="url(#f2nkdvh51d8dn)" height="49.2188" style="stroke:#A80036;stroke-width:1.5;" width="134" x="1372" y="734.2109"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="114" x="1382" y="755.7441">vaccinationCenter</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="120" x="1379" y="773.3535">:VaccinationCenter</text><rect fill="#FFFFFF" filter="url(#f2nkdvh51d8dn)" height="449.2891" style="stroke:#A80036;stroke-width:1.0;" width="10" x="206" y="202.5703"/><rect fill="#FFFFFF" filter="url(#f2nkdvh51d8dn)" height="626.6016" style="stroke:#A80036;stroke-width:1.0;" width="10" x="311.5" y="99.6094"/><rect fill="#FFFFFF" filter="url(#f2nkdvh51d8dn)" height="495.8984" style="stroke:#A80036;stroke-width:1.0;" width="10" x="407.5" y="155.9609"/><rect fill="#FFFFFF" filter="url(#f2nkdvh51d8dn)" height="66.6094" style="stroke:#A80036;stroke-width:1.0;" width="10" x="696" y="343.4922"/><rect fill="#FFFFFF" filter="url(#f2nkdvh51d8dn)" height="120.7031" style="stroke:#A80036;stroke-width:1.0;" width="10" x="696" y="440.4531"/><rect fill="#FFFFFF" filter="url(#f2nkdvh51d8dn)" height="60.3516" style="stroke:#A80036;stroke-width:1.0;" width="10" x="696" y="591.5078"/><rect fill="#FFFFFF" filter="url(#f2nkdvh51d8dn)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="959" y="470.8047"/><rect fill="#FFFFFF" filter="url(#f2nkdvh51d8dn)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="959" y="621.8594"/><rect fill="#FFFFFF" filter="url(#f2nkdvh51d8dn)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1122" y="531.1563"/><rect fill="#FFFFFF" filter="url(#f2nkdvh51d8dn)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1259" y="380.1016"/><rect fill="#FFFFFF" filter="url(#f2nkdvh51d8dn)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1333.5" y="273.1406"/><path d="M117,104.6094 L117,130.6094 L300,130.6094 L300,114.6094 L290,104.6094 L117,104.6094 " fill="#FBFB77" filter="url(#f2nkdvh51d8dn)" style="stroke:#A80036;stroke-width:1.0;"/><path d="M290,104.6094 L290,114.6094 L300,114.6094 L290,104.6094 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="162" x="123" y="123.1045">After logging in successfully</text><polygon fill="#A80036" points="346,141.9609,356,145.9609,346,149.9609,350,145.9609" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="321.5" x2="352" y1="145.9609" y2="145.9609"/><rect fill="#FEFECE" filter="url(#f2nkdvh51d8dn)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="105" x="358" y="139.9609"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="91" x="365" y="161.4941">:CoordinatorUI</text><polygon fill="#A80036" points="885,188.5703,895,192.5703,885,196.5703,889,192.5703" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="417.5" x2="891" y1="192.5703" y2="192.5703"/><rect fill="#FEFECE" filter="url(#f2nkdvh51d8dn)" height="49.2188" style="stroke:#A80036;stroke-width:1.5;" width="130" x="897" y="186.5703"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="111" x="906.5" y="208.1035">employeeSession</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="116" x="904" y="225.7129">:EmployeeSession</text><polygon fill="#A80036" points="1321.5,269.1406,1331.5,273.1406,1321.5,277.1406,1325.5,273.1406" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="321.5" x2="1327.5" y1="273.1406" y2="273.1406"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="142" x="328.5" y="268.2842">company=getCompany()</text><polygon fill="#A80036" points="537.5,329.4922,547.5,333.4922,537.5,337.4922,541.5,333.4922" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="321.5" x2="543.5" y1="333.4922" y2="333.4922"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="204" x="328.5" y="328.6357">create(company,employeeSession)</text><rect fill="#FEFECE" filter="url(#f2nkdvh51d8dn)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="299" x="549.5" y="311.1406"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="285" x="556.5" y="332.6738">:FindCoordinatorVaccinationCenterController</text><polygon fill="#A80036" points="1247,376.1016,1257,380.1016,1247,384.1016,1251,380.1016" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="706" x2="1253" y1="380.1016" y2="380.1016"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="304" x="713" y="375.2451">vaccinationCenterStore=getVaccinationCenterStore()</text><polygon fill="#A80036" points="684,436.4531,694,440.4531,684,444.4531,688,440.4531" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="321.5" x2="690" y1="440.4531" y2="440.4531"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="242" x="328.5" y="435.5967">vaccinationCenter=findCoordinatorCenter()</text><polygon fill="#A80036" points="947,466.8047,957,470.8047,947,474.8047,951,470.8047" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="706" x2="953" y1="470.8047" y2="470.8047"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="106" x="713" y="465.9482">email = getEmail()</text><polygon fill="#A80036" points="1110,527.1563,1120,531.1563,1110,535.1563,1114,531.1563" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="706" x2="1116" y1="531.1563" y2="531.1563"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="289" x="713" y="526.2998">getVaccinationCenterWithCoordinatorEmail(email)</text><polygon fill="#A80036" points="684,587.5078,694,591.5078,684,595.5078,688,591.5078" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="321.5" x2="690" y1="591.5078" y2="591.5078"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="234" x="328.5" y="586.6514">setVaccinationCenter(vaccinationCenter)</text><polygon fill="#A80036" points="947,617.8594,957,621.8594,947,625.8594,951,621.8594" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="706" x2="953" y1="621.8594" y2="621.8594"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="234" x="713" y="617.0029">setVaccinationCenter(vaccinationCenter)</text><path d="M5,689.8594 L5,715.8594 L414,715.8594 L414,699.8594 L404,689.8594 L5,689.8594 " fill="#FBFB77" filter="url(#f2nkdvh51d8dn)" style="stroke:#A80036;stroke-width:1.0;"/><path d="M404,689.8594 L404,699.8594 L414,699.8594 L404,689.8594 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="388" x="11" y="708.3545">The employee vaccination center is stored in the EmployeeSession</text><!--MD5=[d9429213f819db40e2da03a747fbc4cd]
+@startuml CoordinatorLogin_SD
+
+actor "Center Coordinator" as COORDINATOR
+
+note over COORDINATOR
+ After logging in successfully
+end note
+
+participant ":AuthUI" as AUTHUI
+participant ":CoordinatorUI" as EUI
+' participant ":FindCoordinatorVaccinationCenterUI" as UI
+participant ":FindCoordinatorVaccinationCenterController" as CTRL
+participant "employeeSession\n:EmployeeSession" as SESSION
+participant "company\n:Company" as COMP
+participant "vaccinationCenterStore\n:VaccinationCenterStore" as VACCS
+' participant "centerDTO\n:VaccinationCenterListDTO" as CDTO
+participant "company\n:Company" as COMP
+participant ":App" as APP
+participant "vaccinationCenter\n:VaccinationCenter"
+' participant "vaccinationCenters\n:List<VaccinationCenterListDTO>"
+
+activate AUTHUI
+AUTHUI -> EUI **
+activate EUI
+EUI -> SESSION **
+' EUI -> UI **
+' AUTHUI -> UI : run()
+' activate UI
+activate COORDINATOR
+
+AUTHUI -> APP : company=getCompany()
+activate APP
+deactivate APP
+
+
+AUTHUI -> CTRL ** : create(company,employeeSession)
+activate CTRL
+CTRL -> COMP : vaccinationCenterStore=getVaccinationCenterStore()
+activate COMP
+deactivate COMP
+deactivate CTRL
+
+AUTHUI -> CTRL : vaccinationCenter=findCoordinatorCenter()
+activate CTRL
+
+CTRL -> SESSION : email = getEmail()
+activate SESSION
+deactivate SESSION
+
+CTRL -> VACCS : getVaccinationCenterWithCoordinatorEmail(email)
+activate VACCS
+deactivate VACCS
+
+deactivate CTRL
+
+
+AUTHUI -> CTRL : setVaccinationCenter(vaccinationCenter)
+activate CTRL
+' deactivate UI
+' CTRL -> CDTO : email=getEmail()
+' activate CDTO
+' deactivate CDTO
+' CTRL -> VACCS : vaccinationCenter=getVaccinationCenterWithEmail(email)
+' activate VACCS
+' deactivate VACCS
+CTRL -> SESSION : setVaccinationCenter(vaccinationCenter)
+activate SESSION
+deactivate SESSION
+deactivate EUI
+
+
+
+deactivate CTRL
+
+' deactivate UI
+
+deactivate COORDINATOR
+
+|||
+
+note over COORDINATOR
+  The employee vaccination center is stored in the EmployeeSession
+end note
+@enduml
+
+@startuml CoordinatorLogin_SD
+
+actor "Center Coordinator" as COORDINATOR
+
+note over COORDINATOR
+ After logging in successfully
+end note
+
+participant ":AuthUI" as AUTHUI
+participant ":CoordinatorUI" as EUI
+participant ":FindCoordinatorVaccinationCenterController" as CTRL
+participant "employeeSession\n:EmployeeSession" as SESSION
+participant "company\n:Company" as COMP
+participant "vaccinationCenterStore\n:VaccinationCenterStore" as VACCS
+participant "company\n:Company" as COMP
+participant ":App" as APP
+participant "vaccinationCenter\n:VaccinationCenter"
+
+activate AUTHUI
+AUTHUI -> EUI **
+activate EUI
+EUI -> SESSION **
+activate COORDINATOR
+
+AUTHUI -> APP : company=getCompany()
+activate APP
+deactivate APP
+
+
+AUTHUI -> CTRL ** : create(company,employeeSession)
+activate CTRL
+CTRL -> COMP : vaccinationCenterStore=getVaccinationCenterStore()
+activate COMP
+deactivate COMP
+deactivate CTRL
+
+AUTHUI -> CTRL : vaccinationCenter=findCoordinatorCenter()
+activate CTRL
+
+CTRL -> SESSION : email = getEmail()
+activate SESSION
+deactivate SESSION
+
+CTRL -> VACCS : getVaccinationCenterWithCoordinatorEmail(email)
+activate VACCS
+deactivate VACCS
+
+deactivate CTRL
+
+
+AUTHUI -> CTRL : setVaccinationCenter(vaccinationCenter)
+activate CTRL
+CTRL -> SESSION : setVaccinationCenter(vaccinationCenter)
+activate SESSION
+deactivate SESSION
+deactivate EUI
+
+
+
+deactivate CTRL
+
+
+deactivate COORDINATOR
+
+|||
+
+note over COORDINATOR
+  The employee vaccination center is stored in the EmployeeSession
+end note
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 16:16:42 WET 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: Cp1252
+Language: pt
+Country: PT
+--></g></svg>
