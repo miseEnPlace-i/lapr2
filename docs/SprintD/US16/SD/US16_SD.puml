@@ -3,6 +3,7 @@
 actor "Center Coordinator" AS COORD
 participant ":AnalyseCenterPerformanceUI" as UI
 participant ":AnalyseCenterPerformanceController" as CTRL
+participant "vaccinationCenterStore:VaccinationCenterStore" as VACCS
 
 activate COORD
 COORD -> UI : asks to list all present users in the waiting room for the vaccination the nurse is working on

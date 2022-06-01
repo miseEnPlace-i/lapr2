@@ -27,6 +27,42 @@ package core {
       }
     }
 
+    package model {
+      class VaccinationCenter {
+        - name: String
+        - address: String
+        - emailAddress: String
+        - phoneNumber: String
+        - faxNumber: String
+        - websiteAddress: String
+        - openingHours: String
+        - closingHours: String
+        - slotDuration: int
+        - maximumVaccinesPerSlot: int
+        
+        +VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slot,coordinator)
+      }
+
+      class Employee {
+        -id: String 
+        -name: String 
+        -email: String 
+        -phone: String 
+        -address: String 
+        -citizenCardNumber: int 
+        -roleId: String 
+
+        +Employee(name,email,phone,address,citizenCardNumber,roleId)
+      }
+
+      class Slot {
+        -duration: int
+        -maxVaccinesPerSlot: int
+
+        +Slot(duration,maxVaccinesPerSlot)
+      }
+    }
+
     class Company {
       -designation: String
       -authFacade: AuthFacade
@@ -38,39 +74,7 @@ package core {
       +getVaccinationCenterStore()
     }
 
-    class VaccinationCenter {
-      - name: String
-      - address: String
-      - emailAddress: String
-      - phoneNumber: String
-      - faxNumber: String
-      - websiteAddress: String
-      - openingHours: String
-      - closingHours: String
-      - slotDuration: int
-      - maximumVaccinesPerSlot: int
-      
-      +VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slot,coordinator)
-    }
-
-    class Employee {
-      -id: String 
-      -name: String 
-      -email: String 
-      -phone: String 
-      -address: String 
-      -citizenCardNumber: int 
-      -roleId: String 
-
-      +Employee(name,email,phone,address,citizenCardNumber,roleId)
-    }
-
-    class Slot {
-      -duration: int
-      -maxVaccinesPerSlot: int
-
-      +Slot(duration,maxVaccinesPerSlot)
-    }
+    
   }
 
   package controllers {
