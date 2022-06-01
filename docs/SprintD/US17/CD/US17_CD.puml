@@ -10,6 +10,24 @@ class Company {
 
 class Coordinator {}
 
+class CSVReader {
+  - String filePathName
+
+  + readLegacyData()
+}
+
+interface ICSVReader{
+  read(filedata)
+}
+
+class HeaderCSVReader { 
+  + read(filedata)
+}
+
+class MissingHeaderCSVReader{
+  + read(filedata)
+}
+
 class Employee {
   - id: String
   - address: String
@@ -36,6 +54,18 @@ class ImportLegacyDataController {
   + stringifyData()
 }
 
+class SNSUser {
+  - String citizenCard
+  - String snsNumber
+  - Date birthDay
+  - Char gender
+  - String phoneNumber
+  - String address
+  + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
+}
+
+class SNSUserStore {}
+
 class VaccinationCenter {
   - name: String
   - address: String
@@ -50,9 +80,8 @@ class VaccinationCenter {
   - coordinator: EMPLOYEE
   ---
   + VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
-  + getAppointmentList()
   + getName()
-  + getWaitingRoomList()
+  + getCoordinator()
 }
 
 class VaccinationCenterStore {
@@ -64,14 +93,24 @@ class VaccinationCenterStore {
 }
 
 
+Company ..> SNSUserStore
 Company ..> VaccinationCenterStore
 Company "1" --> "*" Employee : knows
 
+CSVReader --> ICSVReader : uses
+
 Employee <|-- Coordinator
+
+ICSVReader <.. MissingHeaderCSVReader
+ICSVReader <.. HeaderCSVReader
 
 ImportLegacyDataController ..> Company
 
+ImportLegacyDataController --> CSVReader : uses
+
 ImportLegacyDataUI ..> ImportLegacyDataController
+
+SNSUserStore "1" --> "*" SNSUser : stores
 
 VaccinationCenterStore "1" --> "*" VaccinationCenter : stores
 
