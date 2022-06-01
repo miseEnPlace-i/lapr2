@@ -1,0 +1,39 @@
+@startuml US01_SSD
+autonumber
+actor "Nurse" as nurse
+
+activate nurse
+
+nurse -> ":System" : asks to record the administration of a vaccine
+activate ":System"
+  ":System" --> nurse : requests data (snsNumber)
+deactivate ":System"
+
+nurse -> ":System" : types requested data
+opt user has more than one appointment for that day and for that center
+  activate ":System"
+    ":System" --> nurse : shows a list of all appointments that user has for that day and asks to select one
+  deactivate ":System"
+
+  nurse -> ":System" : selects an appointment
+  activate ":System"
+end
+  ":System" --> nurse : shows a list of all vaccines that have the vaccine type registered on the appointment and asks to select one
+deactivate ":System"
+
+nurse -> ":System" : selects a vaccine
+activate ":System"
+  ":System" --> nurse : requests data (lotNumber, doseNumber)
+deactivate ":System"
+
+nurse -> ":System" : types requested data
+activate ":System"
+  ":System" --> nurse : shows all data and requests confirmation
+deactivate ":System"
+
+nurse -> ":System" : confirms the data
+activate ":System"
+  ":System" --> nurse : informs operation success
+deactivate ":System"
+
+@enduml
