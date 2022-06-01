@@ -1,0 +1,16 @@
+@startuml US15_CD
+skinparam classAttributeIconSize 0
+
+class ExportCenterStatisticsUI {}
+
+class ExportCenterStatisticsController {}
+
+class VaccinationCenter {}
+
+class VaccinationCenterStore {}
+
+ExportCenterStatisticsUI ..> ExportCenterStatisticsController
+VaccinationCenterStore --> VaccinationCenter : stores >
+
+
+@enduml
