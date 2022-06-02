@@ -40,7 +40,7 @@ VACC -> VACC : events=getEventListForDay(day)
 activate VACC
 deactivate VACC
 create "centerPerformance\n:CenterPerformance" as PERF
-VACC --> PERF : create(events,interval)
+VACC --> PERF : create(events,interval,openingHours)
 activate PERF
 PERF -> PERF : differenceList=calculateDifferencesList()
 
