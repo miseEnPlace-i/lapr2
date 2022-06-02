@@ -16,7 +16,11 @@ n/a.
 
 ### 1.4. Found out Dependencies
 
-Not found.
+* There is a dependency to "US03 - Register SNS User" since at leat one sns user needs to be registered in the system.
+* There is a dependency to "US08 - Record Administration of Vaccine" since at least one vaccine needs to be administered to a sns user.
+* There is a dependency to "US09 - Register a Vaccination Center" since at least one vaccination center needs to be registered in the system.
+* There is a dependency to "US12 - Register a new Vaccine Type" since at least one vaccine type needs to be registered in the system.
+* There is a dependency to "US13 - Register a new Vaccine" since at least one vaccine needs to be registered in the system.
 
 ### 1.5 Input and Output Data
 

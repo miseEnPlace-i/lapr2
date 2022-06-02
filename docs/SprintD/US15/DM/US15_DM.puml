@@ -44,6 +44,8 @@ class Slot {
   -maxVacPerSlot
 }
 
+class VaccineAdministration {}
+
 class FileReport {}
 
 Company "1" -- "*" Employee : knows >
