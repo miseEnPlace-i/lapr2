@@ -32,6 +32,11 @@ class Employee {
   -roleId
 }
 
+class CenterPerformance {
+  - day
+  - maxSumSublist
+}
+
 class Role {
   -designation
 }
@@ -46,6 +51,10 @@ class EmployeeStore {}
 
 VaccinationCenter "1" -- "1" Time : has closing hours >
 VaccinationCenter "1" -- "1" Time : has opening hours >
+
+CenterPerformance "1" -- "1" Time : has start time >
+CenterPerformance "1" -- "1" Time : has end time >
+
 VaccinationCenter "1" -- "1" Slot : has >
 
 Employee <|-- CenterCoordinator

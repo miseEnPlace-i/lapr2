@@ -26,8 +26,6 @@ COORD -> UI : types the requested data
 
 participant "employeeSession\n:EmployeeSession" as SESSION
 participant "vaccinationCenter\n:VaccinationCenter" as VACC
-participant "events\n:CenterEventList" as EVENTL
-participant "centerPerformance\n:CenterPerformance" as PERF
 
 activate UI
 UI -> CTRL : analyseCenterPerformance()
@@ -36,18 +34,53 @@ activate CTRL
 CTRL -> SESSION : center=getVaccinationCenter()
 activate SESSION
 deactivate SESSION
-CTRL -> VACC : centerPerformance=getCenterPerformance(day,interval)
+CTRL -> VACC : centerPerformance=getCenterPerformanceForDay(day,interval)
 activate VACC
 VACC -> VACC : events=getEventListForDay(day)
-VACC -> VACC : centerPerformace=generatePerformanceReport(events,interval)
-VACC --> CTRL : centerPerformance
-|||
+activate VACC
 deactivate VACC
-CTRL --> UI : centerPerformace
+create "centerPerformance\n:CenterPerformance" as PERF
+VACC --> PERF : create(events,interval)
+activate PERF
+PERF -> PERF : differenceList=calculateDifferencesList()
+
+create "maxSumSublistService\n:MaxSumSublistService" as MAXSS
+PERF --> MAXSS : create(differenceList)
+activate MAXSS
+MAXSS -> MAXSS : maxSumSublist=calculateMaxSumSublist()
+activate MAXSS
+deactivate MAXSS
+deactivate MAXSS
+PERF -> MAXSS : getStartIndex()
+activate MAXSS
+deactivate MAXSS
+PERF -> PERF : getStartTime()
+activate PERF
+deactivate PERF
+PERF -> MAXSS : getEndIndex()
+activate MAXSS
+deactivate MAXSS
+PERF -> PERF : getEndTime()
+activate PERF
+deactivate PERF
+PERF -> MAXSS : getMaxSum()
+activate MAXSS
+deactivate MAXSS
+PERF -> MAXSS : getMaxSumSubList()
+activate MAXSS
+deactivate MAXSS
+|||
+VACC --> CTRL : centerPerformance
+
+deactivate VACC
 deactivate CTRL
 
 UI --> COORD : the list with the differences of arrived and left users, maximum continuous sublist, its sum, the time inteval corresponding to this continuous sublist 
 deactivate UI
 deactivate COORD
+
+participant "differnceList\n:List<int>" as DIFFL
+participant "sublist\n:List<int>" as SUBL
+participant "events\n:CenterEventList" as EVENTL
 
 @enduml

@@ -22,9 +22,9 @@ As a center coordinator, I intend to analyse the performance of a center.
 
 > **From the client clarifications:**
 
-> **Question:** "[...]"
+> **Question:** "From the Sprint D requirements it is possible to understand that we ought to implement a procedure that creates a list with the differences between the number of new clients arriving and the number of leaving clients for each time interval. My question then is, should this list strictly data from the legacy system (csv file from moodle which is loaded in US17), or should it also include data from our system?"
 >
-> **Answer:** "[...]"
+> **Answer:** US 16 is for all the data that exists in the system.
 
 ### 1.3. Acceptance Criteria
 

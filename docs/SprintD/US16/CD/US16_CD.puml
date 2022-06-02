@@ -60,27 +60,45 @@ package core {
 
       class CenterPerformance {
         - day: Date
-        - interval: int
-        - inputList: List
-        - optimalSubList: List
-        - optimalSum: int
+        - maxSumSubList: List
+        - sum: int
+        - sum: int
 
-        +CenterPerformance(day,interval,inputList,optimalSublist,optimalSum)
+        +CenterPerformance(day,interval)
+
+        +getDay()
+        +getMaxSumSubList()
+        +getSum()
+        +getStartTime()
+        +getEndTime()
+      }
+
+      class Company {
+        -designation: String
+        -authFacade: AuthFacade
+        -vaccinationCenterStore: VaccinationCenterStore
+        
+        +Company(designation)
+
+        +getVaccinationCenterStore()
       }
     }
 
-    class Company {
-      -designation: String
-      -authFacade: AuthFacade
-      -vaccinationCenterStore: VaccinationCenterStore
-      
-      +Company(designation)
+    package service {
+      class MaxSumSublistService {
+        - list: List
+        - beginningIndex: int
+        - endIndex: int
+        - maxSum: int
 
-      +getAuthFacade()
-      +getVaccinationCenterStore()
+        +MaxSumSublistService(list)
+
+        +getSum()
+        +getBegginingIndex()
+        +getEndIndex()
+        +getMaxSum()
+      }
     }
-
-    
   }
 
   package controllers {
@@ -115,6 +133,8 @@ VaccinationCenter "1" -- "*" CenterPerformance : generates >
 
 CenterPerformance o-- Time : startingInterval
 CenterPerformance o-- Time : endingInterval
+
+CenterPerformance -- MaxSumSublistService : uses >
 
 VaccinationCenterStore "1" -- "*" VaccinationCenter : stores >
 
