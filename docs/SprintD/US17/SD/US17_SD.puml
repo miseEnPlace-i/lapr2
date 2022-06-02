@@ -4,8 +4,15 @@ autonumber
 actor "Center Coordinator" as COORDINATOR
 
 participant ":ImportLegacyDataUI" as UI
-participant ":App" as APP
+participant ":App" as _APP
+participant "app:App" as APP
 participant ":ImportLegacyDataController" as CTRL
+participant "comp:Company" as COMPANY
+participant "snsUserStore:SNSUserStore" as SNSSTORE
+participant "csvReader:CSVReader" as CSVREADER
+participant ":ICSVReader" as ICSV
+participant "vacStore:VaccinationCenterStore" as VACSTORE
+participant ":LegacyDataImporter" as IMPORT
 
 activate COORDINATOR
   ref over COORDINATOR
@@ -15,8 +22,13 @@ activate COORDINATOR
     CoordinatorLogin_SD
   end ref
 
-  COORDINATOR -> UI : starts to import legacy data
+  COORDINATOR -> UI : wants to import legacy data
   activate UI
+
+    UI -> _APP : app = getInstance()
+    activate _APP
+    deactivate _APP
+
     UI -> APP : company = getCompany()
     activate APP
     deactivate APP
@@ -30,10 +42,31 @@ activate COORDINATOR
 
     |||
 
-    UI --> CTRL ** : create(company, center)
+    UI -> CTRL ** : create(company, center)
+    activate CTRL
+      CTRL -> COMPANY : snsUserStore = getSNSUserStore()
+      activate COMPANY
+      deactivate COMPANY
+    deactivate CTRL
     
-    
+    COORDINATOR <-- UI : asks to type the file path
+  deactivate UI
 
+  COORDINATOR -> UI : types the file path
+  activate UI
+
+    ' read data
+
+    UI -> CTRL : read(filepath)
+    activate CTRL
+      CTRL -> CSVREADER ** : create(filepath)
+    deactivate CTRL
+
+    ' process data
+
+    ' convert to dto and send it to ui
+
+    COORDINATOR <-- UI : shows the data
   deactivate UI
 deactivate COORDINATOR
 @enduml
