@@ -37,6 +37,7 @@ activate CTRL
 
 CTRL --> EXPORTER** : exporterCsv = create(filePathName)
 
+loop 
 EXPORTER -> VACADMIN :  snsUserAge = getSNSUserAge()
 activate EXPORTER
 activate VACADMIN
@@ -68,7 +69,7 @@ end
 
 deactivate EXPORTER
 deactivate CTRL
-
+end
 
 UI --> COORDINATOR : informs operation success
 

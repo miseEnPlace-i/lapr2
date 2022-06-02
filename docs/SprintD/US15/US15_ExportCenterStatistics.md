@@ -12,7 +12,8 @@
 
 ### 1.3. Acceptance Criteria
 
-n/a.
+* **AC1** Output data should follow (date; number of fully vaccinated user).
+* **AC2** The user should define a time interval (two dates).
 
 ### 1.4. Found out Dependencies
 
@@ -28,10 +29,11 @@ n/a.
 
 * Typed data:
 	* File path name
+	* Time interval
 
 **Output Data:**
 
-* Registered statistics of a center into a CSV file.
+* Registered statistics of a center into a CSV file between two dates.
 * Operation (in)success.
 
 ### 1.6. System Sequence Diagram (SSD)
