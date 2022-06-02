@@ -17,7 +17,7 @@ create ":AnalyseCenterPerformanceController" as CTRL
 
 UI --> CTRL : create(company,session)
 deactivate UI
-COORD -> UI : asks to list all present users in the waiting room for the vaccination the nurse is working on
+COORD -> UI : asks to analyse the center performance for a given day in the coordinator center
 activate UI
 UI --> COORD : requests data (date & time interval)
 deactivate UI
@@ -75,7 +75,7 @@ VACC --> CTRL : centerPerformance
 deactivate VACC
 deactivate CTRL
 
-UI --> COORD : the list with the differences of arrived and left users, maximum continuous sublist, its sum, the time inteval corresponding to this continuous sublist 
+UI --> COORD : the list with the differences of arrived and left users, maximum continuous sublist, its sum, the time interval corresponding to this continuous sublist 
 deactivate UI
 deactivate COORD
 

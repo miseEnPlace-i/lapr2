@@ -69,18 +69,12 @@ There is a dependency found to US17 or US8. Only with one of those implemented t
 
 **The rationale grounds on the SSD interactions and the identified input/output data.**
 
-| Interaction ID | Question: Which class is responsible for... | Answer | Justification (with patterns) |
-| :------------- | :------------------------------------------ | :----- | :---------------------------- |
-| Step 1         |                                             |        |                               |
-| Step 2         |                                             |        |                               |
-| Step 3         |                                             |        |                               |
-| Step 4         |                                             |        |                               |
-| Step 5         |                                             |        |                               |
-| Step 6         |                                             |        |                               |
-| Step 7         |                                             |        |                               |
-| Step 8         |                                             |        |                               |
-| Step 9         |                                             |        |                               |
-| Step 10        |                                             |        |                               |
+| Interaction ID                                                                                                                                       | Question: Which class is responsible for... | Answer             | Justification (with patterns)                                                                                 |
+| :--------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------ | :----------------- | :------------------------------------------------------------------------------------------------------------ |
+| asks to analyse the center performance for a given day in the coordinator center                                                                     | ... displaying the screen to the user       | UI                 | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+| requests data (date & time interval)                                                                                                                 | n/a                                         |                    |                                                                                                               |
+| types the requested data                                                                                                                             | ... saving the inputted data?               | Vaccination Center | IE:                                                                                                           |
+| list with the differences of arrived and left users, maximum continuous sublist, its sum, the time interval corresponding to this continuous sublist | ... display the result to user?             | UI                 | IE: responsible for user interaction                                                                          |
 
 ### Systematization
 
