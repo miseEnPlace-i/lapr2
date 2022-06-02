@@ -65,6 +65,14 @@ class SNSUser {
 
 class FileReport {}
 
+class Vaccine {}
+
+class VaccineType {
+  -code 
+  -description
+  -technology
+}
+
 Company "1" -- "*" Employee : knows >
 Employee <|-- CenterCoordinator
 CenterCoordinator -- VaccinationCenter : has >
@@ -75,5 +83,7 @@ Company "1" -- "1" VaccinationCenterStore : knows >
 FileReport "1" -- "1" CenterCoordinator : generates <
 VaccineAdministration "1" -- "1" VaccinationCenter : has <
 VaccineAdministration "1" -- "*" SNSUser : has >
+VaccineAdministration "1" -- "1" Vaccine : has > 
+Vaccine -- VaccineType : has >
 
 @enduml
