@@ -32,9 +32,13 @@ class VaccinationCenter {
   - maximumVaccinesPerSlot
 }
 
+class LegacyData {}
 
 Company "1" -- "*" Employee : knows >
 Company "1" -- "*" VaccinationCenter : knows >
-Employee <|-- Company
+
+Coordinator --|> Company
+Coordinator "1" -- "1" VaccinationCenter : coordinates >
+Coordinator "1" -- "*" LegacyData : imports >
 
 @enduml
