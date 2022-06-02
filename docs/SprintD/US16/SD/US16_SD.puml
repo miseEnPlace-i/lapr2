@@ -23,13 +23,31 @@ UI --> COORD : requests data (date & time interval)
 deactivate UI
 COORD -> UI : types the requested data
 
-deactivate COORD
-participant "employeeSession:EmployeeSession" as SESSION
-participant "vaccinationCenterStore:VaccinationCenterStore" as VACCS
-participant "company:Company" as COMP
+
+participant "employeeSession\n:EmployeeSession" as SESSION
+participant "vaccinationCenter\n:VaccinationCenter" as VACC
+participant "events\n:CenterEventList" as EVENTL
+participant "centerPerformance\n:CenterPerformance" as PERF
 
 activate UI
+UI -> CTRL : analyseCenterPerformance()
+
+activate CTRL
+CTRL -> SESSION : center=getVaccinationCenter()
+activate SESSION
+deactivate SESSION
+CTRL -> VACC : centerPerformance=getCenterPerformance(day,interval)
+activate VACC
+VACC -> VACC : events=getEventListForDay(day)
+VACC -> VACC : centerPerformace=generatePerformanceReport(events,interval)
+VACC --> CTRL : centerPerformance
+|||
+deactivate VACC
+CTRL --> UI : centerPerformace
+deactivate CTRL
+
 UI --> COORD : the list with the differences of arrived and left users, maximum continuous sublist, its sum, the time inteval corresponding to this continuous sublist 
 deactivate UI
+deactivate COORD
 
 @enduml
