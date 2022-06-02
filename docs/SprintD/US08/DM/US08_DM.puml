@@ -79,6 +79,15 @@ class Arrival {
   - arrivalDate
 }
 
+class VaccineAdministration {
+  -snsUser
+  -vaccine
+  -lotNumber
+  -doseNumber
+  -vaccinationCenter
+  -date
+}
+
 SNSUser "0..1" -- "1" User : becomes >
 
 Arrival "1" -- "0..1" Appointment : related to >
@@ -87,7 +96,8 @@ Vaccine "*" -- "1" VaccineType : has <
 
 Employee <|-- Nurse
 
-Nurse "1" -- "*" UserHealthData : checks and registers administered vaccines in >
+Nurse "1" -- "*" UserHealthData : checks >
+Nurse "1" -- "*" VaccineAdministration : registers >
 
 VaccinationCenter <|-- CommunityMassVaccinationCenter
 VaccinationCenter <|-- HealthCareCenter
@@ -108,3 +118,8 @@ SNSUser "1" -- "1" UserHealthData : has >
 Company "1" -- "*" Employee : knows >
 Company "1" -- "*" VaccinationCenter : knows >
 Company "1" -- "*" SNSUser : knows >
+
+VaccineAdministration "*" -- "1" Vaccine : has >
+VaccineAdministration "*" -- "1" VaccinationCenter : is held in >
+
+UserHealthData "1" -- "*" VaccineAdministration : has >
