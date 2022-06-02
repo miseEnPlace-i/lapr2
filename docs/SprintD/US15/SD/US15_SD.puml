@@ -36,7 +36,39 @@ UI -> CTRL : createCsvExporter(filePathName)
 activate CTRL
 
 CTRL --> EXPORTER** : exporterCsv = create(filePathName)
+
+EXPORTER -> VACADMIN :  snsUserAge = getSNSUserAge()
+activate EXPORTER
+activate VACADMIN
+deactivate VACADMIN
+
+EXPORTER -> VACADMIN : vaccine = getVaccine()
+activate VACADMIN
+deactivate VACADMIN
+
+EXPORTER -> VACADMIN : adminProcByAge = vaccine.getAdminProc()
+activate VACADMIN
+deactivate VACADMIN
+
+EXPORTER -> VACADMIN : dose = getDose()
+activate VACADMIN
+deactivate VACADMIN
+
+EXPORTER -> VACADMIN : date = getDate()
+activate VACADMIN
+deactivate VACADMIN
+
+EXPORTER -> EXPORTER : vacType = vaccine.getVacType()
+activate EXPORTER
+deactivate EXPORTER
+ 
+opt  doseInfo.size() == dose then snsUser is fully vaccinated 
+EXPORTER -> EXPORTER : info.put(vacType)
+end
+
+deactivate EXPORTER
 deactivate CTRL
+
 
 UI --> COORDINATOR : informs operation success
 

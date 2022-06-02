@@ -62,22 +62,22 @@ n/a.
 | :------------- | :------------------------------------------ | :------------------------- | :------------------------------------------------------------------------------------------------------------ |
 | Step 1         | ... interacting with the actor?             | ExportStatisticsUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
 |                | ... coordinating the US?                    | ExportStatisticsController | Controller                                                                                                    |
-| Step 2         |                                             |                            |                                                                                                               |
-| Step 3         |                                             |                            |                                                                                                               |
-| Step 4         |                                             |                            |                                                                                                               |
+| Step 2         | n/a                                         | n/a                        | n/a                                                                                                           |
+| Step 3         | ... instantiating new ExporterCsvData?      | ExporterCsvData            | IE: holds the information relevant to the statistics                                                          |
+|                | ... holds information needed to statistics? | VaccineAdministration      | IE: holds information about the vaccination process of every user                                             |
+| Step 4         | ... saving the new statistics?              | ExporterCsvData            | IE:                                                                                                           |
 
 ### Systematization
 
 According to the taken rationale, the conceptual classes promoted to software classes are:
 
-- Class1
-- Class2
-- Class3
+- ExporterCsvData 
+- VaccineAdministration
 
 Other software classes (i.e. Pure Fabrication) identified:
 
-- xxxxUI
-- xxxxController
+- ExportStatisticsUI 
+- ExportStatisticsController
 
 ## 3.2. Sequence Diagram (SD)
 
