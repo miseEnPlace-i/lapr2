@@ -44,7 +44,24 @@ class Slot {
   -maxVacPerSlot
 }
 
-class VaccineAdministration {}
+class VaccineAdministration {
+  -snsUser
+  -vaccine
+  -dose
+  -lotNumber
+  -date
+}
+
+class SNSUser {
+  - citizenCard
+  - snsNumber
+  - name
+  - birthDay
+  - gender
+  - phoneNumber
+  - email
+  - address
+}
 
 class FileReport {}
 
@@ -56,6 +73,7 @@ VaccinationCenter "1"-- "1" Slot : has >
 VaccinationCenterStore "1" -- "*" VaccinationCenter : stores >
 Company "1" -- "1" VaccinationCenterStore : knows >
 FileReport "1" -- "1" CenterCoordinator : generates <
-
+VaccineAdministration "1" -- "1" VaccinationCenter : has <
+VaccineAdministration "1" -- "*" SNSUser : has >
 
 @enduml

@@ -8,7 +8,7 @@
 
 ### 1.2. Customer Specifications and Clarifications
 
-"The Center Coordinator wants to monitor the vaccination process, to see statistics and charts, to evaluate the performance of the vaccination process generate reports and analyze data (...)"
+"The Center Coordinator wants to monitor the vaccination process, to see statistics and charts, to evaluate the performance of the vaccination process generate reports and analyze data (... )"
 
 ### 1.3. Acceptance Criteria
 
@@ -58,18 +58,13 @@ n/a.
 
 **The rationale grounds on the SSD interactions and the identified input/output data.**
 
-| Interaction ID | Question: Which class is responsible for... | Answer | Justification (with patterns) |
-| :------------- | :------------------------------------------ | :----- | :---------------------------- |
-| Step 1         |                                             |        |                               |
-| Step 2         |                                             |        |                               |
-| Step 3         |                                             |        |                               |
-| Step 4         |                                             |        |                               |
-| Step 5         |                                             |        |                               |
-| Step 6         |                                             |        |                               |
-| Step 7         |                                             |        |                               |
-| Step 8         |                                             |        |                               |
-| Step 9         |                                             |        |                               |
-| Step 10        |                                             |        |                               |
+| Interaction ID | Question: Which class is responsible for... | Answer                     | Justification (with patterns)                                                                                 |
+| :------------- | :------------------------------------------ | :------------------------- | :------------------------------------------------------------------------------------------------------------ |
+| Step 1         | ... interacting with the actor?             | ExportStatisticsUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+|                | ... coordinating the US?                    | ExportStatisticsController | Controller                                                                                                    |
+| Step 2         |                                             |                            |                                                                                                               |
+| Step 3         |                                             |                            |                                                                                                               |
+| Step 4         |                                             |                            |                                                                                                               |
 
 ### Systematization
 

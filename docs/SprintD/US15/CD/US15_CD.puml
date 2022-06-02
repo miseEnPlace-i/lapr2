@@ -18,8 +18,8 @@ package controllers {
 
        +Time(time)
      }
+    class FileReport {}
    }
-
 
 package core {
   package domain {
@@ -30,7 +30,6 @@ class Company {
 
     package model {
 
-class FileReport {}
 
 class VaccinationCenter {
     - name: String

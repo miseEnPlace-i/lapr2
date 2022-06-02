@@ -7,8 +7,7 @@ participant ":App" as APP
 participant ":ExportCenterStatisticsController" as CTRL
 participant ":Company" as COMP
 participant "exportercsv\n:ExporterCsvData" as EXPORTER
-participant "appointmentScheduleList\n:AppointmentScheduleList" as APPLIST
-participant "store\n:SNSUserStore" as USERSTORE
+participant "vaccineAdministration\n:VaccineAdministration" as VACADMIN
 participant "userhealthdata\n:UserHealthData" as USERDATA
 participant "vaccinationCenter\n:VaccinationCenter" as CENTER
 
@@ -22,7 +21,7 @@ activate APP
 deactivate APP
 
 ref over UI 
-**center** is obtained through the coordinatorSession.
+**center** is obtained through the coordinatorSession
 See here: CoordinatorLogin_SD.svg
 end ref
 UI --> CTRL** : create(company,center)
