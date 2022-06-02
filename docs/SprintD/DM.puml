@@ -68,6 +68,15 @@ class Appointment {
   -sms
 }
 
+class VaccineAdministration {
+  -snsUser
+  -vaccine
+  -lotNumber
+  -doseNumber
+  -vaccinationCenter
+  -date
+}
+
 class AdministrationProcess {
   -ageGroup
   -nOfDoses
@@ -157,7 +166,8 @@ Receptionist "1" -- "*" Appointment : related to >
 Receptionist "1" -- "*" Arrival : registers >
 
 Nurse "1" -- "*" AdverseReaction : reports >
-Nurse "1" -- "*" UserHealthData : checks and registers administered vaccines in >
+Nurse "1" -- "*" UserHealthData : checks >
+Nurse "1" -- "*" VaccineAdministration : registers >
 
 VaccinationCenter "1" -- "1" VaccinationReport : has >
 VaccinationCenter "1" -- "1" WaitingRoom : has >
@@ -172,5 +182,10 @@ Notification <|-- EmailSender
 Notification <|-- ConsoleSender
 
 AdverseReaction "*" -- "1" Appointment : has <
+
+VaccineAdministration "*" -- "1" Vaccine : has >
+VaccineAdministration "*" -- "1" VaccinationCenter : is held in >
+
+UserHealthData "1" -- "*" VaccineAdministration : has >
 
 @enduml
