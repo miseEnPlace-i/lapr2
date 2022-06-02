@@ -1,0 +1,13 @@
+@startuml US01_SD
+autonumber
+' hide footbox
+actor "Nurse" as nurse
+
+participant ":ScheduleVaccineUI" as ui
+participant ":ScheduleVaccineController" as controller
+
+activate nurse
+
+nurse -> ui : asks to record the administration of a vaccine
+activate ui
+  
