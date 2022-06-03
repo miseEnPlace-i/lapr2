@@ -7,6 +7,7 @@ participant ":App" as APP
 
 activate COORD
 activate UI
+COORD -> UI : asks to analyse the center performance for a given day in the coordinator center
 UI -> APP : getInstance()
 activate APP
 deactivate APP
@@ -16,9 +17,6 @@ deactivate APP
 create ":AnalyseCenterPerformanceController" as CTRL
 
 UI --> CTRL : create(company,session)
-deactivate UI
-COORD -> UI : asks to analyse the center performance for a given day in the coordinator center
-activate UI
 UI --> COORD : requests data (date & time interval)
 deactivate UI
 COORD -> UI : types the requested data
