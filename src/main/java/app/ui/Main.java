@@ -12,9 +12,11 @@ import app.ui.gui.App;
 public class Main {
   public static void main(String[] args) {
     try {
+      App.launch(App.class, args);
+
       MainMenuUI menu = new MainMenuUI();
-      
-      menu.run();      
+
+      menu.run();
     } catch (Exception e) {
       e.printStackTrace();
     }
