@@ -6,7 +6,6 @@ import app.ui.console.MainMenuUI;
  *
  * @author Paulo Maio <pam@isep.ipp.pt>
  */
-
 // Teste
 public class Main {
   public static void main(String[] args) {
