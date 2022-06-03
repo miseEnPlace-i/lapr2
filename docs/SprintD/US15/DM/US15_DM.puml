@@ -74,7 +74,7 @@ Employee <|-- CenterCoordinator
 CenterCoordinator -- VaccinationCenter : has >
 VaccinationCenter "1" -- "1" Time : has >
 VaccinationCenter "1"-- "1" Slot : has >
-FileReport "1" -- "1" CenterCoordinator : generates <
+ReportFile "1" -- "1" CenterCoordinator : generates <
 VaccineAdministration "*" -- "1" VaccinationCenter : has <
 VaccineAdministration "1" -- "*" SNSUser : has >
 VaccineAdministration "1" -- "1" Vaccine : has > 
