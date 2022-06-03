@@ -8,9 +8,12 @@ participant ":ExportCenterStatisticsController" as CTRL
 participant ":Company" as COMP
 participant "exportercsv\n:ExporterCsvData" as EXPORTER
 participant "vaccineAdministration\n:VaccineAdministration" as VACADMIN
-participant "userhealthdata\n:UserHealthData" as USERDATA
+participant "adminProcess\n:AdminProcess" as ADMINPROC
+participant "employeeSession\n:EmployeeSession" as EMPLOYEESESSION
 participant "vaccinationCenter\n:VaccinationCenter" as CENTER
-
+participant "vaccineAdministrationList\n:List<VaccineAdministration>" as VACADMINLIST
+participant "vaccineAdministrationDayList\n:List<VaccineAdministration>" as VACDAYLIST
+participant "vaccine\n:Vaccine" as VACCINE
 
 activate COORDINATOR
 COORDINATOR -> UI : asks to export center statistics
@@ -21,25 +24,41 @@ activate APP
 deactivate APP
 
 ref over UI 
-**center** is obtained through the coordinatorSession
+**sessions** is obtained through the coordinatorSession
 See here: CoordinatorLogin_SD.svg
 end ref
-UI --> CTRL** : create(company,center)
 
-UI --> COORDINATOR : requests data (file path name)
+UI --> CTRL** : create(company,session)
+
+UI --> COORDINATOR : requests data (filePath,timeInterval)
 deactivate UI
 
 COORDINATOR -> UI : types requested data
 activate UI
 
-UI -> CTRL : createCsvExporter(filePathName)
+UI -> CTRL : createCsvExporter(filePath,timeInterval)
 activate CTRL
 
-CTRL --> EXPORTER** : exporterCsv = create(filePathName)
+CTRL -> EMPLOYEESESSION : center = getVaccinationCenter()
+activate EMPLOYEESESSION
+deactivate EMPLOYEESESSION
 
-loop 
-EXPORTER -> VACADMIN :  snsUserAge = getSNSUserAge()
+CTRL -> CENTER : vacAdminList = getVaccineAdministrationList()
+activate CENTER
+deactivate CENTER
+
+CTRL --> EXPORTER** : exporterCsv = create(filePath,timeInterval,center)
+
+loop for each day between timeInterval selected
+
+EXPORTER -> VACADMINLIST : dateEqual = getDate()
 activate EXPORTER
+activate VACADMIN
+deactivate VACADMIN
+
+loop for each vaccineAdministration in vaccineAdministrationList
+
+EXPORTER -> VACADMIN :  snsUserAge = getSNSUserAge()
 activate VACADMIN
 deactivate VACADMIN
 
@@ -47,28 +66,29 @@ EXPORTER -> VACADMIN : vaccine = getVaccine()
 activate VACADMIN
 deactivate VACADMIN
 
-EXPORTER -> VACADMIN : adminProcByAge = vaccine.getAdminProc()
-activate VACADMIN
-deactivate VACADMIN
+EXPORTER -> VACCINE : vacType = getVacType()
+activate VACCINE
+deactivate VACCINE
 
 EXPORTER -> VACADMIN : dose = getDose()
 activate VACADMIN
 deactivate VACADMIN
 
-EXPORTER -> VACADMIN : date = getDate()
+EXPORTER -> VACCINE : adminProcByAge = vaccine.getAdminProc(snsUserAge)
 activate VACADMIN
 deactivate VACADMIN
 
-EXPORTER -> EXPORTER : vacType = vaccine.getVacType()
-activate EXPORTER
-deactivate EXPORTER
- 
-opt  doseInfo.size() == dose then snsUser is fully vaccinated 
-EXPORTER -> EXPORTER : info.put(vacType)
+EXPORTER -> VACCINE : fullyVaccinated = checkUserFullyVaccinated(age,dose)
+activate VACCINE
+deactivate VACCINE
+
+opt (fullyVaccinated == true) then snsUser is fully vaccinated 
+EXPORTER -> EXPORTER : addSNSUserFullyVaccinated
 end
 
 deactivate EXPORTER
 deactivate CTRL
+end
 end
 
 UI --> COORDINATOR : informs operation success
