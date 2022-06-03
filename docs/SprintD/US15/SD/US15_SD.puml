@@ -6,7 +6,7 @@ participant ":ExportCenterStatisticsUI" as UI
 participant ":App" as APP
 participant ":ExportCenterStatisticsController" as CTRL
 participant ":Company" as COMP
-participant "exportercsv\n:ExporterCsvData" as EXPORTER
+participant "csvexporter\n:CsvExporterData" as EXPORTER
 participant "vaccineAdministration\n:VaccineAdministration" as VACADMIN
 participant "adminProcess\n:AdminProcess" as ADMINPROC
 participant "employeeSession\n:EmployeeSession" as EMPLOYEESESSION
@@ -14,6 +14,7 @@ participant "vaccinationCenter\n:VaccinationCenter" as CENTER
 participant "vaccineAdministrationList\n:List<VaccineAdministration>" as VACADMINLIST
 participant "vaccineAdministrationDayList\n:List<VaccineAdministration>" as VACDAYLIST
 participant "vaccine\n:Vaccine" as VACCINE
+participant "map\n:Map<String,Integer>" as MAP
 
 activate COORDINATOR
 COORDINATOR -> UI : asks to export center statistics
@@ -30,13 +31,13 @@ end ref
 
 UI --> CTRL** : create(company,session)
 
-UI --> COORDINATOR : requests data (filePath,timeInterval)
+UI --> COORDINATOR : requests data (filePath,startDate,endDate)
 deactivate UI
 
 COORDINATOR -> UI : types requested data
 activate UI
 
-UI -> CTRL : createCsvExporter(filePath,timeInterval)
+UI -> CTRL : createCsvExporter(filePath,startDate,endDate)
 activate CTRL
 
 CTRL -> EMPLOYEESESSION : center = getVaccinationCenter()
@@ -47,12 +48,12 @@ CTRL -> CENTER : vacAdminList = getVaccineAdministrationList()
 activate CENTER
 deactivate CENTER
 
-CTRL --> EXPORTER** : exporterCsv = create(filePath,timeInterval,center)
+CTRL --> EXPORTER** : exporterCsv = create(filePath,startDate,endDate,center)
 
 loop for each day between timeInterval selected
-
-EXPORTER -> VACADMINLIST : dateEqual = getDate()
 activate EXPORTER
+
+EXPORTER -> VACADMIN : 
 activate VACADMIN
 deactivate VACADMIN
 
@@ -75,15 +76,17 @@ activate VACADMIN
 deactivate VACADMIN
 
 EXPORTER -> VACCINE : adminProcByAge = vaccine.getAdminProc(snsUserAge)
-activate VACADMIN
-deactivate VACADMIN
+activate VACCINE
+deactivate VACCINE
 
 EXPORTER -> VACCINE : fullyVaccinated = checkUserFullyVaccinated(age,dose)
 activate VACCINE
 deactivate VACCINE
 
 opt (fullyVaccinated == true) then snsUser is fully vaccinated 
-EXPORTER -> EXPORTER : addSNSUserFullyVaccinated
+EXPORTER -> MAP : addSNSUserFullyVaccinated
+activate MAP
+deactivate MAP
 end
 
 deactivate EXPORTER
