@@ -15,6 +15,7 @@ participant "vaccineAdministrationList\n:List<VaccineAdministration>" as VACADMI
 participant "vaccineAdministrationDayList\n:List<VaccineAdministration>" as VACDAYLIST
 participant "vaccine\n:Vaccine" as VACCINE
 participant "map\n:Map<String,Integer>" as MAP
+participant "filereport\n:FileReport" as FILEREPORT
 
 activate COORDINATOR
 COORDINATOR -> UI : asks to export center statistics
@@ -25,11 +26,11 @@ activate APP
 deactivate APP
 
 ref over UI 
-**sessions** is obtained through the coordinatorSession
+**coordinatorSession** is obtained through the coordinatorSession
 See here: CoordinatorLogin_SD.svg
 end ref
 
-UI --> CTRL** : create(company,session)
+UI --> CTRL** : create(company,coordinatorSession)
 
 UI --> COORDINATOR : requests data (filePath,startDate,endDate)
 deactivate UI
@@ -44,18 +45,19 @@ CTRL -> EMPLOYEESESSION : center = getVaccinationCenter()
 activate EMPLOYEESESSION
 deactivate EMPLOYEESESSION
 
-CTRL -> CENTER : vacAdminList = getVaccineAdministrationList()
-activate CENTER
-deactivate CENTER
-
 CTRL --> EXPORTER** : exporterCsv = create(filePath,startDate,endDate,center)
 
 loop for each day between timeInterval selected
+note over EXPORTER
+inicialy day refers to the startDate, after iterations this increases by one
+until it reaches the endDate
+end note
+
 activate EXPORTER
 
-EXPORTER -> VACADMIN : 
-activate VACADMIN
-deactivate VACADMIN
+EXPORTER -> CENTER : vacAdminList = getVacAdminDayList(day)
+activate CENTER
+deactivate CENTER
 
 loop for each vaccineAdministration in vaccineAdministrationList
 
@@ -79,20 +81,28 @@ EXPORTER -> VACCINE : adminProcByAge = vaccine.getAdminProc(snsUserAge)
 activate VACCINE
 deactivate VACCINE
 
-EXPORTER -> VACCINE : fullyVaccinated = checkUserFullyVaccinated(age,dose)
+EXPORTER -> VACCINE : fullyVaccinated = checkUserFullyVaccinated(snsUserAge,dose)
 activate VACCINE
 deactivate VACCINE
 
-opt (fullyVaccinated == true) then snsUser is fully vaccinated 
-EXPORTER -> MAP : addSNSUserFullyVaccinated
+opt (fullyVaccinated == true) 
+EXPORTER -> MAP : addSNSUserFullyVaccinated(vacType)
 activate MAP
 deactivate MAP
 end
 
-deactivate EXPORTER
 deactivate CTRL
 end
 end
+
+EXPORTER -> MAP : save()
+activate MAP
+
+MAP -> FILEREPORT : saveDate()
+activate FILEREPORT
+deactivate FILEREPORT
+deactivate MAP
+deactivate EXPORTER
 
 UI --> COORDINATOR : informs operation success
 

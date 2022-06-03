@@ -8,7 +8,7 @@
 
 ### 1.2. Customer Specifications and Clarifications
 
-"The Center Coordinator wants to monitor the vaccination process, to see statistics and charts, to evaluate the performance of the vaccination process generate reports and analyze data (... )"
+"The Center Coordinator wants to monitor the vaccination process, to see statistics and charts, to evaluate the performance of the vaccination process generate reports and analyze data (...)"
 
 ### 1.3. Acceptance Criteria
 
@@ -28,8 +28,9 @@
 **Input Data:**
 
 * Typed data:
-	* File path name
-	* Time interval
+	* File path name,
+	* Start date,
+	* End date.
 
 **Output Data:**
 
@@ -65,16 +66,19 @@ n/a.
 | Step 1         | ... interacting with the actor?             | ExportStatisticsUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
 |                | ... coordinating the US?                    | ExportStatisticsController | Controller                                                                                                    |
 | Step 2         | n/a                                         | n/a                        | n/a                                                                                                           |
-| Step 3         | ... instantiating new ExporterCsvData?      | ExporterCsvData            | IE: holds the information relevant to the statistics                                                          |
+| Step 3         | ... instantiating new ExporterCsvData?      | CsvExporterData            | IE: holds the information relevant to the statistics                                                          |
 |                | ... holds information needed to statistics? | VaccineAdministration      | IE: holds information about the vaccination process of every user                                             |
-| Step 4         | ... saving the new statistics?              | ExporterCsvData            | IE:                                                                                                           |
+|                | ... check sns user is fully vaccinated?     | Vaccine                    | IE: holds information about the administrations process                                                       |
+| Step 4         | ... saving the new statistics?              | CsvExporterData            | IE:                                                                                                           |
+|                |                                             |                            |                                                                                                               |
 
 ### Systematization
 
 According to the taken rationale, the conceptual classes promoted to software classes are:
 
-- ExporterCsvData 
+- CsvExporterData 
 - VaccineAdministration
+- Vaccine
 
 Other software classes (i.e. Pure Fabrication) identified:
 
@@ -83,7 +87,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ## 3.2. Sequence Diagram (SD)
 
-![US15_SD](USXXX-SD.svg)
+![US15_SD](SD/US15_SD.svg)
 
 ## 3.3. Class Diagram (CD)
 
