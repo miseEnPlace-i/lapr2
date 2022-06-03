@@ -3,11 +3,117 @@ autonumber
 ' hide footbox
 actor "Nurse" as nurse
 
-participant ":ScheduleVaccineUI" as ui
-participant ":ScheduleVaccineController" as controller
+participant ":RegisterVaccineAdministrationUI" as ui
+participant ":RegisterVaccineAdministrationController" as controller
+participant "nurseSession\n:NurseSession" as nurseSession
+participant "company\n:Company" as company
+participant "vaccinationCenter\n:VaccinationCenter" as vaccinationCenter
+participant "snsUserStore\n:SNSUserStore" as snsUserStore
+participant "waitingRoom\n:WaitingRoom" as waitingRoom
+participant "arrival\n:Arrival" as arrival
+participant "appointment\n:Appointment" as appointment
+participant "vaccineStore\n:VaccineStore" as vaccineStore
+participant "vaccineAdministrationList\n:VaccineAdministrationList" as vaccineAdministrationList
+participant ":VaccineMapper" as vaccineMapper
+participant "vaccineAdministration\n:VaccineAdministration" as vaccineAdministration
+
+participant "vaccines\n:List<Vaccine>" as vaccinesList
+participant "vaccinesDto\n:List<VaccineDTO>" as vaccinesDtoList
 
 activate nurse
 
 nurse -> ui : asks to record the administration of a vaccine
+
 activate ui
-  
+  ref over ui
+    nurseSession is obtained in **EmployeeLogin_SD**.
+    It contains the vaccination center that the nurse is working at
+  end ref
+  ui -> controller** : create(nurseSession)
+  activate controller
+    controller -> company : vaccineStore = getVaccineStore()
+    activate company
+    deactivate company
+    controller -> company : snsUserStore = getSnsUserStore()
+    activate company
+    deactivate company
+  deactivate controller
+  ui --> nurse : requests data (snsNumber)
+deactivate ui
+
+nurse -> ui : types requests data
+
+activate ui
+  ui -> controller : getVaccinesThatHaveVaccineTypeOfMostRecentArrival(snsNumber)
+  activate controller
+    controller -> nurseSession : vaccinationCenter = getVaccinationCenter()
+    activate nurseSession
+    deactivate nurseSession
+    controller -> vaccinationCenter : arrival = getMostRecentArrivalOfSnsUser(snsNumber)
+    activate vaccinationCenter
+      vaccinationCenter -> waitingRoom : arrival = getMostRecentArrivalOfSnsUser(snsNumber)
+      activate waitingRoom
+      deactivate waitingRoom
+    deactivate vaccinationCenter
+    controller -> arrival : appointment = getAppointment()
+    activate arrival
+    deactivate arrival
+    controller -> appointment : vaccineType = getVaccineType()
+    activate appointment
+    deactivate appointment
+    controller -> vaccineStore : vaccines = getVaccinesByType(vaccineType)
+    activate vaccineStore
+    deactivate vaccineStore
+    controller -> vaccineMapper : vaccinesDto = toDto(vaccines)
+    activate vaccineMapper
+    deactivate vaccineMapper
+  deactivate controller
+  ui --> nurse : shows a list of all vaccines that have the vaccine type registered on the most recent arrival and asks to select one
+deactivate ui
+
+nurse -> ui : selects a vaccine
+
+activate ui 
+  ui --> nurse : requests data (lotNumber, doseNumber)
+deactivate ui
+
+nurse -> ui : types requests data
+
+activate ui 
+  ui -> controller : createVaccineAdministration(snsNumber, vaccineDto, lotNumber, doseNumber, vaccinationCenter)
+  activate controller 
+    controller -> vaccinationCenter : vaccineAdministrationList = getVaccineAdministrationList()
+    activate vaccinationCenter
+    deactivate vaccinationCenter
+    controller -> snsUserStore : snsUser = findSnsUserBySnsNumber(snsNumber)
+    activate snsUserStore
+    deactivate snsUserStore
+    controller -> vaccineAdministrationList : vaccineAdministration = createVaccineAdministration(snsUser, vaccineDto, lotNumber, doseNumber, vaccinationCenter)
+    activate vaccineAdministrationList
+      vaccineAdministrationList -> vaccineMapper : vaccine = toModel(vaccineDto)
+      activate vaccineMapper
+      deactivate vaccineMapper
+      vaccineAdministrationList -> vaccineAdministration** : create(snsUser, vaccine, lotNumber, doseNumber, vaccinationCenter, date)
+      activate vaccineAdministration
+      deactivate vaccineAdministration
+      note right
+        date represents a Calendar object
+        with the current date and time
+      end note
+    deactivate vaccineAdministrationList
+    controller -> vaccineAdministrationList : validateVaccineAdministration(vaccineAdministration)
+    activate vaccineAdministrationList
+    deactivate vaccineAdministrationList
+  deactivate controller
+  ui --> nurse : shows all data and requests confirmation
+deactivate ui
+
+nurse -> ui : confirms the data
+
+activate ui
+  ui -> controller : save()
+  activate controller
+    controller -> vaccineAdministrationList : saveVaccineAdministration()
+    activate vaccineAdministrationList
+    deactivate vaccineAdministrationList
+    
