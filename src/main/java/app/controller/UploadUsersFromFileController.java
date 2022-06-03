@@ -1,6 +1,7 @@
 package app.controller;
 
 import java.io.FileNotFoundException;
+import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.util.List;
 import app.domain.model.CSVReader;
@@ -28,7 +29,7 @@ public class UploadUsersFromFileController {
     return csvReader;
   }
 
-  public List<SNSUser> readAndUpload() throws ParseException, ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException {
+  public List<SNSUser> readAndUpload() throws ParseException, ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException, NoSuchMethodException, InvocationTargetException {
 
     SNSUserStore store = this.company.getSNSUserStore();
 
