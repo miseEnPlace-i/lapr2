@@ -10,15 +10,8 @@ activate ":System"
 deactivate ":System"
 
 nurse -> ":System" : types requested data
-opt user has more than one appointment for that day and for that center
-  activate ":System"
-    ":System" --> nurse : shows a list of all appointments that user has for that day and asks to select one
-  deactivate ":System"
-
-  nurse -> ":System" : selects an appointment
-  activate ":System"
-end
-  ":System" --> nurse : shows a list of all vaccines that have the vaccine type registered on the appointment and asks to select one
+activate ":System"
+  ":System" --> nurse : shows a list of all vaccines that have the vaccine type registered on the most recent arrival and asks to select one
 deactivate ":System"
 
 nurse -> ":System" : selects a vaccine
