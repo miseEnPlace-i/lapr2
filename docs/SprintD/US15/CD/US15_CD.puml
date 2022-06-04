@@ -18,18 +18,36 @@ package controllers {
 
        +Time(time)
      }
-    class FileReport {}
    }
 
 package core {
   package domain {
 
-class Company {
-    +getDesignation()
+    package service {
+
+class CsvExporterData {
+    +getVacAdminList()
+    +getSnsUserAge()
+    +getVaccine()
+    +getVacType()
+    }
 }
 
     package model {
 
+class CsvExporter {}
+
+class VaccineAdministration {
+  -snsUser: SNSUser
+  -vaccine: Vaccine
+  -dose: int
+  -lotNumber: String
+  -date: date
+}
+
+class Company {
+    +getDesignation()
+}
 
 class VaccinationCenter {
     - name: String
@@ -67,12 +85,41 @@ class Slot {
     +Slot(duration,maxVaccinesPerSlot)
 }
 
+class Vaccine {
+  -designation : String
+  -brand : String
+  -id : String
+  -vacType : VaccineType
+
+  +Vaccine(designation, id, brand, vacTypeId)
+}
+
+class VaccineType {
+  -code
+  -designation
+  -technology 
+}
+
+class SNSUser {
+  - citizenCard: String
+  - snsNumber: String
+  - name: String
+  - birthDay: Calendar
+  - gender: String
+  - phoneNumber: String
+  - email: String
+  - address: String
+  - userHealthData : UserHealthData
+  + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
+}
+
+
 }
 
 package stores {
       class VaccinationCenterStore {}
       }
-    }
+}
 
 
 
@@ -87,8 +134,18 @@ Company "1" -- "1" VaccinationCenterStore : knows >
 VaccinationCenter o-- Employee
 VaccinationCenter o-- Time 
 VaccinationCenter o-- Slot
-Employee --o FileReport : coordinator
-FileReport "1" --> "1" VaccinationCenter : analyzes >
+
+Vaccine o-- VaccineType
+
+VaccineAdministration -- Vaccine
+VaccineAdministration -- SNSUser
+
+CsvExporterData -- VaccineAdministration : uses >
+
+CsvExporter -- CsvExporterData : sends data to <
+
+Employee -- CsvExporter : coordinator generates
+
 
 VaccinationCenterStore "1" --> "*" VaccinationCenter : stores >
 @enduml
