@@ -1,6 +1,7 @@
 package app.ui;
 
 import app.ui.console.MainMenuUI;
+import app.ui.gui.App;
 
 /**
  *
@@ -10,6 +11,8 @@ import app.ui.console.MainMenuUI;
 public class Main {
   public static void main(String[] args) {
     try {
+      App.launch(App.class, args);
+
       MainMenuUI menu = new MainMenuUI();
 
       menu.run();
