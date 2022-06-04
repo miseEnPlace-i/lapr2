@@ -24,9 +24,11 @@ COORD -> UI : types the requested data
 
 participant "employeeSession\n:EmployeeSession" as SESSION
 participant "vaccinationCenter\n:VaccinationCenter" as VACC
+participant "centerEventList\n:CenterEventList" as EVNTL
+participant "centerEvent\n:CenterEvent" as EVNT
 
 activate UI
-UI -> CTRL : analyseCenterPerformance()
+UI -> CTRL : analyseCenterPerformance(day,interval)
 
 activate CTRL
 CTRL -> SESSION : center=getVaccinationCenter()
@@ -34,9 +36,28 @@ activate SESSION
 deactivate SESSION
 CTRL -> VACC : centerPerformance=getCenterPerformanceForDay(day,interval)
 activate VACC
-VACC -> VACC : events=getEventListForDay(day)
-activate VACC
-deactivate VACC
+VACC -> EVNTL : events=getEventListForDay(day)
+activate EVNTL
+create "eventsInDay\n:CenterEventList" as EVNTLD
+EVNTL --> EVNTLD
+
+loop for each event in events
+  EVNTL -> EVNT : e=isInDay(event)
+  deactivate EVNTL
+  activate EVNT
+  EVNT --> EVNTL : true / false
+  deactivate EVNT
+
+  alt e==true
+    EVNT -> EVNTLD : add(event)
+    activate EVNT
+    deactivate EVNT
+    activate EVNTLD
+    deactivate EVNTLD
+  end
+
+end loop
+
 create "centerPerformance\n:CenterPerformance" as PERF
 VACC --> PERF : create(events,interval,openingHours)
 activate PERF
@@ -77,8 +98,7 @@ UI --> COORD : the list with the differences of arrived and left users, maximum 
 deactivate UI
 deactivate COORD
 
-participant "differnceList\n:List<int>" as DIFFL
-participant "sublist\n:List<int>" as SUBL
-participant "events\n:CenterEventList" as EVENTL
+participant "differnceList\n:List<Integer>" as DIFFL
+participant "sublist\n:List<Integer>" as SUBL
 
 @enduml

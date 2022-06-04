@@ -8,19 +8,28 @@ import app.domain.model.SNSUser;
 import app.domain.shared.CenterEventType;
 
 public class CenterEventList {
-    private List<CenterEvent> events;
+  private List<CenterEvent> events;
 
-    public CenterEventList() {
-        this.events = new ArrayList<CenterEvent>();
-    }
+  public CenterEventList() {
+    this.events = new ArrayList<CenterEvent>();
+  }
 
-    public CenterEvent create(Calendar date, CenterEventType event, SNSUser snsUser) {
-        CenterEvent centerEvent = new CenterEvent(date, event, snsUser);
-        this.events.add(centerEvent);
-        return centerEvent;
-    }
-    
-    public void save(CenterEvent event) {
-        this.events.add(event);
-    }
+  public CenterEvent create(Calendar date, CenterEventType eventType, SNSUser snsUser) {
+    CenterEvent centerEvent = new CenterEvent(date, eventType, snsUser);
+    this.events.add(centerEvent);
+    return centerEvent;
+  }
+
+  public void save(CenterEvent event) {
+    this.events.add(event);
+  }
+
+  public List<CenterEvent> getEventsInDay(Calendar day) {
+    List<CenterEvent> eventsInDay = new ArrayList<CenterEvent>();
+
+    for (CenterEvent event : this.events)
+      if (event.isInDay(day)) eventsInDay.add(event);
+
+    return eventsInDay;
+  }
 }

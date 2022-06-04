@@ -2,6 +2,7 @@ package app.domain.model;
 
 import java.text.ParseException;
 import java.util.Calendar;
+import java.util.List;
 import app.domain.model.list.AppointmentScheduleList;
 import app.domain.model.list.CenterEventList;
 import app.service.FormatVerifier;
@@ -148,7 +149,7 @@ public abstract class VaccinationCenter {
   public int getSlotDuration() {
     return this.slot.getDuration();
   }
-  
+
   /**
    * Gets the events.
    * 
@@ -318,8 +319,16 @@ public abstract class VaccinationCenter {
     return appointmentList;
   }
 
-  public abstract String toString();
+  public CenterPerformance getCenterPerformanceForDay(Calendar day, int interval) {
+    // TODO
+    return null;
+  }
 
+  public List<CenterEvent> getEventListForDay(Calendar day) {
+    this.eventList.
+  }
+
+  public abstract String toString();
 
   @Override
   public boolean equals(Object obj) {

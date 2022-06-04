@@ -7,6 +7,14 @@ package UI {
 
 package core {
   package domain {
+    package shared {
+      enum CenterEventType {
+        ARRIVAL
+        VACCINATED
+        DEPARTED
+      }
+    }
+
     package stores {
       class VaccinationCenterStore {
         +createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
@@ -22,6 +30,10 @@ package core {
     package lists {
       class CenterEventList {
         - events: List<CenterEvent>
+
+        + create(date,eventType,snsUser)
+        + save(event)
+        + getEventsInDay(day)
 
         +CenterEventList()
       }
@@ -51,6 +63,15 @@ package core {
         +Employee(name,email,phone,address,citizenCardNumber,roleId)
       }
 
+      class CenterEvent {
+        - date: Date
+        - eventType: CenterEventType
+
+        + isInDay(day)
+
+        + CenterEvent(date,eventType,snsUser)
+      }
+
       class Slot {
         -duration: int
         -maxVaccinesPerSlot: int
@@ -59,18 +80,17 @@ package core {
       }
 
       class CenterPerformance {
-        - day: Date
+        - day: Calendar
         - maxSumSubList: List
         - sum: int
-        - sum: int
 
-        +CenterPerformance(day,interval)
+        +CenterPerformance(day,interval,openingHours)
 
         +getDay()
         +getMaxSumSubList()
         +getSum()
-        +getStartTime()
-        +getEndTime()
+        +getStartingInterval()
+        +getEndingInterval()
       }
 
       class Company {
@@ -133,8 +153,11 @@ VaccinationCenter "1" -- "*" CenterPerformance : generates >
 
 CenterPerformance o-- Time : startingInterval
 CenterPerformance o-- Time : endingInterval
+CenterPerformance o-- Time : openingHours
 
 CenterPerformance -- MaxSumSublistService : uses >
+
+CenterEvent o-- snsUser : user
 
 VaccinationCenterStore "1" -- "*" VaccinationCenter : stores >
 
