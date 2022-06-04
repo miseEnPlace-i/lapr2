@@ -6,7 +6,7 @@ participant ":ExportCenterStatisticsUI" as UI
 participant ":App" as APP
 participant ":ExportCenterStatisticsController" as CTRL
 participant ":Company" as COMP
-participant "csvexporter\n:CsvExporterData" as EXPORTER
+participant "csvexporter\n:CsvExporterData" as EXPORTERDATA
 participant "vaccineAdministration\n:VaccineAdministration" as VACADMIN
 participant "adminProcess\n:AdminProcess" as ADMINPROC
 participant "employeeSession\n:EmployeeSession" as EMPLOYEESESSION
@@ -15,7 +15,7 @@ participant "vaccineAdministrationList\n:List<VaccineAdministration>" as VACADMI
 participant "vaccineAdministrationDayList\n:List<VaccineAdministration>" as VACDAYLIST
 participant "vaccine\n:Vaccine" as VACCINE
 participant "map\n:Map<String,Integer>" as MAP
-participant "filereport\n:FileReport" as FILEREPORT
+participant "csvexporter\n:CsvExporter" as CSVEXPORTER
 
 activate COORDINATOR
 COORDINATOR -> UI : asks to export center statistics
@@ -45,48 +45,48 @@ CTRL -> EMPLOYEESESSION : center = getVaccinationCenter()
 activate EMPLOYEESESSION
 deactivate EMPLOYEESESSION
 
-CTRL --> EXPORTER** : exporterCsv = create(filePath,startDate,endDate,center)
+CTRL --> EXPORTERDATA** : exporterCsv = create(filePath,startDate,endDate,center)
 
 loop for each day between timeInterval selected
-note over EXPORTER
+note over EXPORTERDATA
 inicialy day refers to the startDate, after iterations this increases by one
 until it reaches the endDate
 end note
 
-activate EXPORTER
+activate EXPORTERDATA
 
-EXPORTER -> CENTER : vacAdminList = getVacAdminDayList(day)
+EXPORTERDATA -> CENTER : vacAdminList = getVacAdminDayList(day)
 activate CENTER
 deactivate CENTER
 
 loop for each vaccineAdministration in vaccineAdministrationList
 
-EXPORTER -> VACADMIN :  snsUserAge = getSNSUserAge()
+EXPORTERDATA -> VACADMIN :  snsUserAge = getSNSUserAge()
 activate VACADMIN
 deactivate VACADMIN
 
-EXPORTER -> VACADMIN : vaccine = getVaccine()
+EXPORTERDATA -> VACADMIN : vaccine = getVaccine()
 activate VACADMIN
 deactivate VACADMIN
 
-EXPORTER -> VACCINE : vacType = getVacType()
+EXPORTERDATA -> VACCINE : vacType = getVacType()
 activate VACCINE
 deactivate VACCINE
 
-EXPORTER -> VACADMIN : dose = getDose()
+EXPORTERDATA -> VACADMIN : dose = getDose()
 activate VACADMIN
 deactivate VACADMIN
 
-EXPORTER -> VACCINE : adminProcByAge = vaccine.getAdminProc(snsUserAge)
+EXPORTERDATA -> VACCINE : adminProcByAge = vaccine.getAdminProc(snsUserAge)
 activate VACCINE
 deactivate VACCINE
 
-EXPORTER -> VACCINE : fullyVaccinated = checkUserFullyVaccinated(snsUserAge,dose)
+EXPORTERDATA -> VACCINE : fullyVaccinated = checkUserFullyVaccinated(snsUserAge,dose)
 activate VACCINE
 deactivate VACCINE
 
 opt (fullyVaccinated == true) 
-EXPORTER -> MAP : addSNSUserFullyVaccinated(vacType)
+EXPORTERDATA -> MAP : addSNSUserFullyVaccinated(vacType)
 activate MAP
 deactivate MAP
 end
@@ -95,14 +95,10 @@ deactivate CTRL
 end
 end
 
-EXPORTER -> MAP : save()
-activate MAP
-
-MAP -> FILEREPORT : saveDate()
-activate FILEREPORT
-deactivate FILEREPORT
-deactivate MAP
-deactivate EXPORTER
+EXPORTERDATA -> CSVEXPORTER** : saveData()
+activate CSVEXPORTER
+deactivate CSVEXPORTER
+deactivate EXPORTERDATA
 
 UI --> COORDINATOR : informs operation success
 
