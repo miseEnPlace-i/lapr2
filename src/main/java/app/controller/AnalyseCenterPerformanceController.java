@@ -1,6 +1,7 @@
 package app.controller;
 
 import java.util.Calendar;
+import app.domain.model.CenterPerformance;
 import app.domain.model.Company;
 import app.domain.model.VaccinationCenter;
 import app.session.EmployeeSession;
@@ -14,8 +15,8 @@ public class AnalyseCenterPerformanceController {
     this.session = session;
   }
 
-  public void analyseCenterPerformance(Calendar day, int interval) {
+  public CenterPerformance analyseCenterPerformance(Calendar day, int interval) {
     VaccinationCenter center = session.getVaccinationCenter();
-    CenterPerformance centerPerformance = center.getCenterPerformanceForDay(day, interval);
+    return center.getCenterPerformanceForDay(day, interval);
   }
 }

@@ -325,7 +325,7 @@ public abstract class VaccinationCenter {
   }
 
   public List<CenterEvent> getEventListForDay(Calendar day) {
-    this.eventList.
+    return this.eventList.getEventsInDay(day);
   }
 
   public abstract String toString();
