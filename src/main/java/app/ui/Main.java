@@ -7,7 +7,6 @@ import app.ui.gui.App;
  *
  * @author Paulo Maio <pam@isep.ipp.pt>
  */
-
 // Teste
 public class Main {
   public static void main(String[] args) {
