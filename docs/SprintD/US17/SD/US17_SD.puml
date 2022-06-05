@@ -12,9 +12,11 @@ participant "empSess:employeeSession" as SESSION
 participant "comp:Company" as COMPANY
 participant "csvReader:CSVReader" as CSVREADER
 participant ":ICSVReader" as ICSV
+participant ":LegacyDataMapper" as MAPPER
 participant "legacyDataDto:LegacyDataDTO" as DTO
+participant "legacyDtoList:List<LegacyDataDTO>" as LIST_DTOS
 participant "snsUserStore:SNSUserStore" as SNSSTORE
-' participant "vacStore:VaccinationCenterStore" as VACSTORE
+participant "center:VaccinationCenter" as CENTER
 participant "fileData:List<String[]>" as LIST_FILEDATA
 
 activate COORDINATOR
@@ -84,12 +86,33 @@ activate COORDINATOR
       deactivate CTRL
 
       ' process data
-      UI -> CTRL : legacy = convertData(fileData)
+      UI -> CTRL : legacyDtoList = convert(fileData)
       activate CTRL
+        loop for each entry in fileData
+          CTRL -> MAPPER : dto = toDto(entry)
+          activate MAPPER
+            MAPPER -> DTO : create(snsNumber, vaccineName, dose, lotNumber, scheduledDate, arrivalDate, administrationDate, leavingDate)
+            activate DTO
+            deactivate DTO
+          deactivate MAPPER
+
+          CTRL -> LIST_DTOS : add(dto)
+          activate LIST_DTOS
+          deactivate LIST_DTOS
+        end
       deactivate CTRL
 
       UI -> CTRL : validate(legacy)
       activate CTRL
+        loop for each legacyDataDto in legacyDtoList
+          CTRL -> DTO : snsNumber = getSNSNumber()
+          activate DTO
+          deactivate DTO
+
+          CTRL -> SNSSTORE : b = findSNSUserByNumber(snsNumber)
+          activate SNSSTORE
+          deactivate SNSSTORE
+        end
       deactivate CTRL
 
       UI -> CTRL : sort(legacy)
