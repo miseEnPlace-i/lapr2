@@ -92,6 +92,8 @@ public class SNSUser {
     this.phoneNumber = snsUserDTO.getPhoneNumber();
     this.email = snsUserDTO.getEmail();
     this.address = snsUserDTO.getAddress();
+
+    this.userHealthData = new HealthData(this);
   }
 
   // Getters
