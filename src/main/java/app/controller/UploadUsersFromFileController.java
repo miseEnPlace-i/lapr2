@@ -33,7 +33,7 @@ public class UploadUsersFromFileController {
 
     SNSUserStore store = this.company.getSNSUserStore();
 
-    List<String[]> userDataList = csvReader.readSNSUserData();
+    List<String[]> userDataList = csvReader.read();
 
     List<SNSUser> userList = store.registerListOfUsers(userDataList);
 

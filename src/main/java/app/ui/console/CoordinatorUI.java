@@ -10,7 +10,7 @@ import app.ui.console.utils.Utils;
 
 /**
  * Coordinator UI.
-*  
+ * 
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 public class CoordinatorUI implements Runnable {
@@ -22,7 +22,7 @@ public class CoordinatorUI implements Runnable {
         Company company = app.getCompany();
         this.employeeSession = new EmployeeSession();
         this.ctrl = new FindCoordinatorVaccinationCenterController(company, employeeSession);
-        
+
         this.ctrl.findCoordinatorCenter();
     }
 
@@ -35,7 +35,7 @@ public class CoordinatorUI implements Runnable {
 
         List<MenuItem> options = new ArrayList<MenuItem>();
 
-        options.add(new MenuItem("Import Legacy Data", new ImportLegacyDataUI()));
+        options.add(new MenuItem("Import Legacy Data", new ImportLegacyDataUI(this.employeeSession.getVaccinationCenter())));
 
         int option = 0;
         do {
