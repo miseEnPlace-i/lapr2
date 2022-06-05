@@ -20,7 +20,7 @@ public class CSVReader {
         this.path = path;
     }
 
-    public List<String[]> readSNSUserData() throws ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException,
+    public List<String[]> read() throws ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException,
             NoSuchMethodException, InvocationTargetException {
         List<String> fileData = FileUtils.readFromFile(this.path);
 
