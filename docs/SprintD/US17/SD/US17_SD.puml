@@ -3,16 +3,19 @@ autonumber
 
 actor "Center Coordinator" as COORDINATOR
 
+participant ":CoordinatorUI" as CUI
 participant ":ImportLegacyDataUI" as UI
 participant ":App" as _APP
 participant "app:App" as APP
 participant ":ImportLegacyDataController" as CTRL
+participant "empSess:employeeSession" as SESSION
 participant "comp:Company" as COMPANY
-participant "snsUserStore:SNSUserStore" as SNSSTORE
 participant "csvReader:CSVReader" as CSVREADER
 participant ":ICSVReader" as ICSV
-participant "vacStore:VaccinationCenterStore" as VACSTORE
-participant ":LegacyDataImporter" as IMPORT
+participant "legacyDataDto:LegacyDataDTO" as DTO
+participant "snsUserStore:SNSUserStore" as SNSSTORE
+' participant "vacStore:VaccinationCenterStore" as VACSTORE
+participant "fileData:List<String[]>" as LIST_FILEDATA
 
 activate COORDINATOR
   ref over COORDINATOR
@@ -22,51 +25,91 @@ activate COORDINATOR
     CoordinatorLogin_SD
   end ref
 
-  COORDINATOR -> UI : wants to import legacy data
-  activate UI
+  activate CUI
+  COORDINATOR -> CUI : wants to import legacy data
 
-    UI -> _APP : app = getInstance()
-    activate _APP
-    deactivate _APP
+      note right of CUI
+        employeeSession has <i><b>center</b></i> obtained 
+        during Coordinator login.
+      end note
 
-    UI -> APP : company = getCompany()
-    activate APP
-    deactivate APP
+      |||
 
-    |||
+    CUI -> SESSION : center = getVaccinationCenter()
+    activate SESSION
+    deactivate SESSION
 
-    note right of UI
-      <i><b>center</b></i> is obtained through the employeeSession.
-' Also see: <i>CoordinatorLogin_SD</i>
-    end note
+    CUI -> UI ** : create(center)
+    activate UI
 
-    |||
+      UI -> _APP : app = getInstance()
+      activate _APP
+      deactivate _APP
 
-    UI -> CTRL ** : create(company, center)
-    activate CTRL
-      CTRL -> COMPANY : snsUserStore = getSNSUserStore()
-      activate COMPANY
-      deactivate COMPANY
-    deactivate CTRL
+      UI -> APP : company = getCompany()
+      activate APP
+      deactivate APP
+
+      UI -> CTRL ** : create(company, center)
+      activate CTRL
+        CTRL -> COMPANY : snsUserStore = getSNSUserStore()
+        activate COMPANY
+        deactivate COMPANY
+      deactivate CTRL
+      
+      COORDINATOR <-- UI : asks to select the file using a file chooser dialog
+    deactivate UI
+
+    COORDINATOR -> UI : selects the file
+    activate UI
+      COORDINATOR <-- UI : asks for confirmation
+    deactivate UI
+    COORDINATOR -> UI : confirms the file
+    activate UI
     
-    COORDINATOR <-- UI : asks to type the file path
-  deactivate UI
+      ' read data
 
-  COORDINATOR -> UI : types the file path
-  activate UI
+      UI -> CTRL : fileData = read(filepath)
+      activate CTRL
+        CTRL -> CSVREADER ** : create(filepath)
 
-    ' read data
+        CTRL -> CSVREADER : read()
+        activate CSVREADER
+          CSVREADER -> ICSV ** : newInstance(filepath)
+          CSVREADER -> ICSV : read(fileData)
+          activate ICSV
+          deactivate ICSV
+        deactivate CSVREADER
 
-    UI -> CTRL : read(filepath)
-    activate CTRL
-      CTRL -> CSVREADER ** : create(filepath)
-    deactivate CTRL
+      deactivate CTRL
 
-    ' process data
+      ' process data
+      UI -> CTRL : legacy = convertData(fileData)
+      activate CTRL
+      deactivate CTRL
 
-    ' convert to dto and send it to ui
+      UI -> CTRL : validate(legacy)
+      activate CTRL
+      deactivate CTRL
 
-    COORDINATOR <-- UI : shows the data
-  deactivate UI
+      UI -> CTRL : sort(legacy)
+      activate CTRL
+      deactivate CTRL
+
+      ' convert to list dto and send it to ui
+
+      COORDINATOR <-- UI : shows the data and asks if he wants to save it
+    deactivate UI
+
+    COORDINATOR -> UI : confirms
+    activate UI
+      UI -> CTRL : save(legacy)
+      activate CTRL
+        ' gg
+      deactivate CTRL
+      COORDINATOR <-- UI : informs operation success
+    deactivate UI
+
+  deactivate CUI
 deactivate COORDINATOR
 @enduml
