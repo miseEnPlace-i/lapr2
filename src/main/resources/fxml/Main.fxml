@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.MainUI">
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="8.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Welcome!">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label text="Login to access the application features. ">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField id="txtEmail" maxWidth="-Infinity" prefWidth="450.0" promptText="Email" />
+            <TextField id="txtPwd" maxWidth="-Infinity" prefWidth="450.0" promptText="Password" />
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" spacing="8.0">
+               <children>
+                  <Button id="btnExit" mnemonicParsing="false" onAction="#btnExit" text="Exit" />
+                  <Button id="btnLogin" mnemonicParsing="false" onAction="#btnLogin" text="Login" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <padding>
+      <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+   </padding>
+</BorderPane>
