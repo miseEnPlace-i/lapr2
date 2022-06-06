@@ -95,12 +95,28 @@ deactivate CTRL
 end
 end
 
-EXPORTERDATA -> CSVEXPORTER** : saveData()
+EXPORTERDATA -> CSVEXPORTER** : saveData(filePath,map)
+activate CSVEXPORTER
+
+note over CSVEXPORTER
+file refers to a object File
+bf refers to a object BufferedWriter
+end note
+CSVEXPORTER -> CSVEXPORTER : file = new File(filePath)
+CSVEXPORTER -> CSVEXPORTER : bf =  new BufferedWriteer(new FileWriter(file))
+loop for each content of the map 
+CSVEXPORTER -> CSVEXPORTER : bf.write(entry.getKey() + ":" + entry.getValue())
+CSVEXPORTER -> CSVEXPORTER : bf.newLine()
 activate CSVEXPORTER
 deactivate CSVEXPORTER
+end
+CSVEXPORTER -> CSVEXPORTER : bf.flush()
+
+CSVEXPORTER -> CSVEXPORTER : bf.close()
 deactivate EXPORTERDATA
 
 UI --> COORDINATOR : informs operation success
+deactivate CSVEXPORTER
 
 deactivate COORDINATOR 
 
