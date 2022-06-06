@@ -19,15 +19,15 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="550.0" prefWidth="900.0" scaleShape="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.BaseScreenUI">
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="550.0" prefWidth="900.0" scaleShape="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.BaseScreenUI">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="90.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="120.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints maxHeight="110.0" minHeight="32.0" prefHeight="34.0" />
-    <RowConstraints maxHeight="420.0" minHeight="82.0" prefHeight="84.0" />
-    <RowConstraints maxHeight="370.0" minHeight="100.0" prefHeight="340.0" />
-    <RowConstraints maxHeight="94.0" minHeight="89.0" prefHeight="94.0" />
+    <RowConstraints maxHeight="84.0" minHeight="82.0" prefHeight="84.0" vgrow="ALWAYS" />
+    <RowConstraints maxHeight="+Infinity" minHeight="100.0" prefHeight="340.0" vgrow="ALWAYS" />
+    <RowConstraints maxHeight="160.0" minHeight="89.0" prefHeight="94.0" vgrow="ALWAYS" />
   </rowConstraints>
    <children>
       <MenuBar centerShape="false" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="32.0" prefWidth="900.0" scaleShape="false" GridPane.halignment="LEFT" GridPane.hgrow="NEVER" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
@@ -51,42 +51,32 @@
       </MenuBar>
       <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="900.0" scaleShape="false" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
          <children>
-            <Text layoutX="132.0" layoutY="51.0" nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Title Text" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="635.9698677062988" AnchorPane.bottomAnchor="29.0" AnchorPane.leftAnchor="132.0" AnchorPane.rightAnchor="132.03013229370117" AnchorPane.topAnchor="30.0">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="30.0" prefHeight="29.0" prefWidth="900.0" text="Title Text" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0">
                <font>
-                  <Font size="22.0" />
+                  <Font size="24.0" />
                </font>
-            </Text>
+            </Label>
             <ImageView fitHeight="58.0" fitWidth="59.0" layoutX="770.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="72.0">
                <image>
                   <Image url="@../img/default-profile-pic.png" />
                </image>
             </ImageView>
-            <Label layoutX="633.0" layoutY="17.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="61.0" text="Name:" AnchorPane.rightAnchor="206.0">
+            <Label alignment="CENTER_RIGHT" layoutX="696.0" layoutY="19.0" prefHeight="25.0" prefWidth="203.0" text="Jovem Craque" AnchorPane.rightAnchor="136.0">
                <font>
-                  <Font size="16.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="696.0" layoutY="19.0" prefHeight="25.0" prefWidth="68.0" text="name" AnchorPane.rightAnchor="136.0">
+            <Label alignment="CENTER_RIGHT" layoutX="696.0" layoutY="44.0" prefHeight="20.0" prefWidth="122.0" text="SNS User" AnchorPane.rightAnchor="139.0">
                <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="633.0" layoutY="40.0" prefHeight="28.0" prefWidth="41.0" text="Role:" AnchorPane.rightAnchor="226.0">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="696.0" layoutY="44.0" prefHeight="20.0" prefWidth="74.0" text="role" AnchorPane.rightAnchor="130.0">
-               <font>
-                  <Font size="16.0" />
+                  <Font name="System Italic" size="14.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="16.0" prefHeight="100.0" prefWidth="900.0" GridPane.rowIndex="3">
+      <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="16.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
          <children>
-            <Button defaultButton="true" mnemonicParsing="false" text="Action" />
-            <Button id="btnBack" cancelButton="true" mnemonicParsing="false" onAction="#btnBack" text="Back to menu" />
+            <Button defaultButton="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="Action" />
+            <Button id="btnBack" cancelButton="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnBack" prefHeight="40.0" prefWidth="120.0" text="Back to menu" />
          </children>
       </FlowPane>
    </children>

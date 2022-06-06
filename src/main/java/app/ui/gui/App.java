@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 public class App extends Application {
   private Stage stage;
-  private final double MINIMUM_WINDOW_WIDTH = 800.0;
+  private final double MINIMUM_WINDOW_WIDTH = 840.0;
   private final double MINIMUM_WINDOW_HEIGHT = 600.0;
   private final double SCENE_WIDTH = 1000.0;
   private final double SCENE_HEIGHT = 600.0;
@@ -25,6 +25,7 @@ public class App extends Application {
     stage.setMinWidth(MINIMUM_WINDOW_WIDTH);
     stage.setMinHeight(MINIMUM_WINDOW_HEIGHT);
     toMainScene();
+    replaceSceneContent("/fxml/BaseScreen.fxml");
     this.stage.show();
   }
 
