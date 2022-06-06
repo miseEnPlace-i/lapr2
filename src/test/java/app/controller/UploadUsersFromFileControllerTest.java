@@ -2,6 +2,7 @@ package app.controller;
 
 import static org.junit.Assert.assertEquals;
 import java.io.FileNotFoundException;
+import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import org.junit.Test;
 import app.domain.model.Company;
@@ -33,7 +34,7 @@ public class UploadUsersFromFileControllerTest {
     //Check that it is possible to read and upload from a list with a repeated user in the middle
     //There are 2 valid users, so it should read 2 users and not stop when failing to register
     @Test
-    public void ensureReadAndUploadFromListWhitRepeatedUser() throws ParseException, ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException {
+    public void ensureReadAndUploadFromListWhitRepeatedUser() throws ParseException, ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException, NoSuchMethodException, InvocationTargetException {
         int size = store.size();
 
         ctrl.createCsvReader("src/test/java/app/domain/model/SNSUserFilesToTests/UsersFileWithRepeatedUser.csv");
@@ -46,7 +47,7 @@ public class UploadUsersFromFileControllerTest {
     //Check that it is possible to read and upload from a list with a invalid user in the middle
     //There are 2 valid users, so it should read 2 users and not stop when failing to register
     @Test
-    public void ensureReadAndUploadFromListWhitInvalidUser() throws ParseException, ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException {
+    public void ensureReadAndUploadFromListWhitInvalidUser() throws ParseException, ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException, NoSuchMethodException, InvocationTargetException {
         int size = store.size();
 
         ctrl.createCsvReader("src/test/java/app/domain/model/SNSUserFilesToTests/UsersFileWithInvalidUser.csv");
@@ -59,7 +60,7 @@ public class UploadUsersFromFileControllerTest {
 
     //Check that it is possible to read and upload from a list with only valid user in the middle
     @Test
-    public void ensureReadAndUploadFromListWhitValidUser() throws ParseException, ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException {
+    public void ensureReadAndUploadFromListWhitValidUser() throws ParseException, ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException, NoSuchMethodException, InvocationTargetException {
         int size = store.size();
 
         ctrl.createCsvReader("src/test/java/app/domain/model/SNSUserFilesToTests/HeaderUsersFile.csv");

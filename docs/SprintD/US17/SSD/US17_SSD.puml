@@ -14,7 +14,20 @@ deactivate ":System"
 COORDINATOR -> ":System" : types the file path
 activate ":System"
 
-":System" --> COORDINATOR : shows data sorted by arrival time or by the center leaving time
+":System" --> COORDINATOR : shows file path and asks for confirmation
+deactivate ":System"
+
+COORDINATOR -> ":System" : confirms the file path
+activate ":System"
+
+' sorted by arrival time or by the center leaving time
+":System" --> COORDINATOR : shows data sorted and asks if he wants to save it
+deactivate ":System"
+
+COORDINATOR -> ":System" : confirms
+activate ":System"
+
+":System" --> COORDINATOR : informs operation success
 deactivate ":System"
 
 deactivate COORDINATOR

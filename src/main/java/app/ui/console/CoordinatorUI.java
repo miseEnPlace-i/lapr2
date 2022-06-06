@@ -1,33 +1,49 @@
 package app.ui.console;
 
-import org.apache.commons.lang3.NotImplementedException;
+import java.util.ArrayList;
+import java.util.List;
+import app.controller.App;
+import app.controller.FindCoordinatorVaccinationCenterController;
+import app.domain.model.Company;
+import app.session.EmployeeSession;
+import app.ui.console.utils.Utils;
 
 /**
+ * Coordinator UI.
  * 
- * @author
+ * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
-public class CoordinatorUI extends EmployeeWithCenterUI {
+public class CoordinatorUI implements Runnable {
+    private EmployeeSession employeeSession;
+    private FindCoordinatorVaccinationCenterController ctrl;
+
     public CoordinatorUI() {
-        super();
+        App app = App.getInstance();
+        Company company = app.getCompany();
+        this.employeeSession = new EmployeeSession();
+        this.ctrl = new FindCoordinatorVaccinationCenterController(company, employeeSession);
+
+        this.ctrl.findCoordinatorCenter();
     }
 
     @Override
-    public void callback() {
-        // TODO: for users with the coordinator role we don't want to select a center, we want to find the one he is assigned to
+    public void run() {
+        if (!this.employeeSession.hasCenter()) {
+            System.out.println("You are not assigned to a vaccination center. Please contact your administrator.");
+            return;
+        }
 
-        System.out.println("Coordinator UI not implemented yet.");
+        List<MenuItem> options = new ArrayList<MenuItem>();
 
-        // List<MenuItem> options = new ArrayList<MenuItem>();
+        options.add(new MenuItem("Import Legacy Data", new ImportLegacyDataUI(this.employeeSession.getVaccinationCenter())));
 
-        // options.add(new MenuItem("Turn the spaceship engine on", new SomethingUI()));
+        int option = 0;
+        do {
+            System.out.printf("%Coordinator Vaccination Center: %s", this.ctrl.getVaccinationCenterName());
+            option = Utils.showAndSelectIndex(options, "\n\nCoordinator Menu:");
 
-        // int option = 0;
-        // do {
-        //     System.out.printf("%Coordinator Vaccination Center: %s", super.getCurrentVaccinationCenter());
-        //     option = Utils.showAndSelectIndex(options, "\n\Coordinator Menu:");
-
-        //     if ((option >= 0) && (option < options.size())) options.get(option).run();
-        // } while (option != -1);
+            if ((option >= 0) && (option < options.size())) options.get(option).run();
+        } while (option != -1);
     }
 
 }
