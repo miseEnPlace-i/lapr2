@@ -11,7 +11,7 @@ deactivate ":System"
 
 nurse -> ":System" : selects an SNS user
 activate ":System"
-  ":System" --> nurse : shows SNS user's health data, name and age
+  ":System" --> nurse : shows SNS user's name, age and previous adverse reactions
 deactivate ":System"
 
 nurse -> ":System" : asks to proceed
