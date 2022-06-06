@@ -135,18 +135,16 @@ public class AppointmentScheduleList {
 
     Time hours = new Time(appointment.getDate());
 
-    if (!vaccinationCenter.isOpenAt(hours)) {
+    if (!vaccinationCenter.isOpenAt(hours))
       throw new IllegalArgumentException("Vaccination center is closed or does not accept appointments at selected time.");
-    }
-    if (!vaccinationCenter.hasAvailabilityInSlot(appointment.getDate())) {
+
+    if (!vaccinationCenter.hasAvailabilityInSlot(appointment.getDate()))
       throw new IllegalArgumentException("Vaccination center does not accept any more appointments at selected time.");
-    }
 
     SNSUser snsUser = appointment.getSnsUser();
 
-    if (snsUser.hasAppointmentForVaccineType(appointment.getVaccineType())) {
+    if (snsUser.hasAppointmentForVaccineType(appointment.getVaccineType()))
       throw new IllegalArgumentException("SNS User has already an appointment for the selected vaccine type.");
-    }
   }
 
   /**
