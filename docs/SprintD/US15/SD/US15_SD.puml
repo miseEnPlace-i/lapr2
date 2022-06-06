@@ -86,7 +86,7 @@ activate VACCINE
 deactivate VACCINE
 
 opt (fullyVaccinated == true) 
-EXPORTERDATA -> MAP : addSNSUserFullyVaccinated(vacType)
+EXPORTERDATA -> MAP : data.put(vacType,1)
 activate MAP
 deactivate MAP
 end
