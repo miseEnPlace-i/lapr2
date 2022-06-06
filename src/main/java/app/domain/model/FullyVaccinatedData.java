@@ -7,7 +7,7 @@ import app.service.FormatVerifier;
 import app.service.TimeUtils;
 
 
-public class CsvExporterData {
+public class FullyVaccinatedData {
 
     private String filePath;
     private Date startDate;
@@ -18,7 +18,7 @@ public class CsvExporterData {
     private SNSUser snsUser;
     private Vaccine vaccine;
 
-    public CsvExporterData(String path, Date start, Date end, VaccinationCenter center) {
+    public FullyVaccinatedData(String path, Date start, Date end, VaccinationCenter center) {
         validatePath(path);
         validateDate(start);
         validateDate(end);
