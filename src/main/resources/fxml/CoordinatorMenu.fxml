@@ -6,17 +6,14 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.MainUI">
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="CENTER" prefHeight="457.0" prefWidth="600.0" spacing="16.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#btnLogin" prefWidth="320.0" text="Do Login">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="btnDevTeam" mnemonicParsing="false" onAction="#btnDevTeam" prefWidth="320.0" text="Know the Development Team" />
-            <Button fx:id="btnExit" mnemonicParsing="false" onAction="#btnExit" prefWidth="320.0" text="Exit" />
+            <Button mnemonicParsing="false" prefWidth="320.0" text="Export Vaccination Statistics" />
+            <Button mnemonicParsing="false" prefWidth="320.0" text="Analyse Center Performance" />
+            <Button mnemonicParsing="false" prefWidth="320.0" text="Import Data from Legacy System" />
          </children>
          <BorderPane.margin>
             <Insets bottom="80.0" />

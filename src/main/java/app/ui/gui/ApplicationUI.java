@@ -34,8 +34,8 @@ public class ApplicationUI extends Application {
 
   public void toMainScene() {
     try {
-      MainUI authUI = (MainUI) replaceSceneContent("/fxml/Main.fxml");
-      authUI.setMainApp(this);
+      MainUI mainUI = (MainUI) replaceSceneContent("/fxml/Main.fxml");
+      mainUI.setMainApp(this);
     } catch (Exception ex) {
       Logger.getLogger(ApplicationUI.class.getName()).log(Level.SEVERE, null, ex);
     }

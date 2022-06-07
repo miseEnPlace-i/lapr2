@@ -4,26 +4,15 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import app.controller.AuthController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 
 public class MainUI implements Initializable {
   private ApplicationUI mainApp;
-  private AuthController ctrl;
-
-  @FXML
-  private TextField txtEmail;
-  @FXML
-  private PasswordField txtPwd;
 
   @Override
-  public void initialize(URL location, ResourceBundle resources) {
-    ctrl = new AuthController();
-  }
+  public void initialize(URL location, ResourceBundle resources) {}
 
   public void setMainApp(ApplicationUI mainApp) {
     this.mainApp = mainApp;
@@ -35,19 +24,13 @@ public class MainUI implements Initializable {
   }
 
   @FXML
+  void btnDevTeam(ActionEvent event) {}
+
+  @FXML
   void btnLogin(ActionEvent event) {
-    // test
     try {
-
-      String email = txtEmail.getText();
-      String pwd = txtPwd.getText();
-
-      if (ctrl.doLogin(email, pwd)) {
-        BaseScreenUI analyseCenterUI = (BaseScreenUI) this.mainApp.replaceSceneContent("/fxml/BaseScreen.fxml");
-        analyseCenterUI.setMainApp(this.mainApp);
-      } else {
-        // TODO Alert for failed login
-      }
+      AuthUI analyseCenterUI = (AuthUI) this.mainApp.replaceSceneContent("/fxml/Auth.fxml");
+      analyseCenterUI.setMainApp(this.mainApp);
     } catch (Exception e) {
       Logger.getLogger(ApplicationUI.class.getName()).log(Level.SEVERE, null, e);
     }
