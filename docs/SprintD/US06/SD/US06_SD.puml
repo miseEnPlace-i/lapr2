@@ -5,29 +5,36 @@ actor "Timer" as ACTOR
 
 participant "App" as APP
 participant "Company" as COMP
-participant "task: ExportDailyVaccinatedTask" as TASK
-participant "timer: Timer" as TIMER
+participant "task:\nExportDailyVaccinatedTask" as TASK
+participant "timer:\nTimer" as TIMER
+participant "vacCenterSt:\nVaccinationCenterStore" as VCST
+participant "vacTypeSt:\nVaccineTypeStore" as VTST
+participant "center:\nVaccinationCenter" as CENTER
+participant "vaccine:\nVaccine" as VAC
+participant "vacType:\nVaccineType" as VACTYPE
+participant "vacAdminList:\nList<VaccineAdministration>" as VALST
 
 
 
 APP -> APP : StartUp()
 activate APP
-    APP -> COMP : scheduleExportDVac()
+    APP -> COMP : scheduleExportDailyVaccinated(dateTime)
     activate COMP
-deactivate APP
+
+    deactivate APP
 
         note right of COMP
             aqui recebe isto??? recebe tambem as stores necessarias??
         end note 
-        COMP -> TASK ** : create(filePath)
+        COMP --> TASK ** : create(filePath, VaccinationCenterStore, VaccineTypeStore)
 
-        COMP -> TIMER ** : create()
+        COMP --> TIMER ** : create()
 
         COMP -> TIMER : schedule(task, dateTime)
         activate TIMER
         deactivate TIMER
 
-        note right of COMP
+        note right TASK 
             After the time to the specifiede date and time has elapsed
         end note 
         
@@ -37,6 +44,25 @@ deactivate APP
         activate TIMER
         deactivate TIMER
         activate TASK
+            TASK -> VCST : centerLst = getVaccinationCenters()
+            activate VCST
+            deactivate VCST
+
+            TASK -> VTST : vacTypeLst = getVaccineTypes()
+            activate VTST
+            deactivate VTST
+
+            loop foreach vaccination center
+                TASK -> CENTER : vacAdminList = getVaccinaAdminList()
+                activate CENTER
+                deactivate CENTER
+
+                loop foreach vaccine administration
+                    TASK -> VAC : vacType = getVacType()
+                    activate VAC
+                    deactivate VAC
+                end
+            end
         deactivate TASK
 
 
