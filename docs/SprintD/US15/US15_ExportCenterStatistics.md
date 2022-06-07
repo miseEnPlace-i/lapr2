@@ -66,8 +66,8 @@ n/a.
 | Step 1         | ... interacting with the actor?             | ExportStatisticsUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
 |                | ... coordinating the US?                    | ExportStatisticsController | Controller                                                                                                    |
 | Step 2         | n/a                                         | n/a                        | n/a                                                                                                           |
-| Step 3         | ... instantiating new ExporterCsvData?      | FullyVaccinatedData        | IE: holds the information relevant to the statistics                                                          |
-|                | ... knows the coordinator center?           | EmployeeSession            | IE: holds information about the sessions of the users.                                                        |
+| Step 3         | ... knows the coordinator center?           | EmployeeSession            | IE: holds information about the sessions of the users.                                                        |
+|                | ... instantiating new FullyVaccinatedData?  | FullyVaccinatedData        | IE: holds the information relevant to the statistics                                                          |
 |                | ... holds information needed to statistics? | VaccineAdministration      | IE: holds information about the vaccination process of every user                                             |
 |                | ... check sns user is fully vaccinated?     | Vaccine                    | IE: holds information about the administrations process                                                       |
 | Step 4         | ... saving the new statistics?              | CsvExporter                | IE: gets all the data needed to export the statistics.                                                        |
