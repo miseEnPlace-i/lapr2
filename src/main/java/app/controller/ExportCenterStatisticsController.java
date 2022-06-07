@@ -35,7 +35,7 @@ public class ExportCenterStatisticsController {
     }
 
     public void saveData(String filePath, Map data) {
-        CsvExporter csvExporter = new CsvExporter();
-        csvExporter.writeToFile(filePath, data);
+        CsvExporter csvExporter = new CsvExporter(filePath);
+        csvExporter.writeToFile(data);
     }
 }
