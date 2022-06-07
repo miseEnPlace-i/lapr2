@@ -62,6 +62,11 @@ public class AuthUI implements Initializable, IGui {
     UserRoleDTO role = ctrl.getUserRoles().get(0);
     String menuFXML = getMenuWithRoleFXML(role);
 
+    if (menuFXML == null) {
+      Logger.getLogger(AuthUI.class.getName()).log(Level.SEVERE, "No menu found for role: " + role.getDescription());
+      return;
+    }
+
     try {
       IGui gui = (IGui) mainApp.replaceSceneContent(menuFXML);
       gui.setMainApp(mainApp);
