@@ -45,14 +45,10 @@ CTRL -> EMPLOYEESESSION : center = getVaccinationCenter()
 activate EMPLOYEESESSION
 deactivate EMPLOYEESESSION
 
-CTRL --> FULLYDATA** : exporterCsv = create(filePath,startDate,endDate,center)
+CTRL --> FULLYDATA** : create(filePath,startDate,endDate,center)
 
-loop for each day between timeInterval selected
-note over FULLYDATA
-inicialy day refers to the startDate, after iterations this increases by one
-until it reaches the endDate
-end note
-
+CTRL -> FULLYDATA : generateFullyVaccinatedUsersInterval = getFullyVaccinatedUsersPerDayMap()
+loop for each day between startDate and endDate selected
 activate FULLYDATA
 
 FULLYDATA -> CENTER : vacAdminList = getVacAdminDayList(day)
@@ -85,19 +81,27 @@ FULLYDATA -> VACCINE : fullyVaccinated = checkUserFullyVaccinated(snsUserAge,dos
 activate VACCINE
 deactivate VACCINE
 
-opt (fullyVaccinated == true) 
-FULLYDATA -> MAP : data.put(vacType,1)
-activate MAP
-deactivate MAP
+opt fullyVaccinated == true
+
+FULLYDATA -> FULLYDATA : nOfFullyVaccinated = 0
+opt data.get(vacType) == null
+FULLYDATA -> FULLYDATA : nOfFullyVaccinated = 1
+alt
+FULLYDATA -> FULLYDATA : nOfFullyVaccinated = data.get(vacType) + 1
+end
 end
 
-deactivate CTRL
+FULLYDATA -> FULLYDATA : data.put(vacType,nOfFullyVaccinated)
+end
 end
 end
 
-FULLYDATA -> CSVEXPORTER** : saveData(filePath,map)
-activate CSVEXPORTER
+FULLYDATA --> CTRL : dataMap
 deactivate FULLYDATA
+
+CTRL -> CSVEXPORTER** : saveData(filePath,dataMap)
+deactivate CTRL
+activate CSVEXPORTER
 
 note over CSVEXPORTER
 file refers to a object File
@@ -105,11 +109,13 @@ bf refers to a object BufferedWriter
 end note
 CSVEXPORTER -> CSVEXPORTER : file = new File(filePath)
 CSVEXPORTER -> CSVEXPORTER : bf =  new BufferedWriteer(new FileWriter(file))
+
+CSVEXPORTER -> CSVEXPORTER : bf.write("Date;NumberOfFullyVaccinatedUsersPerDay")
+
 loop for each content of the map 
 CSVEXPORTER -> CSVEXPORTER : bf.write(entry.getKey() + ":" + entry.getValue())
 CSVEXPORTER -> CSVEXPORTER : bf.newLine()
-activate CSVEXPORTER
-deactivate CSVEXPORTER
+
 end
 CSVEXPORTER -> CSVEXPORTER : bf.flush()
 
