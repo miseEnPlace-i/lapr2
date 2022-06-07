@@ -1,6 +1,7 @@
 package app.domain.model;
 
 import app.domain.model.list.AdminProcList;
+import app.domain.model.list.DoseInfoList;
 
 /**
  * @author Carlos Lopes <1211277@isep.ipp.pt>
@@ -12,6 +13,7 @@ public class Vaccine {
   private String id;
   private VaccineType vacType;
   private AdminProcList adminProcList;
+
 
   public Vaccine(String designation, String id, String brand, VaccineType vacType) {
     setBrand(brand);
@@ -123,4 +125,25 @@ public class Vaccine {
 
     return false;
   }
+
+  public AdminProcess getAdminProc(int age) {
+    for (AdminProcess adPr : adminProcList.getList()) {
+      if (adPr.admitsAge(age)) {
+        return adPr;
+      }
+    }
+
+    return null;
+  }
+
+
+  public boolean checkUserFullyVaccinated(int age, int dose) {
+
+    AdminProcess adminProcByAge = getAdminProc(age);
+    DoseInfoList doseInfoLst = adminProcByAge.getDoseInfoList();
+    int size = doseInfoLst.getSize();
+
+    return dose == size ? true : false;
+  }
 }
+
