@@ -8,20 +8,22 @@ participant ":ExportCenterStatisticsController" as CTRL
 participant ":Company" as COMP
 participant "fullyVaccinatedData\n:FullyVaccinatedData" as FULLYDATA
 participant "vaccineAdministration\n:VaccineAdministration" as VACADMIN
-participant "adminProcess\n:AdminProcess" as ADMINPROC
 participant "employeeSession\n:EmployeeSession" as EMPLOYEESESSION
 participant "vaccinationCenter\n:VaccinationCenter" as CENTER
 participant "vaccineAdministrationList\n:List<VaccineAdministration>" as VACADMINLIST
 participant "vaccineAdministrationDayList\n:List<VaccineAdministration>" as VACDAYLIST
 participant "vaccine\n:Vaccine" as VACCINE
-participant "map\n:Map<String,Integer>" as MAP
+participant "adminProcByAge\n:AdminProcess" as ADMINPROC
+participant "doseInfoLst\n:DoseInfoList" as DI_LIST
+participant "dataMap\n:Map<String,Integer>" as MAP
 participant "csvexporter\n:CsvExporter" as CSVEXPORTER
+
 
 activate COORDINATOR
 COORDINATOR -> UI : asks to export center statistics
 activate UI
 
-UI -> APP : comp = app.getCompany()
+UI -> APP : company = app.getCompany()
 activate APP
 deactivate APP
 
@@ -47,7 +49,7 @@ deactivate EMPLOYEESESSION
 
 CTRL --> FULLYDATA** : create(filePath,startDate,endDate,center)
 
-CTRL -> FULLYDATA : generateFullyVaccinatedUsersInterval = getFullyVaccinatedUsersPerDayMap()
+CTRL -> FULLYDATA : dataMap = getFullyVaccinatedUsersPerDayMap()
 loop for each day between startDate and endDate selected
 activate FULLYDATA
 
@@ -65,64 +67,45 @@ FULLYDATA -> VACADMIN : vaccine = getVaccine()
 activate VACADMIN
 deactivate VACADMIN
 
-FULLYDATA -> VACCINE : vacType = getVacType()
-activate VACCINE
-deactivate VACCINE
-
 FULLYDATA -> VACADMIN : dose = getDose()
 activate VACADMIN
 deactivate VACADMIN
 
-FULLYDATA -> VACCINE : adminProcByAge = vaccine.getAdminProc(snsUserAge)
+FULLYDATA -> VACCINE : fullyVaccinated = checkUserFullyVaccinated(snsUserAge,dose)
+activate VACCINE
+
+VACCINE -> VACCINE : adminProcByAge = getAdminProc(snsUserAge)
 activate VACCINE
 deactivate VACCINE
 
-FULLYDATA -> VACCINE : fullyVaccinated = checkUserFullyVaccinated(snsUserAge,dose)
-activate VACCINE
+VACCINE -> ADMINPROC : doseInfoLst = getDoseInfoList()
+activate ADMINPROC
+deactivate ADMINPROC
+
+VACCINE -> DI_LIST : size = getSize()
+activate DI_LIST
+deactivate DI_LIST
 deactivate VACCINE
 
 opt fullyVaccinated == true
-
-FULLYDATA -> FULLYDATA : nOfFullyVaccinated = 0
-opt data.get(vacType) == null
-FULLYDATA -> FULLYDATA : nOfFullyVaccinated = 1
-alt
-FULLYDATA -> FULLYDATA : nOfFullyVaccinated = data.get(vacType) + 1
+FULLYDATA -> FULLYDATA : nOfFullyVaccinated += 1
 end
 end
 
-FULLYDATA -> FULLYDATA : data.put(vacType,nOfFullyVaccinated)
-end
-end
+FULLYDATA -> MAP : put(day, nOfFullyVaccinated)
+activate MAP
+deactivate MAP
+
 end
 
-FULLYDATA --> CTRL : dataMap
 deactivate FULLYDATA
 
-CTRL -> CSVEXPORTER** : saveData(filePath,dataMap)
-deactivate CTRL
+CTRL -> CSVEXPORTER** : create(filePath)
+
+CTRL -> CSVEXPORTER : saveData(dataMap)
 activate CSVEXPORTER
-
-note over CSVEXPORTER
-file refers to a object File
-bf refers to a object BufferedWriter
-end note
-CSVEXPORTER -> CSVEXPORTER : file = new File(filePath)
-CSVEXPORTER -> CSVEXPORTER : bf =  new BufferedWriteer(new FileWriter(file))
-
-CSVEXPORTER -> CSVEXPORTER : bf.write("Date;NumberOfFullyVaccinatedUsersPerDay")
-
-loop for each content of the map 
-CSVEXPORTER -> CSVEXPORTER : bf.write(entry.getKey() + ":" + entry.getValue())
-CSVEXPORTER -> CSVEXPORTER : bf.newLine()
-
-end
-CSVEXPORTER -> CSVEXPORTER : bf.flush()
-
-CSVEXPORTER -> CSVEXPORTER : bf.close()
-
-UI --> COORDINATOR : informs operation success
 deactivate CSVEXPORTER
+deactivate CTRL
 
 deactivate COORDINATOR 
 

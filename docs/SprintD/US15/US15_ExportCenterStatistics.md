@@ -66,7 +66,7 @@ n/a.
 | Step 1         | ... interacting with the actor?             | ExportStatisticsUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
 |                | ... coordinating the US?                    | ExportStatisticsController | Controller                                                                                                    |
 | Step 2         | n/a                                         | n/a                        | n/a                                                                                                           |
-| Step 3         | ... instantiating new ExporterCsvData?      | CsvExporterData            | IE: holds the information relevant to the statistics                                                          |
+| Step 3         | ... instantiating new ExporterCsvData?      | FullyVaccinatedData        | IE: holds the information relevant to the statistics                                                          |
 |                | ... knows the coordinator center?           | EmployeeSession            | IE: holds information about the sessions of the users.                                                        |
 |                | ... holds information needed to statistics? | VaccineAdministration      | IE: holds information about the vaccination process of every user                                             |
 |                | ... check sns user is fully vaccinated?     | Vaccine                    | IE: holds information about the administrations process                                                       |
@@ -76,7 +76,7 @@ n/a.
 
 According to the taken rationale, the conceptual classes promoted to software classes are:
 
-- CsvExporterData 
+- FullyVaccinatedData 
 - CsvExporter
 - VaccineAdministration
 - Vaccine
@@ -84,8 +84,8 @@ According to the taken rationale, the conceptual classes promoted to software cl
 
 Other software classes (i.e. Pure Fabrication) identified:
 
-- CsvExporterUI 
-- CsvExporterController
+- ExportCenterStatisticsUI 
+- ExportCenterStatisticsController
 
 ## 3.2. Sequence Diagram (SD)
 
