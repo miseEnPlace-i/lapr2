@@ -1,10 +1,11 @@
-package app.domain.model;
+package app.service;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import app.service.FormatVerifier;
-import app.service.TimeUtils;
+import app.domain.model.SNSUser;
+import app.domain.model.VaccinationCenter;
+import app.domain.model.Vaccine;
 
 
 public class FullyVaccinatedData {
@@ -50,7 +51,7 @@ public class FullyVaccinatedData {
     }
 
 
-    public void getAllData() {
+    public Map<String, Integer> getFullyVaccinatedUsersPerDayMap() {
         for (int i = 0; i < endDate.getTime() - startDate.getTime(); i++) {
             Date date = new Date();
             // TODO: vacAdminList();
@@ -58,10 +59,10 @@ public class FullyVaccinatedData {
             snsUserAge = (int) (date.getTime() - snsUser.getBirthDay().getTime());
             // }
         }
+
+        return data;
     }
 
     // public List<VaccineAdministration> vacAdminList() {}
-
-
 
 }
