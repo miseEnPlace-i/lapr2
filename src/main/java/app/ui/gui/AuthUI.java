@@ -5,10 +5,14 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import app.controller.AuthController;
+import app.domain.shared.Constants;
 import app.domain.shared.MenuFXMLPath;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -18,6 +22,7 @@ import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
 public class AuthUI implements Initializable, IGui {
   private ApplicationUI mainApp;
   private AuthController ctrl;
+  private int maxAttempts = Constants.MAX_OF_PASSWORD_TRIES;
 
   @FXML
   private TextField txtEmail;
@@ -36,6 +41,10 @@ public class AuthUI implements Initializable, IGui {
 
   @FXML
   void btnExit(ActionEvent event) {
+    exitApplication();
+  }
+
+  private void exitApplication() {
     mainApp.getStage().close();
   }
 
@@ -45,19 +54,49 @@ public class AuthUI implements Initializable, IGui {
     login();
   }
 
+  private void displayInvalidCredentialsAlert() {
+
+    Alert alert = new Alert(AlertType.ERROR);
+    alert.setTitle("Login Failed");
+    alert.setHeaderText("Please insert your email and password again.");
+    alert.setContentText(String.format("You have %d attempts left.", maxAttempts));
+    alert.showAndWait().ifPresent(response -> {
+      if (response == ButtonType.OK) Logger.getLogger(getClass().getName()).log(Level.INFO, "Login failed");
+    });
+  }
+
+  private void displayMaxAttemptsReachedAlert() {
+    Alert alert = new Alert(AlertType.WARNING);
+    alert.setTitle("Login Failed");
+    alert.setHeaderText("Maximum number of attempts reached.");
+    alert.showAndWait().ifPresent(response -> {
+      if (response == ButtonType.OK) Logger.getLogger(getClass().getName()).log(Level.INFO, "Login failed");
+    });
+  }
+
   @FXML
   void onKeyPressed(KeyEvent event) {
     if (event.getCode() == KeyCode.ENTER) login();
   }
 
   private void login() {
+
+
     String email = txtEmail.getText();
     String pwd = txtPwd.getText();
 
     if (!ctrl.doLogin(email, pwd)) {
-      // TODO 3 tries system
+      if (maxAttempts == 0) {
+        displayMaxAttemptsReachedAlert();
+        exitApplication();
+        return;
+      }
+
+      displayInvalidCredentialsAlert();
+      maxAttempts--;
       return;
     }
+
 
     UserRoleDTO role = ctrl.getUserRoles().get(0);
     String menuFXML = getMenuWithRoleFXML(role);
