@@ -18,6 +18,7 @@ public class FullyVaccinatedData {
     private int snsUserAge;
     private SNSUser snsUser;
     private Vaccine vaccine;
+    private boolean fullyVaccinated;
 
     public FullyVaccinatedData(String path, Date start, Date end, VaccinationCenter center) {
         validatePath(path);
@@ -57,6 +58,9 @@ public class FullyVaccinatedData {
             // TODO: vacAdminList();
             // for (int j = 0; j < vacAdminList.size(); j++) {
             snsUserAge = (int) (date.getTime() - snsUser.getBirthDay().getTime());
+            // vaccine = vacAdmin.getVaccine()
+            // dose = vacAdmin.getDose()
+            // fullyVaccinated = vaccine.checkUserFullyVaccinated(snsUserAge, dose);
             // }
         }
 

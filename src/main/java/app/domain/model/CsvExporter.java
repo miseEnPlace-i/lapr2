@@ -7,13 +7,18 @@ import java.io.IOException;
 import java.util.Map;
 
 public class CsvExporter {
+  private String filePath;
+
+  public CsvExporter(String filePath) {
+    this.filePath = filePath;
+  }
 
   private BufferedWriter bf;
 
-  public void writeToFile(String filename, Map<Object, Object> content) {
+  public void writeToFile(Map<Object, Object> content) {
     bf = null;
     try {
-      File file = new File(filename);
+      File file = new File(this.filePath);
       file.createNewFile();
 
       bf = new BufferedWriter(new FileWriter(file));
