@@ -11,6 +11,7 @@ participant "vacCenterSt:\nVaccinationCenterStore" as VCST
 participant "vacTypeSt:\nVaccineTypeStore" as VTST
 participant "center:\nVaccinationCenter" as CENTER
 participant "vaccine:\nVaccine" as VAC
+participant "csvEx:\n CsvExporter" as CSVEX
 participant "vacType:\nVaccineType" as VACTYPE
 participant "vacAdminList:\nList<VaccineAdministration>" as VALST
 
@@ -63,6 +64,12 @@ activate APP
                     deactivate VAC
                 end
             end
+
+            TASK --> CSVEX ** : create(filePath)
+            TASK --> CSVEX : exportData(dataMap)
+            activate CSVEX
+            deactivate CSVEX
+
         deactivate TASK
 
 
