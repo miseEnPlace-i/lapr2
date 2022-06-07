@@ -8,9 +8,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
-public class ReceptionistUI implements Initializable, IGui {
+public class CoordinatorUI implements Initializable, IGui {
   private ApplicationUI mainApp;
-
+  
   @FXML
   private Label lblName;
 

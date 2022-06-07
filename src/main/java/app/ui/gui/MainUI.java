@@ -24,7 +24,14 @@ public class MainUI implements Initializable {
   }
 
   @FXML
-  void btnDevTeam(ActionEvent event) {}
+  void btnDevTeam(ActionEvent event) {
+    try {
+      DevTeamUI devTeamUI = (DevTeamUI) this.mainApp.replaceSceneContent("/fxml/DevTeam.fxml");
+      devTeamUI.setMainApp(this.mainApp);
+    } catch (Exception e) {
+      Logger.getLogger(ApplicationUI.class.getName()).log(Level.SEVERE, null, e);
+    }
+  }
 
   @FXML
   void btnLogin(ActionEvent event) {
