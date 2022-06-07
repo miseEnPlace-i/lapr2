@@ -1,14 +1,12 @@
 package app.ui.console;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.Objects;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *
  * @author Paulo Maio <pam@isep.ipp.pt>
  */
-
 public class MenuItem {
   private String description;
   private Runnable ui;

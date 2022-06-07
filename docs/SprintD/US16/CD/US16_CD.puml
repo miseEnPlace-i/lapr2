@@ -157,8 +157,6 @@ CenterPerformance o-- Time : openingHours
 
 CenterPerformance -- MaxSumSublistService : uses >
 
-CenterEvent o-- snsUser : user
-
 VaccinationCenterStore "1" -- "*" VaccinationCenter : stores >
 
 Company "1" -- "1" VaccinationCenterStore : knows >

@@ -61,12 +61,12 @@
                   <Image url="@../img/default-profile-pic.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER_RIGHT" layoutX="696.0" layoutY="19.0" prefHeight="25.0" prefWidth="203.0" text="Jovem Craque" AnchorPane.rightAnchor="136.0">
+            <Label fx:id="lblName" alignment="CENTER_RIGHT" layoutX="558.0" layoutY="18.0" prefHeight="25.0" prefWidth="203.0" text="Jovem Craque" AnchorPane.rightAnchor="139.0">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label alignment="CENTER_RIGHT" layoutX="696.0" layoutY="44.0" prefHeight="20.0" prefWidth="122.0" text="SNS User" AnchorPane.rightAnchor="139.0">
+            <Label fx:id="lblRole" alignment="CENTER_RIGHT" layoutX="696.0" layoutY="44.0" prefHeight="20.0" prefWidth="122.0" text="SNS User" AnchorPane.rightAnchor="139.0">
                <font>
                   <Font name="System Italic" size="14.0" />
                </font>
