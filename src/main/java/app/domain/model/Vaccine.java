@@ -145,5 +145,23 @@ public class Vaccine {
 
     return dose == size ? true : false;
   }
+
+  /**
+   * Get the dosage for the given age and dose number.
+   * 
+   * @param doseNumber the dose number
+   * @param age the age
+   * 
+   * @return the dosage
+   */
+  public int getDosageByDoseNumberAndAge(int doseNumber, int age) {
+    for (AdminProcess adPr : adminProcList.getList()) {
+      if (adPr.admitsAge(age)) {
+        return adPr.getDosageByDoseNumber(doseNumber);
+      }
+    }
+
+    return 0;
+  }
 }
 

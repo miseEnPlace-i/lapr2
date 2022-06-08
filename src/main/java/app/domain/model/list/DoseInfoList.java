@@ -25,4 +25,8 @@ public class DoseInfoList {
     public int getSize() {
         return doseInfoList.size();
     }
+
+    public DoseInfo getDoseInfoByDoseNumber(int doseNumber) {
+        return doseInfoList.get(doseNumber - 1);
+    }
 }
