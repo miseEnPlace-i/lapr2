@@ -1,5 +1,6 @@
 package app.controller;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 import app.domain.model.Company;
@@ -13,7 +14,7 @@ public class ExportCenterStatisticsController {
     private Company company;
     private EmployeeSession session;
     private FullyVaccinatedData exporter;
-    private Map<String, Integer> data;
+    private Map<Calendar, Integer> data;
 
     public ExportCenterStatisticsController(Company company, EmployeeSession coordinatorSession) throws NotAuthorizedException {
         if (!coordinatorSession.hasCenter()) throw new NotAuthorizedException("Coordinator is not logged in");
@@ -21,7 +22,7 @@ public class ExportCenterStatisticsController {
         this.company = company;
     }
 
-    public FullyVaccinatedData createCsvExporterData(String filePath, Date start, Date end) {
+    public FullyVaccinatedData createCsvExporterData(String filePath, Calendar start, Calendar end) {
         VaccinationCenter center = session.getVaccinationCenter();
 
         FullyVaccinatedData exporter = new FullyVaccinatedData(filePath, start, end, center);
@@ -29,7 +30,7 @@ public class ExportCenterStatisticsController {
         return exporter;
     }
 
-    public Map<String, Integer> generateFullyVaccinatedUsersInterval() {
+    public Map<Calendar, Integer> generateFullyVaccinatedUsersInterval() {
         data = exporter.getFullyVaccinatedUsersPerDayMap();
         return data;
     }
