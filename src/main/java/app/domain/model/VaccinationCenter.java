@@ -2,6 +2,7 @@ package app.domain.model;
 
 import java.text.ParseException;
 import java.util.Calendar;
+import java.util.List;
 import app.domain.model.list.AppointmentScheduleList;
 import app.domain.model.list.CenterEventList;
 import app.service.FormatVerifier;
@@ -26,6 +27,7 @@ public abstract class VaccinationCenter {
   private WaitingRoom waitingRoom;
   private AppointmentScheduleList appointmentList;
   private CenterEventList eventList;
+  private List<VaccineAdministration> vaccineAdministrationList;
 
   /**
    * Constructor for the Vaccination Center
@@ -148,7 +150,7 @@ public abstract class VaccinationCenter {
   public int getSlotDuration() {
     return this.slot.getDuration();
   }
-  
+
   /**
    * Gets the events.
    * 
@@ -366,5 +368,14 @@ public abstract class VaccinationCenter {
 
   public boolean hasAvailabilityInSlot(Calendar date) {
     return appointmentList.checkSlotAvailability(date);
+  }
+
+  /**
+   * Adds a Vaccine Administration object to the list.
+   * 
+   * @param vaccineAdministration the Vaccine Administration object to be added.
+   */
+  public void addVaccineAdministrationToList(VaccineAdministration vaccineAdministration) {
+    this.vaccineAdministrationList.add(vaccineAdministration);
   }
 }
