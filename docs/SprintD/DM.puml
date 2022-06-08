@@ -13,21 +13,21 @@ class CommunityMassVaccinationCenter {}
 class HealthCareCenter {}
 
 class VaccinationCenter {
-  name
-  address
-  emailAddress
-  phone
-  email
-  fax
-  website
+  -name
+  -address
+  -emailAddress
+  -phone
+  -email
+  -fax
+  -website
 }
 
 class Vaccine {}
 
 class VaccineType {
-  id
-  designation
-  whoid
+  -id
+  -designation
+  -whoId
 }
 
 class SNSUser {
@@ -61,16 +61,25 @@ class Receptionist {}
 class CenterCoordinator {}
 
 class Appointment {
-  snsUser
-  date
-  vaccinationCenter
-  vaccineType
-  sms
+  -snsUser
+  -date
+  -vaccinationCenter
+  -vaccineType
+  -sms
 }
 
-class AdministrationProccess {
-  ageGroup
-  nOfDoses
+class VaccineAdministration {
+  -snsUser
+  -vaccine
+  -lotNumber
+  -doseNumber
+  -vaccinationCenter
+  -date
+}
+
+class AdministrationProcess {
+  -ageGroup
+  -nOfDoses
 }
 
 class AGES {}
@@ -78,19 +87,19 @@ class AGES {}
 class ARS {}
 
 class DoseInformation {
-  dosage
-  timeToNextDose
-  doseNumber
+  -dosage
+  -timeToNextDose
+  -doseNumber
 }
 
 class Slot {
-  slotDuration
-  maxVacPerSlot
+  -slotDuration
+  -maxVacPerSlot
 }
 
 class Time {
-  openingHours
-  closingHours
+  -openingHours
+  -closingHours
 }
 
 class Notification {}
@@ -105,7 +114,7 @@ class WaitingRoom {}
 Arrival "1" -- "0..1" Appointment : related to >
 Arrival "*" -- "*" WaitingRoom : is in >
 
-DoseInformation "*" -- "1" AdministrationProccess : has <
+DoseInformation "*" -- "1" AdministrationProcess : has <
 
 Vaccine "*" -- "1" VaccineType : has <
 
@@ -124,7 +133,7 @@ HealthCareCenter "*" -- "1" AGES : belongs to >
 HealthCareCenter "*" -- "1" ARS : belongs to > 
 
 Appointment "*" -- "1" VaccinationCenter : is held in >
-Appointment "1" -- "1" VaccineType : has a specefic >
+Appointment "1" -- "1" VaccineType : has a specific >
 Appointment "1" -- "0..1" Notification : triggers >
 
 Receptionist "1" -- "*" SNSUser : registers >
@@ -134,7 +143,7 @@ Administrator "1" -- "*" VaccinationCenter : registers >
 Administrator "1" -- "*" VaccineType : manages >
 Administrator "1" -- "*" Vaccine : manages > 
 
-Vaccine "1" -- "1..*" AdministrationProccess : has >
+Vaccine "1" -- "1..*" AdministrationProcess : has >
 
 SNSUser "1" -- "*" Appointment : schedules >
 SNSUser "1" -- "*" Arrival : associated to >
@@ -146,7 +155,7 @@ SNSUser "0..1" -- "1" User : becomes >
 
 VaccinationCertificate "1" -- "1" Vaccine : corresponds >
 
-Company "1" -- "*" VaccinationCertificate : emmits >
+Company "1" -- "*" VaccinationCertificate : emits >
 Company "1" -- "*" Employee : knows >
 Company "1" -- "*" VaccinationCenter : knows >
 Company "1" -- "*" SNSUser : knows >
@@ -158,6 +167,7 @@ Receptionist "1" -- "*" Arrival : registers >
 
 Nurse "1" -- "*" AdverseReaction : reports >
 Nurse "1" -- "*" UserHealthData : checks >
+Nurse "1" -- "*" VaccineAdministration : registers >
 
 VaccinationCenter "1" -- "1" VaccinationReport : has >
 VaccinationCenter "1" -- "1" WaitingRoom : has >
@@ -165,12 +175,17 @@ VaccinationCenter "1" -- "1" WaitingRoom : has >
 CenterCoordinator "1" -- "*" VaccinationReport : analyses >
 CenterCoordinator "1" -- "*" VaccinationReport : generates >
 
-Nurse "1" -- "*" AdministrationProccess : checks >
+Nurse "1" -- "*" AdministrationProcess : checks >
 
 Notification <|-- SMSSender
 Notification <|-- EmailSender
 Notification <|-- ConsoleSender
 
 AdverseReaction "*" -- "1" Appointment : has <
+
+VaccineAdministration "*" -- "1" Vaccine : has >
+VaccineAdministration "*" -- "1" VaccinationCenter : is held in >
+
+UserHealthData "1" -- "*" VaccineAdministration : has >
 
 @enduml

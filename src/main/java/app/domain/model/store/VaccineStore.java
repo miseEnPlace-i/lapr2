@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.Vaccine;
 import app.domain.model.VaccineType;
+import app.dto.VaccineDTO;
+import app.mapper.VaccineMapper;
 
 /**
  * @author Carlos Lopes <1211277@isep.ipp.pt>
@@ -48,15 +50,39 @@ public class VaccineStore {
     return vaccinesList;
   }
 
-  public boolean areVaccinesWithValidAdminProcessWithVaccineType(int age, VaccineType vaccineType) {
-    List<Vaccine> vaccinesList = getVaccinesByType(vaccineType);
-
-    for (Vaccine vaccine : vaccinesList) {
-      if (vaccine.hasAdministrationProcessForGivenAge(age)) {
-        return true;
+  public Vaccine findVaccineById(String id) {
+    for (Vaccine vaccine : vaccines) {
+      if (vaccine.getId().equals(id)) {
+        return vaccine;
       }
     }
 
-    return false;
+    return null;
+  }
+
+  // public boolean areVaccinesWithValidAdminProcessWithVaccineType(int age, VaccineType vaccineType) {
+  // List<Vaccine> vaccinesList = getVaccinesByType(vaccineType);
+
+  // for (Vaccine vaccine : vaccinesList) {
+  // if (vaccine.hasAdministrationProcessForGivenAge(age)) {
+  // return true;
+  // }
+  // }
+
+  // return false;
+  // }
+
+  public List<VaccineDTO> getVaccinesByVaccineTypeWithAdminProcessForAge(VaccineType vaccineType, int age) {
+    List<VaccineDTO> vaccinesList = new ArrayList<VaccineDTO>();
+
+    for (Vaccine vaccine : vaccines) {
+      if (vaccine.getVacType().equals(vaccineType)) {
+        if (vaccine.hasAdministrationProcessForGivenAge(age)) {
+          vaccinesList.add(VaccineMapper.toDto(vaccine));
+        }
+      }
+    }
+
+    return vaccinesList;
   }
 }

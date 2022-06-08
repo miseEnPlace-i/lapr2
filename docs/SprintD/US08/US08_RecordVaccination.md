@@ -1,120 +1,194 @@
-# US XXX - XXXX XXXX
+# US 08 - Record the Administration of a Vaccine
 
 ## 1. Requirements Engineering
 
-_In this section, it is suggested to capture the requirement description and specifications as provided by the client as well as any further clarification on it. It is also suggested to capture the requirements acceptance criteria and existing dependencies to other requirements. At last, identify the involved input and output data and depicted an Actor-System interaction in order to fulfill the requirement._
 
 ### 1.1. User Story Description
 
-_Insert here the User Story as described by the client._
 
-### 1.2. Customer Specifications and Clarifications
+_"As a nurse, I want to record the administration of a vaccine to an SNS user. At the end of the recovery period, the user should receive an SMS message informing the SNS user that he can leave the vaccination center."_
 
-_Insert here any related specification and/or clarification provided by the client together with **your interpretation**. When possible, provide a link to such specifications/clarifications._
+
+### 1.2. Customer Specifications and Clarifications 
+
+
+**From the specifications document:**
+
+>	"After giving the vaccine to the user, each nurse registers the event in the system, more precisely, registers the vaccine type (e.g.: Covid-19), vaccine name/brand (e.g.: Astra Zeneca, Moderna, Pfizer), and the lot number used."
+
+>	"Afterwards, the nurse sends the user to a recovery room, to stay there for a given recovery period (e.g.: 30 minutes). If there are no problems, after the given recovery period, the user should leave the vaccination center."
+
+>	"The system should be able to notify (e.g.: SMS or email) the user that his/her recovery period has ended."
+
+**From the client clarifications:**
+
+> **Question:** Lorem ipsum
+>
+> **Answer:** _"Lorem ipsum"_
+
+> **Question:** Lorem ipsum
+>
+> **Answer:** _"Lorem ipsum"_
 
 ### 1.3. Acceptance Criteria
 
-_Insert here the client acceptance criteria._
+
+* **AC1:** The nurse should select a vaccine and the administered dose number.
+
 
 ### 1.4. Found out Dependencies
 
-_Identify here any found out dependency to other US and/or requirements._
+
+* There is a dependency to "US01 - Schedule a Vaccine", as users need to schedule a vaccine in order to get it administered.
+* There is a dependency to "US03 - Register an SNS User", as nurses can only administer a vaccine to users that are registered in the system.
+* There is a dependency to "US04 - Register the Arrival of an SNS User", as receptionists need to register arrivals so that SNS Users can get vaccines administered.
+* There is a dependency to "US09 - Register a Vaccination Center", as a nurse administers a vaccine in vaccination centers.
+* There is a dependency to "US10 - Register an Employee", as nurses have to be registered in the system in order to administrate vaccines.
+* There is a dependency to "US12 - Specify a Vaccine Type", because in order to administer vaccines, there has to exist, at least, one vaccine type.
+* There is a dependency to "US13 - Specify a Vaccine", because in order to administer vaccines, there has to exist, at least, one vaccine.
+
 
 ### 1.5 Input and Output Data
 
-_Identity here the data to be inputted by the system actor as well as the output data that the system have/needs to present in order to properly support the actor actions. Regarding the inputted data, it is suggested to distinguish between typed data and selected data (e.g. from a list)_
+
+**Input Data:**
+
+* Typed data:
+	* SNS user number
+	* lote number
+	* dose number
+
+* Selected data:
+	* vaccine
+
+**Output Data:**
+
+* List of vaccines that have the vaccine type of the most recent user arrival
+* (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
+ 
+**Alternative 1**
 
-_Insert here a SSD depicting the envisioned Actor-System interactions and throughout which data is inputted and outputted to fulfill the requirement. All interactions must be numbered._
+![US08_SSD](SSD/US08_SSD.svg)
 
-![USXXX-SSD](USXXX-SSD.svg)
+Other alternatives might exist.
 
 ### 1.7 Other Relevant Remarks
 
-_Use this section to capture other relevant information that is related with this US such as (i) special requirements ; (ii) data and/or technology variations; (iii) how often this US is held._
+n/a
+
 
 ## 2. OO Analysis
 
-### 2.1. Relevant Domain Model Excerpt
+### 2.1. Relevant Domain Model Excerpt 
 
-_In this section, it is suggested to present an excerpt of the domain model that is seen as relevant to fulfill this requirement._
-
-![USXXX-MD](USXXX-MD.svg)
+![US08_DM](DM/US08_DM.svg)
 
 ### 2.2. Other Remarks
 
-_Use this section to capture some aditional notes/remarks that must be taken into consideration into the design activity. In some case, it might be usefull to add other analysis artifacts (e.g. activity or state diagrams)._
+n/a
 
-## 3. Design - User Story Realization
+
+## 3. Design - User Story Realization 
 
 ### 3.1. Rationale
 
-**The rationale grounds on the SSD interactions and the identified input/output data.**
+**SSD - Alternative 1 is adopted.**
 
-| Interaction ID | Question: Which class is responsible for... | Answer | Justification (with patterns) |
-| :------------- | :------------------------------------------ | :----- | :---------------------------- |
-| Step 1         |                                             |        |                               |
-| Step 2         |                                             |        |                               |
-| Step 3         |                                             |        |                               |
-| Step 4         |                                             |        |                               |
-| Step 5         |                                             |        |                               |
-| Step 6         |                                             |        |                               |
-| Step 7         |                                             |        |                               |
-| Step 8         |                                             |        |                               |
-| Step 9         |                                             |        |                               |
-| Step 10        |                                             |        |                               |
+| Interaction ID                                                                   | Question: Which class is responsible for... | Answer                   | Justification (with patterns)                                                 |
+| :------------------------------------------------------------------------------- | :------------------------------------------ | :----------------------- | :---------------------------------------------------------------------------- |
+| Step 1: asks to schedule a vaccine                                               | ...instantiate a new Appointment            | AppointmentScheduleList  | Creator: it contains all appointment objects                                  |
+| Step 2: shows suggested vaccine type and asks to accept it                       | ...knowing the vaccine type to show?        | Company                  | IE: knows the suggested vaccine type defined in the configuration file        |
+| Step 3: accepts the suggested vaccine type                                       | ...saving the vaccine type?                 | Appointment              | IE: object created in step 1 has one vaccine type                             |
+| Step 4: shows a list of all vaccine types and asks to select one                 | ...knowing the vaccine types to show?       | VaccineTypeStore         | IE: knows all vaccine types                                                   |
+| Step 5: selects a vaccine type                                                   | ...saving the selected vaccine type?        | Appointment              | IE: object created in step 1 has one vaccine type                             |
+| Step 6: shows a list of all available vaccination centers and asks to select one | ...knowing the vaccination centers to show? | VaccinationCenterStore   | IE: knows all vaccination centers                                             |
+| Step 7: selects a vaccination center                                             | ...saving the selected vaccination center?  | Appointment              | IE: object created in step 1 has one vaccination center                       |
+| Step 8: requests data (date, time)                                               | n/a                                         | n/a                      | n/a                                                                           |
+| Step 9: types requested data                                                     | ...informing operation success?             | Appointment              | IE: object created in step 1 has date and time                                |
+| Step 10: asks permission to send sms about the scheduled vaccine                 | n/a                                         | n/a                      | n/a                                                                           |
+| Step 11: accepts or declines the request                                         | ...saving the selected option?              | Appointment              | IE: object created in step 1 has the information about the sending of the sms |
+| Step 12: shows all data and requests confirmation                                | ...validating the data introduced?          | AppointmentScheduledList | IE: knows all information needed to validate the appointment                  |
+| Step 13: confirms the data                                                       | ...saving the created appointment?          | AppointmentScheduledList | IE: holds all appointment objects                                             |
+| Step 14: informs operation success                                               | ...informing operation success?             | ScheduleVaccineUI        | IE: responsible for user interaction                                          |
 
-### Systematization
+### Systematization ##
 
-According to the taken rationale, the conceptual classes promoted to software classes are:
+According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-- Class1
-- Class2
-- Class3
+ * Appointment
+ * AppointmentScheduleList
+ * VaccinationCenterStore
+ * VaccineTypeStore
+ * Company
 
-Other software classes (i.e. Pure Fabrication) identified:
+Other software classes (i.e. Pure Fabrication) identified: 
 
-- xxxxUI
-- xxxxController
+ * ScheduleVaccineUI
+ * ScheduleVaccineController
 
 ## 3.2. Sequence Diagram (SD)
 
-_In this section, it is suggested to present an UML dynamic view stating the sequence of domain related software objects' interactions that allows to fulfill the requirement._
+**Alternative 1**
 
-![USXXX-SD](USXXX-SD.svg)
+![US08_SD](SD/US08_SD.svg)
 
 ## 3.3. Class Diagram (CD)
 
-_In this section, it is suggested to present an UML static view representing the main domain related software classes that are involved in fulfilling the requirement as well as and their relations, attributes and methods._
+**From alternative 1**
 
-![USXXX-CD](USXXX-CD.svg)
+![US08_CD](CD/US08_CD.svg)
 
 # 4. Tests
 
-_In this section, it is suggested to systematize how the tests were designed to allow a correct measurement of requirements fulfilling._
+## Instantiate objects with null values
 
-**_DO NOT COPY ALL DEVELOPED TESTS HERE_**
+**Test 1:** Check that it is not possible to create an instance of the Appointment class with null values. 
 
-**Test 1:** Check that it is not possible to create an instance of the Example class with null values.
-
-    @Test(expected = IllegalArgumentException.class)
-    	public void ensureNullIsNotAllowed() {
-    	Exemplo instance = new Exemplo(null, null);
+	@Test(expected = IllegalArgumentException.class)
+    public void ensureNullIsNotAllowed() {
+        Appointment instance = new Appointment(null, null, null, null, null);
     }
-
-_It is also recommended to organize this content by subsections._
 
 # 5. Construction (Implementation)
 
-_In this section, it is suggested to provide, if necessary, some evidence that the construction/implementation is in accordance with the previously carried out design. Furthermore, it is recommeded to mention/describe the existence of other relevant (e.g. configuration) files and highlight relevant commits._
+## Class ScheduleVaccineController
 
-_It is also recommended to organize this content by subsections._
+    public void createAppointment(Date date, String time, VaccinationCenterListDTO centerDto, VaccineTypeDTO vaccineTypeDto, boolean sms) {
+        VaccinationCenter center = vaccinationCenterStore.getVaccinationCenterWithEmail(centerDto.getEmail());
+        this.appointmentSchedule = center.getAppointmentList();
 
-# 6. Integration and Demo
+	    String email = App.getInstance().getCurrentUserSession().getUserId().getEmail();
+        SNSUser snsUser = snsUserStore.findSNSUserByEmail(email);
 
-_In this section, it is suggested to describe the efforts made to integrate this functionality with the other features of the system._
+        try {
+            Calendar dateAndTime = CalendarUtils.parseDateTime(date, time);
+
+            this.appointment = appointmentSchedule.createAppointment(snsUser, dateAndTime, vaccineTypeDto, sms);
+        } catch (ParseException ex) {
+            throw new IllegalArgumentException("Date or time invalid.");
+        }
+
+        appointmentSchedule.validateAppointment(this.appointment);
+  	}
+
+## Class AppointmentScheduleList
+
+    public Appointment createAppointment(SNSUser snsUser, Calendar date, VaccineTypeDTO vaccineTypeDto, boolean sms) {
+        VaccineType vaccineType = VaccineTypeMapper.toModel(vaccineTypeDto);
+
+        Appointment appointment = new Appointment(snsUser, date, this.vaccinationCenter, vaccineType, sms);
+
+        return appointment;
+    }
+
+# 6. Integration and Demo 
+
+A new option ("Schedule a Vaccine") was added to the SNS user menu.
+
+For demo purposes, there are multiple objects of all classes created in the previous steps being created when the application is bootstrapped.
 
 # 7. Observations
 
-_In this section, it is suggested to present a critical perspective on the developed work, pointing, for example, to other alternatives and or future related work._
+There are validations needed for this US that are not implemented in the system yet. Therefore, those validations are not implemented yet.

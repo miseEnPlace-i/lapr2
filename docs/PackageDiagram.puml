@@ -1,0 +1,41 @@
+@startuml PackageDiagram
+package core {
+    package Controllers {}
+    package UI {
+        package GUI {}
+        package Console {}
+    }
+    package Domain {
+        package model {}
+        package Stores {}
+    }
+    package Dto {}
+    package Mappers {}
+    package Exception {}
+    package Utils {}
+    package Session {}
+    package Service {}
+}
+
+Stores ..> model
+model ..> Stores
+
+Controllers ..> Mappers
+Controllers ..> Domain
+Controllers ..> Dto
+
+UI ..> Controllers
+
+Domain ..> Dto
+Domain ..> Utils
+Domain ..> Exception
+Domain ..> Service
+Domain ..> Session
+
+Mappers ..> Domain
+Mappers ..> Dto
+
+UI ..> Dto
+UI ..> Session
+UI ..> Exception
+@enduml
