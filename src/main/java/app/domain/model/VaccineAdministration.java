@@ -1,6 +1,7 @@
 package app.domain.model;
 
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Vaccine administration model class.
@@ -94,6 +95,10 @@ public class VaccineAdministration implements Comparable<VaccineAdministration> 
    */
   public int getDoseNumber() {
     return doseNumber;
+  }
+
+  public Calendar getDate() {
+    return date;
   }
 
   /**

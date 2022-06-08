@@ -19,8 +19,7 @@ public class CalendarUtils {
   // {"dd/MM/yyyy", "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$"},
   // {"yyyy-MM-dd", "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"}, {"dd-MM-yyyy",
   // "^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-\\d{4}$"},};
-  private static final String[][] VALID_FORMATS =
-      {{"dd/MM/yyyy", "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$"},};
+  private static final String[][] VALID_FORMATS = {{"dd/MM/yyyy", "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$"},};
 
   /**
    * Parse a String.
@@ -49,6 +48,23 @@ public class CalendarUtils {
     Calendar today = Calendar.getInstance();
     int age = today.get(Calendar.YEAR) - birthDay.get(Calendar.YEAR);
     if (today.get(Calendar.DAY_OF_YEAR) < birthDay.get(Calendar.DAY_OF_YEAR)) {
+      age--;
+    }
+    return age;
+  }
+
+  /**
+   * Calculates the age given a Date.
+   * 
+   * @return the age given the birthday.
+   */
+  public static int calculateAge(Date birthDay) {
+    Calendar today = Calendar.getInstance();
+    Calendar day = Calendar.getInstance();
+    day.setTime(birthDay);
+
+    int age = today.get(Calendar.YEAR) - day.get(Calendar.YEAR);
+    if (today.get(Calendar.DAY_OF_YEAR) < day.get(Calendar.DAY_OF_YEAR)) {
       age--;
     }
     return age;
