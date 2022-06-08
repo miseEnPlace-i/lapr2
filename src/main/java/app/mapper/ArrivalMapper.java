@@ -2,6 +2,7 @@ package app.mapper;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import app.domain.model.Appointment;
 import app.domain.model.Arrival;
 import app.domain.model.SNSUser;
 import app.domain.shared.Gender;
@@ -22,7 +23,8 @@ public class ArrivalMapper {
     String snsUserNumber = snsUser.getSnsNumber();
     String phoneNumber = snsUser.getPhoneNumber();
     Date time = arrival.getArrivalTime().getTime();
+    Appointment appointment = arrival.getAppointment();
 
-    return new ArrivalDTO(name, gender, sdf.format(birthDate), snsUserNumber, phoneNumber, sdfWithHour.format(time));
+    return new ArrivalDTO(name, gender, sdf.format(birthDate), snsUserNumber, phoneNumber, sdfWithHour.format(time), appointment);
   }
 }
