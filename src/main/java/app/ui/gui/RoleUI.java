@@ -24,7 +24,11 @@ public abstract class RoleUI implements Initializable, IGui {
 
         lblName.setText(email);
         lblRole.setText(role);
+
+        this.init();
     }
+
+    abstract void init();
 
     @Override
     public void setMainApp(ApplicationUI mainApp) {
