@@ -12,7 +12,7 @@ public class Main {
     try {
       ApplicationUI.launch(ApplicationUI.class, args);
 
-      /*
+      /**
        * MainMenuUI menu = new MainMenuUI();
        * 
        * menu.run();
