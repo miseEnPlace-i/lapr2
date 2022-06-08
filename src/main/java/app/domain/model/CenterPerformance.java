@@ -47,7 +47,7 @@ public class CenterPerformance {
 
     for (int i = 0; i < events.size(); i++) {
       Time beginningInterval = new Time(openingHours.convertToMinutes() + i * interval);
-      Time endInterval = new Time(beginningInterval.convertToMinutes() + i);
+      Time endInterval = new Time(beginningInterval.convertToMinutes() + interval);
 
       int differenceForInterval = getDifferenceForInterval(events, beginningInterval, endInterval);
 
