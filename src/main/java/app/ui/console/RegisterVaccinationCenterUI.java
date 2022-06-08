@@ -26,6 +26,14 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
 
   @Override
   public void insertData() {
+    List<Employee> coordinators = new ArrayList<Employee>();
+    coordinators = ctrl.getCoordinators();
+
+    if (coordinators.size() == 0) {
+      System.out.println("\nThere are no coordinators to choose from.\n");
+      return;
+    }
+
     // Select center type
     System.out.println("\nSelect the Vaccination Center type: ");
     VaccinationCenterType type = (VaccinationCenterType) Utils.showAndSelectOne(Arrays.asList(VaccinationCenterType.values()), "");
@@ -43,17 +51,10 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
 
     // select coordinator
     boolean flag = false;
-    List<Employee> coordinators = new ArrayList<Employee>();
-    coordinators = ctrl.getCoordinators();
-
-    if (coordinators.size() == 0) {
-      System.out.println("\nThere are no coordinators to choose from.\n");
-      return;
-    }
 
     do {
       System.out.println("\nSelect a coordinator from the list:\n");
-      coordinator = (Employee) Utils.showAndSelectOne(coordinators, "Coordinators");
+      coordinator = (Employee) Utils.showAndSelectOne(coordinators, "Coordinators:\n");
       if (coordinators.contains(coordinator)) {
         flag = true;
       } else {

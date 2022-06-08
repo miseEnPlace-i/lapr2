@@ -101,7 +101,7 @@ public class RegisterVaccinationCenterController implements IRegisterController<
     List<Employee> coordinatorsWithoutCenter = new ArrayList<>();
 
     for (Employee coordinator : coordinators)
-      if (hasCenter(coordinator)) coordinatorsWithoutCenter.add(coordinator);
+      if (!hasCenter(coordinator)) coordinatorsWithoutCenter.add(coordinator);
 
     return coordinatorsWithoutCenter;
   }
