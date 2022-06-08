@@ -19,8 +19,7 @@ public class CalendarUtils {
   // {"dd/MM/yyyy", "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$"},
   // {"yyyy-MM-dd", "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"}, {"dd-MM-yyyy",
   // "^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-\\d{4}$"},};
-  private static final String[][] VALID_FORMATS =
-      {{"dd/MM/yyyy", "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$"},};
+  private static final String[][] VALID_FORMATS = {{"dd/MM/yyyy", "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$"},};
 
   /**
    * Parse a String.
