@@ -1,38 +1,26 @@
 package app.ui.gui;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import app.controller.App;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 
-public class CoordinatorUI implements Initializable, IGui {
-  private ApplicationUI mainApp;
-  
+public class CoordinatorUI extends RoleUI {
   @FXML
-  private Label lblName;
+  public void toImportLegacyDataScene1() {
+    try {
+      ImportLegacyData1UI importUI = (ImportLegacyData1UI) this.mainApp.replaceSceneContent("/fxml/ImportLegacyData_1.fxml");
+      importUI.setParentUI(this);
+      importUI.setMainApp(this.mainApp);
 
-  @FXML
-  private Label lblRole;
-
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-    String email = App.getInstance().getCurrentUserSession().getUserId().getEmail();
-    String role = App.getInstance().getCurrentUserSession().getUserRoles().get(0).getDescription();
-
-    lblName.setText(email);
-    lblRole.setText(role);
+      // importUI.getNameTxtField.requestFocus() to make sure the text field you need focused is, in fact, focused
+    } catch (Exception ex) {
+      Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+    }
   }
 
   @Override
-  public void setMainApp(ApplicationUI mainApp) {
-    this.mainApp = mainApp;
-  }
-
-  @FXML
-  void btnBack(ActionEvent event) {
-    this.mainApp.toMainScene();
+  public String getUIRoleName() {
+    return "COORDINATOR";
   }
 }

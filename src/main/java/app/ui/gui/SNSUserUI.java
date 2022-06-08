@@ -1,8 +1,8 @@
 package app.ui.gui;
 
-public class ReceptionistUI extends RoleUI {
+public class SNSUserUI extends RoleUI {
   @Override
   public String getUIRoleName() {
-    return "RECEPTIONIST";
+    return "SNS_USER";
   }
 }
