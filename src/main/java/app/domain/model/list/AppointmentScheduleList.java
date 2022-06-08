@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import app.controller.App;
 import app.domain.model.Appointment;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;

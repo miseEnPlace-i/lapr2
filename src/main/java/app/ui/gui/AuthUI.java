@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import app.controller.AuthController;
 import app.domain.shared.Constants;
 import app.domain.shared.MenuFXMLPath;
+import app.exception.NotAuthorizedException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

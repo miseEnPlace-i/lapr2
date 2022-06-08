@@ -5,9 +5,12 @@ import java.util.logging.Logger;
 import app.controller.App;
 import app.controller.FindCoordinatorVaccinationCenterController;
 import app.domain.model.Company;
+import app.exception.NotAuthorizedException;
 import app.session.EmployeeSession;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 
 public class CoordinatorUI extends RoleUI {
   private EmployeeSession employeeSession;
@@ -26,13 +29,22 @@ public class CoordinatorUI extends RoleUI {
     this.ctrl.findCoordinatorCenter();
 
     if (!this.employeeSession.hasCenter()) {
-      // create an alert
-      System.out.println("You are not assigned to a vaccination center. Please contact your administrator.");
-      
+      // Much better if I could just throw a NotAuthorizedException
+      // and catch it on AuthUI but it is not possible.
+      // Also mainApp.toMainScene() throws an exception because setMainApp()
+      // is not called until after initialization.
+      Alert alert = new Alert(AlertType.WARNING);
+      alert.setTitle("Login Failed");
+      alert.setHeaderText("You are not assigned to any vaccination center.");
+      alert.setContentText("Please contact your administrator.");
+      alert.showAndWait();
+
+      // exception is thrown so it doesn't move forward with this scene
+      // aka: maneira rota de fazer isto funcionar
       this.mainApp.toMainScene();
-    } else {
-      this.lblCenterName.setText(this.ctrl.getVaccinationCenterName());
     }
+
+    this.lblCenterName.setText(this.ctrl.getVaccinationCenterName());
   }
 
   @FXML
