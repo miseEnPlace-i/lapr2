@@ -29,7 +29,7 @@ participant "vaccinationCenter\n:VaccinationCenter" as vaccinationCenter
 participant "waitingRoomDto\n:List<ArrivalDTO>" as waitingRoomDto
 ' participant "vaccines\n:List<Vaccine>" as vaccinesList
 participant "vaccinesDto\n:List<VaccineDTO>" as vaccinesDtoList
-participant "adverseReactions\n:List<AdverseReaction>" as adverseReactionsList
+participant "adverseReactionsDto\n:List<AdverseReactionDTO>" as adverseReactionsList
 
 activate nurse
 
@@ -69,7 +69,7 @@ activate ui
   end note
   ui -> controller : getSnsUserVaccinationInfoFromArrival(arrivalDto)
   activate controller
-    controller -> arrivalDto : snsNumber = getSnsNumber()
+    controller -> arrivalDto : snsNumber = getSnsUserNumber()
     activate arrivalDto
     deactivate arrivalDto
     controller -> snsUserStore : snsUser = findSNSUserByNumber(snsNumber)
@@ -84,10 +84,13 @@ activate ui
     controller -> snsUser : userHealthData = getUserHealthData()
     activate snsUser
     deactivate snsUser
-    controller -> userHealthData : adverseReactions = getAdverseReactions()
+    controller -> userHealthData : vaccineAdministrationList = getVaccineAdministrationList()
     activate userHealthData
     deactivate userHealthData
-    controller -> userVaccinationInfoMapper : userVaccinationInfoDto = toDto(name, age, adverseReactions)
+    controller -> vaccineAdministrationList : adverseReactionsDto = getAdverseReactions()
+    activate vaccineAdministrationList
+    deactivate vaccineAdministrationList
+    controller -> userVaccinationInfoMapper : userVaccinationInfoDto = toDto(name, age, adverseReactionsDto)
     activate userVaccinationInfoMapper
     deactivate userVaccinationInfoMapper
     controller --> ui : userVaccinationInfoDto
@@ -98,7 +101,7 @@ deactivate ui
 nurse -> ui : asks to proceed
 
 activate ui
-  ui -> controller : getLastTakenVaccine(arrivalDto)
+  ui -> controller : getLastTakenVaccineFromArrival(arrivalDto)
   activate controller
     controller -> arrivalDto : appointment = getAppointment()
     activate arrivalDto
@@ -106,9 +109,6 @@ activate ui
     controller -> appointment : vaccineType = getVaccineType()
     activate appointment
     deactivate appointment
-    controller -> userHealthData : vaccineAdministrationList = getVaccineAdministrationList()
-    activate userHealthData
-    deactivate userHealthData
     controller -> vaccineAdministrationList : vaccineDto = getLastTakenVaccineByVaccineType(vaccineType)
     activate vaccineAdministrationList
     deactivate vaccineAdministrationList
