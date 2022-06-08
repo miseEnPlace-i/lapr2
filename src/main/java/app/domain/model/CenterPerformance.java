@@ -1,11 +1,12 @@
 package app.domain.model;
 
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.List;
 import app.utils.Time;
 
 public class CenterPerformance {
-  private Calendar day;
+  private List<CenterEvent> events;
+  private List<Integer> differenceList;
   private List<Integer> maxSumSubList;
   private int sum;
   private Time startingInterval;
@@ -13,13 +14,19 @@ public class CenterPerformance {
 
   private Time openingHours;
 
-  public CenterPerformance(Calendar day, int interval, Time openingHours) {
-    this.day = day;
+  public CenterPerformance(List<CenterEvent> events, int interval, Time openingHours) {
+    this.events = events;
     this.openingHours = openingHours;
+    differenceList = calculateDifferencesList();
   }
 
-  public Calendar getDay() {
-    return day;
+  private List<Integer> calculateDifferencesList() {
+    List<Integer> differences = new ArrayList<Integer>();
+
+    for (int i = 0; i < events.size(); i++) {
+
+    }
+    return null;
   }
 
   public List<Integer> getMaxSumSubList() {

@@ -24,7 +24,7 @@ public class CenterEventList {
     this.events.add(event);
   }
 
-  public List<CenterEvent> getEventsInDay(Calendar day) {
+  public List<CenterEvent> getEventListForDay(Calendar day) {
     List<CenterEvent> eventsInDay = new ArrayList<CenterEvent>();
 
     for (CenterEvent event : this.events)
