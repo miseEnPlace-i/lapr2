@@ -11,7 +11,11 @@ import app.domain.model.VaccinationCenter;
 import app.domain.model.Vaccine;
 import app.domain.model.VaccineAdministration;
 
-
+/**
+ * FullyVaccinatedData class
+ * 
+ * @author André Barros <1211299@isep.ipp.pt>
+ */
 public class FullyVaccinatedData {
 
     private String filePath;
@@ -24,6 +28,14 @@ public class FullyVaccinatedData {
     private Vaccine vaccine;
     private boolean fullyVaccinated;
 
+    /**
+     * Constructor of the class
+     * 
+     * @param path the file path
+     * @param start the start date of the statistics
+     * @param end the end date of the statistics
+     * @param center the coordinator center of the statistics
+     */
     public FullyVaccinatedData(String path, Calendar start, Calendar end, VaccinationCenter center) {
         validatePath(path);
         validateDate(start);
@@ -36,6 +48,11 @@ public class FullyVaccinatedData {
         this.center = center;
     }
 
+    /**
+     * Validate file path
+     * 
+     * @param path
+     */
     private void validatePath(String path) {
         if (path == null || path == "") {
             throw new IllegalArgumentException("File path cannot be null or empty!");
@@ -43,12 +60,22 @@ public class FullyVaccinatedData {
     }
 
 
+    /**
+     * Validate dates
+     * 
+     * @param date
+     */
     private void validateDate(Calendar date) {
         if (date == null) {
             throw new IllegalArgumentException("Date cannot be null.");
         }
     }
 
+    /**
+     * Validate coordinator center
+     * 
+     * @param center
+     */
     private void validateCenter(VaccinationCenter center) {
         if (center == null) {
             throw new IllegalArgumentException("Center cannot be null.");
@@ -56,6 +83,11 @@ public class FullyVaccinatedData {
     }
 
 
+    /**
+     * Creates a hashMap to get all data needed for each day and for each VaccineAdministration
+     * 
+     * @return hashMap of all the data needed to do the statistics
+     */
     public Map<Calendar, Integer> getFullyVaccinatedUsersPerDayMap() {
         int dose;
 
@@ -93,6 +125,12 @@ public class FullyVaccinatedData {
         return data;
     }
 
+    /**
+     * Gets vaccine administration list
+     * 
+     * @param day the specific day to get the list of the center
+     * @return a List of VaccineAdministrations of that day
+     */
     public List<VaccineAdministration> vacAdminList(Calendar day) {
         return center.getVacAdminDayList(day);
     }
