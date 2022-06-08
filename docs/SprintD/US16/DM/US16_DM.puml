@@ -60,6 +60,8 @@ Employee "*" -- "1" Role : has <
 Company "1" -- "*" Employee : knows >
 Company "1" -- "*" VaccinationCenter : knows >
 
+VaccinationCenter "1" -- "*" CenterPerformance : has >
+
 CenterCoordinator "1" -- "1" VaccinationCenter : analyses >
 CenterCoordinator "1" -- "1" VaccinationCenter : is associated to >
 

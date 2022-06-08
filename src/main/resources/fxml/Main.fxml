@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.MainUI">
+   <center>
+      <VBox alignment="CENTER" prefHeight="457.0" prefWidth="600.0" spacing="16.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#btnLogin" prefWidth="320.0" text="Do Login">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="btnDevTeam" mnemonicParsing="false" onAction="#btnDevTeam" prefWidth="320.0" text="Know the Development Team" />
+            <Button fx:id="btnExit" mnemonicParsing="false" onAction="#btnExit" prefWidth="320.0" text="Exit" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="80.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+   <top>
+      <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="80.0" prefWidth="36.0" text="Menu" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </top>
+</BorderPane>

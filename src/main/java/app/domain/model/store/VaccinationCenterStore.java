@@ -190,6 +190,13 @@ public class VaccinationCenterStore {
     return null;
   }
 
+  public VaccinationCenter getVaccinationCenterWithCoordinatorEmail(String email) {
+    for (VaccinationCenter center : vaccinationCenters)
+      if (center.getCoordinator().getEmail().equals(email)) return center;
+
+    return null;
+  }
+
   public boolean exists(String phone) {
     // !! Refactor !!
     return !(getVaccinationCenterByPhone(phone) == null);

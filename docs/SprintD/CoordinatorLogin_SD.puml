@@ -15,7 +15,8 @@ participant "company\n:Company" as COMP
 participant "vaccinationCenterStore\n:VaccinationCenterStore" as VACCS
 ' participant "centerDTO\n:VaccinationCenterListDTO" as CDTO
 participant "company\n:Company" as COMP
-participant ":App" as APP
+participant ":App" as _APP
+participant "app:App" as APP
 participant "vaccinationCenter\n:VaccinationCenter"
 ' participant "vaccinationCenters\n:List<VaccinationCenterListDTO>"
 
@@ -28,19 +29,24 @@ EUI -> SESSION **
 ' activate UI
 activate COORDINATOR
 
-AUTHUI -> APP : company=getCompany()
+
+EUI -> _APP : app=getInstance()
+activate _APP
+deactivate _APP
+
+EUI -> APP : company=getCompany()
 activate APP
 deactivate APP
 
 
-AUTHUI -> CTRL ** : create(company,employeeSession)
+EUI -> CTRL ** : create(company,employeeSession)
 activate CTRL
 CTRL -> COMP : vaccinationCenterStore=getVaccinationCenterStore()
 activate COMP
 deactivate COMP
 deactivate CTRL
 
-AUTHUI -> CTRL : vaccinationCenter=findCoordinatorCenter()
+EUI -> CTRL : vaccinationCenter=findCoordinatorCenter()
 activate CTRL
 
 CTRL -> SESSION : email = getEmail()
@@ -51,11 +57,14 @@ CTRL -> VACCS : getVaccinationCenterWithCoordinatorEmail(email)
 activate VACCS
 deactivate VACCS
 
+CTRL -> SESSION : setVaccinationCenter(vaccinationCenter)
+activate SESSION
+deactivate SESSION
+
 deactivate CTRL
 
 
-AUTHUI -> CTRL : setVaccinationCenter(vaccinationCenter)
-activate CTRL
+' AUTHUI -> CTRL 
 ' deactivate UI
 ' CTRL -> CDTO : email=getEmail()
 ' activate CDTO
@@ -63,10 +72,10 @@ activate CTRL
 ' CTRL -> VACCS : vaccinationCenter=getVaccinationCenterWithEmail(email)
 ' activate VACCS
 ' deactivate VACCS
-CTRL -> SESSION : setVaccinationCenter(vaccinationCenter)
-activate SESSION
-deactivate SESSION
-deactivate EUI
+' CTRL -> SESSION : setVaccinationCenter(vaccinationCenter)
+' activate SESSION
+' deactivate SESSION
+' deactivate EUI
 
 
 
@@ -76,7 +85,7 @@ deactivate CTRL
 
 deactivate COORDINATOR
 
-|||
+' |||
 
 note over COORDINATOR
   The employee vaccination center is stored in the EmployeeSession

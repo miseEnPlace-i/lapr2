@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="550.0" prefWidth="900.0" scaleShape="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.CoordinatorUI">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="120.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="110.0" minHeight="32.0" prefHeight="34.0" />
+    <RowConstraints maxHeight="84.0" minHeight="82.0" prefHeight="84.0" vgrow="ALWAYS" />
+    <RowConstraints maxHeight="+Infinity" minHeight="100.0" prefHeight="340.0" vgrow="ALWAYS" />
+    <RowConstraints maxHeight="160.0" minHeight="89.0" prefHeight="94.0" vgrow="ALWAYS" />
+  </rowConstraints>
+   <children>
+      <MenuBar centerShape="false" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="32.0" prefWidth="900.0" scaleShape="false" GridPane.halignment="LEFT" GridPane.hgrow="NEVER" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem mnemonicParsing="false" text="Go to menu" />
+                  <MenuItem mnemonicParsing="false" text="Users" />
+              <MenuItem mnemonicParsing="false" text="Save session" />
+                  <MenuItem mnemonicParsing="false" text="Exit" />
+                  <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="About">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Development Team" />
+                  <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="900.0" scaleShape="false" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="30.0" prefHeight="29.0" prefWidth="900.0" text="Menu" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="58.0" fitWidth="59.0" layoutX="770.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="64.0">
+               <image>
+                  <Image url="@../img/default-profile-pic.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="lblName" alignment="CENTER_RIGHT" layoutX="558.0" layoutY="18.0" prefHeight="25.0" prefWidth="203.0" text="Jovem Craque" AnchorPane.rightAnchor="128.0">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblRole" alignment="CENTER_RIGHT" layoutX="696.0" layoutY="44.0" prefHeight="20.0" prefWidth="122.0" text="SNS User" AnchorPane.rightAnchor="128.0">
+               <font>
+                  <Font name="System Italic" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="16.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+         <children>
+            <Button id="btnBack" cancelButton="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnBack" prefHeight="40.0" prefWidth="120.0" text="Back to menu" />
+         </children>
+      </FlowPane>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="900.0" spacing="16.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
+         <children>
+            <Button mnemonicParsing="false" prefWidth="320.0" text="Export Vaccination Statistics" />
+            <Button mnemonicParsing="false" prefWidth="320.0" text="Analyse Center Performance" />
+            <Button mnemonicParsing="false" onAction="#toImportLegacyDataScene1" prefWidth="320.0" text="Import Data from Legacy System" />
+         </children>
+      </VBox>
+   </children>
+</GridPane>

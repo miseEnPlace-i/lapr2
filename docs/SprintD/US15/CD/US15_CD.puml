@@ -2,13 +2,14 @@
 skinparam classAttributeIconSize 0
 
 package UI {
-class ExportCenterStatisticsUI {}
+class CsvExporterUI {}
 }
 
 package controllers {
-     class ExportCenterStatisticsController {
+     class CsvExporterController {
 
      }
+}
 
    package utils {
      class Time {
@@ -125,9 +126,9 @@ package stores {
 
 
 
-ExportCenterStatisticsUI ..> ExportCenterStatisticsController
+CsvExportersUI ..> CsvExportersController
 
-ExportCenterStatisticsController ..> Company
+CsvExportersController ..> Company
 
 Company "1" -- "1" VaccinationCenterStore : knows >
 

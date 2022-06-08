@@ -2,6 +2,7 @@ package app.domain.model;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import java.io.FileNotFoundException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import org.junit.Test;
 
@@ -29,18 +30,18 @@ public class CSVReaderTest {
 
     //Check is not possible to read a file with CSVReader with wrong file path
     @Test(expected = FileNotFoundException.class)
-    public void ensureWrongPathNotAllowed() throws ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException{
+    public void ensureWrongPathNotAllowed() throws ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException, NoSuchMethodException, InvocationTargetException{
         String path = "nonExistingFile";
         CSVReader csvReader = new CSVReader(path);
-        csvReader.readSNSUserData();
+        csvReader.read();
     }
 
     //Check is possible to read a file with header and "," as separator (TYPE 1)
     @Test
-    public void ensureReadFileWithHeaderIsWorking() throws ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException {
+    public void ensureReadFileWithHeaderIsWorking() throws ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException, NoSuchMethodException, InvocationTargetException {
         String path = "src/test/java/app/domain/model/SNSUserFilesToTests/HeaderUsersFile.csv";
         CSVReader csvReader = new CSVReader(path);
-        List<String[]> list = csvReader.readSNSUserData();
+        List<String[]> list = csvReader.read();
 
         String[] expected = {"joao","Male","14/12/2003","rua das flores","+351919993999","joao@gmail.com","123263189","155424041ZY0"};
         assertArrayEquals(list.get(0), expected);
@@ -49,12 +50,12 @@ public class CSVReaderTest {
 
     //Check is possible to read a file without header and ";" as separator (TYPE 2)
     @Test
-    public void ensureReadFileWithoutHeaderIsWorking() throws ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException {
+    public void ensureReadFileWithoutHeaderIsWorking() throws ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException, NoSuchMethodException, InvocationTargetException {
         String path = "src/test/java/app/domain/model/SNSUserFilesToTests/MissingHeaderUsersFile.csv";
         CSVReader csvReader = new CSVReader(path);
-        List<String[]> list = csvReader.readSNSUserData();
+        List<String[]> list = csvReader.read();
 
-        String[] expected = {"joao","Male","14/12/2003","rua das flores","+351919993999","joao@gmail.com","123263189","155424041ZY0"};
+        String[] expected = {"joao","Male","14/12/2003","ruSa das flores","+351919993999","joao@gmail.com","123263189","155424041ZY0"};
 
         assertArrayEquals(list.get(0), expected);
     }

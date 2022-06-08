@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1589px" preserveAspectRatio="none" style="width:3654px;height:1589px;background:#FFFFFF;" version="1.1" viewBox="0 0 3654 1589" width="3654px" zoomAndPan="magnify"><defs><filter height="300%" id="f8v7uohcohdrb" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="1389.1719" style="stroke:#A80036;stroke-width:1.0;" width="10" x="69" y="98.2969"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="1389.1719" style="stroke:#A80036;stroke-width:1.0;" width="10" x="294" y="98.2969"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="257.9922" style="stroke:#A80036;stroke-width:1.0;" width="10" x="508" y="342.2266"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="29.1328" style="stroke:#A80036;stroke-width:1.0;" width="10" x="508" y="629.3516"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="682.4531" style="stroke:#A80036;stroke-width:1.0;" width="10" x="508" y="687.6172"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="88.2656" style="stroke:#A80036;stroke-width:1.0;" width="10" x="508" y="1399.2031"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="678" y="377.5234"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="751" y="436.6563"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="65.2969" style="stroke:#A80036;stroke-width:1.0;" width="10" x="906" y="505.7891"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="178.8594" style="stroke:#A80036;stroke-width:1.0;" width="10" x="906" y="716.75"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="186.5313" style="stroke:#A80036;stroke-width:1.0;" width="10" x="906" y="924.7422"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="157.3984" style="stroke:#A80036;stroke-width:1.0;" width="10" x="906" y="1132.4063"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="906" y="1310.9375"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="906" y="1428.3359"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1128.5" y="273.0938"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1307.5" y="541.0859"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="104.4297" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1468" y="791.1797"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1707" y="865.6094"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="59.1328" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1846.5" y="978.0078"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2629.5" y="1007.1406"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2629.5" y="1185.6719"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2893.5" y="1066.2734"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="3147" y="1244.8047"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="164.5313" style="stroke:#000000;stroke-width:2.0;" width="2251" x="794" y="939.7422"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="135.3984" style="stroke:#000000;stroke-width:2.0;" width="2475" x="794" y="1147.4063"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="74" x2="74" y1="88.2969" y2="1505.4688"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="298.5" x2="298.5" y1="88.2969" y2="1505.4688"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="513" x2="513" y1="343.7422" y2="1505.4688"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="683" x2="683" y1="88.2969" y2="1505.4688"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="756" x2="756" y1="88.2969" y2="1505.4688"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="911" x2="911" y1="507.3047" y2="1505.4688"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1133" x2="1133" y1="88.2969" y2="1505.4688"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1312" x2="1312" y1="88.2969" y2="1505.4688"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1473" x2="1473" y1="757.3984" y2="1505.4688"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1712" x2="1712" y1="831.8281" y2="1505.4688"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1851" x2="1851" y1="88.2969" y2="1505.4688"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="2634" x2="2634" y1="88.2969" y2="1505.4688"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="2898" x2="2898" y1="88.2969" y2="1505.4688"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="3152" x2="3152" y1="88.2969" y2="1505.4688"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="3366" x2="3366" y1="88.2969" y2="1505.4688"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="3558" x2="3558" y1="88.2969" y2="1505.4688"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="132" x="5" y="84.9951">Center Coordinator</text><ellipse cx="74" cy="15" fill="#FEFECE" filter="url(#f8v7uohcohdrb)" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M74,23 L74,50 M61,31 L87,31 M74,50 L61,65 M74,50 L87,65 " fill="none" filter="url(#f8v7uohcohdrb)" style="stroke:#A80036;stroke-width:2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="132" x="5" y="1517.4639">Center Coordinator</text><ellipse cx="74" cy="1530.7656" fill="#FEFECE" filter="url(#f8v7uohcohdrb)" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M74,1538.7656 L74,1565.7656 M61,1546.7656 L87,1546.7656 M74,1565.7656 L61,1580.7656 M74,1565.7656 L87,1580.7656 " fill="none" filter="url(#f8v7uohcohdrb)" style="stroke:#A80036;stroke-width:2.0;"/><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="113" x="240.5" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="99" x="247.5" y="72.9951">:CoordinatorUI</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="113" x="240.5" y="1504.4688"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="99" x="247.5" y="1524.4639">:CoordinatorUI</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="156" x="433" y="1504.4688"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="142" x="440" y="1524.4639">:ImportLegacyDataUI</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="46" x="658" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="665" y="72.9951">:App</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="46" x="658" y="1504.4688"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="665" y="1524.4639">:App</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="72" x="718" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="58" x="725" y="72.9951">app:App</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="72" x="718" y="1504.4688"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="58" x="725" y="1524.4639">app:App</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="210" x="804" y="1504.4688"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="196" x="811" y="1524.4639">:ImportLegacyDataController</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="207" x="1028" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="193" x="1035" y="72.9951">empSess:employeeSession</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="207" x="1028" y="1504.4688"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="193" x="1035" y="1524.4639">empSess:employeeSession</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="123" x="1249" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="109" x="1256" y="72.9951">comp:Company</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="123" x="1249" y="1504.4688"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="109" x="1256" y="1524.4639">comp:Company</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="170" x="1386" y="1504.4688"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="156" x="1393" y="1524.4639">csvReader:CSVReader</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="100" x="1660" y="1504.4688"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="86" x="1667" y="1524.4639">:ICSVReader</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="151" x="1774" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="137" x="1781" y="72.9951">:LegacyDataMapper</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="151" x="1774" y="1504.4688"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="137" x="1781" y="1524.4639">:LegacyDataMapper</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="231" x="2517" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="217" x="2524" y="72.9951">legacyDataDto:LegacyDataDTO</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="231" x="2517" y="1504.4688"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="217" x="2524" y="1524.4639">legacyDataDto:LegacyDataDTO</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="269" x="2762" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="255" x="2769" y="72.9951">legacyDtoList:List&lt;LegacyDataDTO&gt;</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="269" x="2762" y="1504.4688"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="255" x="2769" y="1524.4639">legacyDtoList:List&lt;LegacyDataDTO&gt;</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="210" x="3045" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="196" x="3052" y="72.9951">snsUserStore:SNSUserStore</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="210" x="3045" y="1504.4688"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="196" x="3052" y="1524.4639">snsUserStore:SNSUserStore</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="190" x="3269" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="176" x="3276" y="72.9951">center:VaccinationCenter</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="190" x="3269" y="1504.4688"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="176" x="3276" y="1524.4639">center:VaccinationCenter</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="167" x="3473" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="153" x="3480" y="72.9951">fileData:List&lt;String[]&gt;</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="167" x="3473" y="1504.4688"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="153" x="3480" y="1524.4639">fileData:List&lt;String[]&gt;</text><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="1389.1719" style="stroke:#A80036;stroke-width:1.0;" width="10" x="69" y="98.2969"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="1389.1719" style="stroke:#A80036;stroke-width:1.0;" width="10" x="294" y="98.2969"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="257.9922" style="stroke:#A80036;stroke-width:1.0;" width="10" x="508" y="342.2266"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="29.1328" style="stroke:#A80036;stroke-width:1.0;" width="10" x="508" y="629.3516"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="682.4531" style="stroke:#A80036;stroke-width:1.0;" width="10" x="508" y="687.6172"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="88.2656" style="stroke:#A80036;stroke-width:1.0;" width="10" x="508" y="1399.2031"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="678" y="377.5234"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="751" y="436.6563"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="65.2969" style="stroke:#A80036;stroke-width:1.0;" width="10" x="906" y="505.7891"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="178.8594" style="stroke:#A80036;stroke-width:1.0;" width="10" x="906" y="716.75"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="186.5313" style="stroke:#A80036;stroke-width:1.0;" width="10" x="906" y="924.7422"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="157.3984" style="stroke:#A80036;stroke-width:1.0;" width="10" x="906" y="1132.4063"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="906" y="1310.9375"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="906" y="1428.3359"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1128.5" y="273.0938"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1307.5" y="541.0859"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="104.4297" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1468" y="791.1797"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1707" y="865.6094"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="59.1328" style="stroke:#A80036;stroke-width:1.0;" width="10" x="1846.5" y="978.0078"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2629.5" y="1007.1406"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2629.5" y="1185.6719"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="2893.5" y="1066.2734"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="30" style="stroke:#A80036;stroke-width:1.0;" width="10" x="3147" y="1244.8047"/><rect fill="#FFFFFF" filter="url(#f8v7uohcohdrb)" height="40.2656" style="stroke:#000000;stroke-width:2.0;" width="143" x="2" y="98.2969"/><path d="M2,98.2969 L68,98.2969 L68,105.2969 L58,115.2969 L2,115.2969 L2,98.2969 " fill="#EEEEEE" style="stroke:#000000;stroke-width:2.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="21" x="15" y="112.3638">ref</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="135" x="8" y="131.3638">CoordinatorLogin_SD</text><polygon fill="#A80036" points="282,160.6953,292,164.6953,282,168.6953,286,164.6953" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="79" x2="288" y1="164.6953" y2="164.6953"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="86" y="159.6294">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="178" x="99" y="159.6294">wants to import legacy data</text><path d="M309,177.6953 L309,217.6953 L585,217.6953 L585,187.6953 L575,177.6953 L309,177.6953 " fill="#FBFB77" filter="url(#f8v7uohcohdrb)" style="stroke:#A80036;stroke-width:1.0;"/><path d="M575,177.6953 L575,187.6953 L585,187.6953 L575,177.6953 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="140" x="315" y="194.7622">employeeSession has</text><text fill="#000000" font-family="sans-serif" font-size="13" font-style="italic" font-weight="bold" lengthAdjust="spacing" textLength="47" x="459" y="194.7622">center</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="56" x="510" y="194.7622">obtained</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="157" x="315" y="209.895">during Coordinator login.</text><polygon fill="#A80036" points="1116.5,269.0938,1126.5,273.0938,1116.5,277.0938,1120.5,273.0938" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="304" x2="1122.5" y1="273.0938" y2="273.0938"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="311" y="268.0278">2</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="208" x="324" y="268.0278">center = getVaccinationCenter()</text><polygon fill="#A80036" points="421,328.2266,431,332.2266,421,336.2266,425,332.2266" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="304" x2="427" y1="332.2266" y2="332.2266"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="311" y="327.1606">3</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="92" x="324" y="327.1606">create(center)</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="156" x="433" y="311.0938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="142" x="440" y="331.0889">:ImportLegacyDataUI</text><polygon fill="#A80036" points="666,373.5234,676,377.5234,666,381.5234,670,377.5234" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="518" x2="672" y1="377.5234" y2="377.5234"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="525" y="372.4575">4</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="128" x="538" y="372.4575">app = getInstance()</text><polygon fill="#A80036" points="739,432.6563,749,436.6563,739,440.6563,743,436.6563" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="518" x2="745" y1="436.6563" y2="436.6563"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="525" y="431.5903">5</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="170" x="538" y="431.5903">company = getCompany()</text><polygon fill="#A80036" points="792,491.7891,802,495.7891,792,499.7891,796,495.7891" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="518" x2="798" y1="495.7891" y2="495.7891"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="525" y="490.7231">6</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="159" x="538" y="490.7231">create(company, center)</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="210" x="804" y="474.6563"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="196" x="811" y="494.6514">:ImportLegacyDataController</text><polygon fill="#A80036" points="1295.5,537.0859,1305.5,541.0859,1295.5,545.0859,1299.5,541.0859" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="916" x2="1301.5" y1="541.0859" y2="541.0859"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="923" y="536.02">7</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="230" x="936" y="536.02">snsUserStore = getSNSUserStore()</text><polygon fill="#A80036" points="90,596.2188,80,600.2188,90,604.2188,86,600.2188" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="84" x2="512" y1="600.2188" y2="600.2188"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="96" y="595.1528">8</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="304" x="109" y="595.1528">asks to select the file using a file chooser dialog</text><polygon fill="#A80036" points="496,625.3516,506,629.3516,496,633.3516,500,629.3516" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="79" x2="502" y1="629.3516" y2="629.3516"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="9" x="86" y="624.2856">9</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="92" x="99" y="624.2856">selects the file</text><polygon fill="#A80036" points="90,654.4844,80,658.4844,90,662.4844,86,658.4844" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="84" x2="512" y1="658.4844" y2="658.4844"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="96" y="653.4185">10</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="134" x="118" y="653.4185">asks for confirmation</text><polygon fill="#A80036" points="496,683.6172,506,687.6172,496,691.6172,500,687.6172" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="79" x2="502" y1="687.6172" y2="687.6172"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="86" y="682.5513">11</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="102" x="108" y="682.5513">confirms the file</text><polygon fill="#A80036" points="894,712.75,904,716.75,894,720.75,898,716.75" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="518" x2="900" y1="716.75" y2="716.75"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="525" y="711.6841">12</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="154" x="547" y="711.6841">fileData = read(filepath)</text><polygon fill="#A80036" points="1374,741.8828,1384,745.8828,1374,749.8828,1378,745.8828" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="916" x2="1380" y1="745.8828" y2="745.8828"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="923" y="740.8169">13</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="98" x="945" y="740.8169">create(filepath)</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="170" x="1386" y="724.75"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="156" x="1393" y="744.7451">csvReader:CSVReader</text><polygon fill="#A80036" points="1456,787.1797,1466,791.1797,1456,795.1797,1460,791.1797" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="916" x2="1462" y1="791.1797" y2="791.1797"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="923" y="786.1138">14</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="39" x="945" y="786.1138">read()</text><polygon fill="#A80036" points="1648,816.3125,1658,820.3125,1648,824.3125,1652,820.3125" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="1478" x2="1654" y1="820.3125" y2="820.3125"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="1485" y="815.2466">15</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="136" x="1507" y="815.2466">newInstance(filepath)</text><rect fill="#FEFECE" filter="url(#f8v7uohcohdrb)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="100" x="1660" y="799.1797"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="86" x="1667" y="819.1748">:ICSVReader</text><polygon fill="#A80036" points="1695,861.6094,1705,865.6094,1695,869.6094,1699,865.6094" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="1478" x2="1701" y1="865.6094" y2="865.6094"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="1485" y="860.5435">16</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="88" x="1507" y="860.5435">read(fileData)</text><polygon fill="#A80036" points="894,920.7422,904,924.7422,894,928.7422,898,924.7422" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="518" x2="900" y1="924.7422" y2="924.7422"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="525" y="919.6763">17</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="212" x="547" y="919.6763">legacyDtoList = convert(fileData)</text><path d="M794,939.7422 L871,939.7422 L871,946.7422 L861,956.7422 L794,956.7422 L794,939.7422 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0;"/><rect fill="none" height="164.5313" style="stroke:#000000;stroke-width:2.0;" width="2251" x="794" y="939.7422"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="32" x="809" y="952.8091">loop</text><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="171" x="886" y="951.9526">[for each entry in fileData]</text><polygon fill="#A80036" points="1834.5,974.0078,1844.5,978.0078,1834.5,982.0078,1838.5,978.0078" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="916" x2="1840.5" y1="978.0078" y2="978.0078"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="923" y="972.9419">18</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="119" x="945" y="972.9419">dto = toDto(entry)</text><polygon fill="#A80036" points="2617.5,1003.1406,2627.5,1007.1406,2617.5,1011.1406,2621.5,1007.1406" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="1856.5" x2="2623.5" y1="1007.1406" y2="1007.1406"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="1863.5" y="1002.0747">19</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="732" x="1885.5" y="1002.0747">create(snsNumber, vaccineName, dose, lotNumber, scheduledDate, arrivalDate, administrationDate, leavingDate)</text><polygon fill="#A80036" points="2881.5,1062.2734,2891.5,1066.2734,2881.5,1070.2734,2885.5,1066.2734" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="916" x2="2887.5" y1="1066.2734" y2="1066.2734"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="923" y="1061.2075">20</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="55" x="945" y="1061.2075">add(dto)</text><polygon fill="#A80036" points="894,1128.4063,904,1132.4063,894,1136.4063,898,1132.4063" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="518" x2="900" y1="1132.4063" y2="1132.4063"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="525" y="1127.3403">21</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="101" x="547" y="1127.3403">validate(legacy)</text><path d="M794,1147.4063 L871,1147.4063 L871,1154.4063 L861,1164.4063 L794,1164.4063 L794,1147.4063 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0;"/><rect fill="none" height="135.3984" style="stroke:#000000;stroke-width:2.0;" width="2475" x="794" y="1147.4063"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="32" x="809" y="1160.4731">loop</text><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="268" x="886" y="1159.6167">[for each legacyDataDto in legacyDtoList]</text><polygon fill="#A80036" points="2617.5,1181.6719,2627.5,1185.6719,2617.5,1189.6719,2621.5,1185.6719" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="916" x2="2623.5" y1="1185.6719" y2="1185.6719"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="923" y="1180.606">22</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="204" x="945" y="1180.606">snsNumber = getSNSNumber()</text><polygon fill="#A80036" points="3135,1240.8047,3145,1244.8047,3135,1248.8047,3139,1244.8047" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="916" x2="3141" y1="1244.8047" y2="1244.8047"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="923" y="1239.7388">23</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="260" x="945" y="1239.7388">b = findSNSUserByNumber(snsNumber)</text><polygon fill="#A80036" points="894,1306.9375,904,1310.9375,894,1314.9375,898,1310.9375" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="518" x2="900" y1="1310.9375" y2="1310.9375"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="525" y="1305.8716">24</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="76" x="547" y="1305.8716">sort(legacy)</text><polygon fill="#A80036" points="90,1366.0703,80,1370.0703,90,1374.0703,86,1370.0703" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="84" x2="512" y1="1370.0703" y2="1370.0703"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="96" y="1365.0044">25</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="293" x="118" y="1365.0044">shows the data and asks if he wants to save it</text><polygon fill="#A80036" points="496,1395.2031,506,1399.2031,496,1403.2031,500,1399.2031" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="79" x2="502" y1="1399.2031" y2="1399.2031"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="86" y="1394.1372">26</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="55" x="108" y="1394.1372">confirms</text><polygon fill="#A80036" points="894,1424.3359,904,1428.3359,894,1432.3359,898,1428.3359" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="518" x2="900" y1="1428.3359" y2="1428.3359"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="525" y="1423.27">27</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="81" x="547" y="1423.27">save(legacy)</text><polygon fill="#A80036" points="85,1483.4688,75,1487.4688,85,1491.4688,81,1487.4688" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="79" x2="512" y1="1487.4688" y2="1487.4688"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="18" x="91" y="1482.4028">28</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="168" x="113" y="1482.4028">informs operation success</text><!--MD5=[ea5c93b98f04827a3bea915e1fa9ad87]
+@startuml US17_SD
+autonumber
+
+actor "Center Coordinator" as COORDINATOR
+
+participant ":CoordinatorUI" as CUI
+participant ":ImportLegacyDataUI" as UI
+participant ":App" as _APP
+participant "app:App" as APP
+participant ":ImportLegacyDataController" as CTRL
+participant "empSess:employeeSession" as SESSION
+participant "comp:Company" as COMPANY
+participant "csvReader:CSVReader" as CSVREADER
+participant ":ICSVReader" as ICSV
+participant ":LegacyDataMapper" as MAPPER
+participant "legacyDataDto:LegacyDataDTO" as DTO
+participant "legacyDtoList:List<LegacyDataDTO>" as LIST_DTOS
+participant "snsUserStore:SNSUserStore" as SNSSTORE
+participant "center:VaccinationCenter" as CENTER
+participant "fileData:List<String[]>" as LIST_FILEDATA
+
+activate COORDINATOR
+  ref over COORDINATOR
+    ' !include ../../CoordinatorLogin_SD.puml!
+    ' ![[../../CoordinatorLogin_SD.puml]]
+    ' ![[../../CoordinatorLogin_SD.svg]]
+    CoordinatorLogin_SD
+  end ref
+
+  activate CUI
+  COORDINATOR -> CUI : wants to import legacy data
+
+      note right of CUI
+        employeeSession has <i><b>center</b></i> obtained 
+        during Coordinator login.
+      end note
+
+      |||
+
+    CUI -> SESSION : center = getVaccinationCenter()
+    activate SESSION
+    deactivate SESSION
+
+    CUI -> UI ** : create(center)
+    activate UI
+
+      UI -> _APP : app = getInstance()
+      activate _APP
+      deactivate _APP
+
+      UI -> APP : company = getCompany()
+      activate APP
+      deactivate APP
+
+      UI -> CTRL ** : create(company, center)
+      activate CTRL
+        CTRL -> COMPANY : snsUserStore = getSNSUserStore()
+        activate COMPANY
+        deactivate COMPANY
+      deactivate CTRL
+      
+      COORDINATOR <- - UI : asks to select the file using a file chooser dialog
+    deactivate UI
+
+    COORDINATOR -> UI : selects the file
+    activate UI
+      COORDINATOR <- - UI : asks for confirmation
+    deactivate UI
+    COORDINATOR -> UI : confirms the file
+    activate UI
+    
+      ' read data
+
+      UI -> CTRL : fileData = read(filepath)
+      activate CTRL
+        CTRL -> CSVREADER ** : create(filepath)
+
+        CTRL -> CSVREADER : read()
+        activate CSVREADER
+          CSVREADER -> ICSV ** : newInstance(filepath)
+          CSVREADER -> ICSV : read(fileData)
+          activate ICSV
+          deactivate ICSV
+        deactivate CSVREADER
+
+      deactivate CTRL
+
+      ' process data
+      UI -> CTRL : legacyDtoList = convert(fileData)
+      activate CTRL
+        loop for each entry in fileData
+          CTRL -> MAPPER : dto = toDto(entry)
+          activate MAPPER
+            MAPPER -> DTO : create(snsNumber, vaccineName, dose, lotNumber, scheduledDate, arrivalDate, administrationDate, leavingDate)
+            activate DTO
+            deactivate DTO
+          deactivate MAPPER
+
+          CTRL -> LIST_DTOS : add(dto)
+          activate LIST_DTOS
+          deactivate LIST_DTOS
+        end
+      deactivate CTRL
+
+      UI -> CTRL : validate(legacy)
+      activate CTRL
+        loop for each legacyDataDto in legacyDtoList
+          CTRL -> DTO : snsNumber = getSNSNumber()
+          activate DTO
+          deactivate DTO
+
+          CTRL -> SNSSTORE : b = findSNSUserByNumber(snsNumber)
+          activate SNSSTORE
+          deactivate SNSSTORE
+        end
+      deactivate CTRL
+
+      UI -> CTRL : sort(legacy)
+      activate CTRL
+      deactivate CTRL
+
+      ' convert to list dto and send it to ui
+
+      COORDINATOR <- - UI : shows the data and asks if he wants to save it
+    deactivate UI
+
+    COORDINATOR -> UI : confirms
+    activate UI
+      UI -> CTRL : save(legacy)
+      activate CTRL
+        ' gg
+      deactivate CTRL
+      COORDINATOR <- - UI : informs operation success
+    deactivate UI
+
+  deactivate CUI
+deactivate COORDINATOR
+@enduml
+
+@startuml US17_SD
+autonumber
+
+actor "Center Coordinator" as COORDINATOR
+
+participant ":CoordinatorUI" as CUI
+participant ":ImportLegacyDataUI" as UI
+participant ":App" as _APP
+participant "app:App" as APP
+participant ":ImportLegacyDataController" as CTRL
+participant "empSess:employeeSession" as SESSION
+participant "comp:Company" as COMPANY
+participant "csvReader:CSVReader" as CSVREADER
+participant ":ICSVReader" as ICSV
+participant ":LegacyDataMapper" as MAPPER
+participant "legacyDataDto:LegacyDataDTO" as DTO
+participant "legacyDtoList:List<LegacyDataDTO>" as LIST_DTOS
+participant "snsUserStore:SNSUserStore" as SNSSTORE
+participant "center:VaccinationCenter" as CENTER
+participant "fileData:List<String[]>" as LIST_FILEDATA
+
+activate COORDINATOR
+  ref over COORDINATOR
+    CoordinatorLogin_SD
+  end ref
+
+  activate CUI
+  COORDINATOR -> CUI : wants to import legacy data
+
+      note right of CUI
+        employeeSession has <i><b>center</b></i> obtained 
+        during Coordinator login.
+      end note
+
+      |||
+
+    CUI -> SESSION : center = getVaccinationCenter()
+    activate SESSION
+    deactivate SESSION
+
+    CUI -> UI ** : create(center)
+    activate UI
+
+      UI -> _APP : app = getInstance()
+      activate _APP
+      deactivate _APP
+
+      UI -> APP : company = getCompany()
+      activate APP
+      deactivate APP
+
+      UI -> CTRL ** : create(company, center)
+      activate CTRL
+        CTRL -> COMPANY : snsUserStore = getSNSUserStore()
+        activate COMPANY
+        deactivate COMPANY
+      deactivate CTRL
+      
+      COORDINATOR <- - UI : asks to select the file using a file chooser dialog
+    deactivate UI
+
+    COORDINATOR -> UI : selects the file
+    activate UI
+      COORDINATOR <- - UI : asks for confirmation
+    deactivate UI
+    COORDINATOR -> UI : confirms the file
+    activate UI
+    
+
+      UI -> CTRL : fileData = read(filepath)
+      activate CTRL
+        CTRL -> CSVREADER ** : create(filepath)
+
+        CTRL -> CSVREADER : read()
+        activate CSVREADER
+          CSVREADER -> ICSV ** : newInstance(filepath)
+          CSVREADER -> ICSV : read(fileData)
+          activate ICSV
+          deactivate ICSV
+        deactivate CSVREADER
+
+      deactivate CTRL
+
+      UI -> CTRL : legacyDtoList = convert(fileData)
+      activate CTRL
+        loop for each entry in fileData
+          CTRL -> MAPPER : dto = toDto(entry)
+          activate MAPPER
+            MAPPER -> DTO : create(snsNumber, vaccineName, dose, lotNumber, scheduledDate, arrivalDate, administrationDate, leavingDate)
+            activate DTO
+            deactivate DTO
+          deactivate MAPPER
+
+          CTRL -> LIST_DTOS : add(dto)
+          activate LIST_DTOS
+          deactivate LIST_DTOS
+        end
+      deactivate CTRL
+
+      UI -> CTRL : validate(legacy)
+      activate CTRL
+        loop for each legacyDataDto in legacyDtoList
+          CTRL -> DTO : snsNumber = getSNSNumber()
+          activate DTO
+          deactivate DTO
+
+          CTRL -> SNSSTORE : b = findSNSUserByNumber(snsNumber)
+          activate SNSSTORE
+          deactivate SNSSTORE
+        end
+      deactivate CTRL
+
+      UI -> CTRL : sort(legacy)
+      activate CTRL
+      deactivate CTRL
+
+
+      COORDINATOR <- - UI : shows the data and asks if he wants to save it
+    deactivate UI
+
+    COORDINATOR -> UI : confirms
+    activate UI
+      UI -> CTRL : save(legacy)
+      activate CTRL
+      deactivate CTRL
+      COORDINATOR <- - UI : informs operation success
+    deactivate UI
+
+  deactivate CUI
+deactivate COORDINATOR
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 16:16:42 WET 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

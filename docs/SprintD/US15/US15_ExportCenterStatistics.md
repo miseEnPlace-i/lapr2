@@ -13,7 +13,7 @@
 ### 1.3. Acceptance Criteria
 
 * **AC1** Output data should follow (date; number of fully vaccinated user).
-* **AC2** The user should define a time interval (two dates).
+* **AC2** The user should define a time interval (two dates). Should follow the the portuguese format (dd/mm/yyyy).
 
 ### 1.4. Found out Dependencies
 
@@ -67,23 +67,25 @@ n/a.
 |                | ... coordinating the US?                    | ExportStatisticsController | Controller                                                                                                    |
 | Step 2         | n/a                                         | n/a                        | n/a                                                                                                           |
 | Step 3         | ... instantiating new ExporterCsvData?      | CsvExporterData            | IE: holds the information relevant to the statistics                                                          |
+|                | ... knows the coordinator center?           | EmployeeSession            | IE: holds information about the sessions of the users.                                                        |
 |                | ... holds information needed to statistics? | VaccineAdministration      | IE: holds information about the vaccination process of every user                                             |
 |                | ... check sns user is fully vaccinated?     | Vaccine                    | IE: holds information about the administrations process                                                       |
-| Step 4         | ... saving the new statistics?              | CsvExporterData            | IE:                                                                                                           |
-|                |                                             |                            |                                                                                                               |
+| Step 4         | ... saving the new statistics?              | CsvExporter                | IE: gets all the data needed to export the statistics.                                                        |
 
 ### Systematization
 
 According to the taken rationale, the conceptual classes promoted to software classes are:
 
 - CsvExporterData 
+- CsvExporter
 - VaccineAdministration
 - Vaccine
+- EmployeeSession
 
 Other software classes (i.e. Pure Fabrication) identified:
 
-- ExportStatisticsUI 
-- ExportStatisticsController
+- CsvExporterUI 
+- CsvExporterController
 
 ## 3.2. Sequence Diagram (SD)
 
