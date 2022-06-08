@@ -11,7 +11,6 @@ import app.domain.model.store.VaccineTypeStore;
  * 
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
-
 public class RegisterNewVaccineTypeController implements IRegisterController<VaccineType> {
   private Company company;
   private VaccineTypeStore vaccineTypeStore;
@@ -21,7 +20,6 @@ public class RegisterNewVaccineTypeController implements IRegisterController<Vac
   /**
    * Constructor for SpecifyNewVaccineTypeController
    */
-
   public RegisterNewVaccineTypeController(Company company) {
     this.company = company;
     this.vaccineTypeStore = this.company.getVaccineTypeStore();
@@ -36,7 +34,6 @@ public class RegisterNewVaccineTypeController implements IRegisterController<Vac
    * @param technology the vaccine type technology
    * @return vaccine type
    */
-
   public VaccineType create(String code, String description, String technology) {
     this.vt = vaccineTypeStore.addVaccineType(code, description, technology);
 

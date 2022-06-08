@@ -233,4 +233,38 @@ public class TimeTest {
     Time time = new Time(10, 30);
     assertEquals(time.getMinutes(), 30);
   }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void ensureNegativeMinutesCannotCreateTime() {
+    new Time(-1);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void ensureMoreThan24HoursCannotCreateTime() {
+    new Time(24 * 60 + 1);
+  }
+
+  @Test
+  public void ensureIsPossibleCreateTimeWithMinutes() {
+    Time time = new Time(30);
+    assertEquals(time, new Time(0, 30));
+  }
+
+  @Test
+  public void ensureIsPossibleCreateTimeWithHours() {
+    Time time = new Time(100);
+    assertEquals(time, new Time(1, 40));
+  }
+
+  @Test
+  public void ensureIsPossibleCreateTimeWithHoursWithZero() {
+    Time time = new Time(0);
+    assertEquals(time, new Time(0, 0));
+  }
+
+  @Test
+  public void ensureIsPossibleCreateTimeWithHoursWithZeroMinutes() {
+    Time time = new Time(120);
+    assertEquals(time, new Time(2, 0));
+  }
 }

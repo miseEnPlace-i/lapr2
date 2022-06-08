@@ -48,6 +48,7 @@ public class AuthUI implements Runnable {
     rolesUI.add(new MenuItem(Constants.ROLE_RECEPTIONIST, new ReceptionistUI()));
     rolesUI.add(new MenuItem(Constants.ROLE_NURSE, new NurseUI()));
     rolesUI.add(new MenuItem(Constants.ROLE_SNS_USER, new SNSUserUI()));
+    rolesUI.add(new MenuItem(Constants.ROLE_COORDINATOR, new CoordinatorUI()));
     //
     return rolesUI;
   }
@@ -55,7 +56,7 @@ public class AuthUI implements Runnable {
   private boolean doLogin() {
     System.out.println("\nLogin:");
 
-    int maxAttempts = 3;
+    int maxAttempts = Constants.MAX_OF_PASSWORD_TRIES;
     boolean success = false;
     do {
       maxAttempts--;
@@ -64,8 +65,7 @@ public class AuthUI implements Runnable {
 
       success = ctrl.doLogin(id, pwd);
       if (!success) {
-        System.out.println(
-            "Invalid UserId and/or Password. \n You have  " + maxAttempts + " more attempt(s).");
+        System.out.println("Invalid UserId and/or Password. \n You have  " + maxAttempts + " more attempt(s).");
       }
 
     } while (!success && maxAttempts > 0);
@@ -84,15 +84,12 @@ public class AuthUI implements Runnable {
       found = item.hasDescription(role.getDescription());
       if (found) item.run();
     }
-    if (!found)
-      System.out.println("There is no UI for users with role '" + role.getDescription() + "'");
+    if (!found) System.out.println("There is no UI for users with role '" + role.getDescription() + "'");
   }
 
   private UserRoleDTO selectsRole(List<UserRoleDTO> roles) {
     if (roles.size() == 1) return roles.get(0);
-    else
-      return (UserRoleDTO) Utils.showAndSelectOne(roles,
-          "Select the role you want to adopt in this session:");
+    else return (UserRoleDTO) Utils.showAndSelectOne(roles, "Select the role you want to adopt in this session:");
   }
 
 }

@@ -1,0 +1,35 @@
+@startuml US17_SSD
+autonumber
+
+actor "Center Coordinator" as COORDINATOR
+
+activate COORDINATOR
+
+COORDINATOR -> ":System" : wants to import data from a legacy system
+activate ":System"
+
+":System" --> COORDINATOR : asks for the file path
+deactivate ":System"
+
+COORDINATOR -> ":System" : types the file path
+activate ":System"
+
+":System" --> COORDINATOR : shows file path and asks for confirmation
+deactivate ":System"
+
+COORDINATOR -> ":System" : confirms the file path
+activate ":System"
+
+' sorted by arrival time or by the center leaving time
+":System" --> COORDINATOR : shows data sorted and asks if he wants to save it
+deactivate ":System"
+
+COORDINATOR -> ":System" : confirms
+activate ":System"
+
+":System" --> COORDINATOR : informs operation success
+deactivate ":System"
+
+deactivate COORDINATOR
+
+@enduml
