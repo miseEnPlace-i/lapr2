@@ -1,9 +1,7 @@
 @startuml
 autonumber
 'hide footbox
-actor "Timer" as ACTOR
 
-participant "App" as APP
 participant "Company" as COMP
 participant "task:\nExportDailyVaccinatedTask" as TASK
 participant "timer:\nTimer" as TIMER
@@ -17,12 +15,8 @@ participant "vacAdminList:\nList<VaccineAdministration>" as VALST
 
 
 
-APP -> APP : StartUp()
-activate APP
-    APP -> COMP : scheduleExportDailyVaccinated(dateTime)
+    [o-> COMP : scheduleExportDailyVaccinated(dateTime)
     activate COMP
-
-    deactivate APP
 
         note right of COMP
             aqui recebe isto??? recebe tambem as stores necessarias??
@@ -62,6 +56,10 @@ activate APP
                     TASK -> VAC : vacType = getVacType()
                     activate VAC
                     deactivate VAC
+
+                    TASK -> TASK : listIncrementVacType(vacType)
+                    activate TASK
+                    deactivate TASK
                 end
             end
 
