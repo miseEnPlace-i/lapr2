@@ -27,6 +27,7 @@ public abstract class VaccinationCenter {
   private WaitingRoom waitingRoom;
   private AppointmentScheduleList appointmentList;
   private CenterEventList eventList;
+  private List<VaccineAdministration> vaccineAdministrationList;
 
   /**
    * Constructor for the Vaccination Center
@@ -374,5 +375,14 @@ public abstract class VaccinationCenter {
 
   public boolean hasAvailabilityInSlot(Calendar date) {
     return appointmentList.checkSlotAvailability(date);
+  }
+
+  /**
+   * Adds a Vaccine Administration object to the list.
+   * 
+   * @param vaccineAdministration the Vaccine Administration object to be added.
+   */
+  public void addVaccineAdministrationToList(VaccineAdministration vaccineAdministration) {
+    this.vaccineAdministrationList.add(vaccineAdministration);
   }
 }
