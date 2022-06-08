@@ -28,22 +28,15 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
   public void insertData() {
     // Select center type
     System.out.println("\nSelect the Vaccination Center type: ");
-    VaccinationCenterType type = (VaccinationCenterType) Utils
-        .showAndSelectOne(Arrays.asList(VaccinationCenterType.values()), "");
+    VaccinationCenterType type = (VaccinationCenterType) Utils.showAndSelectOne(Arrays.asList(VaccinationCenterType.values()), "");
     String name = Utils.readLineFromConsole("Name: ");
     String address = Utils.readLineFromConsole("Address: ");
-    String email = Utils.readLineFromConsoleWithValidation("Email (example@example.com): ",
-        FieldToValidate.EMAIL);
-    String phone = Utils.readLineFromConsoleWithValidation("Phone Number (+351xxxxxxxxx): ",
-        FieldToValidate.PHONE_NUMBER);
-    String fax = Utils.readLineFromConsoleWithValidation("Fax Number (+351xxxxxxxxx): ",
-        FieldToValidate.FAX);
-    String website = Utils.readLineFromConsoleWithValidation(
-        "Website Address (https://domain.ext): ", FieldToValidate.WEBSITE);
-    String openHours =
-        Utils.readLineFromConsoleWithValidation("Opening hours (HH:MM): ", FieldToValidate.HOURS);
-    String closHours =
-        Utils.readLineFromConsoleWithValidation("Closing hours (HH:MM): ", FieldToValidate.HOURS);
+    String email = Utils.readLineFromConsoleWithValidation("Email (example@example.com): ", FieldToValidate.EMAIL);
+    String phone = Utils.readLineFromConsoleWithValidation("Phone Number (+351xxxxxxxxx): ", FieldToValidate.PHONE_NUMBER);
+    String fax = Utils.readLineFromConsoleWithValidation("Fax Number (+351xxxxxxxxx): ", FieldToValidate.FAX);
+    String website = Utils.readLineFromConsoleWithValidation("Website Address (https://domain.ext): ", FieldToValidate.WEBSITE);
+    String openHours = Utils.readLineFromConsoleWithValidation("Opening hours (HH:MM): ", FieldToValidate.HOURS);
+    String closHours = Utils.readLineFromConsoleWithValidation("Closing hours (HH:MM): ", FieldToValidate.HOURS);
     int slotDur = Utils.readPositiveIntegerFromConsole("Slot duration (min): ");
     int maxVac = Utils.readPositiveIntegerFromConsole("Maximum vaccines per slot: ");
     Employee coordinator;
@@ -53,8 +46,13 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
     List<Employee> coordinators = new ArrayList<Employee>();
     coordinators = ctrl.getCoordinators();
 
+    if (coordinators.size() == 0) {
+      System.out.println("\nThere are no coordinators to choose from.\n");
+      return;
+    }
+
     do {
-      System.out.println("\nSelect a employee from the list:\n");
+      System.out.println("\nSelect a coordinator from the list:\n");
       coordinator = (Employee) Utils.showAndSelectOne(coordinators, "Coordinators");
       if (coordinators.contains(coordinator)) {
         flag = true;
@@ -65,14 +63,12 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
 
     // select center type
     if (type == VaccinationCenterType.COMMUNITY_MASS_VACCINATION_CENTER) {
-      super.ctrl.createCommunityMass(name, address, email, phone, fax, website, openHours,
-          closHours, slotDur, maxVac, coordinator);
+      super.ctrl.createCommunityMass(name, address, email, phone, fax, website, openHours, closHours, slotDur, maxVac, coordinator);
     } else {
       String ages = Utils.readLineFromConsole("AGES: ");
       String ars = Utils.readLineFromConsole("ARS: ");
 
-      super.ctrl.createHealthCare(name, address, email, phone, fax, website, openHours, closHours,
-          slotDur, maxVac, coordinator, ages, ars);
+      super.ctrl.createHealthCare(name, address, email, phone, fax, website, openHours, closHours, slotDur, maxVac, coordinator, ages, ars);
     }
   }
 }

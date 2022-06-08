@@ -1,5 +1,6 @@
 package app.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.Company;
 import app.domain.model.Employee;
@@ -18,7 +19,7 @@ public class RegisterVaccinationCenterController implements IRegisterController<
   private Company company;
   private EmployeeStore employeeStore;
   private VaccinationCenter center;
-  private VaccinationCenterStore vacStore;
+  private VaccinationCenterStore vaccinationCenterStore;
 
   /**
    * Constructor for VaccinationCenterController
@@ -26,7 +27,7 @@ public class RegisterVaccinationCenterController implements IRegisterController<
   public RegisterVaccinationCenterController(Company company) {
     this.company = company;
     this.employeeStore = this.company.getEmployeeStore();
-    this.vacStore = this.company.getVaccinationCenterStore();
+    this.vaccinationCenterStore = this.company.getVaccinationCenterStore();
   }
 
   /**
@@ -51,11 +52,11 @@ public class RegisterVaccinationCenterController implements IRegisterController<
     VaccineType vaccineType = company.getVaccineTypeStore().getVaccineTypeByCode(vaccineTypeCode);
 
     // creates a vaccination center instance
-    this.center = vacStore.createCommunityMassCenter(name, address, emailAddress, phoneNum, faxNum, webAddress, openingHours, closingHours, slotDuration,
-        maxVacSlot, coordinator, vaccineType);
+    this.center = vaccinationCenterStore.createCommunityMassCenter(name, address, emailAddress, phoneNum, faxNum, webAddress, openingHours, closingHours,
+        slotDuration, maxVacSlot, coordinator, vaccineType);
 
     // validates the center
-    vacStore.validateVaccinationCenter(center);
+    vaccinationCenterStore.validateVaccinationCenter(center);
   }
 
   /**
@@ -79,23 +80,35 @@ public class RegisterVaccinationCenterController implements IRegisterController<
       String closingHours, int slotDuration, int maxVacSlot, Employee coordinator, String ages, String ars) {
 
     // creates a vaccination center instance
-    this.center = vacStore.createHealthCareCenter(name, address, emailAddress, phoneNum, faxNum, webAddress, openingHours, closingHours, slotDuration,
-        maxVacSlot, coordinator, ages, ars);
+    this.center = vaccinationCenterStore.createHealthCareCenter(name, address, emailAddress, phoneNum, faxNum, webAddress, openingHours, closingHours,
+        slotDuration, maxVacSlot, coordinator, ages, ars);
 
     // validates the center
-    vacStore.validateVaccinationCenter(center);
+    vaccinationCenterStore.validateVaccinationCenter(center);
   }
 
   @Override
   public void save() {
-    vacStore.saveVaccinationCenter(this.center);
+    vaccinationCenterStore.saveVaccinationCenter(this.center);
   }
 
   /**
    * @return Gets list of all coordinators registered in the system
    */
   public List<Employee> getCoordinators() {
-    return employeeStore.getEmployeesWithRole(Constants.ROLE_COORDINATOR);
+    List<Employee> coordinators = employeeStore.getEmployeesWithRole(Constants.ROLE_COORDINATOR);
+
+    List<Employee> coordinatorsWithoutCenter = new ArrayList<>();
+
+    for (Employee coordinator : coordinators)
+      if (hasCenter(coordinator)) coordinatorsWithoutCenter.add(coordinator);
+
+    return coordinatorsWithoutCenter;
+  }
+
+  private boolean hasCenter(Employee coordinator) {
+    String coordinatorEmail = coordinator.getEmail();
+    return vaccinationCenterStore.getVaccinationCenterWithCoordinatorEmail(coordinatorEmail) != null;
   }
 
   @Override
