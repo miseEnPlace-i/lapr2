@@ -7,14 +7,14 @@ import app.controller.RegisterVaccineController;
 import app.domain.model.VaccineType;
 import app.ui.console.utils.Utils;
 
+/**
+ * Register Vaccine View
+ * 
+ * @author Carlos Lopes <1211277@isep.ipp.pt>
+ */
 public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
   private String vacTypeId = "";
 
-  /**
-   * Register Vaccine View
-   * 
-   * @author Carlos Lopes <1211277@isep.ipp.pt>
-   */
   public RegisterVaccineUI() {
     super(new RegisterVaccineController(App.getInstance().getCompany()));
   }
@@ -26,14 +26,16 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
     List<VaccineType> vacTypes = super.ctrl.getVacTypes(); // all available vaccine types
 
     if (vacTypes.isEmpty()) {
-      Utils.readLineFromConsole(
-          "No vaccine type registered. Register a vaccine Type before registering a new Vaccine.\nPress enter to go back to the menu. ");
+      Utils.readLineFromConsole("No vaccine type registered. Register a vaccine Type before registering a new Vaccine.\nPress enter to go back to the menu. ");
       return;
     }
 
     displayVacTypes(vacTypes);
 
     VaccineType vacType = selectVacType(vacTypes); // asks to select the vaccine type
+
+    if (vacType == null) return;
+
     this.vacTypeId = vacType.getCode();
 
     insertData(); // asks to insert vaccine data and instantiates and validates a new vaccine
@@ -70,6 +72,9 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
   // RETURNS VACCINE TYPE ID SELECTED
   private VaccineType selectVacType(List<VaccineType> vacTypes) {
     int vacTypeId = Utils.selectsIndex(vacTypes);
+
+    if (vacTypeId == -1) return null;
+
     return vacTypes.get(vacTypeId);
   }
 
@@ -90,8 +95,7 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
     List<String> options = new ArrayList<String>();
     options.add("y");
     options.add("n");
-    Object input =
-        Utils.showAndSelectOne(options, "\nWant to add another administration process? (y/n):  ");
+    Object input = Utils.showAndSelectOne(options, "\nWant to add another administration process? (y/n):  ");
     String inputStr = (String) input;
 
     return inputStr.equals("y");

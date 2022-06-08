@@ -13,7 +13,6 @@ import pt.isep.lei.esoft.auth.domain.model.UserRole;
  * 
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
-
 public class RegisterEmployeeUI extends RegisterUI<RegisterEmployeeController> {
   private String roleId = "";
 
@@ -41,6 +40,8 @@ public class RegisterEmployeeUI extends RegisterUI<RegisterEmployeeController> {
   private UserRole selectEmployeeRole(List<UserRole> employeeRoles) {
     int roleIndex = Utils.selectsIndex(employeeRoles);
 
+    if (roleIndex == -1) return null;
+
     return employeeRoles.get(roleIndex);
   }
 
@@ -53,6 +54,9 @@ public class RegisterEmployeeUI extends RegisterUI<RegisterEmployeeController> {
     displayEmployeeRoles(employeeRoles);
 
     UserRole role = selectEmployeeRole(employeeRoles);
+
+    if (role == null) return;
+
     this.roleId = role.getId();
 
     String name = Utils.readLineFromConsole("Name: ");

@@ -6,7 +6,6 @@ import app.domain.model.list.AdminProcList;
  * @author Carlos Lopes <1211277@isep.ipp.pt>
  */
 public class Vaccine {
-
   private String designation;
   private String brand;
   private String id;
