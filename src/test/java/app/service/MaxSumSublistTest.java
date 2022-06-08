@@ -11,6 +11,7 @@ public class MaxSumSublistTest {
   private Integer[] allNegativeCase = new Integer[] {-2, -6, -8, -1, -2, -4, -10};
   private Integer[] twoSublists = new Integer[] {2, 1, 5, -1, -6, -1, 8, -2};
   private Integer[] emptyList = new Integer[] {};
+  private Integer[] otherExample = new Integer[] {1, -2, 5, -6, 2, 8, -1, 4, 10};
 
   @Test
   public void ensureSublistIsCorrect() {
@@ -53,5 +54,17 @@ public class MaxSumSublistTest {
   public void ensureEmptySublistIsNotAllowed() {
     List<Integer> list = Arrays.asList(emptyList);
     new MaxSumSublistService(list);
+  }
+
+  @Test
+  public void ensureOtherInputWorks() {
+    List<Integer> list = Arrays.asList(otherExample);
+    MaxSumSublistService data = new MaxSumSublistService(list);
+
+    Integer[] expected = new Integer[] {2, 8, -1, 4, 10};
+
+    List<Integer> result = data.getMaxSumSubList();
+
+    assertEquals(Arrays.asList(expected), result);
   }
 }
