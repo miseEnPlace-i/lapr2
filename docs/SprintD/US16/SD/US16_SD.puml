@@ -59,7 +59,7 @@ loop for each event in events
 end loop
 
 create "centerPerformance\n:CenterPerformance" as PERF
-VACC --> PERF : create(events,interval,openingHours)
+VACC --> PERF : create(eventsInDay,interval,openingHours)
 activate PERF
 PERF -> PERF : differenceList=calculateDifferencesList()
 
@@ -73,13 +73,13 @@ deactivate MAXSS
 PERF -> MAXSS : getStartIndex()
 activate MAXSS
 deactivate MAXSS
-PERF -> PERF : getStartTime()
+PERF -> PERF : convertIndexToTime(startIndex)
 activate PERF
 deactivate PERF
 PERF -> MAXSS : getEndIndex()
 activate MAXSS
 deactivate MAXSS
-PERF -> PERF : getEndTime()
+PERF -> PERF : convertIndexToTime(endIndex)
 activate PERF
 deactivate PERF
 PERF -> MAXSS : getMaxSum()

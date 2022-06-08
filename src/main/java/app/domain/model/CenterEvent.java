@@ -17,4 +17,12 @@ public class CenterEvent {
   public boolean isInDay(Calendar day) {
     return this.date.get(Calendar.DAY_OF_YEAR) == day.get(Calendar.DAY_OF_YEAR);
   }
+
+  public Calendar getDate() {
+    return date;
+  }
+
+  public boolean isType(CenterEventType type) {
+    return type.equals(eventType);
+  }
 }
