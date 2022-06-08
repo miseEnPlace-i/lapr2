@@ -1,0 +1,53 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Company{
+    +scheduleExportDailyVaccinated(dateTime)
+}
+
+interface Runnable{
+    +run()
+}
+
+abstract TimerTask{
+    +TimerTask()
+    +run()
+    +cancel()
+    +scheduledExecutionTime()
+}
+
+class ExportDailyVaccinatedTask {
+    +ExportDailyVaccinatedTask(filePath, VaccinationCenterStore, VaccineTypeStore)
+    +run()
+    +listIncrementVacType(vacType)
+}
+
+class TimerTask{
+    +TimerTask()
+    +scheduleAtFixedRate(task, firstTime, period)
+}
+
+class VaccinationCenterStore {
+    +getVaccinationCenters()
+}
+
+class VaccineTypeStore {
+    +getVaccineTypes()
+}
+
+class VaccinationCenter {
+    +getVaccinaAdminList()
+}
+
+class Vaccine {
+    +getVacType()
+}
+
+class CsvExporter {
+    +CsvExporter
+    +exportData(dataMap)
+}
+
+class VaccineType {}
+
+@enduml

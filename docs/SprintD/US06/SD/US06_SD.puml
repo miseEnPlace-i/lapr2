@@ -9,7 +9,7 @@ participant "vacCenterSt:\nVaccinationCenterStore" as VCST
 participant "vacTypeSt:\nVaccineTypeStore" as VTST
 participant "center:\nVaccinationCenter" as CENTER
 participant "vaccine:\nVaccine" as VAC
-participant "csvEx:\n CsvExporter" as CSVEX
+participant "csvEx:\nCsvExporter" as CSVEX
 participant "vacType:\nVaccineType" as VACTYPE
 participant "vacAdminList:\nList<VaccineAdministration>" as VALST
 
@@ -25,7 +25,7 @@ participant "vacAdminList:\nList<VaccineAdministration>" as VALST
 
         COMP --> TIMER ** : create()
 
-        COMP -> TIMER : schedule(task, dateTime)
+        COMP -> TIMER : scheduleAtFixedRate(task, firstTime, period)
         activate TIMER
         deactivate TIMER
 
