@@ -22,6 +22,7 @@ model ..> Stores
 
 Controllers ..> Mappers
 Controllers ..> Domain
+Controllers ..> Dto
 
 UI ..> Controllers
 
@@ -32,9 +33,9 @@ Domain ..> Service
 Domain ..> Session
 
 Mappers ..> Domain
+Mappers ..> Dto
 
-GUI ..> Console
-Console ..> GUI
-
-
+UI ..> Dto
+UI ..> Session
+UI ..> Exception
 @enduml
