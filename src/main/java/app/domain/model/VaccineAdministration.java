@@ -8,12 +8,13 @@ import java.util.Calendar;
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
 public class VaccineAdministration implements Comparable<VaccineAdministration> {
-  SNSUser snsUser;
-  Vaccine vaccine;
-  String lotNumber;
-  int doseNumber;
-  VaccinationCenter vaccinationCenter;
-  Calendar date;
+  private SNSUser snsUser;
+  private Vaccine vaccine;
+  private String lotNumber;
+  private int doseNumber;
+  private VaccinationCenter vaccinationCenter;
+  private Calendar date;
+  private AdverseReaction adverseReaction;
 
   /**
    * Constructor for VaccineAdministration.
@@ -93,6 +94,35 @@ public class VaccineAdministration implements Comparable<VaccineAdministration> 
    */
   public int getDoseNumber() {
     return doseNumber;
+  }
+
+  /**
+   * Adds an adverse reaction to the vaccine administration.
+   * 
+   * @param adverseReaction the adverse reaction to add
+   */
+  public void addAdverseReaction(AdverseReaction adverseReaction) {
+    this.adverseReaction = adverseReaction;
+  }
+
+  /**
+   * Gets the adverse reaction of the vaccine administration.
+   * 
+   * @return the adverse reaction of the vaccine administration
+   */
+  public AdverseReaction getAdverseReaction() {
+    return adverseReaction;
+  }
+
+  /**
+   * Checks if the vaccine administrated has the given vaccine type.
+   * 
+   * @param vaccineType the vaccine type to check
+   * 
+   * @return true if the vaccine administrated has the given vaccine type, false otherwise
+   */
+  public boolean vaccineHasVaccineType(VaccineType vaccineType) {
+    return vaccine.getVacType().equals(vaccineType);
   }
 
   @Override
