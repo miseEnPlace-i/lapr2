@@ -320,8 +320,15 @@ public abstract class VaccinationCenter {
     return appointmentList;
   }
 
-  public abstract String toString();
+  public CenterPerformance getCenterPerformanceForDay(Calendar day, int interval) {
+    List<CenterEvent> events = this.eventList.getEventListForDay(day);
 
+    CenterPerformance centerPerformance = new CenterPerformance(events, interval, openingHours);
+
+    return centerPerformance;
+  }
+
+  public abstract String toString();
 
   @Override
   public boolean equals(Object obj) {

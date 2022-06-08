@@ -132,7 +132,7 @@ public class SNSUserStore {
   }
 
   /**
-   * Finds a SNS User by SNS Number.
+   * Finds a SNS User by SNS Number. Returns <code>null</code> if not found.
    * 
    * @param snsNumber The SNS User Number.
    * @return SNSUser

@@ -1,0 +1,68 @@
+@startuml
+hide methods
+left to right direction
+skinparam classAttributeIconSize 0
+
+class VaccinationCenter {
+  - name
+  - address
+  - emailAddress
+  - phoneNumber
+  - faxNumber
+  - websiteAddress
+}
+
+class Time {
+  - hours
+  - minutes
+}
+
+class Slot {
+  -duration
+  -nOfVaccinesPerSlot
+}
+
+class Employee {
+  -id
+  -name
+  -email
+  -phone
+  -address
+  -citizenCardNumber
+  -roleId
+}
+
+class CenterPerformance {
+  - day
+  - maxSumSublist
+}
+
+class Role {
+  -designation
+}
+
+class Company {}
+
+class CenterCoordinator {}
+
+
+VaccinationCenter "1" -- "1" Time : has closing hours >
+VaccinationCenter "1" -- "1" Time : has opening hours >
+
+CenterPerformance "1" -- "1" Time : has start time >
+CenterPerformance "1" -- "1" Time : has end time >
+
+VaccinationCenter "1" -- "1" Slot : has >
+
+Employee <|-- CenterCoordinator
+Employee "*" -- "1" Role : has <
+
+Company "1" -- "*" Employee : knows >
+Company "1" -- "*" VaccinationCenter : knows >
+
+VaccinationCenter "1" -- "*" CenterPerformance : has >
+
+CenterCoordinator "1" -- "1" VaccinationCenter : analyses >
+CenterCoordinator "1" -- "1" VaccinationCenter : is associated to >
+
+@enduml

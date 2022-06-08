@@ -1,4 +1,4 @@
-# US 005 - To create a Task
+# US 05 - List Users in Waiting Room
 
 ## 1. Requirements Engineering
 
@@ -15,7 +15,6 @@ As a nurse, I intend to consult the users in the waiting room of a vaccination c
 > "At any time, a nurse responsible for administering the vaccine will use the application to check the list of SNS users that are present in the vaccination center to take the vaccine"
 
 **From the client clarifications:**
-oov
 
 > **Question:** "[...] what does consulting constitute in this context? [...]"
 >

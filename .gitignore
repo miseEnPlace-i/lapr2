@@ -51,3 +51,6 @@ Thumbs.db
 
 # SMS Output File
 SMS.txt
+
+# Email Output File
+Email.txt
