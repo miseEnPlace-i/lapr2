@@ -1,6 +1,7 @@
 package app.dto;
 
 import java.text.SimpleDateFormat;
+import app.domain.model.Appointment;
 import app.domain.shared.Gender;
 
 public class ArrivalDTO {
@@ -10,14 +11,16 @@ public class ArrivalDTO {
   private String snsUserNumber;
   private String phoneNumber;
   private String time;
+  private Appointment appointment;
 
-  public ArrivalDTO(String name, Gender gender, String birthDate, String snsUserNumber, String phoneNumber, String time) {
+  public ArrivalDTO(String name, Gender gender, String birthDate, String snsUserNumber, String phoneNumber, String time, Appointment appointment) {
     this.name = name;
     this.gender = gender;
     this.birthDate = birthDate;
     this.snsUserNumber = snsUserNumber;
     this.phoneNumber = phoneNumber;
     this.time = time;
+    this.appointment = appointment;
   }
 
   /**
@@ -60,6 +63,13 @@ public class ArrivalDTO {
    */
   public String getTime() {
     return time;
+  }
+
+  /**
+   * @return Appointment return the appointment
+   */
+  public Appointment getAppointment() {
+    return appointment;
   }
 
   @Override
