@@ -1,6 +1,6 @@
 package app.ui;
 
-import app.ui.gui.ApplicationUI;
+import app.ui.console.MainMenuUI;
 
 /**
  *
@@ -10,13 +10,10 @@ import app.ui.gui.ApplicationUI;
 public class Main {
   public static void main(String[] args) {
     try {
-      ApplicationUI.launch(ApplicationUI.class, args);
+      // ApplicationUI.launch(ApplicationUI.class, args);
 
-      /**
-       * MainMenuUI menu = new MainMenuUI();
-       * 
-       * menu.run();
-       */
+      MainMenuUI menu = new MainMenuUI();
+      menu.run();
     } catch (Exception e) {
       e.printStackTrace();
     }
