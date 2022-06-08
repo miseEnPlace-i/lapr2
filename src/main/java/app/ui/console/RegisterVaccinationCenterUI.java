@@ -37,6 +37,9 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
     // Select center type
     System.out.println("\nSelect the Vaccination Center type: ");
     VaccinationCenterType type = (VaccinationCenterType) Utils.showAndSelectOne(Arrays.asList(VaccinationCenterType.values()), "");
+
+    if (type == null) return;
+
     String name = Utils.readLineFromConsole("Name: ");
     String address = Utils.readLineFromConsole("Address: ");
     String email = Utils.readLineFromConsoleWithValidation("Email (example@example.com): ", FieldToValidate.EMAIL);
