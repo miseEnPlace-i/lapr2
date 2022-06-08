@@ -48,6 +48,23 @@ class CsvExporter {
     +exportData(dataMap)
 }
 
+class VaccineAdministration {
+    +getVaccine()
+}
+
 class VaccineType {}
+
+TimerTask ..|> Runnable
+ExportDailyVaccinatedTask -|> TimerTask
+Company ..> VaccinationCenterStore : knows
+Company ..> VaccineTypeStore : knows
+Vaccine "*" -> "1" VaccineType : has
+VaccineAdministration "*" -> "*" Vaccine : has
+VaccinationCenter "1" -> "*" VaccineAdministration : has
+VaccineTypeStore "1" -> "*" VaccineType : stores
+VaccinationCenterStore "1" -> "*" VaccinationCenter : stores
+Company -> Timer : uses
+Timer -> ExportDailyVaccinatedTask : times
+ExportDailyVaccinatedTask -> CsvExporter : uses
 
 @enduml

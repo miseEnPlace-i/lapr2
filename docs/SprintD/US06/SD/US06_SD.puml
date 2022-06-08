@@ -8,11 +8,12 @@ participant "timer:\nTimer" as TIMER
 participant "vacCenterSt:\nVaccinationCenterStore" as VCST
 participant "vacTypeSt:\nVaccineTypeStore" as VTST
 participant "center:\nVaccinationCenter" as CENTER
+participant "vacAdmin:\nVaccineAdministration" as VACADMIN
 participant "vaccine:\nVaccine" as VAC
 participant "csvEx:\nCsvExporter" as CSVEX
 participant "vacType:\nVaccineType" as VACTYPE
 participant "vacAdminList:\nList<VaccineAdministration>" as VALST
-
+participant "dataMap:\nHashMap<VaccinationCenter,HashMap<VaccineType,Int>>" as VALST
 
 
     [o-> COMP : scheduleExportDailyVaccinated(dateTime)
@@ -53,6 +54,10 @@ participant "vacAdminList:\nList<VaccineAdministration>" as VALST
                 deactivate CENTER
 
                 loop foreach vaccine administration
+                    TASK -> VACADMIN : vaccine = getVaccine()
+                    activate VACADMIN
+                    deactivate VACADMIN
+
                     TASK -> VAC : vacType = getVacType()
                     activate VAC
                     deactivate VAC
