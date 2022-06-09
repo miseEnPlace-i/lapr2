@@ -55,7 +55,6 @@ public class AuthUI implements Initializable, IGui {
   }
 
   private void displayInvalidCredentialsAlert() {
-
     Alert alert = new Alert(AlertType.ERROR);
     alert.setTitle("Login Failed");
     alert.setHeaderText("Please insert your email and password again.");
@@ -63,6 +62,8 @@ public class AuthUI implements Initializable, IGui {
     alert.showAndWait().ifPresent(response -> {
       if (response == ButtonType.OK) Logger.getLogger(getClass().getName()).log(Level.INFO, "Login failed");
     });
+
+    resetTextFields();
   }
 
   private void displayMaxAttemptsReachedAlert() {
@@ -108,12 +109,19 @@ public class AuthUI implements Initializable, IGui {
         RoleUI gui = (RoleUI) mainApp.replaceSceneContent(menuFXML);
         gui.setMainApp(mainApp);
       } catch (Error e) {
+        resetTextFields();
         Logger.getLogger(ApplicationUI.class.getName()).log(Level.SEVERE, "Coordinator has no center.");
       }
 
     } catch (Exception e) {
       Logger.getLogger(ApplicationUI.class.getName()).log(Level.SEVERE, null, e);
     }
+  }
+
+  private void resetTextFields() {
+    txtEmail.setText("");
+    txtPwd.setText("");
+    txtEmail.requestFocus();
   }
 
   private String getMenuWithRoleFXML(UserRoleDTO role) {

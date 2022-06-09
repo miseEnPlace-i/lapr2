@@ -3,7 +3,6 @@ package app.ui;
 import app.ui.gui.ApplicationUI;
 
 /**
- *
  * @author Paulo Maio <pam@isep.ipp.pt>
  */
 // Teste
