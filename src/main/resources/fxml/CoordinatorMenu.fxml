@@ -90,7 +90,7 @@
       </FlowPane>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="900.0" spacing="16.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
          <children>
-            <Button mnemonicParsing="false" prefWidth="320.0" text="Export Vaccination Statistics" />
+            <Button mnemonicParsing="false" onAction="#toExportCenterStatistics" prefWidth="320.0" text="Export Vaccination Statistics" />
             <Button mnemonicParsing="false" prefWidth="320.0" text="Analyse Center Performance" />
             <Button mnemonicParsing="false" onAction="#toImportLegacyDataScene1" prefWidth="320.0" text="Import Data from Legacy System" />
          </children>
