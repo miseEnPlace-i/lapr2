@@ -14,15 +14,16 @@ public class ExportCenterStatisticsController {
     private Company company;
     private EmployeeSession session;
     private FullyVaccinatedData exporter;
-    private Map<Calendar, Integer> data;
+    private Map<Calendar, Integer> dataMap;
+    private CsvExporter csvExporter;
 
     public ExportCenterStatisticsController(Company company, EmployeeSession coordinatorSession) throws NotAuthorizedException {
-        if (!coordinatorSession.hasCenter()) throw new NotAuthorizedException("Coordinator is not logged in");
+        if (!coordinatorSession.hasCenter()) throw new NotAuthorizedException("Coordinator is not logged in.");
         this.session = coordinatorSession;
         this.company = company;
     }
 
-    public FullyVaccinatedData createCsvExporterData(String filePath, Calendar start, Calendar end) {
+    public FullyVaccinatedData createFullyVaccinatedData(String filePath, Calendar start, Calendar end) {
         VaccinationCenter center = session.getVaccinationCenter();
 
         FullyVaccinatedData exporter = new FullyVaccinatedData(filePath, start, end, center);
@@ -31,12 +32,16 @@ public class ExportCenterStatisticsController {
     }
 
     public Map<Calendar, Integer> generateFullyVaccinatedUsersInterval() {
-        data = exporter.getFullyVaccinatedUsersPerDayMap();
-        return data;
+        dataMap = exporter.getFullyVaccinatedUsersPerDayMap();
+        return dataMap;
     }
 
-    public void saveData(String filePath, Map data) {
-        CsvExporter csvExporter = new CsvExporter(filePath);
-        csvExporter.writeToFile(data);
+    public CsvExporter createCsvExporter(String filePath) {
+        csvExporter = new CsvExporter(filePath);
+        return csvExporter;
+    }
+
+    public void saveData(Map dataMap) {
+        csvExporter.writeToFile(dataMap);
     }
 }
