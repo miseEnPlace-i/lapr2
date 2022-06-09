@@ -16,9 +16,12 @@ participant "vacAdminList:\nList<VaccineAdministration>" as VALST
 participant "dataMap:\nHashMap<VaccinationCenter,HashMap<VaccineType,Int>>" as VALST
 
 
-    [o-> COMP : scheduleExportDailyVaccinated(dateTime)
+    [o-> COMP : scheduleExportDailyVaccinated(firstTime, period)
     activate COMP
 
+        note right COMP 
+            filePath is a property of the system
+        end note
         COMP --> TASK ** : create(filePath, vacCenterSt, vacTypeSt)
 
         COMP --> TIMER ** : create()

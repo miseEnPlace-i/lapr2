@@ -1,5 +1,8 @@
 package app.domain.model;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Timer;
 import org.apache.commons.lang3.StringUtils;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
@@ -8,6 +11,7 @@ import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineStore;
 import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.model.store.VaccineTypeStore;
+import app.domain.shared.Constants;
 import pt.isep.lei.esoft.auth.AuthFacade;
 import pt.isep.lei.esoft.auth.UserSession;
 
@@ -128,4 +132,18 @@ public class Company {
   public UserSession getUserSession() {
     return this.userSession;
   }
+
+  public void scheduleExportDailyVaccinated(Date firstDate, long period){
+    ExportDailyVaccinatedTask task = new ExportDailyVaccinatedTask(Constants.FILE_PATH_DAILY_VACCINATED, this.vaccinationCenterStore, this.vaccineTypeStore);
+    Timer timer = new Timer();
+
+    Calendar firstTime = Calendar.getInstance();
+    firstTime.add(Calendar.DAY_OF_MONTH, 1);
+    firstTime.set(Calendar.HOUR, 0);
+    firstTime.set(Calendar.MINUTE, 0);
+    firstTime.set(Calendar.SECOND, 0);
+
+    timer.scheduleAtFixedRate(task, firstTime, 86400);
+  }
+
 }
