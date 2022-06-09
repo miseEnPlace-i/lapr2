@@ -1,9 +1,7 @@
 package app.service;
 
-import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import app.domain.model.SNSUser;
@@ -91,7 +89,7 @@ public class FullyVaccinatedData {
     public Map<Calendar, Integer> getFullyVaccinatedUsersPerDayMap() {
         int dose;
 
-        long nOfDaysBetween = ChronoUnit.DAYS.between(startDate.toInstant(), endDate.toInstant());
+        long nOfDaysBetween = getDaysBetweenTwoDates();
 
         Calendar currentDay = Calendar.getInstance();
         currentDay.setTime(startDate.getTime());
@@ -133,6 +131,13 @@ public class FullyVaccinatedData {
      */
     public List<VaccineAdministration> vacAdminList(Calendar day) {
         return center.getVacAdminDayList(day);
+    }
+
+    /**
+     * Gets number of days between two dates
+     */
+    public long getDaysBetweenTwoDates() {
+        return ChronoUnit.DAYS.between(startDate.toInstant(), endDate.toInstant());
     }
 
 }
