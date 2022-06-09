@@ -11,9 +11,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class App extends Application {
+public class ApplicationUI extends Application {
   private Stage stage;
-  private final double MINIMUM_WINDOW_WIDTH = 800.0;
+  private final double MINIMUM_WINDOW_WIDTH = 840.0;
   private final double MINIMUM_WINDOW_HEIGHT = 600.0;
   private final double SCENE_WIDTH = 1000.0;
   private final double SCENE_HEIGHT = 600.0;
@@ -37,15 +37,15 @@ public class App extends Application {
       MainUI mainUI = (MainUI) replaceSceneContent("/fxml/Main.fxml");
       mainUI.setMainApp(this);
     } catch (Exception ex) {
-      Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(ApplicationUI.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
 
   public Initializable replaceSceneContent(String fxml) throws Exception {
     FXMLLoader loader = new FXMLLoader();
-    InputStream in = App.class.getResourceAsStream(fxml);
+    InputStream in = ApplicationUI.class.getResourceAsStream(fxml);
     loader.setBuilderFactory(new JavaFXBuilderFactory());
-    loader.setLocation(App.class.getResource(fxml));
+    loader.setLocation(ApplicationUI.class.getResource(fxml));
     Pane page;
 
     try {

@@ -7,36 +7,39 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TextField;
 
 public class MainUI implements Initializable {
-    private App mainApp;
+  private ApplicationUI mainApp;
 
-    @FXML
-    private TextField txtEmail;
-    @FXML
-    private TextField txtPwd;
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {}
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {}
+  public void setMainApp(ApplicationUI mainApp) {
+    this.mainApp = mainApp;
+  }
 
-    public void setMainApp(App mainApp) {
-        this.mainApp = mainApp;
+  @FXML
+  void btnExit(ActionEvent event) {
+    mainApp.getStage().close();
+  }
+
+  @FXML
+  void btnDevTeam(ActionEvent event) {
+    try {
+      DevTeamUI devTeamUI = (DevTeamUI) this.mainApp.replaceSceneContent("/fxml/DevTeam.fxml");
+      devTeamUI.setMainApp(this.mainApp);
+    } catch (Exception e) {
+      Logger.getLogger(ApplicationUI.class.getName()).log(Level.SEVERE, null, e);
     }
+  }
 
-    @FXML
-    void btnExit(ActionEvent event) {
-        mainApp.getStage().close();
+  @FXML
+  void btnLogin(ActionEvent event) {
+    try {
+      AuthUI analyseCenterUI = (AuthUI) this.mainApp.replaceSceneContent("/fxml/Auth.fxml");
+      analyseCenterUI.setMainApp(this.mainApp);
+    } catch (Exception e) {
+      Logger.getLogger(ApplicationUI.class.getName()).log(Level.SEVERE, null, e);
     }
-
-    @FXML
-    void btnLogin(ActionEvent event) {
-        // test
-        try {
-            BaseScreenUI analyseCenterUI = (BaseScreenUI) this.mainApp.replaceSceneContent("/fxml/BaseScreen.fxml");
-            analyseCenterUI.setMainApp(this.mainApp);
-        } catch (Exception e) {
-            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, e);
-        }
-    }
+  }
 }

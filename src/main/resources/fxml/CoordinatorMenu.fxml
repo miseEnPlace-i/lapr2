@@ -19,7 +19,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="550.0" prefWidth="900.0" scaleShape="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.BaseScreenUI">
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="550.0" prefWidth="900.0" scaleShape="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.CoordinatorUI">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="120.0" />
   </columnConstraints>
@@ -71,6 +71,16 @@
                   <Font name="System Italic" size="14.0" />
                </font>
             </Label>
+            <Label layoutX="64.0" layoutY="24.0" prefHeight="20.0" prefWidth="160.0" text="Your Vaccination Center:" AnchorPane.leftAnchor="64.0">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblCenterName" layoutX="64.0" layoutY="41.0" prefHeight="20.0" text="VAC_CENTER_NAME" AnchorPane.leftAnchor="64.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="16.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
@@ -80,9 +90,9 @@
       </FlowPane>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="900.0" spacing="16.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
          <children>
-            <Button mnemonicParsing="false" prefWidth="320.0" text="Option 1" />
-            <Button mnemonicParsing="false" prefWidth="320.0" text="Option 2" />
-            <Button mnemonicParsing="false" prefWidth="320.0" text="Option 3" />
+            <Button mnemonicParsing="false" prefWidth="320.0" text="Export Vaccination Statistics" />
+            <Button mnemonicParsing="false" prefWidth="320.0" text="Analyse Center Performance" />
+            <Button mnemonicParsing="false" onAction="#toImportLegacyDataScene1" prefWidth="320.0" text="Import Data from Legacy System" />
          </children>
       </VBox>
    </children>
