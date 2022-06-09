@@ -45,7 +45,7 @@ deactivate UI
 COORDINATOR -> UI : types requested data
 activate UI
 
-UI -> CTRL : createCsvExporter(filePath,startDate,endDate)
+UI -> CTRL : createFullyVaccinatedData(filePath,startDate,endDate)
 activate CTRL
 
 CTRL -> EMPLOYEESESSION : center = getVaccinationCenter()
@@ -64,6 +64,9 @@ deactivate CENTER
 
 loop for each vaccineAdministration in vaccineAdministrationList
 
+FULLYDATA -> FULLYDATA : fullyVaccinated = checkUserFullyVaccinated(vacAdminList,vacAdminNumber)
+activate FULLYDATA
+
 FULLYDATA -> VACADMIN :  snsUserAge = getSNSUserAge()
 activate VACADMIN
 deactivate VACADMIN
@@ -76,7 +79,7 @@ FULLYDATA -> VACADMIN : dose = getDose()
 activate VACADMIN
 deactivate VACADMIN
 
-FULLYDATA -> VACCINE : fullyVaccinated = checkUserFullyVaccinated(snsUserAge,dose)
+FULLYDATA -> VACCINE : fullyVaccinated = vaccine.checkUserFullyVaccinated(snsUserAge,dose)
 activate VACCINE
 
 VACCINE -> VACCINE : adminProcByAge = getAdminProc(snsUserAge)
@@ -91,6 +94,7 @@ VACCINE -> DI_LIST : size = getSize()
 activate DI_LIST
 deactivate DI_LIST
 deactivate VACCINE
+deactivate FULLYDATA
 
 opt fullyVaccinated == true
 FULLYDATA -> FULLYDATA : nOfFullyVaccinated += 1
