@@ -87,7 +87,6 @@ public class FullyVaccinatedData {
      * @return hashMap of all the data needed to do the statistics
      */
     public Map<Calendar, Integer> getFullyVaccinatedUsersPerDayMap() {
-        int dose;
 
         long nOfDaysBetween = getDaysBetweenTwoDates();
 
@@ -102,13 +101,7 @@ public class FullyVaccinatedData {
 
             for (int j = 0; j < vacAdminList.size(); j++) {
 
-                snsUserAge = CalendarUtils.calculateAge(snsUser.getBirthDay());
-
-                vaccine = vacAdminList.get(j).getVaccine();
-
-                dose = vacAdminList.get(j).getDoseNumber();
-
-                fullyVaccinated = vaccine.checkUserFullyVaccinated(snsUserAge, dose);
+                fullyVaccinated = checkUserFullyVaccinated(vacAdminList, j);
 
                 if (fullyVaccinated) {
                     nOfFullyVaccinated += 1;
@@ -138,6 +131,27 @@ public class FullyVaccinatedData {
      */
     public long getDaysBetweenTwoDates() {
         return ChronoUnit.DAYS.between(startDate.toInstant(), endDate.toInstant());
+    }
+
+    /**
+     * Checks if SNS User is fully vaccinated
+     * 
+     * @param vacAdminList the vaccine administration list
+     * @param vacAdminNumber the vaccine administration number from the list
+     * @return "true" if user fully vaccinated, "false" otherwise
+     */
+    public boolean checkUserFullyVaccinated(List<VaccineAdministration> vacAdminList, int vacAdminNumber) {
+        int dose;
+
+        snsUserAge = CalendarUtils.calculateAge(snsUser.getBirthDay());
+
+        vaccine = vacAdminList.get(vacAdminNumber).getVaccine();
+
+        dose = vacAdminList.get(vacAdminNumber).getDoseNumber();
+
+        fullyVaccinated = vaccine.checkUserFullyVaccinated(snsUserAge, dose);
+
+        return fullyVaccinated;
     }
 
 }

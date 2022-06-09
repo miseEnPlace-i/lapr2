@@ -9,6 +9,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 
+/**
+ * ExportCenterStatisticsUI
+ * 
+ * @author André Barros <1211299@isep.ipp.pt>
+ */
 public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     private ExportCenterStatisticsController ctrl;
     private EmployeeSession employeeSession;
