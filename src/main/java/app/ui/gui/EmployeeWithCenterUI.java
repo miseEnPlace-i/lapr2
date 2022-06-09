@@ -5,7 +5,6 @@ import app.controller.App;
 import app.controller.SelectEmployeeVaccinationCenterController;
 import app.domain.shared.MenuFXMLPath;
 import app.dto.VaccinationCenterListDTO;
-import app.session.EmployeeSession;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,9 +12,7 @@ import javafx.scene.control.ListView;
 import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
 
 public class EmployeeWithCenterUI extends RoleUI {
-  protected EmployeeSession session = new EmployeeSession();
-
-  private SelectEmployeeVaccinationCenterController ctrl = new SelectEmployeeVaccinationCenterController(App.getInstance().getCompany(), session);
+  private SelectEmployeeVaccinationCenterController ctrl = new SelectEmployeeVaccinationCenterController(App.getInstance().getCompany(), employeeSession);
 
   @FXML
   private ListView<VaccinationCenterListDTO> lstCenters;
@@ -40,7 +37,8 @@ public class EmployeeWithCenterUI extends RoleUI {
 
   @FXML
   void btnConfirm(Event event) {
-    ctrl.selectVaccinationCenter(selectedCenter, session);
+    ctrl.selectVaccinationCenter(selectedCenter, employeeSession);
+    System.out.println(employeeSession.getVaccinationCenter());
     this.redirectToRoleMenu();
   }
 

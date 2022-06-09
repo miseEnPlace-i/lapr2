@@ -1,14 +1,17 @@
 package app.ui.gui;
 
-import app.session.EmployeeSession;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 
 public class NurseUI extends RoleUI {
-  private EmployeeSession employeeSession;
   // select employee ctrl
+
+  @FXML
+  private Label lblCenter;
 
   @Override
   void init() {
-
+    if (employeeSession.getVaccinationCenter() != null) lblCenter.setText(employeeSession.getVaccinationCenter().getName());
   }
 
   @Override
