@@ -25,6 +25,7 @@ public abstract class VaccinationCenter {
   private Slot slot;
   private Employee coordinator;
   private WaitingRoom waitingRoom;
+  private RecoveryRoom recoveryRoom;
   private AppointmentScheduleList appointmentList;
   private CenterEventList eventList;
   private List<VaccineAdministration> vaccineAdministrationList;
@@ -314,6 +315,10 @@ public abstract class VaccinationCenter {
 
   public WaitingRoom getWaitingRoom() {
     return waitingRoom;
+  }
+
+  public RecoveryRoom getRecoveryRoom() {
+    return recoveryRoom;
   }
 
   public AppointmentScheduleList getAppointmentList() {
