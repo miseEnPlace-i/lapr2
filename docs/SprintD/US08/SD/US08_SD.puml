@@ -10,8 +10,6 @@ participant "company\n:Company" as company
 participant "snsUserStore\n:SNSUserStore" as snsUserStore
 participant "snsUser\n:SNSUser" as snsUser
 participant "userHealthData\n:UserHealthData" as userHealthData
-participant "waitingRoom\n:WaitingRoom" as waitingRoom
-participant "arrival\n:Arrival" as arrival
 participant "arrivalDto\n:ArrivalDTO" as arrivalDto
 participant "appointment\n:Appointment" as appointment
 participant "vaccineStore\n:VaccineStore" as vaccineStore
@@ -19,12 +17,13 @@ participant "vaccine\n:Vaccine" as vaccine
 participant "vaccineAdministrationList\n:VaccineAdministrationList" as vaccineAdministrationList
 participant ":UserVaccinationInfoMapper" as userVaccinationInfoMapper
 participant ":DosageInfoMapper" as dosageInfoMapper
-participant "userVaccinationInfoDto\n:UserVaccinationInfoDTO" as userVaccinationInfoDto
 participant "vaccineDto\n:VaccineDTO" as vaccineDto
-participant ":VaccineMapper" as vaccineMapper
 participant "vaccineAdministrationList\n:VaccineAdministrationList" as vaccineAdministrationList
 participant "vaccineAdministration\n:VaccineAdministration" as vaccineAdministration
+participant "waitingRoom\n:WaitingRoom" as waitingRoom
+participant "recoveryRoom\n:RecoveryRoom" as recoveryRoom
 participant "vaccinationCenter\n:VaccinationCenter" as vaccinationCenter
+participant "centerEventList\n:CenterEventList" as centerEventList
 
 participant "waitingRoomDto\n:List<ArrivalDTO>" as waitingRoomDto
 ' participant "vaccines\n:List<Vaccine>" as vaccinesList
@@ -218,6 +217,30 @@ activate ui
       vaccineAdministrationList -> vaccinationCenter : addVaccineAdministrationToList(vaccineAdministration)
       activate vaccinationCenter
       deactivate vaccinationCenter
+      vaccineAdministrationList -> vaccinationCenter : centerEventList = getEvents()
+      activate vaccinationCenter
+      deactivate vaccinationCenter
+      vaccineAdministrationList -> vaccineAdministration : snsUser = getSnsUser()
+      activate vaccineAdministration
+      deactivate vaccineAdministration
+      vaccineAdministrationList -> vaccineAdministration : date = getDate()
+      activate vaccineAdministration
+      deactivate vaccineAdministration
+      vaccineAdministrationList -> centerEventList : create(date, CenterEventType.VACCINATED, snsUser)
+      activate centerEventList
+      deactivate centerEventList
+      vaccineAdministrationList -> vaccinationCenter : waitingRoom = getWaitingRoom()
+      activate vaccinationCenter
+      deactivate vaccinationCenter
+      vaccineAdministrationList -> waitingRoom : removeUser(snsUser)
+      activate waitingRoom
+      deactivate waitingRoom
+      vaccineAdministrationList -> vaccinationCenter : recoveryRoom = getRecoveryRoom()
+      activate vaccinationCenter
+      deactivate vaccinationCenter
+      vaccineAdministrationList -> recoveryRoom : addUser(snsUser)
+      activate recoveryRoom
+      deactivate recoveryRoom
       vaccineAdministrationList -> vaccineAdministration : setSmsSending()
       activate vaccineAdministration
       deactivate vaccineAdministration
