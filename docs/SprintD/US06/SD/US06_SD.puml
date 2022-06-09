@@ -19,10 +19,7 @@ participant "dataMap:\nHashMap<VaccinationCenter,HashMap<VaccineType,Int>>" as V
     [o-> COMP : scheduleExportDailyVaccinated(dateTime)
     activate COMP
 
-        note right of COMP
-            aqui recebe isto??? recebe tambem as stores necessarias??
-        end note 
-        COMP --> TASK ** : create(filePath, VaccinationCenterStore, VaccineTypeStore)
+        COMP --> TASK ** : create(filePath, vacCenterSt, vacTypeSt)
 
         COMP --> TIMER ** : create()
 
@@ -75,7 +72,12 @@ participant "dataMap:\nHashMap<VaccinationCenter,HashMap<VaccineType,Int>>" as V
 
         deactivate TASK
 
-
-
+        note right TASK 
+            After the time specifiede by period has elapsed the task will be runned again
+        end note 
+        TIMER -> TASK : run()
+        activate TIMER
+        deactivate TIMER
+        activate TASK
 
 @enduml 
