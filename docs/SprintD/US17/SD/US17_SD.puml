@@ -5,7 +5,7 @@ actor "Center Coordinator" as COORDINATOR
 
 participant ":CoordinatorUI" as CUI
 participant ":ImportLegacyDataUI" as UI
-participant ":App" as _APP
+participant "App" as _APP
 participant "app:App" as APP
 participant ":ImportLegacyDataController" as CTRL
 participant "empSess:employeeSession" as SESSION
@@ -38,7 +38,7 @@ activate COORDINATOR
   end ref
 
   activate CUI
-  COORDINATOR -> CUI : wants to import legacy data
+  COORDINATOR -> CUI : starts the process of importing data from a legacy system
 
       note right of CUI
         employeeSession has <i><b>center</b></i> obtained 
@@ -69,14 +69,10 @@ activate COORDINATOR
         deactivate COMPANY
       deactivate CTRL
       
-      COORDINATOR <-- UI : asks to select the file using a file chooser dialog
+      COORDINATOR <-- UI : asks for the file that should be loaded
     deactivate UI
 
     COORDINATOR -> UI : selects the file
-    activate UI
-      COORDINATOR <-- UI : asks for confirmation
-    deactivate UI
-    COORDINATOR -> UI : confirms the file
     activate UI
     
       ' read data
@@ -131,10 +127,10 @@ activate COORDINATOR
 
       ' convert to list dto and send it to ui
 
-      COORDINATOR <-- UI : shows the data and asks if he wants to save it
+      COORDINATOR <-- UI : opens the file and shows data sorted
     deactivate UI
 
-    COORDINATOR -> UI : confirms
+    COORDINATOR -> UI : confirms the data
     activate UI
       UI -> CTRL : save(legacy)
       activate CTRL
