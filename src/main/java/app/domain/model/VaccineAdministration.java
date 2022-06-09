@@ -6,6 +6,7 @@ import java.util.Calendar;
  * Vaccine administration model class.
  * 
  * @author Tomás Russo <1211288@isep.ipp.pt>
+ * @author Carlos Lopes <1211277@isep.ipp.pt>
  */
 public class VaccineAdministration implements Comparable<VaccineAdministration> {
   private SNSUser snsUser;
@@ -129,4 +130,15 @@ public class VaccineAdministration implements Comparable<VaccineAdministration> 
   public int compareTo(VaccineAdministration other) {
     return this.date.compareTo(other.date);
   }
+
+  /**
+   * Gets the date of the vaccine administration
+   * 
+   * @return the date of the vaccine administration
+   */
+  public Calendar getDate() {
+    return this.date;
+  }
+
+  
 }
