@@ -60,6 +60,19 @@ public class CoordinatorUI extends RoleUI {
     }
   }
 
+  @FXML
+  public void toExportCenterStatistics() {
+    try {
+      ExportCenterStatisticsUI importUI = (ExportCenterStatisticsUI) this.mainApp.replaceSceneContent("/fxml/ExportStatisticsInitialPage.fxml");
+      importUI.setParentUI(this);
+      importUI.setMainApp(this.mainApp);
+
+      // importUI.getNameTxtField.requestFocus() to make sure the text field you need focused is, in fact, focused
+    } catch (Exception ex) {
+      Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  }
+
   @Override
   public String getUIRoleName() {
     return "COORDINATOR";
