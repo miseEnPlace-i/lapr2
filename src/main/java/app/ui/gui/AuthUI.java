@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 import app.controller.AuthController;
 import app.domain.shared.Constants;
 import app.domain.shared.MenuFXMLPath;
-import app.exception.NotAuthorizedException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -81,8 +80,6 @@ public class AuthUI implements Initializable, IGui {
   }
 
   private void login() {
-
-
     String email = txtEmail.getText();
     String pwd = txtPwd.getText();
 
@@ -98,7 +95,6 @@ public class AuthUI implements Initializable, IGui {
       return;
     }
 
-
     UserRoleDTO role = ctrl.getUserRoles().get(0);
     String menuFXML = getMenuWithRoleFXML(role);
 
@@ -108,8 +104,13 @@ public class AuthUI implements Initializable, IGui {
     }
 
     try {
-      IGui gui = (IGui) mainApp.replaceSceneContent(menuFXML);
-      gui.setMainApp(mainApp);
+      try {
+        RoleUI gui = (RoleUI) mainApp.replaceSceneContent(menuFXML);
+        gui.setMainApp(mainApp);
+      } catch (Error e) {
+        Logger.getLogger(ApplicationUI.class.getName()).log(Level.SEVERE, "Coordinator has no center.");
+      }
+
     } catch (Exception e) {
       Logger.getLogger(ApplicationUI.class.getName()).log(Level.SEVERE, null, e);
     }

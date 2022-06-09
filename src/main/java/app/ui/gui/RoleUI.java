@@ -9,36 +9,37 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
 public abstract class RoleUI implements Initializable, IGui {
-    protected ApplicationUI mainApp;
+  protected ApplicationUI mainApp;
 
-    @FXML
-    private Label lblName;
+  @FXML
+  private Label lblName;
 
-    @FXML
-    private Label lblRole;
+  @FXML
+  private Label lblRole;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        String email = App.getInstance().getCurrentUserSession().getUserId().getEmail();
-        String role = App.getInstance().getCurrentUserSession().getUserRoles().get(0).getDescription();
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    String email = App.getInstance().getCurrentUserSession().getUserId().getEmail();
+    String role = App.getInstance().getCurrentUserSession().getUserRoles().get(0).getDescription();
 
-        lblName.setText(email);
-        lblRole.setText(role);
+    lblName.setText(email);
+    lblRole.setText(role);
 
-        this.init();
-    }
+    this.init();
+  }
 
-    abstract void init();
+  abstract void init();
 
-    @Override
-    public void setMainApp(ApplicationUI mainApp) {
-        this.mainApp = mainApp;
-    }
+  @Override
+  public void setMainApp(ApplicationUI mainApp) {
+    this.mainApp = mainApp;
+  }
 
-    @FXML
-    void btnBack(ActionEvent event) {
-        this.mainApp.toMainScene();
-    }
+  @FXML
+  void btnBack(ActionEvent event) {
+    App.getInstance().doLogout();
+    this.mainApp.toMainScene();
+  }
 
-    public abstract String getUIRoleName();
+  public abstract String getUIRoleName();
 }

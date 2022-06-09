@@ -5,12 +5,11 @@ import java.util.logging.Logger;
 import app.controller.App;
 import app.controller.FindCoordinatorVaccinationCenterController;
 import app.domain.model.Company;
-import app.exception.NotAuthorizedException;
 import app.session.EmployeeSession;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
 
 public class CoordinatorUI extends RoleUI {
   private EmployeeSession employeeSession;
@@ -20,7 +19,7 @@ public class CoordinatorUI extends RoleUI {
   private Label lblCenterName;
 
   @Override
-  void init() {
+  public void init() {
     App app = App.getInstance();
     Company company = app.getCompany();
     this.employeeSession = new EmployeeSession();
@@ -39,9 +38,8 @@ public class CoordinatorUI extends RoleUI {
       alert.setContentText("Please contact your administrator.");
       alert.showAndWait();
 
-      // exception is thrown so it doesn't move forward with this scene
-      // aka: maneira rota de fazer isto funcionar
-      this.mainApp.toMainScene();
+      // Error is needed to bypass Initializable interface not throwing an exception
+      throw new Error();
     }
 
     this.lblCenterName.setText(this.ctrl.getVaccinationCenterName());
