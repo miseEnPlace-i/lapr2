@@ -12,11 +12,21 @@ participant "empSess:employeeSession" as SESSION
 participant "comp:Company" as COMPANY
 participant "csvReader:CSVReader" as CSVREADER
 participant ":ICSVReader" as ICSV
+participant "snsUserStore:SNSUserStore" as SNSSTORE
+participant "snsUser:SNSUser" as SNSUSER
+participant "center:VaccinationCenter" as CENTER
+participant "vacStore:VaccineStore" as VACCINESTORE
+participant "vaccine:Vaccine" as VACCINE
+participant "administrationList:AdministrationList" as ADLST
+participant "waitingRoom:WaitingRoom" as WR
+participant "aptSchLst:AppointmentScheduleList" as APTSCHLST
+participant "centerEventList:CenterEventList" as CELIST
 participant ":LegacyDataMapper" as MAPPER
 participant "legacyDataDto:LegacyDataDTO" as DTO
 participant "legacyDtoList:List<LegacyDataDTO>" as LIST_DTOS
-participant "snsUserStore:SNSUserStore" as SNSSTORE
-participant "center:VaccinationCenter" as CENTER
+participant "appointment:Appointment" as APT
+participant "arrival:Arrival" as ARRIVAL
+participant "administration:Administration" as ADMINISTRATION
 participant "fileData:List<String[]>" as LIST_FILEDATA
 
 activate COORDINATOR
@@ -128,7 +138,133 @@ activate COORDINATOR
     activate UI
       UI -> CTRL : save(legacy)
       activate CTRL
-        ' gg
+        CTRL -> COMPANY : vacStore = getVaccineStore()
+        activate COMPANY
+        deactivate COMPANY
+
+        CTRL -> CENTER : aptSchLst = getAppointmentScheduleList()
+        activate CENTER
+        deactivate CENTER
+
+        CTRL -> CENTER : wrLst = getWaitingRoomList()
+        activate CENTER
+        deactivate CENTER
+
+        CTRL -> CENTER : centerEventList = getCenterEventList()
+        activate CENTER
+        deactivate CENTER
+
+        loop for each legacyDataDto in legacyDtoList
+          ' get data from dto
+          CTRL -> DTO : snsNumber = getSNSNumber()
+          activate DTO
+          deactivate DTO
+
+          CTRL -> DTO : vaccineName = getVaccineName()
+          activate DTO
+          deactivate DTO
+
+          CTRL -> DTO : doseNumber = getDoseNumber()
+          activate DTO
+          deactivate DTO
+
+          CTRL -> DTO : lotNumber = getLotNumber()
+          activate DTO
+          deactivate DTO
+
+          CTRL -> DTO : arrivalDate = getArrivalDate()
+          activate DTO
+          deactivate DTO
+
+          CTRL -> DTO : scheduledDate = getScheduledDate()
+          activate DTO
+          deactivate DTO
+
+          CTRL -> DTO : administratedDate = getAdministratedDate()
+          activate DTO
+          deactivate DTO
+          
+          CTRL -> DTO : departureDate = getDepartureDate()
+          activate DTO
+          deactivate DTO
+
+          ' get the snsUser
+          CTRL -> SNSSTORE : snsUser = findSNSUserByNumber(snsNumber)
+          activate SNSSTORE
+          deactivate SNSSTORE
+
+          ' get his administration list
+          CTRL -> SNSUSER : administrationList = getAdministrationList()
+          activate SNSUSER
+          deactivate SNSUSER
+          
+          ' get the vaccine
+          CTRL -> VACCINESTORE : vaccine = getVaccineByName()
+          activate VACCINESTORE
+          deactivate VACCINESTORE
+
+          ' create appointment
+          ' TODO: use DTO
+          CTRL -> APTSCHLST : createAppointment(snsUser, scheduledDate, vacTypeDto, false)
+          activate APTSCHLST
+          deactivate APTSCHLST
+
+          ' validate
+          CTRL -> APTSCHLST : validate(appointment)
+          activate APTSCHLST
+          deactivate APTSCHLST
+
+          ' save
+          CTRL -> APTSCHLST : validate(appointment)
+          activate APTSCHLST
+          deactivate APTSCHLST
+
+          ' create arrival
+          CTRL -> WR : createArrival(appointment)
+          activate WR
+          deactivate WR
+
+          ' save
+          CTRL -> WR : saveArrival(arrival)
+          activate WR
+          deactivate WR
+
+          ' create administration
+          CTRL -> ADLST : administration = create(vaccine, lotNumber, doseNumber, administrationDate)
+          activate ADLST
+          deactivate ADLST
+
+          CTRL -> ADLST : save(administration)
+          activate ADLST
+          deactivate ADLST
+
+          ' create center events
+          CTRL -> CELIST : centerEventArrival = create(arrivalDate, ARRIVAL, snsUser)
+          activate CELIST
+          deactivate CELIST
+
+          CTRL -> CELIST : centerEventVaccinated = create(administrationDate, VACCINATED, snsUser)
+          activate CELIST
+          deactivate CELIST
+
+          CTRL -> CELIST : centerEventDeparted = create(departureDate, DEPARTED, snsUser)
+          activate CELIST
+          deactivate CELIST
+
+          ' save
+          CTRL -> CELIST : save(centerEventArrival)
+          activate CELIST
+          deactivate CELIST
+
+          CTRL -> CELIST : save(centerEventVaccinated)
+          activate CELIST
+          deactivate CELIST
+
+          CTRL -> CELIST : save(centerEventDeparted)
+          activate CELIST
+          deactivate CELIST
+
+        end
       deactivate CTRL
       COORDINATOR <-- UI : informs operation success
     deactivate UI
