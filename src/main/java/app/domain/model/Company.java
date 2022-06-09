@@ -143,7 +143,7 @@ public class Company {
     firstTime.set(Calendar.MINUTE, 0);
     firstTime.set(Calendar.SECOND, 0);
 
-    timer.scheduleAtFixedRate(task, firstTime, 86400);
+    timer.scheduleAtFixedRate(task, firstTime.getTime(), 24*60*60);
   }
 
 }
