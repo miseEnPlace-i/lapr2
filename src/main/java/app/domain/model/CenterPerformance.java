@@ -2,24 +2,25 @@ package app.domain.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import app.domain.model.list.CenterEventList;
 import app.domain.shared.CenterEventType;
 import app.service.MaxSumSublistService;
 import app.utils.Time;
 
 public class CenterPerformance {
-  private List<CenterEvent> events;
+  private CenterEventList events;
   private List<Integer> differenceList;
   private List<Integer> maxSumSubList;
 
   private int interval;
 
-  private int sum;
+  private int maxSum;
   private Time startingInterval;
   private Time endingInterval;
 
   private Time openingHours;
 
-  public CenterPerformance(List<CenterEvent> events, int interval, Time openingHours) {
+  public CenterPerformance(CenterEventList events, int interval, Time openingHours) {
     this.events = events;
     this.interval = interval;
     this.openingHours = openingHours;
@@ -33,9 +34,10 @@ public class CenterPerformance {
     int endIndex = maxSumSubListData.getEndIndex();
     endingInterval = convertIndexToTime(endIndex);
 
-    int maxSum = maxSumSubListData.getMaxSum();
+    maxSum = maxSumSubListData.getMaxSum();
 
     maxSumSubList = maxSumSubListData.getMaxSumSubList();
+
   }
 
   private Time convertIndexToTime(int index) {
@@ -57,7 +59,7 @@ public class CenterPerformance {
     return differences;
   }
 
-  private int getDifferenceForInterval(List<CenterEvent> events, Time beginningTime, Time endingTime) {
+  private int getDifferenceForInterval(CenterEventList events, Time beginningTime, Time endingTime) {
     int intervalDifference = 0;
 
     for (CenterEvent event : events) {
@@ -72,12 +74,16 @@ public class CenterPerformance {
     return intervalDifference;
   }
 
+  public List<Integer> getDifferencesList() {
+    return differenceList;
+  }
+
   public List<Integer> getMaxSumSubList() {
     return maxSumSubList;
   }
 
   public int getSum() {
-    return sum;
+    return maxSum;
   }
 
   public Time getStartingInterval() {

@@ -87,6 +87,7 @@ package core {
         +CenterPerformance(day,interval,openingHours)
 
         +getDay()
+        +getDifferencesList()
         +getMaxSumSubList()
         +getSum()
         +getStartingInterval()
