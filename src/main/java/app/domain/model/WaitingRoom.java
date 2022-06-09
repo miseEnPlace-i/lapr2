@@ -52,6 +52,16 @@ public class WaitingRoom implements Iterable<Arrival> {
   }
 
   /**
+   * Removes the SNS User arrival.
+   * 
+   * @param snsUser the SNS User to remove.
+   */
+  public void removeUser(SNSUser snsUser) {
+    for (Arrival arrival : waitingRoom)
+      if (arrival.getSNSUser().equals(snsUser)) waitingRoom.remove(arrival);
+  }
+
+  /**
    * Finds today's SNS User arrival.
    */
   public boolean hasSNSUserArrivedToday(SNSUser snsUser) {
