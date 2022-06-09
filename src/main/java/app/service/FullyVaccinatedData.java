@@ -20,7 +20,7 @@ public class FullyVaccinatedData {
     private Calendar startDate;
     private Calendar endDate;
     private VaccinationCenter center;
-    private Map<Calendar, Integer> data;
+    private Map<Calendar, Integer> dataMap;
     private int snsUserAge;
     private SNSUser snsUser;
     private Vaccine vaccine;
@@ -108,12 +108,12 @@ public class FullyVaccinatedData {
                 }
             }
 
-            data.put(currentDay, nOfFullyVaccinated);
+            dataMap.put(currentDay, nOfFullyVaccinated);
 
             currentDay.add(Calendar.DAY_OF_MONTH, 1);
         }
 
-        return data;
+        return dataMap;
     }
 
     /**

@@ -69,7 +69,7 @@ public class ExportCenterStatisticsControllerTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void ensureNullValuesNotAllowed() {
-        ctrl.createCsvExporterData(null, null, null);
+        ctrl.createFullyVaccinatedData(null, null, null);
     }
 
     /**
@@ -77,6 +77,6 @@ public class ExportCenterStatisticsControllerTest {
      */
     @Test
     public void ensureItIsPossibleToCreateCsvExporter() {
-        ctrl.createCsvExporterData("test.csv", startDate, endDate);
+        ctrl.createFullyVaccinatedData("test.csv", startDate, endDate);
     }
 }
