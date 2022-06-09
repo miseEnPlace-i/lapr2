@@ -1,6 +1,7 @@
 package app.domain.model;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import app.domain.model.list.AppointmentScheduleList;
@@ -12,6 +13,7 @@ import app.utils.Time;
  * Vaccination Center super class
  * 
  * @author André Barros <1211299@isep.ipp.pt>
+ * @author Carlos Lopes <1211277@isep.ipp.pt>
  */
 public abstract class VaccinationCenter {
   private String name;
@@ -29,6 +31,7 @@ public abstract class VaccinationCenter {
   private CenterEventList eventList;
   private List<VaccineAdministration> vaccineAdministrationList;
 
+  
   /**
    * Constructor for the Vaccination Center
    * 
@@ -81,7 +84,7 @@ public abstract class VaccinationCenter {
   public String getPhone() {
     return phoneNum;
   }
-
+  
   /**
    * @return the fax of the vaccination center
    */
@@ -102,7 +105,7 @@ public abstract class VaccinationCenter {
   public String getEmail() {
     return email;
   }
-
+  
   /**
    * @return the maximum number of vaccines given per slot
    */
@@ -116,7 +119,7 @@ public abstract class VaccinationCenter {
   public String getCoordinatorName() {
     return coordinator.name;
   }
-
+  
   /**
    * @return the name of the coordinator of the vaccination center
    */
@@ -203,7 +206,7 @@ public abstract class VaccinationCenter {
     }
     this.email = email;
   }
-
+  
   /**
    * Sets the center phone number.
    * 
@@ -220,7 +223,7 @@ public abstract class VaccinationCenter {
     }
     this.phoneNum = phoneNum;
   }
-
+  
   /**
    * Sets the center fax number.
    * 
@@ -254,7 +257,7 @@ public abstract class VaccinationCenter {
     }
     this.webAddress = webAddress;
   }
-
+  
   /**
    * Sets the center opening hours.
    * 
@@ -315,11 +318,11 @@ public abstract class VaccinationCenter {
   public WaitingRoom getWaitingRoom() {
     return waitingRoom;
   }
-
+  
   public AppointmentScheduleList getAppointmentList() {
     return appointmentList;
   }
-
+  
   public CenterPerformance getCenterPerformanceForDay(Calendar day, int interval) {
     List<CenterEvent> events = this.eventList.getEventListForDay(day);
 
@@ -329,7 +332,7 @@ public abstract class VaccinationCenter {
   }
 
   public abstract String toString();
-
+  
   @Override
   public boolean equals(Object obj) {
     VaccinationCenter center = (VaccinationCenter) obj;
@@ -342,7 +345,7 @@ public abstract class VaccinationCenter {
 
     return false;
   }
-
+  
   /**
    * Checks if the center is open at a given time.
    * 
@@ -364,7 +367,7 @@ public abstract class VaccinationCenter {
     int realClosingMinutesOfDay = openingMinutesOfDay + (appointmentList.getNOfSlotsPerDay() * slot.getDuration());
 
     realClosingMinutesOfDay--;
-
+    
     int hours = realClosingMinutesOfDay / 60;
     int minutes = realClosingMinutesOfDay % 60;
 
@@ -376,7 +379,7 @@ public abstract class VaccinationCenter {
   public boolean hasAvailabilityInSlot(Calendar date) {
     return appointmentList.checkSlotAvailability(date);
   }
-
+  
   /**
    * Adds a Vaccine Administration object to the list.
    * 
@@ -384,5 +387,23 @@ public abstract class VaccinationCenter {
    */
   public void addVaccineAdministrationToList(VaccineAdministration vaccineAdministration) {
     this.vaccineAdministrationList.add(vaccineAdministration);
+  }
+  
+
+  
+  /** 
+   * @return List<VaccineAdministration>
+   */
+  public List<VaccineAdministration> getVaccineAdministrationFromYesterdayList() {
+    List<VaccineAdministration> subList = new ArrayList();
+    Calendar yesterday = Calendar.getInstance();
+    yesterday.add(Calendar.DATE, -1);
+
+    for (int i = 0; i < this.vaccineAdministrationList.size(); i++) {
+      if(this.vaccineAdministrationList.get(i).getDate().equals(yesterday)){
+        subList.add(this.vaccineAdministrationList.get(i));
+      }
+    }
+    return subList;
   }
 }
