@@ -133,4 +133,13 @@ public class VaccineAdministrationList {
 
     return 1;
   }
+
+  /**
+   * Gets the size of the list.
+   * 
+   * @return int of number of VaccineAdministrations in the list.
+   */
+  public int size() {
+    return vaccineAdministrations.size();
+  }
 }

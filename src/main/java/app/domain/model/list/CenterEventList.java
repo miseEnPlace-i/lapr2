@@ -19,8 +19,12 @@ public class CenterEventList {
         this.events.add(centerEvent);
         return centerEvent;
     }
-    
+
     public void save(CenterEvent event) {
         this.events.add(event);
+    }
+
+    public int size() {
+        return this.events.size();
     }
 }

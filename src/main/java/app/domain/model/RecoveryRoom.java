@@ -16,6 +16,10 @@ public class RecoveryRoom {
     setSMSSending(vaccineAdministration);
   }
 
+  public int size() {
+    return recoveryRoom.size();
+  }
+
   private void setSMSSending(VaccineAdministration vaccineAdministration) {
 
   }
