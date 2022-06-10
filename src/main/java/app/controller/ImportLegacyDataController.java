@@ -5,9 +5,18 @@ import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import app.domain.model.Administration;
+import app.domain.model.Appointment;
+import app.domain.model.Arrival;
 import app.domain.model.CSVReader;
+import app.domain.model.CenterEvent;
 import app.domain.model.Company;
+import app.domain.model.LegacyDataObjectBuilder;
+import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
+import app.domain.model.WaitingRoom;
+import app.domain.model.list.AppointmentScheduleList;
+import app.domain.model.list.CenterEventList;
 import app.domain.model.store.SNSUserStore;
 import app.dto.LegacyDataDTO;
 import app.exception.NotFoundException;
@@ -21,7 +30,7 @@ public class ImportLegacyDataController {
     public ImportLegacyDataController(Company company, VaccinationCenter center) {
         this.company = company;
         this.center = center;
-        this.snsUserStore = company.getSNSUserStore();
+        this.snsUserStore = this.company.getSNSUserStore();
     }
 
     public List<String[]> read(String filepath) throws ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException,
@@ -50,5 +59,19 @@ public class ImportLegacyDataController {
 
     public void sort() {}
 
-    public void save() {}
+    public void save(List<LegacyDataDTO> legacyDtoList) {
+        AppointmentScheduleList aptSchList = this.center.getAppointmentList();
+        WaitingRoom waitingRoom = this.center.getWaitingRoom();
+        CenterEventList centerEventList = this.center.getEvents();
+
+        for (LegacyDataDTO d : legacyDtoList) {
+            LegacyDataObjectBuilder builder = new LegacyDataObjectBuilder(LegacyDataMapper.toModel(d));
+
+            aptSchList.saveAppointment(builder.createAppointment());
+            waitingRoom.saveArrival(builder.createArrival());
+            centerEventList.save(builder.createArrivalEvent());
+            centerEventList.save(builder.createVaccinatedEvent());
+            centerEventList.save(builder.createDeparturedEvent());
+        }
+    }
 }

@@ -77,8 +77,7 @@ public class AppointmentScheduleList {
    * 
    * @param snsUser the SNSUser
    * @param date the date
-   * @param center the vaccination center
-   * @param vaccineType the vaccine type
+   * @param vaccineTypeDto the vaccine type DTO
    * @param sms if the user wants to receive a SMS
    * @return
    */
