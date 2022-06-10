@@ -5,16 +5,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import app.domain.model.Administration;
-import app.domain.model.Appointment;
-import app.domain.model.Arrival;
 import app.domain.model.CSVReader;
-import app.domain.model.CenterEvent;
 import app.domain.model.Company;
+import app.domain.model.LegacyData;
 import app.domain.model.LegacyDataObjectBuilder;
-import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.WaitingRoom;
+import app.domain.model.list.AdministrationList;
 import app.domain.model.list.AppointmentScheduleList;
 import app.domain.model.list.CenterEventList;
 import app.domain.model.store.SNSUserStore;
@@ -65,10 +62,13 @@ public class ImportLegacyDataController {
         CenterEventList centerEventList = this.center.getEvents();
 
         for (LegacyDataDTO d : legacyDtoList) {
-            LegacyDataObjectBuilder builder = new LegacyDataObjectBuilder(LegacyDataMapper.toModel(d));
+            LegacyData legacyData = LegacyDataMapper.toModel(d, this.center);
+            LegacyDataObjectBuilder builder = new LegacyDataObjectBuilder(legacyData);
+            AdministrationList administrationList = legacyData.getSNSUser().getAdministrationList();
 
             aptSchList.saveAppointment(builder.createAppointment());
             waitingRoom.saveArrival(builder.createArrival());
+            administrationList.save(builder.createAdministration());
             centerEventList.save(builder.createArrivalEvent());
             centerEventList.save(builder.createVaccinatedEvent());
             centerEventList.save(builder.createDeparturedEvent());

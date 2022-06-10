@@ -32,7 +32,7 @@ public class LegacyData {
     }
 
     // getters
-    public SNSUser getSnsUser() {
+    public SNSUser getSNSUser() {
         return snsUser;
     }
 

@@ -22,7 +22,7 @@ public class AdministrationList {
         return new Administration(vaccine, doseNumber, lotNumber, center, administrationDate);
     }
 
-    public void add(Administration administration) {
+    public void save(Administration administration) {
         this.list.add(administration);
     }
 
