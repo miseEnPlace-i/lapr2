@@ -136,14 +136,26 @@ public class SNSUser {
     return administrationList;
   }
 
-  public Vaccine getLastTakenVaccineFromType(VaccineType vaccineType) {
-    return userHealthData.getLastVaccineTakenWithType(vaccineType);
+  // public Vaccine getLastTakenVaccineFromType(VaccineType vaccineType) {
+  //   return this.userHealthData.getLastVaccineTakenWithType(vaccineType);
+  // }
+
+  public int getAge() {
+    return TimeUtils.calculateAge(birthDay);
   }
 
-  public boolean hasTakenAnyVaccineFromVaccineType(VaccineType vaccineType) {
-    if (getLastTakenVaccineFromType(vaccineType) == null) return false;
-    else return true;
+  public HealthData getUserHealthData() {
+    return this.userHealthData;
   }
+
+  // public Vaccine getLastTakenVaccineFromType(VaccineType vaccineType) {
+  // return userHealthData.getLastVaccineTakenWithType(vaccineType);
+  // }
+
+  // public boolean hasTakenAnyVaccineFromVaccineType(VaccineType vaccineType) {
+  // if (getLastTakenVaccineFromType(vaccineType) == null) return false;
+  // else return true;
+  // }
 
   @Override
   public boolean equals(Object obj) {

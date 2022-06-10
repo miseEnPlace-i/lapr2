@@ -33,8 +33,8 @@ public class WaitingRoom implements Iterable<Arrival> {
    * @param snsNumber the SNS Number of the SNS User.
    * @return Arrival
    */
-  public Arrival createArrival(Appointment appointment) {
-    return new Arrival(appointment, Calendar.getInstance());
+  public Arrival createArrival(Appointment appointment, Calendar arrivalDate) {
+    return new Arrival(appointment, arrivalDate);
   }
 
   /**

@@ -162,6 +162,7 @@ public class SNSUserTest {
   @Test
   public void ensureGetsWorkAsExpected() {
     Date c = new Date();
+    c = DateUtils.addYears(c, -23);
     SNSUser instance = new SNSUser("123456789ZZ1", "123456789", "name", c, Gender.MALE, "+351211111111", "email@email.com", "address");
 
     assert instance.getAddress().equals("address");
@@ -169,6 +170,7 @@ public class SNSUserTest {
     assert instance.getCitizenCard().equals("123456789ZZ1");
     assert instance.getEmail().equals("email@email.com");
     assert instance.getGender() == Gender.MALE;
+    assert instance.getAge() == 23;
     assert instance.getName().equals("name");
     assert instance.getPhoneNumber().equals("+351211111111");
     assert instance.getSnsNumber().equals("123456789");

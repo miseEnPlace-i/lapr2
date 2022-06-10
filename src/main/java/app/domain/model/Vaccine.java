@@ -6,7 +6,6 @@ import app.domain.model.list.AdminProcList;
  * @author Carlos Lopes <1211277@isep.ipp.pt>
  */
 public class Vaccine {
-
   private String designation;
   private String brand;
   private String id;
@@ -122,5 +121,23 @@ public class Vaccine {
     }
 
     return false;
+  }
+
+  /**
+   * Get the dosage for the given age and dose number.
+   * 
+   * @param doseNumber the dose number
+   * @param age the age
+   * 
+   * @return the dosage
+   */
+  public int getDosageByDoseNumberAndAge(int doseNumber, int age) {
+    for (AdminProcess adPr : adminProcList.getList()) {
+      if (adPr.admitsAge(age)) {
+        return adPr.getDosageByDoseNumber(doseNumber);
+      }
+    }
+
+    return 0;
   }
 }

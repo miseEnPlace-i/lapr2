@@ -30,7 +30,7 @@ public class LegacyDataObjectBuilder {
     public Arrival createArrival() {
         if (this.appointment == null) throw new IllegalStateException("Appointment must be created before arrival");
         WaitingRoom waitingRoom = this.legacyData.getCenter().getWaitingRoom();
-        return waitingRoom.createArrival(this.appointment);
+        return waitingRoom.createArrival(this.appointment, this.legacyData.getArrivalDate());
     }
 
     public Administration createAdministration() {
@@ -51,6 +51,6 @@ public class LegacyDataObjectBuilder {
 
     public CenterEvent createDeparturedEvent() {
         CenterEventList centerEvents = this.legacyData.getCenter().getEvents();
-        return centerEvents.create(legacyData.getDeparturedDate(), CenterEventType.DEPARTED, legacyData.getSNSUser());
+        return centerEvents.create(legacyData.getDeparturedDate(), CenterEventType.DEPARTURE, legacyData.getSNSUser());
     }
 }

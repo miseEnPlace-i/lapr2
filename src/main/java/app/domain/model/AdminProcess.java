@@ -86,8 +86,7 @@ public class AdminProcess {
     // TO STRING
     @Override
     public String toString() {
-        return "Min age: " + this.minAge + "\nMax age: " + this.maxAge + "\nNumberOfDoses: "
-                + this.numberOfDoses;
+        return "Min age: " + this.minAge + "\nMax age: " + this.maxAge + "\nNumberOfDoses: " + this.numberOfDoses;
     }
 
     // ADD A NEW DOSE INFO
@@ -103,5 +102,11 @@ public class AdminProcess {
      */
     public boolean admitsAge(int age) {
         return ((age >= minAge) && (age <= maxAge));
+    }
+
+    public int getDosageByDoseNumber(int doseNumber) {
+        DoseInfo doseInfo = doseInfoList.getDoseInfoByDoseNumber(doseNumber);
+
+        return doseInfo.getDosage();
     }
 }

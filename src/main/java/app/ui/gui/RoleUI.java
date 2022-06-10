@@ -3,38 +3,49 @@ package app.ui.gui;
 import java.net.URL;
 import java.util.ResourceBundle;
 import app.controller.App;
+import app.session.EmployeeSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
 public abstract class RoleUI implements Initializable, IGui {
-    protected ApplicationUI mainApp;
+  protected ApplicationUI mainApp;
+  protected static EmployeeSession employeeSession = new EmployeeSession();
 
-    @FXML
-    private Label lblName;
+  @FXML
+  private Label lblName;
 
-    @FXML
-    private Label lblRole;
+  @FXML
+  private Label lblRole;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        String email = App.getInstance().getCurrentUserSession().getUserId().getEmail();
-        String role = App.getInstance().getCurrentUserSession().getUserRoles().get(0).getDescription();
+  @FXML
+  private Label lblCenter;
 
-        lblName.setText(email);
-        lblRole.setText(role);
-    }
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    String email = App.getInstance().getCurrentUserSession().getUserId().getEmail();
+    String role = App.getInstance().getCurrentUserSession().getUserRoles().get(0).getDescription();
 
-    @Override
-    public void setMainApp(ApplicationUI mainApp) {
-        this.mainApp = mainApp;
-    }
+    lblName.setText(email);
+    lblRole.setText(role);
+    if (employeeSession.getVaccinationCenter() != null) lblCenter.setText(employeeSession.getVaccinationCenter().getName());
 
-    @FXML
-    void btnBack(ActionEvent event) {
-        this.mainApp.toMainScene();
-    }
+    this.init();
+  }
 
-    public abstract String getUIRoleName();
+  abstract void init();
+
+  @Override
+  public void setMainApp(ApplicationUI mainApp) {
+    this.mainApp = mainApp;
+  }
+
+  @FXML
+  void btnBack(ActionEvent event) {
+    App.getInstance().doLogout();
+    this.mainApp.toMainScene();
+  }
+
+  public abstract String getUIRoleName();
 }

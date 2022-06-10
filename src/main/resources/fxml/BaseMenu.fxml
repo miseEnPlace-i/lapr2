@@ -11,11 +11,7 @@
    <center>
       <VBox alignment="CENTER" prefHeight="457.0" prefWidth="600.0" spacing="16.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" prefWidth="320.0" text="List Users">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </Button>
+            <Button mnemonicParsing="false" prefWidth="320.0" text="List Users" />
             <Button mnemonicParsing="false" prefWidth="320.0" text="List Vaccines" />
             <Button mnemonicParsing="false" prefWidth="320.0" text="Register Center" />
          </children>

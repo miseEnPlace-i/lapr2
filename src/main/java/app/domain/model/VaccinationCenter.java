@@ -27,6 +27,7 @@ public abstract class VaccinationCenter {
   private WaitingRoom waitingRoom;
   private AppointmentScheduleList appointmentList;
   private CenterEventList eventList;
+  private List<VaccineAdministration> vaccineAdministrationList;
 
   /**
    * Constructor for the Vaccination Center
@@ -320,12 +321,11 @@ public abstract class VaccinationCenter {
   }
 
   public CenterPerformance getCenterPerformanceForDay(Calendar day, int interval) {
-    // TODO
-    return null;
-  }
+    CenterEventList events = this.eventList.getEventListForDay(day);
 
-  public List<CenterEvent> getEventListForDay(Calendar day) {
-    return this.eventList.getEventsInDay(day);
+    CenterPerformance centerPerformance = new CenterPerformance(events, interval, openingHours);
+
+    return centerPerformance;
   }
 
   public abstract String toString();
@@ -375,5 +375,14 @@ public abstract class VaccinationCenter {
 
   public boolean hasAvailabilityInSlot(Calendar date) {
     return appointmentList.checkSlotAvailability(date);
+  }
+
+  /**
+   * Adds a Vaccine Administration object to the list.
+   * 
+   * @param vaccineAdministration the Vaccine Administration object to be added.
+   */
+  public void addVaccineAdministrationToList(VaccineAdministration vaccineAdministration) {
+    this.vaccineAdministrationList.add(vaccineAdministration);
   }
 }

@@ -23,12 +23,12 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="txtEmail" maxWidth="-Infinity" prefWidth="450.0" promptText="Email" />
-            <PasswordField fx:id="txtPwd" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="450.0" promptText="Password" />
+            <TextField fx:id="txtEmail" maxWidth="-Infinity" onKeyTyped="#checkEnableLoginButton" prefWidth="450.0" promptText="Email" />
+            <PasswordField fx:id="txtPwd" maxHeight="-Infinity" maxWidth="-Infinity" onKeyTyped="#checkEnableLoginButton" prefHeight="25.0" prefWidth="450.0" promptText="Password" />
             <HBox alignment="CENTER" prefHeight="80.0" prefWidth="536.0" spacing="8.0">
                <children>
                   <Button id="btnExit" mnemonicParsing="false" onAction="#btnExit" prefHeight="25.0" prefWidth="51.0" text="Exit" />
-                  <Button id="btnLogin" mnemonicParsing="false" onAction="#btnLogin" text="Login" />
+                  <Button id="btnLogin" fx:id="btnLogin" disable="true" mnemonicParsing="false" onAction="#btnLogin" text="Login" />
                </children>
             </HBox>
          </children>
