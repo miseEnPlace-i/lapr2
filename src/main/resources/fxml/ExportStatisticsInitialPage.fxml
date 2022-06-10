@@ -73,7 +73,7 @@
       </VBox>
       <VBox alignment="CENTER" GridPane.rowIndex="1">
          <children>
-            <TextField alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="349.0" promptText="File path name">
+            <TextField fx:id="filePathName" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="349.0" promptText="File path name">
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
@@ -81,12 +81,12 @@
                   <Insets right="250.0" />
                </padding>
             </TextField>
-            <DatePicker maxWidth="-Infinity" prefHeight="34.0" prefWidth="346.0" promptText="Insert the inicial date">
+            <DatePicker fx:id="initialDate" maxWidth="-Infinity" prefHeight="34.0" prefWidth="346.0" promptText="Insert the initial date">
                <VBox.margin>
                   <Insets bottom="8.0" />
                </VBox.margin>
             </DatePicker>
-            <DatePicker maxWidth="-Infinity" prefHeight="34.0" prefWidth="346.0" promptText="Insert the end date" />
+            <DatePicker fx:id="endDate" maxWidth="-Infinity" prefHeight="34.0" prefWidth="346.0" promptText="Insert the end date" />
          </children>
          <opaqueInsets>
             <Insets />
@@ -94,7 +94,7 @@
       </VBox>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" prefWidth="1200.0" GridPane.rowIndex="2">
          <children>
-            <Button alignment="CENTER" cancelButton="true" contentDisplay="CENTER" defaultButton="true" graphicTextGap="8.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="139.0" text="Export statistics" textAlignment="CENTER">
+            <Button fx:id="exportStatistics" alignment="CENTER" cancelButton="true" contentDisplay="CENTER" defaultButton="true" graphicTextGap="8.0" mnemonicParsing="false" onAction="#export" prefHeight="38.0" prefWidth="139.0" text="Export statistics" textAlignment="CENTER">
                <font>
                   <Font size="15.0" />
                </font>
