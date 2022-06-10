@@ -84,7 +84,7 @@ package core {
         - maxSumSubList: List
         - sum: int
 
-        +CenterPerformance(day,interval,openingHours)
+        +CenterPerformance(day,interval,openingHours,closingHours)
 
         +getDay()
         +getDifferencesList()
@@ -155,6 +155,7 @@ VaccinationCenter "1" -- "*" CenterPerformance : generates >
 CenterPerformance o-- Time : startingInterval
 CenterPerformance o-- Time : endingInterval
 CenterPerformance o-- Time : openingHours
+CenterPerformance o-- Time : closingHours
 
 CenterPerformance -- MaxSumSublistService : uses >
 
