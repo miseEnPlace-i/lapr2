@@ -6,9 +6,11 @@ import app.controller.App;
 import app.controller.FindCoordinatorVaccinationCenterController;
 import app.domain.model.Company;
 import app.session.EmployeeSession;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class CoordinatorUI extends RoleUI {
@@ -17,6 +19,9 @@ public class CoordinatorUI extends RoleUI {
 
   @FXML
   private Label lblCenterName;
+
+  @FXML
+  private Button btnAnalyseCenterPerformance;
 
   @Override
   public void init() {
@@ -43,6 +48,18 @@ public class CoordinatorUI extends RoleUI {
     }
 
     this.lblCenterName.setText(this.ctrl.getVaccinationCenterName());
+  }
+
+  @FXML
+  void handleAnalyseCenterNavigation(ActionEvent event) {
+    try {
+      AnalyseCenterPerformanceUI analyseCenterUI = (AnalyseCenterPerformanceUI) this.mainApp.replaceSceneContent("/fxml/AnalyseCenter.fxml");
+      analyseCenterUI.setParentUI(this);
+      analyseCenterUI.setMainApp(this.mainApp);
+      analyseCenterUI.setEmployeeSession(employeeSession);
+    } catch (Exception e) {
+      Logger.getLogger(CoordinatorUI.class.getName()).log(Level.SEVERE, null, e);
+    }
   }
 
   @FXML
