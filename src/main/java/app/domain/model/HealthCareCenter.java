@@ -7,7 +7,7 @@ import app.utils.Time;
  */
 public class HealthCareCenter extends VaccinationCenter {
 
-  private String ages;
+  private String aces;
   private String ars;
 
   /**
@@ -28,19 +28,19 @@ public class HealthCareCenter extends VaccinationCenter {
    * @param ars the health care center ars
    */
   public HealthCareCenter(String name, String address, String email, String phoneNum, String faxNum, String webAddress, Time openingHours, Time closingHours,
-      Slot slot, Employee coordinator, String ages, String ars) {
+      Slot slot, Employee coordinator, String aces, String ars) {
 
     super(name, address, email, phoneNum, faxNum, webAddress, openingHours, closingHours, slot, coordinator);
 
-    setAges(ages);
+    setAges(aces);
     setArs(ars);
   }
 
-  private void setAges(String ages) {
-    if (ages == null || ages.isEmpty()) {
+  private void setAges(String aces) {
+    if (aces == null || aces.isEmpty()) {
       throw new IllegalArgumentException("AGES not valid.");
     }
-    this.ages = ages;
+    this.aces = aces;
   }
 
   private void setArs(String ars) {
@@ -56,20 +56,10 @@ public class HealthCareCenter extends VaccinationCenter {
    */
   @Override
   public String toString() {
+
     StringBuilder sb = new StringBuilder();
-    sb.append("Health Care Center data:\n");
-    sb.append(String.format("\nName: %s\n", super.getName()));
-    sb.append(String.format("Address: %s\n", super.getAddress()));
-    sb.append(String.format("Email: %s\n", super.getEmail()));
-    sb.append(String.format("Phone number: %s\n", super.getPhone()));
-    sb.append(String.format("Fax number: %s\n", super.getFax()));
-    sb.append(String.format("Web address: %s\n", super.getWebAddress()));
-    sb.append(String.format("Opening hours: %s\n", super.getOpeningHours()));
-    sb.append(String.format("Closing hours: %s\n", super.getClosingHours()));
-    sb.append(String.format("Slot duration: %s\n", super.getSlotDuration()));
-    sb.append(String.format("Maximum vaccines per slot: %s\n", super.getMaxVacSlot()));
-    sb.append(String.format("Coordinator: %s\n", super.getCoordinatorName()));
-    sb.append(String.format("AGES: %s\n", this.ages));
+    sb.append(super.toString());
+    sb.append(String.format("ACES: %s\n", this.aces));
     sb.append(String.format("ARS: %s\n", this.ars));
 
     return sb.toString();

@@ -332,7 +332,23 @@ public abstract class VaccinationCenter {
     return this.eventList.getEventsInDay(day);
   }
 
-  public abstract String toString();
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("Health Care Center data:\n");
+    sb.append(String.format("\nName: %s\n", getName()));
+    sb.append(String.format("Address: %s\n", getAddress()));
+    sb.append(String.format("Email: %s\n", getEmail()));
+    sb.append(String.format("Phone number: %s\n", getPhone()));
+    sb.append(String.format("Fax number: %s\n", getFax()));
+    sb.append(String.format("Web address: %s\n", getWebAddress()));
+    sb.append(String.format("Opening hours: %s\n", getOpeningHours()));
+    sb.append(String.format("Closing hours: %s\n", getClosingHours()));
+    sb.append(String.format("Slot duration: %s\n", getSlotDuration()));
+    sb.append(String.format("Maximum vaccines per slot: %s\n", getMaxVacSlot()));
+    sb.append(String.format("Coordinator: %s\n", getCoordinatorName()));
+
+    return sb.toString();
+  }
 
   @Override
   public boolean equals(Object obj) {
