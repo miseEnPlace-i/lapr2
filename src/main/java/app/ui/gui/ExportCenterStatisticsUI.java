@@ -1,5 +1,6 @@
 package app.ui.gui;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Calendar;
@@ -10,11 +11,10 @@ import java.util.logging.Logger;
 import app.controller.App;
 import app.controller.ExportCenterStatisticsController;
 import app.controller.FindCoordinatorVaccinationCenterController;
-import app.domain.model.Company;
+import app.exception.NotAuthorizedException;
 import app.session.EmployeeSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -49,6 +49,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     @FXML
     private TextField filePathName;
 
+    @Override
     void init() {
         this.employeeSession = new EmployeeSession();
         this.ctrlCenter = new FindCoordinatorVaccinationCenterController(App.getInstance().getCompany(), employeeSession);
@@ -56,14 +57,18 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
         this.ctrlCenter.findCoordinatorCenter();
 
         this.lblCenterName.setText(this.ctrlCenter.getVaccinationCenterName());
+        try {
+            this.ctrl = new ExportCenterStatisticsController(App.getInstance().getCompany(), employeeSession);
+        } catch (NotAuthorizedException e) {
+        }
     }
 
     private void displayExportInformation() {
 
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Please confirm the data");
-        alert.setHeaderText("Confirm the data below: ");
-        alert.setContentText(String.format("Export center statistics from % to %, of % to %s.", initialDate, endDate, lblCenterName, filePathName));
+        alert.setHeaderText("Confirm the data below:");
+        alert.setContentText(toString());
 
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
@@ -98,6 +103,17 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         return calendar;
+    }
+
+    public String toString() {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("Data from the Center: %s ", lblCenterName.getText()));
+        sb.append(String.format("\nFile Path Name: %s ", filePathName.getText()));
+        sb.append(String.format("\nExport center statistics from: %s", format.format(getStartDate().getTime())));
+        sb.append(String.format("\nTo: %s", format.format(getEndDate().getTime())));
+
+        return sb.toString();
     }
 
 }

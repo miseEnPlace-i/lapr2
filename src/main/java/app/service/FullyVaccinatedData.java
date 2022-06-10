@@ -64,9 +64,9 @@ public class FullyVaccinatedData {
      * @param date
      */
     private void validateDate(Calendar date) {
-        if (date == null) {
-            throw new IllegalArgumentException("Date cannot be null.");
-        }
+        if (date == null) throw new IllegalArgumentException("Date cannot be null.");
+        if (date.after(Calendar.getInstance()))
+            throw new IllegalArgumentException("It is not possible to export center statistics that contains days in the future.");
     }
 
     /**
