@@ -44,6 +44,10 @@ public class CoordinatorUI extends RoleUI {
 
     this.lblCenterName.setText(this.ctrl.getVaccinationCenterName());
   }
+  
+  public EmployeeSession getEmployeeSession() {
+    return this.employeeSession;
+  }
 
   @FXML
   public void toImportLegacyDataScene1() {

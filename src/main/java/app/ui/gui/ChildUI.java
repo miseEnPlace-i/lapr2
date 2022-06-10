@@ -21,6 +21,10 @@ public abstract class ChildUI<T extends RoleUI> implements Initializable {
     this.parentUI = parentUI;
   }
 
+  public T getParentUI() {
+    return this.parentUI;
+  }
+
   @FXML
   private Label lblName;
 
