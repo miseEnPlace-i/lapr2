@@ -73,17 +73,17 @@
             </Label>
          </children>
       </AnchorPane>
-      <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="16.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
-         <children>
-            <Button id="btnBack" fx:id="btnAnalyse" cancelButton="true" disable="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnBack" prefHeight="40.0" prefWidth="120.0" text="Analyse" />
-            <Button id="btnBack" fx:id="btnBack" cancelButton="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnBack" prefHeight="40.0" prefWidth="120.0" text="Back to menu" />
-         </children>
-      </FlowPane>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="900.0" spacing="16.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
          <children>
             <DatePicker fx:id="dtpDate" onAction="#checkAnalyseButtonEnable" prefHeight="25.0" prefWidth="320.0" promptText="Date" />
             <TextField fx:id="txtInterval" maxWidth="-Infinity" onKeyTyped="#checkAnalyseButtonEnable" prefHeight="25.0" prefWidth="320.0" promptText="Interval" />
          </children>
       </VBox>
+      <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="16.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+         <children>
+            <Button id="btnBack" fx:id="btnAnalyse" cancelButton="true" disable="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnBack" prefHeight="40.0" prefWidth="120.0" text="Analyse" />
+            <Button id="btnBack" fx:id="btnBack" cancelButton="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnBack" prefHeight="40.0" prefWidth="120.0" text="Back to menu" />
+         </children>
+      </FlowPane>
    </children>
 </GridPane>
