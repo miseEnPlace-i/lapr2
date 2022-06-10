@@ -55,7 +55,6 @@ public class AuthUI implements Initializable, IGui {
 
   @FXML
   void btnLogin(ActionEvent event) {
-    // test
     login();
   }
 
