@@ -1,10 +1,9 @@
 package app.service.MaxSum;
 
-import java.util.List;
+import com.isep.mdis.Sum;
 
 public class SumAdapter implements IMaxSum {
-  public List<Integer> maxSum(List<Integer> list) {
-    // return Sum(list.toArray());
-    return null;
+  public int[] maxSum(int[] list) {
+    return Sum.Max(list);
   }
 }
