@@ -71,18 +71,19 @@
                   <Font name="System Italic" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblCenterName" layoutX="63.0" layoutY="33.0" prefHeight="20.0" text="VAC_CENTER_NAME" AnchorPane.leftAnchor="63.0">
+            <Label layoutX="31.0" layoutY="23.0" text="Vaccination Center">
                <font>
-                  <Font size="15.0" />
+                  <Font name="System Bold" size="13.0" />
                </font>
             </Label>
+            <Label fx:id="lblCenter" layoutX="33.0" layoutY="45.0" text="Vaccination Center" />
          </children>
       </AnchorPane>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="900.0" spacing="16.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
          <children>
-            <Button mnemonicParsing="false" prefWidth="320.0" text="Export Vaccination Statistics" />
-            <Button fx:id="btnAnalyseCenterPerformance" mnemonicParsing="false" onAction="#handleAnalyseCenterNavigation" prefWidth="320.0" text="Analyse Center Performance" />
-            <Button mnemonicParsing="false" onAction="#toImportLegacyDataScene1" prefWidth="320.0" text="Import Data from Legacy System" />
+            <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="320.0" text="Export Vaccination Statistics" />
+            <Button mnemonicParsing="false" onAction="#handleAnalyseCenterNavigation" prefHeight="32.0" prefWidth="320.0" text="Analyse Center Performance" />
+            <Button mnemonicParsing="false" onAction="#toImportLegacyDataScene1" prefHeight="32.0" prefWidth="320.0" text="Import Data from Legacy System" />
          </children>
       </VBox>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="16.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">

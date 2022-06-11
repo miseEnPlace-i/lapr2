@@ -58,7 +58,10 @@ public class HealthCareCenter extends VaccinationCenter {
   public String toString() {
 
     StringBuilder sb = new StringBuilder();
+    sb.append("Health Care Center data:\n");
+
     sb.append(super.toString());
+
     sb.append(String.format("ACES: %s\n", this.aces));
     sb.append(String.format("ARS: %s\n", this.ars));
 

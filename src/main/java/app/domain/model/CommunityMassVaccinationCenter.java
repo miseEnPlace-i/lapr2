@@ -63,7 +63,10 @@ public class CommunityMassVaccinationCenter extends VaccinationCenter {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
+    sb.append("Community Mass Vaccination Center data:\n");
+
     sb.append(super.toString());
+
     sb.append(String.format("Vaccine type given on the center:\n\n%s", getVaccineType()));
 
     return sb.toString();

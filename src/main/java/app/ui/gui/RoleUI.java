@@ -3,7 +3,6 @@ package app.ui.gui;
 import java.net.URL;
 import java.util.ResourceBundle;
 import app.controller.App;
-import app.session.EmployeeSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

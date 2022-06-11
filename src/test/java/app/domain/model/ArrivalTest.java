@@ -32,11 +32,11 @@ public class ArrivalTest {
     this.vtStore = company.getVaccineTypeStore();
     this.vtechStore = company.getVaccineTechnologyStore();
 
-    SNSUser snsUser = snsUserStore.createSNSUser("000000000ZZ4", "123456789", "name", Calendar.getInstance().getTime(), Gender.MALE, "+351212345678",
+    SNSUser snsUser = snsUserStore.createSNSUser("00000000", "123456789", "name", Calendar.getInstance().getTime(), Gender.MALE, "+351212345678",
         "s@user.com", "address");
     this.snsUserStore.saveSNSUser(snsUser);
 
-    Employee e2 = empStore.createEmployee("Name2", "+351916919269", "c@user.com", "address", "155424041ZY0", Constants.ROLE_COORDINATOR);
+    Employee e2 = empStore.createEmployee("Name2", "+351916919269", "c@user.com", "address", "15542404", Constants.ROLE_COORDINATOR);
     this.empStore.saveEmployee(e2);
 
     this.vtechStore.addVaccineTechnology("M_RNA_TECHNOLOGY");
@@ -101,9 +101,9 @@ public class ArrivalTest {
     date.set(Calendar.MINUTE, 30);
 
     Appointment appointment = new Appointment(snsUser, date, center, this.vacType, true);
-    Arrival arrival = new Arrival(appointment, Calendar.getInstance());
+    new Arrival(appointment, Calendar.getInstance());
 
-    Calendar now = Calendar.getInstance();
+    Calendar.getInstance();
 
     // arrival.setDepartureTime(now);
 
@@ -124,5 +124,4 @@ public class ArrivalTest {
 
     arrival.getArrivalTime();
   }
-
 }

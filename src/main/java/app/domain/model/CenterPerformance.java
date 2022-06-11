@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.list.CenterEventList;
 import app.domain.shared.CenterEventType;
-import app.service.MaxSumSublistService;
+import app.service.MaxSum.MaxSumSublistService;
 import app.utils.Time;
 
 public class CenterPerformance {
@@ -37,7 +37,7 @@ public class CenterPerformance {
     int endIndex = maxSumSubListData.getEndIndex();
     endingInterval = convertIndexToTime(endIndex);
 
-    maxSum = maxSumSubListData.getMaxSum();
+    maxSum = maxSumSubListData.getSum();
 
     maxSumSubList = maxSumSubListData.getMaxSumSubList();
 
@@ -98,5 +98,12 @@ public class CenterPerformance {
 
   public Time getEndingInterval() {
     return endingInterval;
+  }
+
+  @Override
+  public String toString() {
+    return "CenterPerformance [events=" + events + ", differenceList=" + differenceList + ", maxSumSubList=" + maxSumSubList + ", interval=" + interval
+        + ", maxSum=" + maxSum + ", startingInterval=" + startingInterval + ", endingInterval=" + endingInterval + ", openingHours=" + openingHours
+        + ", closingHours=" + closingHours + "]";
   }
 }

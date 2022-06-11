@@ -62,13 +62,27 @@ create "centerPerformance\n:CenterPerformance" as PERF
 VACC --> PERF : create(eventsInDay,interval,openingHours,closingHours)
 activate PERF
 PERF -> PERF : differenceList=calculateDifferencesList()
+activate PERF
+deactivate PERF
 
 create "maxSumSublistService\n:MaxSumSublistService" as MAXSS
+participant "MaxSumStrategy\n:IMaxSum" as MAXSST
+
 PERF --> MAXSS : create(differenceList)
 activate MAXSS
 MAXSS -> MAXSS : maxSumSublist=calculateMaxSumSublist()
+MAXSS -> MAXSS : MaxSumStrategy=getMaxSumStrategy()
+|||
+MAXSS -> MAXSST : sublist=maxSum(differenceList)
+activate MAXSST
+deactivate MAXSST
+MAXSS -> MAXSS : findIndexes()
 activate MAXSS
 deactivate MAXSS
+MAXSS -> MAXSS : calculateSum()
+activate MAXSS
+deactivate MAXSS
+
 deactivate MAXSS
 PERF -> MAXSS : getStartIndex()
 activate MAXSS
@@ -82,7 +96,7 @@ deactivate MAXSS
 PERF -> PERF : convertIndexToTime(endIndex)
 activate PERF
 deactivate PERF
-PERF -> MAXSS : getMaxSum()
+PERF -> MAXSS : getSum()
 activate MAXSS
 deactivate MAXSS
 PERF -> MAXSS : getMaxSumSubList()
@@ -98,7 +112,7 @@ UI --> COORD : the list with the differences of arrived and left users, maximum 
 deactivate UI
 deactivate COORD
 
-participant "differnceList\n:List<Integer>" as DIFFL
+participant "differenceList\n:List<Integer>" as DIFFL
 participant "sublist\n:List<Integer>" as SUBL
 
 @enduml

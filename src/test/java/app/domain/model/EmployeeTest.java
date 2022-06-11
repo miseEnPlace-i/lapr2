@@ -49,7 +49,7 @@ public class EmployeeTest {
     String invalidEmail = "joana";
 
     new Employee("0000000001", "Joana Maria", "Av. da Liberdade", "+351916478865", invalidEmail,
-        "303652584ZZ0", "Nurse");
+        "30365258", "Nurse");
   }
 
   /**
@@ -97,7 +97,7 @@ public class EmployeeTest {
   @Test
   public void ensureIsPossibleToCreateEmployee() {
     Employee instance = new Employee("000000001", "Joana Maria", "+351123456789", "email@email.com",
-        "Av. da Liberdade", "123456789ZZ1", "NURSE");
+        "Av. da Liberdade", "12345678", "NURSE");
 
     assertNotNull(instance);
   }

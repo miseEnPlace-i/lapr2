@@ -1,8 +1,5 @@
 package app.ui.console;
 
-import java.io.FileNotFoundException;
-import java.lang.reflect.InvocationTargetException;
-import java.text.ParseException;
 import java.util.List;
 import app.controller.App;
 import app.controller.UploadUsersFromFileController;
@@ -37,7 +34,7 @@ public class UploadUsersFromFileUI implements Runnable {
     String fileName = filePath.substring(filePath.lastIndexOf("\\") + 1);
     fileName = fileName.substring(fileName.lastIndexOf("/") + 1);;
 
-    message += (fileName + " (s/n)");
+    message += (fileName + " (y/n)");
 
     // asks to confirm the action
     if (!Utils.confirm(message)) return;

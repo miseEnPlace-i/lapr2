@@ -10,7 +10,7 @@ import org.junit.Test;
 public class FormatVerifierTest {
   @Test
   public void ensureCCFormatIsValid() {
-    assertTrue(FormatVerifier.validateCitizenCard("123456789ZZ1"));
+    assertTrue(FormatVerifier.validateCitizenCard("12345678"));
   }
 
   @Test
@@ -75,10 +75,11 @@ public class FormatVerifierTest {
     assertTrue(FormatVerifier.validatePhoneNumber("+44923456789"));
   }
 
-  @Test
-  public void ensurePhoneNumberWithoutExtension() {
-    assertFalse(FormatVerifier.validatePhoneNumber("123456789"));
-  }
+  // Invalid test following new client's clarifications
+  // @Test
+  // public void ensurePhoneNumberWithoutExtension() {
+  //   assertFalse(FormatVerifier.validatePhoneNumber("123456789"));
+  // }
 
   @Test
   public void ensurePhoneNumberWithoutPlusInExtension() {
@@ -105,10 +106,11 @@ public class FormatVerifierTest {
     assertFalse(FormatVerifier.validateFaxNumber("+351723456789"));
   }
 
-  @Test
-  public void ensureFaxNumberWithoutExtension() {
-    assertFalse(FormatVerifier.validateFaxNumber("723456789"));
-  }
+  // Invalid test following new client's clarifications
+  // @Test
+  // public void ensureFaxNumberWithoutExtension() {
+  //   assertFalse(FormatVerifier.validateFaxNumber("723456789"));
+  // }
 
   @Test
   public void ensureFaxNumberWithoutPlusInExtension() {

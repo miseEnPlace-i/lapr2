@@ -331,20 +331,21 @@ public abstract class VaccinationCenter {
     return centerPerformance;
   }
 
+  @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("Health Care Center data:\n");
-    sb.append(String.format("\nName: %s\n", getName()));
-    sb.append(String.format("Address: %s\n", getAddress()));
-    sb.append(String.format("Email: %s\n", getEmail()));
-    sb.append(String.format("Phone number: %s\n", getPhone()));
-    sb.append(String.format("Fax number: %s\n", getFax()));
-    sb.append(String.format("Web address: %s\n", getWebAddress()));
-    sb.append(String.format("Opening hours: %s\n", getOpeningHours()));
-    sb.append(String.format("Closing hours: %s\n", getClosingHours()));
-    sb.append(String.format("Slot duration: %s\n", getSlotDuration()));
-    sb.append(String.format("Maximum vaccines per slot: %s\n", getMaxVacSlot()));
-    sb.append(String.format("Coordinator: %s\n", getCoordinatorName()));
+
+    sb.append(String.format("\nName: %s\n", this.getName()));
+    sb.append(String.format("Address: %s\n", this.getAddress()));
+    sb.append(String.format("Email: %s\n", this.getEmail()));
+    sb.append(String.format("Phone number: %s\n", this.getPhone()));
+    sb.append(String.format("Fax number: %s\n", this.getFax()));
+    sb.append(String.format("Web address: %s\n", this.getWebAddress()));
+    sb.append(String.format("Opening hours: %s\n", this.getOpeningHours()));
+    sb.append(String.format("Closing hours: %s\n", this.getClosingHours()));
+    sb.append(String.format("Slot duration: %s\n", this.getSlotDuration()));
+    sb.append(String.format("Maximum vaccines per slot: %s\n", this.getMaxVacSlot()));
+    sb.append(String.format("Coordinator: %s\n", this.getCoordinatorName()));
 
     return sb.toString();
   }
@@ -361,6 +362,7 @@ public abstract class VaccinationCenter {
 
     return false;
   }
+
 
   /**
    * Checks if the center is open at a given time.

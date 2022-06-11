@@ -12,13 +12,11 @@ import app.domain.model.Employee;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
-import app.domain.model.list.AppointmentScheduleList;
 import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.SNSUserStore;
 import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineTypeStore;
 import app.domain.shared.Gender;
-import app.dto.AppointmentInsertDTO;
 import app.mapper.AppointmentInsertMapper;
 import app.service.CalendarUtils;
 
@@ -29,19 +27,17 @@ public class ScheduleVaccineControllerTest {
   private VaccinationCenter vaccinationCenter;
   private VaccineType vaccineType;
   private SNSUser user;
-  private AppointmentInsertDTO dto;
   private Appointment appointment;
   private Calendar calendar;
   private boolean sms = true;
   private VaccinationCenterStore vacStore;
   private VaccineTypeStore vaccineTypeStore;
   private SNSUserStore snsUserStore;
-  private AppointmentScheduleList appointmentSchedule;
 
   @Before
   public void setUp() throws ParseException {
     EmployeeStore employeeStore = company.getEmployeeStore();
-    Employee coordinator = employeeStore.createEmployee("name", "+351212345678", "email@email.com", "address", "000000000ZZ4", "COORDINATOR");
+    Employee coordinator = employeeStore.createEmployee("name", "+351212345678", "email@email.com", "address", "00000000", "COORDINATOR");
     employeeStore.saveEmployee(coordinator);
 
     vacStore = company.getVaccinationCenterStore();
@@ -50,7 +46,7 @@ public class ScheduleVaccineControllerTest {
     vacStore.saveVaccinationCenter(vaccinationCenter);
 
     snsUserStore = company.getSNSUserStore();
-    user = new SNSUser("000000000ZZ4", "123456789", "name", new Date(), Gender.MALE, "+351212345678", "email@email.com", "address");
+    user = new SNSUser("00000000", "123456789", "name", new Date(), Gender.MALE, "+351212345678", "email@email.com", "address");
     snsUserStore.saveSNSUser(user);
 
     calendar = CalendarUtils.parseDateTime(new Date(), "20:40");
@@ -60,7 +56,7 @@ public class ScheduleVaccineControllerTest {
     vaccineTypeStore.saveVaccineType(vaccineType);
 
     appointment = new Appointment(user, calendar, vaccinationCenter, vaccineType, sms);
-    dto = AppointmentInsertMapper.toDto(appointment);
+    AppointmentInsertMapper.toDto(appointment);
   }
 
   /**
