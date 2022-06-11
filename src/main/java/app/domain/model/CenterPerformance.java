@@ -49,7 +49,7 @@ public class CenterPerformance {
 
   private List<Integer> calculateDifferencesList() {
     int nOfWorkingMinutes = closingHours.convertToMinutes() - openingHours.convertToMinutes();
-    int nOfIntervals = nOfWorkingMinutes / interval;
+    int nOfIntervals = (int) Math.floor(nOfWorkingMinutes / interval);
 
     List<Integer> differences = new ArrayList<Integer>(nOfIntervals);
 
@@ -68,10 +68,12 @@ public class CenterPerformance {
   private int getDifferenceForInterval(CenterEventList events, Time beginningTime, Time endingTime) {
     int intervalDifference = 0;
 
-    for (CenterEvent event : events) {
+    // -1 is needed because the last interval has different treatment
+    for (int i = 0; i < events.size() - 1; i++) {
+      CenterEvent event = events.get(i);
       Time eventTime = new Time(event.getDate());
 
-      if (eventTime.isBetween(beginningTime, endingTime)) {
+      if (eventTime.isBetweenExcludeRight(beginningTime, endingTime)) {
         if (event.isType(CenterEventType.ARRIVAL)) intervalDifference++;
         if (event.isType(CenterEventType.DEPARTURE)) intervalDifference--;
       }
