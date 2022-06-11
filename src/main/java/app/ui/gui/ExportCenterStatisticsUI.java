@@ -69,6 +69,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
 
     @Override
     void init(CoordinatorUI parentUI) {
+        this.setParentUI(parentUI);
         this.employeeSession = new EmployeeSession();
         this.ctrlCenter = new FindCoordinatorVaccinationCenterController(App.getInstance().getCompany(), employeeSession);
 
@@ -176,10 +177,14 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
 
         Stage stage = (Stage) getParentUI().getMainApp().getStage();
 
+        File file = directoryChooser.showDialog(stage);
 
-
-          }
+        if (file != null) {
+            fileDestination.setText(file.getAbsolutePath());
+        }
 
     }
+
+}
 
 

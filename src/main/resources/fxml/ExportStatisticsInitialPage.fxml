@@ -79,7 +79,7 @@
             <DatePicker fx:id="endDate" editable="false" maxWidth="-Infinity" prefHeight="40.0" prefWidth="500.0" promptText="Insert the end date" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="fileDestination" alignment="CENTER" disable="true" onAction="#txtFileDestination" prefHeight="30.0" prefWidth="250.0" promptText="File Destination">
+                  <TextField fx:id="fileDestination" alignment="CENTER" disable="true" prefHeight="30.0" prefWidth="250.0" promptText="File Destination">
                      <HBox.margin>
                         <Insets bottom="50.0" />
                      </HBox.margin>
