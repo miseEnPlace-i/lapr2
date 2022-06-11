@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
-import app.domain.model.AdminProcess;
 import app.domain.model.Company;
 import app.domain.model.Vaccine;
 import app.domain.model.VaccineType;
@@ -19,10 +18,7 @@ public class RegisterVaccineControllerTest {
   private VaccineStore vaccineStore;
   private VaccineTypeStore vaccineTypeStore;
   private VaccineType vaccineType;
-  private AdminProcList list;
   private String resourceName;
-  private Vaccine vaccine;
-  private AdminProcess process;
 
   @Before
   public void setUp() {
@@ -34,13 +30,10 @@ public class RegisterVaccineControllerTest {
 
     resourceName = "Vaccine";
 
-    vaccine = new Vaccine("teste", "123123", "brand", vaccineType);
+    new Vaccine("teste", "123123", "brand", vaccineType);
 
-    list = new AdminProcList();
-
+    new AdminProcList();
   }
-
-
 
   @Test
   public void ensureGetResourceNameIsWorkingCorrectly() {
@@ -56,7 +49,6 @@ public class RegisterVaccineControllerTest {
     controller.save();
 
     assertEquals(vaccineStore.size(), 1);
-
   }
 
   /**
@@ -68,5 +60,4 @@ public class RegisterVaccineControllerTest {
     assertEquals(list.size(), 1);
     assertEquals(list.get(0), vaccineType);
   }
-
 }

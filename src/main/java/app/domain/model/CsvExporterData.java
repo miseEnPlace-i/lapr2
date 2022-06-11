@@ -1,10 +1,7 @@
 package app.domain.model;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
-import app.service.FormatVerifier;
-import app.service.TimeUtils;
 
 
 public class CsvExporterData {

@@ -22,6 +22,7 @@ public class CenterPerformanceTest {
     center = new HealthCareCenter("name", "address", "email@email.com", "+351212345678", "+351212345678", "https://ccc.com", new Time("10:00"),
         new Time("11:00"), new Slot(5, 5), coordinator, "ages", "ars");
 
+    new VaccineType("12345", "description", "technology");
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
     SimpleDateFormat sdfBday = new SimpleDateFormat("dd-MM-yyyy");
     SNSUser user = new SNSUser("000000000ZZ4", "123456789", "name", sdfBday.parse("01-02-2022"), Gender.MALE, "+351212345678", "email@email.com", "address");

@@ -5,26 +5,20 @@ actor "Center Coordinator" as COORDINATOR
 
 activate COORDINATOR
 
-COORDINATOR -> ":System" : wants to import data from a legacy system
+COORDINATOR -> ":System" : starts the process of importing data from a legacy system
 activate ":System"
 
-":System" --> COORDINATOR : asks for the file path
+":System" --> COORDINATOR : asks for the file that should be loaded
 deactivate ":System"
 
-COORDINATOR -> ":System" : types the file path
-activate ":System"
-
-":System" --> COORDINATOR : shows file path and asks for confirmation
-deactivate ":System"
-
-COORDINATOR -> ":System" : confirms the file path
+COORDINATOR -> ":System" : selects the file
 activate ":System"
 
 ' sorted by arrival time or by the center leaving time
-":System" --> COORDINATOR : shows data sorted and asks if he wants to save it
+":System" --> COORDINATOR : opens the file and shows data sorted
 deactivate ":System"
 
-COORDINATOR -> ":System" : confirms
+COORDINATOR -> ":System" : confirms the data
 activate ":System"
 
 ":System" --> COORDINATOR : informs operation success

@@ -101,9 +101,9 @@ public class ArrivalTest {
     date.set(Calendar.MINUTE, 30);
 
     Appointment appointment = new Appointment(snsUser, date, center, this.vacType, true);
-    Arrival arrival = new Arrival(appointment, Calendar.getInstance());
+    new Arrival(appointment, Calendar.getInstance());
 
-    Calendar now = Calendar.getInstance();
+    Calendar.getInstance();
 
     // arrival.setDepartureTime(now);
 
@@ -124,5 +124,4 @@ public class ArrivalTest {
 
     arrival.getArrivalTime();
   }
-
 }

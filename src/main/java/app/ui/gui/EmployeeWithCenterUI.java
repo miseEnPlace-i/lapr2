@@ -11,7 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
 
-public class EmployeeWithCenterUI extends RoleUI {
+public class EmployeeWithCenterUI extends EmployeeRoleUI {
   private SelectEmployeeVaccinationCenterController ctrl = new SelectEmployeeVaccinationCenterController(App.getInstance().getCompany(), employeeSession);
 
   @FXML
@@ -23,7 +23,8 @@ public class EmployeeWithCenterUI extends RoleUI {
   private VaccinationCenterListDTO selectedCenter;
 
   @Override
-  void init() {
+  void init(ApplicationUI mainApp) {
+    this.setMainApp(mainApp);
     List<VaccinationCenterListDTO> centers = ctrl.getVaccinationCentersList();
     lstCenters.getItems().addAll(centers);
   }
@@ -55,7 +56,7 @@ public class EmployeeWithCenterUI extends RoleUI {
 
     try {
       RoleUI gui = (RoleUI) mainApp.replaceSceneContent(fxmlPath);
-      gui.setMainApp(mainApp);
+      gui.init(mainApp);
     } catch (Exception e) {
       System.out.println(e);
     }
