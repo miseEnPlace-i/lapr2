@@ -7,7 +7,11 @@ import app.controller.FindCoordinatorVaccinationCenterController;
 import app.domain.model.Company;
 import app.exception.NotAuthorizedException;
 import app.session.EmployeeSession;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class CoordinatorUI extends EmployeeRoleUI {
@@ -15,7 +19,10 @@ public class CoordinatorUI extends EmployeeRoleUI {
   private FindCoordinatorVaccinationCenterController ctrl;
 
   @FXML
-  private Label lblCenterName;
+  private Label lblCenter;
+
+  @FXML
+  private Button btnAnalyseCenterPerformance;
 
   @Override
   public void init(ApplicationUI mainApp) throws NotAuthorizedException {
@@ -29,7 +36,17 @@ public class CoordinatorUI extends EmployeeRoleUI {
 
     if (!this.employeeSession.hasCenter()) throw new NotAuthorizedException("You are not assigned to any vaccination center.");
 
-    this.lblCenterName.setText(this.ctrl.getVaccinationCenterName());
+    this.lblCenter.setText(this.ctrl.getVaccinationCenterName());
+  }
+
+  @FXML
+  void handleAnalyseCenterNavigation(ActionEvent event) {
+    try {
+      AnalyseCenterPerformanceUI analyseCenterUI = (AnalyseCenterPerformanceUI) this.mainApp.replaceSceneContent("/fxml/AnalyseCenter.fxml");
+      analyseCenterUI.init(this);
+    } catch (Exception e) {
+      Logger.getLogger(CoordinatorUI.class.getName()).log(Level.SEVERE, null, e);
+    }
   }
 
   public EmployeeSession getEmployeeSession() {
