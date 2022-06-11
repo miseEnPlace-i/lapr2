@@ -17,12 +17,27 @@ public class ExportCenterStatisticsController {
     private Map<Calendar, Integer> dataMap;
     private CsvExporter csvExporter;
 
+    /**
+     * ExportCenterStatisticsController constructor
+     * 
+     * @param company the company
+     * @param coordinatorSession the coordinator session
+     * @throws NotAuthorizedException exception if coordinator is not logged in
+     */
     public ExportCenterStatisticsController(Company company, EmployeeSession coordinatorSession) throws NotAuthorizedException {
         if (!coordinatorSession.hasCenter()) throw new NotAuthorizedException("Coordinator is not logged in.");
         this.session = coordinatorSession;
         this.company = company;
     }
 
+    /**
+     * Creates fullyVaccinatedData
+     * 
+     * @param filePath the file path to save the statistics
+     * @param start the start date of statistics
+     * @param end the end date of statistics
+     * @return fullyVaccinatedData object
+     */
     public FullyVaccinatedData createFullyVaccinatedData(String filePath, Calendar start, Calendar end) {
         VaccinationCenter center = session.getVaccinationCenter();
 
@@ -31,16 +46,33 @@ public class ExportCenterStatisticsController {
         return exporter;
     }
 
+    /**
+     * Gathers all the information needed to export to a file the statistics
+     * 
+     * @param exporter -> FullyVaccinatedData Object
+     * @return hashMap will all the data needed
+     */
     public Map<Calendar, Integer> generateFullyVaccinatedUsersInterval(FullyVaccinatedData exporter) {
         dataMap = exporter.getFullyVaccinatedUsersPerDayMap();
         return dataMap;
     }
 
+    /**
+     * Creates CsvExporter
+     * 
+     * @param filePath the file path to save the statistics
+     * @return
+     */
     public CsvExporter createCsvExporter(String filePath) {
         csvExporter = new CsvExporter(filePath);
         return csvExporter;
     }
 
+    /**
+     * Saves data
+     * 
+     * @param dataMap the hashMap will all information
+     */
     public void saveData(Map dataMap) {
         csvExporter.writeToFile(dataMap);
     }

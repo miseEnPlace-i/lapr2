@@ -72,6 +72,9 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
         }
     }
 
+    /**
+     * Displays the export information selected by the user
+     */
     private void displayExportInformation() {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Please confirm the data");
@@ -88,6 +91,11 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
         });
     }
 
+    /**
+     * Button to export the statistics
+     * 
+     * @param event
+     */
     @FXML
     void export(ActionEvent event) {
         this.displayExportInformation();
@@ -98,6 +106,11 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
         super.btnBack(event);
     }
 
+    /**
+     * Converts localDate to Calendar
+     * 
+     * @return the startDate converted in object Calendar
+     */
     private Calendar getStartDate() {
         LocalDate localDate = initialDate.getValue();
         Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
@@ -106,6 +119,11 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
         return calendar;
     }
 
+    /**
+     * Converts localDate to Calendar
+     * 
+     * @return the endDate converted in object Calendar
+     */
     private Calendar getEndDate() {
         LocalDate localDate = endDate.getValue();
         Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
@@ -125,6 +143,11 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
         return sb.toString();
     }
 
+    /**
+     * Button to help the user to know how to export statistics
+     * 
+     * @param event
+     */
     @FXML
     void helpUser(ActionEvent event) {
         Alert alert = new Alert(AlertType.INFORMATION);
