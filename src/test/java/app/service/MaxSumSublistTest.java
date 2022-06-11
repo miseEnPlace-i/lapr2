@@ -30,7 +30,7 @@ public class MaxSumSublistTest {
     List<Integer> list = Arrays.asList(baseCase);
     MaxSumSublistService data = new MaxSumSublistService(list);
 
-    assertEquals(data.getMaxSum(), 9);
+    assertEquals(data.getSum(), 9);
   }
 
   @Test
@@ -66,7 +66,7 @@ public class MaxSumSublistTest {
     List<Integer> list = Arrays.asList(allNegativeCase);
     MaxSumSublistService data = new MaxSumSublistService(list);
 
-    assertEquals(data.getMaxSum(), -1);
+    assertEquals(data.getSum(), -1);
   }
 
   @Test
@@ -104,7 +104,7 @@ public class MaxSumSublistTest {
     List<Integer> list = Arrays.asList(twoSublists);
     MaxSumSublistService data = new MaxSumSublistService(list);
 
-    assertEquals(data.getMaxSum(), 8);
+    assertEquals(data.getSum(), 8);
   }
 
   @Test
@@ -148,7 +148,7 @@ public class MaxSumSublistTest {
     List<Integer> list = Arrays.asList(otherExample);
     MaxSumSublistService data = new MaxSumSublistService(list);
 
-    assertEquals(data.getMaxSum(), 23);
+    assertEquals(data.getSum(), 23);
   }
 
   @Test

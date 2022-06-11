@@ -37,7 +37,7 @@ public class CenterPerformance {
     int endIndex = maxSumSubListData.getEndIndex();
     endingInterval = convertIndexToTime(endIndex);
 
-    maxSum = maxSumSubListData.getMaxSum();
+    maxSum = maxSumSubListData.getSum();
 
     maxSumSubList = maxSumSubListData.getMaxSumSubList();
 
