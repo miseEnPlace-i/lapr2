@@ -1,5 +1,6 @@
 package app.ui.gui;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -24,6 +25,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.DirectoryChooser;
 
 /**
  * ExportCenterStatisticsUI
@@ -57,6 +59,12 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
 
     @FXML
     private TextField filePathName;
+
+    @FXML
+    private TextField fileDestination;
+
+    @FXML
+    private Button selectDestination;
 
     @Override
     void init() {
@@ -157,5 +165,21 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
                 "File Path Name (enter a valid path to save the file, E.g.: C:\\\\Users\\\\User\\\\Desktop)\n\nDates: select days from the past and not in the future. You can enter manually or on the calendar.");
         alert.showAndWait();
     }
+
+    @FXML
+    void btnSelectDestination(ActionEvent event) {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+
+        directoryChooser.setTitle("Select where to save the file");
+        directoryChooser.getInitialDirectory();
+
+        File file = directoryChooser.showDialog();
+
+        if (file != null) {
+            fileDestination.setText(file.getAbsolutePath());
+        }
+
+    }
+
 
 }

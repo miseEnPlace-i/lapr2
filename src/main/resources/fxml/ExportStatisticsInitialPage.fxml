@@ -71,17 +71,32 @@
       </VBox>
       <VBox alignment="CENTER" GridPane.rowIndex="1">
          <children>
-            <TextField fx:id="filePathName" maxHeight="-Infinity" maxWidth="450.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="500.0" promptText="File path name">
-               <VBox.margin>
-                  <Insets bottom="8.0" />
-               </VBox.margin>
-            </TextField>
             <DatePicker fx:id="initialDate" editable="false" maxWidth="-Infinity" prefHeight="40.0" prefWidth="500.0" promptText="Insert the initial date">
                <VBox.margin>
                   <Insets bottom="8.0" />
                </VBox.margin>
             </DatePicker>
             <DatePicker fx:id="endDate" editable="false" maxWidth="-Infinity" prefHeight="40.0" prefWidth="500.0" promptText="Insert the end date" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="fileDestination" alignment="CENTER" disable="true" onAction="#txtFileDestination" prefHeight="30.0" prefWidth="250.0" promptText="File Destination">
+                     <HBox.margin>
+                        <Insets bottom="50.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Button fx:id="selectDestination" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnSelectDestination" prefHeight="30.0" prefWidth="250.0" text="Select file destination" textAlignment="RIGHT">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="50.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
          </children>
          <opaqueInsets>
             <Insets />
@@ -89,7 +104,7 @@
       </VBox>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" prefWidth="1200.0" GridPane.rowIndex="2">
          <children>
-            <Button fx:id="exportStatistics" alignment="CENTER" cancelButton="true" contentDisplay="CENTER" defaultButton="true" graphicTextGap="8.0" mnemonicParsing="false" onAction="#export" prefHeight="38.0" prefWidth="139.0" text="Export statistics" textAlignment="CENTER">
+            <Button fx:id="exportStatistics" alignment="CENTER" cancelButton="true" contentDisplay="CENTER" defaultButton="true" graphicTextGap="8.0" mnemonicParsing="false" onAction="#export" prefHeight="38.0" prefWidth="139.0" text="Export statistics">
                <font>
                   <Font size="15.0" />
                </font>
