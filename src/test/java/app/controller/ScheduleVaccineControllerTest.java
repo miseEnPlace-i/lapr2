@@ -12,13 +12,11 @@ import app.domain.model.Employee;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
-import app.domain.model.list.AppointmentScheduleList;
 import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.SNSUserStore;
 import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineTypeStore;
 import app.domain.shared.Gender;
-import app.dto.AppointmentInsertDTO;
 import app.mapper.AppointmentInsertMapper;
 import app.service.CalendarUtils;
 
@@ -29,14 +27,12 @@ public class ScheduleVaccineControllerTest {
   private VaccinationCenter vaccinationCenter;
   private VaccineType vaccineType;
   private SNSUser user;
-  private AppointmentInsertDTO dto;
   private Appointment appointment;
   private Calendar calendar;
   private boolean sms = true;
   private VaccinationCenterStore vacStore;
   private VaccineTypeStore vaccineTypeStore;
   private SNSUserStore snsUserStore;
-  private AppointmentScheduleList appointmentSchedule;
 
   @Before
   public void setUp() throws ParseException {
@@ -60,7 +56,7 @@ public class ScheduleVaccineControllerTest {
     vaccineTypeStore.saveVaccineType(vaccineType);
 
     appointment = new Appointment(user, calendar, vaccinationCenter, vaccineType, sms);
-    dto = AppointmentInsertMapper.toDto(appointment);
+    AppointmentInsertMapper.toDto(appointment);
   }
 
   /**

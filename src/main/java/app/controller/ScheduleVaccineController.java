@@ -33,7 +33,6 @@ public class ScheduleVaccineController implements IRegisterController<Appointmen
   private AppointmentScheduleList appointmentSchedule;
   private Appointment appointment;
   private VaccineTypeStore vaccineTypeStore;
-  private VaccineStore vaccineStore;
   private SNSUserStore snsUserStore;
 
   /**
@@ -47,7 +46,6 @@ public class ScheduleVaccineController implements IRegisterController<Appointmen
     this.vaccinationCenterStore = company.getVaccinationCenterStore();
     this.vaccineTypeStore = company.getVaccineTypeStore();
     this.snsUserStore = company.getSNSUserStore();
-    this.vaccineStore = company.getVaccineStore();
   }
 
   /**

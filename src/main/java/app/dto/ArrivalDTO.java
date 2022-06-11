@@ -1,6 +1,5 @@
 package app.dto;
 
-import java.text.SimpleDateFormat;
 import app.domain.model.Appointment;
 import app.domain.shared.Gender;
 
@@ -75,7 +74,6 @@ public class ArrivalDTO {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
     sb.append(String.format("Name: %s%n", name));
     sb.append(String.format("Gender: %s%n", gender));
