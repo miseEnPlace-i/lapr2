@@ -1,0 +1,18 @@
+@startuml
+
+actor "Center Coordinator" AS COORD
+participant ":System" as SYS
+activate COORD
+COORD -> SYS : asks to analyse the center performance for a given day in the coordinator center
+activate SYS
+SYS --> COORD : requests data (date & time interval)
+deactivate SYS
+COORD -> SYS : types the requested data
+activate SYS
+SYS --> COORD : list with the differences of arrived and left users, maximum continuous sublist, its sum, the time interval corresponding to this continuous sublist 
+deactivate SYS
+deactivate SYS
+
+deactivate COORD
+
+@enduml

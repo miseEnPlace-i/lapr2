@@ -47,6 +47,17 @@ public class Time {
     setMinutes(minutes);
   }
 
+  public Time(int timeInMinutes) {
+    if (timeInMinutes < 0) throw new IllegalArgumentException("Time in minutes cannot be negative.");
+    if (timeInMinutes > 24 * 60) throw new IllegalArgumentException("Minutes in day must be in valid.");
+
+    int hours = timeInMinutes / 60;
+    int minutes = timeInMinutes % 60;
+
+    setHours(hours);
+    setMinutes(minutes);
+  }
+
   /**
    * @return the hours of the time
    */

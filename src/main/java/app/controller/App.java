@@ -129,6 +129,12 @@ public class App {
     vaccine2.addAdminProc(adminProcess2);
     this.vaccineStore.saveVaccine(vaccine2);
 
+    // to facilitate US 17 (import legacy data)
+    Vaccine vaccine3 = this.vaccineStore.createVaccine("Spikevax", "00003", "PTVaccines", vacType);
+    vaccine3.addAdminProc(adminProcess1);
+    vaccine3.addAdminProc(adminProcess2);
+    this.vaccineStore.saveVaccine(vaccine3);
+
     VaccinationCenter vc = this.vaccinationCenterStore.createCommunityMassCenter("Centro Vacinação de Teste", "Rua de Teste", "test@gmail.com", "+351212345678",
         "+351212345679", "http://www.test.com", "20:00", "21:00", 7, 5, e2, vacType);
     this.vaccinationCenterStore.saveVaccinationCenter(vc);

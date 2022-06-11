@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import app.controller.App;
 import app.domain.model.Appointment;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
@@ -77,8 +78,7 @@ public class AppointmentScheduleList {
    * 
    * @param snsUser the SNSUser
    * @param date the date
-   * @param center the vaccination center
-   * @param vaccineType the vaccine type
+   * @param vaccineTypeDto the vaccine type DTO
    * @param sms if the user wants to receive a SMS
    * @return
    */

@@ -1,0 +1,165 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+package UI {
+  class AnalyseCenterPerformanceUI {}
+}
+
+package core {
+  package domain {
+    package shared {
+      enum CenterEventType {
+        ARRIVAL
+        VACCINATED
+        DEPARTED
+      }
+    }
+
+    package stores {
+      class VaccinationCenterStore {
+        +createVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
+        +validateVaccinatonCenter(center)
+        +saveVaccinationCenter(center)
+        +checkDuplicates(center)
+        +getVaccinationCenterWithPhone(phone)
+
+        -addVaccinationCenter(center)
+      }
+    }
+
+    package lists {
+      class CenterEventList {
+        - events: List<CenterEvent>
+
+        + create(date,eventType,snsUser)
+        + save(event)
+        + getEventsInDay(day)
+
+        +CenterEventList()
+      }
+    }
+
+    package model {
+      class VaccinationCenter {
+        - name: String
+        - address: String
+        - emailAddress: String
+        - phoneNumber: String
+        - faxNumber: String
+        - websiteAddress: String
+        
+        +VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slot,coordinator)
+      }
+
+      class Employee {
+        -id: String 
+        -name: String 
+        -email: String 
+        -phone: String 
+        -address: String 
+        -citizenCardNumber: int 
+        -roleId: String 
+
+        +Employee(name,email,phone,address,citizenCardNumber,roleId)
+      }
+
+      class CenterEvent {
+        - date: Date
+        - eventType: CenterEventType
+
+        + isInDay(day)
+
+        + CenterEvent(date,eventType,snsUser)
+      }
+
+      class Slot {
+        -duration: int
+        -maxVaccinesPerSlot: int
+
+        +Slot(duration,maxVaccinesPerSlot)
+      }
+
+      class CenterPerformance {
+        - day: Calendar
+        - maxSumSubList: List
+        - sum: int
+
+        +CenterPerformance(day,interval,openingHours)
+
+        +getDay()
+        +getDifferencesList()
+        +getMaxSumSubList()
+        +getSum()
+        +getStartingInterval()
+        +getEndingInterval()
+      }
+
+      class Company {
+        -designation: String
+        -authFacade: AuthFacade
+        -vaccinationCenterStore: VaccinationCenterStore
+        
+        +Company(designation)
+
+        +getVaccinationCenterStore()
+      }
+    }
+
+    package service {
+      class MaxSumSublistService {
+        - list: List
+        - beginningIndex: int
+        - endIndex: int
+        - maxSum: int
+
+        +MaxSumSublistService(list)
+
+        +getSum()
+        +getBegginingIndex()
+        +getEndIndex()
+        +getMaxSum()
+      }
+    }
+  }
+
+  package controllers {
+    class AnalyseCenterPerformanceController {
+      +getCategories()
+      +CheckWaitingRoom(ref,designation,informalDesc,technicalDesc,duration,cost,categoryId)
+      +saveTask()
+    }
+  }
+
+  package utils {
+    class Time {
+      - hour: int
+      - minute: int
+      
+      +Time(hour,minute)
+      +Time(time)
+    }
+  }
+}
+
+AnalyseCenterPerformanceUI ..> AnalyseCenterPerformanceController
+AnalyseCenterPerformanceController ..> Company
+
+VaccinationCenter o-- Employee : coordinator
+VaccinationCenter o-- Time : openingHours
+VaccinationCenter o-- Time : closingHours
+VaccinationCenter o-- Slot
+VaccinationCenter *-- CenterEventList
+
+VaccinationCenter "1" -- "*" CenterPerformance : generates >
+
+CenterPerformance o-- Time : startingInterval
+CenterPerformance o-- Time : endingInterval
+CenterPerformance o-- Time : openingHours
+
+CenterPerformance -- MaxSumSublistService : uses >
+
+VaccinationCenterStore "1" -- "*" VaccinationCenter : stores >
+
+Company "1" -- "1" VaccinationCenterStore : knows >
+
+@enduml

@@ -1,50 +1,59 @@
-# US XXX - XXXX XXXX
+# US 15 - Check and export vaccination statistic.
 
 ## 1. Requirements Engineering
 
-_In this section, it is suggested to capture the requirement description and specifications as provided by the client as well as any further clarification on it. It is also suggested to capture the requirements acceptance criteria and existing dependencies to other requirements. At last, identify the involved input and output data and depicted an Actor-System interaction in order to fulfill the requirement._
-
 ### 1.1. User Story Description
 
-_Insert here the User Story as described by the client._
+"As a center coordinator, I intend to check and export vaccination statistic. I want to export, to a csv file, the total number of fully vaccinated users per day."
 
 ### 1.2. Customer Specifications and Clarifications
 
-_Insert here any related specification and/or clarification provided by the client together with **your interpretation**. When possible, provide a link to such specifications/clarifications._
+"The Center Coordinator wants to monitor the vaccination process, to see statistics and charts, to evaluate the performance of the vaccination process generate reports and analyze data (...)"
 
 ### 1.3. Acceptance Criteria
 
-_Insert here the client acceptance criteria._
+* **AC1** Output data should follow (date; number of fully vaccinated user).
+* **AC2** The user should define a time interval (two dates). Should follow the the portuguese format (dd/mm/yyyy).
 
 ### 1.4. Found out Dependencies
 
-_Identify here any found out dependency to other US and/or requirements._
+* There is a dependency to "US03 - Register SNS User" since at leat one sns user needs to be registered in the system.
+* There is a dependency to "US08 - Record Administration of Vaccine" since at least one vaccine needs to be administered to a sns user.
+* There is a dependency to "US09 - Register a Vaccination Center" since at least one vaccination center needs to be registered in the system.
+* There is a dependency to "US12 - Register a new Vaccine Type" since at least one vaccine type needs to be registered in the system.
+* There is a dependency to "US13 - Register a new Vaccine" since at least one vaccine needs to be registered in the system.
 
 ### 1.5 Input and Output Data
 
-_Identity here the data to be inputted by the system actor as well as the output data that the system have/needs to present in order to properly support the actor actions. Regarding the inputted data, it is suggested to distinguish between typed data and selected data (e.g. from a list)_
+**Input Data:**
+
+* Typed data:
+	* File path name,
+	* Start date,
+	* End date.
+
+**Output Data:**
+
+* Registered statistics of a center into a CSV file between two dates.
+* Operation (in)success.
 
 ### 1.6. System Sequence Diagram (SSD)
 
-_Insert here a SSD depicting the envisioned Actor-System interactions and throughout which data is inputted and outputted to fulfill the requirement. All interactions must be numbered._
-
-![USXXX-SSD](USXXX-SSD.svg)
+![US15_SSD](SSD/US15_SSD.svg)
 
 ### 1.7 Other Relevant Remarks
 
-_Use this section to capture other relevant information that is related with this US such as (i) special requirements ; (ii) data and/or technology variations; (iii) how often this US is held._
+n/a.
 
 ## 2. OO Analysis
 
 ### 2.1. Relevant Domain Model Excerpt
 
-_In this section, it is suggested to present an excerpt of the domain model that is seen as relevant to fulfill this requirement._
-
-![USXXX-MD](USXXX-MD.svg)
+![US15_DM](DM/US15_DM.svg)
 
 ### 2.2. Other Remarks
 
-_Use this section to capture some aditional notes/remarks that must be taken into consideration into the design activity. In some case, it might be usefull to add other analysis artifacts (e.g. activity or state diagrams)._
+n/a.
 
 ## 3. Design - User Story Realization
 
@@ -52,43 +61,39 @@ _Use this section to capture some aditional notes/remarks that must be taken int
 
 **The rationale grounds on the SSD interactions and the identified input/output data.**
 
-| Interaction ID | Question: Which class is responsible for... | Answer | Justification (with patterns) |
-| :------------- | :------------------------------------------ | :----- | :---------------------------- |
-| Step 1         |                                             |        |                               |
-| Step 2         |                                             |        |                               |
-| Step 3         |                                             |        |                               |
-| Step 4         |                                             |        |                               |
-| Step 5         |                                             |        |                               |
-| Step 6         |                                             |        |                               |
-| Step 7         |                                             |        |                               |
-| Step 8         |                                             |        |                               |
-| Step 9         |                                             |        |                               |
-| Step 10        |                                             |        |                               |
+| Interaction ID | Question: Which class is responsible for... | Answer                     | Justification (with patterns)                                                                                 |
+| :------------- | :------------------------------------------ | :------------------------- | :------------------------------------------------------------------------------------------------------------ |
+| Step 1         | ... interacting with the actor?             | ExportStatisticsUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+|                | ... coordinating the US?                    | ExportStatisticsController | Controller                                                                                                    |
+| Step 2         | n/a                                         | n/a                        | n/a                                                                                                           |
+| Step 3         | ... instantiating new ExporterCsvData?      | CsvExporterData            | IE: holds the information relevant to the statistics                                                          |
+|                | ... knows the coordinator center?           | EmployeeSession            | IE: holds information about the sessions of the users.                                                        |
+|                | ... holds information needed to statistics? | VaccineAdministration      | IE: holds information about the vaccination process of every user                                             |
+|                | ... check sns user is fully vaccinated?     | Vaccine                    | IE: holds information about the administrations process                                                       |
+| Step 4         | ... saving the new statistics?              | CsvExporter                | IE: gets all the data needed to export the statistics.                                                        |
 
 ### Systematization
 
 According to the taken rationale, the conceptual classes promoted to software classes are:
 
-- Class1
-- Class2
-- Class3
+- CsvExporterData 
+- CsvExporter
+- VaccineAdministration
+- Vaccine
+- EmployeeSession
 
 Other software classes (i.e. Pure Fabrication) identified:
 
-- xxxxUI
-- xxxxController
+- CsvExporterUI 
+- CsvExporterController
 
 ## 3.2. Sequence Diagram (SD)
 
-_In this section, it is suggested to present an UML dynamic view stating the sequence of domain related software objects' interactions that allows to fulfill the requirement._
-
-![USXXX-SD](USXXX-SD.svg)
+![US15_SD](SD/US15_SD.svg)
 
 ## 3.3. Class Diagram (CD)
 
-_In this section, it is suggested to present an UML static view representing the main domain related software classes that are involved in fulfilling the requirement as well as and their relations, attributes and methods._
-
-![USXXX-CD](USXXX-CD.svg)
+![US15_CD](CD/US15_CD.svg)
 
 # 4. Tests
 
@@ -113,7 +118,7 @@ _It is also recommended to organize this content by subsections._
 
 # 6. Integration and Demo
 
-_In this section, it is suggested to describe the efforts made to integrate this functionality with the other features of the system._
+* A new option on the Center Coordinator menu options was added (export statistics to a csv file).
 
 # 7. Observations
 

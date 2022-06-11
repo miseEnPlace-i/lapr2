@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#onKeyPressed" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.AuthUI">
+   <center>
+      <VBox alignment="CENTER" prefHeight="385.0" prefWidth="536.0" spacing="8.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Welcome!">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label text="Login to access the application features. ">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtEmail" maxWidth="-Infinity" onKeyTyped="#checkEnableLoginButton" prefWidth="450.0" promptText="Email" />
+            <PasswordField fx:id="txtPwd" maxHeight="-Infinity" maxWidth="-Infinity" onKeyTyped="#checkEnableLoginButton" prefHeight="25.0" prefWidth="450.0" promptText="Password" />
+            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="536.0" spacing="8.0">
+               <children>
+                  <Button id="btnBack" mnemonicParsing="false" onAction="#btnBack" prefWidth="75.0" text="Go Back" />
+                  <Button id="btnLogin" fx:id="btnLogin" disable="true" mnemonicParsing="false" onAction="#btnLogin" prefWidth="75.0" text="Login" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <padding>
+      <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+   </padding>
+</BorderPane>
