@@ -19,7 +19,8 @@ public class CoordinatorUI extends RoleUI {
   private Label lblCenterName;
 
   @Override
-  public void init() {
+  public void init(ApplicationUI mainApp) {
+    super.setMainApp(mainApp);
     App app = App.getInstance();
     Company company = app.getCompany();
     this.employeeSession = new EmployeeSession();
@@ -53,8 +54,7 @@ public class CoordinatorUI extends RoleUI {
   public void toImportLegacyDataScene1() {
     try {
       ImportLegacyData1UI importUI = (ImportLegacyData1UI) this.mainApp.replaceSceneContent("/fxml/ImportLegacyData_1.fxml");
-      importUI.setParentUI(this);
-      importUI.setMainApp(this.mainApp);
+      importUI.init(this);
 
       // importUI.getNameTxtField.requestFocus() to make sure the text field you need focused is, in fact, focused
     } catch (Exception ex) {

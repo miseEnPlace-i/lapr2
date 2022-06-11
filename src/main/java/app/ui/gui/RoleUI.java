@@ -31,14 +31,18 @@ public abstract class RoleUI implements Initializable, IGui {
     lblRole.setText(role);
     if (employeeSession.getVaccinationCenter() != null) lblCenter.setText(employeeSession.getVaccinationCenter().getName());
 
-    this.init();
+    // this.init();
   }
 
-  abstract void init();
+  abstract void init(ApplicationUI mainApp);
 
   @Override
   public void setMainApp(ApplicationUI mainApp) {
     this.mainApp = mainApp;
+  }
+
+  public ApplicationUI getMainApp() {
+    return this.mainApp;
   }
 
   @FXML

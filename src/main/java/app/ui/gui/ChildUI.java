@@ -13,7 +13,6 @@ import javafx.scene.control.Label;
 
 public abstract class ChildUI<T extends RoleUI> implements Initializable {
   private T parentUI;
-  private ApplicationUI mainApp;
 
   ChildUI() {}
 
@@ -39,21 +38,18 @@ public abstract class ChildUI<T extends RoleUI> implements Initializable {
     lblName.setText(email);
     lblRole.setText(role);
 
-    this.init();
+    // this.init();
   }
 
-  abstract void init();
-
-  public void setMainApp(ApplicationUI mainApp) {
-    this.mainApp = mainApp;
-  }
+  abstract void init(T parentUI);
 
   private void toRoleScene() {
     for (MenuFXMLPath path : MenuFXMLPath.values())
       if (path.name().equals(this.parentUI.getUIRoleName())) {
         try {
-          IGui gui = (IGui) this.mainApp.replaceSceneContent(path.toString());
-          gui.setMainApp(mainApp);
+          ApplicationUI mainApp = this.parentUI.getMainApp();
+          RoleUI gui = (RoleUI) mainApp.replaceSceneContent(path.toString());
+          gui.init(mainApp);
         } catch (Exception e) {
           Logger.getLogger(AuthUI.class.getName()).log(Level.SEVERE, "No menu found for role: " + this.parentUI.getUIRoleName());
         }

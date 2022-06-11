@@ -39,6 +39,10 @@ public class AuthUI implements Initializable, IGui {
     ctrl = new AuthController();
   }
 
+  public void init(ApplicationUI mainApp) {
+    this.setMainApp(mainApp);
+  }
+
   @Override
   public void setMainApp(ApplicationUI mainApp) {
     this.mainApp = mainApp;
@@ -120,7 +124,7 @@ public class AuthUI implements Initializable, IGui {
     try {
       try {
         RoleUI gui = (RoleUI) mainApp.replaceSceneContent(menuFXML);
-        gui.setMainApp(mainApp);
+        gui.init(mainApp);
       } catch (Error e) {
         resetTextFields();
         Logger.getLogger(ApplicationUI.class.getName()).log(Level.SEVERE, "Coordinator has no center.");

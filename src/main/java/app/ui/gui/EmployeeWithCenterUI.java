@@ -23,7 +23,7 @@ public class EmployeeWithCenterUI extends RoleUI {
   private VaccinationCenterListDTO selectedCenter;
 
   @Override
-  void init() {
+  void init(ApplicationUI mainApp) {
     List<VaccinationCenterListDTO> centers = ctrl.getVaccinationCentersList();
     lstCenters.getItems().addAll(centers);
   }

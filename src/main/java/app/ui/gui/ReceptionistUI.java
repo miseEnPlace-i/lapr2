@@ -1,13 +1,17 @@
 package app.ui.gui;
 
-import app.session.EmployeeSession;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 
 public class ReceptionistUI extends RoleUI {
-  private EmployeeSession employeeSession;
-  // select employee ctrl
+  private ApplicationUI mainApp;
 
-  void init() {
-    
+  @FXML
+  private Label lblCenter;
+  
+  void init(ApplicationUI mainApp) {
+    this.setMainApp(mainApp);
+    if (employeeSession.getVaccinationCenter() != null) lblCenter.setText(employeeSession.getVaccinationCenter().getName());
   }
 
   @Override
