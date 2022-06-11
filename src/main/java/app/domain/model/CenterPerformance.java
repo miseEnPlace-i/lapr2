@@ -19,11 +19,14 @@ public class CenterPerformance {
   private Time endingInterval;
 
   private Time openingHours;
+  private Time closingHours;
 
-  public CenterPerformance(CenterEventList events, int interval, Time openingHours) {
+  public CenterPerformance(CenterEventList events, int interval, Time openingHours, Time closingHours) {
     this.events = events;
     this.interval = interval;
     this.openingHours = openingHours;
+    this.closingHours = closingHours;
+
     differenceList = calculateDifferencesList();
 
     MaxSumSublistService maxSumSubListData = new MaxSumSublistService(differenceList);
@@ -45,9 +48,12 @@ public class CenterPerformance {
   }
 
   private List<Integer> calculateDifferencesList() {
-    List<Integer> differences = new ArrayList<Integer>();
+    int nOfWorkingMinutes = closingHours.convertToMinutes() - openingHours.convertToMinutes();
+    int nOfIntervals = nOfWorkingMinutes / interval;
 
-    for (int i = 0; i < events.size(); i++) {
+    List<Integer> differences = new ArrayList<Integer>(nOfIntervals);
+
+    for (int i = 0; i < nOfIntervals; i++) {
       Time beginningInterval = new Time(openingHours.convertToMinutes() + i * interval);
       Time endInterval = new Time(beginningInterval.convertToMinutes() + interval);
 
@@ -82,7 +88,7 @@ public class CenterPerformance {
     return maxSumSubList;
   }
 
-  public int getSum() {
+  public int getMaxSum() {
     return maxSum;
   }
 
@@ -92,5 +98,12 @@ public class CenterPerformance {
 
   public Time getEndingInterval() {
     return endingInterval;
+  }
+
+  @Override
+  public String toString() {
+    return "CenterPerformance [events=" + events + ", differenceList=" + differenceList + ", maxSumSubList=" + maxSumSubList + ", interval=" + interval
+        + ", maxSum=" + maxSum + ", startingInterval=" + startingInterval + ", endingInterval=" + endingInterval + ", openingHours=" + openingHours
+        + ", closingHours=" + closingHours + "]";
   }
 }

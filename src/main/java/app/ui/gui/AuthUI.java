@@ -36,7 +36,21 @@ public class AuthUI implements Initializable, IGui {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    ctrl = new AuthController();
+    try {
+      ctrl = new AuthController();
+
+    } catch (Exception e) {
+      Logger.getLogger(AuthUI.class.getName()).log(Level.SEVERE, null, e);
+
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("Error");
+      alert.setHeaderText("Error in application initialization");
+      alert.setContentText("Error while initializing the application,\nplease contact an administrator to solve\nthe problem.");
+
+      alert.showAndWait();
+
+      System.exit(-1);
+    }
   }
 
   @Override
@@ -55,7 +69,6 @@ public class AuthUI implements Initializable, IGui {
 
   @FXML
   void btnLogin(ActionEvent event) {
-    // test
     login();
   }
 

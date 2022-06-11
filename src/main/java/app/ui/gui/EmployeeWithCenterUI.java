@@ -38,7 +38,6 @@ public class EmployeeWithCenterUI extends RoleUI {
   @FXML
   void btnConfirm(Event event) {
     ctrl.selectVaccinationCenter(selectedCenter, employeeSession);
-    System.out.println(employeeSession.getVaccinationCenter());
     this.redirectToRoleMenu();
   }
 
