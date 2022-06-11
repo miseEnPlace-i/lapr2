@@ -99,4 +99,11 @@ public class CenterPerformance {
   public Time getEndingInterval() {
     return endingInterval;
   }
+
+  @Override
+  public String toString() {
+    return "CenterPerformance [events=" + events + ", differenceList=" + differenceList + ", maxSumSubList=" + maxSumSubList + ", interval=" + interval
+        + ", maxSum=" + maxSum + ", startingInterval=" + startingInterval + ", endingInterval=" + endingInterval + ", openingHours=" + openingHours
+        + ", closingHours=" + closingHours + "]";
+  }
 }
