@@ -38,7 +38,7 @@ public class WaitingRoomTest {
 
   @Test
   public void ensureWaitingRoomSizeIsWorking() {
-    Arrival arrival = waitingRoom.createArrival(appointment);
+    Arrival arrival = waitingRoom.createArrival(appointment, Calendar.getInstance());
     assertEquals(0, waitingRoom.size());
 
     waitingRoom.saveArrival(arrival);
@@ -47,7 +47,7 @@ public class WaitingRoomTest {
 
   @Test
   public void ensureHasSnsUserArrivedTodayIsWorking() {
-    Arrival arrival = waitingRoom.createArrival(appointment);
+    Arrival arrival = waitingRoom.createArrival(appointment, Calendar.getInstance());
 
     waitingRoom.saveArrival(arrival);
     assertTrue(waitingRoom.hasSNSUserArrivedToday(appointment.getSnsUser()));

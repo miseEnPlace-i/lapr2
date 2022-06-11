@@ -71,13 +71,14 @@
                   <Font name="System Italic" size="14.0" />
                </font>
             </Label>
+            <Label layoutX="31.0" layoutY="23.0" text="Vaccination Center">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblCenter" layoutX="33.0" layoutY="45.0" text="Vaccination Center" />
          </children>
       </AnchorPane>
-      <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="16.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
-         <children>
-            <Button id="btnBack" cancelButton="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnBack" prefHeight="40.0" prefWidth="120.0" text="Back to menu" />
-         </children>
-      </FlowPane>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="900.0" spacing="16.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
          <children>
             <Button mnemonicParsing="false" prefWidth="320.0" text="Register a SNS User" />
@@ -85,5 +86,10 @@
             <Button mnemonicParsing="false" prefWidth="320.0" text="Schedule an arrival"/>
          </children>
       </VBox>
+      <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="16.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+         <children>
+            <Button id="btnBack" cancelButton="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnBack" prefHeight="40.0" prefWidth="120.0" text="Back to menu" />
+         </children>
+      </FlowPane>
    </children>
 </GridPane>

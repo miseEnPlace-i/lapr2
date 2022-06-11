@@ -324,12 +324,11 @@ public abstract class VaccinationCenter {
   }
 
   public CenterPerformance getCenterPerformanceForDay(Calendar day, int interval) {
-    // TODO
-    return null;
-  }
+    CenterEventList events = this.eventList.getEventListForDay(day);
 
-  public List<CenterEvent> getEventListForDay(Calendar day) {
-    return this.eventList.getEventsInDay(day);
+    CenterPerformance centerPerformance = new CenterPerformance(events, interval, openingHours, closingHours);
+
+    return centerPerformance;
   }
 
   public String toString() {

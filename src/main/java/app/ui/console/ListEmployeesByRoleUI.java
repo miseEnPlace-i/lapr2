@@ -12,7 +12,6 @@ import pt.isep.lei.esoft.auth.domain.model.UserRole;
  * 
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
-
 public class ListEmployeesByRoleUI implements Runnable {
   private ListEmployeesByRoleController ctrl;
 
@@ -28,6 +27,8 @@ public class ListEmployeesByRoleUI implements Runnable {
     displayEmployeeRoles(employeeRoles);
 
     int roleIndex = Utils.selectsIndex(employeeRoles);
+
+    if (roleIndex == -1) return;
 
     UserRole role = employeeRoles.get(roleIndex);
 

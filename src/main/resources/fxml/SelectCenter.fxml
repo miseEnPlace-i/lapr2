@@ -19,7 +19,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="550.0" prefWidth="900.0" scaleShape="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.NurseUI">
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="550.0" prefWidth="900.0" scaleShape="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.EmployeeWithCenterUI">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="120.0" />
   </columnConstraints>
@@ -51,7 +51,7 @@
       </MenuBar>
       <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="900.0" scaleShape="false" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="30.0" prefHeight="29.0" prefWidth="900.0" text="Menu" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="30.0" prefHeight="29.0" prefWidth="900.0" text="Select a Center" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0">
                <font>
                   <Font size="24.0" />
                </font>
@@ -81,11 +81,12 @@
       </AnchorPane>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="900.0" spacing="16.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
          <children>
-            <Button fx:id="btnWaitingRoom" mnemonicParsing="false" onAction="#handleGetUsersInWaitingRoomPress" prefWidth="320.0" text="Get Users in Waiting Room" />
+            <ListView fx:id="lstCenters" onMouseClicked="#checkEnableButton" prefHeight="334.0" prefWidth="900.0" />
          </children>
       </VBox>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="16.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
          <children>
+            <Button id="btnBack" fx:id="btnConfirm" defaultButton="true" disable="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnConfirm" prefHeight="40.0" prefWidth="120.0" text="Confirm" />
             <Button id="btnBack" cancelButton="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnBack" prefHeight="40.0" prefWidth="120.0" text="Back to menu" />
          </children>
       </FlowPane>
