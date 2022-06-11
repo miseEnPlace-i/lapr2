@@ -35,7 +35,7 @@
             </MenuBar>
             <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="900.0" scaleShape="false">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="30.0" prefHeight="29.0" prefWidth="900.0" text="Export Center Statistics" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="30.0" prefHeight="29.0" prefWidth="900.0" text="Export Center Statistics" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="130.0">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -71,20 +71,17 @@
       </VBox>
       <VBox alignment="CENTER" GridPane.rowIndex="1">
          <children>
-            <TextField fx:id="filePathName" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="349.0" promptText="File path name">
+            <TextField fx:id="filePathName" maxHeight="-Infinity" maxWidth="450.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="500.0" promptText="File path name">
                <VBox.margin>
-                  <Insets bottom="10.0" />
+                  <Insets bottom="8.0" />
                </VBox.margin>
-               <padding>
-                  <Insets right="250.0" />
-               </padding>
             </TextField>
-            <DatePicker fx:id="initialDate" maxWidth="-Infinity" prefHeight="34.0" prefWidth="346.0" promptText="Insert the initial date">
+            <DatePicker fx:id="initialDate" editable="false" maxWidth="-Infinity" prefHeight="40.0" prefWidth="500.0" promptText="Insert the initial date">
                <VBox.margin>
                   <Insets bottom="8.0" />
                </VBox.margin>
             </DatePicker>
-            <DatePicker fx:id="endDate" maxWidth="-Infinity" prefHeight="34.0" prefWidth="346.0" promptText="Insert the end date" />
+            <DatePicker fx:id="endDate" editable="false" maxWidth="-Infinity" prefHeight="40.0" prefWidth="500.0" promptText="Insert the end date" />
          </children>
          <opaqueInsets>
             <Insets />
