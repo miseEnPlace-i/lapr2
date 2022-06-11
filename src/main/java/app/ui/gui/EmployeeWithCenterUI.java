@@ -24,6 +24,7 @@ public class EmployeeWithCenterUI extends RoleUI {
 
   @Override
   void init(ApplicationUI mainApp) {
+    this.setMainApp(mainApp);
     List<VaccinationCenterListDTO> centers = ctrl.getVaccinationCentersList();
     lstCenters.getItems().addAll(centers);
   }
@@ -56,7 +57,7 @@ public class EmployeeWithCenterUI extends RoleUI {
 
     try {
       RoleUI gui = (RoleUI) mainApp.replaceSceneContent(fxmlPath);
-      gui.setMainApp(mainApp);
+      gui.init(mainApp);
     } catch (Exception e) {
       System.out.println(e);
     }

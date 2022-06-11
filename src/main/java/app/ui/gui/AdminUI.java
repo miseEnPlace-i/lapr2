@@ -1,8 +1,6 @@
 package app.ui.gui;
 
 public class AdminUI extends RoleUI {
-  private ApplicationUI mainApp;
-
   @Override
   void init(ApplicationUI mainApp) {
     this.setMainApp(mainApp);

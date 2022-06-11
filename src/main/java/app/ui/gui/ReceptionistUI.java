@@ -4,8 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public class ReceptionistUI extends RoleUI {
-  private ApplicationUI mainApp;
-
   @FXML
   private Label lblCenter;
   

@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import app.controller.AuthController;
 import app.domain.shared.Constants;
 import app.domain.shared.MenuFXMLPath;
+import app.exception.NotAuthorizedException;
 import app.service.FormatVerifier;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -92,6 +93,16 @@ public class AuthUI implements Initializable, IGui {
     });
   }
 
+  private void displayNotAuthorizedAlert(NotAuthorizedException e) {
+    Alert alert = new Alert(AlertType.WARNING);
+    alert.setTitle("Login Failed");
+    alert.setHeaderText(e.getMessage());
+    alert.setContentText("Please contact your administrator.");
+    alert.showAndWait().ifPresent(response -> {
+      if (response == ButtonType.OK) Logger.getLogger(getClass().getName()).log(Level.INFO, null, e);
+    });
+  }
+
   @FXML
   void onKeyPressed(KeyEvent event) {
     if (event.getCode() == KeyCode.ENTER) login();
@@ -122,14 +133,19 @@ public class AuthUI implements Initializable, IGui {
     }
 
     try {
+      RoleUI gui = (RoleUI) mainApp.replaceSceneContent(menuFXML);
+      gui.init(mainApp);
+      resetTextFields();
+    } catch (NotAuthorizedException e) {
+      // go back to auth ui
       try {
-        RoleUI gui = (RoleUI) mainApp.replaceSceneContent(menuFXML);
-        gui.init(mainApp);
-      } catch (Error e) {
-        resetTextFields();
-        Logger.getLogger(ApplicationUI.class.getName()).log(Level.SEVERE, "Coordinator has no center.");
+        ((AuthUI) this.mainApp.replaceSceneContent("/fxml/Auth.fxml")).setMainApp(this.mainApp);
+      } catch (Exception e1) {
+        Logger.getLogger(getClass().getName()).log(Level.INFO, null, e);
       }
 
+      // displays the alert
+      displayNotAuthorizedAlert(e);
     } catch (Exception e) {
       Logger.getLogger(ApplicationUI.class.getName()).log(Level.SEVERE, null, e);
     }

@@ -34,7 +34,7 @@ public abstract class RoleUI implements Initializable, IGui {
     // this.init();
   }
 
-  abstract void init(ApplicationUI mainApp);
+  abstract void init(ApplicationUI mainApp) throws Exception;
 
   @Override
   public void setMainApp(ApplicationUI mainApp) {

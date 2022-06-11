@@ -5,10 +5,9 @@ import java.util.logging.Logger;
 import app.controller.App;
 import app.controller.FindCoordinatorVaccinationCenterController;
 import app.domain.model.Company;
+import app.exception.NotAuthorizedException;
 import app.session.EmployeeSession;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 
 public class CoordinatorUI extends RoleUI {
@@ -19,7 +18,7 @@ public class CoordinatorUI extends RoleUI {
   private Label lblCenterName;
 
   @Override
-  public void init(ApplicationUI mainApp) {
+  public void init(ApplicationUI mainApp) throws NotAuthorizedException {
     super.setMainApp(mainApp);
     App app = App.getInstance();
     Company company = app.getCompany();
@@ -28,24 +27,11 @@ public class CoordinatorUI extends RoleUI {
 
     this.ctrl.findCoordinatorCenter();
 
-    if (!this.employeeSession.hasCenter()) {
-      // Much better if I could just throw a NotAuthorizedException
-      // and catch it on AuthUI but it is not possible.
-      // Also mainApp.toMainScene() throws an exception because setMainApp()
-      // is not called until after initialization.
-      Alert alert = new Alert(AlertType.WARNING);
-      alert.setTitle("Login Failed");
-      alert.setHeaderText("You are not assigned to any vaccination center.");
-      alert.setContentText("Please contact your administrator.");
-      alert.showAndWait();
-
-      // Error is needed to bypass Initializable interface not throwing an exception
-      throw new Error();
-    }
+    if (!this.employeeSession.hasCenter()) throw new NotAuthorizedException("You are not assigned to any vaccination center.");
 
     this.lblCenterName.setText(this.ctrl.getVaccinationCenterName());
   }
-  
+
   public EmployeeSession getEmployeeSession() {
     return this.employeeSession;
   }
