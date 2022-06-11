@@ -18,7 +18,7 @@ public class CenterPerformanceTest {
 
   @Before
   public void setup() throws ParseException {
-    Employee coordinator = new Employee("123456789", "name", "+351212345678", "email@email.com", "address", "000000000ZZ4", Constants.ROLE_COORDINATOR);
+    Employee coordinator = new Employee("123456789", "name", "+351212345678", "email@email.com", "address", "00000000", Constants.ROLE_COORDINATOR);
 
     center = new HealthCareCenter("name", "address", "email@email.com", "+351212345678", "+351212345678", "https://ccc.com", new Time("10:00"),
         new Time("11:00"), new Slot(5, 5), coordinator, "ages", "ars");
@@ -26,7 +26,7 @@ public class CenterPerformanceTest {
     new VaccineType("12345", "description", "technology");
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
     SimpleDateFormat sdfBday = new SimpleDateFormat("dd-MM-yyyy");
-    SNSUser user = new SNSUser("000000000ZZ4", "123456789", "name", sdfBday.parse("01-02-2022"), Gender.MALE, "+351212345678", "email@email.com", "address");
+    SNSUser user = new SNSUser("00000000", "123456789", "name", sdfBday.parse("01-02-2022"), Gender.MALE, "+351212345678", "email@email.com", "address");
 
     CenterEventList eventList = this.center.getEvents();
     eventList.save(eventList.create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:00")), CenterEventType.ARRIVAL, user));

@@ -29,7 +29,7 @@ public class RegisterEmployeeControllerTest {
     sb.append(String.format("Phone number: %s\n", "+351913456789"));
     sb.append(String.format("Email: %s\n", "example@gmail.com"));
     sb.append(String.format("Address: %s\n", "address"));
-    sb.append(String.format("Citizen Card number: %s\n", "000000000ZZ4"));
+    sb.append(String.format("Citizen Card number: %s\n", "00000000"));
     sb.append(String.format("Role: %s\n", "COORDINATOR"));
 
     return sb.toString();
@@ -41,7 +41,7 @@ public class RegisterEmployeeControllerTest {
   @Test
   public void ensureStringifyDataWorking() {
     String empString = getEmployeeTestString();
-    ctrl.create("name", "address", "+351913456789", "example@gmail.com", "000000000ZZ4", "COORDINATOR");
+    ctrl.create("name", "address", "+351913456789", "example@gmail.com", "00000000", "COORDINATOR");
     ctrl.save();
     assertEquals(ctrl.stringifyData(), empString);
   }
@@ -55,7 +55,7 @@ public class RegisterEmployeeControllerTest {
     String address = "test";
     String phoneNumber = "+351913456789";
     String email = "test@email.com";
-    String citizenCardNumber = "000000000ZZ4";
+    String citizenCardNumber = "00000000";
     String roleId = "NURSE";
     ctrl.create(name, address, phoneNumber, email, citizenCardNumber, roleId);
   }
@@ -69,7 +69,7 @@ public class RegisterEmployeeControllerTest {
     String address = "test";
     String phoneNumber = "+351913456789";
     String email = "test@email.com";
-    String citizenCardNumber = "000000000ZZ4";
+    String citizenCardNumber = "00000000";
     String roleId = "NURSE";
     ctrl.create(name, address, phoneNumber, email, citizenCardNumber, roleId);
     ctrl.save();

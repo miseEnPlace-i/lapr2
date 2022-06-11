@@ -27,7 +27,7 @@ public class SNSUserStoreTest {
     authFacade = company.getAuthFacade();
     store = company.getSNSUserStore();
     Date c = new Date();
-    snsUser = new SNSUser("123456789ZZ1", "123456789", "name", c, Gender.MALE, "+351211111111", "email@email.com", "address");
+    snsUser = new SNSUser("12345678", "123456789", "name", c, Gender.MALE, "+351211111111", "email@email.com", "address");
   }
 
   /**
@@ -76,10 +76,10 @@ public class SNSUserStoreTest {
     int size = store.size();
 
     List<String[]> list = new ArrayList<>();
-    String[] user1Data = {"joao","Male","14/12/2003","rua das flores","+351919993999","joao@gmail.com","123263189","155424041ZY0"};
+    String[] user1Data = {"joao","Male","14/12/2003","rua das flores","+351919993999","joao@gmail.com","123263189","15542404"};
     list.add(user1Data);
     list.add(user1Data);
-    String[] user2Data = {"paulo","Male","14/12/2003","rua das flores","+351919999999","paulito@gmail.com","123789456","096824379ZX8"};
+    String[] user2Data = {"paulo","Male","14/12/2003","rua das flores","+351919999999","paulito@gmail.com","123789456","09682437"};
     list.add(user2Data);
 
     store.registerListOfUsers(list);
@@ -95,11 +95,11 @@ public class SNSUserStoreTest {
     int size = store.size();
 
     List<String[]> list = new ArrayList<>();
-    String[] user1Data = {"joao","Male","14/12/2003","rua das flores","+351919993999","joao@gmail.com","123263189","155424041ZY0"};
+    String[] user1Data = {"joao","Male","14/12/2003","rua das flores","+351919993999","joao@gmail.com","123263189","15542404"};
     list.add(user1Data);
     String[] user2Data = {"","","","","","","",""};
     list.add(user2Data);
-    String[] user3Data = {"paulo","Male","14/12/2003","rua das flores","+351919999999","paulito@gmail.com","123789456","096824379ZX8"};
+    String[] user3Data = {"paulo","Male","14/12/2003","rua das flores","+351919999999","paulito@gmail.com","123789456","09682437"};
     list.add(user3Data);
 
     store.registerListOfUsers(list);
@@ -115,9 +115,9 @@ public class SNSUserStoreTest {
     int size = store.size();
 
     List<String[]> list = new ArrayList<>();
-    String[] user1Data = {"joao","Male","14/12/2003","rua das flores","+351919993999","joao@gmail.com","123263189","155424041ZY0"};
+    String[] user1Data = {"joao","Male","14/12/2003","rua das flores","+351919993999","joao@gmail.com","123263189","15542404"};
     list.add(user1Data);
-    String[] user2Data = {"paulo","Male","14/12/2003","rua das flores","+351919999999","paulito@gmail.com","123789456","096824379ZX8"};
+    String[] user2Data = {"paulo","Male","14/12/2003","rua das flores","+351919999999","paulito@gmail.com","123789456","09682437"};
     list.add(user2Data);
 
     store.registerListOfUsers(list);

@@ -22,7 +22,7 @@ public class VaccinationCenterTest {
 
   @Before
   public void setUp() {
-    coordinator = new Employee("00000001", "Joana", "+351916478865", "email@email.com", "address", "000000000ZZ4", Constants.ROLE_COORDINATOR);
+    coordinator = new Employee("00000001", "Joana", "+351916478865", "email@email.com", "address", "00000000", Constants.ROLE_COORDINATOR);
     vaccineType = new VaccineType("12345", "description", "technology");
 
     openingHours = new Time(8, 0);
