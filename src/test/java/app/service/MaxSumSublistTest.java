@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.Test;
+import app.service.MaxSum.MaxSumSublistService;
 
 public class MaxSumSublistTest {
 

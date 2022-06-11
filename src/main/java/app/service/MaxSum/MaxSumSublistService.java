@@ -1,4 +1,4 @@
-package app.service;
+package app.service.MaxSum;
 
 import java.util.List;
 

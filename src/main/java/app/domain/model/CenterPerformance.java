@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.list.CenterEventList;
 import app.domain.shared.CenterEventType;
-import app.service.MaxSumSublistService;
+import app.service.MaxSum.MaxSumSublistService;
 import app.utils.Time;
 
 public class CenterPerformance {
