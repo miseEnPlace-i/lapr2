@@ -99,7 +99,7 @@ public class AuthUI implements Initializable, IGui {
     alert.setHeaderText(e.getMessage());
     alert.setContentText("Please contact your administrator.");
     alert.showAndWait().ifPresent(response -> {
-      if (response == ButtonType.OK) Logger.getLogger(getClass().getName()).log(Level.INFO, null, e);
+      if (response == ButtonType.OK) Logger.getLogger(getClass().getName()).log(Level.INFO, e.getMessage());
     });
   }
 

@@ -10,7 +10,7 @@ import app.session.EmployeeSession;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class CoordinatorUI extends RoleUI {
+public class CoordinatorUI extends EmployeeRoleUI {
   private EmployeeSession employeeSession;
   private FindCoordinatorVaccinationCenterController ctrl;
 

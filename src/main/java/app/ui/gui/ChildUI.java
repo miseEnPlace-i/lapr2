@@ -37,8 +37,6 @@ public abstract class ChildUI<T extends RoleUI> implements Initializable {
 
     lblName.setText(email);
     lblRole.setText(role);
-
-    // this.init();
   }
 
   abstract void init(T parentUI);

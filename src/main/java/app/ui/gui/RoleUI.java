@@ -11,16 +11,12 @@ import javafx.scene.control.Label;
 
 public abstract class RoleUI implements Initializable, IGui {
   protected ApplicationUI mainApp;
-  protected static EmployeeSession employeeSession = new EmployeeSession();
 
   @FXML
-  private Label lblName;
+  protected Label lblName;
 
   @FXML
-  private Label lblRole;
-
-  @FXML
-  private Label lblCenter;
+  protected Label lblRole;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -29,9 +25,6 @@ public abstract class RoleUI implements Initializable, IGui {
 
     lblName.setText(email);
     lblRole.setText(role);
-    if (employeeSession.getVaccinationCenter() != null) lblCenter.setText(employeeSession.getVaccinationCenter().getName());
-
-    // this.init();
   }
 
   abstract void init(ApplicationUI mainApp) throws Exception;
