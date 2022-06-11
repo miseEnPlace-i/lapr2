@@ -18,7 +18,7 @@ public class CoordinatorUI extends RoleUI {
   private FindCoordinatorVaccinationCenterController ctrl;
 
   @FXML
-  private Label lblCenterName;
+  private Label lblCenter;
 
   @FXML
   private Button btnAnalyseCenterPerformance;
@@ -47,7 +47,7 @@ public class CoordinatorUI extends RoleUI {
       throw new Error();
     }
 
-    this.lblCenterName.setText(this.ctrl.getVaccinationCenterName());
+    this.lblCenter.setText(this.ctrl.getVaccinationCenterName());
   }
 
   @FXML
