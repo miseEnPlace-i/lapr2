@@ -50,8 +50,8 @@ public class AuthUI implements Initializable, IGui {
   }
 
   @FXML
-  void btnExit(ActionEvent event) {
-    exitApplication();
+  void btnBack(ActionEvent event) {
+    this.mainApp.toMainScene();
   }
 
   private void exitApplication() {
