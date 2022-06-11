@@ -9,9 +9,6 @@ import app.exception.NotAuthorizedException;
 import app.session.EmployeeSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class CoordinatorUI extends EmployeeRoleUI {
@@ -20,9 +17,6 @@ public class CoordinatorUI extends EmployeeRoleUI {
 
   @FXML
   private Label lblCenter;
-
-  @FXML
-  private Button btnAnalyseCenterPerformance;
 
   @Override
   public void init(ApplicationUI mainApp) throws NotAuthorizedException {

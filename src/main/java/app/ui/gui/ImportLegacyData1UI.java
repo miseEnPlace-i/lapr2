@@ -54,7 +54,6 @@ public class ImportLegacyData1UI extends ChildUI<CoordinatorUI> {
 
         if (selectedFile != null) {
             this.lblSelectedFile.setText(selectedFile.getName());
-            System.out.println(selectedFile.getAbsolutePath());
             btnOpen.setDisable(false);
         }
     }

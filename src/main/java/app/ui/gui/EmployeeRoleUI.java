@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public abstract class EmployeeRoleUI extends RoleUI {
-  protected EmployeeSession employeeSession = new EmployeeSession();
+  protected static EmployeeSession employeeSession = new EmployeeSession();
 
   @FXML
   private Label lblCenter;
