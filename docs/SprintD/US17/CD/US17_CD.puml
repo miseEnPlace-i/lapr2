@@ -1,0 +1,117 @@
+@startuml US17_CD
+skinparam classAttributeIconSize 0
+
+class Company {
+  - String designation
+  ---
+  + Company(designation)
+  + getVaccinationCenterStore()
+}
+
+class Coordinator {}
+
+class CSVReader {
+  - String filePathName
+
+  + readLegacyData()
+}
+
+interface ICSVReader{
+  read(filedata)
+}
+
+class HeaderCSVReader { 
+  + read(filedata)
+}
+
+class MissingHeaderCSVReader{
+  + read(filedata)
+}
+
+class Employee {
+  - id: String
+  - address: String
+  - phoneNumber: String
+  - citizenCardNumber: String
+  ---
+  + Employee(id, name, address, phoneNumber, email, citizenCardNumber, roleId)
+  + getId()
+  + getName()
+  + getAddress()
+  + getPhoneNumber()
+  + getEmail()
+  + getCitizenCardNumber()
+  + getPassword()
+  + getRoleId()
+}
+
+class ImportLegacyDataUI {}
+
+class ImportLegacyDataController {
+  ---
+  + create()
+  + save()
+  + stringifyData()
+}
+
+class SNSUser {
+  - String citizenCard
+  - String snsNumber
+  - Date birthDay
+  - Char gender
+  - String phoneNumber
+  - String address
+  + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
+}
+
+class SNSUserStore {}
+
+class VaccinationCenter {
+  - name: String
+  - address: String
+  - emailAddress: String
+  - phoneNumber: String
+  - faxNumber: String
+  - websiteAddress: String
+  - openingHours: String
+  - closingHours: String
+  - slotDuration: int
+  - maximumVaccinesPerSlot: int
+  - coordinator: EMPLOYEE
+  ---
+  + VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
+  + getName()
+  + getCoordinator()
+}
+
+class VaccinationCenterStore {
+  + createVaccinationCenter(centerData, coordinator)
+  + validateVaccinatonCenter(center)
+  + saveVaccinationCenter(center)
+  + checkDuplicates(center)
+  + addVaccinationCenter(center)
+}
+
+
+Company ..> SNSUserStore
+Company ..> VaccinationCenterStore
+Company "1" --> "*" Employee : knows
+
+CSVReader --> ICSVReader : uses
+
+Employee <|-- Coordinator
+
+ICSVReader <.. MissingHeaderCSVReader
+ICSVReader <.. HeaderCSVReader
+
+ImportLegacyDataController ..> Company
+
+ImportLegacyDataController --> CSVReader : uses
+
+ImportLegacyDataUI ..> ImportLegacyDataController
+
+SNSUserStore "1" --> "*" SNSUser : stores
+
+VaccinationCenterStore "1" --> "*" VaccinationCenter : stores
+
+@enduml

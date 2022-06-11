@@ -1,0 +1,104 @@
+@startuml
+autonumber
+
+actor "Center Coordinator" AS COORD
+participant ":AnalyseCenterPerformanceUI" as UI
+participant ":App" as APP
+
+activate COORD
+activate UI
+COORD -> UI : asks to analyse the center performance for a given day in the coordinator center
+UI -> APP : getInstance()
+activate APP
+deactivate APP
+UI -> APP : company=getCompany()
+activate APP
+deactivate APP
+create ":AnalyseCenterPerformanceController" as CTRL
+
+UI --> CTRL : create(company,session)
+UI --> COORD : requests data (date & time interval)
+deactivate UI
+COORD -> UI : types the requested data
+
+
+participant "employeeSession\n:EmployeeSession" as SESSION
+participant "vaccinationCenter\n:VaccinationCenter" as VACC
+participant "centerEventList\n:CenterEventList" as EVNTL
+participant "centerEvent\n:CenterEvent" as EVNT
+
+activate UI
+UI -> CTRL : analyseCenterPerformance(day,interval)
+
+activate CTRL
+CTRL -> SESSION : center=getVaccinationCenter()
+activate SESSION
+deactivate SESSION
+CTRL -> VACC : centerPerformance=getCenterPerformanceForDay(day,interval)
+activate VACC
+VACC -> EVNTL : events=getEventListForDay(day)
+activate EVNTL
+create "eventsInDay\n:CenterEventList" as EVNTLD
+EVNTL --> EVNTLD
+
+loop for each event in events
+  EVNTL -> EVNT : e=isInDay(event)
+  deactivate EVNTL
+  activate EVNT
+  EVNT --> EVNTL : true / false
+  deactivate EVNT
+
+  alt e==true
+    EVNT -> EVNTLD : add(event)
+    activate EVNT
+    deactivate EVNT
+    activate EVNTLD
+    deactivate EVNTLD
+  end
+
+end loop
+
+create "centerPerformance\n:CenterPerformance" as PERF
+VACC --> PERF : create(eventsInDay,interval,openingHours)
+activate PERF
+PERF -> PERF : differenceList=calculateDifferencesList()
+
+create "maxSumSublistService\n:MaxSumSublistService" as MAXSS
+PERF --> MAXSS : create(differenceList)
+activate MAXSS
+MAXSS -> MAXSS : maxSumSublist=calculateMaxSumSublist()
+activate MAXSS
+deactivate MAXSS
+deactivate MAXSS
+PERF -> MAXSS : getStartIndex()
+activate MAXSS
+deactivate MAXSS
+PERF -> PERF : convertIndexToTime(startIndex)
+activate PERF
+deactivate PERF
+PERF -> MAXSS : getEndIndex()
+activate MAXSS
+deactivate MAXSS
+PERF -> PERF : convertIndexToTime(endIndex)
+activate PERF
+deactivate PERF
+PERF -> MAXSS : getMaxSum()
+activate MAXSS
+deactivate MAXSS
+PERF -> MAXSS : getMaxSumSubList()
+activate MAXSS
+deactivate MAXSS
+|||
+VACC --> CTRL : centerPerformance
+
+deactivate VACC
+deactivate CTRL
+
+UI --> COORD : the list with the differences of arrived and left users, maximum continuous sublist, its sum, the time interval corresponding to this continuous sublist 
+deactivate UI
+deactivate COORD
+
+participant "differnceList\n:List<Integer>" as DIFFL
+participant "sublist\n:List<Integer>" as SUBL
+
+@enduml

@@ -39,6 +39,9 @@ public class RegisterNewVaccineTypeUI extends RegisterUI<RegisterNewVaccineTypeC
    */
   private String selectTechnology(List<String> technologyList) {
     int technologyIndex = Utils.selectsIndex(technologyList);
+
+    if (technologyIndex == -1) return null;
+
     return technologyList.get(technologyIndex);
   }
 
@@ -49,14 +52,15 @@ public class RegisterNewVaccineTypeUI extends RegisterUI<RegisterNewVaccineTypeC
   public void insertData() throws IllegalArgumentException, ParseException {
 
     System.out.println("\nRegister a new Vaccine type: ");
-    String code =
-        Utils.readLineFromConsoleWithValidation("Code (xxxxx): ", FieldToValidate.VAC_CODE);
+    String code = Utils.readLineFromConsoleWithValidation("Code (xxxxx): ", FieldToValidate.VAC_CODE);
     String designation = Utils.readLineFromConsole("Designation: ");
 
     List<String> technologyList = super.ctrl.getVaccineTechnologyList();
     displayTechnology(technologyList);
 
     String tech = selectTechnology(technologyList);
+
+    if (tech == null) return;
 
     super.ctrl.create(code, designation, tech);
   }

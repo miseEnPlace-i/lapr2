@@ -1,0 +1,152 @@
+@startuml US15_CD
+skinparam classAttributeIconSize 0
+
+package UI {
+class CsvExporterUI {}
+}
+
+package controllers {
+     class CsvExporterController {
+
+     }
+}
+
+   package utils {
+     class Time {
+       - hour: int
+       - minute: int
+       +Time(hour,minute)
+
+       +Time(time)
+     }
+   }
+
+package core {
+  package domain {
+
+    package service {
+
+class CsvExporterData {
+    +getVacAdminList()
+    +getSnsUserAge()
+    +getVaccine()
+    +getVacType()
+    }
+}
+
+    package model {
+
+class CsvExporter {}
+
+class VaccineAdministration {
+  -snsUser: SNSUser
+  -vaccine: Vaccine
+  -dose: int
+  -lotNumber: String
+  -date: date
+}
+
+class Company {
+    +getDesignation()
+}
+
+class VaccinationCenter {
+    - name: String
+    - address: String
+    - emailAddress: String
+    - phoneNumber: String
+    - faxNumber: String
+    - websiteAddress: String
+    - openingHours: String
+    - closingHours: String
+    - slotDuration: int
+    - maximumVaccinesPerSlot: int
+    - coordinator
+        
+    +VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slot,coordinator)
+}
+
+
+class Employee {
+    -id: String 
+    -name: String 
+    -email: String 
+    -phone: String 
+    -address: String 
+    -citizenCardNumber: int 
+    -roleId: String 
+
+    +Employee(name,email,phone,address,citizenCardNumber,roleId)
+}
+
+class Slot {
+    -duration: int
+    -maxVaccinesPerSlot: int
+
+    +Slot(duration,maxVaccinesPerSlot)
+}
+
+class Vaccine {
+  -designation : String
+  -brand : String
+  -id : String
+  -vacType : VaccineType
+
+  +Vaccine(designation, id, brand, vacTypeId)
+}
+
+class VaccineType {
+  -code
+  -designation
+  -technology 
+}
+
+class SNSUser {
+  - citizenCard: String
+  - snsNumber: String
+  - name: String
+  - birthDay: Calendar
+  - gender: String
+  - phoneNumber: String
+  - email: String
+  - address: String
+  - userHealthData : UserHealthData
+  + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
+}
+
+
+}
+
+package stores {
+      class VaccinationCenterStore {}
+      }
+}
+
+
+
+
+
+CsvExportersUI ..> CsvExportersController
+
+CsvExportersController ..> Company
+
+Company "1" -- "1" VaccinationCenterStore : knows >
+
+VaccinationCenter o-- Employee
+VaccinationCenter o-- Time 
+VaccinationCenter o-- Slot
+
+Vaccine o-- VaccineType
+
+VaccineAdministration -- Vaccine
+VaccineAdministration -- SNSUser
+
+CsvExporterData -- VaccineAdministration : uses >
+
+CsvExporter -- CsvExporterData : sends data to <
+
+Employee -- CsvExporter : coordinator generates
+
+
+VaccinationCenterStore "1" --> "*" VaccinationCenter : stores >
+@enduml
