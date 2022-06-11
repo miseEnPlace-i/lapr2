@@ -90,12 +90,11 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
 
     alert.showAndWait().ifPresent(response -> {
       if (response == ButtonType.OK) {
-        Logger.getLogger(getClass().getName()).log(Level.INFO, "Operation succeeded!");
-        success(response);
+        Logger.getLogger(getClass().getName()).log(Level.INFO, "Operation running!");
       } else {
         fileDestination.clear();
         Logger.getLogger(getClass().getName()).log(Level.INFO, "Operation canceled!");
-        cancel(response);
+        cancel();
       }
     });
   }
@@ -109,13 +108,20 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
   void export(ActionEvent event) {
     try {
       displayExportInformation();
-      fullyVaccinatedData = ctrl.createFullyVaccinatedData(fileDestination.getText(), getStartDate(), getEndDate());
-      dataMap = ctrl.generateFullyVaccinatedUsersInterval(fullyVaccinatedData);
-      ctrl.createCsvExporter(fileDestination.getText());
-      ctrl.saveData(dataMap);
-      super.btnBack(event);
+      if (validateDates()) {
+        fullyVaccinatedData = ctrl.createFullyVaccinatedData(fileDestination.getText(), getStartDate(), getEndDate());
+        dataMap = ctrl.generateFullyVaccinatedUsersInterval(fullyVaccinatedData);
+        ctrl.createCsvExporter(fileDestination.getText());
+        ctrl.saveData(dataMap);
+        success();
+        super.btnBack(event);
+      } else {
+        displayErrorAlert();
+      }
     } catch (NullPointerException e) {
-      displayErrorAlert(e);
+      displayErrorAlert();
+    } catch (Exception e) {
+      Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, "Error during operation.");
     }
   }
 
@@ -167,7 +173,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     alert.setTitle("Help Exporting Center Statistics");
     alert.setHeaderText("How it works?");
     alert.setContentText(
-        "File destination: you can select where to save the file by clicking on the button 'Select File Destination' and\n\nDates: select days from the past and not in the future. You can enter manually or on the calendar.");
+        "File destination: you can select where to save the file by clicking on the button 'Select File Destination'\n\nDates: select days from the past and not in the future. You select the pretended interval on the calendar.");
     alert.showAndWait();
   }
 
@@ -192,16 +198,19 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     }
   }
 
-
-  private void cancel(ButtonType event) {
+  /**
+   * Alert when user cancels the operation
+   */
+  private void cancel() {
     Alert alert = new Alert(AlertType.WARNING);
     alert.setTitle("Cancel");
     alert.setHeaderText("Canceled the operation");
     alert.setContentText("The file will not be exported.");
+    fileDestination.clear();
     alert.showAndWait();
   }
 
-  private void success(ButtonType event) {
+  private void success() {
     Alert alert = new Alert(AlertType.INFORMATION);
     alert.setTitle("Success!");
     alert.setHeaderText("The data was exported successfully.");
@@ -210,14 +219,30 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     });;
   }
 
-  private void displayErrorAlert(Exception e) {
+  private void displayErrorAlert() {
     Alert alert = new Alert(AlertType.ERROR);
     alert.setTitle("Oops!");
     alert.setHeaderText("Found an error!");
-    alert.setContentText(String.format("Please try again and check if everything field is correctly filled."));
+    alert.setContentText(
+        String.format("Please try again. Check if every field is correctly filled. If having trouble, check on the menu bar 'File' the option 'Help'."));
+    fileDestination.clear();
     alert.showAndWait().ifPresent(response -> {
-      Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, e);
+      Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, "Operation failed.");
     });
+  }
+
+  private boolean validateDates() {
+
+    if (initialDate == null || endDate == null) {
+      return false;
+    }
+    if (getEndDate().before(getStartDate())) {
+      return false;
+    }
+    if (getEndDate().after(Calendar.getInstance())) {
+      return false;
+    }
+    return true;
   }
 }
 
