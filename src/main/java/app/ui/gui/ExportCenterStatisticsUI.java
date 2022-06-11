@@ -12,6 +12,7 @@ import app.controller.App;
 import app.controller.ExportCenterStatisticsController;
 import app.controller.FindCoordinatorVaccinationCenterController;
 import app.exception.NotAuthorizedException;
+import app.service.FullyVaccinatedData;
 import app.session.EmployeeSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,6 +35,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     private EmployeeSession employeeSession;
     private FindCoordinatorVaccinationCenterController ctrlCenter;
     private Map<Calendar, Integer> dataMap;
+    private FullyVaccinatedData fullyVaccinatedData;
 
     @FXML
     private MenuItem help;
@@ -89,8 +91,8 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     @FXML
     void export(ActionEvent event) {
         this.displayExportInformation();
-        ctrl.createFullyVaccinatedData(filePathName.getText(), getStartDate(), getEndDate());
-        dataMap = ctrl.generateFullyVaccinatedUsersInterval();
+        fullyVaccinatedData = ctrl.createFullyVaccinatedData(filePathName.getText(), getStartDate(), getEndDate());
+        dataMap = ctrl.generateFullyVaccinatedUsersInterval(fullyVaccinatedData);
         ctrl.createCsvExporter(filePathName.getText());
         ctrl.saveData(dataMap);
         super.btnBack(event);

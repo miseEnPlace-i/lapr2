@@ -31,7 +31,7 @@ public class ExportCenterStatisticsController {
         return exporter;
     }
 
-    public Map<Calendar, Integer> generateFullyVaccinatedUsersInterval() {
+    public Map<Calendar, Integer> generateFullyVaccinatedUsersInterval(FullyVaccinatedData exporter) {
         dataMap = exporter.getFullyVaccinatedUsersPerDayMap();
         return dataMap;
     }
