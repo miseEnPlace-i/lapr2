@@ -34,7 +34,7 @@ public class UploadUsersFromFileUI implements Runnable {
     String fileName = filePath.substring(filePath.lastIndexOf("\\") + 1);
     fileName = fileName.substring(fileName.lastIndexOf("/") + 1);;
 
-    message += (fileName + " (s/n)");
+    message += (fileName + " (y/n)");
 
     // asks to confirm the action
     if (!Utils.confirm(message)) return;

@@ -76,6 +76,7 @@ public class SNSUser {
     this.address = address;
 
     this.userHealthData = new HealthData(this);
+    this.administrationList = new AdministrationList();
   }
 
   public SNSUser(SNSUserDTO snsUserDTO) {
@@ -97,6 +98,7 @@ public class SNSUser {
     this.address = snsUserDTO.getAddress();
 
     this.userHealthData = new HealthData(this);
+    this.administrationList = new AdministrationList();
   }
 
   // Getters
