@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
@@ -117,6 +118,7 @@ public class ImportLegacyData1UI extends ChildUI<CoordinatorUI> {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Success!");
         alert.setHeaderText("The legacy data has been imported successfully.");
+        alert.getDialogPane().lookupButton(ButtonType.CANCEL).setVisible(false);
         alert.showAndWait();
     }
 }
