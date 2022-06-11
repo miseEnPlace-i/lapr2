@@ -209,6 +209,9 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     alert.showAndWait();
   }
 
+  /**
+   * Alert when the operation was a success
+   */
   private void success() {
     Alert alert = new Alert(AlertType.INFORMATION);
     alert.setTitle("Success!");
@@ -218,6 +221,9 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     });;
   }
 
+  /**
+   * Alert when was found a error when trying to export due to invalid fields
+   */
   private void displayErrorAlert() {
     Alert alert = new Alert(AlertType.ERROR);
     alert.setTitle("Oops!");
@@ -232,6 +238,10 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     });
   }
 
+  /**
+   * 
+   * @return "true" if valid dates, "false" otherwise
+   */
   private boolean validateDates() {
 
     if (initialDate == null || endDate == null) {
@@ -246,11 +256,19 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     return true;
   }
 
+  /**
+   * Validates the file path
+   * 
+   * @return "true" if valid, "false" otherwise
+   */
   private boolean validateFilePath() {
     if (fileDestination.getText().isEmpty() || fileDestination == null) return false;
     return true;
   }
 
+  /**
+   * Alert when trying to do the operation and there is no data or all fields blank.
+   */
   private void displayErrorAlertOperation() {
     Alert alert = new Alert(AlertType.ERROR);
     alert.setTitle("Oops!");

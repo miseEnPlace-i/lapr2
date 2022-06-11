@@ -10,6 +10,11 @@ import app.exception.NotAuthorizedException;
 import app.service.FullyVaccinatedData;
 import app.session.EmployeeSession;
 
+/**
+ * ExportCenterStatisticsController
+ * 
+ * @author André Barros <1211299@isep.ipp.pt>
+ */
 public class ExportCenterStatisticsController {
     private Company company;
     private EmployeeSession session;
