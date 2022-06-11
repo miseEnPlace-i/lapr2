@@ -40,7 +40,6 @@ public class CenterPerformance {
     maxSum = maxSumSubListData.getSum();
 
     maxSumSubList = maxSumSubListData.getMaxSumSubList();
-
   }
 
   private Time convertIndexToTime(int index) {
@@ -64,7 +63,7 @@ public class CenterPerformance {
     }
 
     // last interval
-    Time beginningInterval = new Time(openingHours.convertToMinutes() + (nOfIntervals - 1) * interval);
+    Time beginningInterval = new Time(openingHours.convertToMinutes() + nOfIntervals * interval);
     // +1 because the last interval needs to be inclusive
     Time endInterval = new Time(beginningInterval.convertToMinutes() + interval + 1);
 
@@ -113,7 +112,7 @@ public class CenterPerformance {
 
   @Override
   public String toString() {
-    return "CenterPerformance [events=" + events + ", differenceList=" + differenceList + ", maxSumSubList=" + maxSumSubList + ", interval=" + interval
+    return "CenterPerformance [events=\n" + events + ", differenceList=" + differenceList + ", maxSumSubList=" + maxSumSubList + ", interval=" + interval
         + ", maxSum=" + maxSum + ", startingInterval=" + startingInterval + ", endingInterval=" + endingInterval + ", openingHours=" + openingHours
         + ", closingHours=" + closingHours + "]";
   }
