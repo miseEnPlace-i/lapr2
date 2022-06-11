@@ -7,7 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.CSVReader;
 import app.domain.model.Company;
+import app.domain.model.LegacyData;
+import app.domain.model.LegacyDataObjectBuilder;
 import app.domain.model.VaccinationCenter;
+import app.domain.model.WaitingRoom;
+import app.domain.model.list.AdministrationList;
+import app.domain.model.list.AppointmentScheduleList;
+import app.domain.model.list.CenterEventList;
 import app.domain.model.store.SNSUserStore;
 import app.dto.LegacyDataDTO;
 import app.exception.NotFoundException;
@@ -21,7 +27,7 @@ public class ImportLegacyDataController {
     public ImportLegacyDataController(Company company, VaccinationCenter center) {
         this.company = company;
         this.center = center;
-        this.snsUserStore = company.getSNSUserStore();
+        this.snsUserStore = this.company.getSNSUserStore();
     }
 
     public List<String[]> read(String filepath) throws ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException,
@@ -50,5 +56,22 @@ public class ImportLegacyDataController {
 
     public void sort() {}
 
-    public void save() {}
+    public void save(List<LegacyDataDTO> legacyDtoList) {
+        AppointmentScheduleList aptSchList = this.center.getAppointmentList();
+        WaitingRoom waitingRoom = this.center.getWaitingRoom();
+        CenterEventList centerEventList = this.center.getEvents();
+
+        for (LegacyDataDTO d : legacyDtoList) {
+            LegacyData legacyData = LegacyDataMapper.toModel(d, this.center);
+            LegacyDataObjectBuilder builder = new LegacyDataObjectBuilder(legacyData);
+            AdministrationList administrationList = legacyData.getSNSUser().getAdministrationList();
+
+            aptSchList.saveAppointment(builder.createAppointment());
+            waitingRoom.saveArrival(builder.createArrival());
+            administrationList.save(builder.createAdministration());
+            centerEventList.save(builder.createArrivalEvent());
+            centerEventList.save(builder.createVaccinatedEvent());
+            centerEventList.save(builder.createDeparturedEvent());
+        }
+    }
 }

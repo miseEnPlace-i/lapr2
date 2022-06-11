@@ -22,7 +22,8 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
   @FXML
   private DatePicker dtpDate;
 
-  void init() {
+  @Override
+  void init(CoordinatorUI parentUI) {
     this.ctrl = new AnalyseCenterPerformanceController(App.getInstance().getCompany(), employeeSession);
   }
 

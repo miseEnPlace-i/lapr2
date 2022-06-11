@@ -5,7 +5,7 @@ actor "Center Coordinator" as COORDINATOR
 
 participant ":CoordinatorUI" as CUI
 participant ":ImportLegacyDataUI" as UI
-participant ":App" as _APP
+participant "App" as _APP
 participant "app:App" as APP
 participant ":ImportLegacyDataController" as CTRL
 participant "empSess:employeeSession" as SESSION
@@ -15,8 +15,20 @@ participant ":ICSVReader" as ICSV
 participant ":LegacyDataMapper" as MAPPER
 participant "legacyDataDto:LegacyDataDTO" as DTO
 participant "legacyDtoList:List<LegacyDataDTO>" as LIST_DTOS
+participant "legacyDataObjectBuilder:LegacyDataObjectBuilder" as BUILDER
+participant "legacyData:LegacyData" as LEGACYDATA
 participant "snsUserStore:SNSUserStore" as SNSSTORE
+participant "snsUser:SNSUser" as SNSUSER
 participant "center:VaccinationCenter" as CENTER
+participant "waitingRoom:WaitingRoom" as WR
+participant "aptSchLst:AppointmentScheduleList" as APTSCHLST
+participant "centerEventList:CenterEventList" as CELIST
+participant "vacStore:VaccineStore" as VACCINESTORE
+participant "vaccine:Vaccine" as VACCINE
+participant "administrationList:AdministrationList" as ADLST
+participant "appointment:Appointment" as APT
+participant "arrival:Arrival" as ARRIVAL
+participant "administration:Administration" as ADMINISTRATION
 participant "fileData:List<String[]>" as LIST_FILEDATA
 
 activate COORDINATOR
@@ -28,7 +40,7 @@ activate COORDINATOR
   end ref
 
   activate CUI
-  COORDINATOR -> CUI : wants to import legacy data
+  COORDINATOR -> CUI : starts the process of importing data from a legacy system
 
       note right of CUI
         employeeSession has <i><b>center</b></i> obtained 
@@ -59,14 +71,10 @@ activate COORDINATOR
         deactivate COMPANY
       deactivate CTRL
       
-      COORDINATOR <-- UI : asks to select the file using a file chooser dialog
+      COORDINATOR <-- UI : asks for the file that should be loaded
     deactivate UI
 
     COORDINATOR -> UI : selects the file
-    activate UI
-      COORDINATOR <-- UI : asks for confirmation
-    deactivate UI
-    COORDINATOR -> UI : confirms the file
     activate UI
     
       ' read data
@@ -117,18 +125,107 @@ activate COORDINATOR
 
       UI -> CTRL : sort(legacy)
       activate CTRL
+        ' TODO: sort with strategy pattern
       deactivate CTRL
 
       ' convert to list dto and send it to ui
 
-      COORDINATOR <-- UI : shows the data and asks if he wants to save it
+      COORDINATOR <-- UI : opens the file and shows data sorted
     deactivate UI
 
-    COORDINATOR -> UI : confirms
+    COORDINATOR -> UI : confirms the data
     activate UI
       UI -> CTRL : save(legacy)
       activate CTRL
-        ' gg
+        ' CTRL -> COMPANY : vacStore = getVaccineStore()
+        ' activate COMPANY
+        ' deactivate COMPANY
+
+        CTRL -> CENTER : aptSchLst = getAppointmentScheduleList()
+        activate CENTER
+        deactivate CENTER
+
+        CTRL -> CENTER : wrLst = getWaitingRoomList()
+        activate CENTER
+        deactivate CENTER
+
+        CTRL -> CENTER : centerEventList = getCenterEventList()
+        activate CENTER
+        deactivate CENTER
+
+        loop for each legacyDataDto in legacyDtoList
+          ' builder
+          CTRL -> MAPPER : legacyData = toModel(legacyDataDto)
+          activate MAPPER
+          deactivate MAPPER
+
+          CTRL -> LEGACYDATA : getSnsUser()
+          activate LEGACYDATA
+          deactivate LEGACYDATA
+
+          CTRL -> SNSUSER : getAdministrationList()
+          activate SNSUSER
+          deactivate SNSUSER
+
+          CTRL -> BUILDER : create(legacyData, center)
+          activate BUILDER
+          deactivate BUILDER
+
+          note right of CTRL
+            <i><b>LegacyDataObjectBuilder</b></i> is responsible to create
+            instances of the classes needed.
+          end note
+
+          CTRL -> BUILDER : appointment = createAppointment()
+          activate BUILDER
+          deactivate BUILDER
+
+          CTRL -> APTSCHLST : saveAppointment(appointment)
+          activate APTSCHLST
+          deactivate APTSCHLST
+
+          CTRL -> BUILDER : arrival = createArrival()
+          activate BUILDER
+          deactivate BUILDER
+
+          CTRL -> WR : saveArrival(arrival)
+          activate WR
+          deactivate WR
+
+          CTRL -> BUILDER : administration = createAdministration()
+          activate BUILDER
+          deactivate BUILDER
+
+          CTRL -> WR : save(administration)
+          activate WR
+          deactivate WR
+
+          CTRL -> BUILDER : arrivalEvent = createArrivalEvent()
+          activate BUILDER
+          deactivate BUILDER
+
+          CTRL -> CELIST : save(arrivalEvent)
+          activate CELIST
+          deactivate CELIST
+
+          CTRL -> BUILDER : vaccinatedEvent = createVaccinatedEvent()
+          activate BUILDER
+          deactivate BUILDER
+
+          CTRL -> CELIST : save(vaccinatedEvent)
+          activate CELIST
+          deactivate CELIST
+
+          CTRL -> BUILDER : departuredEvent = createDeparturedEvent()
+          activate BUILDER
+          deactivate BUILDER
+
+          CTRL -> CELIST : save(departuredEvent)
+          activate CELIST
+          deactivate CELIST
+
+          
+        end
       deactivate CTRL
       COORDINATOR <-- UI : informs operation success
     deactivate UI

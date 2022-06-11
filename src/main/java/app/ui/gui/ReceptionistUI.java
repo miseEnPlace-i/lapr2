@@ -1,13 +1,15 @@
 package app.ui.gui;
 
-import app.session.EmployeeSession;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 
-public class ReceptionistUI extends RoleUI {
-  private EmployeeSession employeeSession;
-  // select employee ctrl
-
-  void init() {
-    
+public class ReceptionistUI extends EmployeeRoleUI {
+  @FXML
+  private Label lblCenter;
+  
+  @Override
+  void init(ApplicationUI mainApp) {
+    this.setMainApp(mainApp);
   }
 
   @Override

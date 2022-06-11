@@ -1,8 +1,8 @@
 package app.ui.gui;
 
 public class SNSUserUI extends RoleUI {
-  void init() {
-    // If you need to do something when the UI is initialized, do it here
+  void init(ApplicationUI mainApp) {
+    this.mainApp = mainApp;
   }
 
   @Override

@@ -26,6 +26,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 
 /**
  * ExportCenterStatisticsUI
@@ -67,7 +68,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     private Button selectDestination;
 
     @Override
-    void init() {
+    void init(CoordinatorUI parentUI) {
         this.employeeSession = new EmployeeSession();
         this.ctrlCenter = new FindCoordinatorVaccinationCenterController(App.getInstance().getCompany(), employeeSession);
 
@@ -162,7 +163,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
         alert.setTitle("Help Exporting Center Statistics");
         alert.setHeaderText("How it works?");
         alert.setContentText(
-                "File Path Name (enter a valid path to save the file, E.g.: C:\\\\Users\\\\User\\\\Desktop)\n\nDates: select days from the past and not in the future. You can enter manually or on the calendar.");
+                "File destination: you can select where to save the file by clicking on the button 'Select File Destination' and\n\nDates: select days from the past and not in the future. You can enter manually or on the calendar.");
         alert.showAndWait();
     }
 
@@ -173,13 +174,12 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
         directoryChooser.setTitle("Select where to save the file");
         directoryChooser.getInitialDirectory();
 
-        File file = directoryChooser.showDialog();
+        Stage stage = (Stage) getParentUI().getMainApp().getStage();
 
-        if (file != null) {
-            fileDestination.setText(file.getAbsolutePath());
-        }
+
+
+          }
 
     }
 
 
-}

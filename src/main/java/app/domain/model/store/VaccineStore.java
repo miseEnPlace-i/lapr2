@@ -38,6 +38,13 @@ public class VaccineStore {
     return vaccines.size();
   }
 
+  public Vaccine getVaccineByDesignation(String name) {
+    for (Vaccine vaccine : vaccines)
+      if (vaccine.getDesignation().equals(name)) return vaccine;
+
+    return null;
+  }
+
   public List<Vaccine> getVaccinesByType(VaccineType vt) {
     List<Vaccine> vaccinesList = new ArrayList<Vaccine>();
 
