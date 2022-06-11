@@ -53,7 +53,8 @@ public class CenterPerformance {
 
     List<Integer> differences = new ArrayList<Integer>(nOfIntervals);
 
-    for (int i = 0; i < nOfIntervals; i++) {
+    // -1 is needed because last interval has special treatment
+    for (int i = 0; i < nOfIntervals - 1; i++) {
       Time beginningInterval = new Time(openingHours.convertToMinutes() + i * interval);
       Time endInterval = new Time(beginningInterval.convertToMinutes() + interval);
 
@@ -62,14 +63,22 @@ public class CenterPerformance {
       differences.add(differenceForInterval);
     }
 
+    // last interval
+    Time beginningInterval = new Time(openingHours.convertToMinutes() + (nOfIntervals - 1) * interval);
+    // +1 because the last interval needs to be inclusive
+    Time endInterval = new Time(beginningInterval.convertToMinutes() + interval + 1);
+
+    int differenceForInterval = getDifferenceForInterval(events, beginningInterval, endInterval);
+
+    differences.add(differenceForInterval);
+
     return differences;
   }
 
   private int getDifferenceForInterval(CenterEventList events, Time beginningTime, Time endingTime) {
     int intervalDifference = 0;
 
-    // -1 is needed because the last interval has different treatment
-    for (int i = 0; i < events.size() - 1; i++) {
+    for (int i = 0; i < events.size(); i++) {
       CenterEvent event = events.get(i);
       Time eventTime = new Time(event.getDate());
 

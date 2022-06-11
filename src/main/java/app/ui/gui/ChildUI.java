@@ -41,7 +41,7 @@ public abstract class ChildUI<T extends RoleUI> implements Initializable {
 
   abstract void init(T parentUI);
 
-  private void toRoleScene() {
+  protected void toRoleScene() {
     for (MenuFXMLPath path : MenuFXMLPath.values())
       if (path.name().equals(this.parentUI.getUIRoleName())) {
         try {

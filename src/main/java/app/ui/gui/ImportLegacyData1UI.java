@@ -119,6 +119,8 @@ public class ImportLegacyData1UI extends ChildUI<CoordinatorUI> {
         alert.setTitle("Success!");
         alert.setHeaderText("The legacy data has been imported successfully.");
         alert.getDialogPane().lookupButton(ButtonType.CANCEL).setVisible(false);
-        alert.showAndWait();
+        alert.showAndWait().ifPresent(response -> {
+            super.toRoleScene();
+        });
     }
 }

@@ -20,17 +20,12 @@ public class CenterEventList implements Iterable<CenterEvent> {
     return events.iterator();
   }
 
-  public void add(CenterEvent event) {
-    events.add(event);
-  }
-
-  public CenterEvent get(int index) {
-    return events.get(index);
+  public CenterEvent get(int i) {
+    return events.get(i);
   }
 
   public CenterEvent create(Calendar date, CenterEventType eventType, SNSUser snsUser) {
     CenterEvent centerEvent = new CenterEvent(date, eventType, snsUser);
-    this.events.add(centerEvent);
     return centerEvent;
   }
 
@@ -42,7 +37,7 @@ public class CenterEventList implements Iterable<CenterEvent> {
     CenterEventList eventsInDay = new CenterEventList();
 
     for (CenterEvent event : this.events)
-      if (event.isInDay(day)) eventsInDay.add(event);
+      if (event.isInDay(day)) eventsInDay.save(event);
 
     System.out.println(eventsInDay);
     return eventsInDay;
