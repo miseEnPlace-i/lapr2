@@ -18,7 +18,7 @@ public class CsvExporter {
   public void writeToFile(Map<Object, Object> content) {
     bf = null;
     try {
-      File file = new File(this.filePath);
+      File file = new File(this.filePath + "Data.csv");
       file.createNewFile();
 
       bf = new BufferedWriter(new FileWriter(file));

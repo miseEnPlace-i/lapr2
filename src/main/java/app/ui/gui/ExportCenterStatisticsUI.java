@@ -108,7 +108,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
   void export(ActionEvent event) {
     try {
       displayExportInformation();
-      if (validateDates()) {
+      if (validateDates() && validateFilePath()) {
         fullyVaccinatedData = ctrl.createFullyVaccinatedData(fileDestination.getText(), getStartDate(), getEndDate());
         dataMap = ctrl.generateFullyVaccinatedUsersInterval(fullyVaccinatedData);
         ctrl.createCsvExporter(fileDestination.getText());
@@ -119,7 +119,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
         displayErrorAlert();
       }
     } catch (NullPointerException e) {
-      displayErrorAlert();
+      displayErrorAlertOperation();
     } catch (Exception e) {
       Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, "Error during operation.");
     }
@@ -173,7 +173,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     alert.setTitle("Help Exporting Center Statistics");
     alert.setHeaderText("How it works?");
     alert.setContentText(
-        "File destination: you can select where to save the file by clicking on the button 'Select File Destination'\n\nDates: select days from the past and not in the future. You select the pretended interval on the calendar.");
+        "File destination: you can select where to save the file by clicking on the button 'Select File Destination'.\n\nDates: select days from the past and not in the future. You select the pretended interval on the calendars.");
     alert.showAndWait();
   }
 
@@ -187,7 +187,6 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     DirectoryChooser directoryChooser = new DirectoryChooser();
 
     directoryChooser.setTitle("Select where to save the file");
-    directoryChooser.getInitialDirectory();
 
     Stage stage = (Stage) getParentUI().getMainApp().getStage();
 
@@ -226,6 +225,8 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     alert.setContentText(
         String.format("Please try again. Check if every field is correctly filled. If having trouble, check on the menu bar 'File' the option 'Help'."));
     fileDestination.clear();
+    initialDate.setValue(null);
+    endDate.setValue(null);
     alert.showAndWait().ifPresent(response -> {
       Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, "Operation failed.");
     });
@@ -243,6 +244,25 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
       return false;
     }
     return true;
+  }
+
+  private boolean validateFilePath() {
+    if (fileDestination.getText().isEmpty() || fileDestination == null) return false;
+    return true;
+  }
+
+  private void displayErrorAlertOperation() {
+    Alert alert = new Alert(AlertType.ERROR);
+    alert.setTitle("Oops!");
+    alert.setHeaderText("Found an error!");
+    alert.setContentText(
+        "When trying to execute the operation it failed. Please check if it registered in the system the necessary data or you filled correctly the fields.");
+    fileDestination.clear();
+    initialDate.setValue(null);
+    endDate.setValue(null);
+    alert.showAndWait().ifPresent(response -> {
+      Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, "Operation failed.");
+    });
   }
 }
 
