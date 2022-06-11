@@ -33,6 +33,7 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
   public void setEmployeeSession(EmployeeSession session) {
     this.employeeSession = session;
     this.ctrl = new AnalyseCenterPerformanceController(App.getInstance().getCompany(), employeeSession);
+    System.out.println("session");
   }
 
   @FXML
@@ -48,6 +49,7 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
 
     int interval = Integer.parseInt(txtInterval.getText());
 
+    System.out.println("performance");
     CenterPerformance performance = ctrl.analyseCenterPerformance(day, interval);
 
     System.out.println(performance);
