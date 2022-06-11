@@ -65,7 +65,7 @@ public class CommunityMassVaccinationCenter extends VaccinationCenter {
     StringBuilder sb = new StringBuilder();
     sb.append("Community Mass Vaccination Center data:\n");
 
-    sb.append(super.toString());
+    sb.append(super.toString() + "\n");
 
     sb.append(String.format("Vaccine type given on the center:\n\n%s", getVaccineType()));
 
