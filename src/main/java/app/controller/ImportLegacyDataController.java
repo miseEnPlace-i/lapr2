@@ -54,7 +54,7 @@ public class ImportLegacyDataController {
         }
     }
 
-    public void sort() {}
+    public void sort(List<LegacyDataDTO> legacyDtoList) {}
 
     public void save(List<LegacyDataDTO> legacyDtoList) {
         AppointmentScheduleList aptSchList = this.center.getAppointmentList();

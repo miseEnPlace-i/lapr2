@@ -85,7 +85,7 @@
             <Button mnemonicParsing="false" prefWidth="320.0" text="Register a new Vaccination Center" />
             <Button mnemonicParsing="false" prefWidth="320.0" text="Register a new Vaccine Type" />
             <Button mnemonicParsing="false" prefWidth="320.0" text="Register a new Vaccine" />
-            <Button mnemonicParsing="false" prefWidth="320.0" text="Upload SNS Users from a File" />
+            <Button mnemonicParsing="false" prefWidth="320.0" text="Upload SNS Users from a File" onAction="#importSNSUsers" />
          </children>
       </VBox>
    </children>

@@ -71,16 +71,42 @@
                   <Font name="System Italic" size="14.0" />
                </font>
             </Label>
+            <Label layoutX="64.0" layoutY="24.0" prefHeight="20.0" prefWidth="160.0" text="Your Vaccination Center:" AnchorPane.leftAnchor="64.0">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblCenterName" layoutX="64.0" layoutY="41.0" prefHeight="20.0" text="VAC_CENTER_NAME" AnchorPane.leftAnchor="64.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="16.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
          <children>
             <Button id="btnBack" cancelButton="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnBack" prefHeight="40.0" prefWidth="120.0" text="Back to menu" />
+            <Button id="btnBack" fx:id="btnOpen" cancelButton="true" disable="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnOpen" prefHeight="40.0" prefWidth="120.0" text="Open file" />
          </children>
       </FlowPane>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="900.0" spacing="16.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="900.0" spacing="8.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
          <children>
-         
+            <Label text="Please select a file to import.">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label text="Valid file types: .csv">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" prefWidth="900.0" spacing="8.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#btnSelect" text="Select file" />
+                  <Label fx:id="lblSelectedFile" text="No file selected." />
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>

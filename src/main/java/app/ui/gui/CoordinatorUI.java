@@ -36,6 +36,10 @@ public class CoordinatorUI extends EmployeeRoleUI {
     return this.employeeSession;
   }
 
+  public String getVaccinationCenterName() {
+    return this.ctrl.getVaccinationCenterName();
+  }
+
   @FXML
   public void toImportLegacyDataScene1() {
     try {
