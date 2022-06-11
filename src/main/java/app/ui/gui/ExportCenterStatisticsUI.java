@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 
@@ -33,6 +34,12 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     private EmployeeSession employeeSession;
     private FindCoordinatorVaccinationCenterController ctrlCenter;
     private Map<Calendar, Integer> dataMap;
+
+    @FXML
+    private MenuItem help;
+
+    @FXML
+    private MenuItem devTeam;
 
     @FXML
     private Label lblCenterName;
@@ -64,7 +71,6 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     }
 
     private void displayExportInformation() {
-
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Please confirm the data");
         alert.setHeaderText("Confirm the data below:");
@@ -74,6 +80,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
             if (response == ButtonType.OK) {
                 Logger.getLogger(getClass().getName()).log(Level.INFO, "Operation succeeded!");
             } else {
+                filePathName.clear();
                 Logger.getLogger(getClass().getName()).log(Level.INFO, "Operation canceled!");
             }
         });
@@ -114,6 +121,16 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
         sb.append(String.format("\nTo: %s", format.format(getEndDate().getTime())));
 
         return sb.toString();
+    }
+
+    @FXML
+    void helpUser(ActionEvent event) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Help Exporting Center Statistics");
+        alert.setHeaderText("How it works?");
+        alert.setContentText(
+                "File Path Name (enter a valid path to save the file, E.g.: C:\\\\Users\\\\User\\\\Desktop)\n\nDates: select days from the past and not in the future. You can enter manually or on the calendar.");
+        alert.showAndWait();
     }
 
 }

@@ -21,16 +21,14 @@
          <children>
             <MenuBar prefHeight="26.0" prefWidth="600.0">
               <menus>
-                <Menu mnemonicParsing="false" text="Options">
+                <Menu mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem fx:id="BaseScreen" mnemonicParsing="false" onAction="#btnBack" text="Go to menu" />
-                        <MenuItem mnemonicParsing="false" text="Close" />
+                    <MenuItem fx:id="help" mnemonicParsing="false" onAction="#helpUser" text="Help" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="About">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Development Team" />
-                        <MenuItem mnemonicParsing="false" text="Close" />
+                    <MenuItem fx:id="devTeam" mnemonicParsing="false" text="Development Team" />
                   </items>
                 </Menu>
               </menus>
@@ -102,7 +100,7 @@
                   <Insets right="16.0" />
                </FlowPane.margin>
             </Button>
-            <Button id="btnBack" cancelButton="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnBack" prefHeight="40.0" prefWidth="120.0" text="Back to menu">
+            <Button id="btnBack" fx:id="btnBack" cancelButton="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnBack" prefHeight="40.0" prefWidth="120.0" text="Back to menu">
                <font>
                   <Font size="15.0" />
                </font>
