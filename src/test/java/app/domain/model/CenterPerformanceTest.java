@@ -7,6 +7,7 @@ import java.util.Arrays;
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Before;
 import org.junit.Test;
+import app.domain.model.list.CenterEventList;
 import app.domain.shared.CenterEventType;
 import app.domain.shared.Constants;
 import app.domain.shared.Gender;
@@ -27,13 +28,14 @@ public class CenterPerformanceTest {
     SimpleDateFormat sdfBday = new SimpleDateFormat("dd-MM-yyyy");
     SNSUser user = new SNSUser("000000000ZZ4", "123456789", "name", sdfBday.parse("01-02-2022"), Gender.MALE, "+351212345678", "email@email.com", "address");
 
-    this.center.getEvents().create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:00")), CenterEventType.ARRIVAL, user);
-    this.center.getEvents().create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:00")), CenterEventType.ARRIVAL, user);
-    this.center.getEvents().create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:00")), CenterEventType.ARRIVAL, user);
-    this.center.getEvents().create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:00")), CenterEventType.ARRIVAL, user);
-    this.center.getEvents().create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:10")), CenterEventType.ARRIVAL, user);
-    this.center.getEvents().create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:10")), CenterEventType.DEPARTURE, user);
-    this.center.getEvents().create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:20")), CenterEventType.DEPARTURE, user);
+    CenterEventList eventList = this.center.getEvents();
+    eventList.save(eventList.create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:00")), CenterEventType.ARRIVAL, user));
+    eventList.save(eventList.create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:00")), CenterEventType.ARRIVAL, user));
+    eventList.save(eventList.create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:00")), CenterEventType.ARRIVAL, user));
+    eventList.save(eventList.create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:00")), CenterEventType.ARRIVAL, user));
+    eventList.save(eventList.create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:10")), CenterEventType.ARRIVAL, user));
+    eventList.save(eventList.create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:10")), CenterEventType.DEPARTURE, user));
+    eventList.save(eventList.create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:20")), CenterEventType.DEPARTURE, user));
   }
 
 
