@@ -52,8 +52,11 @@ public class CenterPerformance {
 
     List<Integer> differences = new ArrayList<Integer>(nOfIntervals);
 
-    // -1 is needed because last interval has special treatment
-    for (int i = 0; i < nOfIntervals - 1; i++) {
+    /**
+     * Here we could do nOfIntervals - 1 and treat the last interval as a special case to include the users that arrive
+     * after the closing hour. In the examples given this is not the case, so we decided not to do it
+     */
+    for (int i = 0; i < nOfIntervals; i++) {
       Time beginningInterval = new Time(openingHours.convertToMinutes() + i * interval);
       Time endInterval = new Time(beginningInterval.convertToMinutes() + interval);
 
@@ -61,15 +64,6 @@ public class CenterPerformance {
 
       differences.add(differenceForInterval);
     }
-
-    // last interval
-    Time beginningInterval = new Time(openingHours.convertToMinutes() + (nOfIntervals - 1) * interval);
-    // +1 because the last interval needs to be inclusive
-    Time endInterval = new Time(beginningInterval.convertToMinutes() + interval + 1);
-
-    int differenceForInterval = getDifferenceForInterval(events, beginningInterval, endInterval);
-
-    differences.add(differenceForInterval);
 
     return differences;
   }

@@ -136,7 +136,7 @@ public class App {
     this.vaccineStore.saveVaccine(vaccine3);
 
     VaccinationCenter vc = this.vaccinationCenterStore.createCommunityMassCenter("Centro Vacinação de Teste", "Rua de Teste", "test@gmail.com", "+351212345678",
-        "+351212345679", "http://www.test.com", "08:00", "21:00", 1, 500, e2, vacType);
+        "+351212345679", "http://www.test.com", "08:00", "20:00", 1, 500, e2, vacType);
     this.vaccinationCenterStore.saveVaccinationCenter(vc);
 
     VaccinationCenter vc2 = this.vaccinationCenterStore.createHealthCareCenter("Unidade de Saúde de Teste", "Rua de Teste", "test2@gmail.com", "+351219876543",
