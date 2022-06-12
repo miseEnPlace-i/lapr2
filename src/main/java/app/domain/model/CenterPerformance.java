@@ -27,61 +27,7 @@ public class CenterPerformance {
     this.openingHours = openingHours;
     this.closingHours = closingHours;
 
-    // differenceList = calculateDifferencesList();
-    differenceList = new ArrayList<Integer>();
-    differenceList.add(0);
-    differenceList.add(1);
-    differenceList.add(1);
-    differenceList.add(1);
-    differenceList.add(1);
-    differenceList.add(1);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
-    differenceList.add(5);
+    differenceList = calculateDifferencesList();
 
     MaxSumSublistService maxSumSubListData = new MaxSumSublistService(differenceList);
 
@@ -143,13 +89,17 @@ public class CenterPerformance {
   }
 
   public String stringifyDifferencesList() {
+    return stringifyList(differenceList);
+  }
+
+  private String stringifyList(List<Integer> list) {
     StringBuilder sb = new StringBuilder();
     sb.append("[");
-    sb.append(differenceList.get(0));
+    sb.append(list.get(0));
 
-    for (int i = 1; i < differenceList.size(); i++) {
+    for (int i = 1; i < list.size(); i++) {
       sb.append(", ");
-      sb.append(differenceList.get(i));
+      sb.append(list.get(i));
     }
 
     sb.append("]");
@@ -158,6 +108,10 @@ public class CenterPerformance {
 
   public List<Integer> getMaxSumSubList() {
     return maxSumSubList;
+  }
+
+  public String stringifyMaxSumSublist() {
+    return stringifyList(maxSumSubList);
   }
 
   public int getMaxSum() {

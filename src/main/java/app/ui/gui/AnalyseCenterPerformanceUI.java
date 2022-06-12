@@ -1,10 +1,7 @@
 package app.ui.gui;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Date;
 import java.util.Calendar;
-import javax.xml.namespace.QName;
 import org.apache.commons.lang3.StringUtils;
 import app.controller.AnalyseCenterPerformanceController;
 import app.controller.App;
@@ -12,26 +9,17 @@ import app.domain.model.CenterPerformance;
 import app.session.EmployeeSession;
 import app.ui.gui.utils.Utils;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.JavaFXBuilderFactory;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -125,16 +113,17 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
     dialog.setHeight(SCENE_HEIGHT);
 
     FlowPane inputListContainer = generatePaneWithData("Input List", performance.stringifyDifferencesList());
-    FlowPane maxSubListContainer = generatePaneWithData("Max Sum", performance.stringifyDifferencesList());
-    FlowPane a = generatePaneWithData("Max Sum", performance.stringifyDifferencesList());
-    FlowPane b = generatePaneWithData("Max Sum", performance.stringifyDifferencesList());
+    FlowPane maxSubListContainer = generatePaneWithData("Max Sum Sublist", performance.stringifyMaxSumSublist());
+    FlowPane sumContainer = generatePaneWithData("Max Sum", "" + performance.getMaxSum());
+    FlowPane begginingInterval = generatePaneWithData("Beggining of Interval", performance.getStartingInterval().toString());
+    FlowPane endInterval = generatePaneWithData("End of Interval", performance.getEndingInterval().toString());
 
     VBox pane = new VBox(15);
 
     // Setting the space between the nodes of a VBox pane
     pane.setPadding(new Insets(40, 40, 40, 40));
     pane.setAlignment(Pos.CENTER);
-    pane.getChildren().addAll(inputListContainer, maxSubListContainer, a, b);
+    pane.getChildren().addAll(inputListContainer, maxSubListContainer, sumContainer, begginingInterval, endInterval);
 
     ScrollPane container = new ScrollPane(pane);
 
