@@ -21,7 +21,7 @@ public class ListEmployeeByRoleTest {
     roleStore.addEmployeeRole("TEST_ROLE", "Test description");
     roleStore.addEmployeeRole("TEST_ROLE2", "Test description 2");
 
-    Employee e = employeeStore.createEmployee("name", "+351212345678", "email@email.com", "address", "000000000ZZ4", "TEST_ROLE");
+    Employee e = employeeStore.createEmployee("name", "+351212345678", "email@email.com", "address", "00000000", "TEST_ROLE");
 
     employeeStore.saveEmployee(e);
   }

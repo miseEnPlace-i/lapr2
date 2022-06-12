@@ -37,7 +37,7 @@ public class ScheduleVaccineControllerTest {
   @Before
   public void setUp() throws ParseException {
     EmployeeStore employeeStore = company.getEmployeeStore();
-    Employee coordinator = employeeStore.createEmployee("name", "+351212345678", "email@email.com", "address", "000000000ZZ4", "COORDINATOR");
+    Employee coordinator = employeeStore.createEmployee("name", "+351212345678", "email@email.com", "address", "00000000", "COORDINATOR");
     employeeStore.saveEmployee(coordinator);
 
     vacStore = company.getVaccinationCenterStore();
@@ -46,7 +46,7 @@ public class ScheduleVaccineControllerTest {
     vacStore.saveVaccinationCenter(vaccinationCenter);
 
     snsUserStore = company.getSNSUserStore();
-    user = new SNSUser("000000000ZZ4", "123456789", "name", new Date(), Gender.MALE, "+351212345678", "email@email.com", "address");
+    user = new SNSUser("00000000", "123456789", "name", new Date(), Gender.MALE, "+351212345678", "email@email.com", "address");
     snsUserStore.saveSNSUser(user);
 
     calendar = CalendarUtils.parseDateTime(new Date(), "20:40");

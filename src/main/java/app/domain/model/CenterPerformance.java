@@ -63,7 +63,7 @@ public class CenterPerformance {
     }
 
     // last interval
-    Time beginningInterval = new Time(openingHours.convertToMinutes() + nOfIntervals * interval);
+    Time beginningInterval = new Time(openingHours.convertToMinutes() + (nOfIntervals - 1) * interval);
     // +1 because the last interval needs to be inclusive
     Time endInterval = new Time(beginningInterval.convertToMinutes() + interval + 1);
 
