@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Date;
 import java.util.Calendar;
+import javax.xml.namespace.QName;
 import org.apache.commons.lang3.StringUtils;
 import app.controller.AnalyseCenterPerformanceController;
 import app.controller.App;
@@ -73,6 +74,7 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
 
     CenterPerformance performance = ctrl.analyseCenterPerformance(day, interval);
 
+
     if (performance == null) {
       Utils.showError("No performance data found", "No performance data found for the selected date.");
       resetFields();
@@ -87,10 +89,31 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
     txtInterval.setText("");
   }
 
+  private FlowPane generatePaneWithData(String title, String data) {
+    Label lblInputList = new Label(title);
+    lblInputList.setMinHeight(24);
+    Label lblList = new Label(data);
+
+    ScrollPane container = new ScrollPane(lblList);
+    container.setHbarPolicy(ScrollBarPolicy.ALWAYS);
+    container.setVbarPolicy(ScrollBarPolicy.NEVER);
+    container.setPadding(new Insets(8, 8, 8, 8));
+    container.setPrefWidth(560);
+    container.setMaxWidth(Double.MAX_VALUE);
+
+    FlowPane inputListContainer = new FlowPane(lblInputList, container);
+    inputListContainer.setOrientation(Orientation.HORIZONTAL);
+    inputListContainer.setHgap(8);
+    inputListContainer.setVgap(8);
+    inputListContainer.setMaxWidth(Double.MAX_VALUE);
+    inputListContainer.setAlignment(Pos.CENTER);
+    inputListContainer.setPadding(new Insets(8, 8, 8, 8));
+
+    return inputListContainer;
+  }
+
   private void loadDialog(CenterPerformance performance) {
-    final double MINIMUM_WINDOW_WIDTH = 400.0;
-    final double MINIMUM_WINDOW_HEIGHT = 320.0;
-    final double SCENE_WIDTH = 560.0;
+    final double SCENE_WIDTH = 640.0;
     final double SCENE_HEIGHT = 400.0;
 
     final Stage dialog = new Stage();
@@ -98,35 +121,27 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
     dialog.initOwner(getParentUI().mainApp.getStage());
 
     dialog.setTitle("Analyse Center Results");
-    dialog.setMinWidth(MINIMUM_WINDOW_WIDTH);
-    dialog.setMinHeight(MINIMUM_WINDOW_HEIGHT);
+    dialog.setWidth(SCENE_WIDTH);
+    dialog.setHeight(SCENE_HEIGHT);
 
-    Label lblInputList = new Label("Input List");
-    lblInputList.setMinHeight(24);
-    Label lblList = new Label(performance.stringifyDifferencesList());
+    FlowPane inputListContainer = generatePaneWithData("Input List", performance.stringifyDifferencesList());
+    FlowPane maxSubListContainer = generatePaneWithData("Max Sum", performance.stringifyDifferencesList());
+    FlowPane a = generatePaneWithData("Max Sum", performance.stringifyDifferencesList());
+    FlowPane b = generatePaneWithData("Max Sum", performance.stringifyDifferencesList());
 
-    ScrollPane container = new ScrollPane(lblList);
-    container.setPrefWidth(SCENE_WIDTH);
-    container.setMaxWidth(Double.MAX_VALUE);
-    container.setHbarPolicy(ScrollBarPolicy.ALWAYS);
-    container.setVbarPolicy(ScrollBarPolicy.NEVER);
-    container.setMinHeight(24);
+    VBox pane = new VBox(15);
 
-    FlowPane inputListContainer = new FlowPane(lblInputList, container);
-    inputListContainer.setOrientation(Orientation.HORIZONTAL);
-    inputListContainer.setHgap(8);
-    inputListContainer.setPrefWidth(SCENE_WIDTH);
-    inputListContainer.setMaxWidth(Double.MAX_VALUE);
-    inputListContainer.setRowValignment(VPos.CENTER);
-
-    HBox pane = new HBox(15);
-
-    // Setting the space between the nodes of a HBox pane
+    // Setting the space between the nodes of a VBox pane
     pane.setPadding(new Insets(40, 40, 40, 40));
     pane.setAlignment(Pos.CENTER);
-    pane.getChildren().addAll(inputListContainer);
+    pane.getChildren().addAll(inputListContainer, maxSubListContainer, a, b);
 
-    Scene scene = new Scene(new Group(pane), SCENE_WIDTH, SCENE_HEIGHT);
+    ScrollPane container = new ScrollPane(pane);
+
+    container.setHbarPolicy(ScrollBarPolicy.NEVER);
+
+    Scene scene = new Scene(container, SCENE_WIDTH, SCENE_HEIGHT);
+    dialog.setResizable(false);
     dialog.setScene(scene);
     dialog.show();
   }
