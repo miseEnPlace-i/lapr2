@@ -1,5 +1,7 @@
 package app.service.MaxSum;
 
+import java.util.List;
+
 public interface IMaxSum {
-  int[] maxSum(int[] list);
+  List<Integer> maxSum(List<Integer> list);
 }
