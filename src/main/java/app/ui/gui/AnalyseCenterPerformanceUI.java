@@ -9,6 +9,7 @@ import app.controller.AnalyseCenterPerformanceController;
 import app.controller.App;
 import app.domain.model.CenterPerformance;
 import app.session.EmployeeSession;
+import app.ui.gui.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
@@ -18,8 +19,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -64,9 +63,20 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
 
     CenterPerformance performance = ctrl.analyseCenterPerformance(day, interval);
 
+    if (performance == null) {
+      Utils.showError("No performance data found", "No performance data found for the selected date.");
+      resetFields();
+      return;
+    }
+
     loadDialog();
 
     lblInputList.setText(performance.getDifferencesList().toString());
+  }
+
+  private void resetFields() {
+    dtpDate.setValue(null);
+    txtInterval.setText("");
   }
 
   private void loadDialog() {
