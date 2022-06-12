@@ -39,7 +39,6 @@ public class CenterEventList implements Iterable<CenterEvent> {
     for (CenterEvent event : this.events)
       if (event.isInDay(day)) eventsInDay.save(event);
 
-    System.out.println(eventsInDay);
     return eventsInDay;
   }
 

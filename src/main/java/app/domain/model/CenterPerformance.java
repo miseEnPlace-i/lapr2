@@ -106,8 +106,8 @@ public class CenterPerformance {
 
   @Override
   public String toString() {
-    return "CenterPerformance [events=\n" + events + ", differenceList=" + differenceList + ", maxSumSubList=" + maxSumSubList + ", interval=" + interval
-        + ", maxSum=" + maxSum + ", startingInterval=" + startingInterval + ", endingInterval=" + endingInterval + ", openingHours=" + openingHours
-        + ", closingHours=" + closingHours + "]";
+    return "CenterPerformance [differenceList=" + differenceList + ", maxSumSubList=" + maxSumSubList + ", interval=" + interval + ", maxSum=" + maxSum
+        + ", startingInterval=" + startingInterval + ", endingInterval=" + endingInterval + ", openingHours=" + openingHours + ", closingHours=" + closingHours
+        + "]";
   }
 }

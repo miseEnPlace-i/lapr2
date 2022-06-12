@@ -319,6 +319,7 @@ public abstract class VaccinationCenter {
 
     CenterPerformance centerPerformance = new CenterPerformance(events, interval, openingHours, closingHours);
 
+    System.out.println(centerPerformance);
     return centerPerformance;
   }
 

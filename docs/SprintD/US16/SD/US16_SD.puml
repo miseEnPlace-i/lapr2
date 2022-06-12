@@ -70,16 +70,15 @@ participant "MaxSumStrategy\n:IMaxSum" as MAXSST
 
 PERF --> MAXSS : create(differenceList)
 activate MAXSS
-MAXSS -> MAXSS : maxSumSublist=calculateMaxSumSublist()
 MAXSS -> MAXSS : MaxSumStrategy=getMaxSumStrategy()
 |||
 MAXSS -> MAXSST : sublist=maxSum(differenceList)
 activate MAXSST
 deactivate MAXSST
-MAXSS -> MAXSS : findIndexes()
+MAXSS -> MAXSS : findIndexes(differenceList)
 activate MAXSS
 deactivate MAXSS
-MAXSS -> MAXSS : calculateSum()
+MAXSS -> MAXSS : calculateSum(differenceList)
 activate MAXSS
 deactivate MAXSS
 
