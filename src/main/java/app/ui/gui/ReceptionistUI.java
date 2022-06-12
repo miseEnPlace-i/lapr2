@@ -1,13 +1,34 @@
 package app.ui.gui;
 
-import app.session.EmployeeSession;
+import app.ui.console.RegisterSNSUserArrivalUI;
+import app.ui.console.RegisterSNSUserUI;
+import app.ui.console.ScheduleVaccineReceptionistUI;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 
-public class ReceptionistUI extends RoleUI {
-  private EmployeeSession employeeSession;
-  // select employee ctrl
+public class ReceptionistUI extends EmployeeRoleUI {
+  @FXML
+  private Label lblCenter;
 
-  void init() {
-    
+  @Override
+  void init(ApplicationUI mainApp) {
+    this.setMainApp(mainApp);
+  }
+
+  @FXML
+  void handleRegisterSNSUser(ActionEvent event) {
+    new RegisterSNSUserUI().run();
+  }
+
+  @FXML
+  void handleScheduleVaccination(ActionEvent event) {
+    new ScheduleVaccineReceptionistUI().run();
+  }
+
+  @FXML
+  void handleRegisterArrival(ActionEvent event) {
+    (new RegisterSNSUserArrivalUI(employeeSession.getVaccinationCenter())).run();
   }
 
   @Override

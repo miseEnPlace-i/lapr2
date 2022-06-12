@@ -4,12 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-import app.controller.App;
 import app.domain.model.Appointment;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
-import app.domain.model.store.VaccineStore;
 import app.dto.UserNotificationDTO;
 import app.dto.VaccineTypeDTO;
 import app.exception.AppointmentNotFoundException;
@@ -30,7 +28,6 @@ import app.utils.Time;
 public class AppointmentScheduleList {
   private VaccinationCenter vaccinationCenter;
   private Map<Calendar, Appointment[][]> appointments;
-  private VaccineStore vaccineStore;
   private int slotsPerDay = 0;
   private int vaccinesPerSlot = 0;
 
@@ -58,28 +55,11 @@ public class AppointmentScheduleList {
   }
 
   /**
-   * Prints a list representing the schedule of appointments.
-   * 
-   * Used for developer purposes
-   */
-  private void listVaccinationSchedule(Appointment[][] list) {
-    for (int i = 0; i < list.length; i++) {
-      for (int j = 0; j < list[0].length; j++) {
-        System.out.print("[");
-        if (list[i][j] != null) System.out.print("x]");
-        else System.out.print(" ]");
-      }
-      System.out.println("");
-    }
-  }
-
-  /**
    * Creates a new appointment
    * 
    * @param snsUser the SNSUser
    * @param date the date
-   * @param center the vaccination center
-   * @param vaccineType the vaccine type
+   * @param vaccineTypeDto the vaccine type DTO
    * @param sms if the user wants to receive a SMS
    * @return
    */

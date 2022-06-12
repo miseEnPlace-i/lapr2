@@ -1,6 +1,7 @@
 package app.domain.model;
 
 import java.util.Date;
+import app.domain.model.list.AdministrationList;
 import app.domain.shared.Gender;
 import app.dto.SNSUserDTO;
 import app.service.CCFormatVerifier;
@@ -44,6 +45,8 @@ public class SNSUser {
 
   private HealthData userHealthData;
 
+  private AdministrationList administrationList;
+
   /**
    * Constructor for SNSUser.
    * 
@@ -73,6 +76,7 @@ public class SNSUser {
     this.address = address;
 
     this.userHealthData = new HealthData(this);
+    this.administrationList = new AdministrationList();
   }
 
   public SNSUser(SNSUserDTO snsUserDTO) {
@@ -94,6 +98,7 @@ public class SNSUser {
     this.address = snsUserDTO.getAddress();
 
     this.userHealthData = new HealthData(this);
+    this.administrationList = new AdministrationList();
   }
 
   // Getters
@@ -128,6 +133,14 @@ public class SNSUser {
   public String getAddress() {
     return address;
   }
+
+  public AdministrationList getAdministrationList() {
+    return administrationList;
+  }
+
+  // public Vaccine getLastTakenVaccineFromType(VaccineType vaccineType) {
+  //   return this.userHealthData.getLastVaccineTakenWithType(vaccineType);
+  // }
 
   public int getAge() {
     return TimeUtils.calculateAge(birthDay);

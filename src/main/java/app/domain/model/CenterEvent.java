@@ -30,6 +30,6 @@ public class CenterEvent {
   @Override
   public String toString() {
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-    return "CenterEvent [date=" + sdf.format(date) + ", eventType=" + eventType.toString() + ", snsUser=" + snsUser.getName() + "]";
+    return "CenterEvent [date=" + sdf.format(date.getTime()) + ", eventType=" + eventType.toString() + ", snsUser=" + snsUser.getName() + "]";
   }
 }

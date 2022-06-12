@@ -38,7 +38,7 @@ public class RegisterVaccinationCenterControllerTest {
 
     EmployeeStore employeeStore = company.getEmployeeStore();
 
-    coordinator = employeeStore.createEmployee("Joana", "+351916478865", "email@email.com", "address", "000000000ZZ4", "COORDINATOR");
+    coordinator = employeeStore.createEmployee("Joana", "+351916478865", "email@email.com", "address", "00000000", "COORDINATOR");
     employeeStore.saveEmployee(coordinator);
   }
 
@@ -166,7 +166,7 @@ public class RegisterVaccinationCenterControllerTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidPhoneThrowsException() {
-    controller.createCommunityMass("name", "address", "example@gmail.com", "913456789", "+351913456788", "https://www.teste.com", "11:00", "12:00", 5, 5,
+    controller.createCommunityMass("name", "address", "example@gmail.com", "9134567891536363", "+351913456788", "https://www.teste.com", "11:00", "12:00", 5, 5,
         coordinator);
   }
 
@@ -177,7 +177,7 @@ public class RegisterVaccinationCenterControllerTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidPhoneThrowsException2() {
-    controller.createHealthCare("name", "address", "example@gmail.com", "913456789", "+351913456788", "https://www.teste.com", "11:00", "12:00", 5, 5,
+    controller.createHealthCare("name", "address", "example@gmail.com", "913456789gsagas", "+351913456788", "https://www.teste.com", "11:00", "12:00", 5, 5,
         coordinator, "test", "test");
   }
 
@@ -188,7 +188,7 @@ public class RegisterVaccinationCenterControllerTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidFaxThrowsException() {
-    controller.createCommunityMass("name", "address", "example@gmail.com", "+351913456789", "913456788", "https://www.teste.com", "11:00", "12:00", 5, 5,
+    controller.createCommunityMass("name", "address", "example@gmail.com", "+351913456789", "913456788362632", "https://www.teste.com", "11:00", "12:00", 5, 5,
         coordinator);
   }
 
@@ -199,7 +199,7 @@ public class RegisterVaccinationCenterControllerTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void ensureInvalidFaxThrowsException2() {
-    controller.createHealthCare("name", "address", "example@gmail.com", "+351913456789", "913456788", "https://www.teste.com", "11:00", "12:00", 5, 5,
+    controller.createHealthCare("name", "address", "example@gmail.com", "+351913456789", "913456788gsagasgas", "https://www.teste.com", "11:00", "12:00", 5, 5,
         coordinator, "test", "test");
   }
 

@@ -149,9 +149,9 @@ public class SNSUserTest {
   @Test
   public void ensureIsPossibleToCreateSNSUser() {
     Date c = new Date();
-    SNSUser instance = new SNSUser("123456789ZZ1", "123456789", "name", c, Gender.MALE, "+351211111111", "email@email.com", "address");
+    SNSUser instance = new SNSUser("12345678", "123456789", "name", c, Gender.MALE, "+351211111111", "email@email.com", "address");
 
-    assertEquals(instance.getCitizenCard(), "123456789ZZ1");
+    assertEquals(instance.getCitizenCard(), "12345678");
     assertEquals(instance.getSnsNumber(), "123456789");
     assertNotNull(instance);
   }
@@ -163,11 +163,11 @@ public class SNSUserTest {
   public void ensureGetsWorkAsExpected() {
     Date c = new Date();
     c = DateUtils.addYears(c, -23);
-    SNSUser instance = new SNSUser("123456789ZZ1", "123456789", "name", c, Gender.MALE, "+351211111111", "email@email.com", "address");
+    SNSUser instance = new SNSUser("12345678", "123456789", "name", c, Gender.MALE, "+351211111111", "email@email.com", "address");
 
     assert instance.getAddress().equals("address");
     assert instance.getBirthDay().equals(c);
-    assert instance.getCitizenCard().equals("123456789ZZ1");
+    assert instance.getCitizenCard().equals("12345678");
     assert instance.getEmail().equals("email@email.com");
     assert instance.getGender() == Gender.MALE;
     assert instance.getAge() == 23;
@@ -184,9 +184,9 @@ public class SNSUserTest {
     Date c = new Date();
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-    SNSUser instance = new SNSUser("123456789ZZ1", "123456789", "name", c, Gender.FEMALE, "+351211111111", "email@email.com", "address");
+    SNSUser instance = new SNSUser("12345678", "123456789", "name", c, Gender.FEMALE, "+351211111111", "email@email.com", "address");
 
-    String expected = "SNS User name: name\nCitizen card number: 123456789ZZ1\nSNS number: 123456789\nBirthday: " + sdf.format(new Date())
+    String expected = "SNS User name: name\nCitizen card number: 12345678\nSNS number: 123456789\nBirthday: " + sdf.format(new Date())
         + "\nGender: Female\nPhone number: +351211111111\nEmail: email@email.com\nAddress: address\n";
 
     assertEquals(instance.toString(), expected);
@@ -198,13 +198,13 @@ public class SNSUserTest {
   @Test
   public void ensureEqualsWorksAsExpected() {
     Date c = new Date();
-    SNSUser instance = new SNSUser("123456789ZZ1", "123456789", "name", c, Gender.FEMALE, "+351211111111", "email@email.com", "address");
-    SNSUser instance2 = new SNSUser("135510490ZX8", "323456789", "name", c, Gender.FEMALE, "+351211111112", "email2@email.com", "address");
+    SNSUser instance = new SNSUser("12345678", "123456789", "name", c, Gender.FEMALE, "+351211111111", "email@email.com", "address");
+    SNSUser instance2 = new SNSUser("13551049", "323456789", "name", c, Gender.FEMALE, "+351211111112", "email2@email.com", "address");
     Object randomObject = new Object();
-    SNSUser emailEquals = new SNSUser("346715253ZY4", "523456789", "name", c, Gender.FEMALE, "+351211111117", "email@email.com", "address");
-    SNSUser phoneEquals = new SNSUser("346715253ZY4", "523456789", "name", c, Gender.FEMALE, "+351211111111", "email3@email.com", "address");
-    SNSUser ccEquals = new SNSUser("123456789ZZ1", "523456789", "name", c, Gender.FEMALE, "+351211111115", "email3@email.com", "address");
-    SNSUser snsNumberEquals = new SNSUser("346715253ZY4", "123456789", "name", c, Gender.FEMALE, "+351211111115", "email3@email.com", "address");
+    SNSUser emailEquals = new SNSUser("34671525", "523456789", "name", c, Gender.FEMALE, "+351211111117", "email@email.com", "address");
+    SNSUser phoneEquals = new SNSUser("34671525", "523456789", "name", c, Gender.FEMALE, "+351211111111", "email3@email.com", "address");
+    SNSUser ccEquals = new SNSUser("12345678", "523456789", "name", c, Gender.FEMALE, "+351211111115", "email3@email.com", "address");
+    SNSUser snsNumberEquals = new SNSUser("34671525", "123456789", "name", c, Gender.FEMALE, "+351211111115", "email3@email.com", "address");
 
     assert instance.equals(instance);
     assert !instance.equals(instance2);

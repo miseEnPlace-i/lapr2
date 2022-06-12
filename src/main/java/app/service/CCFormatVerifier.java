@@ -12,24 +12,28 @@ public class CCFormatVerifier {
   }
 
   public boolean validate(String cc) {
-    int sum = 0;
-    boolean secondDigit = false;
+    // unfortunate moment :(
+    if (cc.length() != 8) throw new IllegalArgumentException("Citizen Card length not valid.");
+    return true;
+  
+    // int sum = 0;
+    // boolean secondDigit = false;
 
-    if (cc.length() != 12) throw new IllegalArgumentException("Citizen Card length not valid.");
+    // if (cc.length() != 12) throw new IllegalArgumentException("Citizen Card length not valid.");
 
-    for (int i = cc.length() - 1; i >= 0; --i) {
-      int value = getNumberFromChar(cc.charAt(i));
+    // for (int i = cc.length() - 1; i >= 0; --i) {
+    //   int value = getNumberFromChar(cc.charAt(i));
 
-      if (secondDigit) {
-        value *= 2;
-        if (value > 9) value -= 9;
-      }
+    //   if (secondDigit) {
+    //     value *= 2;
+    //     if (value > 9) value -= 9;
+    //   }
 
-      sum += value;
-      secondDigit = !secondDigit;
-    }
+    //   sum += value;
+    //   secondDigit = !secondDigit;
+    // }
 
-    return (sum % 10) == 0;
+    // return (sum % 10) == 0;
   }
 
   /**

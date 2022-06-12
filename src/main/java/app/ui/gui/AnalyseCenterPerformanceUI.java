@@ -1,5 +1,7 @@
 package app.ui.gui;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Date;
 import java.util.Calendar;
 import org.apache.commons.lang3.StringUtils;
@@ -8,9 +10,18 @@ import app.controller.App;
 import app.domain.model.CenterPerformance;
 import app.session.EmployeeSession;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.JavaFXBuilderFactory;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
   private AnalyseCenterPerformanceController ctrl;
@@ -25,7 +36,13 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
   @FXML
   private DatePicker dtpDate;
 
-  void init() {}
+  @FXML
+  private Label lblInputList;
+
+  @Override
+  void init(CoordinatorUI parentUI) {
+    setParentUI(parentUI);
+  }
 
   public void setEmployeeSession(EmployeeSession session) {
     this.employeeSession = session;
@@ -47,6 +64,46 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
 
     CenterPerformance performance = ctrl.analyseCenterPerformance(day, interval);
 
-    System.out.println(performance);
+    loadDialog();
+
+    lblInputList.setText(performance.getDifferencesList().toString());
+  }
+
+  private void loadDialog() {
+    String fxml = "/fxml/CenterPerformanceResults.fxml";
+    final double MINIMUM_WINDOW_WIDTH = 320.0;
+    final double MINIMUM_WINDOW_HEIGHT = 240.0;
+    final double SCENE_WIDTH = 400.0;
+    final double SCENE_HEIGHT = 320.0;
+
+    final Stage dialog = new Stage();
+    dialog.initModality(Modality.APPLICATION_MODAL);
+    dialog.initOwner(getParentUI().mainApp.getStage());
+
+    dialog.setTitle("Analyse Center Results");
+    dialog.setMinWidth(MINIMUM_WINDOW_WIDTH);
+    dialog.setMinHeight(MINIMUM_WINDOW_HEIGHT);
+
+    FXMLLoader loader = new FXMLLoader();
+    InputStream in = ApplicationUI.class.getResourceAsStream(fxml);
+    loader.setBuilderFactory(new JavaFXBuilderFactory());
+    loader.setLocation(ApplicationUI.class.getResource(fxml));
+    Pane page;
+
+    try {
+      try {
+        page = (Pane) loader.load(in);
+      }
+      finally {
+        in.close();
+      }
+    } catch (IOException e) {
+      throw new RuntimeException("Unable to load FXML: " + fxml);
+    }
+
+    Scene scene = new Scene(page, SCENE_WIDTH, SCENE_HEIGHT);
+
+    dialog.setScene(scene);
+    dialog.show();
   }
 }

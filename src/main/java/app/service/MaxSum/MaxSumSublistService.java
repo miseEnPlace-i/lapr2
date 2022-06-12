@@ -1,4 +1,4 @@
-package app.service;
+package app.service.MaxSum;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ public class MaxSumSublistService {
   private List<Integer> maxSumSublist = null;
   private int startIndex = 0;
   private int endIndex = 0;
-  private int maxSum = Integer.MIN_VALUE;
+  private int sum = Integer.MIN_VALUE;
 
   public MaxSumSublistService(List<Integer> list) {
     if (list.size() == 0) throw new IllegalArgumentException("The list cannot be empty");
@@ -27,8 +27,8 @@ public class MaxSumSublistService {
       for (int right = left; right < list.size(); right++) {
         currentSum += list.get(right);
 
-        if (currentSum > maxSum) {
-          maxSum = currentSum;
+        if (currentSum > sum) {
+          sum = currentSum;
           startIndex = left;
           endIndex = right;
         }
@@ -47,8 +47,8 @@ public class MaxSumSublistService {
     return endIndex;
   }
 
-  public int getMaxSum() {
-    return maxSum;
+  public int getSum() {
+    return sum;
   }
 
   public List<Integer> getMaxSumSubList() {

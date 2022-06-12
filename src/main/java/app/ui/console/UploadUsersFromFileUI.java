@@ -1,8 +1,5 @@
 package app.ui.console;
 
-import java.io.FileNotFoundException;
-import java.lang.reflect.InvocationTargetException;
-import java.text.ParseException;
 import java.util.List;
 import app.controller.App;
 import app.controller.UploadUsersFromFileController;
@@ -31,13 +28,13 @@ public class UploadUsersFromFileUI implements Runnable {
 
     String filePath = insertData(); // asks to insert file path and instantiates CSVReader
 
-    String message = "Are u sure you want to upload users from file: ";
+    String message = "Are you sure you want to upload users from file: ";
 
     // Get just the file name
     String fileName = filePath.substring(filePath.lastIndexOf("\\") + 1);
     fileName = fileName.substring(fileName.lastIndexOf("/") + 1);;
 
-    message += (fileName + " (s/n)");
+    message += (fileName + " (y/n)");
 
     // asks to confirm the action
     if (!Utils.confirm(message)) return;
@@ -74,7 +71,7 @@ public class UploadUsersFromFileUI implements Runnable {
 
     }
     System.out.println("");
-    System.out.println("0 - Cancel");
+
   }
 
   // asks to insert file path and instantiates CSVReader

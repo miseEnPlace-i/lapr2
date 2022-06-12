@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.list.VaccineAdministrationList;
 import app.domain.model.store.SNSUserStore;
-import app.dto.AdverseReactionDTO;
-import app.mapper.AdverseReactionMapper;
 
 public class HealthData {
   SNSUser snsUser;
