@@ -88,6 +88,20 @@ public class CenterPerformance {
     return differenceList;
   }
 
+  public String stringifyDifferencesList() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("[");
+    sb.append(differenceList.get(0));
+
+    for (int i = 1; i < differenceList.size(); i++) {
+      sb.append(", ");
+      sb.append(differenceList.get(i));
+    }
+
+    sb.append("]");
+    return sb.toString();
+  }
+
   public List<Integer> getMaxSumSubList() {
     return maxSumSubList;
   }

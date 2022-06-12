@@ -13,12 +13,25 @@ import app.ui.gui.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
+import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
+import javafx.geometry.VPos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -34,9 +47,6 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
 
   @FXML
   private DatePicker dtpDate;
-
-  @FXML
-  private Label lblInputList;
 
   @Override
   void init(CoordinatorUI parentUI) {
@@ -69,9 +79,7 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
       return;
     }
 
-    loadDialog();
-
-    lblInputList.setText(performance.getDifferencesList().toString());
+    loadDialog(performance);
   }
 
   private void resetFields() {
@@ -79,12 +87,11 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
     txtInterval.setText("");
   }
 
-  private void loadDialog() {
-    String fxml = "/fxml/CenterPerformanceResults.fxml";
-    final double MINIMUM_WINDOW_WIDTH = 320.0;
-    final double MINIMUM_WINDOW_HEIGHT = 240.0;
-    final double SCENE_WIDTH = 400.0;
-    final double SCENE_HEIGHT = 320.0;
+  private void loadDialog(CenterPerformance performance) {
+    final double MINIMUM_WINDOW_WIDTH = 400.0;
+    final double MINIMUM_WINDOW_HEIGHT = 320.0;
+    final double SCENE_WIDTH = 560.0;
+    final double SCENE_HEIGHT = 400.0;
 
     final Stage dialog = new Stage();
     dialog.initModality(Modality.APPLICATION_MODAL);
@@ -94,25 +101,32 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
     dialog.setMinWidth(MINIMUM_WINDOW_WIDTH);
     dialog.setMinHeight(MINIMUM_WINDOW_HEIGHT);
 
-    FXMLLoader loader = new FXMLLoader();
-    InputStream in = ApplicationUI.class.getResourceAsStream(fxml);
-    loader.setBuilderFactory(new JavaFXBuilderFactory());
-    loader.setLocation(ApplicationUI.class.getResource(fxml));
-    Pane page;
+    Label lblInputList = new Label("Input List");
+    lblInputList.setMinHeight(24);
+    Label lblList = new Label(performance.stringifyDifferencesList());
 
-    try {
-      try {
-        page = (Pane) loader.load(in);
-      }
-      finally {
-        in.close();
-      }
-    } catch (IOException e) {
-      throw new RuntimeException("Unable to load FXML: " + fxml);
-    }
+    ScrollPane container = new ScrollPane(lblList);
+    container.setPrefWidth(SCENE_WIDTH);
+    container.setMaxWidth(Double.MAX_VALUE);
+    container.setHbarPolicy(ScrollBarPolicy.ALWAYS);
+    container.setVbarPolicy(ScrollBarPolicy.NEVER);
+    container.setMinHeight(24);
 
-    Scene scene = new Scene(page, SCENE_WIDTH, SCENE_HEIGHT);
+    FlowPane inputListContainer = new FlowPane(lblInputList, container);
+    inputListContainer.setOrientation(Orientation.HORIZONTAL);
+    inputListContainer.setHgap(8);
+    inputListContainer.setPrefWidth(SCENE_WIDTH);
+    inputListContainer.setMaxWidth(Double.MAX_VALUE);
+    inputListContainer.setRowValignment(VPos.CENTER);
 
+    HBox pane = new HBox(15);
+
+    // Setting the space between the nodes of a HBox pane
+    pane.setPadding(new Insets(40, 40, 40, 40));
+    pane.setAlignment(Pos.CENTER);
+    pane.getChildren().addAll(inputListContainer);
+
+    Scene scene = new Scene(new Group(pane), SCENE_WIDTH, SCENE_HEIGHT);
     dialog.setScene(scene);
     dialog.show();
   }
