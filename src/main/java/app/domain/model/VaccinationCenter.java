@@ -215,12 +215,10 @@ public abstract class VaccinationCenter {
    * @throws IllegalArgumentException if the phone number is null, empty or not valid.
    */
   private void setPhoneNum(String phoneNum) {
-    if (phoneNum == null || phoneNum.isEmpty()) {
-      throw new IllegalArgumentException("Phone number cannot be null or empty.");
-    }
-    if (!FormatVerifier.validatePhoneNumber(phoneNum)) {
-      throw new IllegalArgumentException("Phone number is not valid.");
-    }
+    if (phoneNum == null || phoneNum.isEmpty()) throw new IllegalArgumentException("Phone number cannot be null or empty.");
+
+    if (!FormatVerifier.validatePhoneNumber(phoneNum)) throw new IllegalArgumentException("Phone number is not valid.");
+
     this.phoneNum = phoneNum;
   }
 
@@ -232,12 +230,10 @@ public abstract class VaccinationCenter {
    * @throws IllegalArgumentException if the fax number is null, empty or not valid.
    */
   private void setFaxNum(String faxNum) {
-    if (faxNum == null || faxNum.isEmpty()) {
-      throw new IllegalArgumentException("Fax number cannot be null or empty.");
-    }
-    if (!FormatVerifier.validateFaxNumber(faxNum)) {
-      throw new IllegalArgumentException("Fax number is not valid.");
-    }
+    if (faxNum == null || faxNum.isEmpty()) throw new IllegalArgumentException("Fax number cannot be null or empty.");
+
+    if (!FormatVerifier.validateFaxNumber(faxNum)) throw new IllegalArgumentException("Fax number is not valid.");
+
     this.faxNum = faxNum;
   }
 
@@ -249,12 +245,10 @@ public abstract class VaccinationCenter {
    * @throws IllegalArgumentException if the website address is null, empty or not valid.
    */
   private void setWebAddress(String webAddress) {
-    if (webAddress == null || webAddress.isEmpty()) {
-      throw new IllegalArgumentException("Website address cannot be null or empty.");
-    }
-    if (!FormatVerifier.validateURL(webAddress)) {
-      throw new IllegalArgumentException("Website address is not valid.");
-    }
+    if (webAddress == null || webAddress.isEmpty()) throw new IllegalArgumentException("Website address cannot be null or empty.");
+
+    if (!FormatVerifier.validateURL(webAddress)) throw new IllegalArgumentException("Website address is not valid.");
+
     this.webAddress = webAddress;
   }
 

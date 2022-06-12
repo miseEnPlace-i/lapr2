@@ -69,17 +69,17 @@ public class SNSUserStoreTest {
 
 
 
-  //Check that it is possible to upload a list with a repeated user in the middle
-  //There are 2 valid users, so it should read 2 users and not stop when failing to register
+  // Check that it is possible to upload a list with a repeated user in the middle
+  // There are 2 valid users, so it should read 2 users and not stop when failing to register
   @Test
   public void ensureReadAndUploadFromListWhitRepeatedUser() throws ParseException {
     int size = store.size();
 
     List<String[]> list = new ArrayList<>();
-    String[] user1Data = {"joao","Male","14/12/2003","rua das flores","+351919993999","joao@gmail.com","123263189","15542404"};
+    String[] user1Data = {"joao", "Male", "14/12/2003", "rua das flores", "+351919993999", "joao@gmail.com", "123263189", "15542404"};
     list.add(user1Data);
     list.add(user1Data);
-    String[] user2Data = {"paulo","Male","14/12/2003","rua das flores","+351919999999","paulito@gmail.com","123789456","09682437"};
+    String[] user2Data = {"paulo", "Male", "14/12/2003", "rua das flores", "+351919999999", "paulito@gmail.com", "123789456", "09682437"};
     list.add(user2Data);
 
     store.registerListOfUsers(list);
@@ -88,18 +88,18 @@ public class SNSUserStoreTest {
 
   }
 
-  //Check that it is possible to upload a list with a invalid user in the middle
-  //There are 2 valid users, so it should read 2 users and not stop when failing to register
+  // Check that it is possible to upload a list with a invalid user in the middle
+  // There are 2 valid users, so it should read 2 users and not stop when failing to register
   @Test
   public void ensureReadAndUploadFromListWhitInvalidUser() throws ParseException {
     int size = store.size();
 
     List<String[]> list = new ArrayList<>();
-    String[] user1Data = {"joao","Male","14/12/2003","rua das flores","+351919993999","joao@gmail.com","123263189","15542404"};
+    String[] user1Data = {"joao", "Male", "14/12/2003", "rua das flores", "+351919993999", "joao@gmail.com", "123263189", "15542404"};
     list.add(user1Data);
-    String[] user2Data = {"","","","","","","",""};
+    String[] user2Data = {"", "", "", "", "", "", "", ""};
     list.add(user2Data);
-    String[] user3Data = {"paulo","Male","14/12/2003","rua das flores","+351919999999","paulito@gmail.com","123789456","09682437"};
+    String[] user3Data = {"paulo", "Male", "14/12/2003", "rua das flores", "+351919999999", "paulito@gmail.com", "123789456", "09682437"};
     list.add(user3Data);
 
     store.registerListOfUsers(list);
@@ -109,15 +109,15 @@ public class SNSUserStoreTest {
   }
 
 
-  //Check that it is possible to upload a list with only valid user in the middle
+  // Check that it is possible to upload a list with only valid user in the middle
   @Test
   public void ensureReadAndUploadFromListWhitValidUser() throws ParseException {
     int size = store.size();
 
     List<String[]> list = new ArrayList<>();
-    String[] user1Data = {"joao","Male","14/12/2003","rua das flores","+351919993999","joao@gmail.com","123263189","15542404"};
+    String[] user1Data = {"joao", "Male", "14/12/2003", "rua das flores", "+351919993999", "joao@gmail.com", "123263189", "15542404"};
     list.add(user1Data);
-    String[] user2Data = {"paulo","Male","14/12/2003","rua das flores","+351919999999","paulito@gmail.com","123789456","09682437"};
+    String[] user2Data = {"paulo", "Male", "14/12/2003", "rua das flores", "+351919999999", "paulito@gmail.com", "123789456", "09682437"};
     list.add(user2Data);
 
     store.registerListOfUsers(list);

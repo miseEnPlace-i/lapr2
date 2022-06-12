@@ -43,7 +43,7 @@ public class RegisterEmployeeControllerTest {
     String empString = getEmployeeTestString();
     ctrl.create("name", "address", "+351913456789", "example@gmail.com", "00000000", "COORDINATOR");
     ctrl.save();
-    assertEquals(ctrl.stringifyData(), empString);
+    assertEquals(empString, ctrl.stringifyData());
   }
 
   /**

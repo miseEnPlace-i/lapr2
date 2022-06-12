@@ -14,35 +14,18 @@ public class FormatVerifierTest {
   }
 
   @Test
-  public void ensureCCFormatWithMissingLastDigit() {
-    assertFalse(FormatVerifier.validateCitizenCard("123456789ZZ"));
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void ensureCCFormatWithInvalidLastDigit() {
-    CCFormatVerifier ccFormatVerifier = new CCFormatVerifier();
-
-    ccFormatVerifier.validate("000000000~'1");
+  public void ensureCCFormatWithLetter() {
+    assertFalse(FormatVerifier.validateCitizenCard("12345678Z"));
   }
 
   @Test
-  public void ensureCCFormatWithMissingLetter() {
-    assertFalse(FormatVerifier.validateCitizenCard("123456789Z1"));
+  public void ensureCCFormatWithLessDigits() {
+    assertFalse(FormatVerifier.validateCitizenCard("0000000"));
   }
 
   @Test
   public void ensureCCFormatWithMoreDigits() {
-    assertFalse(FormatVerifier.validateCitizenCard("123456789Z111"));
-  }
-
-  @Test
-  public void ensureCCFormatViolatingDigitRules() {
-    assertFalse(FormatVerifier.validateCitizenCard("122222222Z11"));
-  }
-
-  @Test
-  public void ensureCCFormatViolatingLetterRules() {
-    assertFalse(FormatVerifier.validateCitizenCard("000000000ZZ1"));
+    assertFalse(FormatVerifier.validateCitizenCard("00000000000"));
   }
 
   @Test
@@ -75,12 +58,6 @@ public class FormatVerifierTest {
     assertTrue(FormatVerifier.validatePhoneNumber("+44923456789"));
   }
 
-  // Invalid test following new client's clarifications
-  // @Test
-  // public void ensurePhoneNumberWithoutExtension() {
-  //   assertFalse(FormatVerifier.validatePhoneNumber("123456789"));
-  // }
-
   @Test
   public void ensurePhoneNumberWithoutPlusInExtension() {
     assertFalse(FormatVerifier.validatePhoneNumber("351123456789"));
@@ -105,12 +82,6 @@ public class FormatVerifierTest {
   public void ensureFaxNumberWithoutValidFirstDigit() {
     assertFalse(FormatVerifier.validateFaxNumber("+351723456789"));
   }
-
-  // Invalid test following new client's clarifications
-  // @Test
-  // public void ensureFaxNumberWithoutExtension() {
-  //   assertFalse(FormatVerifier.validateFaxNumber("723456789"));
-  // }
 
   @Test
   public void ensureFaxNumberWithoutPlusInExtension() {

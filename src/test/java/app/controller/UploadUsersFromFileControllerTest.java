@@ -70,7 +70,7 @@ public class UploadUsersFromFileControllerTest {
 
     ctrl.readAndUpload();
 
-    assertEquals(store.size() - size, 2);
+    assertEquals(2, store.size() - size);
   }
 
 

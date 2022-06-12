@@ -20,7 +20,11 @@ public class RegisterSNSUserTest {
 
   @Test
   public void ensureSNSUserIsCreatedSuccessfully() throws ParseException {
+<<<<<<< HEAD
     String cc = "32517335";
+=======
+    String cc = "00000000";
+>>>>>>> ca5c7c854b535f153cc4872e973b6df0d5bb5b25
     String snsNumber = "323456789";
     String name = "test";
     Date birthDay = sdf.parse("01/01/2000");
