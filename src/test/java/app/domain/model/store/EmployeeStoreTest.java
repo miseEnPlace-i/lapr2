@@ -23,7 +23,7 @@ public class EmployeeStoreTest {
     store = company.getEmployeeStore();
     authFacade = company.getAuthFacade();
 
-    employee = new Employee("00000001", "Joana Maria", "+35112345678", "email@email.com", "Av. da Liberdade", "12345678", "NURSE");
+    employee = new Employee("00000001", "Joana Maria", "+351123456789", "email@email.com", "Av. da Liberdade", "12345678", "NURSE");
   }
 
   /**

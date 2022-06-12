@@ -58,6 +58,12 @@ public class FormatVerifierTest {
     assertTrue(FormatVerifier.validatePhoneNumber("+44923456789"));
   }
 
+  // Invalid test following new client's clarifications
+  // @Test
+  // public void ensurePhoneNumberWithoutExtension() {
+  // assertFalse(FormatVerifier.validatePhoneNumber("123456789"));
+  // }
+
   @Test
   public void ensurePhoneNumberWithoutPlusInExtension() {
     assertFalse(FormatVerifier.validatePhoneNumber("351123456789"));
@@ -82,6 +88,12 @@ public class FormatVerifierTest {
   public void ensureFaxNumberWithoutValidFirstDigit() {
     assertFalse(FormatVerifier.validateFaxNumber("+351723456789"));
   }
+
+  // Invalid test following new client's clarifications
+  // @Test
+  // public void ensureFaxNumberWithoutExtension() {
+  // assertFalse(FormatVerifier.validateFaxNumber("723456789"));
+  // }
 
   @Test
   public void ensureFaxNumberWithoutPlusInExtension() {

@@ -28,7 +28,7 @@ public class UploadUsersFromFileUI implements Runnable {
 
     String filePath = insertData(); // asks to insert file path and instantiates CSVReader
 
-    String message = "Are u sure you want to upload users from file: ";
+    String message = "Are you sure you want to upload users from file: ";
 
     // Get just the file name
     String fileName = filePath.substring(filePath.lastIndexOf("\\") + 1);
@@ -71,7 +71,7 @@ public class UploadUsersFromFileUI implements Runnable {
 
     }
     System.out.println("");
-    System.out.println("0 - Cancel");
+
   }
 
   // asks to insert file path and instantiates CSVReader

@@ -13,8 +13,8 @@ public class CCFormatVerifier {
 
   public boolean validate(String cc) {
     // unfortunate moment :(
-    return cc.length() == 8;
-
+    if (cc.length() != 8) throw new IllegalArgumentException("Citizen Card length not valid.");
+    return true;
   
     // int sum = 0;
     // boolean secondDigit = false;
