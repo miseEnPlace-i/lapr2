@@ -1,7 +1,7 @@
 package app.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Map;
 import app.domain.model.Company;
 import app.domain.model.CsvExporter;
@@ -78,7 +78,18 @@ public class ExportCenterStatisticsController {
      * 
      * @param dataMap the hashMap will all information
      */
-    public void saveData(Map dataMap) {
-        csvExporter.writeToFile(dataMap);
+    public boolean saveData(Map dataMap) {
+        return csvExporter.writeToFile(dataMap);
+    }
+
+    public String dataToString(Map<Calendar, Integer> data) {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        StringBuilder sb = new StringBuilder();
+        sb.append("Date;NumberOfFullyVaccinatedUsersPerDay\n");
+        for (Map.Entry<Calendar, Integer> entry : data.entrySet()) {
+            sb.append(format.format(entry.getKey().getTime()) + ";" + entry.getValue());
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 }
