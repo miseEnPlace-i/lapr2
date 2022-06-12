@@ -4,6 +4,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Map;
 
 public class CsvExporter {
@@ -15,7 +17,8 @@ public class CsvExporter {
 
   private BufferedWriter bf;
 
-  public void writeToFile(Map<Object, Object> content) {
+  public boolean writeToFile(Map<Calendar, Integer> content) {
+    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
     bf = null;
     try {
       File file = new File(this.filePath + "Data.csv");
@@ -25,16 +28,17 @@ public class CsvExporter {
 
       bf.write("Date;NumberOfFullyVaccinatedUsersPerDay");
       bf.newLine();
-      for (Map.Entry<Object, Object> entry : content.entrySet()) {
+      for (Map.Entry<Calendar, Integer> entry : content.entrySet()) {
 
-        bf.write(entry.getKey() + ";" + entry.getValue());
+        bf.write(format.format(entry.getKey().getTime()) + ";" + entry.getValue());
         bf.newLine();
       }
       bf.flush();
-
+      return true;
     } catch (IOException e) {
       System.err.println(e);
       e.printStackTrace();
+      return false;
 
     }
     finally {

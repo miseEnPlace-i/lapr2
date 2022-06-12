@@ -1,32 +1,48 @@
 package app.ui.gui;
 
 import java.io.File;
+import java.security.DrbgParameters.Reseed;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import app.controller.App;
 import app.controller.ExportCenterStatisticsController;
 import app.controller.FindCoordinatorVaccinationCenterController;
+import app.domain.model.CsvExporter;
 import app.exception.NotAuthorizedException;
 import app.service.FullyVaccinatedData;
 import app.session.EmployeeSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
+import javafx.geometry.VPos;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.scene.Group;
 
 /**
  * ExportCenterStatisticsUI
@@ -37,7 +53,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
   private ExportCenterStatisticsController ctrl;
   private EmployeeSession employeeSession;
   private FindCoordinatorVaccinationCenterController ctrlCenter;
-  private Map<Calendar, Integer> dataMap;
+  private Map<Calendar, Integer> dataMap = new HashMap<>();
   private FullyVaccinatedData fullyVaccinatedData;
 
   @FXML
@@ -63,6 +79,12 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
 
   @FXML
   private Button selectDestination;
+
+  @FXML
+  private ListView<?> statsViewLV;
+
+  @FXML
+  private Button continueBtn;
 
   @Override
   void init(CoordinatorUI parentUI) {
@@ -103,25 +125,101 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
    * Button to export the statistics
    * 
    * @param event
+   * @throws Exception
    */
   @FXML
-  void export(ActionEvent event) {
+  void export(ActionEvent event) throws Exception {
     try {
       displayExportInformation();
       if (validateDates() && validateFilePath()) {
         fullyVaccinatedData = ctrl.createFullyVaccinatedData(fileDestination.getText(), getStartDate(), getEndDate());
-        dataMap = ctrl.generateFullyVaccinatedUsersInterval(fullyVaccinatedData);
+        // dataMap = ctrl.generateFullyVaccinatedUsersInterval(fullyVaccinatedData);
+
+        // FOR TESTING
+        // dataMap.put(getStartDate(), 100);
+        // dataMap.put(getEndDate(), 200);
+        checkData(dataMap);
         ctrl.createCsvExporter(fileDestination.getText());
-        ctrl.saveData(dataMap);
-        success();
-        super.btnBack(event);
-      } else {
+        if (ctrl.saveData(dataMap)) {
+          success();
+        } else {
+          displayErrorAlert();
+        }
+      } else if (!validateDates() || !validateFilePath()) {
         displayErrorAlert();
+      } else {
+        displayErrorAlertOperation();
       }
     } catch (NullPointerException e) {
       displayErrorAlertOperation();
+    }
+  }
+
+  private FlowPane generatePaneWithData(String title, String data) {
+    Label titleLbl = new Label(title);
+    titleLbl.setMinHeight(24);
+    Label statistics = new Label(data);
+
+    ScrollPane container = new ScrollPane(statistics);
+    container.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+    container.setPadding(new Insets(8, 8, 8, 8));
+    container.setPrefWidth(525);
+    container.setMaxWidth(Double.MAX_VALUE);
+
+    FlowPane inputListContainer = new FlowPane(titleLbl, container);
+    inputListContainer.setOrientation(Orientation.HORIZONTAL);
+    inputListContainer.setHgap(8);
+    inputListContainer.setVgap(8);
+    inputListContainer.setMaxWidth(Double.MAX_VALUE);
+    inputListContainer.setAlignment(Pos.CENTER);
+    inputListContainer.setPadding(new Insets(8, 8, 8, 8));
+
+    return inputListContainer;
+  }
+
+  private void checkData(Map<Calendar, Integer> data) {
+    try {
+      final double SCENE_WIDTH = 640.0;
+      final double SCENE_HEIGHT = 400.0;
+
+      final Stage dialog = new Stage();
+      dialog.initModality(Modality.APPLICATION_MODAL);
+      dialog.initOwner(getParentUI().mainApp.getStage());
+
+      dialog.setTitle(lblCenterName.getText());
+      dialog.setWidth(SCENE_WIDTH);
+      dialog.setHeight(SCENE_HEIGHT);
+
+      FlowPane inputListContainer = generatePaneWithData("CENTER STATISTICS DATA", ctrl.dataToString(data));
+
+      VBox pane = new VBox(30);
+
+      Button close = new Button("Close");
+      // Setting the space between the nodes of a VBox pane
+      pane.setPadding(new Insets(40, 40, 40, 40));
+      pane.setAlignment(Pos.CENTER);
+      pane.getChildren().addAll(inputListContainer, close);
+
+
+      ScrollPane container = new ScrollPane(pane);
+      container.setHbarPolicy(ScrollBarPolicy.NEVER);
+
+      Scene scene = new Scene(container, SCENE_WIDTH, SCENE_HEIGHT);
+      dialog.setResizable(false);
+      dialog.setScene(scene);
+      dialog.show();
+
+      close.setOnAction(response -> {
+        dialog.close();
+      });
+
     } catch (Exception e) {
-      Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, "Error during operation.");
+      Alert alert = new Alert(AlertType.WARNING);
+      alert.setTitle("Warning");
+      alert.setHeaderText("Error found.");
+      alert.setContentText("Can't load the new window.");
+      clearFields();
+      alert.showAndWait();
     }
   }
 
@@ -205,7 +303,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     alert.setTitle("Cancel");
     alert.setHeaderText("Canceled the operation");
     alert.setContentText("The file will not be exported.");
-    fileDestination.clear();
+    clearFields();
     alert.showAndWait();
   }
 
@@ -230,9 +328,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     alert.setHeaderText("Found an error!");
     alert.setContentText(
         String.format("Please try again. Check if every field is correctly filled. If having trouble, check on the menu bar 'File' the option 'Help'."));
-    fileDestination.clear();
-    initialDate.setValue(null);
-    endDate.setValue(null);
+    clearFields();
     alert.showAndWait().ifPresent(response -> {
       Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, "Operation failed.");
     });
@@ -275,12 +371,16 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     alert.setHeaderText("Found an error!");
     alert.setContentText(
         "When trying to execute the operation it failed. Please check if it registered in the system the necessary data or you filled correctly the fields.");
-    fileDestination.clear();
-    initialDate.setValue(null);
-    endDate.setValue(null);
+    clearFields();
     alert.showAndWait().ifPresent(response -> {
       Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, "Operation failed.");
     });
+  }
+
+  private void clearFields() {
+    initialDate.setValue(null);
+    endDate.setValue(null);
+    fileDestination.setText("");
   }
 }
 
