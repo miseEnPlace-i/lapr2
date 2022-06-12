@@ -7,14 +7,14 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="550.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.ExportCenterStatisticsUI">
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="731.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.ExportCenterStatisticsUI">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="185.0" minHeight="10.0" prefHeight="92.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="522.0" minHeight="10.0" prefHeight="522.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="146.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0">
@@ -35,7 +35,7 @@
             </MenuBar>
             <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="900.0" scaleShape="false">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="30.0" prefHeight="29.0" prefWidth="900.0" text="Export Center Statistics" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="100.0">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="30.0" prefHeight="29.0" prefWidth="900.0" text="Export Center Statistics" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="50.0">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -69,42 +69,24 @@
             </AnchorPane>
          </children>
       </VBox>
-      <VBox alignment="CENTER" GridPane.rowIndex="1">
+      <VBox alignment="CENTER" prefHeight="209.0" prefWidth="918.0" GridPane.rowIndex="1">
          <children>
-            <DatePicker fx:id="initialDate" editable="false" maxWidth="-Infinity" prefHeight="40.0" prefWidth="500.0" promptText="Insert the initial date">
-               <VBox.margin>
-                  <Insets bottom="8.0" />
-               </VBox.margin>
-            </DatePicker>
-            <DatePicker fx:id="endDate" editable="false" maxWidth="-Infinity" prefHeight="40.0" prefWidth="500.0" promptText="Insert the end date" />
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <TextField fx:id="fileDestination" alignment="CENTER" disable="true" prefHeight="30.0" prefWidth="250.0" promptText="File Destination">
-                     <HBox.margin>
-                        <Insets bottom="50.0" />
-                     </HBox.margin>
-                  </TextField>
-                  <Button fx:id="selectDestination" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnSelectDestination" prefHeight="30.0" prefWidth="250.0" text="Select file destination" textAlignment="RIGHT">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets bottom="50.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
+            <HBox alignment="CENTER" prefHeight="544.0" prefWidth="900.0">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
+               <children>
+                  <ListView fx:id="statsViewLV" prefHeight="555.0" prefWidth="301.0" />
+               </children>
             </HBox>
          </children>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </VBox>
-      <FlowPane alignment="CENTER" columnHalignment="CENTER" prefWidth="1200.0" GridPane.rowIndex="2">
+      <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="127.0" prefWidth="900.0" GridPane.rowIndex="2">
          <children>
-            <Button fx:id="exportStatistics" alignment="CENTER" cancelButton="true" contentDisplay="CENTER" defaultButton="true" graphicTextGap="8.0" mnemonicParsing="false" onAction="#export" prefHeight="38.0" prefWidth="139.0" text="Export statistics">
+            <Button fx:id="continueBtn" alignment="CENTER" cancelButton="true" contentDisplay="CENTER" defaultButton="true" graphicTextGap="8.0" mnemonicParsing="false" onAction="#continueExport" prefHeight="38.0" prefWidth="139.0" text="Continue">
                <font>
                   <Font size="15.0" />
                </font>
