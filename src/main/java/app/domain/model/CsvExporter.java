@@ -17,35 +17,15 @@ public class CsvExporter {
 
   private BufferedWriter bf;
 
-  public boolean writeToFile(Map<Calendar, Integer> content) {
+  public String toExportFileString(Map<Calendar, Integer> data, String header, String separator) {
     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-    bf = null;
-    try {
-      File file = new File(this.filePath + "Data.csv");
-      file.createNewFile();
+    StringBuilder sb = new StringBuilder();
 
-      bf = new BufferedWriter(new FileWriter(file));
-
-      bf.write("Date;NumberOfFullyVaccinatedUsersPerDay");
-      bf.newLine();
-      for (Map.Entry<Calendar, Integer> entry : content.entrySet()) {
-
-        bf.write(format.format(entry.getKey().getTime()) + ";" + entry.getValue());
-        bf.newLine();
-      }
-      bf.flush();
-      return true;
-    } catch (IOException e) {
-      System.err.println(e);
-      e.printStackTrace();
-      return false;
-
+    sb.append(header);
+    for (Map.Entry<Calendar, Integer> entry : data.entrySet()) {
+      sb.append(format.format(entry.getKey().getTime()) + separator + entry.getValue());
+      sb.append("\n");
     }
-    finally {
-      try {
-        bf.close();
-      } catch (Exception e) {
-      }
-    }
+    return sb.toString();
   }
 }

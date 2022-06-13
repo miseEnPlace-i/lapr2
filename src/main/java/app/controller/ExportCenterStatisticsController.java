@@ -8,6 +8,7 @@ import app.domain.model.Company;
 import app.domain.model.CsvExporter;
 import app.domain.model.VaccinationCenter;
 import app.exception.NotAuthorizedException;
+import app.service.FileUtils;
 import app.service.FullyVaccinatedData;
 import app.session.EmployeeSession;
 
@@ -20,8 +21,9 @@ public class ExportCenterStatisticsController {
     private Company company;
     private EmployeeSession session;
     private FullyVaccinatedData exporter;
-    private LinkedHashMap<Calendar, Integer> dataMap;
+    private Map<Calendar, Integer> dataMap;
     private CsvExporter csvExporter;
+    private FileUtils fileUtils;
 
     /**
      * ExportCenterStatisticsController constructor
@@ -58,7 +60,7 @@ public class ExportCenterStatisticsController {
      * @param exporter -> FullyVaccinatedData Object
      * @return hashMap will all the data needed
      */
-    public LinkedHashMap<Calendar, Integer> generateFullyVaccinatedUsersInterval(FullyVaccinatedData exporter) {
+    public Map<Calendar, Integer> generateFullyVaccinatedUsersInterval(FullyVaccinatedData exporter) {
         dataMap = exporter.getFullyVaccinatedUsersPerDayMap();
         return dataMap;
     }
@@ -79,8 +81,8 @@ public class ExportCenterStatisticsController {
      * 
      * @param dataMap the hashMap will all information
      */
-    public boolean saveData(Map dataMap) {
-        return csvExporter.writeToFile(dataMap);
+    public boolean saveData(String fileName, String content) {
+        return fileUtils.writeToFile(fileName, content);
     }
 
     public String dataToString(Map<Calendar, Integer> data) {
