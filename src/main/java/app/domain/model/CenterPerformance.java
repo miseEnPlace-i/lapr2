@@ -15,6 +15,8 @@ public class CenterPerformance {
   private int interval;
 
   private int maxSum;
+  private double timeElapsed;
+
   private Time startingInterval;
   private Time endingInterval;
 
@@ -40,6 +42,7 @@ public class CenterPerformance {
     maxSum = maxSumSubListData.getSum();
 
     maxSumSubList = maxSumSubListData.getMaxSumSubList();
+    timeElapsed = maxSumSubListData.getTimeElapsed();
   }
 
   private Time convertIndexToTime(int index) {
@@ -124,6 +127,10 @@ public class CenterPerformance {
 
   public Time getEndingInterval() {
     return endingInterval;
+  }
+
+  public double getTimeElapsed() {
+    return timeElapsed;
   }
 
   @Override

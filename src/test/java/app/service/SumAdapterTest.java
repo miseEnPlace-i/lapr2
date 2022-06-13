@@ -6,15 +6,15 @@ import org.junit.Test;
 import app.service.MaxSum.SumAdapter;
 
 public class SumAdapterTest {
-  private Integer[] baseCase = new Integer[] {29, -32, -9, -25, 44, 12, -61, 51, -9, 44, 74, 4};
-  private Integer[] allNegatives = new Integer[] {-29, -32, -9, -25, -44, -12, -61, -51, -9, -44, -74, -4};
+  private int[] baseCase = new int[] {29, -32, -9, -25, 44, 12, -61, 51, -9, 44, 74, 4};
+  private int[] allNegatives = new int[] {-29, -32, -9, -25, -44, -12, -61, -51, -9, -44, -74, -4};
 
   @Test
   public void ensureMaxSumIsWorking() {
     SumAdapter adapter = new SumAdapter();
     Integer[] expected = new Integer[] {51, -9, 44, 74, 4};
 
-    assertEquals(adapter.maxSum(Arrays.asList(baseCase)), Arrays.asList(expected));
+    assertEquals(adapter.maxSum(baseCase), expected);
   }
 
   // !! Bug identified in external module

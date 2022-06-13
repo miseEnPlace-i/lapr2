@@ -1,6 +1,6 @@
 package app.service.MaxSum;
 
-import java.util.List;
+import org.apache.commons.lang3.ArrayUtils;
 
 public class MaxSum implements IMaxSum {
   /**
@@ -9,16 +9,16 @@ public class MaxSum implements IMaxSum {
    * @param list - list of integers
    * @return the max sum sublist
    */
-  public List<Integer> maxSum(List<Integer> list) {
+  public int[] maxSum(int[] list) {
     int startIndex = 0;
-    int endIndex = list.size();
+    int endIndex = list.length;
     int sum = Integer.MIN_VALUE;
 
-    for (int left = 0; left < list.size(); left++) {
+    for (int left = 0; left < list.length; left++) {
       int currentSum = 0;
 
-      for (int right = left; right < list.size(); right++) {
-        currentSum += list.get(right);
+      for (int right = left; right < list.length; right++) {
+        currentSum += list[right];
 
         if (currentSum > sum) {
           sum = currentSum;
@@ -28,6 +28,6 @@ public class MaxSum implements IMaxSum {
       }
     }
 
-    return list.subList(startIndex, endIndex + 1);
+    return ArrayUtils.subarray(list, startIndex, endIndex + 1);
   }
 }

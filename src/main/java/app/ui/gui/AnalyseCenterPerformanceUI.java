@@ -2,10 +2,13 @@ package app.ui.gui;
 
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.Properties;
 import org.apache.commons.lang3.StringUtils;
 import app.controller.AnalyseCenterPerformanceController;
 import app.controller.App;
 import app.domain.model.CenterPerformance;
+import app.domain.shared.Constants;
+import app.service.PropertiesUtils;
 import app.session.EmployeeSession;
 import app.ui.gui.utils.Utils;
 import javafx.fxml.FXML;
@@ -60,16 +63,19 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
 
     int interval = Integer.parseInt(txtInterval.getText());
 
-    CenterPerformance performance = ctrl.analyseCenterPerformance(day, interval);
+    try {
+      CenterPerformance performance = ctrl.analyseCenterPerformance(day, interval);
 
+      if (performance == null) {
+        Utils.showError("No performance data found", "No performance data found for the selected date.");
+        resetFields();
+        return;
+      }
 
-    if (performance == null) {
-      Utils.showError("No performance data found", "No performance data found for the selected date.");
-      resetFields();
-      return;
+      loadDialog(performance);
+    } catch (IllegalArgumentException e) {
+      Utils.showError("Invalid algorithm", e.getMessage());
     }
-
-    loadDialog(performance);
   }
 
   private void resetFields() {
@@ -113,18 +119,24 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
     dialog.setWidth(SCENE_WIDTH);
     dialog.setHeight(SCENE_HEIGHT);
 
+    Properties props = PropertiesUtils.getProperties();
+    String algorithmUsed = props.getProperty(Constants.PARAMS_PERFORMANCE_ALGORITHM);
+
     FlowPane inputListContainer = generatePaneWithData("Input List", performance.stringifyDifferencesList());
     FlowPane maxSubListContainer = generatePaneWithData("Max Sum Sublist", performance.stringifyMaxSumSublist());
     FlowPane sumContainer = generatePaneWithData("Max Sum", "" + performance.getMaxSum());
-    FlowPane begginingInterval = generatePaneWithData("Beggining Time of Interval", performance.getStartingInterval().toString());
-    FlowPane endInterval = generatePaneWithData("End Time of Interval", performance.getEndingInterval().toString());
+    FlowPane begginingIntervalContainer = generatePaneWithData("Beggining Time of Interval", performance.getStartingInterval() + "h");
+    FlowPane endIntervalContainer = generatePaneWithData("End Time of Interval", performance.getEndingInterval() + "h");
+    FlowPane algorithmUsedContainer = generatePaneWithData("Algorithm Used", algorithmUsed);
+    FlowPane timeElapsedContainer = generatePaneWithData("Time Elapsed", performance.getTimeElapsed() + " ms");
 
     VBox pane = new VBox(15);
 
     // Setting the space between the nodes of a VBox pane
     pane.setPadding(new Insets(40, 40, 40, 40));
     pane.setAlignment(Pos.CENTER);
-    pane.getChildren().addAll(inputListContainer, maxSubListContainer, sumContainer, begginingInterval, endInterval);
+    pane.getChildren().addAll(inputListContainer, maxSubListContainer, sumContainer, begginingIntervalContainer, endIntervalContainer, algorithmUsedContainer,
+        timeElapsedContainer);
 
     ScrollPane container = new ScrollPane(pane);
 

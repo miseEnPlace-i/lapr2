@@ -101,6 +101,9 @@ deactivate MAXSS
 PERF -> MAXSS : getMaxSumSubList()
 activate MAXSS
 deactivate MAXSS
+PERF -> MAXSS : getTimeElapsed()
+activate MAXSS
+deactivate MAXSS
 |||
 VACC --> CTRL : centerPerformance
 
