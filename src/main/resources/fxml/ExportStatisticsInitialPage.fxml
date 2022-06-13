@@ -79,19 +79,11 @@
             <DatePicker fx:id="endDate" editable="false" maxWidth="-Infinity" prefHeight="40.0" prefWidth="500.0" promptText="Insert the end date" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="fileDestination" disable="true" prefHeight="30.0" prefWidth="250.0" promptText="File Destination">
+                  <TextField fx:id="txtFileName" maxWidth="-Infinity" prefHeight="40.0" prefWidth="500.0" promptText="File Name">
                      <HBox.margin>
                         <Insets bottom="50.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button fx:id="selectDestination" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnSelectDestination" prefHeight="30.0" prefWidth="250.0" text="Select file destination" textAlignment="RIGHT">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets bottom="50.0" />
-                     </HBox.margin>
-                  </Button>
                </children>
                <opaqueInsets>
                   <Insets />
@@ -104,7 +96,7 @@
       </VBox>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" prefWidth="1200.0" GridPane.rowIndex="2">
          <children>
-            <Button fx:id="exportStatistics" alignment="CENTER" cancelButton="true" contentDisplay="CENTER" defaultButton="true" graphicTextGap="8.0" mnemonicParsing="false" onAction="#export" prefHeight="38.0" prefWidth="139.0" text="Export statistics">
+            <Button fx:id="exportStatistics" alignment="CENTER" cancelButton="true" contentDisplay="CENTER" defaultButton="true" graphicTextGap="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#export" prefHeight="40.0" prefWidth="140.0" text="Export statistics">
                <font>
                   <Font size="15.0" />
                </font>
@@ -112,7 +104,7 @@
                   <Insets right="16.0" />
                </FlowPane.margin>
             </Button>
-            <Button id="btnBack" fx:id="btnBack" cancelButton="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnBack" prefHeight="40.0" prefWidth="120.0" text="Back to menu">
+            <Button id="btnBack" fx:id="btnBack" cancelButton="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnBack" prefHeight="40.0" prefWidth="140.0" text="Back to menu">
                <font>
                   <Font size="15.0" />
                </font>
