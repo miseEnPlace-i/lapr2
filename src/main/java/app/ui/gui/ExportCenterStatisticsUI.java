@@ -160,36 +160,37 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
 
   private FlowPane generatePaneWithData(String title, String data) {
     Label titleLbl = new Label(title);
-    titleLbl.setMinHeight(24);
+    titleLbl.setAlignment(Pos.CENTER);
     Label statistics = new Label(data);
 
     ScrollPane container = new ScrollPane(statistics);
     container.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
     container.setPadding(new Insets(8, 8, 8, 8));
     container.setPrefWidth(525);
+    container.setPrefHeight(350);
     container.setMaxWidth(Double.MAX_VALUE);
 
-    FlowPane inputListContainer = new FlowPane(titleLbl, container);
-    inputListContainer.setOrientation(Orientation.HORIZONTAL);
-    inputListContainer.setHgap(8);
-    inputListContainer.setVgap(8);
-    inputListContainer.setMaxWidth(Double.MAX_VALUE);
-    inputListContainer.setAlignment(Pos.CENTER);
-    inputListContainer.setPadding(new Insets(8, 8, 8, 8));
+    FlowPane containerData = new FlowPane(titleLbl, container);
+    containerData.setOrientation(Orientation.HORIZONTAL);
+    containerData.setHgap(8);
+    containerData.setVgap(8);
+    containerData.setMaxWidth(Double.MAX_VALUE);
+    containerData.setAlignment(Pos.CENTER);
+    containerData.setPadding(new Insets(8, 8, 8, 8));
 
-    return inputListContainer;
+    return containerData;
   }
 
   private void checkData(Map<Calendar, Integer> data) {
     try {
       final double SCENE_WIDTH = 640.0;
-      final double SCENE_HEIGHT = 400.0;
+      final double SCENE_HEIGHT = 600.0;
 
       final Stage dialog = new Stage();
       dialog.initModality(Modality.APPLICATION_MODAL);
       dialog.initOwner(getParentUI().mainApp.getStage());
 
-      dialog.setTitle(lblCenterName.getText());
+      dialog.setTitle("Center Export Statistics");
       dialog.setWidth(SCENE_WIDTH);
       dialog.setHeight(SCENE_HEIGHT);
 
