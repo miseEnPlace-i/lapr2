@@ -7,6 +7,7 @@ import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -57,7 +58,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
   private ExportCenterStatisticsController ctrl;
   private EmployeeSession employeeSession;
   private FindCoordinatorVaccinationCenterController ctrlCenter;
-  private Map<Calendar, Integer> dataMap = new HashMap<>();
+  private LinkedHashMap<Calendar, Integer> dataMap = new LinkedHashMap<>();
   private FullyVaccinatedData fullyVaccinatedData;
 
   @FXML
