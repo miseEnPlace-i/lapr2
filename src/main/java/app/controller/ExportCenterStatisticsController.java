@@ -83,6 +83,6 @@ public class ExportCenterStatisticsController {
     }
 
     public String dataToString(Map<Calendar, Integer> data) {
-        return exporter.toString();
+        return exporter.toString(data);
     }
 }

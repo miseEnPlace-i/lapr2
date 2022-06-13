@@ -158,11 +158,13 @@ public class FullyVaccinatedData {
     public String toString(Map<Calendar, Integer> data) {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         StringBuilder sb = new StringBuilder();
-        sb.append("Date;NumberOfFullyVaccinatedUsersPerDay\n");
+
+        sb.append(String.format("Date %10s | Number of SNS Users Fully Vaccinated \n", ""));
         for (Map.Entry<Calendar, Integer> entry : data.entrySet()) {
-            sb.append(format.format(entry.getKey().getTime()) + ";" + entry.getValue());
+            sb.append(format.format(entry.getKey().getTime()) + " | " + entry.getValue());
             sb.append("\n");
         }
+
         return sb.toString();
     }
 }
