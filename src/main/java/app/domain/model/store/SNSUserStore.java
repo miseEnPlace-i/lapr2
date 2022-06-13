@@ -1,5 +1,6 @@
 package app.domain.model.store;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,19 +23,22 @@ import pt.isep.lei.esoft.auth.AuthFacade;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
-public class SNSUserStore {
+public class SNSUserStore implements Serializable {
   // User List
   private List<SNSUser> snsUsers;
 
   // Auth Facade
-  private AuthFacade authFacade;
+  private transient AuthFacade authFacade;
+
+  private UserStore userStore;
 
   /**
    * Constructor for SNSUserStore.
    */
-  public SNSUserStore(AuthFacade authFacade) {
+  public SNSUserStore(AuthFacade authFacade, UserStore userStore) {
     this.snsUsers = new ArrayList<SNSUser>();
     this.authFacade = authFacade;
+    this.userStore = userStore;
   }
 
   /**
@@ -97,6 +101,7 @@ public class SNSUserStore {
     String pwd = pwdGenerator.generatePwd();
 
     authFacade.addUserWithRole(snsUser.getName(), email, pwd, Constants.ROLE_SNS_USER);
+    userStore.addUser(snsUser.getName(), pwd, email, Constants.ROLE_SNS_USER);
 
     addSNSUser(snsUser);
 
@@ -107,7 +112,7 @@ public class SNSUserStore {
 
   }
 
-  public void addSNSUser(SNSUser snsUser){
+  public void addSNSUser(SNSUser snsUser) {
     this.snsUsers.add(snsUser);
   }
 
@@ -180,23 +185,23 @@ public class SNSUserStore {
   }
 
   public List<SNSUser> registerListOfUsers(List<String[]> userDataList) throws ParseException {
-      List<SNSUser> userList = new ArrayList<SNSUser>();
+    List<SNSUser> userList = new ArrayList<SNSUser>();
 
-      for (int i = 0; i < userDataList.size(); i++) {
-        try{
-          SNSUserDTO userDto = SNSUserMapper.toDto(userDataList.get(i));
+    for (int i = 0; i < userDataList.size(); i++) {
+      try {
+        SNSUserDTO userDto = SNSUserMapper.toDto(userDataList.get(i));
 
-          SNSUser snsUser = createSNSUser(userDto);
-          validateSNSUser(snsUser);
-    
-          saveSNSUser(snsUser);
-    
-          userList.add(snsUser);
-        }catch(Exception e){
-          userList.add(null);
-        }
+        SNSUser snsUser = createSNSUser(userDto);
+        validateSNSUser(snsUser);
+
+        saveSNSUser(snsUser);
+
+        userList.add(snsUser);
+      } catch (Exception e) {
+        userList.add(null);
       }
-    
+    }
+
 
     return userList;
   }

@@ -1,11 +1,12 @@
 package app.domain.model;
 
+import java.io.Serializable;
 import app.domain.model.list.AdminProcList;
 
 /**
  * @author Carlos Lopes <1211277@isep.ipp.pt>
  */
-public class Vaccine {
+public class Vaccine implements Serializable {
   private String designation;
   private String brand;
   private String id;

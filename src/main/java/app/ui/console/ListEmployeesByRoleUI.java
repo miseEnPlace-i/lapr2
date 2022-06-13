@@ -4,6 +4,7 @@ import java.util.List;
 import app.controller.App;
 import app.controller.ListEmployeesByRoleController;
 import app.domain.model.Employee;
+import app.domain.model.MyUserRole;
 import app.ui.console.utils.Utils;
 import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
@@ -22,7 +23,7 @@ public class ListEmployeesByRoleUI implements Runnable {
   public void run() {
     System.out.println("\nList Employees By Role:");
 
-    List<UserRole> employeeRoles = ctrl.getEmployeeRoles();
+    List<MyUserRole> employeeRoles = ctrl.getEmployeeRoles();
 
     displayEmployeeRoles(employeeRoles);
 
@@ -30,7 +31,7 @@ public class ListEmployeesByRoleUI implements Runnable {
 
     if (roleIndex == -1) return;
 
-    UserRole role = employeeRoles.get(roleIndex);
+    MyUserRole role = employeeRoles.get(roleIndex);
 
     List<Employee> employees = getEmployeesWithRole(role.getId());
 
@@ -43,7 +44,7 @@ public class ListEmployeesByRoleUI implements Runnable {
    * 
    * @param employeeRoles the list of employee roles
    */
-  private void displayEmployeeRoles(List<UserRole> employeeRoles) {
+  private void displayEmployeeRoles(List<MyUserRole> employeeRoles) {
     Utils.showList(employeeRoles, "\nEmployee Roles");
   }
 

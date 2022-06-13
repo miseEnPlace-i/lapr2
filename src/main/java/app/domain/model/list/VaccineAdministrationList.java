@@ -1,5 +1,6 @@
 package app.domain.model.list;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -15,7 +16,7 @@ import app.mapper.AdverseReactionMapper;
 import app.mapper.VaccineMapper;
 import app.domain.model.VaccineAdministration;
 
-public class VaccineAdministrationList {
+public class VaccineAdministrationList implements Serializable {
   private List<VaccineAdministration> vaccineAdministrations;
 
   /**

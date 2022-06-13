@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.List;
@@ -13,7 +14,7 @@ import app.utils.Time;
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  */
-public abstract class VaccinationCenter {
+public abstract class VaccinationCenter implements Serializable {
   private String name;
   private String address;
   private String email;
