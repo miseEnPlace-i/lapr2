@@ -3,6 +3,7 @@ package app.service;
 import java.text.SimpleDateFormat;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import app.domain.model.SNSUser;
@@ -21,7 +22,7 @@ public class FullyVaccinatedData {
     private Calendar startDate;
     private Calendar endDate;
     private VaccinationCenter center;
-    private Map<Calendar, Integer> dataMap;
+    private LinkedHashMap<Calendar, Integer> dataMap;
     private int snsUserAge;
     private SNSUser snsUser;
     private Vaccine vaccine;
@@ -87,7 +88,7 @@ public class FullyVaccinatedData {
      * 
      * @return hashMap of all the data needed to do the statistics
      */
-    public Map<Calendar, Integer> getFullyVaccinatedUsersPerDayMap() {
+    public LinkedHashMap<Calendar, Integer> getFullyVaccinatedUsersPerDayMap() {
 
         long nOfDaysBetween = getDaysBetweenTwoDates();
 

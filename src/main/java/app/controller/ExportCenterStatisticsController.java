@@ -2,6 +2,7 @@ package app.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import app.domain.model.Company;
 import app.domain.model.CsvExporter;
@@ -19,7 +20,7 @@ public class ExportCenterStatisticsController {
     private Company company;
     private EmployeeSession session;
     private FullyVaccinatedData exporter;
-    private Map<Calendar, Integer> dataMap;
+    private LinkedHashMap<Calendar, Integer> dataMap;
     private CsvExporter csvExporter;
 
     /**
@@ -57,7 +58,7 @@ public class ExportCenterStatisticsController {
      * @param exporter -> FullyVaccinatedData Object
      * @return hashMap will all the data needed
      */
-    public Map<Calendar, Integer> generateFullyVaccinatedUsersInterval(FullyVaccinatedData exporter) {
+    public LinkedHashMap<Calendar, Integer> generateFullyVaccinatedUsersInterval(FullyVaccinatedData exporter) {
         dataMap = exporter.getFullyVaccinatedUsersPerDayMap();
         return dataMap;
     }

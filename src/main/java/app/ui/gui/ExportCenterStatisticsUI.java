@@ -145,9 +145,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
         dataMap.put(getEndDate(), 200);
         checkData(dataMap);
         ctrl.createCsvExporter(fileDestination.getText());
-        if (ctrl.saveData(dataMap)) {
-          success();
-        } else {
+        if (!ctrl.saveData(dataMap)) {
           displayErrorAlert();
         }
       } else if (!validateDates() || !validateFilePath()) {
@@ -216,6 +214,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
 
       close.setOnAction(response -> {
         dialog.close();
+        success();
       });
 
     } catch (Exception e) {
