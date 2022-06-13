@@ -79,14 +79,15 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
 
   private FlowPane generatePaneWithData(String title, String data) {
     Label lblInputList = new Label(title);
-    lblInputList.setMinHeight(24);
     Label lblList = new Label(data);
+    lblList.setAlignment(Pos.CENTER_LEFT);
 
     ScrollPane container = new ScrollPane(lblList);
-    container.setHbarPolicy(ScrollBarPolicy.ALWAYS);
+    container.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
     container.setVbarPolicy(ScrollBarPolicy.NEVER);
     container.setPadding(new Insets(8, 8, 8, 8));
     container.setPrefWidth(560);
+    container.setPrefHeight(48);
     container.setMaxWidth(Double.MAX_VALUE);
 
     FlowPane inputListContainer = new FlowPane(lblInputList, container);
@@ -115,8 +116,8 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
     FlowPane inputListContainer = generatePaneWithData("Input List", performance.stringifyDifferencesList());
     FlowPane maxSubListContainer = generatePaneWithData("Max Sum Sublist", performance.stringifyMaxSumSublist());
     FlowPane sumContainer = generatePaneWithData("Max Sum", "" + performance.getMaxSum());
-    FlowPane begginingInterval = generatePaneWithData("Beggining of Interval", performance.getStartingInterval().toString());
-    FlowPane endInterval = generatePaneWithData("End of Interval", performance.getEndingInterval().toString());
+    FlowPane begginingInterval = generatePaneWithData("Beggining Time of Interval", performance.getStartingInterval().toString());
+    FlowPane endInterval = generatePaneWithData("End Time of Interval", performance.getEndingInterval().toString());
 
     VBox pane = new VBox(15);
 
