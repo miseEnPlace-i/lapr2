@@ -60,6 +60,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
   private FindCoordinatorVaccinationCenterController ctrlCenter;
   private LinkedHashMap<Calendar, Integer> dataMap = new LinkedHashMap<>();
   private FullyVaccinatedData fullyVaccinatedData;
+  private CsvExporter csvExporter;
 
   @FXML
   private MenuItem help;
@@ -80,16 +81,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
   private Button exportStatistics;
 
   @FXML
-  private TextField fileDestination;
-
-  @FXML
-  private Button selectDestination;
-
-  @FXML
-  private ListView<?> statsViewLV;
-
-  @FXML
-  private Button continueBtn;
+  private TextField txtFileName;
 
   @Override
   void init(CoordinatorUI parentUI) {
@@ -119,7 +111,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
       if (response == ButtonType.OK) {
         Logger.getLogger(getClass().getName()).log(Level.INFO, "Operation running!");
       } else {
-        fileDestination.clear();
+        clearFields();
         Logger.getLogger(getClass().getName()).log(Level.INFO, "Operation canceled!");
         cancel();
       }
@@ -137,15 +129,15 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     try {
       displayExportInformation();
       if (validateDates() && validateFilePath()) {
-        fullyVaccinatedData = ctrl.createFullyVaccinatedData(fileDestination.getText(), getStartDate(), getEndDate());
+        fullyVaccinatedData = ctrl.createFullyVaccinatedData(txtFileName.getText(), getStartDate(), getEndDate());
         // dataMap = ctrl.generateFullyVaccinatedUsersInterval(fullyVaccinatedData);
 
         // FOR TESTING
         dataMap.put(getStartDate(), 100);
         dataMap.put(getEndDate(), 200);
         checkData(dataMap);
-        ctrl.createCsvExporter(fileDestination.getText());
-        if (!ctrl.saveData(dataMap)) {
+        csvExporter = ctrl.createCsvExporter(txtFileName.getText());
+        if (!ctrl.saveData(txtFileName.getText(), csvExporter.toExportFileString(dataMap, "Date;NumberOfFullyVaccinatedUsers\n", ";"))) {
           displayErrorAlert();
         }
       } else if (!validateDates() || !validateFilePath()) {
@@ -258,7 +250,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
     StringBuilder sb = new StringBuilder();
     sb.append(String.format("Data from the Center: %s ", lblCenterName.getText()));
-    sb.append(String.format("\nFile Path Name: %s ", fileDestination.getText()));
+    sb.append(String.format("\nFile Path Name: %s ", txtFileName.getText()));
     sb.append(String.format("\nExport center statistics from: %s", format.format(getStartDate().getTime())));
     sb.append(String.format("\nTo: %s", format.format(getEndDate().getTime())));
 
@@ -278,26 +270,6 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     alert.setContentText(
         "File destination: you can select where to save the file by clicking on the button 'Select File Destination'.\n\nDates: select days from the past and not in the future. You select the pretended interval on the calendars.");
     alert.showAndWait();
-  }
-
-  /**
-   * Button to select the folder to save the file with the statistics
-   * 
-   * @param event
-   */
-  @FXML
-  void btnSelectDestination(ActionEvent event) {
-    DirectoryChooser directoryChooser = new DirectoryChooser();
-
-    directoryChooser.setTitle("Select where to save the file");
-
-    Stage stage = (Stage) getParentUI().getMainApp().getStage();
-
-    File file = directoryChooser.showDialog(stage);
-
-    if (file != null) {
-      fileDestination.setText(file.getAbsolutePath());
-    }
   }
 
   /**
@@ -363,7 +335,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
    * @return "true" if valid, "false" otherwise
    */
   private boolean validateFilePath() {
-    if (fileDestination.getText().isEmpty() || fileDestination == null) return false;
+    if (txtFileName.getText().isEmpty() || txtFileName == null) return false;
     return true;
   }
 
@@ -385,7 +357,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
   private void clearFields() {
     initialDate.setValue(null);
     endDate.setValue(null);
-    fileDestination.setText("");
+    txtFileName.setText("");
   }
 }
 

@@ -22,7 +22,7 @@ public class FullyVaccinatedData {
     private Calendar startDate;
     private Calendar endDate;
     private VaccinationCenter center;
-    private LinkedHashMap<Calendar, Integer> dataMap;
+    private Map<Calendar, Integer> dataMap;
     private int snsUserAge;
     private SNSUser snsUser;
     private Vaccine vaccine;
@@ -88,7 +88,7 @@ public class FullyVaccinatedData {
      * 
      * @return hashMap of all the data needed to do the statistics
      */
-    public LinkedHashMap<Calendar, Integer> getFullyVaccinatedUsersPerDayMap() {
+    public Map<Calendar, Integer> getFullyVaccinatedUsersPerDayMap() {
 
         long nOfDaysBetween = getDaysBetweenTwoDates();
 
