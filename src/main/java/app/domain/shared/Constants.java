@@ -21,7 +21,7 @@ public class Constants {
 
   public static final String PARAMS_ONGOING_OUTBREAK_VACCINE_TYPE_CODE = "OngoingOutbreak.VaccineTypeCode";
 
-  public static final String PARAMS_SENDER = "MessageSender.Sender";
+  public static final String PARAMS_SENDER = "Notification.Sender";
   public static final String PARAMS_DEFAULT_SENDER = "app.service.sender.ConsoleSender";
 
   public static final String PARAMS_TEST_ENVIRONMENT = "Environment.Test";
