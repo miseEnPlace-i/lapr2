@@ -329,6 +329,8 @@ public abstract class VaccinationCenter {
   public CenterPerformance getCenterPerformanceForDay(Calendar day, int interval) {
     CenterEventList events = this.eventList.getEventListForDay(day);
 
+    if (events.size() == 0) return null;
+
     CenterPerformance centerPerformance = new CenterPerformance(events, interval, openingHours, closingHours);
 
     return centerPerformance;
