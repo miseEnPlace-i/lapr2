@@ -46,7 +46,7 @@ public class ExportCenterStatisticsController {
     public FullyVaccinatedData createFullyVaccinatedData(String filePath, Calendar start, Calendar end) {
         VaccinationCenter center = session.getVaccinationCenter();
 
-        FullyVaccinatedData exporter = new FullyVaccinatedData(filePath, start, end, center);
+        exporter = new FullyVaccinatedData(filePath, start, end, center);
 
         return exporter;
     }
@@ -83,13 +83,6 @@ public class ExportCenterStatisticsController {
     }
 
     public String dataToString(Map<Calendar, Integer> data) {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        StringBuilder sb = new StringBuilder();
-        sb.append("Date;NumberOfFullyVaccinatedUsersPerDay\n");
-        for (Map.Entry<Calendar, Integer> entry : data.entrySet()) {
-            sb.append(format.format(entry.getKey().getTime()) + ";" + entry.getValue());
-            sb.append("\n");
-        }
-        return sb.toString();
+        return exporter.toString();
     }
 }

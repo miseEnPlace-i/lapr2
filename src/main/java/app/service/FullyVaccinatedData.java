@@ -1,5 +1,6 @@
 package app.service;
 
+import java.text.SimpleDateFormat;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.List;
@@ -154,4 +155,14 @@ public class FullyVaccinatedData {
         return fullyVaccinated;
     }
 
+    public String toString(Map<Calendar, Integer> data) {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        StringBuilder sb = new StringBuilder();
+        sb.append("Date;NumberOfFullyVaccinatedUsersPerDay\n");
+        for (Map.Entry<Calendar, Integer> entry : data.entrySet()) {
+            sb.append(format.format(entry.getKey().getTime()) + ";" + entry.getValue());
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
 }

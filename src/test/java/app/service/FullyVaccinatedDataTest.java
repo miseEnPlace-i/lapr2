@@ -49,7 +49,7 @@ public class FullyVaccinatedDataTest {
     Calendar date1;
     Calendar date2;
     Calendar birthday;
-    VaccineAdministrationList vacAdminList;
+    VaccineAdministrationList vacAdminList = new VaccineAdministrationList();
     HealthData userHealthData;
     Time openingHours;
     Time closingHours;
@@ -82,7 +82,7 @@ public class FullyVaccinatedDataTest {
         VaccinationCenterStore centerStore = company.getVaccinationCenterStore();
         centerStore.saveVaccinationCenter(center);
 
-        user = new SNSUser("000000000ZZ4", "123456789", "name", birthday.getTime(), Gender.MALE, "+351913456789", "mail@mail.com", "test");
+        user = new SNSUser("00000000", "123456789", "name", birthday.getTime(), Gender.MALE, "+351913456789", "mail@mail.com", "test");
 
         VaccineType vacType = new VaccineType("12345", "test", "test_technology");
         VaccineTypeStore vaccineTypeStore = company.getVaccineTypeStore();
@@ -97,9 +97,10 @@ public class FullyVaccinatedDataTest {
         userHealthData = user.getUserHealthData();
         vacAdminList = userHealthData.getVaccineAdministrationList();
 
-        vacAdmin = new VaccineAdministration(user, vaccine, "00000-AA", 2, center, date1);
+        vacAdmin = new VaccineAdministration(user, vaccine, "00000-11", 2, center, date1);
         vacAdminList.saveVaccineAdministration(vacAdmin);
 
+        fullyVaccinatedData = new FullyVaccinatedData("test.csv", date1, date2, center);
     }
 
     @Test(expected = IllegalArgumentException.class)
