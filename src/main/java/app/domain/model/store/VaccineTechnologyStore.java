@@ -1,5 +1,6 @@
 package app.domain.model.store;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +9,7 @@ import java.util.List;
  * @author Carlos Lopes <1211277@isep.ipp.pt>
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
-public class VaccineTechnologyStore {
-
+public class VaccineTechnologyStore implements Serializable {
   // List of vaccine technology types
   private List<String> techTypes;
 

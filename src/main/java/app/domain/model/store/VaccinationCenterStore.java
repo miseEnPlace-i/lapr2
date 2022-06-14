@@ -1,5 +1,6 @@
 package app.domain.model.store;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.CommunityMassVaccinationCenter;
@@ -20,7 +21,7 @@ import app.utils.Time;
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  */
-public class VaccinationCenterStore {
+public class VaccinationCenterStore implements Serializable {
   // Vaccination Centers list
   private List<VaccinationCenter> vaccinationCenters;
 

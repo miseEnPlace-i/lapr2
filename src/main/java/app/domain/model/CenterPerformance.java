@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.list.CenterEventList;
@@ -7,7 +8,7 @@ import app.domain.shared.CenterEventType;
 import app.service.MaxSum.MaxSumSublistService;
 import app.utils.Time;
 
-public class CenterPerformance {
+public class CenterPerformance implements Serializable {
   private CenterEventList events;
   private List<Integer> differenceList;
   private List<Integer> maxSumSubList;
