@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 import app.dto.AdverseReactionDTO;
+import app.dto.UserNotificationDTO;
 import app.dto.VaccineDTO;
 import app.domain.model.AdverseReaction;
 import app.domain.model.CenterEvent;
@@ -19,9 +20,12 @@ import app.domain.model.WaitingRoom;
 import app.domain.shared.CenterEventType;
 import app.domain.shared.Constants;
 import app.mapper.AdverseReactionMapper;
+import app.mapper.UserNotificationMapper;
 import app.mapper.VaccineMapper;
 import app.service.CalendarUtils;
 import app.service.PropertiesUtils;
+import app.service.sender.ISender;
+import app.service.sender.SenderFactory;
 import app.domain.model.VaccineAdministration;
 
 public class VaccineAdministrationList implements Serializable {
@@ -95,6 +99,36 @@ public class VaccineAdministrationList implements Serializable {
     CenterEvent departure = centerEventList.create(departureTime, CenterEventType.DEPARTURE, snsUser);
 
     centerEventList.save(departure);
+
+    setSmsSending(vaccineAdministration, recoveryPeriod);
+  }
+
+  private void setSmsSending(VaccineAdministration vaccineAdministration, int recoveryPeriod) {
+    String message = String.format("Your recovery period has ended.\nYou can now leave the center.");
+    UserNotificationDTO notificationDto =
+        UserNotificationMapper.toDto(vaccineAdministration.getSnsUser().getEmail(), vaccineAdministration.getSnsUser().getPhoneNumber(), message);
+
+    new java.util.Timer().schedule(new java.util.TimerTask() {
+      @Override
+      public void run() {
+        sendNotification(notificationDto);
+      }
+    }, minutesToMilliseconds(recoveryPeriod));
+  }
+
+  private long minutesToMilliseconds(int minutes) {
+    return minutes * 60 * 1000;
+  }
+
+  private void sendNotification(UserNotificationDTO notificationDto) {
+    ISender sender = SenderFactory.getSender();
+
+    try {
+      sender.send(notificationDto);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      e.printStackTrace();
+    }
   }
 
   /**
