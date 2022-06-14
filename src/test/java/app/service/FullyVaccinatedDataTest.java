@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.AdminProcess;
 import app.domain.model.Company;
+import app.domain.model.DoseInfo;
 import app.domain.model.Employee;
 import app.domain.model.HealthCareCenter;
 import app.domain.model.HealthData;
@@ -40,7 +41,7 @@ public class FullyVaccinatedDataTest {
     Calendar startDate;
     Calendar endDate;
     HealthCareCenter center;
-    Map<Calendar, Integer> data;
+    Map<Calendar, Integer> data = new HashMap<>();
     VaccineAdministration vacAdmin;
     SNSUser user;
     Vaccine vaccine;
@@ -65,13 +66,13 @@ public class FullyVaccinatedDataTest {
         slot = new Slot(5, 10);
 
         birthday = Calendar.getInstance();
-        birthday.set(1980, 5, 23);
+        birthday.set(2020, 5, 23);
 
         date1 = Calendar.getInstance();
-        date1.set(Calendar.DAY_OF_MONTH, 20);
+        date1.set(Calendar.DAY_OF_MONTH, 1);
 
         date2 = Calendar.getInstance();
-        date2.set(Calendar.DAY_OF_MONTH, 21);
+        date2.set(Calendar.DAY_OF_MONTH, 2);
 
         coordinator = new Employee("010101", "coordinator", "+351913456789", "mail@mail.com", "test", "00000000", Constants.ROLE_COORDINATOR);
         EmployeeStore empStore = company.getEmployeeStore();
@@ -90,6 +91,10 @@ public class FullyVaccinatedDataTest {
 
         Vaccine vaccine = new Vaccine("test", "12345", "brand", vacType);
         AdminProcess ap = new AdminProcess(1, 10, 2);
+        DoseInfo di1 = new DoseInfo(120, 0);
+        DoseInfo di2 = new DoseInfo(120, 365);
+        ap.addDoseInfo(di1);
+        ap.addDoseInfo(di2);
         vaccine.addAdminProc(ap);
         VaccineStore vaccineStore = company.getVaccineStore();
         vaccineStore.saveVaccine(vaccine);
