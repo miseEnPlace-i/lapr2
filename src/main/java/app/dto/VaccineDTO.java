@@ -62,4 +62,15 @@ public class VaccineDTO {
   public VaccineType getVacType() {
     return this.vacType;
   }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+
+    sb.append(String.format("Designation: %s%n", designation));
+    sb.append(String.format("Type: %s%n", vacType.getDescription()));
+    sb.append(String.format("Brand: %s", brand));
+
+    return sb.toString();
+  }
 }

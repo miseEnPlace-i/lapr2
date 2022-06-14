@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Properties;
 import app.domain.model.AdminProcess;
 import app.domain.model.Company;
+import app.domain.model.DoseInfo;
 import app.domain.model.Employee;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
@@ -120,6 +121,14 @@ public class App {
     Vaccine vaccine = this.vaccineStore.createVaccine("BioNTech, Pfizer vaccine", "00001", "Pfizer, BioNTech", vacType);
     AdminProcess adminProcess1 = new AdminProcess(1, 16, 1);
     AdminProcess adminProcess2 = new AdminProcess(17, 89, 2);
+    DoseInfo doseInfo1 = new DoseInfo(11, 0);
+    DoseInfo doseInfo2 = new DoseInfo(22, 30);
+
+    adminProcess1.addDoseInfo(doseInfo1);
+
+    adminProcess2.addDoseInfo(doseInfo1);
+    adminProcess2.addDoseInfo(doseInfo2);
+
     vaccine.addAdminProc(adminProcess1);
     vaccine.addAdminProc(adminProcess2);
     this.vaccineStore.saveVaccine(vaccine);
