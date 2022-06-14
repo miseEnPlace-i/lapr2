@@ -3,8 +3,11 @@ package app.ui.gui;
 import java.util.List;
 import app.controller.App;
 import app.controller.SelectEmployeeVaccinationCenterController;
+import app.domain.shared.HelpText;
 import app.domain.shared.MenuFXMLPath;
 import app.dto.VaccinationCenterListDTO;
+import app.ui.gui.utils.Utils;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -44,6 +47,11 @@ public class EmployeeWithCenterUI extends EmployeeRoleUI {
 
   public String getUIRoleName() {
     return "Employee";
+  }
+
+  @Override
+  void handleHelp(ActionEvent event) {
+    Utils.showHelp("Employee Help", HelpText.EMPLOYEE_WITH_CENTER);
   }
 
   private void redirectToRoleMenu() {
