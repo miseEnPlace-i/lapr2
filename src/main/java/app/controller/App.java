@@ -74,7 +74,10 @@ public class App {
     for (MyUserRole role : employeeRoles)
       this.authFacade.addUserRole(role.getId(), role.getDescription());
 
-    userStore.loadUsersToAuthFacade(authFacade);
+    this.authFacade.addUserRole(Constants.ROLE_ADMIN, Constants.ROLE_ADMIN);
+    this.authFacade.addUserRole(Constants.ROLE_SNS_USER, Constants.ROLE_SNS_USER);
+
+    userStore.loadUsersToAuthFacade(this.authFacade);
   }
 
   private void loadCompany() {
@@ -159,8 +162,6 @@ public class App {
   private void bootstrap() {
     // Added Receptionist user role & a test user with Receptionist role for testing
     // purposes
-    this.authFacade.addUserRole(Constants.ROLE_ADMIN, Constants.ROLE_ADMIN);
-    this.authFacade.addUserRole(Constants.ROLE_SNS_USER, Constants.ROLE_SNS_USER);
     this.employeeRoleStore.addEmployeeRole(Constants.ROLE_RECEPTIONIST, Constants.ROLE_RECEPTIONIST);
     this.employeeRoleStore.addEmployeeRole(Constants.ROLE_NURSE, Constants.ROLE_NURSE);
     this.employeeRoleStore.addEmployeeRole(Constants.ROLE_COORDINATOR, Constants.ROLE_COORDINATOR);

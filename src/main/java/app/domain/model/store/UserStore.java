@@ -23,8 +23,4 @@ public class UserStore implements Serializable {
     for (User user : users)
       authFacade.addUserWithRole(user.getName(), user.getEmail(), user.getPassword(), user.getRoleId());
   }
-
-  public List<User> getUsers() {
-    return users;
-  }
 }
