@@ -62,29 +62,66 @@ public class FileUtils {
 
     /**
      * 
-     * @param dateIntervals String array with date intervals
-     * @return generated filename according to specifications
+     * @param fileName filename to sanitize
+     * @return sanitized filename
      */
-    public static String generateFileName(String[] dateIntervals) {
-        String fileName = "";
+    public static String sanitizeFileName(String fileName) {
+        String newFileName = fileName;
+        newFileName = removeExtension(fileName) + ".csv";
 
-        String pathName = convertDatesIntervalToPathName(dateIntervals[0], dateIntervals[dateIntervals.length - 1]);
-        fileName = OUTPUT_BASE_PATH + pathName + "_data.csv";
+        newFileName = removeSpecialChars(newFileName);
+        buildDirStructure(OUTPUT_BASE_PATH);
+        newFileName = OUTPUT_BASE_PATH + newFileName;
 
-        return fileName;
+        return newFileName;
     }
 
     /**
      * 
-     * @param beginningDateInterval first date interval
-     * @param endDateInterval last date interval
-     * @return String with the file's name corresponding to first and last intervals of dates' array
+     * @param fileName filename to check if has extension
+     * @return true or false depending on whether the filename has extension or not
      */
-    public static String convertDatesIntervalToPathName(String beginningDateInterval, String endDateInterval) {
-        String firstDate = beginningDateInterval.substring(0, 10);
-        int startIndexOfEndDate = endDateInterval.indexOf("/") + 1;
-        String secondDate = endDateInterval.substring(startIndexOfEndDate);
+    public static boolean hasNoExtension(String fileName) {
+        return fileName.indexOf(".") == -1;
+    }
 
-        return firstDate + "_" + secondDate;
+    /**
+     * 
+     * @param fileName
+     * @return
+     */
+    public static String removeExtension(String fileName) {
+        if (hasNoExtension(fileName)) return fileName;
+
+        return fileName.substring(0, fileName.lastIndexOf("."));
+    }
+
+    /**
+     * 
+     * @param fileName filename to check if has special characters
+     * @return filename without special characters
+     */
+
+    public static String removeSpecialChars(String fileName) {
+        String newFileName = fileName;
+
+        for (int i = 0; i < BANNED_CHARS.length; i++)
+            newFileName = newFileName.replace(BANNED_CHARS[i], "");
+
+        return newFileName;
+    }
+
+    /**
+     * 
+     * @param dirStructure directory structure
+     */
+    public static void buildDirStructure(String dirStructure) {
+
+        File dirPath = new File(dirStructure);
+
+        if (!dirPath.exists() || !dirPath.isDirectory()) {
+            dirPath.mkdirs();
+        }
+
     }
 }

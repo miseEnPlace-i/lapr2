@@ -1,6 +1,7 @@
 package app.ui.gui;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -16,6 +17,7 @@ import app.controller.ExportCenterStatisticsController;
 import app.controller.FindCoordinatorVaccinationCenterController;
 import app.domain.model.CsvExporter;
 import app.exception.NotAuthorizedException;
+import app.service.FileUtils;
 import app.service.FullyVaccinatedData;
 import app.session.EmployeeSession;
 import javafx.collections.FXCollections;
@@ -61,6 +63,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
   private LinkedHashMap<Calendar, Integer> dataMap = new LinkedHashMap<>();
   private FullyVaccinatedData fullyVaccinatedData;
   private CsvExporter csvExporter;
+  private String fileName;
 
   @FXML
   private MenuItem help;
@@ -129,15 +132,16 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     try {
       displayExportInformation();
       if (validateDates() && validateFilePath()) {
-        fullyVaccinatedData = ctrl.createFullyVaccinatedData(txtFileName.getText(), getStartDate(), getEndDate());
+        fileName = FileUtils.sanitizeFileName(txtFileName.getText());
+        fullyVaccinatedData = ctrl.createFullyVaccinatedData(fileName, getStartDate(), getEndDate());
         // dataMap = ctrl.generateFullyVaccinatedUsersInterval(fullyVaccinatedData);
 
         // FOR TESTING
         dataMap.put(getStartDate(), 100);
         dataMap.put(getEndDate(), 200);
         checkData(dataMap);
-        csvExporter = ctrl.createCsvExporter(txtFileName.getText());
-        if (!ctrl.saveData(txtFileName.getText(), csvExporter.toExportFileString(dataMap, "Date;NumberOfFullyVaccinatedUsers\n", ";"))) {
+        csvExporter = ctrl.createCsvExporter(fileName);
+        if (!ctrl.saveData(fileName, csvExporter.toExportFileString(dataMap, "Date;NumberOfFullyVaccinatedUsers\n", ";"))) {
           displayErrorAlert();
         }
       } else if (!validateDates() || !validateFilePath()) {
@@ -250,8 +254,8 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
     StringBuilder sb = new StringBuilder();
     sb.append(String.format("Data from the Center: %s ", lblCenterName.getText()));
-    sb.append(String.format("\nFile Path Name: %s ", txtFileName.getText()));
-    sb.append(String.format("\nExport center statistics from: %s", format.format(getStartDate().getTime())));
+    sb.append(String.format("\nFile Name: %s ", FileUtils.sanitizeFileName(txtFileName.getText())));
+    sb.append(String.format("\nCenter statistics from: %s", format.format(getStartDate().getTime())));
     sb.append(String.format("\nTo: %s", format.format(getEndDate().getTime())));
 
     return sb.toString();
@@ -268,7 +272,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     alert.setTitle("Help Exporting Center Statistics");
     alert.setHeaderText("How it works?");
     alert.setContentText(
-        "File destination: you can select where to save the file by clicking on the button 'Select File Destination'.\n\nDates: select days from the past and not in the future. You select the pretended interval on the calendars.");
+        "File name: write on the text area 'File name' the name you want to give to your file. Remember, you are going to export a CSV file\n\nDates: select days from the past and not in the future. You select the pretended interval on the calendars.");
     alert.showAndWait();
   }
 
