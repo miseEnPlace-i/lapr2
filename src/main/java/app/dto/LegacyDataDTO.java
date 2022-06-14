@@ -7,7 +7,7 @@ import java.util.Calendar;
  * 
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
-public class LegacyDataDTO {
+public class LegacyDataDTO implements Comparable<LegacyDataDTO> {
     private String snsNumber;
     private String vaccineName;
     private int dose;
@@ -59,5 +59,13 @@ public class LegacyDataDTO {
 
     public Calendar getDepartureDate() {
         return departureDate;
+    }
+
+    @Override
+    public int compareTo(LegacyDataDTO o) {
+        int compare = this.arrivalDate.compareTo(o.arrivalDate);
+        if (compare == 0) compare = this.departureDate.compareTo(o.departureDate);
+
+        return compare;
     }
 }

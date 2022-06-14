@@ -24,6 +24,8 @@ public class Constants {
   public static final String PARAMS_SENDER = "MessageSender.Sender";
   public static final String PARAMS_DEFAULT_SENDER = "app.service.sender.ConsoleSender";
 
+  public static final String PARAMS_SORTING_ALGORITHM = "LegacyData.SortingAlgorithm";
+
   public static final String PARAMS_TEST_ENVIRONMENT = "Environment.Test";
   public static final byte VACCINE_TYPE_CODE_LENGTH = 5;
 

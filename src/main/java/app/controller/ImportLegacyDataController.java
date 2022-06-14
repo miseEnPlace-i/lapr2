@@ -18,6 +18,8 @@ import app.domain.model.store.SNSUserStore;
 import app.dto.LegacyDataDTO;
 import app.exception.NotFoundException;
 import app.mapper.LegacyDataMapper;
+import app.service.sorting.ISortStrategy;
+import app.service.sorting.SortFactory;
 
 public class ImportLegacyDataController {
     private Company company;
@@ -54,7 +56,10 @@ public class ImportLegacyDataController {
         }
     }
 
-    public void sort(List<LegacyDataDTO> legacyDtoList) {}
+    public void sort(List<LegacyDataDTO> legacyDtoList) {
+        ISortStrategy sortStrategy = SortFactory.getSortStrategy();
+        sortStrategy.doSort(legacyDtoList);
+    }
 
     public void save(List<LegacyDataDTO> legacyDtoList) {
         AppointmentScheduleList aptSchList = this.center.getAppointmentList();
