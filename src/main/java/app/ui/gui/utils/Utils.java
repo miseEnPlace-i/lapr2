@@ -2,6 +2,7 @@ package app.ui.gui.utils;
 
 import java.util.Optional;
 import app.controller.App;
+import app.domain.shared.HelpText;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -63,11 +64,11 @@ public class Utils {
     }
   }
 
-  public static void showHelp(String title, String text) {
+  public static void showHelp(String title, HelpText text) {
     Alert alert = new Alert(AlertType.INFORMATION);
     alert.setTitle(title);
     alert.setHeaderText(null);
-    alert.setContentText(text);
+    alert.setContentText(text.toString());
 
     alert.showAndWait();
   }

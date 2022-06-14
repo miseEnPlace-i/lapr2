@@ -1,5 +1,6 @@
 package app.ui.gui;
 
+import app.domain.shared.HelpText;
 import app.ui.console.ListUsersInWaitingRoomUI;
 import app.ui.gui.utils.Utils;
 import javafx.event.ActionEvent;
@@ -22,8 +23,7 @@ public class NurseUI extends EmployeeRoleUI {
 
   @Override
   void handleHelp(ActionEvent event) {
-    String helpText = "help help \n\n123\n\n\n1111";
-    Utils.showHelp("Nurse Help", helpText);
+    Utils.showHelp("Nurse Help", HelpText.NURSE);
   }
 
   @Override
