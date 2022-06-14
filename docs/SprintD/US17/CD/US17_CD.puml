@@ -1,150 +1,182 @@
 @startuml US17_CD
 skinparam classAttributeIconSize 0
 
-class Appointment {
-  - Date appointmentTime
-  - SNSUser snsUser
-  - VaccineType vaccineType
-  ---
-  + Appointment(appointmentTime, snsUser, vaccineType)
-  + getCenter()
-  + getDate()
-  + getSNSUser()
-  + getVaccineType()
+package core {
+  package domain {
+    package model {
+      class Appointment {
+        - Date appointmentTime
+        - SNSUser snsUser
+        - VaccineType vaccineType
+        ---
+        + Appointment(appointmentTime, snsUser, vaccineType)
+        + getCenter()
+        + getDate()
+        + getSNSUser()
+        + getVaccineType()
+      }
+
+      class Administration {
+        - SNSUser snsUser
+        - Vaccine vaccine
+        - String lotNumber
+        - int doseNumber
+        - VaccinationCenter center
+        - Date administrationDate
+        ---
+        Administration(snsUser, vaccine, lotNumber, doseNumber, center, administrationDate)
+      }
+
+      class Arrival {
+        - Date arrivalTime
+        - int status
+      }
+
+      class CenterEvent {
+        - events: List<CenterEvent>
+        ---
+        + CenterEvent()
+      }
+
+      class Company {
+        - String designation
+        ---
+        + Company(designation)
+        + getVaccinationCenterStore()
+      }
+
+      class Coordinator {}
+
+      class Employee {
+        - id: String
+        - address: String
+        - phoneNumber: String
+        - citizenCardNumber: String
+        ---
+        + Employee(id, name, address, phoneNumber, email, citizenCardNumber, roleId)
+        + getId()
+        + getName()
+        + getAddress()
+        + getPhoneNumber()
+        + getEmail()
+        + getCitizenCardNumber()
+        + getPassword()
+        + getRoleId()
+      }
+
+      class SNSUser {
+        - String citizenCard
+        - String snsNumber
+        - Date birthDay
+        - Char gender
+        - String phoneNumber
+        - String address
+        + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
+      }
+
+      class VaccinationCenter {
+        - name: String
+        - address: String
+        - emailAddress: String
+        - phoneNumber: String
+        - faxNumber: String
+        - websiteAddress: String
+        - openingHours: String
+        - closingHours: String
+        - slotDuration: int
+        - maximumVaccinesPerSlot: int
+        - coordinator: EMPLOYEE
+        ---
+        + VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
+        + getName()
+        + getCoordinator()
+      }
+
+      class Vaccine {}
+      
+      package store {
+        class SNSUserStore {}
+
+        class VaccinationCenterStore {
+          + createVaccinationCenter(centerData, coordinator)
+          + validateVaccinatonCenter(center)
+          + saveVaccinationCenter(center)
+          + checkDuplicates(center)
+          + addVaccinationCenter(center)
+        }
+
+        class VaccineStore {
+          + createVaccinationCenter(centerData, coordinator)
+          + validateVaccinatonCenter(center)
+          + saveVaccinationCenter(center)
+          + checkDuplicates(center)
+          + addVaccinationCenter(center)
+        }
+      }
+
+      package list {
+        class AppointmentScheduleList {}
+        class AdministrationList {}
+        class CenterEventList {
+          - events: List<CenterEvent>
+          ---
+          + CenterEventList()
+        }
+        class WaitingRoom {}
+      }
+    }
+
+    package ui {
+      class ImportLegacyDataUI {}
+    }
+
+    package controller {
+      class ImportLegacyDataController {
+        ---
+        + create()
+        + save()
+        + stringifyData()
+      }
+    }
+  }
+
+  package service {
+    class CSVReader {
+      - String filePathName
+
+      + readLegacyData()
+    }
+
+    interface ICSVReader {
+      + read(filedata)
+    }
+
+    class HeaderCSVReader { 
+      + read(filedata)
+    }
+
+    class MissingHeaderCSVReader{
+      + read(filedata)
+    }
+
+    class SortFactory {
+      + getSortStrategy()
+    }
+
+    interface ISortStrategy {
+      + doSort(data)
+    }
+
+    class MergeSort {
+      + doSort(data)
+    }
+
+    class BubbleSort {
+      + doSort(data)
+    }
+  }
 }
 
-class AppointmentScheduleList {}
-
-class Administration {
-  - SNSUser snsUser
-  - Vaccine vaccine
-  - String lotNumber
-  - int doseNumber
-  - VaccinationCenter center
-  - Date administrationDate
-  ---
-  Administration(snsUser, vaccine, lotNumber, doseNumber, center, administrationDate)
-}
-
-class AdministrationList {}
-
-class Arrival {
-  - Date arrivalTime
-  - int status
-}
-
-class CenterEventList {
-  - events: List<CenterEvent>
-  ---
-  + CenterEventList()
-}
-
-class CenterEvent {
-  - events: List<CenterEvent>
-  ---
-  + CenterEvent()
-}
-
-class Company {
-  - String designation
-  ---
-  + Company(designation)
-  + getVaccinationCenterStore()
-}
-
-class Coordinator {}
-
-class CSVReader {
-  - String filePathName
-
-  + readLegacyData()
-}
-
-interface ICSVReader{
-  read(filedata)
-}
-
-class HeaderCSVReader { 
-  + read(filedata)
-}
-
-class MissingHeaderCSVReader{
-  + read(filedata)
-}
-
-class Employee {
-  - id: String
-  - address: String
-  - phoneNumber: String
-  - citizenCardNumber: String
-  ---
-  + Employee(id, name, address, phoneNumber, email, citizenCardNumber, roleId)
-  + getId()
-  + getName()
-  + getAddress()
-  + getPhoneNumber()
-  + getEmail()
-  + getCitizenCardNumber()
-  + getPassword()
-  + getRoleId()
-}
-
-class ImportLegacyDataUI {}
-
-class ImportLegacyDataController {
-  ---
-  + create()
-  + save()
-  + stringifyData()
-}
-
-class SNSUser {
-  - String citizenCard
-  - String snsNumber
-  - Date birthDay
-  - Char gender
-  - String phoneNumber
-  - String address
-  + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
-}
-
-class SNSUserStore {}
-
-class VaccinationCenter {
-  - name: String
-  - address: String
-  - emailAddress: String
-  - phoneNumber: String
-  - faxNumber: String
-  - websiteAddress: String
-  - openingHours: String
-  - closingHours: String
-  - slotDuration: int
-  - maximumVaccinesPerSlot: int
-  - coordinator: EMPLOYEE
-  ---
-  + VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slotDuration,maximumVaccinesPerSlot,coordinator)
-  + getName()
-  + getCoordinator()
-}
-
-class VaccinationCenterStore {
-  + createVaccinationCenter(centerData, coordinator)
-  + validateVaccinatonCenter(center)
-  + saveVaccinationCenter(center)
-  + checkDuplicates(center)
-  + addVaccinationCenter(center)
-}
-
-class VaccineStore {
-  + createVaccinationCenter(centerData, coordinator)
-  + validateVaccinatonCenter(center)
-  + saveVaccinationCenter(center)
-  + checkDuplicates(center)
-  + addVaccinationCenter(center)
-}
-
-class Vaccine {}
 
 
 AdministrationList "1" --> "*" Administration : stores
@@ -160,12 +192,17 @@ CSVReader --> ICSVReader : uses
 
 Employee <|-- Coordinator
 
-ICSVReader <.. MissingHeaderCSVReader
-ICSVReader <.. HeaderCSVReader
+ICSVReader o-- MissingHeaderCSVReader
+ICSVReader o-- HeaderCSVReader
 
 ImportLegacyDataController ..> Company
-
+ImportLegacyDataController --> SortFactory : uses
 ImportLegacyDataController --> CSVReader : uses
+
+SortFactory --> ISortStrategy : uses
+
+ISortStrategy o-- MergeSort
+ISortStrategy o-- BubbleSort
 
 ImportLegacyDataUI ..> ImportLegacyDataController
 
@@ -177,7 +214,7 @@ SNSUserStore "1" --> "*" SNSUser : stores
 
 VaccinationCenter ..> AppointmentScheduleList
 VaccinationCenter ..> CenterEventList
-VaccinationCenter ..> WaitingRoomList
+VaccinationCenter ..> WaitingRoom
 
 AppointmentScheduleList "1" --> "*" Appointment : stores
 CenterEventList "1" --> "*" CenterEvent : stores
@@ -186,6 +223,6 @@ VaccinationCenterStore "1" --> "*" VaccinationCenter : stores
 
 VaccineStore "1" --> "*" Vaccine : stores
 
-WaitingRoomList "1" --> "*" Arrival : stores
+WaitingRoom "1" --> "*" Arrival : stores
 
 @enduml
