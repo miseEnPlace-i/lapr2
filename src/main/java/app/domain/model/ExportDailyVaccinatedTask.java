@@ -1,10 +1,12 @@
 package app.domain.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TimerTask;
 import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineTypeStore;
+import app.domain.shared.Constants;
 
 public class ExportDailyVaccinatedTask extends TimerTask {
 
@@ -39,6 +41,29 @@ public class ExportDailyVaccinatedTask extends TimerTask {
             }
             dataMap.put(centerLst.get(i), centerDataMap);
         }
+    }
+
+    public String convertToString(List<VaccinationCenter> centers, List<VaccineType> types, HashMap<VaccinationCenter, HashMap> data){
+        String result = "";
+
+        //HEADER
+        for (int i = 0; i < types.size(); i++) {
+            result += types.get(i).getCode() + Constants.FILE_SEPARATOR_DAILY_VACCINATED;
+        }
+        result += "\n";
+
+
+        for (int i = 0; i < centers.size(); i++) {
+            result += centers.get(i).getName() + Constants.FILE_SEPARATOR_DAILY_VACCINATED;
+            for (int j = 0; j < types.size(); j++) {       
+
+                int value = data.get(centers.get(i)).get(types.get(i)) != null ? (int) data.get(centers.get(i)).get(types.get(i)) : 0;
+
+                result += String.valueOf(value) + Constants.FILE_SEPARATOR_DAILY_VACCINATED;                
+            }
+            result += "\n";
+        }
+        return result;
     }
     
 }
