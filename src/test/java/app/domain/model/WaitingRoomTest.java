@@ -2,10 +2,15 @@ package app.domain.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import java.text.ParseException;
 import java.util.Calendar;
+import java.util.Date;
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Before;
 import org.junit.Test;
 import app.domain.shared.Gender;
+import app.service.CalendarUtils;
 import app.utils.Time;
 
 public class WaitingRoomTest {
@@ -51,5 +56,38 @@ public class WaitingRoomTest {
 
     waitingRoom.saveArrival(arrival);
     assertTrue(waitingRoom.hasSNSUserArrivedToday(appointment.getSnsUser()));
+  }
+
+  @Test
+  public void ensureHasSnsUserArrivedTodayIsWorking2() {
+    SNSUser snsUser2 =
+        new SNSUser("00000000", "123456789", "name", Calendar.getInstance().getTime(), Gender.MALE, "+351212345678", "email@email.com", "address");
+    assertFalse(waitingRoom.hasSNSUserArrivedToday(snsUser2));
+  }
+
+  @Test
+  public void ensureRemoveUserIsWorking() {
+    Arrival arrival = waitingRoom.createArrival(appointment, Calendar.getInstance());
+
+    waitingRoom.saveArrival(arrival);
+
+    assertEquals(waitingRoom.size(), 1);
+
+    waitingRoom.removeUser(appointment.getSnsUser());
+
+    assertEquals(waitingRoom.size(), 0);
+  }
+
+  @Test
+  public void ensureRemoveLastArrivalIsWorking() {
+    Arrival arrival = waitingRoom.createArrival(appointment, Calendar.getInstance());
+
+    waitingRoom.saveArrival(arrival);
+
+    assertEquals(waitingRoom.size(), 1);
+
+    waitingRoom.removeLastArrival();
+
+    assertEquals(waitingRoom.size(), 0);
   }
 }

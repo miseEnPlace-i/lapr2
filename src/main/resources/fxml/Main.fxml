@@ -10,6 +10,14 @@
    <center>
       <VBox alignment="CENTER" prefHeight="457.0" prefWidth="600.0" spacing="16.0" BorderPane.alignment="CENTER">
          <children>
+            <Label text="Menu">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="30.0" />
+               </VBox.margin>
+            </Label>
             <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#btnLogin" prefHeight="32.0" prefWidth="320.0" text="Do Login">
                <VBox.margin>
                   <Insets />
@@ -24,10 +32,13 @@
       </VBox>
    </center>
    <top>
-      <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="80.0" prefWidth="36.0" text="Menu" BorderPane.alignment="CENTER">
+      <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="80.0" prefWidth="36.0" text="DGS Vaccination Manager" BorderPane.alignment="CENTER">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="30.0" />
          </font>
+         <BorderPane.margin>
+            <Insets bottom="-50.0" top="30.0" />
+         </BorderPane.margin>
       </Label>
    </top>
 </BorderPane>

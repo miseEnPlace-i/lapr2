@@ -77,10 +77,10 @@ public class ArrivalDTO {
 
     sb.append(String.format("Name: %s%n", name));
     sb.append(String.format("Gender: %s%n", gender));
-    sb.append(String.format("BirthDate: %s%n", birthDate));
+    sb.append(String.format("Birth Date: %s%n", birthDate));
     sb.append(String.format("SNS User Number: %s%n", snsUserNumber));
     sb.append(String.format("Phone Number: %s%n", phoneNumber));
-    sb.append(String.format("Time: %s%n", time));
+    sb.append(String.format("Arrival Time: %s", time));
 
     return sb.toString();
   }

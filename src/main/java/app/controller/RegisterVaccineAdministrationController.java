@@ -46,8 +46,8 @@ public class RegisterVaccineAdministrationController implements IRegisterControl
   public RegisterVaccineAdministrationController(Company company, EmployeeSession nurseSession) {
     this.company = company;
     this.nurseSession = nurseSession;
-    this.vaccineStore = company.getVaccineStore();
-    this.snsUserStore = company.getSNSUserStore();
+    this.vaccineStore = this.company.getVaccineStore();
+    this.snsUserStore = this.company.getSNSUserStore();
   }
 
   /**
@@ -58,15 +58,12 @@ public class RegisterVaccineAdministrationController implements IRegisterControl
    * @return the UserVaccinationInfoDTO containing the User Vaccination Info
    */
   public UserVaccinationInfoDTO getUserVaccinationInfoFromArrival(ArrivalDTO arrivalDTO) {
-    String snsNumber = arrivalDTO.getSnsUserNumber();
-    snsUser = snsUserStore.findSNSUserByNumber(snsNumber);
+    snsUser = getSNSUserFromArrival(arrivalDTO);
 
     String name = snsUser.getName();
     int age = snsUser.getAge();
 
-    userHealthData = snsUser.getUserHealthData();
-
-    vaccineAdministrationList = userHealthData.getVaccineAdministrationList();
+    vaccineAdministrationList = getVaccineAdministrationListFromArrival(arrivalDTO);
 
     List<AdverseReactionDTO> adverseReactionsDto = vaccineAdministrationList.getAdverseReactions();
 
@@ -81,6 +78,8 @@ public class RegisterVaccineAdministrationController implements IRegisterControl
    * @return the VaccineDTO containing the last taken vaccine
    */
   public VaccineDTO getLastTakenVaccineFromArrival(ArrivalDTO arrivalDto) {
+    vaccineAdministrationList = getVaccineAdministrationListFromArrival(arrivalDto);
+
     Appointment appointment = arrivalDto.getAppointment();
 
     VaccineType vaccineType = appointment.getVaccineType();
@@ -101,6 +100,7 @@ public class RegisterVaccineAdministrationController implements IRegisterControl
 
     VaccineType vaccineType = appointment.getVaccineType();
 
+    snsUser = getSNSUserFromArrival(arrivalDto);
     int age = snsUser.getAge();
 
     return vaccineStore.getVaccinesByVaccineTypeWithAdminProcessForAge(vaccineType, age);
@@ -113,13 +113,15 @@ public class RegisterVaccineAdministrationController implements IRegisterControl
    * 
    * @return the DosageInfoDTO containing the dosage info
    */
-  public DosageInfoDTO getDosageInfoFromVaccineBySnsUser(VaccineDTO vaccineDTO) {
+  public DosageInfoDTO getDosageInfoFromVaccineBySnsUser(VaccineDTO vaccineDTO, ArrivalDTO arrivalDTO) {
     String id = vaccineDTO.getId();
 
     Vaccine vaccine = vaccineStore.findVaccineById(id);
 
+    snsUser = getSNSUserFromArrival(arrivalDTO);
     int age = snsUser.getAge();
 
+    vaccineAdministrationList = getVaccineAdministrationListFromArrival(arrivalDTO);
     int doseNumber = vaccineAdministrationList.getNextDoseNumberOfVaccine(vaccine);
 
     int dosage = vaccine.getDosageByDoseNumberAndAge(doseNumber, age);
@@ -127,7 +129,17 @@ public class RegisterVaccineAdministrationController implements IRegisterControl
     return DosageInfoMapper.toDto(doseNumber, dosage);
   }
 
+  /**
+   * Creates a new Vaccine Administration.
+   * 
+   * @param arrivalDTO ArrivalDTO
+   * @param vaccineDTO VaccineDTO
+   * @param lotNumber String
+   * @param doseNumber int
+   */
   public void createVaccineAdministration(ArrivalDTO arrivalDTO, VaccineDTO vaccineDTO, String lotNumber, int doseNumber) {
+    vaccineAdministrationList = getVaccineAdministrationListFromArrival(arrivalDTO);
+
     String id = vaccineDTO.getId();
 
     Vaccine vaccine = vaccineStore.findVaccineById(id);
@@ -179,5 +191,16 @@ public class RegisterVaccineAdministrationController implements IRegisterControl
   @Override
   public void save() {
     this.vaccineAdministrationList.saveVaccineAdministration(this.vaccineAdministration);
+  }
+
+  private VaccineAdministrationList getVaccineAdministrationListFromArrival(ArrivalDTO arrivalDto) {
+    snsUser = getSNSUserFromArrival(arrivalDto);
+    userHealthData = snsUser.getUserHealthData();
+    return userHealthData.getVaccineAdministrationList();
+  }
+
+  private SNSUser getSNSUserFromArrival(ArrivalDTO arrivalDto) {
+    String snsNumber = arrivalDto.getSnsUserNumber();
+    return snsUserStore.findSNSUserByNumber(snsNumber);
   }
 }
