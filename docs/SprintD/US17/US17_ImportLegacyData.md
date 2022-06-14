@@ -28,6 +28,12 @@ _"As a center coordinator, I want to import data from a legacy system that was u
 
 <!-- TODO -->
 <!-- ? Identify here any found out dependency to other US and/or requirements. -->
+- There is a dependency with 
+- register sns user
+- register employee
+- f
+- f
+- 
 
 ### 1.5 Input and Output Data
 
