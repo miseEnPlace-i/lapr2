@@ -111,8 +111,14 @@ public class App {
     return comp;
   }
 
-  public void saveCurrentCompany() {
-    writeCompany(this.company, Constants.DATA_FILE_PATH);
+  public boolean saveCurrentCompany() {
+    try {
+      writeCompany(this.company, Constants.DATA_FILE_PATH);
+      return true;
+    } catch (Exception e) {
+      System.out.println("Error saving company");
+      return false;
+    }
   }
 
   private void writeCompany(Company comp, String filePath) {

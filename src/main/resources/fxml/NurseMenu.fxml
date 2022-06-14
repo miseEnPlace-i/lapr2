@@ -34,17 +34,15 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem mnemonicParsing="false" text="Go to menu" />
-                  <MenuItem mnemonicParsing="false" text="Users" />
-              <MenuItem mnemonicParsing="false" text="Save session" />
-                  <MenuItem mnemonicParsing="false" text="Exit" />
-                  <MenuItem mnemonicParsing="false" text="Close" />
+                  <MenuItem fx:id="menuGoToMenu" mnemonicParsing="false" onAction="#handleGoToMenu" text="Go to menu" />
+              <MenuItem fx:id="menuSaveSession" mnemonicParsing="false" onAction="#handleSaveSession" text="Save session" />
+                  <MenuItem fx:id="menuLogout" mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
+                  <MenuItem fx:id="menuExit1" mnemonicParsing="false" onAction="#handleExit" text="Exit" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="About">
             <items>
-              <MenuItem mnemonicParsing="false" text="Development Team" />
-                  <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem fx:id="menuDevelopmentTeam" mnemonicParsing="false" onAction="#handleDevelopmentTeam" text="Development Team" />
             </items>
           </Menu>
         </menus>
