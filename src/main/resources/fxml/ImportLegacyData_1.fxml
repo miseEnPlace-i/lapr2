@@ -96,17 +96,20 @@
                   <Font size="15.0" />
                </font>
             </Label>
+            <HBox alignment="CENTER" prefWidth="900.0" spacing="8.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#btnSelect" text="Select file" />
+                  <Label fx:id="lblSelectedFile" text="No file selected.">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+               </children>
+            </HBox>
             <Label text="Valid file types: .csv">
                <font>
                   <Font name="System Italic" size="12.0" />
                </font>
             </Label>
-            <HBox alignment="CENTER" prefWidth="900.0" spacing="8.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#btnSelect" text="Select file" />
-                  <Label fx:id="lblSelectedFile" text="No file selected." />
-               </children>
-            </HBox>
          </children>
       </VBox>
    </children>
