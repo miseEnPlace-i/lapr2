@@ -24,7 +24,7 @@ import pt.isep.lei.esoft.auth.UserSession;
 public class Company implements Serializable {
   private String designation;
   private String ongoingOutbreakVaccineTypeCode;
-  private transient AuthFacade authFacade = new AuthFacade();
+  private transient AuthFacade authFacade;
   private EmployeeStore employeeStore;
   private EmployeeRoleStore employeeRoleStore;
   private SNSUserStore snsUserStore;
@@ -47,6 +47,7 @@ public class Company implements Serializable {
 
     this.designation = designation;
 
+    this.authFacade = new AuthFacade();
     this.userStore = new UserStore();
     this.employeeRoleStore = new EmployeeRoleStore(this.authFacade);
     this.employeeStore = new EmployeeStore(this.authFacade, this.userStore, this.employeeRoleStore);

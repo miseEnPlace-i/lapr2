@@ -18,4 +18,9 @@ public class MyUserRole implements Serializable {
   public String getDescription() {
     return description;
   }
+
+  @Override
+  public String toString() {
+    return description;
+  }
 }

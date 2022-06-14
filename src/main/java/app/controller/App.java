@@ -36,7 +36,7 @@ import pt.isep.lei.esoft.auth.UserSession;
  */
 public class App {
   private Company company;
-  private transient AuthFacade authFacade = new AuthFacade();
+  private transient AuthFacade authFacade;
   private EmployeeStore employeeStore;
   private EmployeeRoleStore employeeRoleStore;
   private VaccineTechnologyStore vaccineTechnologyStore;
@@ -48,6 +48,9 @@ public class App {
 
   private App() {
     loadCompany();
+
+    if (this.company.getAuthFacade() == null) this.authFacade = new AuthFacade();
+    else this.authFacade = this.company.getAuthFacade();
 
     this.employeeStore = this.company.getEmployeeStore();
     this.employeeRoleStore = this.company.getEmployeeRoleStore();
@@ -103,6 +106,10 @@ public class App {
     }
 
     return comp;
+  }
+
+  public void saveCurrentCompany() {
+    writeCompany(this.company, Constants.DATA_FILE_PATH);
   }
 
   private void writeCompany(Company comp, String filePath) {
@@ -172,6 +179,7 @@ public class App {
     // *******************************
 
     this.authFacade.addUserWithRole("Test Administrator", "admin@user.com", "123456", Constants.ROLE_ADMIN);
+    this.userStore.addUser("Test Administrator", "admin@user.com", "123456", Constants.ROLE_ADMIN);
 
     Calendar date = Calendar.getInstance();
     date.add(Calendar.YEAR, -18);

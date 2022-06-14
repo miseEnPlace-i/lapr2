@@ -101,7 +101,7 @@ public class SNSUserStore implements Serializable {
     String pwd = pwdGenerator.generatePwd();
 
     authFacade.addUserWithRole(snsUser.getName(), email, pwd, Constants.ROLE_SNS_USER);
-    userStore.addUser(snsUser.getName(), pwd, email, Constants.ROLE_SNS_USER);
+    userStore.addUser(snsUser.getName(), email, pwd, Constants.ROLE_SNS_USER);
 
     addSNSUser(snsUser);
 

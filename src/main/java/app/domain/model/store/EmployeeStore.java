@@ -100,7 +100,7 @@ public class EmployeeStore implements Serializable {
     String pwd = pwdGenerator.generatePwd();
 
     this.authFacade.addUserWithRole(employee.getName(), email, pwd, employee.getRoleId());
-    this.userStore.addUser(employee.getName(), pwd, email, employee.getRoleId());
+    this.userStore.addUser(employee.getName(), email, pwd, employee.getRoleId());
 
     String message = String.format("A new user has been created.\nEmail: %s\nPassword: %s", email, pwd);
     UserNotificationDTO notificationDto = UserNotificationMapper.toDto(email, phoneNumber, message);

@@ -13,8 +13,8 @@ public class UserStore implements Serializable {
     this.users = new ArrayList<User>();
   }
 
-  public boolean addUser(String name, String password, String email, String roleId) {
-    User user = new User(name, password, email, roleId);
+  public boolean addUser(String name, String email, String password, String roleId) {
+    User user = new User(name, email, password, roleId);
 
     return users.add(user);
   }
