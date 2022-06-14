@@ -3,6 +3,7 @@ package app.service;
 import java.text.SimpleDateFormat;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,7 @@ public class FullyVaccinatedData {
     private Calendar startDate;
     private Calendar endDate;
     private VaccinationCenter center;
-    private Map<Calendar, Integer> dataMap;
+    private Map<Calendar, Integer> dataMap = new HashMap<>();
     private int snsUserAge;
     private SNSUser snsUser;
     private Vaccine vaccine;
@@ -109,8 +110,7 @@ public class FullyVaccinatedData {
                     nOfFullyVaccinated += 1;
                 }
             }
-
-            dataMap.put(currentDay, nOfFullyVaccinated);
+            this.dataMap.put(currentDay, nOfFullyVaccinated);
 
             currentDay.add(Calendar.DAY_OF_MONTH, 1);
         }
@@ -166,6 +166,18 @@ public class FullyVaccinatedData {
             sb.append("\n");
         }
 
+        return sb.toString();
+    }
+
+    public String toExportFileString(Map<Calendar, Integer> data) {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Date;NumberOfFullyVaccinatedUsers\n");
+        for (Map.Entry<Calendar, Integer> entry : data.entrySet()) {
+            sb.append(format.format(entry.getKey().getTime()) + ";" + entry.getValue());
+            sb.append("\n");
+        }
         return sb.toString();
     }
 }

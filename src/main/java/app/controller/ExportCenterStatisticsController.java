@@ -5,7 +5,6 @@ import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import app.domain.model.Company;
-import app.domain.model.CsvExporter;
 import app.domain.model.VaccinationCenter;
 import app.exception.NotAuthorizedException;
 import app.service.FileUtils;
@@ -22,7 +21,6 @@ public class ExportCenterStatisticsController {
     private EmployeeSession session;
     private FullyVaccinatedData exporter;
     private Map<Calendar, Integer> dataMap;
-    private CsvExporter csvExporter;
     private FileUtils fileUtils;
 
     /**
@@ -66,17 +64,6 @@ public class ExportCenterStatisticsController {
     }
 
     /**
-     * Creates CsvExporter
-     * 
-     * @param filePath the file path to save the statistics
-     * @return
-     */
-    public CsvExporter createCsvExporter(String filePath) {
-        csvExporter = new CsvExporter(filePath);
-        return csvExporter;
-    }
-
-    /**
      * Saves data
      * 
      * @param dataMap the hashMap will all information
@@ -87,5 +74,9 @@ public class ExportCenterStatisticsController {
 
     public String dataToString(Map<Calendar, Integer> data) {
         return exporter.toString(data);
+    }
+
+    public String exportFileString(Map<Calendar, Integer> data) {
+        return exporter.toExportFileString(data);
     }
 }
