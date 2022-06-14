@@ -135,6 +135,18 @@ public class Time {
     return isAfter(startTime) && isBefore(endTime);
   }
 
+  /**
+   * @param startTime the start time of the interval.
+   * @param endTime the end time of the interval.
+   * 
+   * @return true if the time is between the given times excluding the end of the interval, false otherwise.
+   */
+  public boolean isBetweenExcludeRight(Time startTime, Time endTime) {
+    if (equals(startTime)) return true;
+
+    return isAfter(startTime) && isBefore(endTime);
+  }
+
   @Override
   public String toString() {
     return String.format("%02d:%02d", hours, minutes);

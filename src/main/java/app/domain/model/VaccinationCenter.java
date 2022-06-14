@@ -1,6 +1,7 @@
 package app.domain.model;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import app.domain.model.list.AppointmentScheduleList;
@@ -25,6 +26,7 @@ public abstract class VaccinationCenter {
   private Slot slot;
   private Employee coordinator;
   private WaitingRoom waitingRoom;
+  private RecoveryRoom recoveryRoom;
   private AppointmentScheduleList appointmentList;
   private CenterEventList eventList;
   private List<VaccineAdministration> vaccineAdministrationList;
@@ -59,6 +61,8 @@ public abstract class VaccinationCenter {
     this.waitingRoom = new WaitingRoom();
     this.appointmentList = new AppointmentScheduleList(this);
     this.eventList = new CenterEventList();
+    this.vaccineAdministrationList = new ArrayList<VaccineAdministration>();
+    this.recoveryRoom = new RecoveryRoom();
   }
 
   /**
@@ -212,12 +216,10 @@ public abstract class VaccinationCenter {
    * @throws IllegalArgumentException if the phone number is null, empty or not valid.
    */
   private void setPhoneNum(String phoneNum) {
-    if (phoneNum == null || phoneNum.isEmpty()) {
-      throw new IllegalArgumentException("Phone number cannot be null or empty.");
-    }
-    if (!FormatVerifier.validatePhoneNumber(phoneNum)) {
-      throw new IllegalArgumentException("Phone number is not valid.");
-    }
+    if (phoneNum == null || phoneNum.isEmpty()) throw new IllegalArgumentException("Phone number cannot be null or empty.");
+
+    if (!FormatVerifier.validatePhoneNumber(phoneNum)) throw new IllegalArgumentException("Phone number is not valid.");
+
     this.phoneNum = phoneNum;
   }
 
@@ -229,12 +231,10 @@ public abstract class VaccinationCenter {
    * @throws IllegalArgumentException if the fax number is null, empty or not valid.
    */
   private void setFaxNum(String faxNum) {
-    if (faxNum == null || faxNum.isEmpty()) {
-      throw new IllegalArgumentException("Fax number cannot be null or empty.");
-    }
-    if (!FormatVerifier.validateFaxNumber(faxNum)) {
-      throw new IllegalArgumentException("Fax number is not valid.");
-    }
+    if (faxNum == null || faxNum.isEmpty()) throw new IllegalArgumentException("Fax number cannot be null or empty.");
+
+    if (!FormatVerifier.validateFaxNumber(faxNum)) throw new IllegalArgumentException("Fax number is not valid.");
+
     this.faxNum = faxNum;
   }
 
@@ -246,12 +246,10 @@ public abstract class VaccinationCenter {
    * @throws IllegalArgumentException if the website address is null, empty or not valid.
    */
   private void setWebAddress(String webAddress) {
-    if (webAddress == null || webAddress.isEmpty()) {
-      throw new IllegalArgumentException("Website address cannot be null or empty.");
-    }
-    if (!FormatVerifier.validateURL(webAddress)) {
-      throw new IllegalArgumentException("Website address is not valid.");
-    }
+    if (webAddress == null || webAddress.isEmpty()) throw new IllegalArgumentException("Website address cannot be null or empty.");
+
+    if (!FormatVerifier.validateURL(webAddress)) throw new IllegalArgumentException("Website address is not valid.");
+
     this.webAddress = webAddress;
   }
 
@@ -314,6 +312,14 @@ public abstract class VaccinationCenter {
 
   public WaitingRoom getWaitingRoom() {
     return waitingRoom;
+  }
+
+  public RecoveryRoom getRecoveryRoom() {
+    return recoveryRoom;
+  }
+
+  public List<VaccineAdministration> getVaccineAdministrations() {
+    return vaccineAdministrationList;
   }
 
   public AppointmentScheduleList getAppointmentList() {

@@ -37,6 +37,7 @@ public class CoordinatorUI extends EmployeeRoleUI {
   void handleAnalyseCenterNavigation(ActionEvent event) {
     try {
       AnalyseCenterPerformanceUI analyseCenterUI = (AnalyseCenterPerformanceUI) this.mainApp.replaceSceneContent("/fxml/AnalyseCenter.fxml");
+      analyseCenterUI.setEmployeeSession(employeeSession);
       analyseCenterUI.init(this);
     } catch (Exception e) {
       Logger.getLogger(CoordinatorUI.class.getName()).log(Level.SEVERE, null, e);

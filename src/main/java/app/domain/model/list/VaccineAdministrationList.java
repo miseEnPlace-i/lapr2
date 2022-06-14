@@ -7,10 +7,13 @@ import java.util.List;
 import app.dto.AdverseReactionDTO;
 import app.dto.VaccineDTO;
 import app.domain.model.AdverseReaction;
+import app.domain.model.RecoveryRoom;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.Vaccine;
 import app.domain.model.VaccineType;
+import app.domain.model.WaitingRoom;
+import app.domain.shared.CenterEventType;
 import app.mapper.AdverseReactionMapper;
 import app.mapper.VaccineMapper;
 import app.domain.model.VaccineAdministration;
@@ -60,10 +63,20 @@ public class VaccineAdministrationList {
     vaccineAdministrations.add(vaccineAdministration);
 
     VaccinationCenter vaccinationCenter = vaccineAdministration.getVaccinationCenter();
-
     vaccinationCenter.addVaccineAdministrationToList(vaccineAdministration);
 
-    // vaccineAdministration.setSMSSending();
+    CenterEventList centerEventList = vaccinationCenter.getEvents();
+
+    SNSUser snsUser = vaccineAdministration.getSnsUser();
+    Calendar date = vaccineAdministration.getDate();
+
+    centerEventList.create(date, CenterEventType.VACCINATED, snsUser);
+
+    WaitingRoom waitingRoom = vaccinationCenter.getWaitingRoom();
+    waitingRoom.removeUser(snsUser);
+
+    RecoveryRoom recoveryRoom = vaccinationCenter.getRecoveryRoom();
+    recoveryRoom.addVaccineAdministration(vaccineAdministration);
   }
 
   /**
@@ -119,5 +132,14 @@ public class VaccineAdministrationList {
     }
 
     return 1;
+  }
+
+  /**
+   * Gets the size of the list.
+   * 
+   * @return int of number of VaccineAdministrations in the list.
+   */
+  public int size() {
+    return vaccineAdministrations.size();
   }
 }

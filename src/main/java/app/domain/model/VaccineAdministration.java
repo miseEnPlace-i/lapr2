@@ -115,6 +115,15 @@ public class VaccineAdministration implements Comparable<VaccineAdministration> 
   }
 
   /**
+   * Gets the vaccine administration date.
+   * 
+   * @return the vaccine administration date
+   */
+  public Calendar getDate() {
+    return date;
+  }
+
+  /**
    * Checks if the vaccine administrated has the given vaccine type.
    * 
    * @param vaccineType the vaccine type to check
