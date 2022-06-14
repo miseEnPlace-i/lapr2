@@ -1,7 +1,9 @@
 package app.domain.model;
 
+import java.io.ObjectInputFilter.Config;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Properties;
 import java.util.Timer;
 import org.apache.commons.lang3.StringUtils;
 import app.domain.model.store.EmployeeRoleStore;
@@ -134,7 +136,7 @@ public class Company {
   }
 
   public void scheduleExportDailyVaccinated(Date firstDate, long period){
-    ExportDailyVaccinatedTask task = new ExportDailyVaccinatedTask(Constants.FILE_PATH_DAILY_VACCINATED, this.vaccinationCenterStore, this.vaccineTypeStore);
+    ExportDailyVaccinatedTask task = new ExportDailyVaccinatedTask(, this.vaccinationCenterStore, this.vaccineTypeStore);
     Timer timer = new Timer();
 
     Calendar firstTime = Calendar.getInstance();

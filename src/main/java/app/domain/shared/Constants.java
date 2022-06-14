@@ -34,7 +34,4 @@ public class Constants {
 
   public static final int MAX_OF_PASSWORD_TRIES = 3;
 
-  public static final String FILE_PATH_DAILY_VACCINATED = "out/docs/DailyVaccinatedByCenter-";
-  public static final String FILE_SEPARATOR_DAILY_VACCINATED = ";";
-
 }

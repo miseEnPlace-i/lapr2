@@ -1,7 +1,6 @@
 package app.domain.model;
 
-import java.text.DateFormat;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -16,11 +15,13 @@ public class ExportDailyVaccinatedTask extends TimerTask {
     String filePath;
     VaccinationCenterStore vacCenterSt;
     VaccineTypeStore vacTypeSt;
+    char separator;
 
-    public ExportDailyVaccinatedTask(String filePath, VaccinationCenterStore vacCenterSt, VaccineTypeStore vacTypeSt){
+    public ExportDailyVaccinatedTask(String filePath, char separator, VaccinationCenterStore vacCenterSt, VaccineTypeStore vacTypeSt){
         this.filePath = filePath;
         this.vacCenterSt = vacCenterSt;
         this.vacTypeSt = vacTypeSt;
+        this.separator = separator;
     }
 
     @Override
@@ -48,8 +49,9 @@ public class ExportDailyVaccinatedTask extends TimerTask {
         String content = convertToString(centerLst, vacTypeLst, dataMap);
         Calendar yesterday = Calendar.getInstance();
         yesterday.add(Calendar.DATE, -1);
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
-        String filepath = Constants.FILE_PATH_DAILY_VACCINATED + yesterday.toString() + ".csv";
+        String filepath = this.filePath + format.format(yesterday) + ".csv";
         FileUtils.writeToFile(filepath, content);
     }
 
@@ -58,18 +60,18 @@ public class ExportDailyVaccinatedTask extends TimerTask {
 
         //HEADER
         for (int i = 0; i < types.size(); i++) {
-            result += types.get(i).getCode() + Constants.FILE_SEPARATOR_DAILY_VACCINATED;
+            result += types.get(i).getDescription() + this.separator;
         }
         result += "\n";
 
 
         for (int i = 0; i < centers.size(); i++) {
-            result += centers.get(i).getName() + Constants.FILE_SEPARATOR_DAILY_VACCINATED;
+            result += centers.get(i).getName() + this.filePath;
             for (int j = 0; j < types.size(); j++) {       
 
                 int value = data.get(centers.get(i)).get(types.get(i)) != null ? (int) data.get(centers.get(i)).get(types.get(i)) : 0;
 
-                result += String.valueOf(value) + Constants.FILE_SEPARATOR_DAILY_VACCINATED;                
+                result += String.valueOf(value) + this.separator;                
             }
             result += "\n";
         }
