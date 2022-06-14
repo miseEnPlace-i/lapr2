@@ -87,6 +87,9 @@ public abstract class RoleUI implements Initializable, IGui {
   }
 
   @FXML
+  abstract void handleHelp(ActionEvent event);
+
+  @FXML
   void handleLogout(ActionEvent event) {
     if (Utils.showConfirmation("Logout?", "Are you sure you want to logout?")) {
       App.getInstance().doLogout();

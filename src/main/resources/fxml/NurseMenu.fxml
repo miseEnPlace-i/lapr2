@@ -36,6 +36,9 @@
             <items>
                   <MenuItem fx:id="menuGoToMenu" mnemonicParsing="false" onAction="#handleGoToMenu" text="Go to menu" />
               <MenuItem fx:id="menuSaveSession" mnemonicParsing="false" onAction="#handleSaveSession" text="Save session" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="menuLogout" mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
                   <MenuItem fx:id="menuExit1" mnemonicParsing="false" onAction="#handleExit" text="Exit" />
             </items>

@@ -62,4 +62,13 @@ public class Utils {
       Platform.exit();
     }
   }
+
+  public static void showHelp(String title, String text) {
+    Alert alert = new Alert(AlertType.INFORMATION);
+    alert.setTitle(title);
+    alert.setHeaderText(null);
+    alert.setContentText(text);
+
+    alert.showAndWait();
+  }
 }
