@@ -56,7 +56,7 @@ public class ExportDailyVaccinatedTask extends TimerTask {
     }
 
     public String convertToString(List<VaccinationCenter> centers, List<VaccineType> types, HashMap<VaccinationCenter, HashMap> data){
-        String result = "";
+        String result = "Center;";
 
         //HEADER
         for (int i = 0; i < types.size(); i++) {
