@@ -59,7 +59,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
   private ExportCenterStatisticsController ctrl;
   private EmployeeSession employeeSession;
   private FindCoordinatorVaccinationCenterController ctrlCenter;
-  private LinkedHashMap<Calendar, Integer> dataMap = new LinkedHashMap<>();
+  private Map<Calendar, Integer> dataMap = new HashMap<>();
   private FullyVaccinatedData fullyVaccinatedData;
   private String fileName;
 
@@ -132,11 +132,11 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
       if (validateDates() && validateFilePath()) {
         fileName = FileUtils.sanitizeFileName(txtFileName.getText());
         fullyVaccinatedData = ctrl.createFullyVaccinatedData(fileName, getStartDate(), getEndDate());
-        // dataMap = ctrl.generateFullyVaccinatedUsersInterval(fullyVaccinatedData);
+        dataMap = ctrl.generateFullyVaccinatedUsersInterval(fullyVaccinatedData);
 
         // FOR TESTING
-        dataMap.put(getStartDate(), 100);
-        dataMap.put(getEndDate(), 200);
+        // dataMap.put(getStartDate(), 100);
+        // dataMap.put(getEndDate(), 200);
         checkData(dataMap);
         if (!ctrl.saveData(fileName, ctrl.exportFileString(dataMap))) {
           displayErrorAlert();

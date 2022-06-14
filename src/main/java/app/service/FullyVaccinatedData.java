@@ -96,7 +96,7 @@ public class FullyVaccinatedData {
         Calendar currentDay = Calendar.getInstance();
         currentDay.setTime(startDate.getTime());
 
-        for (int i = 0; i < nOfDaysBetween; i++) {
+        for (int i = 0; i < nOfDaysBetween + 1; i++) {
 
             int nOfFullyVaccinated = 0;
 
