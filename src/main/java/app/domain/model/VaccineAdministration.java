@@ -139,4 +139,17 @@ public class VaccineAdministration implements Comparable<VaccineAdministration>,
   public int compareTo(VaccineAdministration other) {
     return this.date.compareTo(other.date);
   }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+
+    sb.append(String.format("SNS User Name: %s\n", this.snsUser.getName()));
+    sb.append(String.format("SNS User Number: %s\n", this.snsUser.getSnsNumber()));
+    sb.append(String.format("Vaccine: %s\n", this.vaccine.getDesignation()));
+    sb.append(String.format("Lot Number: %s\n", this.lotNumber));
+    sb.append(String.format("Dose Number: %s\n", this.doseNumber));
+
+    return sb.toString();
+  }
 }

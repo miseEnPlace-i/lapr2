@@ -46,13 +46,13 @@ public class VaccinationCenterListDTO {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("Vaccination Center data:\n");
-    sb.append(String.format("  Type: %s%n", this.type));
-    sb.append(String.format("  Name: %s%n", this.name));
-    sb.append(String.format("  Address: %s%n", this.address));
-    sb.append(String.format("  Email: %s%n", this.email));
-    sb.append(String.format("  Phone number: %s%n", this.phone));
-    sb.append(String.format("  Schedule: %s - %s%n", this.openingHours, this.closingHours));
+
+    sb.append(String.format("Name: %s%n", this.name));
+    sb.append(String.format("Type: %s%n", this.type));
+    sb.append(String.format("Address: %s%n", this.address));
+    sb.append(String.format("Email: %s%n", this.email));
+    sb.append(String.format("Phone number: %s%n", this.phone));
+    sb.append(String.format("Schedule: %s - %s", this.openingHours, this.closingHours));
 
     return sb.toString();
   }

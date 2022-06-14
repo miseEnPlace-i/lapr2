@@ -58,7 +58,7 @@ public class RegisterVaccineAdministrationControllerTest {
 
   @Before
   public void setup() {
-    Employee coordinator = new Employee("123456789", "name", "+351212345678", "email@email.com", "address", "000000000ZZ4", "ROLE");
+    Employee coordinator = new Employee("123456789", "name", "+351212345678", "email@email.com", "address", "00000000", "ROLE");
 
     vaccineType = new VaccineType("12345", "description", "technology");
     vaccine = new Vaccine("pfizer", "123456", "pfizer", vaccineType);
@@ -71,7 +71,7 @@ public class RegisterVaccineAdministrationControllerTest {
 
     vaccineDTO = VaccineMapper.toDto(vaccine);
 
-    user1 = new SNSUser("000000000ZZ4", "123456789", "name", DateUtils.addDays(new Date(), -400), Gender.MALE, "+351212345675", "email1@email.com", "address");
+    user1 = new SNSUser("00000000", "123456789", "name", DateUtils.addDays(new Date(), -400), Gender.MALE, "+351212345675", "email1@email.com", "address");
     snsUserStore = company.getSNSUserStore();
     snsUserStore.saveSNSUser(user1);
 

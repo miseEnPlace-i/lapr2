@@ -42,7 +42,7 @@ public class VaccineAdministrationListTest {
 
   @Before
   public void setup() {
-    Employee coordinator = new Employee("123456789", "name", "+351212345678", "email@email.com", "address", "000000000ZZ4", "ROLE");
+    Employee coordinator = new Employee("123456789", "name", "+351212345678", "email@email.com", "address", "00000000", "ROLE");
     vaccineType = new VaccineType("12345", "description", "technology");
     vaccine = new Vaccine("pfizer", "123456", "pfizer", vaccineType);
     vaccineStore = new VaccineStore();
@@ -56,7 +56,7 @@ public class VaccineAdministrationListTest {
     vaccinationCenter = new HealthCareCenter("name", "address", "email@email.com", "+351212345678", "+351212345678", "http://www.site.com", openingHours,
         closingHours, slot, coordinator, "ages", "ars");
 
-    user1 = new SNSUser("000000000ZZ4", "123456788", "name", DateUtils.addDays(new Date(), -400), Gender.MALE, "+351212345675", "email1@email.com", "address");
+    user1 = new SNSUser("00000000", "123456788", "name", DateUtils.addDays(new Date(), -400), Gender.MALE, "+351212345675", "email1@email.com", "address");
     // user2 = new SNSUser("185352901ZZ6", "123456789", "name", new Date(), Gender.MALE, "+351212345678",
     // "email2@email.com", "address");
     // user3 = new SNSUser("191052469ZZ5", "123456787", "name", new Date(), Gender.MALE, "+351212345671",
@@ -93,7 +93,7 @@ public class VaccineAdministrationListTest {
     assertEquals(vaccinationCenter.getVaccineAdministrations().size(), 1);
     assertEquals(vaccinationCenter.getWaitingRoom().size(), 0);
     assertEquals(vaccinationCenter.getRecoveryRoom().size(), 1);
-    assertEquals(vaccinationCenter.getEvents().size(), 1);
+    assertEquals(vaccinationCenter.getEvents().size(), 2);
   }
 
   @Test
