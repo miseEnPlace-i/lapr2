@@ -1,5 +1,6 @@
 package app.domain.model.list;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -25,7 +26,7 @@ import app.utils.Time;
  * @author Tomás Russo <1211288@isep.ipp.pt>
  * @author Tomás Lopes <1211289@isep.ip.pt>
  */
-public class AppointmentScheduleList {
+public class AppointmentScheduleList implements Serializable {
   private VaccinationCenter vaccinationCenter;
   private Map<Calendar, Appointment[][]> appointments;
   private int slotsPerDay = 0;

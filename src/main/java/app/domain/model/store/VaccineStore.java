@@ -1,5 +1,6 @@
 package app.domain.model.store;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.Vaccine;
@@ -10,7 +11,7 @@ import app.mapper.VaccineMapper;
 /**
  * @author Carlos Lopes <1211277@isep.ipp.pt>
  */
-public class VaccineStore {
+public class VaccineStore implements Serializable {
   private List<Vaccine> vaccines;
 
 

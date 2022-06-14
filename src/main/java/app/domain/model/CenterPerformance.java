@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.list.CenterEventList;
@@ -7,7 +8,7 @@ import app.domain.shared.CenterEventType;
 import app.service.MaxSum.MaxSumSublistService;
 import app.utils.Time;
 
-public class CenterPerformance {
+public class CenterPerformance implements Serializable {
   private CenterEventList events;
   private List<Integer> differenceList;
   private List<Integer> maxSumSubList;
@@ -15,6 +16,8 @@ public class CenterPerformance {
   private int interval;
 
   private int maxSum;
+  private double timeElapsed;
+
   private Time startingInterval;
   private Time endingInterval;
 
@@ -40,6 +43,7 @@ public class CenterPerformance {
     maxSum = maxSumSubListData.getSum();
 
     maxSumSubList = maxSumSubListData.getMaxSumSubList();
+    timeElapsed = maxSumSubListData.getTimeElapsed();
   }
 
   private Time convertIndexToTime(int index) {
@@ -88,8 +92,30 @@ public class CenterPerformance {
     return differenceList;
   }
 
+  public String stringifyDifferencesList() {
+    return stringifyList(differenceList);
+  }
+
+  private String stringifyList(List<Integer> list) {
+    StringBuilder sb = new StringBuilder();
+    sb.append("[");
+    sb.append(list.get(0));
+
+    for (int i = 1; i < list.size(); i++) {
+      sb.append(", ");
+      sb.append(list.get(i));
+    }
+
+    sb.append("]");
+    return sb.toString();
+  }
+
   public List<Integer> getMaxSumSubList() {
     return maxSumSubList;
+  }
+
+  public String stringifyMaxSumSublist() {
+    return stringifyList(maxSumSubList);
   }
 
   public int getMaxSum() {
@@ -104,10 +130,14 @@ public class CenterPerformance {
     return endingInterval;
   }
 
+  public double getTimeElapsed() {
+    return timeElapsed;
+  }
+
   @Override
   public String toString() {
-    return "CenterPerformance [events=\n" + events + ", differenceList=" + differenceList + ", maxSumSubList=" + maxSumSubList + ", interval=" + interval
-        + ", maxSum=" + maxSum + ", startingInterval=" + startingInterval + ", endingInterval=" + endingInterval + ", openingHours=" + openingHours
-        + ", closingHours=" + closingHours + "]";
+    return "CenterPerformance [differenceList=" + differenceList + ", maxSumSubList=" + maxSumSubList + ", interval=" + interval + ", maxSum=" + maxSum
+        + ", startingInterval=" + startingInterval + ", endingInterval=" + endingInterval + ", openingHours=" + openingHours + ", closingHours=" + closingHours
+        + "]";
   }
 }

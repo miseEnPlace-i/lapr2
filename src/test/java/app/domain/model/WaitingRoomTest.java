@@ -61,7 +61,7 @@ public class WaitingRoomTest {
   @Test
   public void ensureHasSnsUserArrivedTodayIsWorking2() {
     SNSUser snsUser2 =
-        new SNSUser("000000000ZZ4", "123456789", "name", Calendar.getInstance().getTime(), Gender.MALE, "+351212345678", "email@email.com", "address");
+        new SNSUser("00000000", "123456789", "name", Calendar.getInstance().getTime(), Gender.MALE, "+351212345678", "email@email.com", "address");
     assertFalse(waitingRoom.hasSNSUserArrivedToday(snsUser2));
   }
 

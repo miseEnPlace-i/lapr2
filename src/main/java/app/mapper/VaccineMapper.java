@@ -13,6 +13,6 @@ public class VaccineMapper {
   private VaccineMapper() {}
 
   public static VaccineDTO toDto(Vaccine vaccine) {
-    return new VaccineDTO(vaccine.getId(), vaccine.getBrand(), vaccine.getId(), vaccine.getVacType());
+    return new VaccineDTO(vaccine.getDesignation(), vaccine.getBrand(), vaccine.getId(), vaccine.getVacType());
   }
 }

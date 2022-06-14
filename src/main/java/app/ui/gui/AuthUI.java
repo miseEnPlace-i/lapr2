@@ -9,6 +9,7 @@ import app.domain.shared.Constants;
 import app.domain.shared.MenuFXMLPath;
 import app.exception.NotAuthorizedException;
 import app.service.FormatVerifier;
+import app.ui.gui.utils.Utils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -43,12 +44,8 @@ public class AuthUI implements Initializable, IGui {
     } catch (Exception e) {
       Logger.getLogger(AuthUI.class.getName()).log(Level.SEVERE, null, e);
 
-      Alert alert = new Alert(AlertType.ERROR);
-      alert.setTitle("Error");
-      alert.setHeaderText("Error in application initialization");
-      alert.setContentText("Error while initializing the application,\nplease contact an administrator to solve\nthe problem.");
-
-      alert.showAndWait();
+      Utils.showError("Error in application initialization",
+          "Error while initializing the application,\nplease contact an administrator to solve\nthe problem.");
 
       System.exit(-1);
     }
@@ -78,13 +75,7 @@ public class AuthUI implements Initializable, IGui {
   }
 
   private void displayInvalidCredentialsAlert() {
-    Alert alert = new Alert(AlertType.ERROR);
-    alert.setTitle("Login Failed");
-    alert.setHeaderText("Please insert your email and password again.");
-    alert.setContentText(String.format("You have %d attempts left.", maxAttempts));
-    alert.showAndWait().ifPresent(response -> {
-      if (response == ButtonType.OK) Logger.getLogger(getClass().getName()).log(Level.INFO, "Login failed");
-    });
+    Utils.showError("Please insert your email and password again.", String.format("You have %d attempts left.", maxAttempts));
 
     resetTextFields();
   }

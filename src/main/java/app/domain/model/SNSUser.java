@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import app.domain.model.list.AdministrationList;
 import app.domain.shared.Gender;
@@ -14,7 +15,7 @@ import app.service.TimeUtils;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
-public class SNSUser {
+public class SNSUser implements Serializable {
 
   // Max age a user can have
   private static final int MAX_AGE = 150;
@@ -139,7 +140,7 @@ public class SNSUser {
   }
 
   // public Vaccine getLastTakenVaccineFromType(VaccineType vaccineType) {
-  //   return this.userHealthData.getLastVaccineTakenWithType(vaccineType);
+  // return this.userHealthData.getLastVaccineTakenWithType(vaccineType);
   // }
 
   public int getAge() {

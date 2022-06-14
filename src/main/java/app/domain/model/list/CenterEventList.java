@@ -1,5 +1,6 @@
 package app.domain.model.list;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -8,7 +9,7 @@ import app.domain.model.CenterEvent;
 import app.domain.model.SNSUser;
 import app.domain.shared.CenterEventType;
 
-public class CenterEventList implements Iterable<CenterEvent> {
+public class CenterEventList implements Iterable<CenterEvent>, Serializable {
   private List<CenterEvent> events;
 
   public CenterEventList() {
@@ -39,7 +40,6 @@ public class CenterEventList implements Iterable<CenterEvent> {
     for (CenterEvent event : this.events)
       if (event.isInDay(day)) eventsInDay.save(event);
 
-    System.out.println(eventsInDay);
     return eventsInDay;
   }
 
