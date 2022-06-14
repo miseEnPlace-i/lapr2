@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 import app.dto.AdverseReactionDTO;
 import app.dto.VaccineDTO;
 import app.domain.model.AdverseReaction;
@@ -16,8 +17,11 @@ import app.domain.model.Vaccine;
 import app.domain.model.VaccineType;
 import app.domain.model.WaitingRoom;
 import app.domain.shared.CenterEventType;
+import app.domain.shared.Constants;
 import app.mapper.AdverseReactionMapper;
 import app.mapper.VaccineMapper;
+import app.service.CalendarUtils;
+import app.service.PropertiesUtils;
 import app.domain.model.VaccineAdministration;
 
 public class VaccineAdministrationList implements Serializable {
@@ -72,15 +76,25 @@ public class VaccineAdministrationList implements Serializable {
     SNSUser snsUser = vaccineAdministration.getSnsUser();
     Calendar date = vaccineAdministration.getDate();
 
-    CenterEvent event = centerEventList.create(date, CenterEventType.VACCINATED, snsUser);
+    CenterEvent vaccinated = centerEventList.create(date, CenterEventType.VACCINATED, snsUser);
 
-    centerEventList.save(event);
+    centerEventList.save(vaccinated);
 
     WaitingRoom waitingRoom = vaccinationCenter.getWaitingRoom();
     waitingRoom.removeUser(snsUser);
 
     RecoveryRoom recoveryRoom = vaccinationCenter.getRecoveryRoom();
     recoveryRoom.addVaccineAdministration(vaccineAdministration);
+
+    Properties props = PropertiesUtils.getProperties();
+    int recoveryPeriod = Integer.parseInt(props.getProperty(Constants.PARAMS_RECOVERY_PERIOD));
+
+    Calendar departureTime = Calendar.getInstance();
+    departureTime.add(Calendar.MINUTE, recoveryPeriod);
+
+    CenterEvent departure = centerEventList.create(departureTime, CenterEventType.DEPARTURE, snsUser);
+
+    centerEventList.save(departure);
   }
 
   /**

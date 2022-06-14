@@ -93,7 +93,7 @@ public class VaccineAdministrationListTest {
     assertEquals(vaccinationCenter.getVaccineAdministrations().size(), 1);
     assertEquals(vaccinationCenter.getWaitingRoom().size(), 0);
     assertEquals(vaccinationCenter.getRecoveryRoom().size(), 1);
-    assertEquals(vaccinationCenter.getEvents().size(), 1);
+    assertEquals(vaccinationCenter.getEvents().size(), 2);
   }
 
   @Test
