@@ -22,24 +22,19 @@ public class SNSUserMapper {
     Date birthDay = df.parse(userData[2]);
     Gender gender;
 
-    switch(userData[1]){
+    switch(userData[1].toLowerCase()){
       case "m":
-      case "M":
-      case "Male":
       case "male":
-      case "MALE":
+      case "masculino":
         gender = Gender.MALE;
         break;
       case "f":
-      case "F":
-      case "Female":
       case "female":
-      case "FEMALE":
+      case "feminino":
         gender = Gender.FEMALE;
         break;
       default:
         gender = Gender.N_A;
-
     }
 
     // userData: Name, Sex, Birth Date, Address, Phone Number, E-mail, SNS User Number and Citizen Card Number.

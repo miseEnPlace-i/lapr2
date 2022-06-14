@@ -24,8 +24,8 @@ public class VaccinationCenterStoreTest {
    */
   @Before
   public void setUp() {
-    coordinator = new Employee("00000001", "Joana", "+351916478865", "email@email.com", "address", "000000000ZZ4", Constants.ROLE_COORDINATOR);
-    otherCoordinator = new Employee("00000002", "name", "+351916478865", "email2@email2.com", "address", "111111111ZZ0", Constants.ROLE_COORDINATOR);
+    coordinator = new Employee("00000001", "Joana", "+351916478865", "email@email.com", "address", "00000000", Constants.ROLE_COORDINATOR);
+    otherCoordinator = new Employee("00000002", "name", "+351916478865", "email2@email2.com", "address", "11111111", Constants.ROLE_COORDINATOR);
 
     vacType = new VaccineType("12345", "description", "technology");
   }

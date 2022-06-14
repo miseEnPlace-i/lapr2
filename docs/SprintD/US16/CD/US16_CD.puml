@@ -5,13 +5,25 @@ package UI {
   class AnalyseCenterPerformanceUI {}
 }
 
+package lib {
+  package com {
+    package isep {
+      package mdis {
+        class Sum {
+          + Sum(seq)
+        }
+      }
+    }
+  }
+}
+
 package core {
   package domain {
     package shared {
       enum CenterEventType {
         ARRIVAL
         VACCINATED
-        DEPARTED
+        DEPARTURE
       }
     }
 
@@ -83,14 +95,17 @@ package core {
         - day: Calendar
         - maxSumSubList: List
         - sum: int
+        - timeElapsed: double
 
-        +CenterPerformance(day,interval,openingHours)
+        +CenterPerformance(day,interval,openingHours,closingHours)
 
         +getDay()
+        +getDifferencesList()
         +getMaxSumSubList()
         +getSum()
         +getStartingInterval()
         +getEndingInterval()
+        +getTimeElapsed()
       }
 
       class Company {
@@ -105,18 +120,40 @@ package core {
     }
 
     package service {
-      class MaxSumSublistService {
-        - list: List
-        - beginningIndex: int
-        - endIndex: int
-        - maxSum: int
 
-        +MaxSumSublistService(list)
+      package MaxSum {
+        class MaxSumSublistService {
+          - list: List
+          - beginningIndex: int
+          - endIndex: int
+          - sum: int
+          - timeElapsed: double
 
-        +getSum()
-        +getBegginingIndex()
-        +getEndIndex()
-        +getMaxSum()
+          +MaxSumSublistService(list)
+
+          +getMaxSumSubList()
+          +getStartIndex()
+          +getEndIndex()
+          +getSum()
+          +getTimeElapsed()
+
+          -getMaxSumStrategy()
+          -calculateMaxSumSublist(list)
+          -findIndexes()
+          -calculateSum()
+        }
+
+        interface IMaxSum {
+          + maxSum(list)
+        }
+
+        class SumAdapter implements IMaxSum {
+          + maxSum(list)
+        }
+
+        class MaxSumBruteForce implements IMaxSum {
+          + maxSum(list)
+        }
       }
     }
   }
@@ -154,11 +191,15 @@ VaccinationCenter "1" -- "*" CenterPerformance : generates >
 CenterPerformance o-- Time : startingInterval
 CenterPerformance o-- Time : endingInterval
 CenterPerformance o-- Time : openingHours
+CenterPerformance o-- Time : closingHours
 
 CenterPerformance -- MaxSumSublistService : uses >
 
 VaccinationCenterStore "1" -- "*" VaccinationCenter : stores >
 
 Company "1" -- "1" VaccinationCenterStore : knows >
+
+MaxSumSublistService "*" -- "1" IMaxSum : makes use of
+SumAdapter --> Sum : adapts >
 
 @enduml

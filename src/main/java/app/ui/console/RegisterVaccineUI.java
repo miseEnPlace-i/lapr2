@@ -5,16 +5,17 @@ import java.util.List;
 import app.controller.App;
 import app.controller.RegisterVaccineController;
 import app.domain.model.VaccineType;
+import app.exception.CanceledMenuException;
 import app.ui.console.utils.Utils;
 
+/**
+ * Register Vaccine View
+ * 
+ * @author Carlos Lopes <1211277@isep.ipp.pt>
+ */
 public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
   private String vacTypeId = "";
 
-  /**
-   * Register Vaccine View
-   * 
-   * @author Carlos Lopes <1211277@isep.ipp.pt>
-   */
   public RegisterVaccineUI() {
     super(new RegisterVaccineController(App.getInstance().getCompany()));
   }
@@ -26,14 +27,16 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
     List<VaccineType> vacTypes = super.ctrl.getVacTypes(); // all available vaccine types
 
     if (vacTypes.isEmpty()) {
-      Utils.readLineFromConsole(
-          "No vaccine type registered. Register a vaccine Type before registering a new Vaccine.\nPress enter to go back to the menu. ");
+      Utils.readLineFromConsole("No vaccine type registered. Register a vaccine Type before registering a new Vaccine.\nPress enter to go back to the menu. ");
       return;
     }
 
     displayVacTypes(vacTypes);
 
     VaccineType vacType = selectVacType(vacTypes); // asks to select the vaccine type
+
+    if (vacType == null) return;
+
     this.vacTypeId = vacType.getCode();
 
     insertData(); // asks to insert vaccine data and instantiates and validates a new vaccine
@@ -51,7 +54,12 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
 
         insertDoseInfoData();// asks to insert dose info data and instantiates a new dose info
       }
-      confirmed = askCreateAdminProc(); // asks the user if he wants to add a new ap
+      try {
+        confirmed = askCreateAdminProc(); // asks the user if he wants to add a new ap
+      } catch (CanceledMenuException ex) {
+        System.out.println("\nCanceled.\n");
+        return;
+      }
     }
 
     confirmed = confirmData(super.ctrl.stringifyData());// asks to confirm data
@@ -70,6 +78,9 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
   // RETURNS VACCINE TYPE ID SELECTED
   private VaccineType selectVacType(List<VaccineType> vacTypes) {
     int vacTypeId = Utils.selectsIndex(vacTypes);
+
+    if (vacTypeId == -1) return null;
+
     return vacTypes.get(vacTypeId);
   }
 
@@ -86,21 +97,27 @@ public class RegisterVaccineUI extends RegisterUI<RegisterVaccineController> {
   }
 
   // ASKS THE USER IF HE WANTS TO ADD A NEW ADMIN PROC
-  private boolean askCreateAdminProc() {
+  private boolean askCreateAdminProc() throws CanceledMenuException {
     List<String> options = new ArrayList<String>();
-    options.add("y");
-    options.add("n");
-    Object input =
-        Utils.showAndSelectOne(options, "\nWant to add another administration process? (y/n):  ");
-    String inputStr = (String) input;
+    options.add("Yes, add a new administration process");
+    options.add("No, I'm done");
 
-    return inputStr.equals("y");
+    int index = Utils.showAndSelectIndex(options, "\nWant to add another administration process?:  ");
+    if (index == -1) throw new CanceledMenuException("Invalid option");
+
+    return index == 0;
   }
 
   // ASKS TO INSERT THE ADMIN PROC DATA AND RETURN THE NUMBER OF DOSES
   public int insertAdminProcData() {
-    int minAge = Utils.readNonNegativeIntegerFromConsole("Min age: ");
-    int maxAge = Utils.readPositiveIntegerFromConsole("Max age: ");
+    int minAge = 1;
+    int maxAge = 0;
+    do {
+      minAge = Utils.readNonNegativeIntegerFromConsole("Min age: ");
+      maxAge = Utils.readPositiveIntegerFromConsole("Max age: ");
+      if (minAge > maxAge) System.out.println("Min age must be less than max age.");
+    } while (minAge > maxAge);
+
     int numberOfDoses = Utils.readPositiveIntegerFromConsole("Number of doses: ");
 
     super.ctrl.createAdminProc(minAge, maxAge, numberOfDoses);

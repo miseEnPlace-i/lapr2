@@ -12,52 +12,50 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
 public abstract class ChildUI<T extends RoleUI> implements Initializable {
-    private T parentUI;
-    private ApplicationUI mainApp;
+  private T parentUI;
 
-    ChildUI() {}
+  ChildUI() {}
 
-    public void setParentUI(T parentUI) {
-        this.parentUI = parentUI;
-    }
+  public void setParentUI(T parentUI) {
+    this.parentUI = parentUI;
+  }
 
-    @FXML
-    private Label lblName;
+  public T getParentUI() {
+    return this.parentUI;
+  }
 
-    @FXML
-    private Label lblRole;
+  @FXML
+  private Label lblName;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        String email = App.getInstance().getCurrentUserSession().getUserId().getEmail();
-        String role = App.getInstance().getCurrentUserSession().getUserRoles().get(0).getDescription();
+  @FXML
+  private Label lblRole;
 
-        lblName.setText(email);
-        lblRole.setText(role);
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    String email = App.getInstance().getCurrentUserSession().getUserId().getEmail();
+    String role = App.getInstance().getCurrentUserSession().getUserRoles().get(0).getDescription();
 
-        this.init();
-    }
+    lblName.setText(email);
+    lblRole.setText(role);
+  }
 
-    abstract void init();
+  abstract void init(T parentUI);
 
-    public void setMainApp(ApplicationUI mainApp) {
-        this.mainApp = mainApp;
-    }
+  protected void toRoleScene() {
+    for (MenuFXMLPath path : MenuFXMLPath.values())
+      if (path.name().equals(this.parentUI.getUIRoleName())) {
+        try {
+          ApplicationUI mainApp = this.parentUI.getMainApp();
+          RoleUI gui = (RoleUI) mainApp.replaceSceneContent(path.toString());
+          gui.init(mainApp);
+        } catch (Exception e) {
+          Logger.getLogger(AuthUI.class.getName()).log(Level.SEVERE, "No menu found for role: " + this.parentUI.getUIRoleName());
+        }
+      }
+  }
 
-    private void toRoleScene() {
-        for (MenuFXMLPath path : MenuFXMLPath.values())
-            if (path.name().equals(this.parentUI.getUIRoleName())) {
-                try {
-                    IGui gui = (IGui) this.mainApp.replaceSceneContent(path.toString());
-                    gui.setMainApp(mainApp);
-                } catch (Exception e) {
-                    Logger.getLogger(AuthUI.class.getName()).log(Level.SEVERE, "No menu found for role: " + this.parentUI.getUIRoleName());
-                }
-            }
-    }
-
-    @FXML
-    public void btnBack(ActionEvent event) {
-        this.toRoleScene();
-    }
+  @FXML
+  public void btnBack(ActionEvent event) {
+    this.toRoleScene();
+  }
 }

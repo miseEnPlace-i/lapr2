@@ -2,27 +2,33 @@ package app.domain.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import app.domain.model.list.CenterEventList;
 import app.domain.shared.CenterEventType;
-import app.service.MaxSumSublistService;
+import app.service.MaxSum.MaxSumSublistService;
 import app.utils.Time;
 
 public class CenterPerformance {
-  private List<CenterEvent> events;
+  private CenterEventList events;
   private List<Integer> differenceList;
   private List<Integer> maxSumSubList;
 
   private int interval;
 
-  private int sum;
+  private int maxSum;
+  private double timeElapsed;
+
   private Time startingInterval;
   private Time endingInterval;
 
   private Time openingHours;
+  private Time closingHours;
 
-  public CenterPerformance(List<CenterEvent> events, int interval, Time openingHours) {
+  public CenterPerformance(CenterEventList events, int interval, Time openingHours, Time closingHours) {
     this.events = events;
     this.interval = interval;
     this.openingHours = openingHours;
+    this.closingHours = closingHours;
+
     differenceList = calculateDifferencesList();
 
     MaxSumSublistService maxSumSubListData = new MaxSumSublistService(differenceList);
@@ -31,11 +37,12 @@ public class CenterPerformance {
     startingInterval = convertIndexToTime(startIndex);
 
     int endIndex = maxSumSubListData.getEndIndex();
-    endingInterval = convertIndexToTime(endIndex);
+    endingInterval = convertIndexToTime(endIndex + 1);
 
-    int maxSum = maxSumSubListData.getMaxSum();
+    maxSum = maxSumSubListData.getSum();
 
     maxSumSubList = maxSumSubListData.getMaxSumSubList();
+    timeElapsed = maxSumSubListData.getTimeElapsed();
   }
 
   private Time convertIndexToTime(int index) {
@@ -43,11 +50,18 @@ public class CenterPerformance {
   }
 
   private List<Integer> calculateDifferencesList() {
-    List<Integer> differences = new ArrayList<Integer>();
+    int nOfWorkingMinutes = closingHours.convertToMinutes() - openingHours.convertToMinutes();
+    int nOfIntervals = (int) Math.floor(nOfWorkingMinutes / interval);
 
-    for (int i = 0; i < events.size(); i++) {
+    List<Integer> differences = new ArrayList<Integer>(nOfIntervals);
+
+    /**
+     * Here we could do nOfIntervals - 1 and treat the last interval as a special case to include the users that arrive
+     * after the closing hour. In the examples given this is not the case, so we decided not to do it
+     */
+    for (int i = 0; i < nOfIntervals; i++) {
       Time beginningInterval = new Time(openingHours.convertToMinutes() + i * interval);
-      Time endInterval = new Time(beginningInterval.convertToMinutes() + i);
+      Time endInterval = new Time(beginningInterval.convertToMinutes() + interval);
 
       int differenceForInterval = getDifferenceForInterval(events, beginningInterval, endInterval);
 
@@ -57,13 +71,14 @@ public class CenterPerformance {
     return differences;
   }
 
-  private int getDifferenceForInterval(List<CenterEvent> events, Time beginningTime, Time endingTime) {
+  private int getDifferenceForInterval(CenterEventList events, Time beginningTime, Time endingTime) {
     int intervalDifference = 0;
 
-    for (CenterEvent event : events) {
+    for (int i = 0; i < events.size(); i++) {
+      CenterEvent event = events.get(i);
       Time eventTime = new Time(event.getDate());
 
-      if (eventTime.isBetween(beginningTime, endingTime)) {
+      if (eventTime.isBetweenExcludeRight(beginningTime, endingTime)) {
         if (event.isType(CenterEventType.ARRIVAL)) intervalDifference++;
         if (event.isType(CenterEventType.DEPARTURE)) intervalDifference--;
       }
@@ -72,12 +87,38 @@ public class CenterPerformance {
     return intervalDifference;
   }
 
+  public List<Integer> getDifferencesList() {
+    return differenceList;
+  }
+
+  public String stringifyDifferencesList() {
+    return stringifyList(differenceList);
+  }
+
+  private String stringifyList(List<Integer> list) {
+    StringBuilder sb = new StringBuilder();
+    sb.append("[");
+    sb.append(list.get(0));
+
+    for (int i = 1; i < list.size(); i++) {
+      sb.append(", ");
+      sb.append(list.get(i));
+    }
+
+    sb.append("]");
+    return sb.toString();
+  }
+
   public List<Integer> getMaxSumSubList() {
     return maxSumSubList;
   }
 
-  public int getSum() {
-    return sum;
+  public String stringifyMaxSumSublist() {
+    return stringifyList(maxSumSubList);
+  }
+
+  public int getMaxSum() {
+    return maxSum;
   }
 
   public Time getStartingInterval() {
@@ -86,5 +127,16 @@ public class CenterPerformance {
 
   public Time getEndingInterval() {
     return endingInterval;
+  }
+
+  public double getTimeElapsed() {
+    return timeElapsed;
+  }
+
+  @Override
+  public String toString() {
+    return "CenterPerformance [differenceList=" + differenceList + ", maxSumSubList=" + maxSumSubList + ", interval=" + interval + ", maxSum=" + maxSum
+        + ", startingInterval=" + startingInterval + ", endingInterval=" + endingInterval + ", openingHours=" + openingHours + ", closingHours=" + closingHours
+        + "]";
   }
 }

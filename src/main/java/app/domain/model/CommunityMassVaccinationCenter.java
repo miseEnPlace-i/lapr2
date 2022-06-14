@@ -64,19 +64,10 @@ public class CommunityMassVaccinationCenter extends VaccinationCenter {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("Community Mass Vaccination Center data:\n");
-    sb.append(String.format("\nName: %s\n", super.getName()));
-    sb.append(String.format("Address: %s\n", super.getAddress()));
-    sb.append(String.format("Email: %s\n", super.getEmail()));
-    sb.append(String.format("Phone number: %s\n", super.getPhone()));
-    sb.append(String.format("Fax number: %s\n", super.getFax()));
-    sb.append(String.format("Web address: %s\n", super.getWebAddress()));
-    sb.append(String.format("Opening hours: %s\n", super.getOpeningHours()));
-    sb.append(String.format("Closing hours: %s\n", super.getClosingHours()));
-    sb.append(String.format("Slot duration: %s\n", super.getSlotDuration()));
-    sb.append(String.format("Maximum vaccines per slot: %s\n", super.getMaxVacSlot()));
-    sb.append(String.format("Coordinator: %s\n", super.getCoordinatorName()));
-    sb.append(String.format("Vaccine type given on the center:\n\n%s", getVaccineType()));
 
+    sb.append(super.toString());
+
+    sb.append(String.format("Vaccine type given on the center:\n\n%s", getVaccineType()));
 
     return sb.toString();
   }

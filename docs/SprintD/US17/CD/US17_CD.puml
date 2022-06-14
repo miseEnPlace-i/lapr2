@@ -1,6 +1,50 @@
 @startuml US17_CD
 skinparam classAttributeIconSize 0
 
+class Appointment {
+  - Date appointmentTime
+  - SNSUser snsUser
+  - VaccineType vaccineType
+  ---
+  + Appointment(appointmentTime, snsUser, vaccineType)
+  + getCenter()
+  + getDate()
+  + getSNSUser()
+  + getVaccineType()
+}
+
+class AppointmentScheduleList {}
+
+class Administration {
+  - SNSUser snsUser
+  - Vaccine vaccine
+  - String lotNumber
+  - int doseNumber
+  - VaccinationCenter center
+  - Date administrationDate
+  ---
+  Administration(snsUser, vaccine, lotNumber, doseNumber, center, administrationDate)
+}
+
+class AdministrationList {}
+
+class Arrival {
+  - Date arrivalTime
+  - int status
+}
+
+class CenterEventList {
+  - events: List<CenterEvent>
+  ---
+  + CenterEventList()
+}
+
+class CenterEvent {
+  - events: List<CenterEvent>
+  ---
+  + CenterEvent()
+}
+
 class Company {
   - String designation
   ---
@@ -92,9 +136,24 @@ class VaccinationCenterStore {
   + addVaccinationCenter(center)
 }
 
+class VaccineStore {
+  + createVaccinationCenter(centerData, coordinator)
+  + validateVaccinatonCenter(center)
+  + saveVaccinationCenter(center)
+  + checkDuplicates(center)
+  + addVaccinationCenter(center)
+}
+
+class Vaccine {}
+
+
+AdministrationList "1" --> "*" Administration : stores
+
+Arrival "1" --> "*" Appointment : related to
 
 Company ..> SNSUserStore
 Company ..> VaccinationCenterStore
+Company ..> VaccineStore
 Company "1" --> "*" Employee : knows
 
 CSVReader --> ICSVReader : uses
@@ -110,8 +169,23 @@ ImportLegacyDataController --> CSVReader : uses
 
 ImportLegacyDataUI ..> ImportLegacyDataController
 
+SNSUser ..> AdministrationList
+SNSUser --o Appointment
+SNSUser --o Arrival
+
 SNSUserStore "1" --> "*" SNSUser : stores
 
+VaccinationCenter ..> AppointmentScheduleList
+VaccinationCenter ..> CenterEventList
+VaccinationCenter ..> WaitingRoomList
+
+AppointmentScheduleList "1" --> "*" Appointment : stores
+CenterEventList "1" --> "*" CenterEvent : stores
+
 VaccinationCenterStore "1" --> "*" VaccinationCenter : stores
+
+VaccineStore "1" --> "*" Vaccine : stores
+
+WaitingRoomList "1" --> "*" Arrival : stores
 
 @enduml

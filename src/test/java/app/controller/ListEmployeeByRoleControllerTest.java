@@ -24,7 +24,7 @@ public class ListEmployeeByRoleControllerTest {
     roleStore.addEmployeeRole("TEST1", "TEST1");
 
     EmployeeStore employeeStore = company.getEmployeeStore();
-    Employee employee = new Employee("00000001", "Joana Maria", "+351123456789", "email@email.com", "Av. da Liberdade", "123456789ZZ1", "TEST");
+    Employee employee = new Employee("00000001", "Joana Maria", "+351123456789", "email@email.com", "Av. da Liberdade", "12345678", "TEST");
     employeeStore.saveEmployee(employee);
   }
 

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.Test;
+import app.service.MaxSum.MaxSumSublistService;
 
 public class MaxSumSublistTest {
 
@@ -26,6 +27,30 @@ public class MaxSumSublistTest {
   }
 
   @Test
+  public void ensureMaxSumIsCorrect() {
+    List<Integer> list = Arrays.asList(baseCase);
+    MaxSumSublistService data = new MaxSumSublistService(list);
+
+    assertEquals(data.getSum(), 9);
+  }
+
+  @Test
+  public void ensureBeginningIndexIsCorrect() {
+    List<Integer> list = Arrays.asList(baseCase);
+    MaxSumSublistService data = new MaxSumSublistService(list);
+
+    assertEquals(data.getStartIndex(), 0);
+  }
+
+  @Test
+  public void ensureEndIndexIsCorrect() {
+    List<Integer> list = Arrays.asList(baseCase);
+    MaxSumSublistService data = new MaxSumSublistService(list);
+
+    assertEquals(data.getEndIndex(), 2);
+  }
+
+  @Test
   public void ensureSublistIsCorrectWithNegativeValues() {
     List<Integer> list = Arrays.asList(allNegativeCase);
     MaxSumSublistService data = new MaxSumSublistService(list);
@@ -35,6 +60,30 @@ public class MaxSumSublistTest {
     List<Integer> result = data.getMaxSumSubList();
 
     assertEquals(Arrays.asList(expected), result);
+  }
+
+  @Test
+  public void ensureMaxSumIsCorrectWithNegativeValues() {
+    List<Integer> list = Arrays.asList(allNegativeCase);
+    MaxSumSublistService data = new MaxSumSublistService(list);
+
+    assertEquals(data.getSum(), -1);
+  }
+
+  @Test
+  public void ensureStartIndexIsCorrectWithNegativeValues() {
+    List<Integer> list = Arrays.asList(allNegativeCase);
+    MaxSumSublistService data = new MaxSumSublistService(list);
+
+    assertEquals(data.getStartIndex(), 3);
+  }
+
+  @Test
+  public void ensureEndIndexIsCorrectWithNegativeValues() {
+    List<Integer> list = Arrays.asList(allNegativeCase);
+    MaxSumSublistService data = new MaxSumSublistService(list);
+
+    assertEquals(data.getEndIndex(), 3);
   }
 
   @Test
@@ -48,6 +97,33 @@ public class MaxSumSublistTest {
     List<Integer> result = data.getMaxSumSubList();
 
     assertEquals(Arrays.asList(expected), result);
+  }
+
+  @Test
+  public void ensureMaxSumIsCorrectWithTwoEqualSublistSums() {
+    // In this test the first sublist with max sum will be chosen
+    List<Integer> list = Arrays.asList(twoSublists);
+    MaxSumSublistService data = new MaxSumSublistService(list);
+
+    assertEquals(data.getSum(), 8);
+  }
+
+  @Test
+  public void ensureStartIndexIsCorrectWithTwoEqualSublistSums() {
+    // In this test the first sublist with max sum will be chosen
+    List<Integer> list = Arrays.asList(twoSublists);
+    MaxSumSublistService data = new MaxSumSublistService(list);
+
+    assertEquals(data.getStartIndex(), 0);
+  }
+
+  @Test
+  public void ensureEndIndexIsCorrectWithTwoEqualSublistSums() {
+    // In this test the first sublist with max sum will be chosen
+    List<Integer> list = Arrays.asList(twoSublists);
+    MaxSumSublistService data = new MaxSumSublistService(list);
+
+    assertEquals(data.getEndIndex(), 2);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -66,5 +142,29 @@ public class MaxSumSublistTest {
     List<Integer> result = data.getMaxSumSubList();
 
     assertEquals(Arrays.asList(expected), result);
+  }
+
+  @Test
+  public void ensureOtherInputSumWorks() {
+    List<Integer> list = Arrays.asList(otherExample);
+    MaxSumSublistService data = new MaxSumSublistService(list);
+
+    assertEquals(data.getSum(), 23);
+  }
+
+  @Test
+  public void ensureOtherInputStartIndexWorks() {
+    List<Integer> list = Arrays.asList(otherExample);
+    MaxSumSublistService data = new MaxSumSublistService(list);
+
+    assertEquals(data.getStartIndex(), 4);
+  }
+
+  @Test
+  public void ensureOtherInputEndIndexWorks() {
+    List<Integer> list = Arrays.asList(otherExample);
+    MaxSumSublistService data = new MaxSumSublistService(list);
+
+    assertEquals(data.getEndIndex(), 8);
   }
 }

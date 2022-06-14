@@ -1,7 +1,9 @@
 package app.controller;
 
+import java.util.Calendar;
 import app.domain.model.Appointment;
 import app.domain.model.Arrival;
+import app.domain.model.CenterEvent;
 import app.domain.model.Company;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
@@ -38,14 +40,15 @@ public class RegisterSNSUserArrivalController implements IRegisterController<Arr
 
   public void create() {
     this.waitingRoom = center.getWaitingRoom();
-    this.arrival = waitingRoom.createArrival(this.appointment);
+    this.arrival = waitingRoom.createArrival(this.appointment, Calendar.getInstance());
   }
 
   @Override
   public void save() {
     this.waitingRoom.saveArrival(this.arrival);
-    this.center.getEvents().create(this.arrival.getArrivalTime(), CenterEventType.ARRIVAL, this.snsUser);
-    
+    CenterEvent event = this.center.getEvents().create(this.arrival.getArrivalTime(), CenterEventType.ARRIVAL, this.snsUser);
+    this.center.getEvents().save(event);
+
     // DEBUG: print the waiting room
     // System.out.println(this.waitingRoom);
   }
