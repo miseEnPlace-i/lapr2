@@ -15,7 +15,6 @@ import java.util.logging.Logger;
 import app.controller.App;
 import app.controller.ExportCenterStatisticsController;
 import app.controller.FindCoordinatorVaccinationCenterController;
-import app.domain.model.CsvExporter;
 import app.exception.NotAuthorizedException;
 import app.service.FileUtils;
 import app.service.FullyVaccinatedData;
@@ -62,7 +61,6 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
   private FindCoordinatorVaccinationCenterController ctrlCenter;
   private LinkedHashMap<Calendar, Integer> dataMap = new LinkedHashMap<>();
   private FullyVaccinatedData fullyVaccinatedData;
-  private CsvExporter csvExporter;
   private String fileName;
 
   @FXML
@@ -140,8 +138,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
         dataMap.put(getStartDate(), 100);
         dataMap.put(getEndDate(), 200);
         checkData(dataMap);
-        csvExporter = ctrl.createCsvExporter(fileName);
-        if (!ctrl.saveData(fileName, csvExporter.toExportFileString(dataMap, "Date;NumberOfFullyVaccinatedUsers\n", ";"))) {
+        if (!ctrl.saveData(fileName, ctrl.exportFileString(dataMap))) {
           displayErrorAlert();
         }
       } else if (!validateDates() || !validateFilePath()) {
