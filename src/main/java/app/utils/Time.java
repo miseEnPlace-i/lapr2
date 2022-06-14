@@ -1,11 +1,12 @@
 package app.utils;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
-public class Time {
+public class Time implements Serializable {
   private int hours;
   private int minutes;
 

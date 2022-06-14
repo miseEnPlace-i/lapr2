@@ -21,7 +21,7 @@ public class Constants {
 
   public static final String PARAMS_ONGOING_OUTBREAK_VACCINE_TYPE_CODE = "OngoingOutbreak.VaccineTypeCode";
 
-  public static final String PARAMS_SENDER = "MessageSender.Sender";
+  public static final String PARAMS_SENDER = "Notification.Sender";
   public static final String PARAMS_DEFAULT_SENDER = "app.service.sender.ConsoleSender";
 
   public static final String PARAMS_TEST_ENVIRONMENT = "Environment.Test";
@@ -33,4 +33,6 @@ public class Constants {
   public static final String SMS_FILE = "SMS.txt";
 
   public static final int MAX_OF_PASSWORD_TRIES = 3;
+
+  public static final String DATA_FILE_PATH = "data.bin";
 }

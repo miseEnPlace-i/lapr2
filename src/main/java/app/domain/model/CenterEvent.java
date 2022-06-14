@@ -1,10 +1,11 @@
 package app.domain.model;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import app.domain.shared.CenterEventType;
 
-public class CenterEvent {
+public class CenterEvent implements Serializable {
   private Calendar date;
   private CenterEventType eventType;
   private SNSUser snsUser;

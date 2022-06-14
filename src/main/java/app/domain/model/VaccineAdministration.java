@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Calendar;
  * 
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
-public class VaccineAdministration implements Comparable<VaccineAdministration> {
+public class VaccineAdministration implements Comparable<VaccineAdministration>, Serializable {
   private SNSUser snsUser;
   private Vaccine vaccine;
   private String lotNumber;
