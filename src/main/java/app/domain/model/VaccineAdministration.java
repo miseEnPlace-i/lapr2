@@ -97,10 +97,6 @@ public class VaccineAdministration implements Comparable<VaccineAdministration> 
     return doseNumber;
   }
 
-  public Calendar getDate() {
-    return date;
-  }
-
   /**
    * Adds an adverse reaction to the vaccine administration.
    * 
@@ -117,6 +113,15 @@ public class VaccineAdministration implements Comparable<VaccineAdministration> 
    */
   public AdverseReaction getAdverseReaction() {
     return adverseReaction;
+  }
+
+  /**
+   * Gets the vaccine administration date.
+   * 
+   * @return the vaccine administration date
+   */
+  public Calendar getDate() {
+    return date;
   }
 
   /**

@@ -1,9 +1,12 @@
 package app.controller;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import javax.print.attribute.standard.DialogOwner;
 import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.Appointment;
@@ -12,12 +15,18 @@ import app.domain.model.Employee;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
+import app.domain.model.list.AppointmentScheduleList;
 import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.SNSUserStore;
 import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineTypeStore;
 import app.domain.shared.Gender;
+import app.dto.AppointmentInsertDTO;
+import app.dto.VaccinationCenterListDTO;
+import app.dto.VaccineTypeDTO;
 import app.mapper.AppointmentInsertMapper;
+import app.mapper.VaccinationCenterMapper;
+import app.mapper.VaccineTypeMapper;
 import app.service.CalendarUtils;
 
 public class ScheduleVaccineControllerTest {
@@ -33,6 +42,9 @@ public class ScheduleVaccineControllerTest {
   private VaccinationCenterStore vacStore;
   private VaccineTypeStore vaccineTypeStore;
   private SNSUserStore snsUserStore;
+  private AppointmentScheduleList appointmentSchedule;
+  private VaccinationCenterListDTO centerDto;
+  private VaccineTypeDTO vaccineTypeDTO;
 
   @Before
   public void setUp() throws ParseException {
@@ -45,6 +57,8 @@ public class ScheduleVaccineControllerTest {
         "21:00", 5, 5, coordinator, "ages", "ags");
     vacStore.saveVaccinationCenter(vaccinationCenter);
 
+    centerDto = VaccinationCenterMapper.toDto(vaccinationCenter);
+
     snsUserStore = company.getSNSUserStore();
     user = new SNSUser("00000000", "123456789", "name", new Date(), Gender.MALE, "+351212345678", "email@email.com", "address");
     snsUserStore.saveSNSUser(user);
@@ -54,6 +68,8 @@ public class ScheduleVaccineControllerTest {
     vaccineTypeStore = company.getVaccineTypeStore();
     vaccineType = new VaccineType("12345", "TEST", "TEST_TECHNOLOGY");
     vaccineTypeStore.saveVaccineType(vaccineType);
+
+    vaccineTypeDTO = VaccineTypeMapper.toDto(vaccineType);
 
     appointment = new Appointment(user, calendar, vaccinationCenter, vaccineType, sms);
     AppointmentInsertMapper.toDto(appointment);
@@ -72,7 +88,42 @@ public class ScheduleVaccineControllerTest {
    */
   @Test
   public void ensureItIsPossibleToCreateAppointment() {
-    // controller.createAppointment(this.user.getSnsNumber(), this.calendar, this.vaccinationCenter, this.vaccineType,
-    // this.sms);
+    controller.createAppointment(user.getSnsNumber(), new Date(), "20:30", centerDto, vaccineTypeDTO, true);
+  }
+
+  @Test
+  public void ensureGetSuggestedVaccineTypeIsWorkingCorrectly() {
+    assertNotNull(controller.getSuggestedVaccineType());
+  }
+
+  @Test
+  public void ensureToStringIsWorking() {
+    controller.createAppointment(user.getSnsNumber(), new Date(), "20:30", centerDto, vaccineTypeDTO, true);
+    assertNotNull(controller.stringifyData());
+  }
+
+  @Test
+  public void ensureSaveIsWorking() {
+    controller.createAppointment(user.getSnsNumber(), new Date(), "20:30", centerDto, vaccineTypeDTO, true);
+    controller.save();
+  }
+
+  @Test
+  public void ensureGetListOfVaccinationCentersWithVaccineType() {
+    List<VaccinationCenterListDTO> list = controller.getListOfVaccinationCentersWithVaccineType(vaccineTypeDTO);
+    assertNotNull(list);
+  }
+
+  @Test
+  public void ensureGetListOfVaccineTypesIsWorking() {
+    List<VaccineTypeDTO> list = controller.getListOfVaccineTypes();
+    assertNotNull(list);
+  }
+
+  @Test
+  public void ensureGetRegisteredObjectIsWorking() {
+    controller.createAppointment(user.getSnsNumber(), new Date(), "20:30", centerDto, vaccineTypeDTO, true);
+    controller.save();
+    assertNotNull(controller.getRegisteredObject());
   }
 }
