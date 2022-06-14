@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.MyUserRole;
 import pt.isep.lei.esoft.auth.AuthFacade;
-import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
 /**
  * @author Tomás Lopes <1211289@isep.ipp.pt>
