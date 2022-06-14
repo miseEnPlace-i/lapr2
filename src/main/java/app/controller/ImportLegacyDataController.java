@@ -11,9 +11,9 @@ import app.domain.model.LegacyData;
 import app.domain.model.LegacyDataObjectBuilder;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.WaitingRoom;
-import app.domain.model.list.AdministrationList;
 import app.domain.model.list.AppointmentScheduleList;
 import app.domain.model.list.CenterEventList;
+import app.domain.model.list.VaccineAdministrationList;
 import app.domain.model.store.SNSUserStore;
 import app.dto.LegacyDataDTO;
 import app.exception.NotFoundException;
@@ -69,11 +69,11 @@ public class ImportLegacyDataController {
         for (LegacyDataDTO d : legacyDtoList) {
             LegacyData legacyData = LegacyDataMapper.toModel(d, this.center);
             LegacyDataObjectBuilder builder = new LegacyDataObjectBuilder(legacyData);
-            AdministrationList administrationList = legacyData.getSNSUser().getAdministrationList();
+            VaccineAdministrationList administrationList = legacyData.getSNSUser().getUserHealthData().getVaccineAdministrationList();
 
             aptSchList.saveAppointment(builder.createAppointment());
             waitingRoom.saveArrival(builder.createArrival());
-            administrationList.save(builder.createAdministration());
+            administrationList.saveVaccineAdministration(builder.createAdministration());
             centerEventList.save(builder.createArrivalEvent());
             centerEventList.save(builder.createVaccinatedEvent());
             centerEventList.save(builder.createDeparturedEvent());
