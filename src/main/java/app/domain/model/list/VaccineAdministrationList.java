@@ -8,6 +8,7 @@ import java.util.List;
 import app.dto.AdverseReactionDTO;
 import app.dto.VaccineDTO;
 import app.domain.model.AdverseReaction;
+import app.domain.model.CenterEvent;
 import app.domain.model.RecoveryRoom;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
@@ -71,7 +72,9 @@ public class VaccineAdministrationList implements Serializable {
     SNSUser snsUser = vaccineAdministration.getSnsUser();
     Calendar date = vaccineAdministration.getDate();
 
-    centerEventList.create(date, CenterEventType.VACCINATED, snsUser);
+    CenterEvent event = centerEventList.create(date, CenterEventType.VACCINATED, snsUser);
+
+    centerEventList.save(event);
 
     WaitingRoom waitingRoom = vaccinationCenter.getWaitingRoom();
     waitingRoom.removeUser(snsUser);
