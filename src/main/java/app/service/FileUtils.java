@@ -93,7 +93,7 @@ public class FileUtils {
     public static String removeExtension(String fileName) {
         if (hasNoExtension(fileName)) return fileName;
 
-        return fileName.substring(0, fileName.lastIndexOf("."));
+        return fileName.substring(0, fileName.indexOf("."));
     }
 
     /**
