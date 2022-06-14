@@ -30,7 +30,7 @@ participant "vaccine:Vaccine" as VACCINE
 participant "administrationList:AdministrationList" as ADLST
 participant "appointment:Appointment" as APT
 participant "arrival:Arrival" as ARRIVAL
-participant "administration:Administration" as ADMINISTRATION
+participant "vacAdministration:VaccineAdministration" as VACADMINISTRATION
 participant "fileData:List<String[]>" as LIST_FILEDATA
 
 activate COORDINATOR
@@ -201,13 +201,13 @@ activate COORDINATOR
           activate WR
           deactivate WR
 
-          CTRL -> BUILDER : administration = createAdministration()
+          CTRL -> BUILDER : vacAdministration = createVaccineAdministration()
           activate BUILDER
           deactivate BUILDER
 
-          CTRL -> WR : save(administration)
-          activate WR
-          deactivate WR
+          CTRL -> VACADMINISTRATION : saveVaccineAdministration(vacAdministration)
+          activate VACADMINISTRATION
+          deactivate VACADMINISTRATION
 
           CTRL -> BUILDER : arrivalEvent = createArrivalEvent()
           activate BUILDER
