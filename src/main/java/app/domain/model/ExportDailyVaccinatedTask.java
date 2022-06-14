@@ -1,12 +1,15 @@
 package app.domain.model;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TimerTask;
 import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineTypeStore;
 import app.domain.shared.Constants;
+import app.service.FileUtils;
 
 public class ExportDailyVaccinatedTask extends TimerTask {
 
@@ -41,6 +44,13 @@ public class ExportDailyVaccinatedTask extends TimerTask {
             }
             dataMap.put(centerLst.get(i), centerDataMap);
         }
+
+        String content = convertToString(centerLst, vacTypeLst, dataMap);
+        Calendar yesterday = Calendar.getInstance();
+        yesterday.add(Calendar.DATE, -1);
+
+        String filepath = Constants.FILE_PATH_DAILY_VACCINATED + yesterday.toString() + ".csv";
+        FileUtils.writeToFile(filepath, content);
     }
 
     public String convertToString(List<VaccinationCenter> centers, List<VaccineType> types, HashMap<VaccinationCenter, HashMap> data){
