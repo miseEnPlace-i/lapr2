@@ -1,6 +1,8 @@
 package app.domain.model;
 
-public class AdverseReaction {
+import java.io.Serializable;
+
+public class AdverseReaction implements Serializable {
   private String description;
 
   /**

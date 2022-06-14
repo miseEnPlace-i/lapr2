@@ -1,9 +1,11 @@
 package app.domain.model;
 
+import java.io.Serializable;
 import org.apache.commons.lang3.StringUtils;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.SNSUserStore;
+import app.domain.model.store.UserStore;
 import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineStore;
 import app.domain.model.store.VaccineTechnologyStore;
@@ -19,10 +21,10 @@ import pt.isep.lei.esoft.auth.UserSession;
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
-public class Company {
+public class Company implements Serializable {
   private String designation;
   private String ongoingOutbreakVaccineTypeCode;
-  private AuthFacade authFacade;
+  private transient AuthFacade authFacade;
   private EmployeeStore employeeStore;
   private EmployeeRoleStore employeeRoleStore;
   private SNSUserStore snsUserStore;
@@ -30,7 +32,8 @@ public class Company {
   private VaccineStore vaccineStore;
   private VaccineTechnologyStore vaccineTechnologyStore;
   private VaccineTypeStore vaccineTypeStore;
-  private UserSession userSession;
+  private transient UserSession userSession;
+  private UserStore userStore;
 
   /**
    * Company constructor.
@@ -45,12 +48,10 @@ public class Company {
     this.designation = designation;
 
     this.authFacade = new AuthFacade();
-
-
-
+    this.userStore = new UserStore();
     this.employeeRoleStore = new EmployeeRoleStore(this.authFacade);
-    this.employeeStore = new EmployeeStore(this.authFacade, this.employeeRoleStore);
-    this.snsUserStore = new SNSUserStore(this.authFacade);
+    this.employeeStore = new EmployeeStore(this.authFacade, this.userStore, this.employeeRoleStore);
+    this.snsUserStore = new SNSUserStore(this.authFacade, this.userStore);
     this.vaccinationCenterStore = new VaccinationCenterStore();
     this.vaccineStore = new VaccineStore();
     this.vaccineTechnologyStore = new VaccineTechnologyStore();
@@ -127,5 +128,9 @@ public class Company {
 
   public UserSession getUserSession() {
     return this.userSession;
+  }
+
+  public UserStore getUserStore() {
+    return this.userStore;
   }
 }

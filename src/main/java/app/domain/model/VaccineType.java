@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import java.io.Serializable;
 import app.domain.shared.Constants;
 
 /**
@@ -7,7 +8,7 @@ import app.domain.shared.Constants;
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 
-public class VaccineType {
+public class VaccineType implements Serializable {
   private String code;
   private String description;
   private String technology;
@@ -52,8 +53,7 @@ public class VaccineType {
 
   private void setCode(String code) {
     if (code == null || !code.matches("[0-9]{" + Constants.VACCINE_TYPE_CODE_LENGTH + "}"))
-      throw new IllegalArgumentException(
-          "Vaccine type code must be " + Constants.VACCINE_TYPE_CODE_LENGTH + " characters long.");
+      throw new IllegalArgumentException("Vaccine type code must be " + Constants.VACCINE_TYPE_CODE_LENGTH + " characters long.");
 
     this.code = code;
   }
@@ -67,8 +67,7 @@ public class VaccineType {
    */
 
   private void setDescription(String description) {
-    if (description.isEmpty() || description == null)
-      throw new IllegalArgumentException("Description is not valid.");
+    if (description.isEmpty() || description == null) throw new IllegalArgumentException("Description is not valid.");
 
     this.description = description;
   }
@@ -82,8 +81,7 @@ public class VaccineType {
    */
 
   private void setTechnology(String technology) {
-    if (technology == null || technology.isEmpty())
-      throw new IllegalArgumentException("Invalid vaccine technology: " + technology);
+    if (technology == null || technology.isEmpty()) throw new IllegalArgumentException("Invalid vaccine technology: " + technology);
 
     this.technology = technology;
   }

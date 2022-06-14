@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
+import app.domain.model.MyUserRole;
 import pt.isep.lei.esoft.auth.AuthFacade;
 import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
@@ -24,11 +25,11 @@ public class EmployeeRoleStoreTest {
 
   @Test
   public void ensureIsPossibleToAddNewRole() {
-    List<UserRole> roles = employeeRoleStore.getRoles();
+    List<MyUserRole> roles = employeeRoleStore.getRoles();
 
     assert roles.size() == 0;
 
-    UserRole role = employeeRoleStore.addEmployeeRole("role", "role");
+    MyUserRole role = employeeRoleStore.addEmployeeRole("role", "role");
 
     roles = employeeRoleStore.getRoles();
 

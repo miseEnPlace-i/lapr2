@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.List;
 import app.controller.App;
 import app.controller.RegisterEmployeeController;
+import app.domain.model.MyUserRole;
 import app.domain.shared.FieldToValidate;
 import app.ui.console.utils.Utils;
 import pt.isep.lei.esoft.auth.domain.model.UserRole;
@@ -28,7 +29,7 @@ public class RegisterEmployeeUI extends RegisterUI<RegisterEmployeeController> {
    * 
    * @param employeeRoles the list of employee roles
    */
-  private void displayEmployeeRoles(List<UserRole> employeeRoles) {
+  private void displayEmployeeRoles(List<MyUserRole> employeeRoles) {
     Utils.showList(employeeRoles, "\nEmployee Roles");
   }
 
@@ -37,7 +38,7 @@ public class RegisterEmployeeUI extends RegisterUI<RegisterEmployeeController> {
    * 
    * @param employeeRoles the list of employee roles
    */
-  private UserRole selectEmployeeRole(List<UserRole> employeeRoles) {
+  private MyUserRole selectEmployeeRole(List<MyUserRole> employeeRoles) {
     int roleIndex = Utils.selectsIndex(employeeRoles);
 
     if (roleIndex == -1) return null;
@@ -50,10 +51,10 @@ public class RegisterEmployeeUI extends RegisterUI<RegisterEmployeeController> {
    */
   @Override
   public void insertData() throws IllegalArgumentException, ParseException {
-    List<UserRole> employeeRoles = ctrl.getEmployeeRoles();
+    List<MyUserRole> employeeRoles = ctrl.getEmployeeRoles();
     displayEmployeeRoles(employeeRoles);
 
-    UserRole role = selectEmployeeRole(employeeRoles);
+    MyUserRole role = selectEmployeeRole(employeeRoles);
 
     if (role == null) return;
 

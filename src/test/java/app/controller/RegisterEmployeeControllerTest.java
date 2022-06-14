@@ -5,6 +5,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.Company;
+import app.domain.model.MyUserRole;
 import app.domain.model.store.EmployeeRoleStore;
 import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
@@ -88,7 +89,7 @@ public class RegisterEmployeeControllerTest {
    */
   @Test
   public void ensureEmployeeRolesListWorking() {
-    List<UserRole> list = ctrl.getEmployeeRoles();
+    List<MyUserRole> list = ctrl.getEmployeeRoles();
     assertEquals(list.size(), 2);
   }
 }
