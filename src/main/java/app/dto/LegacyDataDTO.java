@@ -10,6 +10,7 @@ import java.util.Calendar;
 public class LegacyDataDTO implements Comparable<LegacyDataDTO> {
     private String snsNumber;
     private String vaccineName;
+    private String vaccineType;
     private int dose;
     private String lotNumber;
     private Calendar scheduledDate;
@@ -59,6 +60,10 @@ public class LegacyDataDTO implements Comparable<LegacyDataDTO> {
 
     public Calendar getDepartureDate() {
         return departureDate;
+    }
+
+    public String getVaccineType() {
+        return vaccineType;
     }
 
     @Override

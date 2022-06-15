@@ -71,6 +71,17 @@ public class CoordinatorUI extends EmployeeRoleUI {
     }
   }
 
+  public ImportLegacyData2UI toImportLegacyDataScene2() {
+    try {
+      ImportLegacyData2UI importUI = (ImportLegacyData2UI) this.mainApp.replaceSceneContent("/fxml/ImportLegacyData_2.fxml");
+      importUI.init(this);
+      return importUI;
+    } catch (Exception ex) {
+      Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return null;
+  }
+
   @Override
   public String getUIRoleName() {
     return "COORDINATOR";

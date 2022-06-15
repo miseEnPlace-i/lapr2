@@ -39,4 +39,6 @@ public class Constants {
   public static final int MAX_OF_PASSWORD_TRIES = 3;
 
   public static final String DATA_FILE_PATH = "data.bin";
+
+  public static final String PARAMS_AUTO_DESERIALIZE = "Init.AutoDeserialize.Enabled";
 }

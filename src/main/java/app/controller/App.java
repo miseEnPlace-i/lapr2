@@ -89,7 +89,9 @@ public class App {
   }
 
   private boolean isFirstRun() {
-    return !new File(Constants.DATA_FILE_PATH).exists();
+    Properties props = PropertiesUtils.getProperties();
+    String auto = props.getProperty(Constants.PARAMS_AUTO_DESERIALIZE);
+    return !(auto != null && auto.equals("true")) || !new File(Constants.DATA_FILE_PATH).exists();
   }
 
   private Company readExistingCompany(File file) {
