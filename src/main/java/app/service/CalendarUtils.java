@@ -101,4 +101,19 @@ public class CalendarUtils {
 
     return calendar;
   }
+
+  public static int compareDates(Calendar date1, Calendar date2) {
+    return generateKeyFromDate(date1).compareTo(generateKeyFromDate(date2));
+  }
+
+  private static Calendar generateKeyFromDate(Calendar date) {
+    Calendar key = Calendar.getInstance();
+    key.setTime(date.getTime());
+    key.set(Calendar.HOUR_OF_DAY, 0);
+    key.set(Calendar.MINUTE, 0);
+    key.set(Calendar.SECOND, 0);
+    key.set(Calendar.MILLISECOND, 0);
+
+    return key;
+  }
 }
