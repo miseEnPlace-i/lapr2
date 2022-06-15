@@ -7,6 +7,7 @@ import java.util.Properties;
 import org.apache.commons.lang3.ArrayUtils;
 import app.domain.shared.Constants;
 import app.service.PropertiesUtils;
+import java.util.stream.Collectors;
 
 public class MaxSumSublistService {
   private List<Integer> sublist = null;
@@ -39,7 +40,7 @@ public class MaxSumSublistService {
   }
 
   private List<Integer> parseArrayToList(int[] array) {
-    return Arrays.stream(array).boxed().toList();
+    return Arrays.stream(array).boxed().collect(Collectors.toList());
   }
 
   private IMaxSum getMaxSumStrategy() {
