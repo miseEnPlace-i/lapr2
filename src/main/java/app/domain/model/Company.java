@@ -1,6 +1,7 @@
 package app.domain.model;
 
 import java.io.ObjectInputFilter.Config;
+import java.nio.file.FileStore;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
@@ -16,6 +17,8 @@ import app.domain.model.store.VaccineStore;
 import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.model.store.VaccineTypeStore;
 import app.domain.shared.Constants;
+import app.service.PropertiesUtils;
+import app.utils.Time;
 import pt.isep.lei.esoft.auth.AuthFacade;
 import pt.isep.lei.esoft.auth.UserSession;
 
@@ -40,6 +43,7 @@ public class Company implements Serializable {
   private VaccineTypeStore vaccineTypeStore;
   private transient UserSession userSession;
   private UserStore userStore;
+  private Properties props;
 
   /**
    * Company constructor.
@@ -65,6 +69,9 @@ public class Company implements Serializable {
     this.userSession = new UserSession();
 
     this.ongoingOutbreakVaccineTypeCode = ongoingOutbreakVaccineTypeCode;
+
+    this.props = PropertiesUtils.getProperties();
+    Scheduler.scheduleExportDailyVaccinated(props.getProperty(Constants.PARAMS_EXPORTATION_PATH), props.getProperty(Constants.PARAMS_EXPORTATION_TIME), props.getProperty(Constants.PARAMS_EXPORTATION_SEPARATOR), this.vaccinationCenterStore, this.vaccineTypeStore);
   }
 
   /**
@@ -136,20 +143,8 @@ public class Company implements Serializable {
     return this.userSession;
   }
 
-  public void scheduleExportDailyVaccinated(Date firstDate, long period){
-    ExportDailyVaccinatedTask task = new ExportDailyVaccinatedTask("filetest", ";".charAt(0), this.vaccinationCenterStore, this.vaccineTypeStore);
-    Timer timer = new Timer();
-
-    Calendar firstTime = Calendar.getInstance();
-    firstTime.add(Calendar.DAY_OF_MONTH, 1);
-    firstTime.set(Calendar.HOUR, 0);
-    firstTime.set(Calendar.MINUTE, 0);
-    firstTime.set(Calendar.SECOND, 0);
-
-    timer.scheduleAtFixedRate(task, firstTime.getTime(), 24*60*60);
-  }
-
   public UserStore getUserStore() {
     return this.userStore;
   }
+
 }
