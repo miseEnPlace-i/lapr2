@@ -3,6 +3,7 @@ package app.domain.model.store;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import app.domain.model.Address;
 import app.domain.model.Employee;
 import app.dto.UserNotificationDTO;
 import app.mapper.UserNotificationMapper;
@@ -42,7 +43,7 @@ public class EmployeeStore implements Serializable {
    * @param citizenCard the employee citizenCard
    * @param roleId the employee roleId
    */
-  public Employee createEmployee(String name, String phoneNumber, String email, String address, String citizenCard, String roleId) {
+  public Employee createEmployee(String name, String phoneNumber, String email, Address address, String citizenCard, String roleId) {
     String id = generateId();
     Employee employee = new Employee(id, name, phoneNumber, email, address, citizenCard, roleId);
 

@@ -59,7 +59,8 @@ public class RegisterSNSUserArrivalControllerTest {
         new Address("street", 1, "11-11", "city"));
     this.snsUserStore.saveSNSUser(snsUser);
 
-    Employee e2 = empStore.createEmployee("Name2", "+351916919269", "c@user.com", "address", "15542404", Constants.ROLE_COORDINATOR);
+    Employee e2 =
+        empStore.createEmployee("Name2", "+351916919269", "c@user.com", new Address("street", 1, "11-1", "city"), "15542404", Constants.ROLE_COORDINATOR);
     this.empStore.saveEmployee(e2);
 
     this.vtechStore.addVaccineTechnology("M_RNA_TECHNOLOGY");
@@ -67,8 +68,8 @@ public class RegisterSNSUserArrivalControllerTest {
     this.vacType = vtStore.addVaccineType("00000", "COVID-19", "M_RNA_TECHNOLOGY");
     this.vtStore.saveVaccineType(vacType);
 
-    this.center = vcStore.createCommunityMassCenter("Centro Vacinação de Teste", "Rua de Teste", "test@gmail.com", "+351212345678", "+351212345679",
-        "http://www.test.com", "20:00", "21:00", 7, 5, e2, vacType);
+    this.center = vcStore.createCommunityMassCenter("Centro Vacinação de Teste", new Address("street", 1, "11-11", "city"), "test@gmail.com", "+351212345678",
+        "+351212345679", "http://www.test.com", "20:00", "21:00", 7, 5, e2, vacType);
     this.vcStore.saveVaccinationCenter(this.center);
 
     Vaccine vaccine = new Vaccine("designation", "12345", "brand", vacType);

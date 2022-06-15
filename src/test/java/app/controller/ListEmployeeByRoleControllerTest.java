@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
+import app.domain.model.Address;
 import app.domain.model.Company;
 import app.domain.model.Employee;
 import app.domain.model.MyUserRole;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
-import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
 /**
  * @author Tomás Lopes <1211289@isep.ipp.pt>
@@ -25,7 +25,8 @@ public class ListEmployeeByRoleControllerTest {
     roleStore.addEmployeeRole("TEST1", "TEST1");
 
     EmployeeStore employeeStore = company.getEmployeeStore();
-    Employee employee = new Employee("00000001", "Joana Maria", "+351123456789", "email@email.com", "Av. da Liberdade", "12345678", "TEST");
+    Employee employee =
+        new Employee("00000001", "Joana Maria", "+351123456789", "email@email.com", new Address("street", 1, "1-11", "city"), "12345678", "TEST");
     employeeStore.saveEmployee(employee);
   }
 

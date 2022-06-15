@@ -54,7 +54,7 @@ public class RegisterVaccineAdministrationControllerTest {
 
   @Before
   public void setup() {
-    Employee coordinator = new Employee("123456789", "name", "+351212345678", "email@email.com", "address", "00000000", "ROLE");
+    Employee coordinator = new Employee("123456789", "name", "+351212345678", "email@email.com", new Address("street", 1, "11-11", "city"), "00000000", "ROLE");
 
     vaccineType = new VaccineType("12345", "description", "technology");
     vaccine = new Vaccine("pfizer", "123456", "pfizer", vaccineType);
@@ -76,8 +76,8 @@ public class RegisterVaccineAdministrationControllerTest {
     Time closingHours = new Time(11, 0);
     Slot slot = new Slot(5, 5);
 
-    vaccinationCenter = new HealthCareCenter("name", "address", "email@email.com", "+351212345678", "+351212345678", "http://www.site.com", openingHours,
-        closingHours, slot, coordinator, "ages", "ars");
+    vaccinationCenter = new HealthCareCenter("name", new Address("street", 1, "11-11", "city"), "email@email.com", "+351212345678", "+351212345678",
+        "http://www.site.com", openingHours, closingHours, slot, coordinator, "ages", "ars");
 
     Appointment appointment = new Appointment(user1, Calendar.getInstance(), vaccinationCenter, vaccineType, true);
 

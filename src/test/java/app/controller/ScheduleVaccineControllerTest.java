@@ -49,12 +49,13 @@ public class ScheduleVaccineControllerTest {
   @Before
   public void setUp() throws ParseException {
     EmployeeStore employeeStore = company.getEmployeeStore();
-    Employee coordinator = employeeStore.createEmployee("name", "+351212345678", "email@email.com", "address", "00000000", "COORDINATOR");
+    Employee coordinator =
+        employeeStore.createEmployee("name", "+351212345678", "email@email.com", new Address("street", 1, "1-1", "city"), "00000000", "COORDINATOR");
     employeeStore.saveEmployee(coordinator);
 
     vacStore = company.getVaccinationCenterStore();
-    vaccinationCenter = vacStore.createHealthCareCenter("name", "address", "email@email.com", "+351212345678", "+351212345678", "http://www.com", "20:00",
-        "21:00", 5, 5, coordinator, "ages", "ags");
+    vaccinationCenter = vacStore.createHealthCareCenter("name", new Address("street", 1, "1-1", "city"), "email@email.com", "+351212345678", "+351212345678",
+        "http://www.com", "20:00", "21:00", 5, 5, coordinator, "ages", "ags");
     vacStore.saveVaccinationCenter(vaccinationCenter);
 
     centerDto = VaccinationCenterMapper.toDto(vaccinationCenter);

@@ -18,10 +18,11 @@ public class CenterPerformanceTest {
 
   @Before
   public void setup() throws ParseException {
-    Employee coordinator = new Employee("123456789", "name", "+351212345678", "email@email.com", "address", "00000000", Constants.ROLE_COORDINATOR);
+    Employee coordinator = new Employee("123456789", "name", "+351212345678", "email@email.com", new Address("street", 1, "11-11", "city"), "00000000",
+        Constants.ROLE_COORDINATOR);
 
-    center = new HealthCareCenter("name", "address", "email@email.com", "+351212345678", "+351212345678", "https://ccc.com", new Time("10:00"),
-        new Time("11:00"), new Slot(5, 5), coordinator, "ages", "ars");
+    center = new HealthCareCenter("name", new Address("street", 1, "11-11", "city"), "email@email.com", "+351212345678", "+351212345678", "https://ccc.com",
+        new Time("10:00"), new Time("11:00"), new Slot(5, 5), coordinator, "ages", "ars");
 
     new VaccineType("12345", "description", "technology");
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");

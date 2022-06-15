@@ -14,7 +14,7 @@ public class Employee implements Serializable {
   String name = "";
   String phoneNumber = "";
   String email = "";
-  String address = "";
+  Address address = null;
   String citizenCard = "";
   String roleId = "";
 
@@ -28,12 +28,12 @@ public class Employee implements Serializable {
    * @param citizenCard the employee citizenCard
    * @param roleId the employee roleId
    */
-  public Employee(String id, String name, String phoneNumber, String email, String address, String citizenCard, String roleId) {
+  public Employee(String id, String name, String phoneNumber, String email, Address address, String citizenCard, String roleId) {
     this.id = id;
     setName(name);
     setPhoneNumber(phoneNumber);
     setEmail(email);
-    setAddress(address);
+    this.address = address;
     setCitizenCard(citizenCard);
     setRoleId(roleId);
   }
@@ -78,7 +78,7 @@ public class Employee implements Serializable {
     sb.append(String.format("Name: %s\n", this.name));
     sb.append(String.format("Phone number: %s\n", this.phoneNumber));
     sb.append(String.format("Email: %s\n", this.email));
-    sb.append(String.format("Address: %s\n", this.address));
+    sb.append(String.format("Address: %s\n", this.address.toString()));
     sb.append(String.format("Citizen Card number: %s\n", this.citizenCard));
     sb.append(String.format("Role: %s\n", this.roleId));
 
@@ -185,13 +185,6 @@ public class Employee implements Serializable {
    * 
    * @throws IllegalArgumentException if the address is null, empty or not valid
    */
-
-  private void setAddress(String address) {
-    if (address == null) throw new IllegalArgumentException("Address cannot be null");
-    if (address.isEmpty()) throw new IllegalArgumentException("Address cannot be empty");
-
-    this.address = address;
-  }
 
   /**
    * Sets the employee citizenCard.
