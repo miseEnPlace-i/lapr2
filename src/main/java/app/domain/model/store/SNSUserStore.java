@@ -202,7 +202,6 @@ public class SNSUserStore implements Serializable {
       }
     }
 
-
     return userList;
   }
 
