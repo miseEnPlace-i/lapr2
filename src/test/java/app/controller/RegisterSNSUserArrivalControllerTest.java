@@ -6,11 +6,14 @@ import java.util.Calendar;
 import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.Address;
+import app.domain.model.AdminProcess;
 import app.domain.model.Appointment;
 import app.domain.model.Company;
+import app.domain.model.DoseInfo;
 import app.domain.model.Employee;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
+import app.domain.model.Vaccine;
 import app.domain.model.VaccineType;
 import app.domain.model.list.AppointmentScheduleList;
 import app.domain.model.store.EmployeeStore;
@@ -67,6 +70,12 @@ public class RegisterSNSUserArrivalControllerTest {
     this.center = vcStore.createCommunityMassCenter("Centro Vacinação de Teste", "Rua de Teste", "test@gmail.com", "+351212345678", "+351212345679",
         "http://www.test.com", "20:00", "21:00", 7, 5, e2, vacType);
     this.vcStore.saveVaccinationCenter(this.center);
+
+    Vaccine vaccine = new Vaccine("designation", "12345", "brand", vacType);
+    AdminProcess adminProcess = new AdminProcess(10, 19, 1);
+    adminProcess.addDoseInfo(new DoseInfo(200, 10));
+    vaccine.addAdminProc(adminProcess);
+    vaccineStore.saveVaccine(vaccine);
 
     this.aptSchList = this.center.getAppointmentList();
 

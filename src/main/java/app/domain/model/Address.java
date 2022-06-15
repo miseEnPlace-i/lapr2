@@ -31,13 +31,23 @@ public class Address {
     return city;
   }
 
+  public void setPostalCode(String postalCode) {
+    if (!FormatVerifier.validatePostalCode(postalCode)) throw new IllegalArgumentException("Invalid postal code.");
+    this.postalCode = postalCode;
+  }
+
   @Override
   public String toString() {
     return street + " " + number + ", " + postalCode + " " + city;
   }
 
-  public void setPostalCode(String postalCode) {
-    if (!FormatVerifier.validatePostalCode(postalCode)) throw new IllegalArgumentException("Invalid postal code.");
-    this.postalCode = postalCode;
+  @Override
+  public boolean equals(Object other) {
+    if (other == null) return false;
+    if (other == this) return true;
+    if (!(other instanceof Address)) return false;
+    Address otherAddress = (Address) other;
+    return this.street.equals(otherAddress.street) && this.number == otherAddress.number && this.postalCode.equals(otherAddress.postalCode)
+        && this.city.equals(otherAddress.city);
   }
 }

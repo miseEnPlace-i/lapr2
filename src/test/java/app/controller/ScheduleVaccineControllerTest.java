@@ -9,13 +9,15 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.Address;
+import app.domain.model.AdminProcess;
 import app.domain.model.Appointment;
 import app.domain.model.Company;
+import app.domain.model.DoseInfo;
 import app.domain.model.Employee;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
+import app.domain.model.Vaccine;
 import app.domain.model.VaccineType;
-import app.domain.model.list.AppointmentScheduleList;
 import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.SNSUserStore;
 import app.domain.model.store.VaccinationCenterStore;
@@ -41,7 +43,6 @@ public class ScheduleVaccineControllerTest {
   private VaccinationCenterStore vacStore;
   private VaccineTypeStore vaccineTypeStore;
   private SNSUserStore snsUserStore;
-  private AppointmentScheduleList appointmentSchedule;
   private VaccinationCenterListDTO centerDto;
   private VaccineTypeDTO vaccineTypeDTO;
 
@@ -58,8 +59,12 @@ public class ScheduleVaccineControllerTest {
 
     centerDto = VaccinationCenterMapper.toDto(vaccinationCenter);
 
+    Calendar age = Calendar.getInstance();
+    age.add(Calendar.YEAR, -18);
+
     snsUserStore = company.getSNSUserStore();
-    user = new SNSUser("00000000", "123456789", "name", new Date(), Gender.MALE, "+351212345678", "email@email.com", new Address("street", 1, "11-11", "city"));
+    user =
+        new SNSUser("00000000", "123456789", "name", age.getTime(), Gender.MALE, "+351212345678", "email@email.com", new Address("street", 1, "11-11", "city"));
     snsUserStore.saveSNSUser(user);
 
     calendar = CalendarUtils.parseDateTime(new Date(), "20:40");
@@ -69,6 +74,12 @@ public class ScheduleVaccineControllerTest {
     vaccineTypeStore.saveVaccineType(vaccineType);
 
     vaccineTypeDTO = VaccineTypeMapper.toDto(vaccineType);
+
+    Vaccine vaccine = new Vaccine("designation", "12345", "brand", vaccineType);
+    AdminProcess adminProcess = new AdminProcess(10, 19, 1);
+    adminProcess.addDoseInfo(new DoseInfo(200, 10));
+    vaccine.addAdminProc(adminProcess);
+    company.getVaccineStore().saveVaccine(vaccine);
 
     appointment = new Appointment(user, calendar, vaccinationCenter, vaccineType, sms);
     AppointmentInsertMapper.toDto(appointment);

@@ -38,9 +38,15 @@ public class SNSUserMapper {
         gender = Gender.N_A;
     }
 
-    String addressString = userData[3];
-    String[] addressData = addressString.split("|");
-    Address address = new Address(addressData[0], Integer.parseInt(addressData[1]), addressData[2], addressData[3]);
+    String addressString = userData[3].trim();
+
+    String[] addressData = addressString.trim().split("\\|");
+    String street = addressData[0];
+    int number = Integer.parseInt(addressData[1].trim());
+    String postalCode = addressData[2];
+    String city = addressData[3];
+
+    Address address = new Address(street, number, postalCode, city);
 
     // userData: Name, Sex, Birth Date, Address, Phone Number, E-mail, SNS User Number and Citizen Card Number.
     return new SNSUserDTO(userData[7], userData[6], userData[0], birthDay, gender, userData[4], userData[5], address);

@@ -62,11 +62,15 @@ public class SNSUserStore implements Serializable {
     return snsUser;
   }
 
-
   // creates SNS User instance.
   public SNSUser createSNSUser(SNSUserDTO snsUserDto) {
-    SNSUser snsUser = new SNSUser(snsUserDto);
+    SNSUser snsUser = null;
+    try {
+      snsUser = new SNSUser(snsUserDto);
 
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     return snsUser;
   }
 

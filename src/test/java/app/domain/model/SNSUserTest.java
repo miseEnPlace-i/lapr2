@@ -188,7 +188,7 @@ public class SNSUserTest {
         new SNSUser("12345678", "123456789", "name", c, Gender.FEMALE, "+351211111111", "email@email.com", new Address("street", 1, "11-11", "city"));
 
     String expected = "SNS User name: name\nCitizen card number: 12345678\nSNS number: 123456789\nBirthday: " + sdf.format(new Date())
-        + "\nGender: Female\nPhone number: +351211111111\nEmail: email@email.com\nAddress: address\n";
+        + "\nGender: Female\nPhone number: +351211111111\nEmail: email@email.com\nAddress: street 1, 11-11 city\n";
 
     assertEquals(instance.toString(), expected);
   }
