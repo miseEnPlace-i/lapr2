@@ -30,15 +30,16 @@ _"As a center coordinator, I want to import data from a legacy system that was u
 >
 > **Answer:** "That file is from a legacy system, that uses a different date and time format. The date and time should be converted when loading the data into the application that we are developing."
 
-<!--  -->
 > **Question:** "I noticed that some postal codes in the address does not follow the format of XXXX-YYY. For example some of them are XXXX-Y. Are we supposed to be able to load those users as well?"
 >
 > **Answer:** "Yes."
 
+<!--  -->
 > **Question:** "In a meeting you already clarified that when uploading a file from a legacy system the application should check if the SNS Users are already registered and if not US 014 should be put to use. My question is now if only one or two SNS Users are not registered, should the whole legacy file be discarded?"
 >
 > **Answer:** "SNS users that are not registered should be loaded/registered. The other SNS users should not be registered again and should be ignored."
 
+<!--  -->
 > **Question:** "You already have clarified that when uploading a file from a legacy system the application should check if the SNS Users are already registered and if not, we should register them using US 014. How exactly do you want this to proceed, in case there aren't registered users, should the application ask the center coordinator to select the file with the users data to be uploaded?"
 >
 > **Answer:** "US14 and US17 are two different features of the system. In US17, if the SNS user does not exist in the system, the vaccination of this SNS user should not be loaded. The system should continue processing the CSV file until all vaccinations are processed."
@@ -51,6 +52,7 @@ _"As a center coordinator, I want to import data from a legacy system that was u
 >
 > **Answer:** "Yes."
 
+<!-- user chooses ascending or descending order on UI -->
 > **Question:** "When sorting data by arrival time or central leaving time, should we sort from greater to smallest or from smallest to greater?"
 >
 > **Answer:** "The user must be able to sort in ascending and descending order."
@@ -73,28 +75,27 @@ _"As a center coordinator, I want to import data from a legacy system that was u
 
 ### 1.4. Found out Dependencies
 
-<!-- TODO -->
 <!-- ? Identify here any found out dependency to other US and/or requirements. -->
-- There is a dependency with 
-- register sns user
-- register employee
-- f
-- f
-- 
+- There is a dependency with US 03 / 14 since the CSV file that is being loaded contains SNS User numbers and those must exist in the system.
+- There is a dependency with US 09 since there needs to be at least one vaccination center with one coordinator in order to import the legacy data into that center.
+- There is a dependency with US 10 since there needs to be at least one coordinator in order to access this feature.
+- There is a dependency with US 12 / 13 sice the CSV file contains data about a vaccine that needs to exist in the system.
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 -   Typed data:
-    - file location
+    - n/a
 
 -   Selected data:
-    - n/a
+    - file to be imported
+    - sorting order (ascending or descending)
+    - sorted by (arrival time or center leaving time)
 
 **Output Data:**
 
--   imported data sorted by arrival time or by the center leaving time
+-   imported data sorted by arrival time or by the center leaving time (ascending or descending) and the short description of the vaccine type
 
 ### 1.6. System Sequence Diagram (SSD)
 
@@ -104,8 +105,8 @@ _"As a center coordinator, I want to import data from a legacy system that was u
 
 ### 1.7 Other Relevant Remarks
 
-<!-- TODO -->
 <!-- ? Use this section to capture other relevant information that is related with this US such as (i) special requirements ; (ii) data and/or technology variations; (iii) how often this US is held. -->
+- The imported data should be presented to the user and the vaccine type Short Description attribute should also be presented to the user.
 
 ## 2. OO Analysis
 
@@ -115,8 +116,8 @@ _"As a center coordinator, I want to import data from a legacy system that was u
 
 ### 2.2. Other Remarks
 
-<!-- TODO -->
 <!-- ? Use this section to capture some aditional notes/remarks that must be taken into consideration into the design activity. In some case, it might be usefull to add other analysis artifacts (e.g. activity or state diagrams). -->
+- n/a.
 
 ## 3. Design - User Story Realization
 
@@ -152,9 +153,8 @@ According to the taken rationale, the conceptual classes promoted to software cl
 
 Other software classes (i.e. Pure Fabrication) identified:
 
-<!-- TODO -->
-- xxxxUI
-- xxxxController
+- ImportLegacyDataUI
+- ImportLegacyDataController
 
 ## 3.2. Sequence Diagram (SD)
 
