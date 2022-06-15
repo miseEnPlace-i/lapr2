@@ -1,6 +1,7 @@
 package app.domain.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import app.domain.model.list.AdminProcList;
 
 /**
@@ -124,6 +125,16 @@ public class Vaccine implements Serializable {
     return false;
   }
 
+  public AdminProcess getAdministrationProcessForGivenAge(int age) {
+    for (AdminProcess adPr : adminProcList.getList()) {
+      if (adPr.admitsAge(age)) {
+        return adPr;
+      }
+    }
+
+    return null;
+  }
+
   /**
    * Get the dosage for the given age and dose number.
    * 
@@ -140,5 +151,26 @@ public class Vaccine implements Serializable {
     }
 
     return 0;
+  }
+
+  public boolean isDateWithinTimeSinceLastDose(Calendar administrationDate, Calendar appointmentDate, int lastDose, int age) {
+    if (lastDose == 0) return true;
+
+    AdminProcess adminProcess = getAdministrationProcessForGivenAge(age);
+
+    if (adminProcess == null) return false;
+
+    int numberOfDoses = adminProcess.getNumberOfDoses();
+
+    if (numberOfDoses <= lastDose) return false;
+
+    int timeSinceLastDose = adminProcess.getTimeSinceLastDose(lastDose + 1);
+
+    if (timeSinceLastDose == 0) return true;
+
+    Calendar expectedNextDoseDate = administrationDate;
+    expectedNextDoseDate.add(Calendar.DATE, timeSinceLastDose);
+
+    return expectedNextDoseDate.before(administrationDate);
   }
 }

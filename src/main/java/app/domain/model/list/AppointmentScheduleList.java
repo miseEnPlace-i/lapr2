@@ -5,10 +5,12 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import app.controller.App;
 import app.domain.model.Appointment;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.VaccineType;
+import app.domain.model.store.VaccineStore;
 import app.dto.UserNotificationDTO;
 import app.dto.VaccineTypeDTO;
 import app.exception.AppointmentNotFoundException;
@@ -105,28 +107,6 @@ public class AppointmentScheduleList implements Serializable {
 
     if (scheduledMinutesOfDay > workingHours) return false;
     return true;
-  }
-
-  /**
-   * Validates the appointment.
-   * 
-   * @param appointment the appointment to be added
-   */
-  public void validateAppointment(Appointment appointment) {
-    if (appointment == null) throw new IllegalArgumentException("Appointment is not valid.");
-
-    Time hours = new Time(appointment.getDate());
-
-    if (!vaccinationCenter.isOpenAt(hours))
-      throw new IllegalArgumentException("Vaccination center is closed or does not accept appointments at selected time.");
-
-    if (!vaccinationCenter.hasAvailabilityInSlot(appointment.getDate()))
-      throw new IllegalArgumentException("Vaccination center does not accept any more appointments at selected time.");
-
-    SNSUser snsUser = appointment.getSnsUser();
-
-    if (snsUser.hasAppointmentForVaccineType(appointment.getVaccineType()))
-      throw new IllegalArgumentException("SNS User has already an appointment for the selected vaccine type.");
   }
 
   /**

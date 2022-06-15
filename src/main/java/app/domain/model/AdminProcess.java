@@ -91,6 +91,12 @@ public class AdminProcess implements Serializable {
     doseInfoList.addDoseInfo(doseInfo);
   }
 
+  public int getTimeSinceLastDose(int dose) {
+    DoseInfo doseInfo = doseInfoList.getDoseInfoByDoseNumber(dose);
+
+    return doseInfo.getTimeSinceLastDose();
+  }
+
   /**
    * Checks if the given age is between minAge and maxAge.
    * 

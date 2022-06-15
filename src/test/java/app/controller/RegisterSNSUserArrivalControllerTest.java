@@ -15,6 +15,7 @@ import app.domain.model.list.AppointmentScheduleList;
 import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.SNSUserStore;
 import app.domain.model.store.VaccinationCenterStore;
+import app.domain.model.store.VaccineStore;
 import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.model.store.VaccineTypeStore;
 import app.domain.shared.Constants;
@@ -22,6 +23,7 @@ import app.domain.shared.Gender;
 import app.dto.VaccineTypeDTO;
 import app.exception.AppointmentNotFoundException;
 import app.mapper.VaccineTypeMapper;
+import app.service.AppointmentValidator;
 
 public class RegisterSNSUserArrivalControllerTest {
   Company company;
@@ -34,6 +36,7 @@ public class RegisterSNSUserArrivalControllerTest {
   VaccineType vacType;
   VaccinationCenter center;
   AppointmentScheduleList aptSchList;
+  VaccineStore vaccineStore;
 
   @Before
   public void setUp() {
@@ -43,6 +46,7 @@ public class RegisterSNSUserArrivalControllerTest {
     this.empStore = company.getEmployeeStore();
     this.vtStore = company.getVaccineTypeStore();
     this.vtechStore = company.getVaccineTechnologyStore();
+    this.vaccineStore = company.getVaccineStore();
 
     Calendar date = Calendar.getInstance();
     date.add(Calendar.YEAR, -18);
@@ -109,7 +113,8 @@ public class RegisterSNSUserArrivalControllerTest {
 
     appointment = this.aptSchList.createAppointment(snsUser, date, vtdto, true);
 
-    this.aptSchList.validateAppointment(appointment);
+    AppointmentValidator appointmentValidator = new AppointmentValidator(this.vaccineStore);
+    appointmentValidator.validateAppointment(appointment);
     this.aptSchList.saveAppointment(appointment);
   }
 
