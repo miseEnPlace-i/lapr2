@@ -1,11 +1,6 @@
 package app.domain.model;
 
-import java.io.ObjectInputFilter.Config;
-import java.nio.file.FileStore;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Properties;
-import java.util.Timer;
 import java.io.Serializable;
 import org.apache.commons.lang3.StringUtils;
 import app.domain.model.store.EmployeeRoleStore;
@@ -18,7 +13,6 @@ import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.model.store.VaccineTypeStore;
 import app.domain.shared.Constants;
 import app.service.PropertiesUtils;
-import app.utils.Time;
 import pt.isep.lei.esoft.auth.AuthFacade;
 import pt.isep.lei.esoft.auth.UserSession;
 

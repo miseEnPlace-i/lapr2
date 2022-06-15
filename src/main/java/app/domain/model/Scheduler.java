@@ -6,9 +6,11 @@ import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineTypeStore;
 import app.utils.Time;
 
+/**
+ * @author Carlos Lopes <1211277@isep.ipp.pt>
+ */
 public class Scheduler {
     public static void scheduleExportDailyVaccinated(String path, String time, String separator, VaccinationCenterStore vacCenterStore, VaccineTypeStore vacTStore){
-       
         
         ExportDailyVaccinatedTask task = new ExportDailyVaccinatedTask(path, separator.charAt(0), vacCenterStore, vacTStore);
         Timer timer = new Timer();
@@ -23,6 +25,7 @@ public class Scheduler {
         if(firstTime.before(Calendar.getInstance())) firstTime.add(Calendar.DATE, 1);
     
         timer.scheduleAtFixedRate(task, firstTime.getTime(), 24*60*60);
+
       }
     
 }
