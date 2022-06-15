@@ -51,8 +51,6 @@ public class ExportDailyVaccinatedTask extends TimerTask {
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
         String filepath = this.filePath + format.format(yesterday.getTime()) + ".csv";
-        System.out.println(filepath);
-        System.out.println(content);
         FileUtils.writeToFile(filepath, content);
     }
 
@@ -63,18 +61,20 @@ public class ExportDailyVaccinatedTask extends TimerTask {
         for (int i = 0; i < types.size(); i++) {
             result += types.get(i).getDescription() + this.separator;
         }
-        result += "\n";
+        //removes last ; and changes line
+        result = result.substring(0, result.length() - 1) + "\n"; 
 
 
         for (int i = 0; i < centers.size(); i++) {
             result += centers.get(i).getName() + this.separator;
             for (int j = 0; j < types.size(); j++) {       
 
-                int value = data.get(centers.get(i)).get(types.get(i)) != null ? (int) data.get(centers.get(i)).get(types.get(i)) : 0;
+                int value = data.get(centers.get(i)).get(types.get(j)) != null ? (int) data.get(centers.get(i)).get(types.get(j)) : 0;
 
                 result += String.valueOf(value) + this.separator;                
             }
-            result += "\n";
+            //removes last ; and changes line
+        result = result.substring(0, result.length() - 1) + "\n"; 
         }
         return result;
     }

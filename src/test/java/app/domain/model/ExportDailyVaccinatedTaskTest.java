@@ -8,14 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import org.junit.Before;
 import org.junit.Test;
-import app.domain.model.Company;
-import app.domain.model.Employee;
-import app.domain.model.ExportDailyVaccinatedTask;
-import app.domain.model.SNSUser;
-import app.domain.model.VaccinationCenter;
-import app.domain.model.Vaccine;
-import app.domain.model.VaccineAdministration;
-import app.domain.model.VaccineType;
 import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.SNSUserStore;
 import app.domain.model.store.VaccinationCenterStore;
@@ -77,12 +69,12 @@ public class ExportDailyVaccinatedTaskTest {
         this.vacStore.saveVaccine(vac2);
 
 
-        this.center1 = vcStore.createCommunityMassCenter("Centro Vacinação de Teste", "Rua de Teste", "test@gmail.com", "+351212345678", "+351212345679",
-        "http://www.test.com", "20:00", "21:00", 7, 5, emp, vacType1);
+        this.center1 = vcStore.createHealthCareCenter("Centro Vacinação de Teste", "Rua de Teste", "test@gmail.com", "+351212345678", "+351212345679",
+        "http://www.test.com", "20:00", "21:00", 7, 5, emp, "ages", "ags");
         this.vcStore.saveVaccinationCenter(this.center1);
 
-        this.center2 = vcStore.createCommunityMassCenter("Centro Vacinação de Teste2", "Rua de Teste 2", "test2@gmail.com", "+351212345679", "+351212345678",
-            "http://www.test2.com", "20:00", "21:00", 7, 5, emp2, vacType1);
+        this.center2 = vcStore.createHealthCareCenter("Centro Vacinação de Teste2", "Rua de Teste 2", "test2@gmail.com", "+351212345679", "+351212345678",
+            "http://www.test2.com", "20:00", "21:00", 7, 5, emp2, "ages", "ags");
         this.vcStore.saveVaccinationCenter(this.center2);
     }
 
