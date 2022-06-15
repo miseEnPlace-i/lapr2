@@ -24,7 +24,7 @@ public class ApplicationUI extends Application {
   @Override
   public void start(Stage stage) throws Exception {
     this.stage = stage;
-    stage.setTitle("DGS Application");
+    stage.setTitle("DGS Vaccination Manager");
     stage.setMinWidth(MINIMUM_WINDOW_WIDTH);
     stage.setMinHeight(MINIMUM_WINDOW_HEIGHT);
     toMainScene();

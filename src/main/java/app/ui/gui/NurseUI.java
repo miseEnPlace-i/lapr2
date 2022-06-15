@@ -1,10 +1,10 @@
 package app.ui.gui;
 
+import app.domain.shared.HelpText;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import app.controller.App;
 import app.session.EmployeeSession;
-import app.domain.shared.HelpText;
 import app.ui.console.ListUsersInWaitingRoomUI;
 import app.ui.gui.utils.Utils;
 import javafx.event.ActionEvent;
