@@ -21,12 +21,14 @@ public class Constants {
 
   public static final String PARAMS_ONGOING_OUTBREAK_VACCINE_TYPE_CODE = "OngoingOutbreak.VaccineTypeCode";
 
-  public static final String PARAMS_SENDER = "MessageSender.Sender";
+  public static final String PARAMS_SENDER = "Notification.Sender";
   public static final String PARAMS_DEFAULT_SENDER = "app.service.sender.ConsoleSender";
 
   public static final String PARAMS_TEST_ENVIRONMENT = "Environment.Test";
   public static final String PARAMS_UI_ENVIRONMENT = "Environment.UI";
   public static final String PARAMS_PERFORMANCE_ALGORITHM = "Algorithm.Performance";
+
+  public static final String PARAMS_RECOVERY_PERIOD = "Vaccine.RecoveryPeriod";
 
   public static final byte VACCINE_TYPE_CODE_LENGTH = 5;
 
@@ -34,4 +36,8 @@ public class Constants {
 
   public static final int MAX_OF_PASSWORD_TRIES = 3;
 
+<<<<<<< HEAD
+=======
+  public static final String DATA_FILE_PATH = "data.bin";
+>>>>>>> d1018faec3af32bd6eca8a10738c205569184fbb
 }

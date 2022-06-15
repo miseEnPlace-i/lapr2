@@ -1,5 +1,6 @@
 package app.service;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import java.util.Arrays;
 import org.junit.Test;
@@ -12,9 +13,9 @@ public class SumAdapterTest {
   @Test
   public void ensureMaxSumIsWorking() {
     SumAdapter adapter = new SumAdapter();
-    Integer[] expected = new Integer[] {51, -9, 44, 74, 4};
+    int[] expected = new int[] {51, -9, 44, 74, 4};
 
-    assertEquals(adapter.maxSum(baseCase), expected);
+    assertArrayEquals(adapter.maxSum(baseCase), expected);
   }
 
   // !! Bug identified in external module

@@ -1,21 +1,34 @@
 package app.domain.model.list;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 import app.dto.AdverseReactionDTO;
+import app.dto.UserNotificationDTO;
 import app.dto.VaccineDTO;
 import app.domain.model.AdverseReaction;
+import app.domain.model.CenterEvent;
+import app.domain.model.RecoveryRoom;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.Vaccine;
 import app.domain.model.VaccineType;
+import app.domain.model.WaitingRoom;
+import app.domain.shared.CenterEventType;
+import app.domain.shared.Constants;
 import app.mapper.AdverseReactionMapper;
+import app.mapper.UserNotificationMapper;
 import app.mapper.VaccineMapper;
+import app.service.CalendarUtils;
+import app.service.PropertiesUtils;
+import app.service.sender.ISender;
+import app.service.sender.SenderFactory;
 import app.domain.model.VaccineAdministration;
 
-public class VaccineAdministrationList {
+public class VaccineAdministrationList implements Serializable {
   private List<VaccineAdministration> vaccineAdministrations;
 
   /**
@@ -60,10 +73,62 @@ public class VaccineAdministrationList {
     vaccineAdministrations.add(vaccineAdministration);
 
     VaccinationCenter vaccinationCenter = vaccineAdministration.getVaccinationCenter();
-
     vaccinationCenter.addVaccineAdministrationToList(vaccineAdministration);
 
-    // vaccineAdministration.setSMSSending();
+    CenterEventList centerEventList = vaccinationCenter.getEvents();
+
+    SNSUser snsUser = vaccineAdministration.getSnsUser();
+    Calendar date = vaccineAdministration.getDate();
+
+    CenterEvent vaccinated = centerEventList.create(date, CenterEventType.VACCINATED, snsUser);
+
+    centerEventList.save(vaccinated);
+
+    WaitingRoom waitingRoom = vaccinationCenter.getWaitingRoom();
+    waitingRoom.removeUser(snsUser);
+
+    RecoveryRoom recoveryRoom = vaccinationCenter.getRecoveryRoom();
+    recoveryRoom.addVaccineAdministration(vaccineAdministration);
+
+    Properties props = PropertiesUtils.getProperties();
+    int recoveryPeriod = Integer.parseInt(props.getProperty(Constants.PARAMS_RECOVERY_PERIOD));
+
+    Calendar departureTime = Calendar.getInstance();
+    departureTime.add(Calendar.MINUTE, recoveryPeriod);
+
+    CenterEvent departure = centerEventList.create(departureTime, CenterEventType.DEPARTURE, snsUser);
+
+    centerEventList.save(departure);
+
+    setSmsSending(vaccineAdministration, recoveryPeriod);
+  }
+
+  private void setSmsSending(VaccineAdministration vaccineAdministration, int recoveryPeriod) {
+    String message = String.format("Your recovery period has ended.\nYou can now leave the center.");
+    UserNotificationDTO notificationDto =
+        UserNotificationMapper.toDto(vaccineAdministration.getSnsUser().getEmail(), vaccineAdministration.getSnsUser().getPhoneNumber(), message);
+
+    new java.util.Timer().schedule(new java.util.TimerTask() {
+      @Override
+      public void run() {
+        sendNotification(notificationDto);
+      }
+    }, minutesToMilliseconds(recoveryPeriod));
+  }
+
+  private long minutesToMilliseconds(int minutes) {
+    return minutes * 60 * 1000;
+  }
+
+  private void sendNotification(UserNotificationDTO notificationDto) {
+    ISender sender = SenderFactory.getSender();
+
+    try {
+      sender.send(notificationDto);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      e.printStackTrace();
+    }
   }
 
   /**
@@ -119,5 +184,14 @@ public class VaccineAdministrationList {
     }
 
     return 1;
+  }
+
+  /**
+   * Gets the size of the list.
+   * 
+   * @return int of number of VaccineAdministrations in the list.
+   */
+  public int size() {
+    return vaccineAdministrations.size();
   }
 }

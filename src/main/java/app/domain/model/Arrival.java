@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Calendar;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
-public class Arrival {
+public class Arrival implements Serializable {
   private Appointment appointment;
   private Calendar arrivalTime;
 

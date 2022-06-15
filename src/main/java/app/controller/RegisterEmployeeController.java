@@ -3,6 +3,7 @@ package app.controller;
 import java.util.List;
 import app.domain.model.Company;
 import app.domain.model.Employee;
+import app.domain.model.MyUserRole;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
 import pt.isep.lei.esoft.auth.AuthFacade;
@@ -61,7 +62,7 @@ public class RegisterEmployeeController implements IRegisterController<Employee>
    * 
    * @return String
    */
-  public List<UserRole> getEmployeeRoles() {
+  public List<MyUserRole> getEmployeeRoles() {
     return roleStore.getRoles();
   }
 

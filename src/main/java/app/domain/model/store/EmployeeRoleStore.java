@@ -1,23 +1,25 @@
 package app.domain.model.store;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import app.domain.model.MyUserRole;
 import pt.isep.lei.esoft.auth.AuthFacade;
 import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
 /**
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
-public class EmployeeRoleStore {
-  private List<UserRole> roles;
+public class EmployeeRoleStore implements Serializable {
+  private List<MyUserRole> roles;
 
-  private AuthFacade authFacade;
+  private transient AuthFacade authFacade;
 
   /**
    * Constructor for EmployeeRoleStore.
    */
   public EmployeeRoleStore(AuthFacade authFacade) {
-    this.roles = new ArrayList<UserRole>();
+    this.roles = new ArrayList<MyUserRole>();
     this.authFacade = authFacade;
   }
 
@@ -27,13 +29,13 @@ public class EmployeeRoleStore {
    * @param id the role id
    * @param description the role description
    */
-  public UserRole addEmployeeRole(String id, String description) {
+  public MyUserRole addEmployeeRole(String id, String description) {
     if (authFacade.existsRole(id)) throw new IllegalArgumentException("Role already exists.");
     if (existsRole(id)) throw new IllegalArgumentException("Role already exists.");
 
     authFacade.addUserRole(id, description);
 
-    UserRole role = new UserRole(id, description);
+    MyUserRole role = new MyUserRole(id, description);
     roles.add(role);
 
     return role;
@@ -44,7 +46,7 @@ public class EmployeeRoleStore {
    * 
    * @return List of all Employee Roles
    */
-  public List<UserRole> getRoles() {
+  public List<MyUserRole> getRoles() {
     return roles;
   }
 
@@ -57,7 +59,7 @@ public class EmployeeRoleStore {
    * @return true if the role exists and false otherwise
    */
   public boolean existsRole(String id) {
-    for (UserRole userRole : roles)
+    for (MyUserRole userRole : roles)
       if (userRole.getId().equalsIgnoreCase(id)) return true;
 
     return false;

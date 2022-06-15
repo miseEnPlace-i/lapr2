@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Calendar;
  * @author Tomás Russo <1211288@isep.ipp.pt>
  * @author Carlos Lopes <1211277@isep.ipp.pt>
  */
-public class VaccineAdministration implements Comparable<VaccineAdministration> {
+public class VaccineAdministration implements Comparable<VaccineAdministration>, Serializable {
   private SNSUser snsUser;
   private Vaccine vaccine;
   private String lotNumber;
@@ -116,6 +117,15 @@ public class VaccineAdministration implements Comparable<VaccineAdministration> 
   }
 
   /**
+   * Gets the vaccine administration date.
+   * 
+   * @return the vaccine administration date
+   */
+  public Calendar getDate() {
+    return date;
+  }
+
+  /**
    * Checks if the vaccine administrated has the given vaccine type.
    * 
    * @param vaccineType the vaccine type to check
@@ -131,6 +141,7 @@ public class VaccineAdministration implements Comparable<VaccineAdministration> 
     return this.date.compareTo(other.date);
   }
 
+<<<<<<< HEAD
   /**
    * Gets the date of the vaccine administration
    * 
@@ -141,4 +152,18 @@ public class VaccineAdministration implements Comparable<VaccineAdministration> 
   }
 
   
+=======
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+
+    sb.append(String.format("SNS User Name: %s\n", this.snsUser.getName()));
+    sb.append(String.format("SNS User Number: %s\n", this.snsUser.getSnsNumber()));
+    sb.append(String.format("Vaccine: %s\n", this.vaccine.getDesignation()));
+    sb.append(String.format("Lot Number: %s\n", this.lotNumber));
+    sb.append(String.format("Dose Number: %s\n", this.doseNumber));
+
+    return sb.toString();
+  }
+>>>>>>> d1018faec3af32bd6eca8a10738c205569184fbb
 }

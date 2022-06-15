@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -15,7 +16,7 @@ import app.utils.Time;
  * @author André Barros <1211299@isep.ipp.pt>
  * @author Carlos Lopes <1211277@isep.ipp.pt>
  */
-public abstract class VaccinationCenter {
+public abstract class VaccinationCenter implements Serializable {
   private String name;
   private String address;
   private String email;
@@ -27,6 +28,7 @@ public abstract class VaccinationCenter {
   private Slot slot;
   private Employee coordinator;
   private WaitingRoom waitingRoom;
+  private RecoveryRoom recoveryRoom;
   private AppointmentScheduleList appointmentList;
   private CenterEventList eventList;
   private List<VaccineAdministration> vaccineAdministrationList;
@@ -62,6 +64,8 @@ public abstract class VaccinationCenter {
     this.waitingRoom = new WaitingRoom();
     this.appointmentList = new AppointmentScheduleList(this);
     this.eventList = new CenterEventList();
+    this.vaccineAdministrationList = new ArrayList<VaccineAdministration>();
+    this.recoveryRoom = new RecoveryRoom();
   }
 
   /**
@@ -312,7 +316,15 @@ public abstract class VaccinationCenter {
   public WaitingRoom getWaitingRoom() {
     return waitingRoom;
   }
-  
+
+  public RecoveryRoom getRecoveryRoom() {
+    return recoveryRoom;
+  }
+
+  public List<VaccineAdministration> getVaccineAdministrations() {
+    return vaccineAdministrationList;
+  }
+
   public AppointmentScheduleList getAppointmentList() {
     return appointmentList;
   }

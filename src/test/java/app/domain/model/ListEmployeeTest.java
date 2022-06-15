@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
+import app.domain.model.store.UserStore;
 import pt.isep.lei.esoft.auth.AuthFacade;
 
 public class ListEmployeeTest {
@@ -15,7 +16,8 @@ public class ListEmployeeTest {
     AuthFacade authFacade = new AuthFacade();
 
     EmployeeRoleStore roleStore = new EmployeeRoleStore(authFacade);
-    this.employeeStore = new EmployeeStore(authFacade, roleStore);
+    UserStore userStore = new UserStore();
+    this.employeeStore = new EmployeeStore(authFacade,userStore, roleStore);
 
     roleStore.addEmployeeRole("TEST_ROLE", "Test description");
   }

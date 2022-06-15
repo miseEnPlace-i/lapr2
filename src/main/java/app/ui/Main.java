@@ -1,6 +1,7 @@
 package app.ui;
 
 import java.util.Properties;
+import app.controller.App;
 import app.domain.shared.Constants;
 import app.service.PropertiesUtils;
 import app.ui.console.MainMenuUI;
@@ -17,6 +18,9 @@ public class Main {
         MainMenuUI menu = new MainMenuUI();
         menu.run();
       } else ApplicationUI.launch(ApplicationUI.class, args);
+
+      // Save company when program exits
+      App.getInstance().saveCurrentCompany();
     } catch (Exception e) {
       e.printStackTrace();
     }

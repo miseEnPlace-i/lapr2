@@ -1,11 +1,12 @@
 package app.domain.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.list.VaccineAdministrationList;
 import app.domain.model.store.SNSUserStore;
 
-public class HealthData {
+public class HealthData implements Serializable {
   SNSUser snsUser;
   VaccineAdministrationList vaccineAdministrationList;
   List<Appointment> appointments;
