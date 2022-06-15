@@ -1,15 +1,11 @@
 package app.ui.gui;
 
-import java.io.File;
-import java.io.FilenameFilter;
+
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import app.controller.App;
@@ -17,38 +13,27 @@ import app.controller.ExportCenterStatisticsController;
 import app.controller.FindCoordinatorVaccinationCenterController;
 import app.exception.NotAuthorizedException;
 import app.service.FileUtils;
-import app.service.FullyVaccinatedData;
 import app.session.EmployeeSession;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.scene.Group;
 
 /**
  * ExportCenterStatisticsUI
@@ -59,8 +44,6 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
   private ExportCenterStatisticsController ctrl;
   private EmployeeSession employeeSession;
   private FindCoordinatorVaccinationCenterController ctrlCenter;
-  private Map<Calendar, Integer> dataMap = new HashMap<>();
-  private FullyVaccinatedData fullyVaccinatedData;
   private String fileName;
 
   @FXML
@@ -131,14 +114,11 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
       displayExportInformation();
       if (validateDates() && validateFilePath()) {
         fileName = FileUtils.sanitizeFileName(txtFileName.getText());
-        fullyVaccinatedData = ctrl.createFullyVaccinatedData(fileName, getStartDate(), getEndDate());
-        dataMap = ctrl.generateFullyVaccinatedUsersInterval(fullyVaccinatedData);
+        ctrl.createFullyVaccinatedData(fileName, getStartDate(), getEndDate());
+        ctrl.generateFullyVaccinatedUsersInterval();
 
-        // FOR TESTING
-        // dataMap.put(getStartDate(), 100);
-        // dataMap.put(getEndDate(), 200);
-        checkData(dataMap);
-        if (!ctrl.saveData(fileName, ctrl.exportFileString(dataMap))) {
+        checkData();
+        if (!ctrl.saveData(fileName)) {
           displayErrorAlert();
         }
       } else if (!validateDates() || !validateFilePath()) {
@@ -174,7 +154,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     return containerData;
   }
 
-  private void checkData(Map<Calendar, Integer> data) {
+  private void checkData() {
     try {
       final double SCENE_WIDTH = 640.0;
       final double SCENE_HEIGHT = 600.0;
@@ -187,7 +167,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
       dialog.setWidth(SCENE_WIDTH);
       dialog.setHeight(SCENE_HEIGHT);
 
-      FlowPane inputListContainer = generatePaneWithData("Data from: " + lblCenterName.getText(), ctrl.dataToString(data));
+      FlowPane inputListContainer = generatePaneWithData("Data from: " + lblCenterName.getText(), ctrl.dataToString());
 
       VBox pane = new VBox(30);
 

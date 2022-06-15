@@ -3,7 +3,6 @@ package app.service;
 import java.text.SimpleDateFormat;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,11 +18,9 @@ import app.domain.model.VaccineAdministration;
  */
 public class FullyVaccinatedData {
 
-    private String filePath;
     private Calendar startDate;
     private Calendar endDate;
     private VaccinationCenter center;
-    private Map<Calendar, Integer> dataMap = new HashMap<>();
     private int snsUserAge;
     private SNSUser snsUser;
     private Vaccine vaccine;
@@ -43,7 +40,6 @@ public class FullyVaccinatedData {
         validateDate(end);
         validateCenter(center);
 
-        this.filePath = path;
         this.startDate = start;
         this.endDate = end;
         this.center = center;
@@ -89,14 +85,17 @@ public class FullyVaccinatedData {
      * 
      * @return hashMap of all the data needed to do the statistics
      */
-    public Map<Calendar, Integer> getFullyVaccinatedUsersPerDayMap() {
+    public LinkedHashMap<Calendar, Integer> getFullyVaccinatedUsersPerDayMap() {
 
         long nOfDaysBetween = getDaysBetweenTwoDates();
+        LinkedHashMap<Calendar, Integer> result = new LinkedHashMap<>();
 
-        Calendar currentDay = Calendar.getInstance();
-        currentDay.setTime(startDate.getTime());
 
-        for (int i = 0; i < nOfDaysBetween + 1; i++) {
+
+        for (int i = 0; i < nOfDaysBetween; i++) {
+            Calendar currentDay = Calendar.getInstance();
+            currentDay.setTime(startDate.getTime());
+            currentDay.add(Calendar.DAY_OF_MONTH, i);
 
             int nOfFullyVaccinated = 0;
 
@@ -110,12 +109,10 @@ public class FullyVaccinatedData {
                     nOfFullyVaccinated += 1;
                 }
             }
-            this.dataMap.put(currentDay, nOfFullyVaccinated);
-
-            currentDay.add(Calendar.DAY_OF_MONTH, 1);
+            result.put(currentDay, nOfFullyVaccinated);
         }
 
-        return dataMap;
+        return result;
     }
 
     /**
@@ -132,7 +129,7 @@ public class FullyVaccinatedData {
      * Gets number of days between two dates
      */
     public long getDaysBetweenTwoDates() {
-        return ChronoUnit.DAYS.between(startDate.toInstant(), endDate.toInstant());
+        return ChronoUnit.DAYS.between(startDate.toInstant(), endDate.toInstant()) + 1;
     }
 
     /**
