@@ -33,8 +33,8 @@ public class AppointmentTest {
     this.vtStore = company.getVaccineTypeStore();
     this.vtechStore = company.getVaccineTechnologyStore();
 
-    SNSUser snsUser =
-        snsUserStore.createSNSUser("00000000", "123456789", "name", Calendar.getInstance().getTime(), Gender.MALE, "+351212345678", "s@user.com", "address");
+    SNSUser snsUser = snsUserStore.createSNSUser("00000000", "123456789", "name", Calendar.getInstance().getTime(), Gender.MALE, "+351212345678", "s@user.com",
+        new Address("street", 1, "11-11", "city"));
     this.snsUserStore.saveSNSUser(snsUser);
 
     Employee e2 = empStore.createEmployee("Name2", "+351916919269", "c@user.com", "address", "15542404", Constants.ROLE_COORDINATOR);

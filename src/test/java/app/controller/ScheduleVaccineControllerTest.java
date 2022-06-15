@@ -6,9 +6,9 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import javax.print.attribute.standard.DialogOwner;
 import org.junit.Before;
 import org.junit.Test;
+import app.domain.model.Address;
 import app.domain.model.Appointment;
 import app.domain.model.Company;
 import app.domain.model.Employee;
@@ -21,7 +21,6 @@ import app.domain.model.store.SNSUserStore;
 import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineTypeStore;
 import app.domain.shared.Gender;
-import app.dto.AppointmentInsertDTO;
 import app.dto.VaccinationCenterListDTO;
 import app.dto.VaccineTypeDTO;
 import app.mapper.AppointmentInsertMapper;
@@ -60,7 +59,7 @@ public class ScheduleVaccineControllerTest {
     centerDto = VaccinationCenterMapper.toDto(vaccinationCenter);
 
     snsUserStore = company.getSNSUserStore();
-    user = new SNSUser("00000000", "123456789", "name", new Date(), Gender.MALE, "+351212345678", "email@email.com", "address");
+    user = new SNSUser("00000000", "123456789", "name", new Date(), Gender.MALE, "+351212345678", "email@email.com", new Address("street", 1, "11-11", "city"));
     snsUserStore.saveSNSUser(user);
 
     calendar = CalendarUtils.parseDateTime(new Date(), "20:40");

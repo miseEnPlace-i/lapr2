@@ -26,7 +26,8 @@ public class CenterPerformanceTest {
     new VaccineType("12345", "description", "technology");
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
     SimpleDateFormat sdfBday = new SimpleDateFormat("dd-MM-yyyy");
-    SNSUser user = new SNSUser("00000000", "123456789", "name", sdfBday.parse("01-02-2022"), Gender.MALE, "+351212345678", "email@email.com", "address");
+    SNSUser user = new SNSUser("00000000", "123456789", "name", sdfBday.parse("01-02-2022"), Gender.MALE, "+351212345678", "email@email.com",
+        new Address("street", 1, "11-11", "city"));
 
     CenterEventList eventList = this.center.getEvents();
     eventList.save(eventList.create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:00")), CenterEventType.ARRIVAL, user));

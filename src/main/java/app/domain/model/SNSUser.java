@@ -44,7 +44,7 @@ public class SNSUser implements Serializable {
   private String email;
 
   // SNS User address
-  private String address;
+  private Address address;
 
   private HealthData userHealthData;
 
@@ -60,14 +60,13 @@ public class SNSUser implements Serializable {
    * @param phoneNumber
    * @param email
    */
-  public SNSUser(String citizenCard, String snsNumber, String name, Date birthDay, Gender gender, String phoneNumber, String email, String address) {
+  public SNSUser(String citizenCard, String snsNumber, String name, Date birthDay, Gender gender, String phoneNumber, String email, Address address) {
     validateBirthday(birthDay);
     validateCitizenCard(citizenCard);
     validateSNSNumber(snsNumber);
     validateName(name);
     validatePhoneNumber(phoneNumber);
     validateEmail(email);
-    validateAddress(address);
 
     this.citizenCard = citizenCard.toUpperCase();
     this.snsNumber = snsNumber;
@@ -89,7 +88,6 @@ public class SNSUser implements Serializable {
     validateName(snsUserDTO.getName());
     validatePhoneNumber(snsUserDTO.getPhoneNumber());
     validateEmail(snsUserDTO.getEmail());
-    validateAddress(snsUserDTO.getAddress());
 
     this.citizenCard = snsUserDTO.getCitizenCard().toUpperCase();
     this.snsNumber = snsUserDTO.getSnsNumber();
@@ -133,7 +131,7 @@ public class SNSUser implements Serializable {
     return birthDay;
   }
 
-  public String getAddress() {
+  public Address getAddress() {
     return address;
   }
 
@@ -223,14 +221,6 @@ public class SNSUser implements Serializable {
 
   private static void validateEmail(String email) {
     if (!FormatVerifier.validateEmail(email)) throw new IllegalArgumentException("Email is not valid.");
-  }
-
-  private static void validateAddress(String address) {
-    // should not be empty
-    // regex: ^.+$
-    if (!address.matches("^.+$")) {
-      throw new IllegalArgumentException("Address is not valid.");
-    }
   }
 
   @Override

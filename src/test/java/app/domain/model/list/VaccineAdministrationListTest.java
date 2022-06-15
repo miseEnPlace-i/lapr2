@@ -8,6 +8,7 @@ import java.util.Date;
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Before;
 import org.junit.Test;
+import app.domain.model.Address;
 import app.domain.model.AdminProcess;
 import app.domain.model.AdverseReaction;
 import app.domain.model.Employee;
@@ -56,7 +57,8 @@ public class VaccineAdministrationListTest {
     vaccinationCenter = new HealthCareCenter("name", "address", "email@email.com", "+351212345678", "+351212345678", "http://www.site.com", openingHours,
         closingHours, slot, coordinator, "ages", "ars");
 
-    user1 = new SNSUser("00000000", "123456788", "name", DateUtils.addDays(new Date(), -400), Gender.MALE, "+351212345675", "email1@email.com", "address");
+    user1 = new SNSUser("00000000", "123456788", "name", DateUtils.addDays(new Date(), -400), Gender.MALE, "+351212345675", "email1@email.com",
+        new Address("street", 1, "11-1", "city"));
     // user2 = new SNSUser("185352901ZZ6", "123456789", "name", new Date(), Gender.MALE, "+351212345678",
     // "email2@email.com", "address");
     // user3 = new SNSUser("191052469ZZ5", "123456787", "name", new Date(), Gender.MALE, "+351212345671",

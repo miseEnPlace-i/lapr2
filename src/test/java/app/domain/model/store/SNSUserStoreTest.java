@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
+import app.domain.model.Address;
 import app.domain.model.Company;
 import app.domain.model.SNSUser;
 import app.domain.shared.Gender;
@@ -27,7 +28,7 @@ public class SNSUserStoreTest {
     authFacade = company.getAuthFacade();
     store = company.getSNSUserStore();
     Date c = new Date();
-    snsUser = new SNSUser("12345678", "123456789", "name", c, Gender.MALE, "+351211111111", "email@email.com", "address");
+    snsUser = new SNSUser("12345678", "123456789", "name", c, Gender.MALE, "+351211111111", "email@email.com", new Address("street", 1, "11-11", "city"));
   }
 
   /**

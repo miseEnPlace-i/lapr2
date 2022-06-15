@@ -3,6 +3,7 @@ package app.mapper;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import app.domain.model.Address;
 import app.domain.shared.Gender;
 import app.dto.SNSUserDTO;
 
@@ -22,7 +23,7 @@ public class SNSUserMapper {
     Date birthDay = df.parse(userData[2]);
     Gender gender;
 
-    switch(userData[1].toLowerCase()){
+    switch (userData[1].toLowerCase()) {
       case "m":
       case "male":
       case "masculino":
@@ -37,7 +38,11 @@ public class SNSUserMapper {
         gender = Gender.N_A;
     }
 
+    String addressString = userData[3];
+    String[] addressData = addressString.split("|");
+    Address address = new Address(addressData[0], Integer.parseInt(addressData[1]), addressData[2], addressData[3]);
+
     // userData: Name, Sex, Birth Date, Address, Phone Number, E-mail, SNS User Number and Citizen Card Number.
-    return new SNSUserDTO(userData[7], userData[6], userData[0], birthDay, gender, userData[4], userData[5], userData[3]);
+    return new SNSUserDTO(userData[7], userData[6], userData[0], birthDay, gender, userData[4], userData[5], address);
   }
 }

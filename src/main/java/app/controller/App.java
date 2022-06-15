@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
+import app.domain.model.Address;
 import app.domain.model.AdminProcess;
 import app.domain.model.Company;
 import app.domain.model.DoseInfo;
@@ -199,7 +200,8 @@ public class App {
     Calendar date = Calendar.getInstance();
     date.add(Calendar.YEAR, -18);
 
-    SNSUser user = this.snsUserStore.createSNSUser("00000000", "123456789", "name", date.getTime(), Gender.MALE, "+351212345678", "s@user.com", "address");
+    SNSUser user = this.snsUserStore.createSNSUser("00000000", "123456789", "name", date.getTime(), Gender.MALE, "+351212345678", "s@user.com",
+        new Address("street", 1, "4444-333", "city"));
     this.snsUserStore.saveSNSUser(user);
 
     Employee e = this.employeeStore.createEmployee("Name", "+351916919169", "r@user.com", "address", "12345678", Constants.ROLE_RECEPTIONIST);
