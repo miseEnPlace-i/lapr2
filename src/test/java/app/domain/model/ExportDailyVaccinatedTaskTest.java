@@ -81,7 +81,7 @@ public class ExportDailyVaccinatedTaskTest {
         "http://www.test.com", "20:00", "21:00", 7, 5, emp, vacType1);
         this.vcStore.saveVaccinationCenter(this.center1);
 
-        this.center2 = vcStore.createCommunityMassCenter("Centro Vacinação de Teste 2", "Rua de Teste 2", "test2@gmail.com", "+351212345679", "+351212345678",
+        this.center2 = vcStore.createCommunityMassCenter("Centro Vacinação de Teste2", "Rua de Teste 2", "test2@gmail.com", "+351212345679", "+351212345678",
             "http://www.test2.com", "20:00", "21:00", 7, 5, emp2, vacType1);
         this.vcStore.saveVaccinationCenter(this.center2);
     }

@@ -5,10 +5,8 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TimerTask;
-import javax.swing.plaf.metal.MetalBorders.Flush3DBorder;
 import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineTypeStore;
-import app.domain.shared.Constants;
 import app.service.FileUtils;
 
 public class ExportDailyVaccinatedTask extends TimerTask {
@@ -53,6 +51,8 @@ public class ExportDailyVaccinatedTask extends TimerTask {
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
         String filepath = this.filePath + format.format(yesterday.getTime()) + ".csv";
+        System.out.println(filepath);
+        System.out.println(content);
         FileUtils.writeToFile(filepath, content);
     }
 
@@ -67,7 +67,7 @@ public class ExportDailyVaccinatedTask extends TimerTask {
 
 
         for (int i = 0; i < centers.size(); i++) {
-            result += centers.get(i).getName() + this.filePath;
+            result += centers.get(i).getName() + this.separator;
             for (int j = 0; j < types.size(); j++) {       
 
                 int value = data.get(centers.get(i)).get(types.get(i)) != null ? (int) data.get(centers.get(i)).get(types.get(i)) : 0;
