@@ -138,10 +138,8 @@ public class Company implements Serializable {
   }
 
   private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-    System.out.println("reading..");
     try {
       in.defaultReadObject();
-      this.employeeRoleStore = new EmployeeRoleStore(this.getAuthFacade());
       this.employeeStore = new EmployeeStore(this.getAuthFacade(), this.userStore, this.employeeRoleStore);
       this.snsUserStore = new SNSUserStore(this.getAuthFacade(), this.userStore);
     } catch (Exception e) {

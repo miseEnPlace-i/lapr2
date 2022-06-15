@@ -198,7 +198,6 @@ public class SNSUserStore implements Serializable {
 
         userList.add(snsUser);
       } catch (Exception e) {
-        System.out.println(e.getMessage());
         userList.add(null);
       }
     }
