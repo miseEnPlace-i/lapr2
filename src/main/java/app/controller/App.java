@@ -122,6 +122,13 @@ public class App {
     }
   }
 
+  public void restoreCompany() {
+    File file = new File(Constants.DATA_FILE_PATH);
+    file.delete();
+
+    App.getInstance();
+  }
+
   private void writeCompany(Company comp, String filePath) {
     try {
       ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath));
