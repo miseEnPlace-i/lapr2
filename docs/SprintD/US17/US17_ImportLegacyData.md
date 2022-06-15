@@ -12,13 +12,60 @@ _"As a center coordinator, I want to import data from a legacy system that was u
 
 **From the specifications document:**
 
-> 
+> The Center Coordinator wants to (...) generate reports and analyze data from other centers, including data from legacy systems.
 
 **From the client clarifications:**
 
-> **Question:** 
+<!-- The algorithm used to sort is defined in the properties. -->
+> **Question:** "In the Sprint D requirements is stated that two sorting algorithms should be implemented and that the imported data should be sorted by arrival time or center leaving time. Should each algorithm be capable of both sortings or is one of the algorithms supposed to do one (e.g. arrival time) and the other the remaining sorting criteria (e.g. leaving time)?"
 >
-> **Answer:** 
+> **Answer:** "Each algorithm should be capable of doing both sortings. The application should be prepared to run both algorithms. The algorithm that will be used to sort data should be defined in a configuration file."
+
+<!-- The user chooses in the UI if he wants to sort by arrival or by departure time. -->
+> **Question:** "Should there be an option to choose to either sort by arrival time or by the center leaving time?"
+>
+> **Answer:** "The user can choose to sort by arrival time or by the center leaving time."
+
+> **Question:** "I was analysing the csv file that should be imported for US17 (the one that is in moodle), I noticed that the date attributes are written like this 5/30/2022 I thought that the date format should be DD/MM/YYYY. I also noticed, that the time is written like this, 9:43, I also thought that the time format should be written like this HH:MM, (in this case it would be 09:43). Are the date and time formats diferent for US17?"
+>
+> **Answer:** "That file is from a legacy system, that uses a different date and time format. The date and time should be converted when loading the data into the application that we are developing."
+
+<!--  -->
+> **Question:** "I noticed that some postal codes in the address does not follow the format of XXXX-YYY. For example some of them are XXXX-Y. Are we supposed to be able to load those users as well?"
+>
+> **Answer:** "Yes."
+
+> **Question:** "In a meeting you already clarified that when uploading a file from a legacy system the application should check if the SNS Users are already registered and if not US 014 should be put to use. My question is now if only one or two SNS Users are not registered, should the whole legacy file be discarded?"
+>
+> **Answer:** "SNS users that are not registered should be loaded/registered. The other SNS users should not be registered again and should be ignored."
+
+> **Question:** "You already have clarified that when uploading a file from a legacy system the application should check if the SNS Users are already registered and if not, we should register them using US 014. How exactly do you want this to proceed, in case there aren't registered users, should the application ask the center coordinator to select the file with the users data to be uploaded?"
+>
+> **Answer:** "US14 and US17 are two different features of the system. In US17, if the SNS user does not exist in the system, the vaccination of this SNS user should not be loaded. The system should continue processing the CSV file until all vaccinations are processed."
+
+> **Question:** "Is there any correct format for the lot number? Should we simply assume that the lot number will always appear like this 21C16-05 ,like it's written in the file, and not validate it?"
+>
+> **Answer:** "The lot number has five alphanumeric characters an hyphen and two numerical characters (examples: 21C16-05 and A1C16-22)."
+
+> **Question:** "Should the vaccine named Spikevax, (the one in the given CSV file for US17), be registered before loading the CSV file?"
+>
+> **Answer:** "Yes."
+
+> **Question:** "When sorting data by arrival time or central leaving time, should we sort from greater to smallest or from smallest to greater?"
+>
+> **Answer:** "The user must be able to sort in ascending and descending order."
+
+> **Question:** "Regarding the validation of the data in the performance data csv, in case the dose is the not the first one, should we check if the user age and the date when the user took the other vaccine dose, are valid for the new dose to be administered?"
+>
+> **Answer:** "The data from the legacy system (CSV file) should be validated before being loaded."
+
+> **Question:** "You answered to a previous question saying that the user should be able to sort by ascending or descending order. Should the user choose in the UI, the order in which the information should be presented? Or should this feature be defined in the configuration file?"
+>
+> **Answer:** "The center coordinator must use the GUI to select the sorting type (ascending or descending)."
+
+> **Question:** "Does the file loaded in US17 have only one day to analyse or can it have more than one day?"
+>
+> **Answer:** "The file can have data from more than one day."
 
 ### 1.3. Acceptance Criteria
 
