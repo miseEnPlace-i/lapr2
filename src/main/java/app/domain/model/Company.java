@@ -1,5 +1,7 @@
 package app.domain.model;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import org.apache.commons.lang3.StringUtils;
 import app.domain.model.store.EmployeeRoleStore;
@@ -76,6 +78,7 @@ public class Company implements Serializable {
    * @return the AuthFacade
    */
   public AuthFacade getAuthFacade() {
+    if (authFacade == null) this.authFacade = new AuthFacade();
     return authFacade;
   }
 
@@ -132,5 +135,17 @@ public class Company implements Serializable {
 
   public UserStore getUserStore() {
     return this.userStore;
+  }
+
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    System.out.println("reading..");
+    try {
+      in.defaultReadObject();
+      this.employeeRoleStore = new EmployeeRoleStore(this.getAuthFacade());
+      this.employeeStore = new EmployeeStore(this.getAuthFacade(), this.userStore, this.employeeRoleStore);
+      this.snsUserStore = new SNSUserStore(this.getAuthFacade(), this.userStore);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }

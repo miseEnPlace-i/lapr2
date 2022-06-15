@@ -50,8 +50,9 @@ public class App {
   private App() {
     loadCompany();
 
-    if (this.company.getAuthFacade() == null) this.authFacade = new AuthFacade();
-    else this.authFacade = this.company.getAuthFacade();
+    if (this.company == null) restoreCompany();
+
+    this.authFacade = this.company.getAuthFacade();
 
     this.employeeStore = this.company.getEmployeeStore();
     this.employeeRoleStore = this.company.getEmployeeRoleStore();
@@ -124,9 +125,8 @@ public class App {
 
   public void restoreCompany() {
     File file = new File(Constants.DATA_FILE_PATH);
-    file.delete();
-
-    App.getInstance();
+    if (!file.delete()) System.out.println("Error restoring company");
+    else System.out.println("Successfully restored company!");
   }
 
   private void writeCompany(Company comp, String filePath) {
