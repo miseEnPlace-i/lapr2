@@ -36,8 +36,5 @@ public class Constants {
 
   public static final int MAX_OF_PASSWORD_TRIES = 3;
 
-<<<<<<< HEAD
-=======
   public static final String DATA_FILE_PATH = "data.bin";
->>>>>>> d1018faec3af32bd6eca8a10738c205569184fbb
 }

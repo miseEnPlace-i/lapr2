@@ -117,15 +117,6 @@ public class VaccineAdministration implements Comparable<VaccineAdministration>,
   }
 
   /**
-   * Gets the vaccine administration date.
-   * 
-   * @return the vaccine administration date
-   */
-  public Calendar getDate() {
-    return date;
-  }
-
-  /**
    * Checks if the vaccine administrated has the given vaccine type.
    * 
    * @param vaccineType the vaccine type to check
@@ -141,7 +132,6 @@ public class VaccineAdministration implements Comparable<VaccineAdministration>,
     return this.date.compareTo(other.date);
   }
 
-<<<<<<< HEAD
   /**
    * Gets the date of the vaccine administration
    * 
@@ -152,7 +142,6 @@ public class VaccineAdministration implements Comparable<VaccineAdministration>,
   }
 
   
-=======
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -165,5 +154,4 @@ public class VaccineAdministration implements Comparable<VaccineAdministration>,
 
     return sb.toString();
   }
->>>>>>> d1018faec3af32bd6eca8a10738c205569184fbb
 }
