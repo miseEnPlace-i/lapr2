@@ -1,4 +1,4 @@
-package app.domain;
+package app.domain.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.IOException;
@@ -57,20 +57,13 @@ public class ExportDailyVaccinatedTaskTest {
             snsUserStore.createSNSUser("00000000", "123456789", "name", Calendar.getInstance().getTime(), Gender.MALE, "+351212345678", "s@user.com", "address");
         this.snsUserStore.saveSNSUser(snsUser);
 
-
-        Employee emp = empStore.createEmployee("Name2", "+351916919269", "c@user.com", "address", "15542404", Constants.ROLE_COORDINATOR);
+        Employee emp = empStore.createEmployee("Name", "+351916919268", "c1@user.com", "address", "15542404", Constants.ROLE_COORDINATOR);
         this.empStore.saveEmployee(emp);
 
-        this.center1 = vcStore.createCommunityMassCenter("Centro Vacinação de Teste", "Rua de Teste", "test@gmail.com", "+351212345678", "+351212345679",
-            "http://www.test.com", "20:00", "21:00", 7, 5, emp, vacType1);
-        this.vcStore.saveVaccinationCenter(this.center1);
+        Employee emp2 = empStore.createEmployee("Name2", "+351916919269", "c2@user.com", "address2", "15542405", Constants.ROLE_COORDINATOR);
+        this.empStore.saveEmployee(emp2);
 
-        this.center2 = vcStore.createCommunityMassCenter("Centro Vacinação de Teste 2", "Rua de Teste 2", "test2@gmail.com", "+351212345679", "+351212345678",
-            "http://www.test2.com", "20:00", "21:00", 7, 5, emp, vacType1);
-        this.vcStore.saveVaccinationCenter(this.center2);
-
-
-        
+       
         this.vtechStore.addVaccineTechnology("M_RNA_TECHNOLOGY");
 
         this.vacType1 = vtStore.addVaccineType("00000", "COVID-19", "M_RNA_TECHNOLOGY");
@@ -82,6 +75,15 @@ public class ExportDailyVaccinatedTaskTest {
         this.vtStore.saveVaccineType(vacType2);
         this.vac2 = new Vaccine("vacTest2", "vac2", "brand2", vacType2);
         this.vacStore.saveVaccine(vac2);
+
+
+        this.center1 = vcStore.createCommunityMassCenter("Centro Vacinação de Teste", "Rua de Teste", "test@gmail.com", "+351212345678", "+351212345679",
+        "http://www.test.com", "20:00", "21:00", 7, 5, emp, vacType1);
+        this.vcStore.saveVaccinationCenter(this.center1);
+
+        this.center2 = vcStore.createCommunityMassCenter("Centro Vacinação de Teste 2", "Rua de Teste 2", "test2@gmail.com", "+351212345679", "+351212345678",
+            "http://www.test2.com", "20:00", "21:00", 7, 5, emp2, vacType1);
+        this.vcStore.saveVaccinationCenter(this.center2);
     }
 
     @Test
@@ -89,13 +91,13 @@ public class ExportDailyVaccinatedTaskTest {
         Calendar yesterday = Calendar.getInstance();
         yesterday.add(Calendar.DATE, -1);
 
-        VaccineAdministration vacAdmin = new VaccineAdministration(snsUser, vac1, "1234567", 1, center1, yesterday);
+        VaccineAdministration vacAdmin = new VaccineAdministration(snsUser, vac1, "AAAAA-11", 1, center1, yesterday);
         center1.addVaccineAdministrationToList(vacAdmin);
 
-        VaccineAdministration vacAdmin2 = new VaccineAdministration(snsUser, vac2, "1234567", 1, center1, yesterday);
+        VaccineAdministration vacAdmin2 = new VaccineAdministration(snsUser, vac2, "BBBBB-22", 1, center1, yesterday);
         center1.addVaccineAdministrationToList(vacAdmin2);
 
-        VaccineAdministration vacAdmin3 = new VaccineAdministration(snsUser, vac2, "1234567", 1, center2, yesterday);
+        VaccineAdministration vacAdmin3 = new VaccineAdministration(snsUser, vac2, "CCCCC-22", 1, center2, yesterday);
         center2.addVaccineAdministrationToList(vacAdmin3);
 
         ExportDailyVaccinatedTask task = new ExportDailyVaccinatedTask("/Test_Out/test", ";".charAt(0), vcStore, vtStore);

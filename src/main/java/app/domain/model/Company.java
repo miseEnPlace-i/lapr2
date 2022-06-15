@@ -136,7 +136,7 @@ public class Company {
   }
 
   public void scheduleExportDailyVaccinated(Date firstDate, long period){
-    ExportDailyVaccinatedTask task = new ExportDailyVaccinatedTask(, this.vaccinationCenterStore, this.vaccineTypeStore);
+    ExportDailyVaccinatedTask task = new ExportDailyVaccinatedTask("filetest", ";".charAt(0), this.vaccinationCenterStore, this.vaccineTypeStore);
     Timer timer = new Timer();
 
     Calendar firstTime = Calendar.getInstance();
