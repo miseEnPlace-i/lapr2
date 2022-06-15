@@ -26,7 +26,7 @@ package core {
 
     package service {
 
-class CsvExporterData {
+class FullyVaccinatedData {
     +getVacAdminList()
     +getSnsUserAge()
     +getVaccine()
@@ -126,9 +126,9 @@ package stores {
 
 
 
-CsvExportersUI ..> CsvExportersController
+CsvExporterUI ..> CsvExporterController
 
-CsvExportersController ..> Company
+CsvExporterController ..> Company
 
 Company "1" -- "1" VaccinationCenterStore : knows >
 
@@ -141,9 +141,9 @@ Vaccine o-- VaccineType
 VaccineAdministration -- Vaccine
 VaccineAdministration -- SNSUser
 
-CsvExporterData -- VaccineAdministration : uses >
+FullyVaccinatedData -- VaccineAdministration : uses >
 
-CsvExporter -- CsvExporterData : sends data to <
+CsvExporter -- FullyVaccinatedData : sends data to <
 
 Employee -- CsvExporter : coordinator generates
 

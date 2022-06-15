@@ -54,6 +54,23 @@ public class CalendarUtils {
   }
 
   /**
+   * Calculates the age given a Date.
+   * 
+   * @return the age given the birthday.
+   */
+  public static int calculateAge(Date birthDay) {
+    Calendar today = Calendar.getInstance();
+    Calendar day = Calendar.getInstance();
+    day.setTime(birthDay);
+
+    int age = today.get(Calendar.YEAR) - day.get(Calendar.YEAR);
+    if (today.get(Calendar.DAY_OF_YEAR) < day.get(Calendar.DAY_OF_YEAR)) {
+      age--;
+    }
+    return age;
+  }
+
+  /**
    * Calendar to string in dd/MM/yyyy format.
    * 
    * @param calendar

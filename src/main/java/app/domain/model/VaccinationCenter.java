@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import app.domain.model.list.AppointmentScheduleList;
 import app.domain.model.list.CenterEventList;
+import app.domain.model.list.VaccineAdministrationList;
 import app.service.FormatVerifier;
 import app.utils.Time;
 
@@ -431,5 +433,16 @@ public abstract class VaccinationCenter implements Serializable {
       }
     }
     return subList;
+  }
+
+  public List<VaccineAdministration> getVacAdminDayList(Calendar day) {
+    List<VaccineAdministration> vacAdminPerDay = new ArrayList<>();
+
+    for (VaccineAdministration vaccineAdministration : vaccineAdministrationList) {
+      if (vaccineAdministration.getDate() == day) {
+        vacAdminPerDay.add(vaccineAdministration);
+      }
+    }
+    return vacAdminPerDay;
   }
 }

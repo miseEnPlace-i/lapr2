@@ -8,6 +8,7 @@ import app.controller.ScheduleVaccineController;
 import app.domain.shared.FieldToValidate;
 import app.dto.VaccinationCenterListDTO;
 import app.dto.VaccineTypeDTO;
+import app.exception.AbortedOperationException;
 import app.ui.console.utils.Utils;
 
 /**
@@ -26,23 +27,27 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
 
     VaccineTypeDTO vaccineTypeDto = ctrl.getSuggestedVaccineType();
 
-    boolean accepted = showSuggestedVaccineType(vaccineTypeDto);
+    boolean accepted;
+    try {
+      accepted = showSuggestedVaccineType(vaccineTypeDto);
+      if (!accepted) {
+        vaccineTypeDto = selectVaccineType();
+      }
 
-    if (!accepted) {
-      vaccineTypeDto = selectVaccineType();
+      VaccinationCenterListDTO vacCenterDto = selectVaccinationCenterWithVaccineType(vaccineTypeDto);
+
+      Date date = Utils.readDateInFutureFromConsole("Date (dd/MM/yyyy): ");
+      String time = Utils.readLineFromConsoleWithValidation("Hour (HH:MM):", FieldToValidate.HOURS);
+
+      boolean sms = selectSMS();
+
+      ctrl.createAppointment(snsNumber, date, time, vacCenterDto, vaccineTypeDto, sms);
+    } catch (AbortedOperationException e) {
+      // System.out.println(e.getMessage());
     }
-
-    VaccinationCenterListDTO vacCenterDto = selectVaccinationCenterWithVaccineType(vaccineTypeDto);
-
-    Date date = Utils.readDateInFutureFromConsole("Date (dd/MM/yyyy): ");
-    String time = Utils.readLineFromConsoleWithValidation("Hour (HH:MM):", FieldToValidate.HOURS);
-
-    boolean sms = selectSMS();
-
-    ctrl.createAppointment(snsNumber, date, time, vacCenterDto, vaccineTypeDto, sms);
   }
 
-  private boolean showSuggestedVaccineType(VaccineTypeDTO vt) {
+  private boolean showSuggestedVaccineType(VaccineTypeDTO vt) throws AbortedOperationException {
     System.out.println("\nSuggested Vaccine Type:\n");
 
     System.out.println(vt.getDescription());
@@ -52,13 +57,17 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
     options.add("No, choose other vaccine type.");
     int index = Utils.showAndSelectIndex(options, "\nSelect an option: (1 or 2)  ");
 
+    if (index == -1) throw new AbortedOperationException("Canceled operation by Receptionist.");
+
     return index == 0;
   }
 
-  private VaccineTypeDTO selectVaccineType() {
+  private VaccineTypeDTO selectVaccineType() throws AbortedOperationException {
     List<VaccineTypeDTO> list = ctrl.getListOfVaccineTypes();
 
     Object selectedVt = Utils.showAndSelectOne(list, "\n\nSelect a Vaccine Type:\n");
+
+    if (selectedVt == null) throw new AbortedOperationException("Canceled operation by Receptionist.");
 
     try {
       return (VaccineTypeDTO) selectedVt;
@@ -72,11 +81,14 @@ public class ScheduleVaccineReceptionistUI extends RegisterUI<ScheduleVaccineCon
    * 
    * @param vt the vaccine type that the centers administer
    * @return the selected vaccination center
+   * @throws AbortedOperationException
    */
-  private VaccinationCenterListDTO selectVaccinationCenterWithVaccineType(VaccineTypeDTO vtDto) {
+  private VaccinationCenterListDTO selectVaccinationCenterWithVaccineType(VaccineTypeDTO vtDto) throws AbortedOperationException {
     List<VaccinationCenterListDTO> list = ctrl.getListOfVaccinationCentersWithVaccineType(vtDto);
 
     Object selectedCenter = Utils.showAndSelectOne(list, "\nSelect a Vaccination Center:\n");
+
+    if (selectedCenter == null) throw new AbortedOperationException("Canceled operation by Receptionist.");
 
     try {
       return (VaccinationCenterListDTO) selectedCenter;

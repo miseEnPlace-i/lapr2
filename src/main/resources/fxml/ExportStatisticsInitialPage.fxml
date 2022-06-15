@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="550.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.ExportCenterStatisticsUI">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <MenuBar prefHeight="26.0" prefWidth="600.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem fx:id="help" mnemonicParsing="false" onAction="#helpUser" text="Help" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="About">
+                  <items>
+                    <MenuItem fx:id="devTeam" mnemonicParsing="false" text="Development Team" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="900.0" scaleShape="false">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="30.0" prefHeight="29.0" prefWidth="900.0" text="Export Center Statistics" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="100.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="58.0" fitWidth="59.0" layoutX="770.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="64.0">
+                     <image>
+                        <Image url="@../img/default-profile-pic.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="lblName" alignment="CENTER_RIGHT" layoutX="558.0" layoutY="18.0" prefHeight="25.0" prefWidth="203.0" text="Jovem Craque" AnchorPane.rightAnchor="128.0">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblRole" alignment="CENTER_RIGHT" layoutX="696.0" layoutY="44.0" prefHeight="20.0" prefWidth="122.0" text="SNS User" AnchorPane.rightAnchor="128.0">
+                     <font>
+                        <Font name="System Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="64.0" layoutY="24.0" prefHeight="20.0" prefWidth="160.0" text="Your Vaccination Center:" AnchorPane.leftAnchor="64.0">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblCenterName" layoutX="64.0" layoutY="41.0" prefHeight="20.0" text="VAC_CENTER_NAME" AnchorPane.leftAnchor="64.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" GridPane.rowIndex="1">
+         <children>
+            <DatePicker fx:id="initialDate" editable="false" maxWidth="-Infinity" prefHeight="40.0" prefWidth="500.0" promptText="Insert the initial date">
+               <VBox.margin>
+                  <Insets bottom="8.0" />
+               </VBox.margin>
+            </DatePicker>
+            <DatePicker fx:id="endDate" editable="false" maxWidth="-Infinity" prefHeight="40.0" prefWidth="500.0" promptText="Insert the end date" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="txtFileName" maxWidth="-Infinity" prefHeight="40.0" prefWidth="500.0" promptText="File Name">
+                     <HBox.margin>
+                        <Insets bottom="50.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+      <FlowPane alignment="CENTER" columnHalignment="CENTER" prefWidth="1200.0" GridPane.rowIndex="2">
+         <children>
+            <Button fx:id="exportStatistics" alignment="CENTER" cancelButton="true" contentDisplay="CENTER" defaultButton="true" graphicTextGap="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#export" prefHeight="40.0" prefWidth="140.0" text="Export statistics">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <FlowPane.margin>
+                  <Insets right="16.0" />
+               </FlowPane.margin>
+            </Button>
+            <Button id="btnBack" fx:id="btnBack" cancelButton="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnBack" prefHeight="40.0" prefWidth="140.0" text="Back to menu">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </FlowPane>
+   </children>
+</GridPane>
