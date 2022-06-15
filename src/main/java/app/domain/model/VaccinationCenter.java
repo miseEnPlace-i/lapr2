@@ -419,10 +419,26 @@ public abstract class VaccinationCenter implements Serializable {
     List<VaccineAdministration> vacAdminPerDay = new ArrayList<>();
 
     for (VaccineAdministration vaccineAdministration : vaccineAdministrationList) {
-      if (vaccineAdministration.getDate() == day) {
+      if (generateKeyFromDate(vaccineAdministration.getDate()).equals(generateKeyFromDate(day))) {
         vacAdminPerDay.add(vaccineAdministration);
       }
     }
     return vacAdminPerDay;
+  }
+
+  /**
+   * 
+   * @param date the date of the appointment
+   * @return the key of the appointment in the map of the center's appointments
+   */
+  private Calendar generateKeyFromDate(Calendar date) {
+    Calendar key = Calendar.getInstance();
+    key.setTime(date.getTime());
+    key.set(Calendar.HOUR_OF_DAY, 0);
+    key.set(Calendar.MINUTE, 0);
+    key.set(Calendar.SECOND, 0);
+    key.set(Calendar.MILLISECOND, 0);
+
+    return key;
   }
 }

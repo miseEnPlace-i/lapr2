@@ -209,8 +209,8 @@ public class App {
     this.vacTypeStore.saveVaccineType(vacType2);
 
     Vaccine vaccine = this.vaccineStore.createVaccine("BioNTech, Pfizer vaccine", "00001", "Pfizer, BioNTech", vacType);
-    AdminProcess adminProcess1 = new AdminProcess(1, 16, 1);
-    AdminProcess adminProcess2 = new AdminProcess(17, 89, 2);
+    AdminProcess adminProcess1 = new AdminProcess(1, 20, 1);
+    AdminProcess adminProcess2 = new AdminProcess(21, 89, 2);
     DoseInfo doseInfo1 = new DoseInfo(11, 0);
     DoseInfo doseInfo2 = new DoseInfo(22, 30);
 
@@ -225,7 +225,6 @@ public class App {
 
     Vaccine vaccine2 = this.vaccineStore.createVaccine("Monkeypox vaccine", "00002", "PTVaccines", vacType2);
     vaccine2.addAdminProc(adminProcess1);
-    vaccine2.addAdminProc(adminProcess2);
     this.vaccineStore.saveVaccine(vaccine2);
 
     // to facilitate US 17 (import legacy data)

@@ -90,12 +90,10 @@ public class FullyVaccinatedData {
         long nOfDaysBetween = getDaysBetweenTwoDates();
         LinkedHashMap<Calendar, Integer> result = new LinkedHashMap<>();
 
-
-
         for (int i = 0; i < nOfDaysBetween; i++) {
             Calendar currentDay = Calendar.getInstance();
             currentDay.setTime(startDate.getTime());
-            currentDay.add(Calendar.DAY_OF_MONTH, i);
+            currentDay.add(Calendar.DATE, i);
 
             int nOfFullyVaccinated = 0;
 
@@ -142,7 +140,7 @@ public class FullyVaccinatedData {
     public boolean checkUserFullyVaccinated(List<VaccineAdministration> vacAdminList, int vacAdminNumber) {
         int dose;
 
-        snsUserAge = CalendarUtils.calculateAge(snsUser.getBirthDay());
+        snsUserAge = CalendarUtils.calculateAge(vacAdminList.get(vacAdminNumber).getSnsUser().getBirthDay());
 
         vaccine = vacAdminList.get(vacAdminNumber).getVaccine();
 
