@@ -1,9 +1,7 @@
 package app.service;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -28,6 +26,13 @@ public class FileUtils {
     public static boolean writeToFile(String filename, String content) {
         try {
             File file = new File(filename);
+
+            //create file path directory
+            File directory = file.getParentFile();
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+
             file.createNewFile(); // creates a file if it does not exist
             PrintWriter writer = new PrintWriter(file);
             writer.write(content);

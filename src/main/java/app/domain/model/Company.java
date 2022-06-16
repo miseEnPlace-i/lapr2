@@ -1,6 +1,5 @@
 package app.domain.model;
 
-import java.util.Properties;
 import java.io.Serializable;
 import org.apache.commons.lang3.StringUtils;
 import app.domain.model.store.EmployeeRoleStore;
@@ -11,8 +10,6 @@ import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineStore;
 import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.model.store.VaccineTypeStore;
-import app.domain.shared.Constants;
-import app.service.PropertiesUtils;
 import pt.isep.lei.esoft.auth.AuthFacade;
 import pt.isep.lei.esoft.auth.UserSession;
 
@@ -37,7 +34,6 @@ public class Company implements Serializable {
   private VaccineTypeStore vaccineTypeStore;
   private transient UserSession userSession;
   private UserStore userStore;
-  private Properties props;
 
   /**
    * Company constructor.
