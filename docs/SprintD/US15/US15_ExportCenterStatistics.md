@@ -40,14 +40,12 @@ As a center coordinator, I intend to check and export vaccination statistic. I w
 >
 > **Answer:** "Yes." (https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=16801#p21599)
 
-> **Question:** "Should we group all sns users fully vaccinated per day of different vaccine types into a total number of that day? Or should we divide the number by vaccine types?"
->
-> **Answer:** Not answered yet.
-
 ### 1.3. Acceptance Criteria
 
 * **AC1:** Output data should follow (date; number of fully vaccinated user).
 * **AC2:** The user should define a time interval (two dates). Should follow the the portuguese format (dd/mm/yyyy).
+* **AC3:** File name must be filled in.
+* **AC4:** All required fields must be filled in.
 
 ### 1.4. Found out Dependencies
 
@@ -62,7 +60,7 @@ As a center coordinator, I intend to check and export vaccination statistic. I w
 **Input Data:**
 
 * Typed data:
-	* File path name,
+	* File name,
 	* Start date,
 	* End date.
 
