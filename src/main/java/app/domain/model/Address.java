@@ -1,8 +1,9 @@
 package app.domain.model;
 
+import java.io.Serializable;
 import app.service.FormatVerifier;
 
-public class Address {
+public class Address implements Serializable {
   private String street;
   private int number;
   private String postalCode;
