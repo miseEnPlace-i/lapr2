@@ -46,7 +46,7 @@
                </VBox.margin>
             </TextField>
             <Label fx:id="lblAdverseReaction" text="Adverse Reaction:" />
-            <TextArea fx:id="txtAdverseReaction" maxWidth="500.0" onKeyReleased="#enableConfirm" prefHeight="131.0" prefWidth="400.0" promptText="Adverse Reaction description">
+            <TextArea fx:id="txtAdverseReaction" maxWidth="500.0" onKeyReleased="#enableConfirm" prefHeight="131.0" prefWidth="400.0" promptText="Adverse Reaction description" wrapText="true">
                <VBox.margin>
                   <Insets top="-10.0" />
                </VBox.margin>
