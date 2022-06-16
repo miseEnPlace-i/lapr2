@@ -10,6 +10,7 @@ import java.util.Date;
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Before;
 import org.junit.Test;
+import app.domain.model.Address;
 import app.domain.model.Appointment;
 import app.domain.model.Employee;
 import app.domain.model.HealthCareCenter;
@@ -45,10 +46,10 @@ public class AppointmentScheduleListTest {
     vaccinationCenter = new HealthCareCenter("name", "address", "email@email.com", "+351212345678", "+351212345678", "http://www.site.com", openingHours,
         closingHours, slot, coordinator, "ages", "ars");
     appointments = vaccinationCenter.getAppointmentList();
-    user1 = new SNSUser("00000000", "123456788", "name", new Date(), Gender.MALE, "+351212345675", "email1@email.com", "address");
-    user2 = new SNSUser("18535290", "123456789", "name", new Date(), Gender.MALE, "+351212345678", "email2@email.com", "address");
-    user3 = new SNSUser("19105246", "123456787", "name", new Date(), Gender.MALE, "+351212345671", "email3@email.com", "address");
-    user4 = new SNSUser("33295275", "123456786", "name", new Date(), Gender.MALE, "+351212345670", "email4@email.com", "address");
+    user1 = new SNSUser("00000000", "123456788", "name", new Date(), Gender.MALE, "+351212345675", "email1@email.com", new Address("street", 1, "1-1", "city"));
+    user2 = new SNSUser("18535290", "123456789", "name", new Date(), Gender.MALE, "+351212345678", "email2@email.com", new Address("street", 1, "1-1", "city"));
+    user3 = new SNSUser("19105246", "123456787", "name", new Date(), Gender.MALE, "+351212345671", "email3@email.com", new Address("street", 1, "1-1", "city"));
+    user4 = new SNSUser("33295275", "123456786", "name", new Date(), Gender.MALE, "+351212345670", "email4@email.com", new Address("street", 1, "1-1", "city"));
   }
 
   @Test

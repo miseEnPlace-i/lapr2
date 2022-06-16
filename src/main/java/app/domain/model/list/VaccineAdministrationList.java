@@ -168,6 +168,25 @@ public class VaccineAdministrationList implements Serializable {
   }
 
   /**
+   * Get the last taken vaccine of a given vaccine type by a user.
+   * 
+   * @param VaccineType the vaccine type
+   * 
+   * @return the last taken vaccine of a given vaccine type by a user
+   */
+  public VaccineAdministration getLastVaccineAdministrationByVaccineType(VaccineType vaccineType) {
+    Collections.sort(vaccineAdministrations);
+
+    for (VaccineAdministration vaccineAdministration : vaccineAdministrations) {
+      if (vaccineAdministration.vaccineHasVaccineType(vaccineType)) {
+        return vaccineAdministration;
+      }
+    }
+
+    return null;
+  }
+
+  /**
    * Get the next dose number to administer to a user.
    * 
    * @param Vaccine the vaccine to check the next dose number

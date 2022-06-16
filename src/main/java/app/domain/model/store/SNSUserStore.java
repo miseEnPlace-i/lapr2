@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import app.domain.model.Address;
 import app.domain.model.SNSUser;
 import app.domain.shared.Constants;
 import app.domain.shared.Gender;
@@ -55,17 +56,21 @@ public class SNSUserStore implements Serializable {
    * @return SNSUser
    */
   public SNSUser createSNSUser(String citizenCard, String snsNumber, String name, Date birthDay, Gender gender, String phoneNumber, String email,
-      String address) {
+      Address address) {
     SNSUser snsUser = new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
 
     return snsUser;
   }
 
-
   // creates SNS User instance.
   public SNSUser createSNSUser(SNSUserDTO snsUserDto) {
-    SNSUser snsUser = new SNSUser(snsUserDto);
+    SNSUser snsUser = null;
+    try {
+      snsUser = new SNSUser(snsUserDto);
 
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     return snsUser;
   }
 
@@ -201,7 +206,6 @@ public class SNSUserStore implements Serializable {
         userList.add(null);
       }
     }
-
 
     return userList;
   }

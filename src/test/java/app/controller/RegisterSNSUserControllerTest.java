@@ -24,9 +24,12 @@ public class RegisterSNSUserControllerTest {
     Gender gender = Gender.MALE;
     String phoneNumber = "+351910000002";
     String email = "example3@example.com";
-    String address = "test";
+    String addressStreet = "test";
+    int addressNumber = 1;
+    String postalCode = "111-11";
+    String addressCity = "city";
 
-    ctrl.create(cc, snsNumber, name, birthDay, gender, phoneNumber, email, address);
+    ctrl.create(cc, snsNumber, name, birthDay, gender, phoneNumber, email, addressStreet, addressNumber, postalCode, addressCity);
   }
 
   @Test
@@ -38,13 +41,16 @@ public class RegisterSNSUserControllerTest {
     Gender gender = Gender.MALE;
     String phoneNumber = "+351910000001";
     String email = "example2@example.com";
-    String address = "test";
+    String addressStreet = "test";
+    int addressNumber = 1;
+    String postalCode = "111-11";
+    String addressCity = "city";
 
-    ctrl.create(cc, snsNumber, name, birthDay, gender, phoneNumber, email, address);
+    ctrl.create(cc, snsNumber, name, birthDay, gender, phoneNumber, email, addressStreet, addressNumber, postalCode, addressCity);
 
     String stringified = ctrl.stringifyData();
     String expected =
-        "SNS User name: test\nCitizen card number: 00000000\nSNS number: 223456789\nBirthday: 01/01/1970\nGender: Male\nPhone number: +351910000001\nEmail: example2@example.com\nAddress: test\n";
+        "SNS User name: test\nCitizen card number: 18925769\nSNS number: 223456789\nBirthday: 01/01/1970\nGender: Male\nPhone number: +351910000001\nEmail: example2@example.com\nAddress: test 1, 111-11 city\n";
 
     assertEquals(stringified, expected);
   }
@@ -58,9 +64,12 @@ public class RegisterSNSUserControllerTest {
     Gender gender = Gender.MALE;
     String phoneNumber = "+351910000000";
     String email = "example@example.com";
-    String address = "test";
+    String addressStreet = "test";
+    int addressNumber = 1;
+    String postalCode = "111-11";
+    String addressCity = "city";
 
-    ctrl.create(cc, snsNumber, name, birthDay, gender, phoneNumber, email, address);
+    ctrl.create(cc, snsNumber, name, birthDay, gender, phoneNumber, email, addressStreet, addressNumber, postalCode, addressCity);
     ctrl.save();
   }
 

@@ -19,7 +19,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="550.0" prefWidth="900.0" scaleShape="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.AnalyseCenterPerformanceUI">
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#onKeyPressed" prefHeight="550.0" prefWidth="900.0" scaleShape="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.AnalyseCenterPerformanceUI">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="120.0" />
   </columnConstraints>
@@ -30,25 +30,6 @@
     <RowConstraints maxHeight="160.0" minHeight="89.0" prefHeight="94.0" vgrow="ALWAYS" />
   </rowConstraints>
    <children>
-      <MenuBar centerShape="false" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="32.0" prefWidth="900.0" scaleShape="false" GridPane.halignment="LEFT" GridPane.hgrow="NEVER" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-                  <MenuItem mnemonicParsing="false" text="Go to menu" />
-                  <MenuItem mnemonicParsing="false" text="Users" />
-              <MenuItem mnemonicParsing="false" text="Save session" />
-                  <MenuItem mnemonicParsing="false" text="Exit" />
-                  <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="About">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Development Team" />
-                  <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
       <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="900.0" scaleShape="false" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="30.0" prefHeight="29.0" prefWidth="900.0" text="Analyse Center Performance" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0">

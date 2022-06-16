@@ -10,7 +10,6 @@ import app.controller.RegisterVaccineAdministrationController;
 import app.domain.model.AdverseReaction;
 import app.domain.model.Company;
 import app.session.EmployeeSession;
-import app.ui.console.RegisterVaccinationCenterUI;
 import app.ui.gui.utils.Utils;
 import javafx.event.ActionEvent;
 import javafx.event.Event;

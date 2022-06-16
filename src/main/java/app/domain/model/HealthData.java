@@ -2,9 +2,13 @@ package app.domain.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import app.controller.App;
 import app.domain.model.list.VaccineAdministrationList;
 import app.domain.model.store.SNSUserStore;
+import app.dto.VaccineDTO;
+import app.service.CalendarUtils;
 
 public class HealthData implements Serializable {
   SNSUser snsUser;
@@ -37,13 +41,30 @@ public class HealthData implements Serializable {
     this.appointments.add(appointment);
   }
 
-  public boolean hasAppointmentForVaccineType(VaccineType vaccineType) {
+  public boolean hasAppointmentForVaccineTypeInFuture(VaccineType vaccineType) {
     for (Appointment appointment : appointments) {
-      if (appointment.hasSnsNumber(snsUser.getSnsNumber()) && appointment.hasVaccineType(vaccineType)) {
+      if (appointment.hasSnsNumber(snsUser.getSnsNumber()) && appointment.hasVaccineType(vaccineType) && isAppointmentInFuture(appointment.getDate())) {
         return true;
       }
     }
     return false;
+  }
+
+  public boolean hasAppointmentForVaccineTypeToday(VaccineType vaccineType) {
+    for (Appointment appointment : appointments) {
+      if (appointment.hasSnsNumber(snsUser.getSnsNumber()) && appointment.hasVaccineType(vaccineType) && isAppointmentToday(appointment.getDate())) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private boolean isAppointmentInFuture(Calendar appointmentDate) {
+    return CalendarUtils.compareDates(appointmentDate, Calendar.getInstance()) > 0;
+  }
+
+  private boolean isAppointmentToday(Calendar appointmentDate) {
+    return CalendarUtils.compareDates(appointmentDate, Calendar.getInstance()) == 0;
   }
 
   /**
@@ -55,12 +76,13 @@ public class HealthData implements Serializable {
     return vaccineAdministrationList;
   }
 
-  public boolean hasAppointmentForVaccineType(VaccineType vaccineType, String number) {
-    for (Appointment appointment : appointments) {
-      if (appointment.hasSnsNumber(number) && appointment.hasVaccineType(vaccineType)) {
-        return true;
-      }
+  public boolean hasTakenAllDoses(VaccineType vaccineType) {
+    VaccineAdministration lastVaccineAdministration = vaccineAdministrationList.getLastVaccineAdministrationByVaccineType(vaccineType);
+    if (lastVaccineAdministration == null) {
+      return false;
     }
-    return false;
+
+    return lastVaccineAdministration.getDoseNumber() == lastVaccineAdministration.getVaccine().getAdministrationProcessForGivenAge(snsUser.getAge())
+        .getNumberOfDoses();
   }
 }

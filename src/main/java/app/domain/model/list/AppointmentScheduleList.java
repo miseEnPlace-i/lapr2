@@ -108,28 +108,6 @@ public class AppointmentScheduleList implements Serializable {
   }
 
   /**
-   * Validates the appointment.
-   * 
-   * @param appointment the appointment to be added
-   */
-  public void validateAppointment(Appointment appointment) {
-    if (appointment == null) throw new IllegalArgumentException("Appointment is not valid.");
-
-    Time hours = new Time(appointment.getDate());
-
-    if (!vaccinationCenter.isOpenAt(hours))
-      throw new IllegalArgumentException("Vaccination center is closed or does not accept appointments at selected time.");
-
-    if (!vaccinationCenter.hasAvailabilityInSlot(appointment.getDate()))
-      throw new IllegalArgumentException("Vaccination center does not accept any more appointments at selected time.");
-
-    SNSUser snsUser = appointment.getSnsUser();
-
-    if (snsUser.hasAppointmentForVaccineType(appointment.getVaccineType()))
-      throw new IllegalArgumentException("SNS User has already an appointment for the selected vaccine type.");
-  }
-
-  /**
    * Saves an appointment.
    * 
    * @param appointment the appointment

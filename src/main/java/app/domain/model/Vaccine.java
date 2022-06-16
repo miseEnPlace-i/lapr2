@@ -1,6 +1,7 @@
 package app.domain.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import app.domain.model.list.AdminProcList;
 import app.domain.model.list.DoseInfoList;
 
@@ -126,7 +127,7 @@ public class Vaccine implements Serializable {
     return false;
   }
 
-  public AdminProcess getAdminProc(int age) {
+  public AdminProcess getAdministrationProcessForGivenAge(int age) {
     for (AdminProcess adPr : adminProcList.getList()) {
       if (adPr.admitsAge(age)) {
         return adPr;
@@ -139,7 +140,7 @@ public class Vaccine implements Serializable {
 
   public boolean checkUserFullyVaccinated(int age, int dose) {
 
-    AdminProcess adminProcByAge = getAdminProc(age);
+    AdminProcess adminProcByAge = getAdministrationProcessForGivenAge(age);
     DoseInfoList doseInfoLst = adminProcByAge.getDoseInfoList();
     int size = doseInfoLst.getSize();
 
@@ -162,6 +163,27 @@ public class Vaccine implements Serializable {
     }
 
     return 0;
+  }
+
+  public boolean isDateWithinTimeSinceLastDose(Calendar administrationDate, Calendar appointmentDate, int lastDose, int age) {
+    if (lastDose == 0) return true;
+
+    AdminProcess adminProcess = getAdministrationProcessForGivenAge(age);
+
+    if (adminProcess == null) return false;
+
+    int numberOfDoses = adminProcess.getNumberOfDoses();
+
+    if (numberOfDoses <= lastDose) return false;
+
+    int timeSinceLastDose = adminProcess.getTimeSinceLastDose(lastDose + 1);
+
+    if (timeSinceLastDose == 0) return true;
+
+    Calendar expectedNextDoseDate = administrationDate;
+    expectedNextDoseDate.add(Calendar.DATE, timeSinceLastDose);
+
+    return expectedNextDoseDate.before(administrationDate);
   }
 }
 

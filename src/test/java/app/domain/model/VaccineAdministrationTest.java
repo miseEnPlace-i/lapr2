@@ -3,7 +3,6 @@ package app.domain.model;
 import static org.junit.Assert.assertEquals;
 import java.util.Calendar;
 import java.util.Date;
-import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Before;
 import org.junit.Test;
 import app.domain.shared.Gender;
@@ -32,7 +31,8 @@ public class VaccineAdministrationTest {
     vaccinationCenter = new HealthCareCenter("name", "address", "email@email.com", "+351212345678", "+351212345678", "http://www.site.com", openingHours,
         closingHours, slot, coordinator, "ages", "ars");
 
-    user1 = new SNSUser("00000000", "123456788", "name", new Date(), Gender.MALE, "+351212345675", "email1@email.com", "address");
+    user1 =
+        new SNSUser("00000000", "123456788", "name", new Date(), Gender.MALE, "+351212345675", "email1@email.com", new Address("street", 1, "11-11", "city"));
   }
 
   @Test

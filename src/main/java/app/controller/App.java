@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
+import app.domain.model.Address;
 import app.domain.model.AdminProcess;
 import app.domain.model.Company;
 import app.domain.model.DoseInfo;
@@ -50,8 +51,9 @@ public class App {
   private App() {
     loadCompany();
 
-    if (this.company.getAuthFacade() == null) this.authFacade = new AuthFacade();
-    else this.authFacade = this.company.getAuthFacade();
+    if (this.company == null) restoreCompany();
+
+    this.authFacade = this.company.getAuthFacade();
 
     this.employeeStore = this.company.getEmployeeStore();
     this.employeeRoleStore = this.company.getEmployeeRoleStore();
@@ -112,8 +114,20 @@ public class App {
     return comp;
   }
 
-  public void saveCurrentCompany() {
-    writeCompany(this.company, Constants.DATA_FILE_PATH);
+  public boolean saveCurrentCompany() {
+    try {
+      writeCompany(this.company, Constants.DATA_FILE_PATH);
+      return true;
+    } catch (Exception e) {
+      System.out.println("Error saving company");
+      return false;
+    }
+  }
+
+  public void restoreCompany() {
+    File file = new File(Constants.DATA_FILE_PATH);
+    if (!file.delete()) System.out.println("Error restoring company");
+    else System.out.println("Successfully restored company!");
   }
 
   private void writeCompany(Company comp, String filePath) {
@@ -186,7 +200,8 @@ public class App {
     Calendar date = Calendar.getInstance();
     date.add(Calendar.YEAR, -18);
 
-    SNSUser user = this.snsUserStore.createSNSUser("00000000", "123456789", "name", date.getTime(), Gender.MALE, "+351212345678", "s@user.com", "address");
+    SNSUser user = this.snsUserStore.createSNSUser("00000000", "123456789", "name", date.getTime(), Gender.MALE, "+351212345678", "s@user.com",
+        new Address("street", 1, "4444-333", "city"));
     this.snsUserStore.saveSNSUser(user);
 
     Employee e = this.employeeStore.createEmployee("Name", "+351916919169", "r@user.com", "address", "12345678", Constants.ROLE_RECEPTIONIST);

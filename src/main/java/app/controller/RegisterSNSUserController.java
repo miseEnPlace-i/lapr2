@@ -2,6 +2,7 @@ package app.controller;
 
 import java.text.ParseException;
 import java.util.Date;
+import app.domain.model.Address;
 import app.domain.model.Company;
 import app.domain.model.SNSUser;
 import app.domain.model.store.SNSUserStore;
@@ -41,8 +42,9 @@ public class RegisterSNSUserController implements IRegisterController<SNSUser> {
    * @param email
    * @param address
    */
-  public void create(String citizenCard, String snsNumber, String name, Date birthDay, Gender gender, String phoneNumber, String email, String address)
-      throws IllegalArgumentException, ParseException {
+  public void create(String citizenCard, String snsNumber, String name, Date birthDay, Gender gender, String phoneNumber, String email, String addressStreet,
+      int addressNumber, String postalCode, String addressCity) throws IllegalArgumentException, ParseException {
+    Address address = new Address(addressStreet, addressNumber, postalCode, addressCity);
     // create an instance of an SNS User
     this.snsUser = store.createSNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
 

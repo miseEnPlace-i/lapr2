@@ -19,6 +19,7 @@ import app.dto.VaccinationCenterListDTO;
 import app.dto.VaccineTypeDTO;
 import app.mapper.AppointmentInsertMapper;
 import app.mapper.VaccineTypeMapper;
+import app.service.AppointmentValidator;
 import app.service.CalendarUtils;
 
 /**
@@ -33,6 +34,7 @@ public class ScheduleVaccineController implements IRegisterController<Appointmen
   private AppointmentScheduleList appointmentSchedule;
   private Appointment appointment;
   private VaccineTypeStore vaccineTypeStore;
+  private VaccineStore vaccineStore;
   private SNSUserStore snsUserStore;
 
   /**
@@ -46,6 +48,7 @@ public class ScheduleVaccineController implements IRegisterController<Appointmen
     this.vaccinationCenterStore = company.getVaccinationCenterStore();
     this.vaccineTypeStore = company.getVaccineTypeStore();
     this.snsUserStore = company.getSNSUserStore();
+    this.vaccineStore = company.getVaccineStore();
   }
 
   /**
@@ -67,7 +70,9 @@ public class ScheduleVaccineController implements IRegisterController<Appointmen
       throw new IllegalArgumentException("Date or time invalid.");
     }
 
-    appointmentSchedule.validateAppointment(this.appointment);
+    AppointmentValidator appointmentValidator = new AppointmentValidator(this.vaccineStore);
+
+    appointmentValidator.validateAppointment(this.appointment);
   }
 
   /**
@@ -90,7 +95,9 @@ public class ScheduleVaccineController implements IRegisterController<Appointmen
       throw new IllegalArgumentException("Date or time invalid.");
     }
 
-    appointmentSchedule.validateAppointment(this.appointment);
+    AppointmentValidator appointmentValidator = new AppointmentValidator(this.vaccineStore);
+
+    appointmentValidator.validateAppointment(this.appointment);
   }
 
   /**
