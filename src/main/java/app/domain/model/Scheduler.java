@@ -31,8 +31,6 @@ public class Scheduler {
   
       timer.scheduleAtFixedRate(task, firstTime.getTime(), SECOND_INTERVAL);
 
-      System.out.println(firstTime.getTime());
-
     }
     
 }

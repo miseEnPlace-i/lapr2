@@ -30,7 +30,7 @@ public class FileUtils {
             //create file path directory
             File directory = file.getParentFile();
             if (!directory.exists()) {
-                directory.mkdir();
+                directory.mkdirs();
             }
 
             file.createNewFile(); // creates a file if it does not exist
