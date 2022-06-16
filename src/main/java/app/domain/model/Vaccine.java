@@ -3,6 +3,7 @@ package app.domain.model;
 import java.io.Serializable;
 import java.util.Calendar;
 import app.domain.model.list.AdminProcList;
+import app.service.CalendarUtils;
 
 /**
  * @author Carlos Lopes <1211277@isep.ipp.pt>
@@ -168,9 +169,10 @@ public class Vaccine implements Serializable {
 
     if (timeSinceLastDose == 0) return true;
 
-    Calendar expectedNextDoseDate = administrationDate;
+    Calendar expectedNextDoseDate = (Calendar) administrationDate.clone();
     expectedNextDoseDate.add(Calendar.DATE, timeSinceLastDose);
 
-    return expectedNextDoseDate.before(administrationDate);
+    if (CalendarUtils.compareDates(expectedNextDoseDate, appointmentDate) <= 0) return true;
+    else return false;
   }
 }
