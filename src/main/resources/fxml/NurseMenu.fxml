@@ -86,7 +86,8 @@
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="900.0" spacing="16.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
          <children>
             <Button mnemonicParsing="false" onAction="#handleGetUsersInWaitingRoomPress" prefHeight="32.0" prefWidth="320.0" text="Get Users in Waiting Room" />
-            <Button mnemonicParsing="false" onAction="#registerVaccineAdministration" prefHeight="32.0" prefWidth="320.0" text="Record Administration of a Vaccine" />
+            <Button mnemonicParsing="false" onAction="#registerVaccineAdministration" prefHeight="32.0" prefWidth="320.0" text="Register Vaccine Administration" />
+            <Button mnemonicParsing="false" onAction="#registerAdverseReaction" prefHeight="32.0" prefWidth="320.0" text="Register Adverse Reaction" />
          </children>
       </VBox>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="16.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">

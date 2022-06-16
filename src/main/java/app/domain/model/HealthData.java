@@ -7,7 +7,9 @@ import java.util.List;
 import app.controller.App;
 import app.domain.model.list.VaccineAdministrationList;
 import app.domain.model.store.SNSUserStore;
+import app.dto.AdverseReactionDTO;
 import app.dto.VaccineDTO;
+import app.mapper.AdverseReactionMapper;
 import app.service.CalendarUtils;
 
 public class HealthData implements Serializable {
@@ -15,11 +17,13 @@ public class HealthData implements Serializable {
   VaccineAdministrationList vaccineAdministrationList;
   List<Appointment> appointments;
   SNSUserStore store;
+  List<AdverseReaction> adverseReactions;
 
   public HealthData(SNSUser snsUser) {
     this.vaccineAdministrationList = new VaccineAdministrationList();
     this.appointments = new ArrayList<>();
     this.snsUser = snsUser;
+    this.adverseReactions = new ArrayList<>();
   }
 
   // public void addVaccine(Vaccine vaccine) {
@@ -43,7 +47,9 @@ public class HealthData implements Serializable {
 
   public boolean hasAppointmentForVaccineTypeInFuture(VaccineType vaccineType) {
     for (Appointment appointment : appointments) {
-      if (appointment.hasSnsNumber(snsUser.getSnsNumber()) && appointment.hasVaccineType(vaccineType) && isAppointmentInFuture(appointment.getDate())) {
+      if (appointment.hasSnsNumber(snsUser.getSnsNumber())
+          && appointment.hasVaccineType(vaccineType)
+          && isAppointmentInFuture(appointment.getDate())) {
         return true;
       }
     }
@@ -52,7 +58,9 @@ public class HealthData implements Serializable {
 
   public boolean hasAppointmentForVaccineTypeToday(VaccineType vaccineType) {
     for (Appointment appointment : appointments) {
-      if (appointment.hasSnsNumber(snsUser.getSnsNumber()) && appointment.hasVaccineType(vaccineType) && isAppointmentToday(appointment.getDate())) {
+      if (appointment.hasSnsNumber(snsUser.getSnsNumber())
+          && appointment.hasVaccineType(vaccineType)
+          && isAppointmentToday(appointment.getDate())) {
         return true;
       }
     }
@@ -60,11 +68,13 @@ public class HealthData implements Serializable {
   }
 
   private boolean isAppointmentInFuture(Calendar appointmentDate) {
-    return CalendarUtils.compareDates(appointmentDate, Calendar.getInstance()) > 0;
+    return CalendarUtils.compareDates(appointmentDate,
+        Calendar.getInstance()) > 0;
   }
 
   private boolean isAppointmentToday(Calendar appointmentDate) {
-    return CalendarUtils.compareDates(appointmentDate, Calendar.getInstance()) == 0;
+    return CalendarUtils.compareDates(appointmentDate,
+        Calendar.getInstance()) == 0;
   }
 
   /**
@@ -76,13 +86,34 @@ public class HealthData implements Serializable {
     return vaccineAdministrationList;
   }
 
+  /**
+   * Adds an adverse reaction to the vaccine administration.
+   * 
+   * @param adverseReaction the adverse reaction to add
+   */
+  public void addAdverseReaction(AdverseReaction adverseReaction) {
+    this.adverseReactions.add(adverseReaction);
+  }
+
+  /**
+   * Gets the list of adverse reactions.
+   * 
+   * @return a list of AdverseReactionDTO
+   */
+  public List<AdverseReactionDTO> getAdverseReactions() {
+    return AdverseReactionMapper.toDto(adverseReactions);
+  }
+
   public boolean hasTakenAllDoses(VaccineType vaccineType) {
-    VaccineAdministration lastVaccineAdministration = vaccineAdministrationList.getLastVaccineAdministrationByVaccineType(vaccineType);
+    VaccineAdministration lastVaccineAdministration = vaccineAdministrationList
+        .getLastVaccineAdministrationByVaccineType(vaccineType);
     if (lastVaccineAdministration == null) {
       return false;
     }
 
-    return lastVaccineAdministration.getDoseNumber() == lastVaccineAdministration.getVaccine().getAdministrationProcessForGivenAge(snsUser.getAge())
-        .getNumberOfDoses();
+    return lastVaccineAdministration
+        .getDoseNumber() == lastVaccineAdministration.getVaccine()
+            .getAdministrationProcessForGivenAge(snsUser.getAge())
+            .getNumberOfDoses();
   }
 }

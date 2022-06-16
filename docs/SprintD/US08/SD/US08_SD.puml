@@ -83,6 +83,25 @@ activate ui
     controller -> snsUser : age = getAge()
     activate snsUser
     deactivate snsUser
+    controller -> snsUser : userHealthData = getUserHealthData()
+    activate snsUser
+    deactivate snsUser
+    controller -> userHealthData : adverseReactionsDto = getAdverseReactions()
+    activate userHealthData
+    deactivate userHealthData
+    controller -> userVaccinationInfoMapper : userVaccinationInfoDto = toDto(name, age, adverseReactionsDto)
+    activate userVaccinationInfoMapper
+    deactivate userVaccinationInfoMapper
+    controller --> ui : userVaccinationInfoDto
+  deactivate controller
+  ui --> nurse : shows SNS user's name, age and previous adverse reactions
+deactivate ui
+
+nurse -> ui : asks to proceed
+
+activate ui
+  ui -> controller : getLastTakenVaccineFromArrival(arrivalDto)
+  activate controller
     controller -> controller : vaccineAdministrationList = getVaccineAdministrationListFromArrival(arrivalDto)
     activate controller
       controller -> controller : snsUser = getSnsUserFromArrival(arrivalDto)
@@ -99,29 +118,6 @@ activate ui
       activate userHealthData
       deactivate userHealthData
     deactivate controller
-    controller -> vaccineAdministrationList : adverseReactionsDto = getAdverseReactions()
-    activate vaccineAdministrationList
-    deactivate vaccineAdministrationList
-    controller -> userVaccinationInfoMapper : userVaccinationInfoDto = toDto(name, age, adverseReactionsDto)
-    activate userVaccinationInfoMapper
-    deactivate userVaccinationInfoMapper
-    controller --> ui : userVaccinationInfoDto
-  deactivate controller
-  ui --> nurse : shows SNS user's name, age and previous adverse reactions
-deactivate ui
-
-nurse -> ui : asks to proceed
-
-activate ui
-  ui -> controller : getLastTakenVaccineFromArrival(arrivalDto)
-  activate controller
-    controller -> controller : vaccineAdministrationList = getVaccineAdministrationListFromArrival(arrivalDto)
-    activate controller
-    deactivate controller
-    note right
-        Steps for getting the vaccine administration 
-        list are specified in message 15
-    end note
     controller -> arrivalDto : appointment = getAppointment()
     activate arrivalDto
     deactivate arrivalDto
@@ -191,7 +187,7 @@ activate ui
     deactivate controller
     note right
         Steps for getting the vaccine administration 
-        list are specified in message 15
+        list are specified in message 22
     end note
     controller -> vaccineAdministrationList : doseNumber = getNextDoseNumberOfVaccine(vaccine)
     activate vaccineAdministrationList
@@ -223,7 +219,7 @@ activate ui
     deactivate controller
     note right
         Steps for getting the vaccine administration 
-        list are specified in message 15
+        list are specified in message 22
     end note
     controller -> vaccineDto : id = getId()
     activate vaccineDto

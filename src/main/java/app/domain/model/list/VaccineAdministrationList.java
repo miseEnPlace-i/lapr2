@@ -48,9 +48,11 @@ public class VaccineAdministrationList implements Serializable {
    * @param vaccinationCenter the vaccination center where the vaccine was administered
    * @param date the date the vaccine was administered
    */
-  public VaccineAdministration createVaccineAdministration(SNSUser snsUser, Vaccine vaccine, String lotNumber, int doseNumber,
+  public VaccineAdministration createVaccineAdministration(SNSUser snsUser,
+      Vaccine vaccine, String lotNumber, int doseNumber,
       VaccinationCenter vaccinationCenter, Calendar date) {
-    VaccineAdministration vaccineAdministration = new VaccineAdministration(snsUser, vaccine, lotNumber, doseNumber, vaccinationCenter, date);
+    VaccineAdministration vaccineAdministration = new VaccineAdministration(
+        snsUser, vaccine, lotNumber, doseNumber, vaccinationCenter, date);
 
     return vaccineAdministration;
   }
@@ -60,7 +62,8 @@ public class VaccineAdministrationList implements Serializable {
    * 
    * @param vaccineAdministration the vaccine administration object to be validated
    */
-  public void validateVaccineAdministration(VaccineAdministration vaccineAdministration) {
+  public void validateVaccineAdministration(
+      VaccineAdministration vaccineAdministration) {
 
   }
 
@@ -69,10 +72,12 @@ public class VaccineAdministrationList implements Serializable {
    * 
    * @param vaccineAdministration the vaccine administration object to be saved
    */
-  public void saveVaccineAdministration(VaccineAdministration vaccineAdministration) {
+  public void saveVaccineAdministration(
+      VaccineAdministration vaccineAdministration) {
     vaccineAdministrations.add(vaccineAdministration);
 
-    VaccinationCenter vaccinationCenter = vaccineAdministration.getVaccinationCenter();
+    VaccinationCenter vaccinationCenter =
+        vaccineAdministration.getVaccinationCenter();
     vaccinationCenter.addVaccineAdministrationToList(vaccineAdministration);
 
     CenterEventList centerEventList = vaccinationCenter.getEvents();
@@ -80,7 +85,8 @@ public class VaccineAdministrationList implements Serializable {
     SNSUser snsUser = vaccineAdministration.getSnsUser();
     Calendar date = vaccineAdministration.getDate();
 
-    CenterEvent vaccinated = centerEventList.create(date, CenterEventType.VACCINATED, snsUser);
+    CenterEvent vaccinated =
+        centerEventList.create(date, CenterEventType.VACCINATED, snsUser);
 
     centerEventList.save(vaccinated);
 
@@ -91,22 +97,27 @@ public class VaccineAdministrationList implements Serializable {
     recoveryRoom.addVaccineAdministration(vaccineAdministration);
 
     Properties props = PropertiesUtils.getProperties();
-    int recoveryPeriod = Integer.parseInt(props.getProperty(Constants.PARAMS_RECOVERY_PERIOD));
+    int recoveryPeriod =
+        Integer.parseInt(props.getProperty(Constants.PARAMS_RECOVERY_PERIOD));
 
     Calendar departureTime = Calendar.getInstance();
     departureTime.add(Calendar.MINUTE, recoveryPeriod);
 
-    CenterEvent departure = centerEventList.create(departureTime, CenterEventType.DEPARTURE, snsUser);
+    CenterEvent departure = centerEventList.create(departureTime,
+        CenterEventType.DEPARTURE, snsUser);
 
     centerEventList.save(departure);
 
     setSmsSending(vaccineAdministration, recoveryPeriod);
   }
 
-  private void setSmsSending(VaccineAdministration vaccineAdministration, int recoveryPeriod) {
-    String message = String.format("Your recovery period has ended.\nYou can now leave the center.");
-    UserNotificationDTO notificationDto =
-        UserNotificationMapper.toDto(vaccineAdministration.getSnsUser().getEmail(), vaccineAdministration.getSnsUser().getPhoneNumber(), message);
+  private void setSmsSending(VaccineAdministration vaccineAdministration,
+      int recoveryPeriod) {
+    String message = String.format(
+        "Your recovery period has ended.\nYou can now leave the center.");
+    UserNotificationDTO notificationDto = UserNotificationMapper.toDto(
+        vaccineAdministration.getSnsUser().getEmail(),
+        vaccineAdministration.getSnsUser().getPhoneNumber(), message);
 
     new java.util.Timer().schedule(new java.util.TimerTask() {
       @Override
@@ -129,23 +140,6 @@ public class VaccineAdministrationList implements Serializable {
       System.out.println(e.getMessage());
       e.printStackTrace();
     }
-  }
-
-  /**
-   * Gets the list of adverse reactions.
-   * 
-   * @return a list of AdverseReactionDTO
-   */
-  public List<AdverseReactionDTO> getAdverseReactions() {
-    List<AdverseReaction> adverseReactions = new ArrayList<>();
-
-    for (VaccineAdministration vaccineAdministration : vaccineAdministrations) {
-      if (vaccineAdministration.getAdverseReaction() != null) {
-        adverseReactions.add(vaccineAdministration.getAdverseReaction());
-      }
-    }
-
-    return AdverseReactionMapper.toDto(adverseReactions);
   }
 
   /**
@@ -174,7 +168,8 @@ public class VaccineAdministrationList implements Serializable {
    * 
    * @return the last taken vaccine of a given vaccine type by a user
    */
-  public VaccineAdministration getLastVaccineAdministrationByVaccineType(VaccineType vaccineType) {
+  public VaccineAdministration getLastVaccineAdministrationByVaccineType(
+      VaccineType vaccineType) {
     Collections.sort(vaccineAdministrations);
 
     for (VaccineAdministration vaccineAdministration : vaccineAdministrations) {
