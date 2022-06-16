@@ -55,7 +55,7 @@
       </VBox>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="16.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
          <children>
-            <Button id="btnBack" fx:id="btnContinueLotNumber" defaultButton="true" disable="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleContinueLotNumber" prefHeight="40.0" prefWidth="120.0" text="Continue" />
+            <Button id="btnBack" fx:id="btnContinueLotNumber" defaultButton="true" disable="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleContinueLotNumber" prefHeight="40.0" prefWidth="120.0" text="Confirm" />
             <Button id="btnBack" fx:id="btnBack" cancelButton="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnBack" prefHeight="40.0" prefWidth="120.0" text="Cancel" />
          </children>
       </FlowPane>
