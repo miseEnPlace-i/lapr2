@@ -1,6 +1,7 @@
 package app.dto;
 
 import java.util.Calendar;
+import app.service.TimeUtils;
 
 /**
  * Legacy Data DTO.
@@ -19,7 +20,7 @@ public class LegacyDataDTO implements Comparable<LegacyDataDTO> {
     private Calendar departureDate;
 
     public LegacyDataDTO(String snsNumber, String vaccineName, int dose, String lotNumber, Calendar scheduledDate, Calendar arrivalDate,
-            Calendar administrationDate, Calendar departureDate) {
+            Calendar administrationDate, Calendar departureDate, String vaccineType) {
         this.snsNumber = snsNumber;
         this.vaccineName = vaccineName;
         this.dose = dose;
@@ -28,6 +29,7 @@ public class LegacyDataDTO implements Comparable<LegacyDataDTO> {
         this.arrivalDate = arrivalDate;
         this.administrationDate = administrationDate;
         this.departureDate = departureDate;
+        this.vaccineType = vaccineType;
     }
 
     public String getSnsNumber() {
@@ -72,5 +74,22 @@ public class LegacyDataDTO implements Comparable<LegacyDataDTO> {
         if (compare == 0) compare = this.departureDate.compareTo(o.departureDate);
 
         return compare;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(String.format("SNS User number: %s\n", this.snsNumber));
+        sb.append(String.format("Vaccine: %s", this.vaccineName));
+        sb.append(String.format(" for %s disease\n", this.vaccineType));
+        sb.append(String.format("Dose: %s\n", this.dose));
+        sb.append(String.format("Lot number: %s\n", this.lotNumber));
+        sb.append(String.format("Arrival time: %s\n", TimeUtils.timeToString(arrivalDate)));
+        sb.append(String.format("Scheduled time: %s\n", TimeUtils.timeToString(scheduledDate)));
+        sb.append(String.format("Vaccine Administration time: %s\n", TimeUtils.timeToString(administrationDate)));
+        sb.append(String.format("Departure time: %s\n", TimeUtils.timeToString(departureDate)));
+
+        return sb.toString();
     }
 }

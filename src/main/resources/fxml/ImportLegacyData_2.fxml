@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -31,6 +30,29 @@
     <RowConstraints maxHeight="160.0" minHeight="89.0" prefHeight="94.0" vgrow="ALWAYS" />
   </rowConstraints>
    <children>
+      <MenuBar centerShape="false" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="32.0" prefWidth="900.0" scaleShape="false" GridPane.halignment="LEFT" GridPane.hgrow="NEVER" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="menuSaveSession" mnemonicParsing="false" onAction="#handleSaveSession" text="Save session" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleRestoreSession" text="Restore Defaults" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="menuLogout" mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
+                  <MenuItem fx:id="menuExit1" mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="About">
+            <items>
+              <MenuItem fx:id="menuDevelopmentTeam" mnemonicParsing="false" onAction="#handleDevelopmentTeam" text="Development Team" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleHelp" text="Show Help" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
       <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="900.0" scaleShape="false" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="30.0" prefHeight="29.0" prefWidth="900.0" text="Import Legacy Data" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0">
@@ -53,31 +75,32 @@
                   <Font name="System Italic" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="64.0" layoutY="24.0" prefHeight="20.0" prefWidth="160.0" text="Your Vaccination Center:" AnchorPane.leftAnchor="64.0">
+            <!-- hidden w/ opacity 0 -->
+            <Label layoutX="31.0" layoutY="23.0" text="Vaccination Center">
                <font>
-                  <Font size="10.0" />
+                  <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="lblCenterName" layoutX="64.0" layoutY="41.0" prefHeight="20.0" text="VAC_CENTER_NAME" AnchorPane.leftAnchor="64.0">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
+            <Label fx:id="lblCenterName" layoutX="33.0" layoutY="45.0" text="Vaccination Center" />
          </children>
       </AnchorPane>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="900.0" spacing="8.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="900.0" spacing="16.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
          <children>
-            <HBox alignment="CENTER" prefWidth="900.0" spacing="8.0" />
-            <ScrollPane prefHeight="1000.0" prefWidth="900.0">
-               <content>
-                  <VBox fx:id="vboxData" />
-               </content>
-            </ScrollPane>
+            <Label text="Please confirm that you want to import this data.">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ListView fx:id="lstData" prefHeight="257.0" prefWidth="900.0">
+               <VBox.margin>
+                  <Insets left="50.0" right="50.0" />
+               </VBox.margin>
+            </ListView>
          </children>
       </VBox>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="16.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
          <children>
-            <Button id="btnBack" cancelButton="true" disable="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnImport" prefHeight="40.0" prefWidth="120.0" text="Import" />
+            <Button id="btnBack" cancelButton="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnImport" prefHeight="40.0" prefWidth="120.0" text="Import" />
             <Button id="btnBack" cancelButton="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnBack" prefHeight="40.0" prefWidth="120.0" text="Go back" />
          </children>
       </FlowPane>

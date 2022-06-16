@@ -23,9 +23,7 @@ public class TimeUtils {
 
     int age = today.get(Calendar.YEAR) - birthDate.get(Calendar.YEAR);
 
-    if (today.get(Calendar.DAY_OF_YEAR) < birthDate.get(Calendar.DAY_OF_YEAR)) {
-      age--;
-    }
+    if (today.get(Calendar.DAY_OF_YEAR) < birthDate.get(Calendar.DAY_OF_YEAR)) age--;
 
     return age;
   }
@@ -33,5 +31,10 @@ public class TimeUtils {
   public static String dateToString(Date date) {
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     return sdf.format(date);
+  }
+
+  public static String timeToString(Calendar date) {
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    return sdf.format(date.getTime());
   }
 }
