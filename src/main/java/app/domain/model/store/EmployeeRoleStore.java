@@ -34,9 +34,11 @@ public class EmployeeRoleStore implements Serializable {
 
     authFacade.addUserRole(id, description);
 
+
     MyUserRole role = new MyUserRole(id, description);
     roles.add(role);
 
+    System.out.println(role);
     return role;
   }
 

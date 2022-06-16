@@ -23,9 +23,24 @@ public class NurseUI extends EmployeeRoleUI {
   @FXML
   void registerVaccineAdministration(ActionEvent event) {
     try {
-      VaccineAdministrationUI vaccineAdministrationUI = (VaccineAdministrationUI) this.mainApp.replaceSceneContent("/fxml/RegVacAdminSelectUser.fxml");
+      VaccineAdministrationUI vaccineAdministrationUI =
+          (VaccineAdministrationUI) this.mainApp
+              .replaceSceneContent("/fxml/RegVacAdminSelectUser.fxml");
 
       vaccineAdministrationUI.init(this);
+    } catch (Exception e) {
+      Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, e);
+    }
+
+  }
+
+  @FXML
+  void registerAdverseReaction(ActionEvent event) {
+    try {
+      AdverseReactionUI adverseReactionUI = (AdverseReactionUI) this.mainApp
+          .replaceSceneContent("/fxml/RegAdverseReaction.fxml");
+
+      adverseReactionUI.init(this);
     } catch (Exception e) {
       Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, e);
     }

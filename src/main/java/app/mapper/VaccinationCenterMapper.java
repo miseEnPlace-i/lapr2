@@ -2,6 +2,7 @@ package app.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import app.domain.model.Address;
 import app.domain.model.CommunityMassVaccinationCenter;
 import app.domain.model.HealthCareCenter;
 import app.domain.model.VaccinationCenter;
@@ -23,7 +24,7 @@ public class VaccinationCenterMapper {
     else if (vaccinationCenter instanceof CommunityMassVaccinationCenter) type = "Community Mass Vaccination Center";
 
     String name = vaccinationCenter.getName();
-    String address = vaccinationCenter.getAddress();
+    Address address = vaccinationCenter.getAddress();
     String email = vaccinationCenter.getEmail();
     String phone = vaccinationCenter.getPhone();
     String openingHours = vaccinationCenter.getOpeningHours().toString();

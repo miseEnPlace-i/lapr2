@@ -20,8 +20,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -57,7 +59,16 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
   }
 
   @FXML
+  void onKeyPressed(KeyEvent event) {
+    if (event.getCode() == KeyCode.ENTER) analyse();
+  }
+
+  @FXML
   void handleAnalyse() {
+    analyse();
+  }
+
+  private void analyse() {
     Calendar day = Calendar.getInstance();
     day.setTime(Date.valueOf(dtpDate.getValue()));
 

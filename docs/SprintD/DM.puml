@@ -41,13 +41,6 @@ class SNSUser {
   - address
 }
 
-class User {
-  - name
-  - email
-  - pwd
-  - role
-}
-
 class UserHealthData {}
 
 class Administrator {}
@@ -150,7 +143,6 @@ SNSUser "1" -- "*" Arrival : associated to >
 SNSUser "1" -- "1" UserHealthData : has >
 SNSUser "1" -- "*" Notification : receives >
 SNSUser "1" -- "*" VaccinationCertificate : requests >
-SNSUser "0..1" -- "1" User : becomes >
 
 
 VaccinationCertificate "1" -- "1" Vaccine : corresponds >

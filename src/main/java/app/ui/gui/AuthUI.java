@@ -4,12 +4,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import app.controller.App;
 import app.controller.AuthController;
 import app.domain.shared.Constants;
 import app.domain.shared.MenuFXMLPath;
 import app.exception.NotAuthorizedException;
 import app.service.FormatVerifier;
 import app.ui.gui.utils.Utils;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -40,14 +42,14 @@ public class AuthUI implements Initializable, IGui {
   public void initialize(URL location, ResourceBundle resources) {
     try {
       ctrl = new AuthController();
-
     } catch (Exception e) {
       Logger.getLogger(AuthUI.class.getName()).log(Level.SEVERE, null, e);
 
       Utils.showError("Error in application initialization",
           "Error while initializing the application,\nplease contact an administrator to solve\nthe problem.");
 
-      System.exit(-1);
+      App.getInstance().restoreCompany();
+      Platform.exit();
     }
   }
 

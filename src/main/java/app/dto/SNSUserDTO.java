@@ -1,6 +1,7 @@
 package app.dto;
 
 import java.util.Date;
+import app.domain.model.Address;
 import app.domain.shared.Gender;
 
 /**
@@ -14,7 +15,7 @@ public class SNSUserDTO {
   Gender gender;
   String phoneNumber;
   String email;
-  String address;
+  Address address;
 
   public String getCitizenCard() {
     return this.citizenCard;
@@ -44,12 +45,12 @@ public class SNSUserDTO {
     return this.email;
   }
 
-  public String getAddress() {
+  public Address getAddress() {
     return this.address;
   }
 
 
-  public SNSUserDTO(String citizenCard, String snsNumber, String name, Date birthDay, Gender gender, String phoneNumber, String email, String address) {
+  public SNSUserDTO(String citizenCard, String snsNumber, String name, Date birthDay, Gender gender, String phoneNumber, String email, Address address) {
     this.citizenCard = citizenCard.toUpperCase();
     this.snsNumber = snsNumber;
     this.name = name;

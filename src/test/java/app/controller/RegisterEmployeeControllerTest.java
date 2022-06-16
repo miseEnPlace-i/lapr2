@@ -7,11 +7,11 @@ import org.junit.Test;
 import app.domain.model.Company;
 import app.domain.model.MyUserRole;
 import app.domain.model.store.EmployeeRoleStore;
-import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
 public class RegisterEmployeeControllerTest {
   Company company = new Company("designation", "12345");
-  private RegisterEmployeeController ctrl = new RegisterEmployeeController(company);
+  private RegisterEmployeeController ctrl =
+      new RegisterEmployeeController(company);
 
   @Before
   public void setUp() {
@@ -29,7 +29,7 @@ public class RegisterEmployeeControllerTest {
     sb.append(String.format("Name: %s\n", "name"));
     sb.append(String.format("Phone number: %s\n", "+351913456789"));
     sb.append(String.format("Email: %s\n", "example@gmail.com"));
-    sb.append(String.format("Address: %s\n", "address"));
+    sb.append(String.format("Address: %s\n", "street 1, 11-11 city"));
     sb.append(String.format("Citizen Card number: %s\n", "00000000"));
     sb.append(String.format("Role: %s\n", "COORDINATOR"));
 
@@ -42,7 +42,8 @@ public class RegisterEmployeeControllerTest {
   @Test
   public void ensureStringifyDataWorking() {
     String empString = getEmployeeTestString();
-    ctrl.create("name", "address", "+351913456789", "example@gmail.com", "00000000", "COORDINATOR");
+    ctrl.create("name", "street", 1, "11-11", "city", "+351913456789",
+        "example@gmail.com", "00000000", "COORDINATOR");
     ctrl.save();
     assertEquals(empString, ctrl.stringifyData());
   }
@@ -53,12 +54,16 @@ public class RegisterEmployeeControllerTest {
   @Test
   public void ensureEmployeeIsCreatedSuccessfully() {
     String name = "test";
-    String address = "test";
+    String street = "test";
+    int number = 1;
+    String door = "11-11";
+    String city = "test";
     String phoneNumber = "+351913456789";
     String email = "test@email.com";
     String citizenCardNumber = "00000000";
     String roleId = "NURSE";
-    ctrl.create(name, address, phoneNumber, email, citizenCardNumber, roleId);
+    ctrl.create(name, street, number, door, city, phoneNumber, email,
+        citizenCardNumber, roleId);
   }
 
   /**
@@ -67,12 +72,16 @@ public class RegisterEmployeeControllerTest {
   @Test
   public void ensureSaveWorksAsExpected() {
     String name = "test";
-    String address = "test";
+    String street = "test";
+    int number = 1;
+    String door = "11-11";
+    String city = "test";
     String phoneNumber = "+351913456789";
     String email = "test@email.com";
     String citizenCardNumber = "00000000";
     String roleId = "NURSE";
-    ctrl.create(name, address, phoneNumber, email, citizenCardNumber, roleId);
+    ctrl.create(name, street, number, door, city, phoneNumber, email,
+        citizenCardNumber, roleId);
     ctrl.save();
   }
 

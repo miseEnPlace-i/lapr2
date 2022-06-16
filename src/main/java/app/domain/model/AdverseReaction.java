@@ -22,4 +22,9 @@ public class AdverseReaction implements Serializable {
   public String getDescription() {
     return this.description;
   }
+
+  @Override
+  public String toString() {
+    return this.description;
+  }
 }

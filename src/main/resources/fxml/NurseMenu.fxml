@@ -35,8 +35,7 @@
           <Menu mnemonicParsing="false" text="File">
             <items>
               <MenuItem fx:id="menuSaveSession" mnemonicParsing="false" onAction="#handleSaveSession" text="Save session" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleRestoreSession" text="Restore Defaults" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="menuLogout" mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
                   <MenuItem fx:id="menuExit1" mnemonicParsing="false" onAction="#handleExit" text="Exit" />
@@ -47,6 +46,11 @@
               <MenuItem fx:id="menuDevelopmentTeam" mnemonicParsing="false" onAction="#handleDevelopmentTeam" text="Development Team" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleHelp" text="Show Help" />
+               </items>
+            </Menu>
         </menus>
       </MenuBar>
       <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="900.0" scaleShape="false" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
@@ -82,7 +86,8 @@
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="900.0" spacing="16.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
          <children>
             <Button mnemonicParsing="false" onAction="#handleGetUsersInWaitingRoomPress" prefHeight="32.0" prefWidth="320.0" text="Get Users in Waiting Room" />
-            <Button mnemonicParsing="false" onAction="#registerVaccineAdministration" prefHeight="32.0" prefWidth="320.0" text="Record Administration of a Vaccine" />
+            <Button mnemonicParsing="false" onAction="#registerVaccineAdministration" prefHeight="32.0" prefWidth="320.0" text="Register Vaccine Administration" />
+            <Button mnemonicParsing="false" onAction="#registerAdverseReaction" prefHeight="32.0" prefWidth="320.0" text="Register Adverse Reaction" />
          </children>
       </VBox>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="16.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">

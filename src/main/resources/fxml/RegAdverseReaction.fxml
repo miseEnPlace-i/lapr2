@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="550.0" prefWidth="900.0" scaleShape="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.VaccineAdministrationUI">
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="550.0" prefWidth="900.0" scaleShape="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.AdverseReactionUI">
    <children>
       <MenuBar centerShape="false" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="32.0" prefWidth="900.0" scaleShape="false" GridPane.halignment="LEFT" GridPane.hgrow="NEVER" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
          <menus>
@@ -30,27 +30,38 @@
       </MenuBar>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="900.0" spacing="16.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
          <children>
-            <Label text="Select a Vaccine to administer from the list.">
+            <Label text="Enter the SNS User number and the respective Adverse Reaction description.">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <ListView fx:id="listVaccines" onMouseClicked="#checkEnableButtonVaccines" prefHeight="264.0" prefWidth="800.0">
+            <Label fx:id="lblSnsUserNmbr" text="SNS User Number:">
                <VBox.margin>
-                  <Insets left="50.0" right="50.0" />
+                  <Insets top="20.0" />
                </VBox.margin>
-            </ListView>
+            </Label>
+            <TextField fx:id="txtSnsUserNumber" maxWidth="280.0" onKeyReleased="#enableConfirm" promptText="SNS User Number">
+               <VBox.margin>
+                  <Insets top="-10.0" />
+               </VBox.margin>
+            </TextField>
+            <Label fx:id="lblAdverseReaction" text="Adverse Reaction:" />
+            <TextArea fx:id="txtAdverseReaction" maxWidth="500.0" onKeyReleased="#enableConfirm" prefHeight="131.0" prefWidth="400.0" promptText="Adverse Reaction description" wrapText="true">
+               <VBox.margin>
+                  <Insets top="-10.0" />
+               </VBox.margin>
+            </TextArea>
          </children>
       </VBox>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="16.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
          <children>
-            <Button id="btnBack" fx:id="btnContinueVaccines" defaultButton="true" disable="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleContinueVaccines" prefHeight="40.0" prefWidth="120.0" text="Continue" />
+            <Button id="btnBack" fx:id="btnConfirm" defaultButton="true" disable="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleConfirm" prefHeight="40.0" prefWidth="120.0" text="Confirm" />
             <Button id="btnBack" fx:id="btnBack" cancelButton="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnBack" prefHeight="40.0" prefWidth="120.0" text="Cancel" />
          </children>
       </FlowPane>
       <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="900.0" scaleShape="false" GridPane.rowIndex="1">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="30.0" prefHeight="29.0" prefWidth="900.0" text="Register Vaccine Administration" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="30.0" prefHeight="29.0" prefWidth="900.0" text="Register Adverse Reaction" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0">
                <font>
                   <Font size="24.0" />
                </font>

@@ -1,15 +1,17 @@
 package app.dto;
 
+import app.domain.model.Address;
+
 public class VaccinationCenterListDTO {
   private String type;
   private String name;
-  private String address;
+  private Address address;
   private String email;
   private String phone;
   private String openingHours;
   private String closingHours;
 
-  public VaccinationCenterListDTO(String type, String name, String address, String email, String phone, String openingHours, String closingHours) {
+  public VaccinationCenterListDTO(String type, String name, Address address, String email, String phone, String openingHours, String closingHours) {
     this.type = type;
     this.name = name;
     this.address = address;
@@ -23,7 +25,7 @@ public class VaccinationCenterListDTO {
     return name;
   }
 
-  public String getAddress() {
+  public Address getAddress() {
     return address;
   }
 
