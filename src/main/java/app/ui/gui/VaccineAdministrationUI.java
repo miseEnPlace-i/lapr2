@@ -88,9 +88,11 @@ public class VaccineAdministrationUI extends ChildUI<NurseUI> {
     this.setParentUI(parentUI);
     Company company = App.getInstance().getCompany();
     this.employeeSession = super.getParentUI().getEmployeeSession();
-    this.ctrl = new RegisterVaccineAdministrationController(company, this.employeeSession);
+    this.ctrl = new RegisterVaccineAdministrationController(company,
+        this.employeeSession);
     try {
-      this.ctrlList = new ListUsersInWaitingRoomController(this.employeeSession);
+      this.ctrlList =
+          new ListUsersInWaitingRoomController(this.employeeSession);
     } catch (NotAuthorizedException ex) {
       Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -118,7 +120,9 @@ public class VaccineAdministrationUI extends ChildUI<NurseUI> {
   @FXML
   void handleContinueUsers(ActionEvent event) {
     try {
-      VaccineAdministrationUI ui = (VaccineAdministrationUI) super.getParentUI().mainApp.replaceSceneContent("/fxml/RegVacAdminUserData.fxml");
+      VaccineAdministrationUI ui =
+          (VaccineAdministrationUI) super.getParentUI().mainApp
+              .replaceSceneContent("/fxml/RegVacAdminUserData.fxml");
       ui.setParentUI(this.getParentUI());
       ui.initUserInfo(this.selectedUser);
     } catch (Exception e) {
@@ -138,18 +142,22 @@ public class VaccineAdministrationUI extends ChildUI<NurseUI> {
 
     Company company = App.getInstance().getCompany();
     this.employeeSession = super.getParentUI().getEmployeeSession();
-    this.ctrl = new RegisterVaccineAdministrationController(company, this.employeeSession);
+    this.ctrl = new RegisterVaccineAdministrationController(company,
+        this.employeeSession);
 
     this.selectedUser = selectedUser;
-    UserVaccinationInfoDTO userInfo = ctrl.getUserVaccinationInfoFromArrival(this.selectedUser);
+    UserVaccinationInfoDTO userInfo =
+        ctrl.getUserVaccinationInfoFromArrival(this.selectedUser);
 
     this.lblUserName.setText("Name: " + userInfo.getName());
     this.lblUserAge.setText("Age: " + String.valueOf(userInfo.getAge()));
 
     if (userInfo.getAdverseReactions().size() > 0) {
-      this.listAdverseReactions.getItems().addAll(userInfo.getAdverseReactions());
+      this.listAdverseReactions.getItems()
+          .addAll(userInfo.getAdverseReactions());
     } else {
-      this.listAdverseReactions.getItems().add(AdverseReactionMapper.toDto(new AdverseReaction("No adverse reactions were found.")));
+      this.listAdverseReactions.getItems().add(AdverseReactionMapper
+          .toDto(new AdverseReaction("No adverse reactions were found.")));
     }
   }
 
@@ -157,7 +165,9 @@ public class VaccineAdministrationUI extends ChildUI<NurseUI> {
   void handleContinueUserInfo(ActionEvent event) {
     if (ctrl.getLastTakenVaccineFromArrival(this.selectedUser) == null) {
       try {
-        VaccineAdministrationUI ui = (VaccineAdministrationUI) super.getParentUI().mainApp.replaceSceneContent("/fxml/RegVacAdminSelectVaccine.fxml");
+        VaccineAdministrationUI ui =
+            (VaccineAdministrationUI) super.getParentUI().mainApp
+                .replaceSceneContent("/fxml/RegVacAdminSelectVaccine.fxml");
         ui.setParentUI(this.getParentUI());
         ui.initSelectVaccine(this.selectedUser);
       } catch (Exception e) {
@@ -165,9 +175,12 @@ public class VaccineAdministrationUI extends ChildUI<NurseUI> {
       }
     } else {
       try {
-        VaccineAdministrationUI ui = (VaccineAdministrationUI) super.getParentUI().mainApp.replaceSceneContent("/fxml/RegVacAdminVaccineData.fxml");
+        VaccineAdministrationUI ui =
+            (VaccineAdministrationUI) super.getParentUI().mainApp
+                .replaceSceneContent("/fxml/RegVacAdminVaccineData.fxml");
         ui.setParentUI(this.getParentUI());
-        ui.initVaccineInfo(this.selectedUser, ctrl.getLastTakenVaccineFromArrival(this.selectedUser));
+        ui.initVaccineInfo(this.selectedUser,
+            ctrl.getLastTakenVaccineFromArrival(this.selectedUser));
       } catch (Exception e) {
         Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, e);
       }
@@ -184,11 +197,13 @@ public class VaccineAdministrationUI extends ChildUI<NurseUI> {
 
     Company company = App.getInstance().getCompany();
     this.employeeSession = super.getParentUI().getEmployeeSession();
-    this.ctrl = new RegisterVaccineAdministrationController(company, this.employeeSession);
+    this.ctrl = new RegisterVaccineAdministrationController(company,
+        this.employeeSession);
 
     this.selectedUser = selectedUser;
 
-    List<VaccineDTO> vaccines = ctrl.getListOfVaccinesWithVaccineTypeOfArrival(selectedUser);
+    List<VaccineDTO> vaccines =
+        ctrl.getListOfVaccinesWithVaccineTypeOfArrival(selectedUser);
     listVaccines.getItems().addAll(vaccines);
   }
 
@@ -202,7 +217,9 @@ public class VaccineAdministrationUI extends ChildUI<NurseUI> {
   @FXML
   void handleContinueVaccines(ActionEvent event) {
     try {
-      VaccineAdministrationUI ui = (VaccineAdministrationUI) super.getParentUI().mainApp.replaceSceneContent("/fxml/RegVacAdminVaccineData.fxml");
+      VaccineAdministrationUI ui =
+          (VaccineAdministrationUI) super.getParentUI().mainApp
+              .replaceSceneContent("/fxml/RegVacAdminVaccineData.fxml");
       ui.setParentUI(this.getParentUI());
       ui.initVaccineInfo(this.selectedUser, this.selectedVaccine);
     } catch (Exception e) {
@@ -220,15 +237,18 @@ public class VaccineAdministrationUI extends ChildUI<NurseUI> {
 
     Company company = App.getInstance().getCompany();
     this.employeeSession = super.getParentUI().getEmployeeSession();
-    this.ctrl = new RegisterVaccineAdministrationController(company, this.employeeSession);
+    this.ctrl = new RegisterVaccineAdministrationController(company,
+        this.employeeSession);
 
     this.selectedUser = selectedUser;
     this.selectedVaccine = selectedVaccine;
 
-    this.lblVaccineDesignation.setText("Vaccine: " + selectedVaccine.getDesignation());
+    this.lblVaccineDesignation
+        .setText("Vaccine: " + selectedVaccine.getDesignation());
     this.lblVaccineBrand.setText("Brand: " + selectedVaccine.getBrand());
 
-    DosageInfoDTO dosageInfoDto = this.ctrl.getDosageInfoFromVaccineBySnsUser(selectedVaccine, selectedUser);
+    DosageInfoDTO dosageInfoDto = this.ctrl
+        .getDosageInfoFromVaccineBySnsUser(selectedVaccine, selectedUser);
 
     this.lblDoseNumber.setText("Dose Number: " + dosageInfoDto.getDoseNumber());
     this.lblDosage.setText("Dosage: " + dosageInfoDto.getDosage() + "ml");
@@ -237,7 +257,9 @@ public class VaccineAdministrationUI extends ChildUI<NurseUI> {
   @FXML
   void handleContinueVaccineInfo(ActionEvent event) {
     try {
-      VaccineAdministrationUI ui = (VaccineAdministrationUI) super.getParentUI().mainApp.replaceSceneContent("/fxml/RegVacAdminLotNumber.fxml");
+      VaccineAdministrationUI ui =
+          (VaccineAdministrationUI) super.getParentUI().mainApp
+              .replaceSceneContent("/fxml/RegVacAdminLotNumber.fxml");
       ui.setParentUI(this.getParentUI());
       ui.initLotNumber(this.selectedUser, this.selectedVaccine);
     } catch (Exception e) {
@@ -255,12 +277,14 @@ public class VaccineAdministrationUI extends ChildUI<NurseUI> {
 
     Company company = App.getInstance().getCompany();
     this.employeeSession = super.getParentUI().getEmployeeSession();
-    this.ctrl = new RegisterVaccineAdministrationController(company, this.employeeSession);
+    this.ctrl = new RegisterVaccineAdministrationController(company,
+        this.employeeSession);
 
     this.selectedUser = selectedUser;
     this.selectedVaccine = selectedVaccine;
 
-    this.lblVaccineDesignation.setText("Vaccine: " + selectedVaccine.getDesignation());
+    this.lblVaccineDesignation
+        .setText("Vaccine: " + selectedVaccine.getDesignation());
     this.lblVaccineBrand.setText("Brand: " + selectedVaccine.getBrand());
   }
 
@@ -276,10 +300,14 @@ public class VaccineAdministrationUI extends ChildUI<NurseUI> {
   @FXML
   void handleContinueLotNumber(ActionEvent event) {
     try {
-      DosageInfoDTO dosageInfoDto = this.ctrl.getDosageInfoFromVaccineBySnsUser(selectedVaccine, selectedUser);
-      this.ctrl.createVaccineAdministration(this.selectedUser, this.selectedVaccine, this.txtLotNumber.getText(), dosageInfoDto.getDoseNumber());
+      DosageInfoDTO dosageInfoDto = this.ctrl
+          .getDosageInfoFromVaccineBySnsUser(selectedVaccine, selectedUser);
+      this.ctrl.createVaccineAdministration(this.selectedUser,
+          this.selectedVaccine, this.txtLotNumber.getText(),
+          dosageInfoDto.getDoseNumber());
     } catch (IllegalArgumentException e) {
-      Utils.showError("Lot number invalid.", "Please insert a valid lot number.");
+      Utils.showError("Lot number invalid.",
+          "Please insert a valid lot number.");
       return;
     }
 
@@ -291,7 +319,8 @@ public class VaccineAdministrationUI extends ChildUI<NurseUI> {
   void showDataAndAskToConfirm() {
     Alert alert = new Alert(AlertType.CONFIRMATION);
     alert.setTitle("Confirm the data");
-    alert.setHeaderText("Do you want to register the following Vaccine Administration?");
+    alert.setHeaderText(
+        "Do you want to register the following Vaccine Administration?");
     alert.setContentText(this.ctrl.stringifyData());
 
     Optional<ButtonType> result = alert.showAndWait();
@@ -299,8 +328,10 @@ public class VaccineAdministrationUI extends ChildUI<NurseUI> {
       this.ctrl.save();
       Alert alertSuccess = new Alert(AlertType.CONFIRMATION);
       alertSuccess.setTitle("Success");
-      alertSuccess.setHeaderText("Vaccine Administration registered successfully.");
-      alert.getDialogPane().lookupButton(ButtonType.CANCEL).setVisible(false);
+      alertSuccess
+          .setHeaderText("Vaccine Administration registered successfully.");
+      alertSuccess.getDialogPane().lookupButton(ButtonType.CANCEL)
+          .setVisible(false);
       alertSuccess.showAndWait();
     }
   }

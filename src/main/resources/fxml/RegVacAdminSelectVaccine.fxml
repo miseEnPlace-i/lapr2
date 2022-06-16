@@ -45,7 +45,7 @@
       <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="16.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
          <children>
             <Button id="btnBack" fx:id="btnContinueVaccines" defaultButton="true" disable="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleContinueVaccines" prefHeight="40.0" prefWidth="120.0" text="Continue" />
-            <Button id="btnBack" fx:id="btnBack" cancelButton="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnBack" prefHeight="40.0" prefWidth="120.0" text="Back to menu" />
+            <Button id="btnBack" fx:id="btnBack" cancelButton="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnBack" prefHeight="40.0" prefWidth="120.0" text="Cancel" />
          </children>
       </FlowPane>
       <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="900.0" scaleShape="false" GridPane.rowIndex="1">
