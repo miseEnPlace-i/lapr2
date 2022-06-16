@@ -63,9 +63,6 @@ public class Company implements Serializable {
     this.userSession = new UserSession();
 
     this.ongoingOutbreakVaccineTypeCode = ongoingOutbreakVaccineTypeCode;
-
-    this.props = PropertiesUtils.getProperties();
-    Scheduler.scheduleExportDailyVaccinated(props.getProperty(Constants.PARAMS_EXPORTATION_PATH), props.getProperty(Constants.PARAMS_EXPORTATION_TIME), props.getProperty(Constants.PARAMS_EXPORTATION_SEPARATOR), this.vaccinationCenterStore, this.vaccineTypeStore);
   }
 
   /**

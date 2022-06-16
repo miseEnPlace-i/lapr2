@@ -15,6 +15,7 @@ import app.domain.model.DoseInfo;
 import app.domain.model.Employee;
 import app.domain.model.MyUserRole;
 import app.domain.model.SNSUser;
+import app.domain.model.Scheduler;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.Vaccine;
 import app.domain.model.VaccineType;
@@ -46,6 +47,7 @@ public class App {
   private SNSUserStore snsUserStore;
   private VaccineStore vaccineStore;
   private UserStore userStore;
+  private Properties props;
 
   private App() {
     loadCompany();
@@ -68,6 +70,11 @@ public class App {
       bootstrap();
       writeCompany(this.company, Constants.DATA_FILE_PATH);
     }
+
+    
+    props = PropertiesUtils.getProperties();
+    Scheduler.scheduleExportDailyVaccinated(props.getProperty(Constants.PARAMS_EXPORTATION_PATH), props.getProperty(Constants.PARAMS_EXPORTATION_TIME), props.getProperty(Constants.PARAMS_EXPORTATION_SEPARATOR), this.vaccinationCenterStore, this.vacTypeStore);
+
   }
 
   private void registerInAuthFacade(EmployeeRoleStore employeeRoleStore, UserStore userStore) {
@@ -144,7 +151,7 @@ public class App {
   private Company createNewCompany() {
     Company comp = null;
 
-    Properties props = PropertiesUtils.getProperties();
+    props = PropertiesUtils.getProperties();
     comp = new Company(props.getProperty(Constants.PARAMS_COMPANY_DESIGNATION), props.getProperty(Constants.PARAMS_ONGOING_OUTBREAK_VACCINE_TYPE_CODE));
 
     return comp;
