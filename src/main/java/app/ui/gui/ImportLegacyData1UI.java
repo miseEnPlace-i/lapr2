@@ -64,7 +64,7 @@ public class ImportLegacyData1UI extends ChildUI<CoordinatorUI> {
       List<String[]> fileData = this.ctrl.read(selectedFile.getAbsolutePath());
       List<LegacyDataDTO> legacyDtoList = this.ctrl.convert(fileData);
       this.ctrl.validate(legacyDtoList);
-      this.ctrl.sort(legacyDtoList);
+      this.ctrl.sort(legacyDtoList, true, false);
 
       ImportLegacyData2UI iUI = this.getParentUI().toImportLegacyDataScene2();
       iUI.setLegacyDtoList(legacyDtoList);

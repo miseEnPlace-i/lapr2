@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import app.domain.model.CSVReader;
 import app.domain.model.Company;
@@ -56,9 +58,11 @@ public class ImportLegacyDataController {
         }
     }
 
-    public void sort(List<LegacyDataDTO> legacyDtoList) {
+    public void sort(List<LegacyDataDTO> legacyDtoList, boolean isArrival, boolean isAsc) {
         ISortStrategy sortStrategy = SortFactory.getSortStrategy();
+        if (isArrival)
         sortStrategy.doSort(legacyDtoList);
+        if (!isAsc) Collections.reverse(legacyDtoList);
     }
 
     public void save(List<LegacyDataDTO> legacyDtoList) {

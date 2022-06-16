@@ -70,10 +70,11 @@ public class LegacyDataDTO implements Comparable<LegacyDataDTO> {
 
     @Override
     public int compareTo(LegacyDataDTO o) {
-        int compare = this.arrivalDate.compareTo(o.arrivalDate);
-        if (compare == 0) compare = this.departureDate.compareTo(o.departureDate);
+        return this.getArrivalDate().compareTo(o.getArrivalDate());
+    }
 
-        return compare;
+    public int compareToByDeparture(LegacyDataDTO o) {
+        return this.getDepartureDate().compareTo(o.getDepartureDate());
     }
 
     @Override

@@ -10,10 +10,12 @@ import app.domain.shared.HelpText;
 import app.dto.LegacyDataDTO;
 import app.session.EmployeeSession;
 import app.ui.gui.utils.Utils;
+import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Alert.AlertType;
@@ -39,14 +41,36 @@ public class ImportLegacyData2UI extends ChildUI<CoordinatorUI> {
   @FXML
   private ListView<LegacyDataDTO> lstData;
 
+  @FXML
+  private ChoiceBox<String> selParam;
+
+  @FXML
+  private ChoiceBox<String> selOrder;
+
   void init(CoordinatorUI parentUI) {
     this.setParentUI(parentUI);
     Company company = App.getInstance().getCompany();
     this.employeeSession = parentUI.getEmployeeSession();
-    this.ctrl = new ImportLegacyDataController(company,
-        this.employeeSession.getVaccinationCenter());
+    this.ctrl = new ImportLegacyDataController(company, this.employeeSession.getVaccinationCenter());
 
     this.lblCenterName.setText(parentUI.getVaccinationCenterName());
+
+    selParam.getItems().add("Arrival");
+    selParam.getItems().add("Departure");
+    selParam.valueProperty().set(selParam.getItems().get(0));
+    selOrder.getItems().add("Ascending");
+    selOrder.getItems().add("Descending");
+    selOrder.valueProperty().set(selOrder.getItems().get(0));
+
+    ChangeListener<String> listener = (observable, oldValue, newValue) -> {
+      boolean isArrival = selParam.valueProperty().get().equals("Arrival");
+      boolean isAsc = selOrder.valueProperty().get().equals("Ascending");
+
+      this.ctrl.sort(legacyDtoList, isArrival, isAsc);
+    };
+
+    selParam.valueProperty().addListener(listener);
+    selOrder.valueProperty().addListener(listener);
   }
 
   public void setLegacyDtoList(List<LegacyDataDTO> legacyDtoList) {
@@ -81,9 +105,7 @@ public class ImportLegacyData2UI extends ChildUI<CoordinatorUI> {
 
   @FXML
   void handleSaveSession(ActionEvent event) {
-    if (App.getInstance().saveCurrentCompany())
-      Utils.showInformation("Session saved!",
-          "Your changes have been saved successfully!");
+    if (App.getInstance().saveCurrentCompany()) Utils.showInformation("Session saved!", "Your changes have been saved successfully!");
   }
 
   @FXML
@@ -108,12 +130,10 @@ public class ImportLegacyData2UI extends ChildUI<CoordinatorUI> {
   void handleDevelopmentTeam(ActionEvent event) {
     App.getInstance().doLogout();
     try {
-      DevTeamUI ui = (DevTeamUI) getParentUI().mainApp
-          .replaceSceneContent("/fxml/DevTeam.fxml");
+      DevTeamUI ui = (DevTeamUI) getParentUI().mainApp.replaceSceneContent("/fxml/DevTeam.fxml");
       ui.setMainApp(getParentUI().mainApp);
     } catch (Exception ex) {
-      Logger.getLogger(ApplicationUI.class.getName()).log(Level.SEVERE, null,
-          ex);
+      Logger.getLogger(ApplicationUI.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
 
