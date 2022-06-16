@@ -1,38 +1,46 @@
-# US XXX - XXXX XXXX
+# US 06 - Record Daily Vaccinated
 
 ## 1. Requirements Engineering
 
-_In this section, it is suggested to capture the requirement description and specifications as provided by the client as well as any further clarification on it. It is also suggested to capture the requirements acceptance criteria and existing dependencies to other requirements. At last, identify the involved input and output data and depicted an Actor-System interaction in order to fulfill the requirement._
-
 ### 1.1. User Story Description
 
-_Insert here the User Story as described by the client._
+DGS wants to record daily the total number of people vaccinated in each vaccinated center.
 
 ### 1.2. Customer Specifications and Clarifications
 
-_Insert here any related specification and/or clarification provided by the client together with **your interpretation**. When possible, provide a link to such specifications/clarifications._
+**From the specifications document:**
+
+> No Information regarding this US was found on the specifications document.
+
+**From the client clarifications:**
+
+> **Question:** In the acceptance criteria, "the algorithm should run automatically at a time defined in a configuration file and should register a date, the name of the vaccination center and the total number of vaccinated users." How it is supposed to register this information? Should it be recorded in a file (ex: txt,..) or recorded in the system (ex: in a store) ?
+>  
+> **Answer:** The data should be written to a CSV file (field delimiter should be a semicolon).
+
 
 ### 1.3. Acceptance Criteria
 
-_Insert here the client acceptance criteria._
-
+* **AC1** The algorithm should run automatically at a time defined in a configuration file and should register the date, the name of the vaccination center and the total number of vaccinated users.
+  
 ### 1.4. Found out Dependencies
 
-_Identify here any found out dependency to other US and/or requirements._
-
+* There is a dependency to US08 - "As a nurse, I want to record the administration of a vaccine to a SNS user. At the end of the recovery period, the user should receive a SMS message informing the SNS user that he can leave the vaccination center.", because in order to record the daily vaccinated people, its needed that the vaccine administration get registered in the system.
+  
 ### 1.5 Input and Output Data
 
-_Identity here the data to be inputted by the system actor as well as the output data that the system have/needs to present in order to properly support the actor actions. Regarding the inputted data, it is suggested to distinguish between typed data and selected data (e.g. from a list)_
+**Output Data:**
+
+- A CSV file is generated
 
 ### 1.6. System Sequence Diagram (SSD)
 
-_Insert here a SSD depicting the envisioned Actor-System interactions and throughout which data is inputted and outputted to fulfill the requirement. All interactions must be numbered._
 
-![USXXX-SSD](USXXX-SSD.svg)
+![US06-SSD](./SSD/US06_SSD.svg)
 
 ### 1.7 Other Relevant Remarks
 
-_Use this section to capture other relevant information that is related with this US such as (i) special requirements ; (ii) data and/or technology variations; (iii) how often this US is held._
+
 
 ## 2. OO Analysis
 

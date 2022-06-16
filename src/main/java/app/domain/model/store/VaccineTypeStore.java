@@ -93,4 +93,13 @@ public class VaccineTypeStore implements Serializable {
   public int size() {
     return vaccineTypes.size();
   }
+
+  
+  
+  /** 
+   * @return a list of Vaccine Types
+   */
+  public List<VaccineType> getListOfVaccineTypes(){
+    return this.vaccineTypes;
+  }
 }

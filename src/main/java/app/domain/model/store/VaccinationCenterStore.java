@@ -20,6 +20,7 @@ import app.utils.Time;
  * Vaccination Center store
  * 
  * @author André Barros <1211299@isep.ipp.pt>
+ * @author Carlos Lopes <1211277@isep.ipp.pt>
  */
 public class VaccinationCenterStore implements Serializable {
   // Vaccination Centers list
@@ -201,5 +202,9 @@ public class VaccinationCenterStore implements Serializable {
   public boolean exists(String phone) {
     // !! Refactor !!
     return !(getVaccinationCenterByPhone(phone) == null);
+  }
+
+  public List<VaccinationCenter> getListOfVaccinationCenters(){
+    return this.vaccinationCenters;
   }
 }

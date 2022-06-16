@@ -36,8 +36,7 @@ public class FullyVaccinatedData {
      */
     public FullyVaccinatedData(String path, Calendar start, Calendar end, VaccinationCenter center) {
         validatePath(path);
-        validateDate(start);
-        validateDate(end);
+        validateDateInterval(start, end);
         validateCenter(center);
 
         this.startDate = start;
@@ -62,10 +61,13 @@ public class FullyVaccinatedData {
      * 
      * @param date
      */
-    private void validateDate(Calendar date) {
-        if (date == null) throw new IllegalArgumentException("Date cannot be null.");
-        if (date.after(Calendar.getInstance()))
+    private void validateDateInterval(Calendar start, Calendar end) {
+        if (start == null && end == null) throw new IllegalArgumentException("Date cannot be null.");
+        if(start.after(end))
+            throw new IllegalArgumentException("End date must be after start date."); 
+        if (end.after(Calendar.getInstance()))
             throw new IllegalArgumentException("It is not possible to export center statistics that contains days in the future.");
+        
     }
 
     /**

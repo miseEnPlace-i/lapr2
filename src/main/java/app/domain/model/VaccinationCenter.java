@@ -16,6 +16,7 @@ import app.utils.Time;
  * Vaccination Center super class
  * 
  * @author André Barros <1211299@isep.ipp.pt>
+ * @author Carlos Lopes <1211277@isep.ipp.pt>
  */
 public abstract class VaccinationCenter implements Serializable {
   private String name;
@@ -34,6 +35,7 @@ public abstract class VaccinationCenter implements Serializable {
   private CenterEventList eventList;
   private List<VaccineAdministration> vaccineAdministrationList;
 
+  
   /**
    * Constructor for the Vaccination Center
    * 
@@ -88,7 +90,7 @@ public abstract class VaccinationCenter implements Serializable {
   public String getPhone() {
     return phoneNum;
   }
-
+  
   /**
    * @return the fax of the vaccination center
    */
@@ -109,7 +111,7 @@ public abstract class VaccinationCenter implements Serializable {
   public String getEmail() {
     return email;
   }
-
+  
   /**
    * @return the maximum number of vaccines given per slot
    */
@@ -123,7 +125,7 @@ public abstract class VaccinationCenter implements Serializable {
   public String getCoordinatorName() {
     return coordinator.name;
   }
-
+  
   /**
    * @return the name of the coordinator of the vaccination center
    */
@@ -210,7 +212,7 @@ public abstract class VaccinationCenter implements Serializable {
     }
     this.email = email;
   }
-
+  
   /**
    * Sets the center phone number.
    * 
@@ -225,7 +227,7 @@ public abstract class VaccinationCenter implements Serializable {
 
     this.phoneNum = phoneNum;
   }
-
+  
   /**
    * Sets the center fax number.
    * 
@@ -255,7 +257,7 @@ public abstract class VaccinationCenter implements Serializable {
 
     this.webAddress = webAddress;
   }
-
+  
   /**
    * Sets the center opening hours.
    * 
@@ -328,7 +330,7 @@ public abstract class VaccinationCenter implements Serializable {
   public AppointmentScheduleList getAppointmentList() {
     return appointmentList;
   }
-
+  
   public CenterPerformance getCenterPerformanceForDay(Calendar day, int interval) {
     CenterEventList events = this.eventList.getEventListForDay(day);
 
@@ -393,7 +395,7 @@ public abstract class VaccinationCenter implements Serializable {
     int realClosingMinutesOfDay = openingMinutesOfDay + (appointmentList.getNOfSlotsPerDay() * slot.getDuration());
 
     realClosingMinutesOfDay--;
-
+    
     int hours = realClosingMinutesOfDay / 60;
     int minutes = realClosingMinutesOfDay % 60;
 
@@ -405,7 +407,7 @@ public abstract class VaccinationCenter implements Serializable {
   public boolean hasAvailabilityInSlot(Calendar date) {
     return appointmentList.checkSlotAvailability(date);
   }
-
+  
   /**
    * Adds a Vaccine Administration object to the list.
    * 
@@ -414,6 +416,34 @@ public abstract class VaccinationCenter implements Serializable {
   public void addVaccineAdministrationToList(VaccineAdministration vaccineAdministration) {
     this.vaccineAdministrationList.add(vaccineAdministration);
   }
+  
+
+  
+  /** 
+   * @return List<VaccineAdministration> list of vaccine administration from yesterday
+   */
+  public List<VaccineAdministration> getVaccineAdministrationFromYesterdayList() {
+    List<VaccineAdministration> subList = new ArrayList();
+    Calendar yesterday = getDateWithoutTime(Calendar.getInstance());
+    yesterday.add(Calendar.DATE, -1);
+
+    for (int i = 0; i < this.vaccineAdministrationList.size(); i++) {
+      if(getDateWithoutTime(this.vaccineAdministrationList.get(i).getDate()).equals(yesterday)){
+        subList.add(this.vaccineAdministrationList.get(i));
+      }
+    }
+    return subList;
+  }
+
+
+  public Calendar getDateWithoutTime(Calendar date) {
+    date.set(Calendar.HOUR_OF_DAY, 0);
+    date.set(Calendar.MINUTE, 0);
+    date.set(Calendar.SECOND, 0);
+    date.set(Calendar.MILLISECOND, 0);
+
+    return date;
+}
 
   public List<VaccineAdministration> getVacAdminDayList(Calendar day) {
     List<VaccineAdministration> vacAdminPerDay = new ArrayList<>();

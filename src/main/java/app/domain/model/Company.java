@@ -2,6 +2,7 @@ package app.domain.model;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.Properties;
 import java.io.Serializable;
 import org.apache.commons.lang3.StringUtils;
 import app.domain.model.store.EmployeeRoleStore;
@@ -12,6 +13,8 @@ import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineStore;
 import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.model.store.VaccineTypeStore;
+import app.domain.shared.Constants;
+import app.service.PropertiesUtils;
 import pt.isep.lei.esoft.auth.AuthFacade;
 import pt.isep.lei.esoft.auth.UserSession;
 
@@ -36,6 +39,7 @@ public class Company implements Serializable {
   private VaccineTypeStore vaccineTypeStore;
   private transient UserSession userSession;
   private UserStore userStore;
+  private Properties props;
 
   /**
    * Company constructor.
@@ -61,6 +65,10 @@ public class Company implements Serializable {
     this.userSession = new UserSession();
 
     this.ongoingOutbreakVaccineTypeCode = ongoingOutbreakVaccineTypeCode;
+
+    this.props = PropertiesUtils.getProperties();
+    Scheduler.scheduleExportDailyVaccinated(props.getProperty(Constants.PARAMS_EXPORTATION_PATH), props.getProperty(Constants.PARAMS_EXPORTATION_TIME),
+        props.getProperty(Constants.PARAMS_EXPORTATION_SEPARATOR), this.vaccinationCenterStore, this.vaccineTypeStore);
   }
 
   /**

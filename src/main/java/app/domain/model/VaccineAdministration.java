@@ -8,6 +8,7 @@ import java.util.Date;
  * Vaccine administration model class.
  * 
  * @author Tomás Russo <1211288@isep.ipp.pt>
+ * @author Carlos Lopes <1211277@isep.ipp.pt>
  */
 public class VaccineAdministration implements Comparable<VaccineAdministration>, Serializable {
   private SNSUser snsUser;
@@ -117,15 +118,6 @@ public class VaccineAdministration implements Comparable<VaccineAdministration>,
   }
 
   /**
-   * Gets the vaccine administration date.
-   * 
-   * @return the vaccine administration date
-   */
-  public Calendar getDate() {
-    return date;
-  }
-
-  /**
    * Checks if the vaccine administrated has the given vaccine type.
    * 
    * @param vaccineType the vaccine type to check
@@ -141,6 +133,16 @@ public class VaccineAdministration implements Comparable<VaccineAdministration>,
     return this.date.compareTo(other.date);
   }
 
+  /**
+   * Gets the date of the vaccine administration
+   * 
+   * @return the date of the vaccine administration
+   */
+  public Calendar getDate() {
+    return this.date;
+  }
+
+  
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
