@@ -3,13 +3,16 @@ package app.ui.gui;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import app.ui.gui.utils.Utils;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class ApplicationUI extends Application {
   private Stage stage;
@@ -21,11 +24,19 @@ public class ApplicationUI extends Application {
   @Override
   public void start(Stage stage) throws Exception {
     this.stage = stage;
-    stage.setTitle("DGS Application");
+    stage.setTitle("DGS Vaccination Manager");
     stage.setMinWidth(MINIMUM_WINDOW_WIDTH);
     stage.setMinHeight(MINIMUM_WINDOW_HEIGHT);
     toMainScene();
     this.stage.show();
+
+    this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+      @Override
+      public void handle(WindowEvent event) {
+        event.consume();
+        Utils.showExitConfirmation();
+      }
+    });
   }
 
   public Stage getStage() {

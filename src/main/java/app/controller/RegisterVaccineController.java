@@ -60,7 +60,7 @@ public class RegisterVaccineController implements IRegisterController<Vaccine> {
 
   // SAVE ADMINISTRATION PROCESS
   public void saveAdminProc() {
-    vac.addAdminProc(ap);;
+    vac.addAdminProc(ap);
   }
 
   // CREATE DOSE INFO

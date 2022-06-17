@@ -1,10 +1,13 @@
 package app.domain.model;
 
+import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import app.domain.model.list.AdministrationList;
 import app.domain.shared.Gender;
 import app.dto.SNSUserDTO;
 import app.service.CCFormatVerifier;
+import app.service.CalendarUtils;
 import app.service.FormatVerifier;
 import app.service.TimeUtils;
 
@@ -14,7 +17,7 @@ import app.service.TimeUtils;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
-public class SNSUser {
+public class SNSUser implements Serializable {
 
   // Max age a user can have
   private static final int MAX_AGE = 150;
@@ -41,7 +44,7 @@ public class SNSUser {
   private String email;
 
   // SNS User address
-  private String address;
+  private Address address;
 
   private HealthData userHealthData;
 
@@ -57,14 +60,13 @@ public class SNSUser {
    * @param phoneNumber
    * @param email
    */
-  public SNSUser(String citizenCard, String snsNumber, String name, Date birthDay, Gender gender, String phoneNumber, String email, String address) {
+  public SNSUser(String citizenCard, String snsNumber, String name, Date birthDay, Gender gender, String phoneNumber, String email, Address address) {
     validateBirthday(birthDay);
     validateCitizenCard(citizenCard);
     validateSNSNumber(snsNumber);
     validateName(name);
     validatePhoneNumber(phoneNumber);
     validateEmail(email);
-    validateAddress(address);
 
     this.citizenCard = citizenCard.toUpperCase();
     this.snsNumber = snsNumber;
@@ -86,7 +88,6 @@ public class SNSUser {
     validateName(snsUserDTO.getName());
     validatePhoneNumber(snsUserDTO.getPhoneNumber());
     validateEmail(snsUserDTO.getEmail());
-    validateAddress(snsUserDTO.getAddress());
 
     this.citizenCard = snsUserDTO.getCitizenCard().toUpperCase();
     this.snsNumber = snsUserDTO.getSnsNumber();
@@ -130,7 +131,7 @@ public class SNSUser {
     return birthDay;
   }
 
-  public String getAddress() {
+  public Address getAddress() {
     return address;
   }
 
@@ -139,7 +140,7 @@ public class SNSUser {
   }
 
   // public Vaccine getLastTakenVaccineFromType(VaccineType vaccineType) {
-  //   return this.userHealthData.getLastVaccineTakenWithType(vaccineType);
+  // return this.userHealthData.getLastVaccineTakenWithType(vaccineType);
   // }
 
   public int getAge() {
@@ -222,14 +223,6 @@ public class SNSUser {
     if (!FormatVerifier.validateEmail(email)) throw new IllegalArgumentException("Email is not valid.");
   }
 
-  private static void validateAddress(String address) {
-    // should not be empty
-    // regex: ^.+$
-    if (!address.matches("^.+$")) {
-      throw new IllegalArgumentException("Address is not valid.");
-    }
-  }
-
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -250,10 +243,23 @@ public class SNSUser {
   }
 
   public boolean hasAppointmentForVaccineType(VaccineType vaccineType) {
-    return this.userHealthData.hasAppointmentForVaccineType(vaccineType);
+    if (this.userHealthData.hasAppointmentForVaccineTypeInFuture(vaccineType)) return true;
+
+    if (this.userHealthData.hasAppointmentForVaccineTypeToday(vaccineType)) {
+      VaccineAdministration lastVacAdmin = this.userHealthData.getVaccineAdministrationList().getLastVaccineAdministrationByVaccineType(vaccineType);
+      if (lastVacAdmin == null) {
+        return true;
+      }
+      Calendar administrationDate = lastVacAdmin.getDate();
+      if (CalendarUtils.compareDates(administrationDate, Calendar.getInstance()) == 0) {
+        return false;
+      }
+    }
+
+    return false;
   }
 
-  public boolean hasAppointmentForVaccineType(VaccineType vaccineType, String number) {
-    return this.userHealthData.hasAppointmentForVaccineType(vaccineType);
+  public boolean hasTakenAllDoses(VaccineType vaccineType) {
+    return this.userHealthData.hasTakenAllDoses(vaccineType);
   }
 }

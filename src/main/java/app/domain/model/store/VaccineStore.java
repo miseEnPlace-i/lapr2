@@ -1,5 +1,6 @@
 package app.domain.model.store;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import app.domain.model.Vaccine;
@@ -10,7 +11,7 @@ import app.mapper.VaccineMapper;
 /**
  * @author Carlos Lopes <1211277@isep.ipp.pt>
  */
-public class VaccineStore {
+public class VaccineStore implements Serializable {
   private List<Vaccine> vaccines;
 
 
@@ -67,17 +68,17 @@ public class VaccineStore {
     return null;
   }
 
-  // public boolean areVaccinesWithValidAdminProcessWithVaccineType(int age, VaccineType vaccineType) {
-  // List<Vaccine> vaccinesList = getVaccinesByType(vaccineType);
+  public boolean areVaccinesWithValidAdminProcessWithVaccineType(int age, VaccineType vaccineType) {
+    List<Vaccine> vaccinesList = getVaccinesByType(vaccineType);
 
-  // for (Vaccine vaccine : vaccinesList) {
-  // if (vaccine.hasAdministrationProcessForGivenAge(age)) {
-  // return true;
-  // }
-  // }
+    for (Vaccine vaccine : vaccinesList) {
+      if (vaccine.hasAdministrationProcessForGivenAge(age)) {
+        return true;
+      }
+    }
 
-  // return false;
-  // }
+    return false;
+  }
 
   public List<VaccineDTO> getVaccinesByVaccineTypeWithAdminProcessForAge(VaccineType vaccineType, int age) {
     List<VaccineDTO> vaccinesList = new ArrayList<VaccineDTO>();

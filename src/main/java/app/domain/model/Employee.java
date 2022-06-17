@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import java.io.Serializable;
 import app.service.CCFormatVerifier;
 
 /**
@@ -8,12 +9,12 @@ import app.service.CCFormatVerifier;
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
-public class Employee {
+public class Employee implements Serializable {
   String id = "";
   String name = "";
   String phoneNumber = "";
   String email = "";
-  String address = "";
+  Address address = null;
   String citizenCard = "";
   String roleId = "";
 
@@ -27,13 +28,12 @@ public class Employee {
    * @param citizenCard the employee citizenCard
    * @param roleId the employee roleId
    */
-  public Employee(String id, String name, String phoneNumber, String email, String address,
-      String citizenCard, String roleId) {
+  public Employee(String id, String name, String phoneNumber, String email, Address address, String citizenCard, String roleId) {
     this.id = id;
     setName(name);
     setPhoneNumber(phoneNumber);
     setEmail(email);
-    setAddress(address);
+    this.address = address;
     setCitizenCard(citizenCard);
     setRoleId(roleId);
   }
@@ -78,7 +78,7 @@ public class Employee {
     sb.append(String.format("Name: %s\n", this.name));
     sb.append(String.format("Phone number: %s\n", this.phoneNumber));
     sb.append(String.format("Email: %s\n", this.email));
-    sb.append(String.format("Address: %s\n", this.address));
+    sb.append(String.format("Address: %s\n", this.address.toString()));
     sb.append(String.format("Citizen Card number: %s\n", this.citizenCard));
     sb.append(String.format("Role: %s\n", this.roleId));
 
@@ -155,8 +155,7 @@ public class Employee {
     if (phoneNumber == null) throw new IllegalArgumentException("Phone number cannot be null");
     if (phoneNumber.isEmpty()) throw new IllegalArgumentException("Phone number cannot be empty");
 
-    if (!phoneNumber
-        .matches("^(\\+\\d{1,3}?)?((\\(\\d{1,3}\\))|\\d{1,3})[- .]?\\d{3,4}[- .]?\\d{4}$"))
+    if (!phoneNumber.matches("^(\\+\\d{1,3}?)?((\\(\\d{1,3}\\))|\\d{1,3})[- .]?\\d{3,4}[- .]?\\d{4}$"))
       throw new IllegalArgumentException("Phone Number is not valid");
 
     this.phoneNumber = phoneNumber;
@@ -173,8 +172,7 @@ public class Employee {
     if (email == null) throw new IllegalArgumentException("Email cannot be null");
     if (email.isEmpty()) throw new IllegalArgumentException("Email cannot be empty");
 
-    if (!email.matches(
-        "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"))
+    if (!email.matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"))
       throw new IllegalArgumentException("Email is not valid");
 
     this.email = email;
@@ -187,13 +185,6 @@ public class Employee {
    * 
    * @throws IllegalArgumentException if the address is null, empty or not valid
    */
-
-  private void setAddress(String address) {
-    if (address == null) throw new IllegalArgumentException("Address cannot be null");
-    if (address.isEmpty()) throw new IllegalArgumentException("Address cannot be empty");
-
-    this.address = address;
-  }
 
   /**
    * Sets the employee citizenCard.
@@ -208,8 +199,7 @@ public class Employee {
     if (citizenCard == null) throw new IllegalArgumentException("Citizen Card cannot be null.");
     if (citizenCard.isEmpty()) throw new IllegalArgumentException("Citizen Card cannot be empty.");
 
-    if (!formatVerifier.validate(citizenCard))
-      throw new IllegalArgumentException("Citizen Card is not valid.");
+    if (!formatVerifier.validate(citizenCard)) throw new IllegalArgumentException("Citizen Card is not valid.");
 
     this.citizenCard = citizenCard;
   }

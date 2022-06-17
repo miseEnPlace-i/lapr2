@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -11,7 +12,7 @@ import java.util.Queue;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
-public class WaitingRoom implements Iterable<Arrival> {
+public class WaitingRoom implements Iterable<Arrival>, Serializable {
   Queue<Arrival> waitingRoom;
 
   public WaitingRoom() {
@@ -49,6 +50,16 @@ public class WaitingRoom implements Iterable<Arrival> {
    */
   public void removeLastArrival() {
     waitingRoom.remove();
+  }
+
+  /**
+   * Removes the SNS User arrival.
+   * 
+   * @param snsUser the SNS User to remove.
+   */
+  public void removeUser(SNSUser snsUser) {
+    for (Arrival arrival : waitingRoom)
+      if (arrival.getSNSUser().equals(snsUser)) waitingRoom.remove(arrival);
   }
 
   /**

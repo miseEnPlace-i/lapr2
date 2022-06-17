@@ -41,7 +41,13 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
     if (type == null) return;
 
     String name = Utils.readLineFromConsole("Name: ");
-    String address = Utils.readLineFromConsole("Address: ");
+
+    System.out.println("Address:");
+    String addressStreet = Utils.readLineFromConsole("Street: ");
+    int addressNumber = Utils.readIntegerFromConsole("Number: ");
+    String postalCode = Utils.readLineFromConsoleWithValidation("Postal Code: ", FieldToValidate.POSTAL_CODE);
+    String addressCity = Utils.readLineFromConsole("City: ");
+
     String email = Utils.readLineFromConsoleWithValidation("Email (example@example.com): ", FieldToValidate.EMAIL);
     String phone = Utils.readLineFromConsoleWithValidation("Phone Number (+351xxxxxxxxx): ", FieldToValidate.PHONE_NUMBER);
     String fax = Utils.readLineFromConsoleWithValidation("Fax Number (+351xxxxxxxxx): ", FieldToValidate.FAX);
@@ -67,12 +73,14 @@ public class RegisterVaccinationCenterUI extends RegisterUI<RegisterVaccinationC
 
     // select center type
     if (type == VaccinationCenterType.COMMUNITY_MASS_VACCINATION_CENTER) {
-      super.ctrl.createCommunityMass(name, address, email, phone, fax, website, openHours, closHours, slotDur, maxVac, coordinator);
+      super.ctrl.createCommunityMass(name, addressStreet, addressNumber, postalCode, addressCity, email, phone, fax, website, openHours, closHours, slotDur,
+          maxVac, coordinator);
     } else {
       String ages = Utils.readLineFromConsole("AGES: ");
       String ars = Utils.readLineFromConsole("ARS: ");
 
-      super.ctrl.createHealthCare(name, address, email, phone, fax, website, openHours, closHours, slotDur, maxVac, coordinator, ages, ars);
+      super.ctrl.createHealthCare(name, addressStreet, addressNumber, postalCode, addressCity, email, phone, fax, website, openHours, closHours, slotDur,
+          maxVac, coordinator, ages, ars);
     }
   }
 }

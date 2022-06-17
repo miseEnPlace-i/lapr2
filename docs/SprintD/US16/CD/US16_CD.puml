@@ -95,6 +95,7 @@ package core {
         - day: Calendar
         - maxSumSubList: List
         - sum: int
+        - timeElapsed: double
 
         +CenterPerformance(day,interval,openingHours,closingHours)
 
@@ -104,6 +105,7 @@ package core {
         +getSum()
         +getStartingInterval()
         +getEndingInterval()
+        +getTimeElapsed()
       }
 
       class Company {
@@ -125,6 +127,7 @@ package core {
           - beginningIndex: int
           - endIndex: int
           - sum: int
+          - timeElapsed: double
 
           +MaxSumSublistService(list)
 
@@ -132,6 +135,7 @@ package core {
           +getStartIndex()
           +getEndIndex()
           +getSum()
+          +getTimeElapsed()
 
           -getMaxSumStrategy()
           -calculateMaxSumSublist(list)

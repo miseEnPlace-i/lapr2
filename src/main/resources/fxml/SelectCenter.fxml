@@ -34,19 +34,23 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem mnemonicParsing="false" text="Go to menu" />
-                  <MenuItem mnemonicParsing="false" text="Users" />
-              <MenuItem mnemonicParsing="false" text="Save session" />
-                  <MenuItem mnemonicParsing="false" text="Exit" />
-                  <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem fx:id="menuSaveSession" mnemonicParsing="false" onAction="#handleSaveSession" text="Save session" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleRestoreSession" text="Restore Defaults" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="menuLogout" mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
+                  <MenuItem fx:id="menuExit1" mnemonicParsing="false" onAction="#handleExit" text="Exit" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="About">
             <items>
-              <MenuItem mnemonicParsing="false" text="Development Team" />
-                  <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem fx:id="menuDevelopmentTeam" mnemonicParsing="false" onAction="#handleDevelopmentTeam" text="Development Team" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleHelp" text="Show Help" />
+               </items>
+            </Menu>
         </menus>
       </MenuBar>
       <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="900.0" scaleShape="false" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
@@ -82,7 +86,15 @@
       </AnchorPane>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="900.0" spacing="16.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
          <children>
-            <ListView fx:id="lstCenters" onMouseClicked="#checkEnableButton" prefHeight="334.0" prefWidth="900.0" />
+            <Label text="Please select the center you are working at.">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ListView fx:id="lstCenters" onMouseClicked="#checkEnableButton" prefHeight="257.0" prefWidth="900.0">
+               <VBox.margin>
+                  <Insets left="50.0" right="50.0" />
+               </VBox.margin></ListView>
          </children>
       </VBox>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="16.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">

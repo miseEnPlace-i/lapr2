@@ -1,6 +1,8 @@
 package app.domain.model;
 
-public class AdverseReaction {
+import java.io.Serializable;
+
+public class AdverseReaction implements Serializable {
   private String description;
 
   /**
@@ -18,6 +20,11 @@ public class AdverseReaction {
    * @return the adverse reaction description
    */
   public String getDescription() {
+    return this.description;
+  }
+
+  @Override
+  public String toString() {
     return this.description;
   }
 }

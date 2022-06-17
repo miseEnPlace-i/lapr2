@@ -5,16 +5,21 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import org.junit.Before;
 import org.junit.Test;
+import app.domain.model.Address;
+import app.domain.model.AdminProcess;
 import app.domain.model.Appointment;
 import app.domain.model.Company;
+import app.domain.model.DoseInfo;
 import app.domain.model.Employee;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
+import app.domain.model.Vaccine;
 import app.domain.model.VaccineType;
 import app.domain.model.list.AppointmentScheduleList;
 import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.SNSUserStore;
 import app.domain.model.store.VaccinationCenterStore;
+import app.domain.model.store.VaccineStore;
 import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.model.store.VaccineTypeStore;
 import app.domain.shared.Constants;
@@ -22,6 +27,7 @@ import app.domain.shared.Gender;
 import app.dto.VaccineTypeDTO;
 import app.exception.AppointmentNotFoundException;
 import app.mapper.VaccineTypeMapper;
+import app.service.AppointmentValidator;
 
 public class RegisterSNSUserArrivalControllerTest {
   Company company;
@@ -34,6 +40,7 @@ public class RegisterSNSUserArrivalControllerTest {
   VaccineType vacType;
   VaccinationCenter center;
   AppointmentScheduleList aptSchList;
+  VaccineStore vaccineStore;
 
   @Before
   public void setUp() {
@@ -43,14 +50,17 @@ public class RegisterSNSUserArrivalControllerTest {
     this.empStore = company.getEmployeeStore();
     this.vtStore = company.getVaccineTypeStore();
     this.vtechStore = company.getVaccineTechnologyStore();
+    this.vaccineStore = company.getVaccineStore();
 
     Calendar date = Calendar.getInstance();
     date.add(Calendar.YEAR, -18);
 
-    SNSUser snsUser = snsUserStore.createSNSUser("00000000", "123456789", "name", date.getTime(), Gender.MALE, "+351212345678", "s@user.com", "address");
+    SNSUser snsUser = snsUserStore.createSNSUser("00000000", "123456789", "name", date.getTime(), Gender.MALE, "+351212345678", "s@user.com",
+        new Address("street", 1, "11-11", "city"));
     this.snsUserStore.saveSNSUser(snsUser);
 
-    Employee e2 = empStore.createEmployee("Name2", "+351916919269", "c@user.com", "address", "15542404", Constants.ROLE_COORDINATOR);
+    Employee e2 =
+        empStore.createEmployee("Name2", "+351916919269", "c@user.com", new Address("street", 1, "11-1", "city"), "15542404", Constants.ROLE_COORDINATOR);
     this.empStore.saveEmployee(e2);
 
     this.vtechStore.addVaccineTechnology("M_RNA_TECHNOLOGY");
@@ -58,9 +68,15 @@ public class RegisterSNSUserArrivalControllerTest {
     this.vacType = vtStore.addVaccineType("00000", "COVID-19", "M_RNA_TECHNOLOGY");
     this.vtStore.saveVaccineType(vacType);
 
-    this.center = vcStore.createCommunityMassCenter("Centro Vacinação de Teste", "Rua de Teste", "test@gmail.com", "+351212345678", "+351212345679",
-        "http://www.test.com", "20:00", "21:00", 7, 5, e2, vacType);
+    this.center = vcStore.createCommunityMassCenter("Centro Vacinação de Teste", new Address("street", 1, "11-11", "city"), "test@gmail.com", "+351212345678",
+        "+351212345679", "http://www.test.com", "20:00", "21:00", 7, 5, e2, vacType);
     this.vcStore.saveVaccinationCenter(this.center);
+
+    Vaccine vaccine = new Vaccine("designation", "12345", "brand", vacType);
+    AdminProcess adminProcess = new AdminProcess(10, 19, 1);
+    adminProcess.addDoseInfo(new DoseInfo(200, 10));
+    vaccine.addAdminProc(adminProcess);
+    vaccineStore.saveVaccine(vaccine);
 
     this.aptSchList = this.center.getAppointmentList();
 
@@ -109,7 +125,8 @@ public class RegisterSNSUserArrivalControllerTest {
 
     appointment = this.aptSchList.createAppointment(snsUser, date, vtdto, true);
 
-    this.aptSchList.validateAppointment(appointment);
+    AppointmentValidator appointmentValidator = new AppointmentValidator(this.vaccineStore);
+    appointmentValidator.validateAppointment(appointment);
     this.aptSchList.saveAppointment(appointment);
   }
 

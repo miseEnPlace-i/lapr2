@@ -1,11 +1,12 @@
 package app.utils;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
-public class Time {
+public class Time implements Serializable {
   private int hours;
   private int minutes;
 
@@ -131,6 +132,18 @@ public class Time {
    */
   public boolean isBetween(Time startTime, Time endTime) {
     if (equals(startTime) || equals(endTime)) return true;
+
+    return isAfter(startTime) && isBefore(endTime);
+  }
+
+  /**
+   * @param startTime the start time of the interval.
+   * @param endTime the end time of the interval.
+   * 
+   * @return true if the time is between the given times excluding the end of the interval, false otherwise.
+   */
+  public boolean isBetweenExcludeRight(Time startTime, Time endTime) {
+    if (equals(startTime)) return true;
 
     return isAfter(startTime) && isBefore(endTime);
   }

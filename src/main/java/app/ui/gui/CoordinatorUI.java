@@ -5,8 +5,10 @@ import java.util.logging.Logger;
 import app.controller.App;
 import app.controller.FindCoordinatorVaccinationCenterController;
 import app.domain.model.Company;
+import app.domain.shared.HelpText;
 import app.exception.NotAuthorizedException;
 import app.session.EmployeeSession;
+import app.ui.gui.utils.Utils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -37,6 +39,7 @@ public class CoordinatorUI extends EmployeeRoleUI {
   void handleAnalyseCenterNavigation(ActionEvent event) {
     try {
       AnalyseCenterPerformanceUI analyseCenterUI = (AnalyseCenterPerformanceUI) this.mainApp.replaceSceneContent("/fxml/AnalyseCenter.fxml");
+      analyseCenterUI.setEmployeeSession(employeeSession);
       analyseCenterUI.init(this);
     } catch (Exception e) {
       Logger.getLogger(CoordinatorUI.class.getName()).log(Level.SEVERE, null, e);
@@ -49,6 +52,11 @@ public class CoordinatorUI extends EmployeeRoleUI {
 
   public String getVaccinationCenterName() {
     return this.ctrl.getVaccinationCenterName();
+  }
+
+  @Override
+  void handleHelp(ActionEvent event) {
+    Utils.showHelp("Coordinator Help", HelpText.COORDINATOR);
   }
 
   @FXML

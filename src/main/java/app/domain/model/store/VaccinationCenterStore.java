@@ -1,7 +1,9 @@
 package app.domain.model.store;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import app.domain.model.Address;
 import app.domain.model.CommunityMassVaccinationCenter;
 import app.domain.model.Employee;
 import app.domain.model.HealthCareCenter;
@@ -20,7 +22,7 @@ import app.utils.Time;
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  */
-public class VaccinationCenterStore {
+public class VaccinationCenterStore implements Serializable {
   // Vaccination Centers list
   private List<VaccinationCenter> vaccinationCenters;
 
@@ -47,7 +49,7 @@ public class VaccinationCenterStore {
    * @param coordinator the vaccination center coordinator
    * @return VaccinationCenter
    */
-  public VaccinationCenter createCommunityMassCenter(String name, String address, String emailAddress, String phoneNum, String faxNum, String webAddress,
+  public VaccinationCenter createCommunityMassCenter(String name, Address address, String emailAddress, String phoneNum, String faxNum, String webAddress,
       String openingHours, String closingHours, int slotDuration, int maxVacSlot, Employee coordinator, VaccineType vaccineType) {
 
     boolean isCoordinatorValid = validateCoordinator(coordinator);
@@ -64,7 +66,7 @@ public class VaccinationCenterStore {
     return center;
   }
 
-  public VaccinationCenter createHealthCareCenter(String name, String address, String emailAddress, String phoneNum, String faxNum, String webAddress,
+  public VaccinationCenter createHealthCareCenter(String name, Address address, String emailAddress, String phoneNum, String faxNum, String webAddress,
       String openingHours, String closingHours, int slotDuration, int maxVacSlot, Employee coordinator, String ages, String ags) {
 
     boolean isCoordinatorValid = validateCoordinator(coordinator);

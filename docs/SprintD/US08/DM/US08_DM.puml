@@ -40,13 +40,6 @@ class SNSUser {
   - address
 }
 
-class User {
-  - name
-  - email
-  - pwd
-  - role
-}
-
 class Slot {
   -slotDuration
   -maxVacPerSlot
@@ -87,8 +80,6 @@ class VaccineAdministration {
   -vaccinationCenter
   -date
 }
-
-SNSUser "0..1" -- "1" User : becomes >
 
 Arrival "1" -- "0..1" Appointment : related to >
 

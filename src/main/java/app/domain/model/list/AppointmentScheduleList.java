@@ -1,5 +1,6 @@
 package app.domain.model.list;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -25,7 +26,7 @@ import app.utils.Time;
  * @author Tomás Russo <1211288@isep.ipp.pt>
  * @author Tomás Lopes <1211289@isep.ip.pt>
  */
-public class AppointmentScheduleList {
+public class AppointmentScheduleList implements Serializable {
   private VaccinationCenter vaccinationCenter;
   private Map<Calendar, Appointment[][]> appointments;
   private int slotsPerDay = 0;
@@ -104,28 +105,6 @@ public class AppointmentScheduleList {
 
     if (scheduledMinutesOfDay > workingHours) return false;
     return true;
-  }
-
-  /**
-   * Validates the appointment.
-   * 
-   * @param appointment the appointment to be added
-   */
-  public void validateAppointment(Appointment appointment) {
-    if (appointment == null) throw new IllegalArgumentException("Appointment is not valid.");
-
-    Time hours = new Time(appointment.getDate());
-
-    if (!vaccinationCenter.isOpenAt(hours))
-      throw new IllegalArgumentException("Vaccination center is closed or does not accept appointments at selected time.");
-
-    if (!vaccinationCenter.hasAvailabilityInSlot(appointment.getDate()))
-      throw new IllegalArgumentException("Vaccination center does not accept any more appointments at selected time.");
-
-    SNSUser snsUser = appointment.getSnsUser();
-
-    if (snsUser.hasAppointmentForVaccineType(appointment.getVaccineType()))
-      throw new IllegalArgumentException("SNS User has already an appointment for the selected vaccine type.");
   }
 
   /**

@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -8,7 +9,7 @@ import java.util.Calendar;
  * 
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
-public class Appointment {
+public class Appointment implements Serializable {
   private SNSUser snsUser;
   private Calendar date;
   private VaccinationCenter center;

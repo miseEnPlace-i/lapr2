@@ -1,10 +1,11 @@
 package app.domain.model;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import app.domain.shared.CenterEventType;
 
-public class CenterEvent {
+public class CenterEvent implements Serializable {
   private Calendar date;
   private CenterEventType eventType;
   private SNSUser snsUser;
@@ -30,6 +31,6 @@ public class CenterEvent {
   @Override
   public String toString() {
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-    return "CenterEvent [date=" + sdf.format(date) + ", eventType=" + eventType.toString() + ", snsUser=" + snsUser.getName() + "]";
+    return "CenterEvent [date=" + sdf.format(date.getTime()) + ", eventType=" + eventType.toString() + ", snsUser=" + snsUser.getName() + "]";
   }
 }

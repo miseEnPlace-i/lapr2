@@ -1,6 +1,8 @@
 package app.domain.model;
 
+import java.io.Serializable;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import app.domain.model.list.AppointmentScheduleList;
@@ -13,9 +15,9 @@ import app.utils.Time;
  * 
  * @author André Barros <1211299@isep.ipp.pt>
  */
-public abstract class VaccinationCenter {
+public abstract class VaccinationCenter implements Serializable {
   private String name;
-  private String address;
+  private Address address;
   private String email;
   private String phoneNum;
   private String faxNum;
@@ -25,6 +27,7 @@ public abstract class VaccinationCenter {
   private Slot slot;
   private Employee coordinator;
   private WaitingRoom waitingRoom;
+  private RecoveryRoom recoveryRoom;
   private AppointmentScheduleList appointmentList;
   private CenterEventList eventList;
   private List<VaccineAdministration> vaccineAdministrationList;
@@ -44,8 +47,9 @@ public abstract class VaccinationCenter {
    * @param maxVaccinesPerSlot the vaccination center maximum vaccines per slot
    * @param coordinator the vaccination center coordinator
    */
-  public VaccinationCenter(String name, String address, String email, String phoneNum, String faxNum, String webAddress, Time openingHours, Time closingHours,
-      Slot slot, Employee coordinator) {
+  public VaccinationCenter(String name, Address address, String email,
+      String phoneNum, String faxNum, String webAddress, Time openingHours,
+      Time closingHours, Slot slot, Employee coordinator) {
     setName(name);
     setAddress(address);
     setEmail(email);
@@ -59,6 +63,8 @@ public abstract class VaccinationCenter {
     this.waitingRoom = new WaitingRoom();
     this.appointmentList = new AppointmentScheduleList(this);
     this.eventList = new CenterEventList();
+    this.vaccineAdministrationList = new ArrayList<VaccineAdministration>();
+    this.recoveryRoom = new RecoveryRoom();
   }
 
   /**
@@ -71,7 +77,7 @@ public abstract class VaccinationCenter {
   /**
    * @return the address of the vaccination center
    */
-  public String getAddress() {
+  public Address getAddress() {
     return address;
   }
 
@@ -174,20 +180,6 @@ public abstract class VaccinationCenter {
   }
 
   /**
-   * Sets the center address
-   * 
-   * @param address the vaccination center address
-   * 
-   * @throws IllegalArgumentException if the address is null, empty or not valid.
-   */
-  private void setAddress(String address) {
-    if (address == null || address.isEmpty()) {
-      throw new IllegalArgumentException("Address cannot be null or empty.");
-    }
-    this.address = address;
-  }
-
-  /**
    * Sets the center email.
    * 
    * @param email the vaccination center email address
@@ -212,12 +204,13 @@ public abstract class VaccinationCenter {
    * @throws IllegalArgumentException if the phone number is null, empty or not valid.
    */
   private void setPhoneNum(String phoneNum) {
-    if (phoneNum == null || phoneNum.isEmpty()) {
-      throw new IllegalArgumentException("Phone number cannot be null or empty.");
-    }
-    if (!FormatVerifier.validatePhoneNumber(phoneNum)) {
+    if (phoneNum == null || phoneNum.isEmpty())
+      throw new IllegalArgumentException(
+          "Phone number cannot be null or empty.");
+
+    if (!FormatVerifier.validatePhoneNumber(phoneNum))
       throw new IllegalArgumentException("Phone number is not valid.");
-    }
+
     this.phoneNum = phoneNum;
   }
 
@@ -229,12 +222,12 @@ public abstract class VaccinationCenter {
    * @throws IllegalArgumentException if the fax number is null, empty or not valid.
    */
   private void setFaxNum(String faxNum) {
-    if (faxNum == null || faxNum.isEmpty()) {
+    if (faxNum == null || faxNum.isEmpty())
       throw new IllegalArgumentException("Fax number cannot be null or empty.");
-    }
-    if (!FormatVerifier.validateFaxNumber(faxNum)) {
+
+    if (!FormatVerifier.validateFaxNumber(faxNum))
       throw new IllegalArgumentException("Fax number is not valid.");
-    }
+
     this.faxNum = faxNum;
   }
 
@@ -246,12 +239,13 @@ public abstract class VaccinationCenter {
    * @throws IllegalArgumentException if the website address is null, empty or not valid.
    */
   private void setWebAddress(String webAddress) {
-    if (webAddress == null || webAddress.isEmpty()) {
-      throw new IllegalArgumentException("Website address cannot be null or empty.");
-    }
-    if (!FormatVerifier.validateURL(webAddress)) {
+    if (webAddress == null || webAddress.isEmpty())
+      throw new IllegalArgumentException(
+          "Website address cannot be null or empty.");
+
+    if (!FormatVerifier.validateURL(webAddress))
       throw new IllegalArgumentException("Website address is not valid.");
-    }
+
     this.webAddress = webAddress;
   }
 
@@ -266,6 +260,11 @@ public abstract class VaccinationCenter {
     this.openingHours = openingHours;
   }
 
+  private void setAddress(Address address) {
+    if (address == null) throw new IllegalArgumentException("Address is null");
+    this.address = address;
+  }
+
   /**
    * Sets the center closing hours.
    * 
@@ -275,7 +274,9 @@ public abstract class VaccinationCenter {
    * @throws IllegalArgumentException if the closing hours are null, empty or not valid.
    */
   private void setClosingHours(Time closingHours) {
-    if (!closingHours.isAfter(openingHours)) throw new IllegalArgumentException("Closing hours must be after the opening hours.");
+    if (!closingHours.isAfter(openingHours))
+      throw new IllegalArgumentException(
+          "Closing hours must be after the opening hours.");
 
     this.closingHours = closingHours;
   }
@@ -316,14 +317,26 @@ public abstract class VaccinationCenter {
     return waitingRoom;
   }
 
+  public RecoveryRoom getRecoveryRoom() {
+    return recoveryRoom;
+  }
+
+  public List<VaccineAdministration> getVaccineAdministrations() {
+    return vaccineAdministrationList;
+  }
+
   public AppointmentScheduleList getAppointmentList() {
     return appointmentList;
   }
 
-  public CenterPerformance getCenterPerformanceForDay(Calendar day, int interval) {
+  public CenterPerformance getCenterPerformanceForDay(Calendar day,
+      int interval) {
     CenterEventList events = this.eventList.getEventListForDay(day);
 
-    CenterPerformance centerPerformance = new CenterPerformance(events, interval, openingHours, closingHours);
+    if (events.size() == 0) return null;
+
+    CenterPerformance centerPerformance =
+        new CenterPerformance(events, interval, openingHours, closingHours);
 
     return centerPerformance;
   }
@@ -341,7 +354,8 @@ public abstract class VaccinationCenter {
     sb.append(String.format("Opening hours: %s\n", this.getOpeningHours()));
     sb.append(String.format("Closing hours: %s\n", this.getClosingHours()));
     sb.append(String.format("Slot duration: %s\n", this.getSlotDuration()));
-    sb.append(String.format("Maximum vaccines per slot: %s\n", this.getMaxVacSlot()));
+    sb.append(
+        String.format("Maximum vaccines per slot: %s\n", this.getMaxVacSlot()));
     sb.append(String.format("Coordinator: %s\n", this.getCoordinatorName()));
 
     return sb.toString();
@@ -379,7 +393,8 @@ public abstract class VaccinationCenter {
    */
   public Time getRealClosingHours() {
     int openingMinutesOfDay = openingHours.convertToMinutes();
-    int realClosingMinutesOfDay = openingMinutesOfDay + (appointmentList.getNOfSlotsPerDay() * slot.getDuration());
+    int realClosingMinutesOfDay = openingMinutesOfDay
+        + (appointmentList.getNOfSlotsPerDay() * slot.getDuration());
 
     realClosingMinutesOfDay--;
 
@@ -400,7 +415,8 @@ public abstract class VaccinationCenter {
    * 
    * @param vaccineAdministration the Vaccine Administration object to be added.
    */
-  public void addVaccineAdministrationToList(VaccineAdministration vaccineAdministration) {
+  public void addVaccineAdministrationToList(
+      VaccineAdministration vaccineAdministration) {
     this.vaccineAdministrationList.add(vaccineAdministration);
   }
 }

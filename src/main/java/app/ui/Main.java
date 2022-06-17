@@ -1,6 +1,8 @@
 package app.ui;
 
 import java.util.Properties;
+import app.controller.App;
+import app.domain.shared.Constants;
 import app.service.PropertiesUtils;
 import app.ui.console.MainMenuUI;
 import app.ui.gui.ApplicationUI;
@@ -16,6 +18,9 @@ public class Main {
         MainMenuUI menu = new MainMenuUI();
         menu.run();
       } else ApplicationUI.launch(ApplicationUI.class, args);
+
+      // Save company when program exits
+      App.getInstance().saveCurrentCompany();
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -26,8 +31,10 @@ public class Main {
    */
   private static boolean isConsole() {
     Properties props = PropertiesUtils.getProperties();
-    String ui = props.getProperty("Environment.UI");
+    String ui = props.getProperty(Constants.PARAMS_UI_ENVIRONMENT);
 
-    return ui.equals("console");
+    if (ui.equals("console")) return true;
+    else if (ui.equals("gui")) return false;
+    else throw new IllegalArgumentException("Unknown UI: " + ui);
   }
 }

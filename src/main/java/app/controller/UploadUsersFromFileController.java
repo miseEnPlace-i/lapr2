@@ -12,10 +12,9 @@ import app.domain.model.store.SNSUserStore;
 /**
  * Vaccination Center mapper
  * 
- * @autor Carlos Lopes <1211277@isep.ipp.pt>
+ * @author Carlos Lopes <1211277@isep.ipp.pt>
  */
 public class UploadUsersFromFileController {
-
   private Company company;
   private CSVReader csvReader;
 
@@ -29,8 +28,8 @@ public class UploadUsersFromFileController {
     return csvReader;
   }
 
-  public List<SNSUser> readAndUpload() throws ParseException, ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException, NoSuchMethodException, InvocationTargetException {
-
+  public List<SNSUser> readAndUpload() throws ParseException, ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException,
+      NoSuchMethodException, InvocationTargetException {
     SNSUserStore store = this.company.getSNSUserStore();
 
     List<String[]> userDataList = csvReader.read();
@@ -39,5 +38,4 @@ public class UploadUsersFromFileController {
 
     return userList;
   }
-
 }

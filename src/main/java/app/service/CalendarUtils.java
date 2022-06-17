@@ -19,8 +19,7 @@ public class CalendarUtils {
   // {"dd/MM/yyyy", "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$"},
   // {"yyyy-MM-dd", "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"}, {"dd-MM-yyyy",
   // "^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-\\d{4}$"},};
-  private static final String[][] VALID_FORMATS =
-      {{"dd/MM/yyyy", "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$"},};
+  private static final String[][] VALID_FORMATS = {{"dd/MM/yyyy", "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$"},};
 
   /**
    * Parse a String.
@@ -84,5 +83,20 @@ public class CalendarUtils {
     calendar.setTime(sdf.parse(dateAndTime));
 
     return calendar;
+  }
+
+  public static int compareDates(Calendar date1, Calendar date2) {
+    return generateKeyFromDate(date1).compareTo(generateKeyFromDate(date2));
+  }
+
+  private static Calendar generateKeyFromDate(Calendar date) {
+    Calendar key = Calendar.getInstance();
+    key.setTime(date.getTime());
+    key.set(Calendar.HOUR_OF_DAY, 0);
+    key.set(Calendar.MINUTE, 0);
+    key.set(Calendar.SECOND, 0);
+    key.set(Calendar.MILLISECOND, 0);
+
+    return key;
   }
 }

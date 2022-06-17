@@ -44,7 +44,7 @@ public class CSVReaderTest {
     CSVReader csvReader = new CSVReader(path);
     List<String[]> list = csvReader.read();
 
-    String[] expected = {"joao", "Male", "14/12/2003", "rua das flores", "+351919993999", "joao@gmail.com", "123263189", "15542404"};
+    String[] expected = {"joao", "Male", "14/12/2003", "Rua  Guadiana|487|4200-316|PORTO", "+351919993999", "joao@gmail.com", "123263189", "15542404"};
     assertArrayEquals(list.get(0), expected);
 
   }
@@ -57,7 +57,7 @@ public class CSVReaderTest {
     CSVReader csvReader = new CSVReader(path);
     List<String[]> list = csvReader.read();
 
-    String[] expected = {"joao", "Male", "14/12/2003", "rua das flores", "+351919993999", "joao@gmail.com", "123263189", "15542404"};
+    String[] expected = {"joao", "Male", "14/12/2003", "Rua  Guadiana|487|4200-316|PORTO", "+351919993999", "joao@gmail.com", "123263189", "15542404"};
 
     assertArrayEquals(list.get(0), expected);
   }

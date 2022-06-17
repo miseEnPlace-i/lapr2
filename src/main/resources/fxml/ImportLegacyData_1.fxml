@@ -30,25 +30,6 @@
     <RowConstraints maxHeight="160.0" minHeight="89.0" prefHeight="94.0" vgrow="ALWAYS" />
   </rowConstraints>
    <children>
-      <MenuBar centerShape="false" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="32.0" prefWidth="900.0" scaleShape="false" GridPane.halignment="LEFT" GridPane.hgrow="NEVER" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-                  <MenuItem mnemonicParsing="false" text="Go to menu" />
-                  <MenuItem mnemonicParsing="false" text="Users" />
-              <MenuItem mnemonicParsing="false" text="Save session" />
-                  <MenuItem mnemonicParsing="false" text="Exit" />
-                  <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="About">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Development Team" />
-                  <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
       <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="900.0" scaleShape="false" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="30.0" prefHeight="29.0" prefWidth="900.0" text="Import Legacy Data" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0">
@@ -83,12 +64,6 @@
             </Label>
          </children>
       </AnchorPane>
-      <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="16.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
-         <children>
-            <Button id="btnBack" fx:id="btnOpen" cancelButton="true" disable="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnOpen" prefHeight="40.0" prefWidth="120.0" text="Open file" />
-            <Button id="btnBack" cancelButton="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnBack" prefHeight="40.0" prefWidth="120.0" text="Back to menu" />
-         </children>
-      </FlowPane>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="900.0" spacing="8.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
          <children>
             <Label text="Please select a file to import.">
@@ -109,5 +84,11 @@
             </HBox>
          </children>
       </VBox>
+      <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="16.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+         <children>
+            <Button id="btnBack" fx:id="btnOpen" cancelButton="true" disable="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnOpen" prefHeight="40.0" prefWidth="120.0" text="Open file" />
+            <Button id="btnBack" cancelButton="true" maxHeight="-Infinity" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnBack" prefHeight="40.0" prefWidth="120.0" text="Back to menu" />
+         </children>
+      </FlowPane>
    </children>
 </GridPane>

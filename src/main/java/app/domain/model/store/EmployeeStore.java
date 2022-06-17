@@ -1,7 +1,9 @@
 package app.domain.model.store;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import app.domain.model.Address;
 import app.domain.model.Employee;
 import app.dto.UserNotificationDTO;
 import app.mapper.UserNotificationMapper;
@@ -15,18 +17,20 @@ import pt.isep.lei.esoft.auth.AuthFacade;
  * @author Tomás Lopes <1211289@isep.ipp.pt>
  * @author Tomás Russo <1211288@isep.ipp.pt>
  */
-public class EmployeeStore {
-  private AuthFacade authFacade;
+public class EmployeeStore implements Serializable {
+  private transient AuthFacade authFacade;
   private List<Employee> employees;
   private EmployeeRoleStore roleStore;
+  private UserStore userStore;
 
   /**
    * Constructor for EmployeeStore.
    */
-  public EmployeeStore(AuthFacade authFacade, EmployeeRoleStore roleStore) {
+  public EmployeeStore(AuthFacade authFacade, UserStore userStore, EmployeeRoleStore roleStore) {
     this.employees = new ArrayList<Employee>();
     this.authFacade = authFacade;
     this.roleStore = roleStore;
+    this.userStore = userStore;
   }
 
   /**
@@ -39,7 +43,7 @@ public class EmployeeStore {
    * @param citizenCard the employee citizenCard
    * @param roleId the employee roleId
    */
-  public Employee createEmployee(String name, String phoneNumber, String email, String address, String citizenCard, String roleId) {
+  public Employee createEmployee(String name, String phoneNumber, String email, Address address, String citizenCard, String roleId) {
     String id = generateId();
     Employee employee = new Employee(id, name, phoneNumber, email, address, citizenCard, roleId);
 
@@ -97,6 +101,7 @@ public class EmployeeStore {
     String pwd = pwdGenerator.generatePwd();
 
     this.authFacade.addUserWithRole(employee.getName(), email, pwd, employee.getRoleId());
+    this.userStore.addUser(employee.getName(), email, pwd, employee.getRoleId());
 
     String message = String.format("A new user has been created.\nEmail: %s\nPassword: %s", email, pwd);
     UserNotificationDTO notificationDto = UserNotificationMapper.toDto(email, phoneNumber, message);

@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
+import app.domain.model.Address;
 import app.domain.model.Appointment;
 import app.domain.model.Arrival;
 import app.domain.model.Employee;
@@ -28,12 +29,14 @@ public class ListUsersInWaitingRoomControllerTest {
 
   @Before
   public void setup() {
-    Employee coordinator = new Employee("123456789", "name", "+351212345678", "email@email.com", "address", "00000000", "COORDINATOR");
+    Employee coordinator =
+        new Employee("123456789", "name", "+351212345678", "email@email.com", new Address("street", 1, "11-11", "city"), "00000000", "COORDINATOR");
 
-    center = new HealthCareCenter("name", "address", "email@email.com", "+351212345678", "+351212345678", "http://www.sss.com", new Time("10:00"),
-        new Time("11:00"), new Slot(5, 5), coordinator, "ages", "ars");
+    center = new HealthCareCenter("name", new Address("street", 1, "11-11", "city"), "email@email.com", "+351212345678", "+351212345678", "http://www.sss.com",
+        new Time("10:00"), new Time("11:00"), new Slot(5, 5), coordinator, "ages", "ars");
 
-    snsUser = new SNSUser("00000000", "123456789", "name", new Date(), Gender.MALE, "+351212345678", "email@email.com", "address");
+    snsUser =
+        new SNSUser("00000000", "123456789", "name", new Date(), Gender.MALE, "+351212345678", "email@email.com", new Address("street", 1, "11-11", "city"));
     vaccineType = new VaccineType("12345", "description", "technology");
   }
 
