@@ -30,13 +30,15 @@ public class ImportLegacyDataController {
     this.snsUserStore = this.company.getSNSUserStore();
   }
 
-  public List<String[]> read(String filepath)
-      throws ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException, NoSuchMethodException, InvocationTargetException {
+  public List<String[]> read(String filepath) throws ClassNotFoundException,
+      InstantiationException, IllegalAccessException, FileNotFoundException,
+      NoSuchMethodException, InvocationTargetException {
     CSVReader csvReader = new CSVReader(filepath);
     return csvReader.read();
   }
 
-  public List<LegacyDataDTO> convert(List<String[]> fileData) throws ParseException {
+  public List<LegacyDataDTO> convert(List<String[]> fileData)
+      throws ParseException {
     List<LegacyDataDTO> legacyDtoList = new ArrayList<LegacyDataDTO>();
 
     for (String[] d : fileData) {
@@ -47,10 +49,12 @@ public class ImportLegacyDataController {
     return legacyDtoList;
   }
 
-  public void validate(List<LegacyDataDTO> legacyDtoList) throws NotFoundException {
+  public void validate(List<LegacyDataDTO> legacyDtoList)
+      throws NotFoundException {
     for (LegacyDataDTO d : legacyDtoList) {
       String snsNumber = d.getSnsNumber();
-      if (this.snsUserStore.findSNSUserByNumber(snsNumber) == null) throw new NotFoundException("SNS User w/ number " + snsNumber);
+      if (this.snsUserStore.findSNSUserByNumber(snsNumber) == null)
+        throw new NotFoundException("SNS User w/ number " + snsNumber);
     }
   }
 
@@ -64,7 +68,8 @@ public class ImportLegacyDataController {
     for (LegacyDataDTO d : legacyDtoList) {
       LegacyData legacyData = LegacyDataMapper.toModel(d, this.center);
       LegacyDataObjectBuilder builder = new LegacyDataObjectBuilder(legacyData);
-      AdministrationList administrationList = legacyData.getSNSUser().getAdministrationList();
+      AdministrationList administrationList =
+          legacyData.getSNSUser().getAdministrationList();
 
       aptSchList.saveAppointment(builder.createAppointment());
       waitingRoom.saveArrival(builder.createArrival());

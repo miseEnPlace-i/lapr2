@@ -55,9 +55,11 @@ public class SNSUserStore implements Serializable {
    * @param address SNS User address
    * @return SNSUser
    */
-  public SNSUser createSNSUser(String citizenCard, String snsNumber, String name, Date birthDay, Gender gender, String phoneNumber, String email,
-      Address address) {
-    SNSUser snsUser = new SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address);
+  public SNSUser createSNSUser(String citizenCard, String snsNumber,
+      String name, Date birthDay, Gender gender, String phoneNumber,
+      String email, Address address) {
+    SNSUser snsUser = new SNSUser(citizenCard, snsNumber, name, birthDay,
+        gender, phoneNumber, email, address);
 
     return snsUser;
   }
@@ -102,16 +104,20 @@ public class SNSUserStore implements Serializable {
 
     String email = snsUser.getEmail();
     String phoneNumber = snsUser.getPhoneNumber();
-    IPasswordGenerator pwdGenerator = PasswordGeneratorFactory.getPasswordGenerator();
+    IPasswordGenerator pwdGenerator =
+        PasswordGeneratorFactory.getPasswordGenerator();
     String pwd = pwdGenerator.generatePwd();
 
-    authFacade.addUserWithRole(snsUser.getName(), email, pwd, Constants.ROLE_SNS_USER);
+    authFacade.addUserWithRole(snsUser.getName(), email, pwd,
+        Constants.ROLE_SNS_USER);
     userStore.addUser(snsUser.getName(), email, pwd, Constants.ROLE_SNS_USER);
 
     addSNSUser(snsUser);
 
-    String message = String.format("A new user has been created.\nEmail: %s\nPassword: %s", email, pwd);
-    UserNotificationDTO notificationDto = UserNotificationMapper.toDto(email, phoneNumber, message);
+    String message = String.format(
+        "A new user has been created.\nEmail: %s\nPassword: %s", email, pwd);
+    UserNotificationDTO notificationDto =
+        UserNotificationMapper.toDto(email, phoneNumber, message);
 
     sendNotification(notificationDto);
 
@@ -138,7 +144,8 @@ public class SNSUserStore implements Serializable {
    * @param snsUser
    */
   public void checkDuplicates(SNSUser snsUser) {
-    if (snsUsers.contains(snsUser)) throw new IllegalArgumentException("Duplicate SNS User.");
+    if (snsUsers.contains(snsUser))
+      throw new IllegalArgumentException("Duplicate SNS User.");
   }
 
   /**
@@ -189,7 +196,16 @@ public class SNSUserStore implements Serializable {
     return snsUsers.size();
   }
 
-  public List<SNSUser> registerListOfUsers(List<String[]> userDataList) throws ParseException {
+  public List<SNSUser> getList() {
+    return snsUsers;
+  }
+
+  public void updateAuthFacade(AuthFacade authFacade) {
+    this.authFacade = authFacade;
+  }
+
+  public List<SNSUser> registerListOfUsers(List<String[]> userDataList)
+      throws ParseException {
     List<SNSUser> userList = new ArrayList<SNSUser>();
 
     for (int i = 0; i < userDataList.size(); i++) {
