@@ -135,7 +135,7 @@ public class ExportCenterStatisticsControllerTest {
         ctrl.createFullyVaccinatedData(null, null, null);
     }
 
-     /**
+    /**
      * Checks that it is not possible to create a csv exporter with null values
      */
     @Test(expected = IllegalArgumentException.class)
@@ -144,11 +144,45 @@ public class ExportCenterStatisticsControllerTest {
     }
 
     /**
+     * Checks that it is not possible to create a csv exporter with null values
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureFutureIntervalNotAllowed() {
+        Calendar futureStartDate = Calendar.getInstance();
+        futureStartDate.add(Calendar.DAY_OF_MONTH, 5);
+
+        Calendar futureEndDate = Calendar.getInstance();
+        futureEndDate.add(Calendar.DAY_OF_MONTH, 6);
+
+        ctrl.createFullyVaccinatedData(null, futureStartDate, futureEndDate);
+    }
+
+    /**
      * Check that it is possible to create a CsvExporter
      */
     @Test
     public void ensureItIsPossibleToCreateCsvExporter() {
         ctrl.createFullyVaccinatedData("test.csv", startDate, endDate);
+    }
+
+    @Test
+    public void exportFileString() throws IOException {
+        LinkedHashMap<Calendar, Integer> dataExpected = new LinkedHashMap<Calendar, Integer>();
+        dataExpected.put(startDate, 1);
+        dataExpected.put(endDate, 0);
+        
+        center.addVaccineAdministrationToList(new VaccineAdministration(snsUser, vac1, "AAAAA-11", 2, center, startDate));
+
+        ctrl.createFullyVaccinatedData("Path.csv", startDate, endDate);
+
+        ctrl.generateFullyVaccinatedUsersInterval();
+       
+        String expected = "Date;NumberOfFullyVaccinatedUsers\n";
+
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/YYYY");
+        expected += df.format(startDate.getTime()) + ";1\n" + df.format(endDate.getTime()) + ";0\n";
+
+        assertEquals(expected, ctrl.exportFileString());
     }
 
     @Test
@@ -169,6 +203,31 @@ public class ExportCenterStatisticsControllerTest {
 
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/YYYY");
         expected += df.format(startDate.getTime()) + ";1\n" + df.format(endDate.getTime()) + ";0\n";
+
+        Path expectedFilepath = Path.of("Path.csv");
+
+        assertEquals(expected, Files.readString(expectedFilepath));
+    }
+
+    //ensures that saveData checks if it is the last dose for the admin process for user's age
+    @Test
+    public void ensureSaveDataWorksForNotLastDoseInAdminProcAge() throws IOException {
+        LinkedHashMap<Calendar, Integer> dataExpected = new LinkedHashMap<Calendar, Integer>();
+        dataExpected.put(startDate, 1);
+        dataExpected.put(endDate, 0);
+        
+        center.addVaccineAdministrationToList(new VaccineAdministration(snsUser, vac1, "AAAAA-11", 1, center, startDate));
+
+        ctrl.createFullyVaccinatedData("Path.csv", startDate, endDate);
+
+        ctrl.generateFullyVaccinatedUsersInterval();
+
+        ctrl.saveData("Path.csv"); 
+        
+        String expected = "Date;NumberOfFullyVaccinatedUsers\n";
+
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/YYYY");
+        expected += df.format(startDate.getTime()) + ";0\n" + df.format(endDate.getTime()) + ";0\n";
 
         Path expectedFilepath = Path.of("Path.csv");
 
