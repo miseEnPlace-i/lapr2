@@ -10,40 +10,69 @@ import app.dto.LegacyDataDTO;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 public class MergeSort implements ISortStrategy {
+    private Comparator<LegacyDataDTO> comparator;
+
     public MergeSort() {}
 
     // TODO: FIX
     @Override
     public void doSort(List<LegacyDataDTO> data, Comparator<LegacyDataDTO> c) {
-        int n = data.size();
-        if (n <= 1) return;
-        int mid = n / 2;
-        List<LegacyDataDTO> left = data.subList(0, mid);
-        List<LegacyDataDTO> right = data.subList(mid, n);
-        doSort(left, c);
-        doSort(right, c);
-        merge(data, left, right, c);
+        this.comparator = c;
+        mergeSort(data, 0, data.size() - 1);
     }
 
-    private void merge(List<LegacyDataDTO> data, List<LegacyDataDTO> left, List<LegacyDataDTO> right, Comparator<LegacyDataDTO> c) {
-        int i = 0, j = 0, k = 0;
-        while (i < left.size() && j < right.size()) {
-            if (c.compare(left.get(i), right.get(j)) < 0) {
-                data.set(k, left.get(i));
+    private void mergeSort(List<LegacyDataDTO> data, int left, int right) {
+        // if the list contains only one element, it is already sorted
+        if (left >= right) return;
+
+        // divide the list into two halves
+        int mid = (left + right) / 2;
+
+        // left: 0
+        // mid: mid
+        // right: n
+
+        // keep dividing recursively until left + right = 1
+        mergeSort(data, left, mid);
+        mergeSort(data, mid + 1, right);
+
+        // finally, merge both halves
+        merge(data, left, mid, right);
+    }
+
+    private void merge(List<LegacyDataDTO> data, int left, int mid, int right) {
+        // let's create 2 sub lists of data
+        // where we will merge them into the main list
+
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+
+        // create the 2 sub lists
+        List<LegacyDataDTO> leftList = data.subList(left, left + n1);
+        List<LegacyDataDTO> rightList = data.subList(mid + 1, mid + 1 + n2);
+
+        int i = 0, j = 0, k = left;
+
+        // reorder the greater elements into the correct position
+        while (i < leftList.size() && j < rightList.size()) {
+            if (comparator.compare(leftList.get(i), rightList.get(j)) < 0) {
+                data.set(k, leftList.get(i));
                 i++;
             } else {
-                data.set(k, right.get(j));
+                data.set(k, rightList.get(j));
                 j++;
             }
             k++;
         }
-        while (i < left.size()) {
-            data.set(k, left.get(i));
+        
+        // finally, fill with the remainding elements
+        while (i < leftList.size()) {
+            data.set(k, leftList.get(i));
             i++;
             k++;
         }
-        while (j < right.size()) {
-            data.set(k, right.get(j));
+        while (j < rightList.size()) {
+            data.set(k, rightList.get(j));
             j++;
             k++;
         }
