@@ -189,7 +189,7 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
     Time startingInterval = performance.getStartingInterval();
     Time endingInterval = performance.getEndingInterval();
     Time tempInterval =
-        employeeSession.getVaccinationCenter().getOpeningHours();
+        employeeSession.getVaccinationCenter().getOpeningHours().clone();
 
     for (Integer value : differences) {
       if (tempInterval.isBetweenExcludeRight(startingInterval, endingInterval))
