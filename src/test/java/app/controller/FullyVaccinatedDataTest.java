@@ -1,4 +1,4 @@
-package app.service;
+package app.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.Calendar;
@@ -11,6 +11,7 @@ import app.domain.model.AdminProcess;
 import app.domain.model.Company;
 import app.domain.model.DoseInfo;
 import app.domain.model.Employee;
+import app.domain.model.FullyVaccinatedData;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.Vaccine;

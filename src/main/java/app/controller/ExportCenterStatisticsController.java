@@ -3,10 +3,10 @@ package app.controller;
 import java.util.Calendar;
 import java.util.LinkedHashMap;
 import app.domain.model.Company;
+import app.domain.model.FullyVaccinatedData;
 import app.domain.model.VaccinationCenter;
 import app.exception.NotAuthorizedException;
 import app.service.FileUtils;
-import app.service.FullyVaccinatedData;
 import app.session.EmployeeSession;
 
 /**

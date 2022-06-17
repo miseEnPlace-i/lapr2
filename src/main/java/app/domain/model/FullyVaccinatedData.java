@@ -1,4 +1,4 @@
-package app.service;
+package app.domain.model;
 
 import java.text.SimpleDateFormat;
 import java.time.temporal.ChronoUnit;
@@ -6,10 +6,7 @@ import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import app.domain.model.SNSUser;
-import app.domain.model.VaccinationCenter;
-import app.domain.model.Vaccine;
-import app.domain.model.VaccineAdministration;
+import app.service.CalendarUtils;
 
 /**
  * FullyVaccinatedData class
