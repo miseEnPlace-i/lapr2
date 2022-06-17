@@ -73,7 +73,7 @@ public class App {
 
     
     props = PropertiesUtils.getProperties();
-    Scheduler.scheduleExportDailyVaccinated(props.getProperty(Constants.PARAMS_EXPORTATION_PATH), props.getProperty(Constants.PARAMS_EXPORTATION_TIME), props.getProperty(Constants.PARAMS_EXPORTATION_SEPARATOR), this.vaccinationCenterStore, this.vacTypeStore);
+    this.company.scheduleDailyVaccinated(props.getProperty(Constants.PARAMS_EXPORTATION_PATH), props.getProperty(Constants.PARAMS_EXPORTATION_TIME), props.getProperty(Constants.PARAMS_EXPORTATION_SEPARATOR));
 
   }
 

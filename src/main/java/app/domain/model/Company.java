@@ -134,4 +134,8 @@ public class Company implements Serializable {
     return this.userStore;
   }
 
+  public void scheduleDailyVaccinated(String filePath, String time, String separator){
+    Scheduler.scheduleExportDailyVaccinated(filePath, time, separator, this.vaccinationCenterStore, this.vaccineTypeStore);
+  }
+
 }
