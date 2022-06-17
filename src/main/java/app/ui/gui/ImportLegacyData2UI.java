@@ -104,43 +104,4 @@ public class ImportLegacyData2UI extends ChildUI<CoordinatorUI> {
       super.toRoleScene();
     });
   }
-
-  @FXML
-  void handleSaveSession(ActionEvent event) {
-    if (App.getInstance().saveCurrentCompany()) Utils.showInformation("Session saved!", "Your changes have been saved successfully!");
-  }
-
-  @FXML
-  void handleRestoreSession(ActionEvent event) {
-    App.getInstance().doLogout();
-    App.getInstance().restoreCompany();
-    getParentUI().mainApp.toMainScene();
-  }
-
-  @FXML
-  void handleLogout(ActionEvent event) {
-    App.getInstance().doLogout();
-    getParentUI().mainApp.toMainScene();
-  }
-
-  @FXML
-  void handleExit(ActionEvent event) {
-    Utils.showExitConfirmation();
-  }
-
-  @FXML
-  void handleDevelopmentTeam(ActionEvent event) {
-    App.getInstance().doLogout();
-    try {
-      DevTeamUI ui = (DevTeamUI) getParentUI().mainApp.replaceSceneContent("/fxml/DevTeam.fxml");
-      ui.setMainApp(getParentUI().mainApp);
-    } catch (Exception ex) {
-      Logger.getLogger(ApplicationUI.class.getName()).log(Level.SEVERE, null, ex);
-    }
-  }
-
-  @FXML
-  void handleHelp(ActionEvent event) {
-    Utils.showHelp("Employee Help", HelpText.COORDINATOR);
-  }
 }

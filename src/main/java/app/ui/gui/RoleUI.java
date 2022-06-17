@@ -115,7 +115,7 @@ public abstract class RoleUI implements Initializable, IGui {
     Runtime rs = Runtime.getRuntime();
 
     try {
-      if (System.getProperty("os.name").contains("win")) rs.exec("notepad " + Constants.PARAMS_FILENAME);
+      if (System.getProperty("os.name").contains("Win")) rs.exec("notepad " + Constants.PARAMS_FILENAME);
       else if (System.getProperty("os.name").contains("nux")) rs.exec("gedit " + Constants.PARAMS_FILENAME);
       else if (System.getProperty("os.name").contains("mac")) rs.exec("open " + Constants.PARAMS_FILENAME);
     } catch (Exception ex) {
