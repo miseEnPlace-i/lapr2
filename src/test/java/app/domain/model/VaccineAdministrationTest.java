@@ -3,7 +3,6 @@ package app.domain.model;
 import static org.junit.Assert.assertEquals;
 import java.util.Calendar;
 import java.util.Date;
-import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Before;
 import org.junit.Test;
 import app.domain.shared.Gender;
@@ -22,17 +21,18 @@ public class VaccineAdministrationTest {
 
   @Before
   public void setup() {
-    Employee coordinator = new Employee("123456789", "name", "+351212345678", "email@email.com", "address", "00000000", "ROLE");
+    Employee coordinator = new Employee("123456789", "name", "+351212345678", "email@email.com", new Address("street", 1, "11-11", "city"), "00000000", "ROLE");
     vaccineType = new VaccineType("12345", "description", "technology");
     vaccine = new Vaccine("pfizer", "123456", "pfizer", vaccineType);
     Time openingHours = new Time(10, 0);
     Time closingHours = new Time(11, 0);
     Slot slot = new Slot(5, 5);
 
-    vaccinationCenter = new HealthCareCenter("name", "address", "email@email.com", "+351212345678", "+351212345678", "http://www.site.com", openingHours,
-        closingHours, slot, coordinator, "ages", "ars");
+    vaccinationCenter = new HealthCareCenter("name", new Address("street", 1, "11-11", "city"), "email@email.com", "+351212345678", "+351212345678",
+        "http://www.site.com", openingHours, closingHours, slot, coordinator, "ages", "ars");
 
-    user1 = new SNSUser("00000000", "123456788", "name", new Date(), Gender.MALE, "+351212345675", "email1@email.com", "address");
+    user1 =
+        new SNSUser("00000000", "123456788", "name", new Date(), Gender.MALE, "+351212345675", "email1@email.com", new Address("street", 1, "11-11", "city"));
   }
 
   @Test

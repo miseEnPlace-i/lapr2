@@ -32,11 +32,12 @@ public class ArrivalTest {
     this.vtStore = company.getVaccineTypeStore();
     this.vtechStore = company.getVaccineTechnologyStore();
 
-    SNSUser snsUser =
-        snsUserStore.createSNSUser("00000000", "123456789", "name", Calendar.getInstance().getTime(), Gender.MALE, "+351212345678", "s@user.com", "address");
+    SNSUser snsUser = snsUserStore.createSNSUser("00000000", "123456789", "name", Calendar.getInstance().getTime(), Gender.MALE, "+351212345678", "s@user.com",
+        new Address("street", 1, "11-11", "city"));
     this.snsUserStore.saveSNSUser(snsUser);
 
-    Employee e2 = empStore.createEmployee("Name2", "+351916919269", "c@user.com", "address", "15542401", Constants.ROLE_COORDINATOR);
+    Employee e2 =
+        empStore.createEmployee("Name2", "+351916919269", "c@user.com", new Address("street", 1, "11-11", "city"), "15542404", Constants.ROLE_COORDINATOR);
     this.empStore.saveEmployee(e2);
 
     this.vtechStore.addVaccineTechnology("M_RNA_TECHNOLOGY");
@@ -44,8 +45,8 @@ public class ArrivalTest {
     this.vacType = vtStore.addVaccineType("00000", "COVID-19", "M_RNA_TECHNOLOGY");
     this.vtStore.saveVaccineType(vacType);
 
-    this.center = vcStore.createCommunityMassCenter("Centro Vacinação de Teste", "Rua de Teste", "test@gmail.com", "+351212345678", "+351212345679",
-        "http://www.test.com", "20:00", "21:00", 7, 5, e2, vacType);
+    this.center = vcStore.createCommunityMassCenter("Centro Vacinação de Teste", new Address("street", 1, "111-1", "city"), "test@gmail.com", "+351212345678",
+        "+351212345679", "http://www.test.com", "20:00", "21:00", 7, 5, e2, vacType);
     this.vcStore.saveVaccinationCenter(this.center);
   }
 

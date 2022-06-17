@@ -16,7 +16,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
@@ -65,12 +64,10 @@ public class ImportLegacyData1UI extends ChildUI<CoordinatorUI> {
       List<String[]> fileData = this.ctrl.read(selectedFile.getAbsolutePath());
       List<LegacyDataDTO> legacyDtoList = this.ctrl.convert(fileData);
       this.ctrl.validate(legacyDtoList);
-      this.ctrl.sort(legacyDtoList);
+      this.ctrl.sort(legacyDtoList, true, true);
 
-      // TODO: go to the import legacy data 2 UI
-
-      this.ctrl.save(legacyDtoList);
-      displaySuccessAlert();
+      ImportLegacyData2UI iUI = this.getParentUI().toImportLegacyDataScene2();
+      iUI.setLegacyDtoList(legacyDtoList);
     } catch (FileNotFoundException e) {
       // the user may have deleted the file after selecting it
       displayFileNotFoundErrorAlert(e);
@@ -112,16 +109,6 @@ public class ImportLegacyData1UI extends ChildUI<CoordinatorUI> {
     alert.setContentText(String.format("Please ask you administrator to load the missing SNS Users."));
     alert.showAndWait().ifPresent(response -> {
       Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, e);
-    });
-  }
-
-  private void displaySuccessAlert() {
-    Alert alert = new Alert(AlertType.CONFIRMATION);
-    alert.setTitle("Success!");
-    alert.setHeaderText("The legacy data has been imported successfully.");
-    alert.getDialogPane().lookupButton(ButtonType.CANCEL).setVisible(false);
-    alert.showAndWait().ifPresent(response -> {
-      super.toRoleScene();
     });
   }
 }

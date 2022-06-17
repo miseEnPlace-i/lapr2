@@ -52,16 +52,12 @@
                   <Font name="System Italic" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="64.0" layoutY="24.0" prefHeight="20.0" prefWidth="160.0" text="Your Vaccination Center:" AnchorPane.leftAnchor="64.0">
+            <Label layoutX="31.0" layoutY="23.0" text="Vaccination Center">
                <font>
-                  <Font size="10.0" />
+                  <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="lblCenterName" layoutX="64.0" layoutY="41.0" prefHeight="20.0" text="VAC_CENTER_NAME" AnchorPane.leftAnchor="64.0">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
+            <Label fx:id="lblCenterName" layoutX="33.0" layoutY="45.0" text="Vaccination Center" />
          </children>
       </AnchorPane>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="900.0" spacing="8.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
@@ -71,17 +67,20 @@
                   <Font size="15.0" />
                </font>
             </Label>
+            <HBox alignment="CENTER" prefWidth="900.0" spacing="8.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#btnSelect" text="Select file" />
+                  <Label fx:id="lblSelectedFile" text="No file selected.">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+               </children>
+            </HBox>
             <Label text="Valid file types: .csv">
                <font>
                   <Font name="System Italic" size="12.0" />
                </font>
             </Label>
-            <HBox alignment="CENTER" prefWidth="900.0" spacing="8.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#btnSelect" text="Select file" />
-                  <Label fx:id="lblSelectedFile" text="No file selected." />
-               </children>
-            </HBox>
          </children>
       </VBox>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="16.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">

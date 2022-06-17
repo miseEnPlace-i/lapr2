@@ -36,13 +36,11 @@ public class UploadUsersFromFileControllerTest {
   @Test
   public void ensureReadAndUploadFromListWhitRepeatedUser() throws ParseException, ClassNotFoundException, InstantiationException, IllegalAccessException,
       FileNotFoundException, NoSuchMethodException, InvocationTargetException {
-    int size = store.size();
-
     ctrl.createCsvReader("src/test/resources/SNSUserFilesToTests/UsersFileWithRepeatedUser.csv");
 
     ctrl.readAndUpload();
 
-    assertEquals(store.size() - size, 2);
+    assertEquals(2, store.size());
   }
 
   // Check that it is possible to read and upload from a list with a invalid user in the middle
@@ -50,13 +48,11 @@ public class UploadUsersFromFileControllerTest {
   @Test
   public void ensureReadAndUploadFromListWhitInvalidUser() throws ParseException, ClassNotFoundException, InstantiationException, IllegalAccessException,
       FileNotFoundException, NoSuchMethodException, InvocationTargetException {
-    int size = store.size();
-
     ctrl.createCsvReader("src/test/resources/SNSUserFilesToTests/UsersFileWithRepeatedUser.csv");
 
     ctrl.readAndUpload();
 
-    assertEquals(store.size() - size, 2);
+    assertEquals(2, store.size());
   }
 
 
@@ -64,15 +60,10 @@ public class UploadUsersFromFileControllerTest {
   @Test
   public void ensureReadAndUploadFromListWhitValidUser() throws ParseException, ClassNotFoundException, InstantiationException, IllegalAccessException,
       FileNotFoundException, NoSuchMethodException, InvocationTargetException {
-    int size = store.size();
-
     ctrl.createCsvReader("src/test/resources/SNSUserFilesToTests/UsersFileWithRepeatedUser.csv");
 
     ctrl.readAndUpload();
 
-    assertEquals(2, store.size() - size);
+    assertEquals(2, store.size());
   }
-
-
-
 }

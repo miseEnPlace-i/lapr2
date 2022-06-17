@@ -1,0 +1,9 @@
+@startuml
+scale 600 width
+
+[*] -> WaittingRoom : US4 - register arrival
+WaittingRoom --> Vaccinated : US8 - record vaccine administration \n create vaccine administration
+Vaccinated --> RecoveryRoom : US8 - record vaccine administration \n register in waitting room
+RecoveryRoom --> [*] : US8 - record vaccine administration \n remove from recovery room
+
+@enduml

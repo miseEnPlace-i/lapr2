@@ -46,13 +46,13 @@ public class ExportDailyVaccinatedTaskTest {
         this.vtechStore = company.getVaccineTechnologyStore();
 
         this.snsUser =
-            snsUserStore.createSNSUser("00000000", "123456789", "name", Calendar.getInstance().getTime(), Gender.MALE, "+351212345678", "s@user.com", "address");
+            snsUserStore.createSNSUser("00000000", "123456789", "name", Calendar.getInstance().getTime(), Gender.MALE, "+351212345678", "s@user.com", new Address("street", 1, "10-10", "city"));
         this.snsUserStore.saveSNSUser(snsUser);
 
-        Employee emp = empStore.createEmployee("Name", "+351916919268", "c1@user.com", "address", "15542404", Constants.ROLE_COORDINATOR);
+        Employee emp = empStore.createEmployee("Name", "+351916919268", "c1@user.com", new Address("street", 1, "10-10", "city"), "15542404", Constants.ROLE_COORDINATOR);
         this.empStore.saveEmployee(emp);
 
-        Employee emp2 = empStore.createEmployee("Name2", "+351916919269", "c2@user.com", "address2", "15542405", Constants.ROLE_COORDINATOR);
+        Employee emp2 = empStore.createEmployee("Name2", "+351916919269", "c2@user.com", new Address("street", 1, "10-10", "city"), "15542405", Constants.ROLE_COORDINATOR);
         this.empStore.saveEmployee(emp2);
 
        
@@ -69,11 +69,11 @@ public class ExportDailyVaccinatedTaskTest {
         this.vacStore.saveVaccine(vac2);
 
 
-        this.center1 = vcStore.createHealthCareCenter("Centro Vacinação de Teste", "Rua de Teste", "test@gmail.com", "+351212345678", "+351212345679",
+        this.center1 = vcStore.createHealthCareCenter("Centro Vacinação de Teste", new Address("street", 1, "10-10", "city"), "test@gmail.com", "+351212345678", "+351212345679",
         "http://www.test.com", "20:00", "21:00", 7, 5, emp, "ages", "ags");
         this.vcStore.saveVaccinationCenter(this.center1);
 
-        this.center2 = vcStore.createHealthCareCenter("Centro Vacinação de Teste2", "Rua de Teste 2", "test2@gmail.com", "+351212345679", "+351212345678",
+        this.center2 = vcStore.createHealthCareCenter("Centro Vacinação de Teste2", new Address("street", 1, "10-10", "city"), "test2@gmail.com", "+351212345679", "+351212345678",
             "http://www.test2.com", "20:00", "21:00", 7, 5, emp2, "ages", "ags");
         this.vcStore.saveVaccinationCenter(this.center2);
     }

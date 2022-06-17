@@ -36,8 +36,6 @@
             <items>
               <MenuItem fx:id="menuSaveSession" mnemonicParsing="false" onAction="#handleSaveSession" text="Save session" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" onAction="#handleHelp" text="Help" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="menuLogout" mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
                   <MenuItem fx:id="menuExit1" mnemonicParsing="false" onAction="#handleExit" text="Exit" />
             </items>
@@ -47,6 +45,11 @@
               <MenuItem fx:id="menuDevelopmentTeam" mnemonicParsing="false" onAction="#handleDevelopmentTeam" text="Development Team" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleHelp" text="Show Help" />
+               </items>
+            </Menu>
         </menus>
       </MenuBar>
       <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="900.0" scaleShape="false" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">

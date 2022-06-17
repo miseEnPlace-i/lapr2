@@ -7,7 +7,6 @@ import app.controller.RegisterEmployeeController;
 import app.domain.model.MyUserRole;
 import app.domain.shared.FieldToValidate;
 import app.ui.console.utils.Utils;
-import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
 /**
  * Register Employee View
@@ -61,11 +60,17 @@ public class RegisterEmployeeUI extends RegisterUI<RegisterEmployeeController> {
     this.roleId = role.getId();
 
     String name = Utils.readLineFromConsole("Name: ");
-    String address = Utils.readLineFromConsole("Address: ");
+
+    System.out.println("Address:");
+    String addressStreet = Utils.readLineFromConsole("Street: ");
+    int addressNumber = Utils.readIntegerFromConsole("Number: ");
+    String postalCode = Utils.readLineFromConsoleWithValidation("Postal Code: ", FieldToValidate.POSTAL_CODE);
+    String addressCity = Utils.readLineFromConsole("City: ");
+
     String phoneNumber = Utils.readLineFromConsoleWithValidation("Phone Number (+351xxxxxxxxx): ", FieldToValidate.PHONE_NUMBER);
     String email = Utils.readLineFromConsoleWithValidation("Email (example@example.com): ", FieldToValidate.EMAIL);
     String citizenCard = Utils.readLineFromConsoleWithValidation("Citizen Card Number (xxxxxxxxxLLx): ", FieldToValidate.CITIZEN_CARD);
 
-    super.ctrl.create(name, address, phoneNumber, email, citizenCard, this.roleId);
+    super.ctrl.create(name, addressStreet, addressNumber, postalCode, addressCity, phoneNumber, email, citizenCard, this.roleId);
   }
 }

@@ -6,8 +6,11 @@ package core {
         package Console {}
     }
     package Domain {
-        package model {}
-        package Stores {}
+        package model {
+            package store {}
+            package list {}
+        }
+        package shared {}
     }
     package Dto {}
     package Mappers {}
@@ -17,12 +20,11 @@ package core {
     package Service {}
 }
 
-Stores ..> model
-model ..> Stores
+Console ..> GUI
 
 Controllers ..> Mappers
-Controllers ..> Domain
 Controllers ..> Dto
+Controllers ..> Domain
 
 UI ..> Controllers
 
@@ -32,10 +34,7 @@ Domain ..> Exception
 Domain ..> Service
 Domain ..> Session
 
-Mappers ..> Domain
 Mappers ..> Dto
+Mappers ..> Domain
 
-UI ..> Dto
-UI ..> Session
-UI ..> Exception
 @enduml

@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import app.domain.model.CSVReader;
 import app.domain.model.Company;
@@ -11,13 +13,17 @@ import app.domain.model.LegacyData;
 import app.domain.model.LegacyDataObjectBuilder;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.WaitingRoom;
-import app.domain.model.list.AdministrationList;
 import app.domain.model.list.AppointmentScheduleList;
 import app.domain.model.list.CenterEventList;
+import app.domain.model.list.VaccineAdministrationList;
 import app.domain.model.store.SNSUserStore;
+import app.dto.ArrivalCompare;
+import app.dto.DepartureCompare;
 import app.dto.LegacyDataDTO;
 import app.exception.NotFoundException;
 import app.mapper.LegacyDataMapper;
+import app.service.sorting.ISortStrategy;
+import app.service.sorting.SortFactory;
 
 public class ImportLegacyDataController {
   private Company company;
@@ -54,7 +60,12 @@ public class ImportLegacyDataController {
     }
   }
 
-  public void sort(List<LegacyDataDTO> legacyDtoList) {}
+  public void sort(List<LegacyDataDTO> legacyDtoList, boolean isArrival, boolean isAsc) {
+    ISortStrategy sortStrategy = SortFactory.getSortStrategy();
+    Comparator<LegacyDataDTO> comparator = isArrival ? new ArrivalCompare() : new DepartureCompare();
+    sortStrategy.doSort(legacyDtoList, comparator);
+    if (!isAsc) Collections.reverse(legacyDtoList);
+  }
 
   public void save(List<LegacyDataDTO> legacyDtoList) {
     AppointmentScheduleList aptSchList = this.center.getAppointmentList();
@@ -64,11 +75,11 @@ public class ImportLegacyDataController {
     for (LegacyDataDTO d : legacyDtoList) {
       LegacyData legacyData = LegacyDataMapper.toModel(d, this.center);
       LegacyDataObjectBuilder builder = new LegacyDataObjectBuilder(legacyData);
-      AdministrationList administrationList = legacyData.getSNSUser().getAdministrationList();
+      VaccineAdministrationList administrationList = legacyData.getSNSUser().getUserHealthData().getVaccineAdministrationList();
 
       aptSchList.saveAppointment(builder.createAppointment());
       waitingRoom.saveArrival(builder.createArrival());
-      administrationList.save(builder.createAdministration());
+      administrationList.saveVaccineAdministration(builder.createAdministration());
       centerEventList.save(builder.createArrivalEvent());
       centerEventList.save(builder.createVaccinatedEvent());
       centerEventList.save(builder.createDeparturedEvent());

@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
+import app.domain.model.Address;
 import app.domain.model.Employee;
 import app.domain.model.HealthCareCenter;
 import app.domain.model.Slot;
@@ -21,10 +22,11 @@ public class EmployeeSessionTest {
   @Before
   public void setup() {
     session = new EmployeeSession();
-    Employee coordinator = new Employee("123456789", "name", "+351212345678", "email@email.com", "address", "00000000", "COORDINATOR");
+    Employee coordinator =
+        new Employee("123456789", "name", "+351212345678", "email@email.com", new Address("street", 1, "11-11", "city"), "00000000", "COORDINATOR");
 
-    center = new HealthCareCenter("name", "address", "email@email.com", "+351212345678", "+351212345678", "http://www.google.com", new Time("20:00"),
-        new Time("21:00"), new Slot(5, 5), coordinator, "ages", "ars");
+    center = new HealthCareCenter("name", new Address("street", 1, "11-11", "city"), "email@email.com", "+351212345678", "+351212345678",
+        "http://www.google.com", new Time("20:00"), new Time("21:00"), new Slot(5, 5), coordinator, "ages", "ars");
   }
 
   @Test

@@ -5,13 +5,13 @@ actor "Center Coordinator" as COOR
 activate COOR
 COOR -> ":System" : asks to export his center statistics
 activate ":System"
-":System" --> COOR : requests data (filePath,startDate,endDate)
+":System" --> COOR : requests data (fileName,startDate,endDate)
 deactivate ":System"
 
 COOR -> ":System" : types requested
 activate ":System"
 
-":System" --> COOR : informs operation success
+":System" --> COOR : shows center statistics
 deactivate ":System"
 deactivate COOR
 

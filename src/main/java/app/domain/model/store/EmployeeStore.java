@@ -3,6 +3,7 @@ package app.domain.model.store;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import app.domain.model.Address;
 import app.domain.model.Employee;
 import app.dto.UserNotificationDTO;
 import app.mapper.UserNotificationMapper;
@@ -25,7 +26,8 @@ public class EmployeeStore implements Serializable {
   /**
    * Constructor for EmployeeStore.
    */
-  public EmployeeStore(AuthFacade authFacade, UserStore userStore, EmployeeRoleStore roleStore) {
+  public EmployeeStore(AuthFacade authFacade, UserStore userStore,
+      EmployeeRoleStore roleStore) {
     this.employees = new ArrayList<Employee>();
     this.authFacade = authFacade;
     this.roleStore = roleStore;
@@ -42,15 +44,21 @@ public class EmployeeStore implements Serializable {
    * @param citizenCard the employee citizenCard
    * @param roleId the employee roleId
    */
-  public Employee createEmployee(String name, String phoneNumber, String email, String address, String citizenCard, String roleId) {
+  public Employee createEmployee(String name, String phoneNumber, String email,
+      Address address, String citizenCard, String roleId) {
     String id = generateId();
-    Employee employee = new Employee(id, name, phoneNumber, email, address, citizenCard, roleId);
+    Employee employee = new Employee(id, name, phoneNumber, email, address,
+        citizenCard, roleId);
 
     return employee;
   }
 
   private String generateId() {
     return String.format("%010d", employees.size() + 1);
+  }
+
+  public void updateAuthFacade(AuthFacade authFacade) {
+    this.authFacade = authFacade;
   }
 
   /**
@@ -60,8 +68,10 @@ public class EmployeeStore implements Serializable {
    * @return a List of employees with that given role
    */
   public List<Employee> getEmployeesWithRole(String roleId) {
-    if (roleId == null) throw new IllegalArgumentException("Role id cannot be null.");
-    if (!roleStore.existsRole(roleId)) throw new IllegalArgumentException("Role does not exist.");
+    if (roleId == null)
+      throw new IllegalArgumentException("Role id cannot be null.");
+    if (!roleStore.existsRole(roleId))
+      throw new IllegalArgumentException("Role does not exist.");
 
     List<Employee> lstEmp = new ArrayList<>();
 
@@ -77,11 +87,13 @@ public class EmployeeStore implements Serializable {
    * @param employee the employee to be checked
    */
   public void validateEmployee(Employee employee) {
-    if (employee == null) throw new IllegalArgumentException("Employee cannot be null.");
+    if (employee == null)
+      throw new IllegalArgumentException("Employee cannot be null.");
 
     String email = employee.getEmail();
 
-    if (this.authFacade.existsUser(email)) throw new IllegalArgumentException("Email already exists.");
+    if (this.authFacade.existsUser(email))
+      throw new IllegalArgumentException("Email already exists.");
 
     checkDuplicates(employee);
   }
@@ -96,14 +108,19 @@ public class EmployeeStore implements Serializable {
 
     String email = employee.getEmail();
     String phoneNumber = employee.getPhoneNumber();
-    IPasswordGenerator pwdGenerator = PasswordGeneratorFactory.getPasswordGenerator();
+    IPasswordGenerator pwdGenerator =
+        PasswordGeneratorFactory.getPasswordGenerator();
     String pwd = pwdGenerator.generatePwd();
 
-    this.authFacade.addUserWithRole(employee.getName(), email, pwd, employee.getRoleId());
-    this.userStore.addUser(employee.getName(), email, pwd, employee.getRoleId());
+    this.authFacade.addUserWithRole(employee.getName(), email, pwd,
+        employee.getRoleId());
+    this.userStore.addUser(employee.getName(), email, pwd,
+        employee.getRoleId());
 
-    String message = String.format("A new user has been created.\nEmail: %s\nPassword: %s", email, pwd);
-    UserNotificationDTO notificationDto = UserNotificationMapper.toDto(email, phoneNumber, message);
+    String message = String.format(
+        "A new user has been created.\nEmail: %s\nPassword: %s", email, pwd);
+    UserNotificationDTO notificationDto =
+        UserNotificationMapper.toDto(email, phoneNumber, message);
 
     sendNotification(notificationDto);
   }
@@ -125,7 +142,8 @@ public class EmployeeStore implements Serializable {
    * @param employee the employee to be checked
    */
   public void checkDuplicates(Employee employee) {
-    if (employees.contains(employee)) throw new IllegalArgumentException("Duplicate employee found.");
+    if (employees.contains(employee))
+      throw new IllegalArgumentException("Duplicate employee found.");
   }
 
   /**

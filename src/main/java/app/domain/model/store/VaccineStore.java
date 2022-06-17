@@ -68,17 +68,17 @@ public class VaccineStore implements Serializable {
     return null;
   }
 
-  // public boolean areVaccinesWithValidAdminProcessWithVaccineType(int age, VaccineType vaccineType) {
-  // List<Vaccine> vaccinesList = getVaccinesByType(vaccineType);
+  public boolean areVaccinesWithValidAdminProcessWithVaccineType(int age, VaccineType vaccineType) {
+    List<Vaccine> vaccinesList = getVaccinesByType(vaccineType);
 
-  // for (Vaccine vaccine : vaccinesList) {
-  // if (vaccine.hasAdministrationProcessForGivenAge(age)) {
-  // return true;
-  // }
-  // }
+    for (Vaccine vaccine : vaccinesList) {
+      if (vaccine.hasAdministrationProcessForGivenAge(age)) {
+        return true;
+      }
+    }
 
-  // return false;
-  // }
+    return false;
+  }
 
   public List<VaccineDTO> getVaccinesByVaccineTypeWithAdminProcessForAge(VaccineType vaccineType, int age) {
     List<VaccineDTO> vaccinesList = new ArrayList<VaccineDTO>();

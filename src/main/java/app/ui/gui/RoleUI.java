@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import app.controller.App;
+import app.domain.shared.Constants;
 import app.ui.gui.utils.Utils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -100,5 +101,25 @@ public abstract class RoleUI implements Initializable, IGui {
   @FXML
   void handleExit(ActionEvent event) {
     Utils.showExitConfirmation();
+  }
+
+  @FXML
+  void handleRestoreSession() {
+    App.getInstance().doLogout();
+    App.getInstance().restoreCompany();
+    this.mainApp.toMainScene();
+  }
+
+  @FXML
+  void handlePreferences() {
+    Runtime rs = Runtime.getRuntime();
+
+    try {
+      if (System.getProperty("os.name").contains("Win")) rs.exec("notepad " + Constants.PARAMS_FILENAME);
+      else if (System.getProperty("os.name").contains("nux")) rs.exec("gedit " + Constants.PARAMS_FILENAME);
+      else if (System.getProperty("os.name").contains("mac")) rs.exec("open " + Constants.PARAMS_FILENAME);
+    } catch (Exception ex) {
+      Logger.getLogger(ApplicationUI.class.getName()).log(Level.SEVERE, null, ex);
+    }
   }
 }

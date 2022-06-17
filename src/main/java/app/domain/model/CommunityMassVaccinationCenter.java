@@ -25,7 +25,7 @@ public class CommunityMassVaccinationCenter extends VaccinationCenter {
    * @param maxVacSlot the community mass vaccination center maximum vaccines per slot
    * @param coordinator the community mass vaccination center coordinator
    */
-  public CommunityMassVaccinationCenter(String name, String address, String email, String phoneNum, String faxNum, String webAddress, Time openingHours,
+  public CommunityMassVaccinationCenter(String name, Address address, String email, String phoneNum, String faxNum, String webAddress, Time openingHours,
       Time closingHours, Slot slot, Employee coordinator, VaccineType vaccineType) {
 
     super(name, address, email, phoneNum, faxNum, webAddress, openingHours, closingHours, slot, coordinator);

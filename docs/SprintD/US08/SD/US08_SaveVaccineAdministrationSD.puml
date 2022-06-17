@@ -1,0 +1,74 @@
+@startuml US08_SaveVaccineAdministration_SD
+autonumber
+' hide footbox
+
+participant "vaccineAdministrationList\n:VaccineAdministrationList" as vaccineAdministrationList
+participant "snsUser\n:SNSUser" as snsUser
+participant "vaccineAdministration\n:VaccineAdministration" as vaccineAdministration
+participant "waitingRoom\n:WaitingRoom" as waitingRoom
+participant "recoveryRoom\n:RecoveryRoom" as recoveryRoom
+participant "vaccinationCenter\n:VaccinationCenter" as vaccinationCenter
+participant "centerEventList\n:CenterEventList" as centerEventList
+participant "properties\n:Properties" as properties
+participant ":PropertiesUtils" as propertiesUtils
+
+[o-> vaccineAdministrationList : saveVaccineAdministration(vaccineAdministration)
+activate vaccineAdministrationList
+  vaccineAdministrationList -> vaccineAdministrationList : add(vaccineAdministration)
+  activate vaccineAdministrationList
+  deactivate vaccineAdministrationList
+  vaccineAdministrationList -> vaccineAdministration : vaccinationCenter = getVaccinationCenter()
+  activate vaccineAdministration
+  deactivate vaccineAdministration
+  vaccineAdministrationList -> vaccinationCenter : addVaccineAdministrationToList(vaccineAdministration)
+  activate vaccinationCenter
+  deactivate vaccinationCenter
+  vaccineAdministrationList -> vaccinationCenter : centerEventList = getEvents()
+  activate vaccinationCenter
+  deactivate vaccinationCenter
+  vaccineAdministrationList -> vaccineAdministration : snsUser = getSnsUser()
+  activate vaccineAdministration
+  deactivate vaccineAdministration
+  vaccineAdministrationList -> vaccineAdministration : date = getDate()
+  activate vaccineAdministration
+  deactivate vaccineAdministration
+  vaccineAdministrationList -> centerEventList : vaccinatedEvent = create(date, CenterEventType.VACCINATED, snsUser)
+  activate centerEventList
+  deactivate centerEventList
+  vaccineAdministrationList -> centerEventList : save(vaccinatedEvent)
+  activate centerEventList
+  deactivate centerEventList
+  vaccineAdministrationList -> vaccinationCenter : waitingRoom = getWaitingRoom()
+  activate vaccinationCenter
+  deactivate vaccinationCenter
+  vaccineAdministrationList -> waitingRoom : removeUser(snsUser)
+  activate waitingRoom
+  deactivate waitingRoom
+  vaccineAdministrationList -> vaccinationCenter : recoveryRoom = getRecoveryRoom()
+  activate vaccinationCenter
+  deactivate vaccinationCenter
+  vaccineAdministrationList -> recoveryRoom : addVaccineAdministration(vaccineAdministration)
+  activate recoveryRoom
+  deactivate recoveryRoom
+  vaccineAdministrationList -> propertiesUtils : properties = getProperties()
+  activate propertiesUtils
+  deactivate propertiesUtils
+  vaccineAdministrationList -> properties : recoveryPeriod = getProperty(Constants.RECOVERY_PERIOD)
+  activate properties
+  deactivate properties
+  vaccineAdministrationList -> centerEventList : departureEvent = create(departureDate, CenterEventType.DEPARTURE, snsUser)
+  activate centerEventList
+  deactivate centerEventList
+  note left
+    departureDate represents a Calendar object containing
+    the current date and time plus the recovery period
+  end note
+  vaccineAdministrationList -> centerEventList : save(departureEvent)
+  activate centerEventList
+  deactivate centerEventList
+  vaccineAdministrationList -> vaccineAdministrationList : setSmsSending(vaccineAdministration, recoveryPeriod)
+  ref over vaccineAdministrationList
+    Steps for setting the sending the SMS to the 
+    user are specified in US08_SetSmsSending_SD.
+  end ref
+deactivate vaccineAdministrationList

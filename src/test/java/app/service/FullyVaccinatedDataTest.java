@@ -6,19 +6,16 @@ import java.util.HashMap;
 import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
+import app.domain.model.Address;
 import app.domain.model.AdminProcess;
 import app.domain.model.Company;
 import app.domain.model.DoseInfo;
 import app.domain.model.Employee;
-import app.domain.model.HealthCareCenter;
-import app.domain.model.HealthData;
 import app.domain.model.SNSUser;
-import app.domain.model.Slot;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.Vaccine;
 import app.domain.model.VaccineAdministration;
 import app.domain.model.VaccineType;
-import app.domain.model.list.VaccineAdministrationList;
 import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.SNSUserStore;
 import app.domain.model.store.VaccinationCenterStore;
@@ -27,8 +24,6 @@ import app.domain.model.store.VaccineTechnologyStore;
 import app.domain.model.store.VaccineTypeStore;
 import app.domain.shared.Constants;
 import app.domain.shared.Gender;
-import app.service.FullyVaccinatedData;
-import app.utils.Time;
 
 /**
  * FullyVaccinatedData test
@@ -155,11 +150,12 @@ public class FullyVaccinatedDataTest {
         this.vtechStore = company.getVaccineTechnologyStore();
 
         this.snsUser =
-            snsUserStore.createSNSUser("00000000", "123456789", "name", Calendar.getInstance().getTime(), Gender.MALE, "+351212345678", "s@user.com", "address");
+            snsUserStore.createSNSUser("00000000", "123456789", "name", Calendar.getInstance().getTime(), Gender.MALE, "+351212345678", "s@user.com", new Address("street", 1, "10-10", "city"));
         this.snsUserStore.saveSNSUser(snsUser);
 
-        Employee emp = empStore.createEmployee("Name", "+351916919268", "c1@user.com", "address", "15542404", Constants.ROLE_COORDINATOR);
+        Employee emp = empStore.createEmployee("Name", "+351916919268", "c1@user.com", new Address("street", 1, "10-10", "city"), "15542404", Constants.ROLE_COORDINATOR);
         this.empStore.saveEmployee(emp);
+        
 
         this.vtechStore.addVaccineTechnology("M_RNA_TECHNOLOGY");
 
@@ -190,7 +186,7 @@ public class FullyVaccinatedDataTest {
         this.vacStore.saveVaccine(vac2);
 
 
-        this.center1 = vcStore.createHealthCareCenter("Centro Vacinação de Teste", "Rua de Teste", "test@gmail.com", "+351212345678", "+351212345679",
+        this.center1 = vcStore.createHealthCareCenter("Centro Vacinação de Teste", new Address("street", 1, "10-10", "city"), "test@gmail.com", "+351212345678", "+351212345679",
         "http://www.test.com", "20:00", "21:00", 7, 5, emp, "ages", "ags");
         this.vcStore.saveVaccinationCenter(this.center1);
     }

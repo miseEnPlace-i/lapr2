@@ -28,10 +28,15 @@ public class RegisterSNSUserUI extends RegisterUI<RegisterSNSUserController> {
     Date birthDay = Utils.readDateFromConsole("Birthday (dd/MM/yyyy): ");
     String phoneNumber = Utils.readLineFromConsoleWithValidation("Phone Number (+351xxxxxxxxx): ", FieldToValidate.PHONE_NUMBER);
     String email = Utils.readLineFromConsoleWithValidation("Email (example@example.com): ", FieldToValidate.EMAIL);
-    String address = Utils.readLineFromConsole("Address: ");
+
+    System.out.println("Address:");
+    String addressStreet = Utils.readLineFromConsole("Street: ");
+    int addressNumber = Utils.readIntegerFromConsole("Number: ");
+    String postalCode = Utils.readLineFromConsoleWithValidation("Postal Code: ", FieldToValidate.POSTAL_CODE);
+    String addressCity = Utils.readLineFromConsole("City: ");
 
     Gender g = (Gender) Utils.showAndSelectOneEnum(Gender.values(), "\nSelect a gender:");
 
-    super.ctrl.create(citizenCard, snsNumber, name, birthDay, g, phoneNumber, email, address);
+    super.ctrl.create(citizenCard, snsNumber, name, birthDay, g, phoneNumber, email, addressStreet, addressNumber, postalCode, addressCity);
   }
 }

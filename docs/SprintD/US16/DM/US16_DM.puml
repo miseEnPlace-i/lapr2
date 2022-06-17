@@ -5,7 +5,6 @@ skinparam classAttributeIconSize 0
 
 class VaccinationCenter {
   - name
-  - address
   - emailAddress
   - phoneNumber
   - faxNumber
@@ -27,9 +26,14 @@ class Employee {
   -name
   -email
   -phone
-  -address
   -citizenCardNumber
-  -roleId
+}
+
+class Address {
+  - street
+  - doorNumber
+  - postalCode
+  - city
 }
 
 class CenterPerformance {
@@ -59,6 +63,9 @@ Employee "*" -- "1" Role : has <
 
 Company "1" -- "*" Employee : knows >
 Company "1" -- "*" VaccinationCenter : knows >
+
+Employee "*" -- "1" Address : has >
+VaccinationCenter "*" -- "1" Address : has >
 
 VaccinationCenter "1" -- "*" CenterPerformance : has >
 

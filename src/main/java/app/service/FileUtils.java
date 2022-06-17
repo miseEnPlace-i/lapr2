@@ -10,6 +10,9 @@ import java.util.Scanner;
 
 /**
  * File Utils.
+ * 
+ * @author André Barros <1211299@isep.ipp.pt>
+ * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 public class FileUtils {
     private static String[] BANNED_CHARS = {",", "\"", "@", ":", ";", "!", "&", "%", "[", "]", "/"};
@@ -23,9 +26,9 @@ public class FileUtils {
      * @throws IOException if the file could not be written.
      * @return true if the file was written successfully, false otherwise.
      */
-    public static boolean writeToFile(String filename, String content) {
+    public static boolean writeToFile(String fileName, String content) {
         try {
-            File file = new File(filename);
+            File file = new File(fileName);
 
             //create file path directory
             File directory = file.getParentFile();

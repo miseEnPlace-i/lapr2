@@ -23,12 +23,14 @@ participant "center:VaccinationCenter" as CENTER
 participant "waitingRoom:WaitingRoom" as WR
 participant "aptSchLst:AppointmentScheduleList" as APTSCHLST
 participant "centerEventList:CenterEventList" as CELIST
+participant ":SortFactory" as SORTFACTORY
+participant "sortStrategy:ISortStrategy" as ISORTSTRATEGY
 participant "vacStore:VaccineStore" as VACCINESTORE
 participant "vaccine:Vaccine" as VACCINE
 participant "administrationList:AdministrationList" as ADLST
 participant "appointment:Appointment" as APT
 participant "arrival:Arrival" as ARRIVAL
-participant "administration:Administration" as ADMINISTRATION
+participant "vacAdministration:VaccineAdministration" as VACADMINISTRATION
 participant "fileData:List<String[]>" as LIST_FILEDATA
 
 activate COORDINATOR
@@ -126,6 +128,13 @@ activate COORDINATOR
       UI -> CTRL : sort(legacy)
       activate CTRL
         ' TODO: sort with strategy pattern
+        CTRL -> SORTFACTORY : sortStrategy = getSortStrategy()
+        activate SORTFACTORY
+        deactivate SORTFACTORY
+        
+        CTRL -> ISORTSTRATEGY : doSort(legacyDtoList)
+        activate ISORTSTRATEGY
+        deactivate ISORTSTRATEGY
       deactivate CTRL
 
       ' convert to list dto and send it to ui
@@ -192,13 +201,13 @@ activate COORDINATOR
           activate WR
           deactivate WR
 
-          CTRL -> BUILDER : administration = createAdministration()
+          CTRL -> BUILDER : vacAdministration = createVaccineAdministration()
           activate BUILDER
           deactivate BUILDER
 
-          CTRL -> WR : save(administration)
-          activate WR
-          deactivate WR
+          CTRL -> VACADMINISTRATION : saveVaccineAdministration(vacAdministration)
+          activate VACADMINISTRATION
+          deactivate VACADMINISTRATION
 
           CTRL -> BUILDER : arrivalEvent = createArrivalEvent()
           activate BUILDER

@@ -33,20 +33,26 @@ public class AppointmentTest {
     this.vtStore = company.getVaccineTypeStore();
     this.vtechStore = company.getVaccineTechnologyStore();
 
-    SNSUser snsUser =
-        snsUserStore.createSNSUser("00000000", "123456789", "name", Calendar.getInstance().getTime(), Gender.MALE, "+351212345678", "s@user.com", "address");
+    SNSUser snsUser = snsUserStore.createSNSUser("00000000", "123456789",
+        "name", Calendar.getInstance().getTime(), Gender.MALE, "+351212345678",
+        "s@user.com", new Address("street", 1, "11-11", "city"));
     this.snsUserStore.saveSNSUser(snsUser);
 
-    Employee e2 = empStore.createEmployee("Name2", "+351916919269", "c@user.com", "address", "15542404", Constants.ROLE_COORDINATOR);
+    Employee e2 = empStore.createEmployee("Name2", "+351916919269",
+        "c@user.com", new Address("street", 1, "11-11", "city"), "15542404",
+        Constants.ROLE_COORDINATOR);
     this.empStore.saveEmployee(e2);
 
     this.vtechStore.addVaccineTechnology("M_RNA_TECHNOLOGY");
 
-    this.vacType = vtStore.addVaccineType("00000", "COVID-19", "M_RNA_TECHNOLOGY");
+    this.vacType =
+        vtStore.addVaccineType("00000", "COVID-19", "M_RNA_TECHNOLOGY");
     this.vtStore.saveVaccineType(vacType);
 
-    this.center = vcStore.createCommunityMassCenter("Centro Vacinação de Teste", "Rua de Teste", "test@gmail.com", "+351212345678", "+351212345679",
-        "http://www.test.com", "20:00", "21:00", 7, 5, e2, vacType);
+    this.center = vcStore.createCommunityMassCenter("Centro Vacinação de Teste",
+        new Address("Rua de teste", 1, "11-1", "city"), "test@gmail.com",
+        "+351212345678", "+351212345679", "http://www.test.com", "20:00",
+        "21:00", 7, 5, e2, vacType);
     this.vcStore.saveVaccinationCenter(this.center);
   }
 
@@ -57,12 +63,13 @@ public class AppointmentTest {
     date.set(Calendar.HOUR_OF_DAY, 20);
     date.set(Calendar.MINUTE, 30);
 
-    Appointment appointment = new Appointment(snsUser, date, center, this.vacType, true);
+    Appointment appointment =
+        new Appointment(snsUser, date, center, this.vacType, true);
     String result = appointment.toString();
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     String expected = String.format(
-        "Appointment: \n\nSNS Number: 123456789\nDate: %s 20:30\nVaccination Center: Community Mass Vaccination Center data:\n\nName: Centro Vacinação de Teste\nAddress: Rua de Teste\nEmail: test@gmail.com\nPhone number: +351212345678\nFax number: +351212345679\nWeb address: http://www.test.com\nOpening hours: 20:00\nClosing hours: 21:00\nSlot duration: 7\nMaximum vaccines per slot: 5\nCoordinator: Name2\nVaccine type given on the center:\n\nVaccine type specifications:\nCode: 00000\nDescription: COVID-19\nTechnology: M_RNA_TECHNOLOGY\n\nVaccine Type: Vaccine type specifications:\nCode: 00000\nDescription: COVID-19\nTechnology: M_RNA_TECHNOLOGY\n\nSend SMS: Yes",
+        "Appointment: \n\nSNS Number: 123456789\nDate: %s 20:30\nVaccination Center: Community Mass Vaccination Center data:\n\nName: Centro Vacinação de Teste\nAddress: Rua de teste 1, 11-1 city\nEmail: test@gmail.com\nPhone number: +351212345678\nFax number: +351212345679\nWeb address: http://www.test.com\nOpening hours: 20:00\nClosing hours: 21:00\nSlot duration: 7\nMaximum vaccines per slot: 5\nCoordinator: Name2\nVaccine type given on the center:\n\nVaccine type specifications:\nCode: 00000\nDescription: COVID-19\nTechnology: M_RNA_TECHNOLOGY\n\nVaccine Type: Vaccine type specifications:\nCode: 00000\nDescription: COVID-19\nTechnology: M_RNA_TECHNOLOGY\n\nSend SMS: Yes",
         sdf.format(Calendar.getInstance().getTime()));
 
     assertEquals(expected, result);
@@ -71,7 +78,7 @@ public class AppointmentTest {
     result = appointment.toString();
 
     expected = String.format(
-        "Appointment: \n\nSNS Number: 123456789\nDate: %s 20:30\nVaccination Center: Community Mass Vaccination Center data:\n\nName: Centro Vacinação de Teste\nAddress: Rua de Teste\nEmail: test@gmail.com\nPhone number: +351212345678\nFax number: +351212345679\nWeb address: http://www.test.com\nOpening hours: 20:00\nClosing hours: 21:00\nSlot duration: 7\nMaximum vaccines per slot: 5\nCoordinator: Name2\nVaccine type given on the center:\n\nVaccine type specifications:\nCode: 00000\nDescription: COVID-19\nTechnology: M_RNA_TECHNOLOGY\n\nVaccine Type: Vaccine type specifications:\nCode: 00000\nDescription: COVID-19\nTechnology: M_RNA_TECHNOLOGY\n\nSend SMS: No",
+        "Appointment: \n\nSNS Number: 123456789\nDate: %s 20:30\nVaccination Center: Community Mass Vaccination Center data:\n\nName: Centro Vacinação de Teste\nAddress: Rua de teste 1, 11-1 city\nEmail: test@gmail.com\nPhone number: +351212345678\nFax number: +351212345679\nWeb address: http://www.test.com\nOpening hours: 20:00\nClosing hours: 21:00\nSlot duration: 7\nMaximum vaccines per slot: 5\nCoordinator: Name2\nVaccine type given on the center:\n\nVaccine type specifications:\nCode: 00000\nDescription: COVID-19\nTechnology: M_RNA_TECHNOLOGY\n\nVaccine Type: Vaccine type specifications:\nCode: 00000\nDescription: COVID-19\nTechnology: M_RNA_TECHNOLOGY\n\nSend SMS: No",
         sdf.format(Calendar.getInstance().getTime()));
 
     assertEquals(expected, result);
@@ -84,7 +91,8 @@ public class AppointmentTest {
     date.set(Calendar.HOUR_OF_DAY, 20);
     date.set(Calendar.MINUTE, 30);
 
-    Appointment appointment = new Appointment(snsUser, date, center, this.vacType, true);
+    Appointment appointment =
+        new Appointment(snsUser, date, center, this.vacType, true);
 
     assertEquals(true, appointment.hasVaccineType(this.vacType));
     assertEquals(false, appointment.hasVaccineType(null));

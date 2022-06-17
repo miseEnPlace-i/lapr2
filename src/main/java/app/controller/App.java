@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
+import app.domain.model.Address;
 import app.domain.model.AdminProcess;
 import app.domain.model.Company;
 import app.domain.model.DoseInfo;
@@ -52,8 +53,9 @@ public class App {
   private App() {
     loadCompany();
 
-    if (this.company.getAuthFacade() == null) this.authFacade = new AuthFacade();
-    else this.authFacade = this.company.getAuthFacade();
+    if (this.company == null) restoreCompany();
+
+    this.authFacade = this.company.getAuthFacade();
 
     this.employeeStore = this.company.getEmployeeStore();
     this.employeeRoleStore = this.company.getEmployeeRoleStore();
@@ -96,7 +98,9 @@ public class App {
   }
 
   private boolean isFirstRun() {
-    return !new File(Constants.DATA_FILE_PATH).exists();
+    Properties props = PropertiesUtils.getProperties();
+    String auto = props.getProperty(Constants.PARAMS_AUTO_DESERIALIZE);
+    return !(auto != null && auto.equals("true")) || !new File(Constants.DATA_FILE_PATH).exists();
   }
 
   private Company readExistingCompany(File file) {
@@ -127,6 +131,12 @@ public class App {
       System.out.println("Error saving company");
       return false;
     }
+  }
+
+  public void restoreCompany() {
+    File file = new File(Constants.DATA_FILE_PATH);
+    if (!file.delete()) System.out.println("Error restoring company");
+    else System.out.println("Successfully restored company!");
   }
 
   private void writeCompany(Company comp, String filePath) {
@@ -199,20 +209,26 @@ public class App {
     Calendar date = Calendar.getInstance();
     date.add(Calendar.YEAR, -18);
 
-    SNSUser user = this.snsUserStore.createSNSUser("00000000", "123456789", "name", date.getTime(), Gender.MALE, "+351212345678", "s@user.com", "address");
+    SNSUser user = this.snsUserStore.createSNSUser("00000000", "123456789", "name", date.getTime(), Gender.MALE, "+351212345678", "s@user.com",
+        new Address("street", 1, "4444-333", "city"));
     this.snsUserStore.saveSNSUser(user);
 
-    Employee e = this.employeeStore.createEmployee("Name", "+351916919169", "r@user.com", "address", "12345678", Constants.ROLE_RECEPTIONIST);
+    Employee e = this.employeeStore.createEmployee("Name", "+351916919169", "r@user.com", new Address("street", 1, "1-11", "city"), "12345678",
+        Constants.ROLE_RECEPTIONIST);
     this.employeeStore.saveEmployee(e);
-    Employee e2 = this.employeeStore.createEmployee("Name2", "+351916919269", "c@user.com", "address", "15542404", Constants.ROLE_COORDINATOR);
+    Employee e2 = this.employeeStore.createEmployee("Name2", "+351916919269", "c@user.com", new Address("street", 1, "1-11", "city"), "15542404",
+        Constants.ROLE_COORDINATOR);
     this.employeeStore.saveEmployee(e2);
-    Employee e21 = this.employeeStore.createEmployee("Name21", "+351916919269", "c2@user.com", "address", "15542404", Constants.ROLE_COORDINATOR);
+    Employee e21 = this.employeeStore.createEmployee("Name21", "+351916919269", "c2@user.com", new Address("street", 1, "1-11", "city"), "15542404",
+        Constants.ROLE_COORDINATOR);
     this.employeeStore.saveEmployee(e21);
 
-    Employee e3 = this.employeeStore.createEmployee("Name2", "+351916919269", "n@user.com", "address", "00000000", Constants.ROLE_NURSE);
+    Employee e3 =
+        this.employeeStore.createEmployee("Name2", "+351916919269", "n@user.com", new Address("street", 1, "1-11", "city"), "00000000", Constants.ROLE_NURSE);
     this.employeeStore.saveEmployee(e3);
 
-    Employee e4 = this.employeeStore.createEmployee("Name2", "+351916919269", "teste@coor.pt", "address", "00000000", Constants.ROLE_COORDINATOR);
+    Employee e4 = this.employeeStore.createEmployee("Name2", "+351916919269", "teste@coor.pt", new Address("street", 1, "1-11", "city"), "00000000",
+        Constants.ROLE_COORDINATOR);
     this.employeeStore.saveEmployee(e4);
 
     VaccineType vacType = this.vacTypeStore.addVaccineType("00000", "COVID-19", "M_RNA_TECHNOLOGY");
@@ -246,12 +262,12 @@ public class App {
     vaccine3.addAdminProc(adminProcess2);
     this.vaccineStore.saveVaccine(vaccine3);
 
-    VaccinationCenter vc = this.vaccinationCenterStore.createCommunityMassCenter("Centro Vacinação de Teste", "Rua de Teste", "test@gmail.com", "+351212345678",
-        "+351212345679", "http://www.test.com", "08:00", "20:00", 1, 500, e2, vacType);
+    VaccinationCenter vc = this.vaccinationCenterStore.createCommunityMassCenter("Centro Vacinação de Teste", new Address("street", 1, "11-11", "city"),
+        "test@gmail.com", "+351212345678", "+351212345679", "http://www.test.com", "08:00", "20:00", 1, 500, e2, vacType);
     this.vaccinationCenterStore.saveVaccinationCenter(vc);
 
-    VaccinationCenter vc2 = this.vaccinationCenterStore.createHealthCareCenter("Unidade de Saúde de Teste", "Rua de Teste", "test2@gmail.com", "+351219876543",
-        "+351219876543", "https://teste.com", "20:00", "21:00", 7, 5, e21, "AGES", "AGS");
+    VaccinationCenter vc2 = this.vaccinationCenterStore.createHealthCareCenter("Unidade de Saúde de Teste", new Address("street", 1, "11-11", "city"),
+        "test2@gmail.com", "+351219876543", "+351219876543", "https://teste.com", "20:00", "21:00", 7, 5, e21, "AGES", "AGS");
     this.vaccinationCenterStore.saveVaccinationCenter(vc2);
   }
 

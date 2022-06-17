@@ -38,8 +38,11 @@ public class Time implements Serializable {
 
     String[] timeString = time.trim().split(":");
 
-    if (timeString.length != 2) throw new IllegalArgumentException("Invalid time format");
-    if (timeString == null || timeString[0].isEmpty() || timeString[1].isEmpty()) throw new IllegalArgumentException("Time cannot be null or empty.");
+    if (timeString.length != 2)
+      throw new IllegalArgumentException("Invalid time format");
+    if (timeString == null || timeString[0].isEmpty()
+        || timeString[1].isEmpty())
+      throw new IllegalArgumentException("Time cannot be null or empty.");
 
     int hours = Integer.parseInt(timeString[0]);
     int minutes = Integer.parseInt(timeString[1]);
@@ -49,8 +52,10 @@ public class Time implements Serializable {
   }
 
   public Time(int timeInMinutes) {
-    if (timeInMinutes < 0) throw new IllegalArgumentException("Time in minutes cannot be negative.");
-    if (timeInMinutes > 24 * 60) throw new IllegalArgumentException("Minutes in day must be in valid.");
+    if (timeInMinutes < 0)
+      throw new IllegalArgumentException("Time in minutes cannot be negative.");
+    if (timeInMinutes > 24 * 60)
+      throw new IllegalArgumentException("Minutes in day must be in valid.");
 
     int hours = timeInMinutes / 60;
     int minutes = timeInMinutes % 60;
@@ -81,13 +86,15 @@ public class Time implements Serializable {
   }
 
   private void setHours(int hours) {
-    if (hours < 0 || hours >= 24) throw new IllegalArgumentException("Hours must be between 0 and 23");
+    if (hours < 0 || hours >= 24)
+      throw new IllegalArgumentException("Hours must be between 0 and 23");
 
     this.hours = hours;
   }
 
   private void setMinutes(int minutes) {
-    if (minutes < 0 || minutes >= 60) throw new IllegalArgumentException("Minutes must be between 0 and 59");
+    if (minutes < 0 || minutes >= 60)
+      throw new IllegalArgumentException("Minutes must be between 0 and 59");
 
     this.minutes = minutes;
   }
@@ -110,7 +117,8 @@ public class Time implements Serializable {
    */
   public boolean isAfter(Time otherTime) {
     if (this.hours > otherTime.hours) return true;
-    if (this.hours == otherTime.hours && this.minutes > otherTime.minutes) return true;
+    if (this.hours == otherTime.hours && this.minutes > otherTime.minutes)
+      return true;
 
     return false;
   }
@@ -146,6 +154,20 @@ public class Time implements Serializable {
     if (equals(startTime)) return true;
 
     return isAfter(startTime) && isBefore(endTime);
+  }
+
+  public Time clone() {
+    return new Time(hours, minutes);
+  }
+
+  public void addMinutes(int minutes) {
+    if (minutes < 0)
+      throw new IllegalArgumentException("Minutes cannot be negative.");
+
+    int newMinutes = convertToMinutes() + minutes;
+
+    setHours(newMinutes / 60);
+    setMinutes(newMinutes % 60);
   }
 
   @Override

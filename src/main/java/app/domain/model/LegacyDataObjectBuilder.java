@@ -1,8 +1,8 @@
 package app.domain.model;
 
-import app.domain.model.list.AdministrationList;
 import app.domain.model.list.AppointmentScheduleList;
 import app.domain.model.list.CenterEventList;
+import app.domain.model.list.VaccineAdministrationList;
 import app.domain.shared.CenterEventType;
 import app.dto.VaccineTypeDTO;
 import app.mapper.VaccineTypeMapper;
@@ -33,9 +33,9 @@ public class LegacyDataObjectBuilder {
     return waitingRoom.createArrival(this.appointment, this.legacyData.getArrivalDate());
   }
 
-  public Administration createAdministration() {
-    AdministrationList administList = this.legacyData.getSNSUser().getAdministrationList();
-    return administList.create(legacyData.getVaccine(), legacyData.getDoseNumber(), legacyData.getLotNumber(), legacyData.getCenter(),
+  public VaccineAdministration createAdministration() {
+    VaccineAdministrationList administList = this.legacyData.getSNSUser().getUserHealthData().getVaccineAdministrationList();
+    return administList.createVaccineAdministration(this.legacyData.getSNSUser(), legacyData.getVaccine(), legacyData.getLotNumber(), legacyData.getDoseNumber(), legacyData.getCenter(),
         legacyData.getAdministrationDate());
   }
 

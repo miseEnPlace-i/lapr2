@@ -8,22 +8,28 @@ participant ":RegisterVaccineAdministrationController" as controller
 participant "nurseSession\n:NurseSession" as nurseSession
 participant "company\n:Company" as company
 participant "snsUserStore\n:SNSUserStore" as snsUserStore
+participant "vaccineAdministrationList\n:VaccineAdministrationList" as vaccineAdministrationList
 participant "snsUser\n:SNSUser" as snsUser
 participant "userHealthData\n:UserHealthData" as userHealthData
 participant "arrivalDto\n:ArrivalDTO" as arrivalDto
 participant "appointment\n:Appointment" as appointment
 participant "vaccineStore\n:VaccineStore" as vaccineStore
 participant "vaccine\n:Vaccine" as vaccine
-participant "vaccineAdministrationList\n:VaccineAdministrationList" as vaccineAdministrationList
 participant ":UserVaccinationInfoMapper" as userVaccinationInfoMapper
 participant ":DosageInfoMapper" as dosageInfoMapper
 participant "vaccineDto\n:VaccineDTO" as vaccineDto
-participant "vaccineAdministrationList\n:VaccineAdministrationList" as vaccineAdministrationList
 participant "vaccineAdministration\n:VaccineAdministration" as vaccineAdministration
 participant "waitingRoom\n:WaitingRoom" as waitingRoom
 participant "recoveryRoom\n:RecoveryRoom" as recoveryRoom
 participant "vaccinationCenter\n:VaccinationCenter" as vaccinationCenter
 participant "centerEventList\n:CenterEventList" as centerEventList
+participant "properties\n:Properties" as properties
+participant ":PropertiesUtils" as propertiesUtils
+participant ":UserNotificationMapper" as userNotificationMapper
+participant ":SenderFactory" as senderFactory
+participant ":Sender" as sender
+participant "timer:Timer" as timer
+participant "removeRecoveryRoomTask:RemoveRecoveryRoomTask" as removeRecoveryRoomTask
 
 participant "waitingRoomDto\n:List<ArrivalDTO>" as waitingRoomDto
 ' participant "vaccines\n:List<Vaccine>" as vaccinesList
@@ -83,6 +89,25 @@ activate ui
     controller -> snsUser : age = getAge()
     activate snsUser
     deactivate snsUser
+    controller -> snsUser : userHealthData = getUserHealthData()
+    activate snsUser
+    deactivate snsUser
+    controller -> userHealthData : adverseReactionsDto = getAdverseReactions()
+    activate userHealthData
+    deactivate userHealthData
+    controller -> userVaccinationInfoMapper : userVaccinationInfoDto = toDto(name, age, adverseReactionsDto)
+    activate userVaccinationInfoMapper
+    deactivate userVaccinationInfoMapper
+    controller --> ui : userVaccinationInfoDto
+  deactivate controller
+  ui --> nurse : shows SNS user's name, age and previous adverse reactions
+deactivate ui
+
+nurse -> ui : asks to proceed
+
+activate ui
+  ui -> controller : getLastTakenVaccineFromArrival(arrivalDto)
+  activate controller
     controller -> controller : vaccineAdministrationList = getVaccineAdministrationListFromArrival(arrivalDto)
     activate controller
       controller -> controller : snsUser = getSnsUserFromArrival(arrivalDto)
@@ -99,29 +124,6 @@ activate ui
       activate userHealthData
       deactivate userHealthData
     deactivate controller
-    controller -> vaccineAdministrationList : adverseReactionsDto = getAdverseReactions()
-    activate vaccineAdministrationList
-    deactivate vaccineAdministrationList
-    controller -> userVaccinationInfoMapper : userVaccinationInfoDto = toDto(name, age, adverseReactionsDto)
-    activate userVaccinationInfoMapper
-    deactivate userVaccinationInfoMapper
-    controller --> ui : userVaccinationInfoDto
-  deactivate controller
-  ui --> nurse : shows SNS user's name, age and previous adverse reactions
-deactivate ui
-
-nurse -> ui : asks to proceed
-
-activate ui
-  ui -> controller : getLastTakenVaccineFromArrival(arrivalDto)
-  activate controller
-    controller -> controller : vaccineAdministrationList = getVaccineAdministrationListFromArrival(arrivalDto)
-    activate controller
-    deactivate controller
-    note right
-        Steps for getting the vaccine administration 
-        list are specified in message 15
-    end note
     controller -> arrivalDto : appointment = getAppointment()
     activate arrivalDto
     deactivate arrivalDto
@@ -191,7 +193,7 @@ activate ui
     deactivate controller
     note right
         Steps for getting the vaccine administration 
-        list are specified in message 15
+        list are specified in message 22
     end note
     controller -> vaccineAdministrationList : doseNumber = getNextDoseNumberOfVaccine(vaccine)
     activate vaccineAdministrationList
@@ -223,7 +225,7 @@ activate ui
     deactivate controller
     note right
         Steps for getting the vaccine administration 
-        list are specified in message 15
+        list are specified in message 22
     end note
     controller -> vaccineDto : id = getId()
     activate vaccineDto
@@ -243,8 +245,10 @@ activate ui
       vaccineAdministrationList -> vaccineAdministration** : create(snsUser, vaccine, lotNumber, doseNumber, vaccinationCenter, date)
     deactivate vaccineAdministrationList
     controller -> vaccineAdministrationList : validateVaccineAdministration(vaccineAdministration)
-    activate vaccineAdministrationList
-    deactivate vaccineAdministrationList
+    ref over vaccineAdministrationList
+      Steps for validating the vaccine administration
+      are specified in US08_ValidateVaccineAdministrationSD
+    end ref
   deactivate controller
   ui --> nurse : shows all data and requests confirmation
 deactivate ui
@@ -255,44 +259,10 @@ activate ui
   ui -> controller : save()
   activate controller 
     controller -> vaccineAdministrationList : saveVaccineAdministration(vaccineAdministration)
-    activate vaccineAdministrationList
-      vaccineAdministrationList -> vaccineAdministrationList : add(vaccineAdministration)
-      activate vaccineAdministrationList
-      deactivate vaccineAdministrationList
-      vaccineAdministrationList -> vaccineAdministration : vaccinationCenter = getVaccinationCenter()
-      activate vaccineAdministration
-      deactivate vaccineAdministration
-      vaccineAdministrationList -> vaccinationCenter : addVaccineAdministrationToList(vaccineAdministration)
-      activate vaccinationCenter
-      deactivate vaccinationCenter
-      vaccineAdministrationList -> vaccinationCenter : centerEventList = getEvents()
-      activate vaccinationCenter
-      deactivate vaccinationCenter
-      vaccineAdministrationList -> vaccineAdministration : snsUser = getSnsUser()
-      activate vaccineAdministration
-      deactivate vaccineAdministration
-      vaccineAdministrationList -> vaccineAdministration : date = getDate()
-      activate vaccineAdministration
-      deactivate vaccineAdministration
-      vaccineAdministrationList -> centerEventList : create(date, CenterEventType.VACCINATED, snsUser)
-      activate centerEventList
-      deactivate centerEventList
-      vaccineAdministrationList -> vaccinationCenter : waitingRoom = getWaitingRoom()
-      activate vaccinationCenter
-      deactivate vaccinationCenter
-      vaccineAdministrationList -> waitingRoom : removeUser(snsUser)
-      activate waitingRoom
-      deactivate waitingRoom
-      vaccineAdministrationList -> vaccinationCenter : recoveryRoom = getRecoveryRoom()
-      activate vaccinationCenter
-      deactivate vaccinationCenter
-      vaccineAdministrationList -> recoveryRoom : addUser(snsUser)
-      activate recoveryRoom
-      deactivate recoveryRoom
-      vaccineAdministrationList -> vaccineAdministration : setSmsSending()
-      activate vaccineAdministration
-      deactivate vaccineAdministration
-    deactivate vaccineAdministrationList
+    ref over vaccineAdministrationList
+      Steps for saving the vaccine administration
+      are specified in US08_SaveVaccineAdministrationSD
+    end ref
   deactivate controller
   ui --> nurse: informs operation success
 deactivate ui

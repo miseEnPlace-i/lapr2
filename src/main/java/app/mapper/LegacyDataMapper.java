@@ -30,7 +30,8 @@ public class LegacyDataMapper {
   }
 
   public static LegacyDataDTO toDto(String[] fileData) throws ParseException {
-    if (fileData == null || fileData.length < 8) throw new IllegalArgumentException();
+    if (fileData == null || fileData.length < 8)
+      throw new IllegalArgumentException();
 
     int dose = 0;
 
@@ -60,17 +61,26 @@ public class LegacyDataMapper {
     administrationDate.setTime(df.parse(fileData[6]));
     departureDate.setTime(df.parse(fileData[7]));
 
-    return new LegacyDataDTO(fileData[0], fileData[1], dose, fileData[3], scheduledDate, arrivalDate, administrationDate, departureDate);
+    Company company = App.getInstance().getCompany();
+    VaccineStore vaccineStore = company.getVaccineStore();
+    Vaccine vaccine = vaccineStore.getVaccineByDesignation(fileData[1]);
+
+    return new LegacyDataDTO(fileData[0], fileData[1], dose, fileData[3],
+        scheduledDate, arrivalDate, administrationDate, departureDate,
+        vaccine.getVacType().getDescription());
   }
 
-  public static LegacyData toModel(LegacyDataDTO dto, VaccinationCenter center) {
+  public static LegacyData toModel(LegacyDataDTO dto,
+      VaccinationCenter center) {
     Company company = App.getInstance().getCompany();
     SNSUserStore snsUserStore = company.getSNSUserStore();
     VaccineStore vaccineStore = company.getVaccineStore();
     SNSUser snsUser = snsUserStore.findSNSUserByNumber(dto.getSnsNumber());
-    Vaccine vaccine = vaccineStore.getVaccineByDesignation(dto.getVaccineName());
+    Vaccine vaccine =
+        vaccineStore.getVaccineByDesignation(dto.getVaccineName());
 
-    return new LegacyData(snsUser, vaccine, dto.getDose(), dto.getLotNumber(), dto.getArrivalDate(), dto.getScheduledDate(), dto.getAdministrationDate(),
-        dto.getDepartureDate(), center);
+    return new LegacyData(snsUser, vaccine, dto.getDose(), dto.getLotNumber(),
+        dto.getArrivalDate(), dto.getScheduledDate(),
+        dto.getAdministrationDate(), dto.getDepartureDate(), center);
   }
 }

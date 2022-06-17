@@ -40,12 +40,18 @@ public final class FormatVerifier {
   }
 
   /**
-   * <p>Validates if the given string is a citizen card number. ~~Follows the rules for portuguese citizens cards.~~</p>
+   * <p>
+   * Validates if the given string is a citizen card number. ~~Follows the rules for portuguese citizens cards.~~
+   * </p>
    * 
-   * <p>~~Working example: 000000000ZZ4~~</p>
+   * <p>
+   * ~~Working example: 000000000ZZ4~~
+   * </p>
    * 
-   * <p>For reference:
-   * https://www.autenticacao.gov.pt/documents/20126/115760/Valida%C3%A7%C3%A3o+de+N%C3%BAmero+de+Documento+do+Cart%C3%A3o+de+Cidad%C3%A3o.pdf/bdc4eb37-7316-3ff4-164a-f869382b7053</p>
+   * <p>
+   * For reference:
+   * https://www.autenticacao.gov.pt/documents/20126/115760/Valida%C3%A7%C3%A3o+de+N%C3%BAmero+de+Documento+do+Cart%C3%A3o+de+Cidad%C3%A3o.pdf/bdc4eb37-7316-3ff4-164a-f869382b7053
+   * </p>
    * 
    * @param cc The citizen card number to be verified.
    * @return True if the cc is valid, false otherwise.
@@ -62,9 +68,13 @@ public final class FormatVerifier {
   }
 
   /**
-   * <p>Validates if the given string is a email. Must follow the structure <user>@<domain>. Ex.: example@email.com</p>
+   * <p>
+   * Validates if the given string is a email. Must follow the structure <user>@<domain>. Ex.: example@email.com
+   * </p>
    * 
-   * <p>For reference: https://www.emailregex.com</p>
+   * <p>
+   * For reference: https://www.emailregex.com
+   * </p>
    * 
    * @param expression The expression to be validated.
    * @return True if the expression is a valid email, false otherwise.
@@ -75,8 +85,13 @@ public final class FormatVerifier {
   }
 
   /**
-   * <p>Validates if the given string is a phone number. Follows the patterns +{extension}{number} or {number} Example: +351223456789.</p>
-   * <p>Between the extension and the number there is no space. The first digit after the extension must be a 2 or a 9.</p>
+   * <p>
+   * Validates if the given string is a phone number. Follows the patterns +{extension}{number} or {number} Example:
+   * +351223456789.
+   * </p>
+   * <p>
+   * Between the extension and the number there is no space. The first digit after the extension must be a 2 or a 9.
+   * </p>
    * 
    * @param expression The expression to be validated.
    * @return True if the expression is a valid phone number, false otherwise.
@@ -140,5 +155,9 @@ public final class FormatVerifier {
     } catch (IllegalArgumentException e) {
       return false;
     }
+  }
+
+  public static boolean validatePostalCode(String expression) {
+    return expression.matches("[0-9]{1,}[-]?[0-9]{1,}");
   }
 }

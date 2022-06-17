@@ -16,7 +16,7 @@ public class SNSUserRegisterInfoMapper {
   // converts SNSUser to SNSUserRegisterInfoDTO
   public static SNSUserRegisterInfoDTO toDto(SNSUser user, String pwd, String role) {
     return new SNSUserRegisterInfoDTO(user.getCitizenCard(), user.getSnsNumber(), user.getName(), user.getBirthDay().toString(), user.getGender().toString(),
-        user.getPhoneNumber(), user.getEmail(), user.getAddress(), pwd, role);
+        user.getPhoneNumber(), user.getEmail(), user.getAddress().toString(), pwd, role);
   }
 
 }

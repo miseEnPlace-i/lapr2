@@ -17,7 +17,6 @@ public class VaccineAdministration implements Comparable<VaccineAdministration>,
   private int doseNumber;
   private VaccinationCenter vaccinationCenter;
   private Calendar date;
-  private AdverseReaction adverseReaction;
 
   /**
    * Constructor for VaccineAdministration.
@@ -100,24 +99,6 @@ public class VaccineAdministration implements Comparable<VaccineAdministration>,
   }
 
   /**
-   * Adds an adverse reaction to the vaccine administration.
-   * 
-   * @param adverseReaction the adverse reaction to add
-   */
-  public void addAdverseReaction(AdverseReaction adverseReaction) {
-    this.adverseReaction = adverseReaction;
-  }
-
-  /**
-   * Gets the adverse reaction of the vaccine administration.
-   * 
-   * @return the adverse reaction of the vaccine administration
-   */
-  public AdverseReaction getAdverseReaction() {
-    return adverseReaction;
-  }
-
-  /**
    * Checks if the vaccine administrated has the given vaccine type.
    * 
    * @param vaccineType the vaccine type to check
@@ -142,7 +123,7 @@ public class VaccineAdministration implements Comparable<VaccineAdministration>,
     return this.date;
   }
 
-  
+
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();

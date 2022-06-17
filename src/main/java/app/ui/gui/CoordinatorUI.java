@@ -71,16 +71,15 @@ public class CoordinatorUI extends EmployeeRoleUI {
     }
   }
 
-  @FXML
-  public void toExportCenterStatistics() {
+  public ImportLegacyData2UI toImportLegacyDataScene2() {
     try {
-      ExportCenterStatisticsUI importUI = (ExportCenterStatisticsUI) this.mainApp.replaceSceneContent("/fxml/ExportStatisticsInitialPage.fxml");
+      ImportLegacyData2UI importUI = (ImportLegacyData2UI) this.mainApp.replaceSceneContent("/fxml/ImportLegacyData_2.fxml");
       importUI.init(this);
-
-      // importUI.getNameTxtField.requestFocus() to make sure the text field you need focused is, in fact, focused
+      return importUI;
     } catch (Exception ex) {
       Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
     }
+    return null;
   }
 
   @Override
