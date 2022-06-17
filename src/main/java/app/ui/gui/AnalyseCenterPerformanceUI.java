@@ -118,7 +118,6 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
     txtInterval.setText("");
   }
 
-
   private void loadDialog(CenterPerformance performance) {
     final double SCENE_WIDTH = 720.0;
     final double SCENE_HEIGHT = 480.0;
@@ -142,7 +141,7 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
     FlowPane sumContainer = generatePaneWithData("Max Sum",
         "" + performance.getMaxSum(), SCENE_WIDTH);
     FlowPane beginningIntervalContainer =
-        generatePaneWithData("Beggining Time of Interval",
+        generatePaneWithData("Beginning Time of Interval",
             performance.getStartingInterval() + "h", SCENE_WIDTH);
     FlowPane endIntervalContainer = generatePaneWithData("End Time of Interval",
         performance.getEndingInterval() + "h", SCENE_WIDTH);
@@ -157,7 +156,6 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
 
     VBox pane = new VBox(16);
 
-    // Setting the space between the nodes of a VBox pane
     pane.setAlignment(Pos.CENTER);
     pane.getChildren().addAll(inputListContainer, maxSubListContainer,
         sumContainer, beginningIntervalContainer, endIntervalContainer,
@@ -212,10 +210,8 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
             Number val =
                 (Number) (item.getYValue() instanceof Number ? item.getYValue()
                     : item.getXValue());
-            if (val.doubleValue() < 0) {
-              // add missing CSS class
+            if (val.doubleValue() < 0)
               item.getNode().getStyleClass().add("negative");
-            }
           }
 
           /**
@@ -228,7 +224,6 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
               List<Data<String, Number>> items = getData().get(i).getData();
               for (int j = 0; j < items.size(); j++) {
                 Node bar = items.get(j).getNode();
-                // change .setAll to .addAll to avoid overriding styles
                 bar.getStyleClass()
                     .removeIf(s -> s.matches("chart-bar|(series|data)\\d+"));
                 bar.getStyleClass().addAll("chart-bar", "series" + i,

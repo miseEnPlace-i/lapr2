@@ -35,7 +35,6 @@
           <Menu mnemonicParsing="false" text="File">
             <items>
               <MenuItem fx:id="menuSaveSession" mnemonicParsing="false" onAction="#handleSaveSession" text="Save session" />
-                  <MenuItem mnemonicParsing="false" onAction="#handleRestoreSession" text="Restore Defaults" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="menuLogout" mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
                   <MenuItem fx:id="menuExit1" mnemonicParsing="false" onAction="#handleExit" text="Exit" />
@@ -85,9 +84,9 @@
       </AnchorPane>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="900.0" spacing="16.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
          <children>
-            <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="320.0" text="Register a SNS User" onAction="#handleRegisterSNSUser" />
-            <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="320.0" text="Schedule Vaccination" onAction="#handleScheduleVaccination" />
-            <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="320.0" text="Register an Arrival" onAction="#handleRegisterArrival" />
+            <Button mnemonicParsing="false" onAction="#handleRegisterSNSUser" prefHeight="32.0" prefWidth="320.0" text="Register a SNS User" />
+            <Button mnemonicParsing="false" onAction="#handleScheduleVaccination" prefHeight="32.0" prefWidth="320.0" text="Schedule Vaccination" />
+            <Button mnemonicParsing="false" onAction="#handleRegisterArrival" prefHeight="32.0" prefWidth="320.0" text="Register an Arrival" />
          </children>
       </VBox>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="16.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
