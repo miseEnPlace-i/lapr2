@@ -16,7 +16,6 @@ import app.domain.model.DoseInfo;
 import app.domain.model.Employee;
 import app.domain.model.MyUserRole;
 import app.domain.model.SNSUser;
-import app.domain.model.Scheduler;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.Vaccine;
 import app.domain.model.VaccineType;
@@ -73,9 +72,10 @@ public class App {
       writeCompany(this.company, Constants.DATA_FILE_PATH);
     }
 
-    
+
     props = PropertiesUtils.getProperties();
-    this.company.scheduleDailyVaccinated(props.getProperty(Constants.PARAMS_EXPORTATION_PATH), props.getProperty(Constants.PARAMS_EXPORTATION_TIME), props.getProperty(Constants.PARAMS_EXPORTATION_SEPARATOR));
+    this.company.scheduleDailyVaccinated(props.getProperty(Constants.PARAMS_EXPORTATION_PATH), props.getProperty(Constants.PARAMS_EXPORTATION_TIME),
+        props.getProperty(Constants.PARAMS_EXPORTATION_SEPARATOR));
 
   }
 
@@ -124,6 +124,7 @@ public class App {
   }
 
   public boolean saveCurrentCompany() {
+    System.out.println("Saving current data... Please wait...");
     try {
       writeCompany(this.company, Constants.DATA_FILE_PATH);
       return true;
