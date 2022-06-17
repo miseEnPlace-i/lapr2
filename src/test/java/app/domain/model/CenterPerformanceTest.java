@@ -18,33 +18,52 @@ public class CenterPerformanceTest {
 
   @Before
   public void setup() throws ParseException {
-    Employee coordinator = new Employee("123456789", "name", "+351212345678", "email@email.com", new Address("street", 1, "11-11", "city"), "00000000",
-        Constants.ROLE_COORDINATOR);
+    Employee coordinator = new Employee("123456789", "name", "+351212345678",
+        "email@email.com", new Address("street", 1, "11-11", "city"),
+        "00000000", Constants.ROLE_COORDINATOR);
 
-    center = new HealthCareCenter("name", new Address("street", 1, "11-11", "city"), "email@email.com", "+351212345678", "+351212345678", "https://ccc.com",
-        new Time("10:00"), new Time("11:00"), new Slot(5, 5), coordinator, "ages", "ars");
+    center = new HealthCareCenter("name",
+        new Address("street", 1, "11-11", "city"), "email@email.com",
+        "+351212345678", "+351212345678", "https://ccc.com", new Time("10:00"),
+        new Time("11:00"), new Slot(5, 5), coordinator, "ages", "ars");
 
     new VaccineType("12345", "description", "technology");
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
     SimpleDateFormat sdfBday = new SimpleDateFormat("dd-MM-yyyy");
-    SNSUser user = new SNSUser("00000000", "123456789", "name", sdfBday.parse("01-02-2022"), Gender.MALE, "+351212345678", "email@email.com",
-        new Address("street", 1, "11-11", "city"));
+    SNSUser user = new SNSUser("00000000", "123456789", "name",
+        sdfBday.parse("01-02-2022"), Gender.MALE, "+351212345678",
+        "email@email.com", new Address("street", 1, "11-11", "city"));
 
     CenterEventList eventList = this.center.getEvents();
-    eventList.save(eventList.create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:00")), CenterEventType.ARRIVAL, user));
-    eventList.save(eventList.create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:00")), CenterEventType.ARRIVAL, user));
-    eventList.save(eventList.create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:00")), CenterEventType.ARRIVAL, user));
-    eventList.save(eventList.create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:00")), CenterEventType.ARRIVAL, user));
-    eventList.save(eventList.create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:10")), CenterEventType.ARRIVAL, user));
-    eventList.save(eventList.create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:10")), CenterEventType.DEPARTURE, user));
-    eventList.save(eventList.create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:20")), CenterEventType.DEPARTURE, user));
+    eventList.save(
+        eventList.create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:00")),
+            CenterEventType.ARRIVAL, user));
+    eventList.save(
+        eventList.create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:00")),
+            CenterEventType.ARRIVAL, user));
+    eventList.save(
+        eventList.create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:00")),
+            CenterEventType.ARRIVAL, user));
+    eventList.save(
+        eventList.create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:00")),
+            CenterEventType.ARRIVAL, user));
+    eventList.save(
+        eventList.create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:10")),
+            CenterEventType.ARRIVAL, user));
+    eventList.save(
+        eventList.create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:10")),
+            CenterEventType.DEPARTURE, user));
+    eventList.save(
+        eventList.create(DateUtils.toCalendar(sdf.parse("05-10-2022 10:20")),
+            CenterEventType.DEPARTURE, user));
   }
 
 
   @Test
   public void ensureMaxSumIsCorrect() throws ParseException {
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-    CenterPerformance performance = center.getCenterPerformanceForDay(DateUtils.toCalendar(sdf.parse("05-10-2022")), 5);
+    CenterPerformance performance = center.getCenterPerformanceForDay(
+        DateUtils.toCalendar(sdf.parse("05-10-2022")), 5);
 
     assertEquals(performance.getMaxSum(), 4);
   }
@@ -52,7 +71,8 @@ public class CenterPerformanceTest {
   @Test
   public void ensureDifferencesListSizeIsCorrect() throws ParseException {
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-    CenterPerformance performance = center.getCenterPerformanceForDay(DateUtils.toCalendar(sdf.parse("05-10-2022")), 60);
+    CenterPerformance performance = center.getCenterPerformanceForDay(
+        DateUtils.toCalendar(sdf.parse("05-10-2022")), 60);
 
     assertEquals(1, performance.getDifferencesList().size());
   }
@@ -60,18 +80,21 @@ public class CenterPerformanceTest {
   @Test
   public void ensureDifferencesListIsCorrect() throws ParseException {
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-    CenterPerformance performance = center.getCenterPerformanceForDay(DateUtils.toCalendar(sdf.parse("05-10-2022")), 60);
+    CenterPerformance performance = center.getCenterPerformanceForDay(
+        DateUtils.toCalendar(sdf.parse("05-10-2022")), 60);
 
     Integer[] expected = new Integer[] {3};
     assertEquals(Arrays.asList(expected), performance.getDifferencesList());
   }
 
   @Test
-  public void ensureDifferencesListWithTinyIntervalIsCorrect() throws ParseException {
+  public void ensureDifferencesListWithTinyIntervalIsCorrect()
+      throws ParseException {
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-    CenterPerformance performance = center.getCenterPerformanceForDay(DateUtils.toCalendar(sdf.parse("05-10-2022")), 10);
+    CenterPerformance performance = center.getCenterPerformanceForDay(
+        DateUtils.toCalendar(sdf.parse("05-10-2022")), 10);
 
     Integer[] expected = new Integer[] {4, 0, -1, 0, 0, 0};
-    // assertEquals(Arrays.asList(expected), performance.getDifferencesList());
+    assertEquals(Arrays.asList(expected), performance.getDifferencesList());
   }
 }

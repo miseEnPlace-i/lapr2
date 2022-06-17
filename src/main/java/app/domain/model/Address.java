@@ -5,16 +5,17 @@ import app.service.FormatVerifier;
 
 public class Address implements Serializable {
   private String street;
-  private int number;
+  private int doorNumber;
   private String postalCode;
   private String city;
 
-  public Address(String street, int number, String postalCode, String city) {
+  public Address(String street, int doorNumber, String postalCode,
+      String city) {
     if (street == null || street.isEmpty()) {
       throw new IllegalArgumentException("Street is not valid.");
     }
 
-    if (number < 0) {
+    if (doorNumber < 0) {
       throw new IllegalArgumentException("Number is not valid.");
     }
 
@@ -27,7 +28,7 @@ public class Address implements Serializable {
     }
 
     this.street = street;
-    this.number = number;
+    this.doorNumber = doorNumber;
     setPostalCode(postalCode);
     this.city = city;
   }
@@ -37,7 +38,7 @@ public class Address implements Serializable {
   }
 
   public int getNumber() {
-    return number;
+    return doorNumber;
   }
 
   public String getPostalCode() {
@@ -56,7 +57,7 @@ public class Address implements Serializable {
 
   @Override
   public String toString() {
-    return street + " " + number + ", " + postalCode + " " + city;
+    return street + " " + doorNumber + ", " + postalCode + " " + city;
   }
 
   @Override
@@ -66,7 +67,7 @@ public class Address implements Serializable {
     if (!(other instanceof Address)) return false;
     Address otherAddress = (Address) other;
     return this.street.equals(otherAddress.street)
-        && this.number == otherAddress.number
+        && this.doorNumber == otherAddress.doorNumber
         && this.postalCode.equals(otherAddress.postalCode)
         && this.city.equals(otherAddress.city);
   }
