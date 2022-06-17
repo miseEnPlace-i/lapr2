@@ -1,5 +1,6 @@
 package app.service.sorting;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import app.dto.LegacyDataDTO;
@@ -14,67 +15,63 @@ public class MergeSort implements ISortStrategy {
 
     public MergeSort() {}
 
-    // TODO: FIX
     @Override
     public void doSort(List<LegacyDataDTO> data, Comparator<LegacyDataDTO> c) {
         this.comparator = c;
-        mergeSort(data, 0, data.size() - 1);
+        List<LegacyDataDTO> result = mergeSort(data);
+
+        data.clear();
+        data.addAll(result);
     }
 
-    private void mergeSort(List<LegacyDataDTO> data, int left, int right) {
+    private List<LegacyDataDTO> mergeSort(List<LegacyDataDTO> data) {
         // if the list contains only one element, it is already sorted
-        if (left >= right) return;
+        if (data.size() <= 1) return data;
 
         // divide the list into two halves
-        int mid = (left + right) / 2;
+        int mid = data.size() / 2;
+        // System.out.print(mid + " ");
 
         // left: 0
         // mid: mid
         // right: n
 
         // keep dividing recursively until left + right = 1
-        mergeSort(data, left, mid);
-        mergeSort(data, mid + 1, right);
+        List<LegacyDataDTO> left = mergeSort(data.subList(0, mid));
+        List<LegacyDataDTO> right = mergeSort(data.subList(mid, data.size()));
 
         // finally, merge both halves
-        merge(data, left, mid, right);
+        return merge(left, right);
     }
 
-    private void merge(List<LegacyDataDTO> data, int left, int mid, int right) {
+    private List<LegacyDataDTO> merge(List<LegacyDataDTO> left, List<LegacyDataDTO> right) {
         // let's create 2 sub lists of data
         // where we will merge them into the main list
 
-        int n1 = mid - left + 1;
-        int n2 = right - mid;
-
-        // create the 2 sub lists
-        List<LegacyDataDTO> leftList = data.subList(left, left + n1);
-        List<LegacyDataDTO> rightList = data.subList(mid + 1, mid + 1 + n2);
-
-        int i = 0, j = 0, k = left;
+        List<LegacyDataDTO> data = new ArrayList<LegacyDataDTO>();
+        int i = 0, j = 0;
 
         // reorder the greater elements into the correct position
-        while (i < leftList.size() && j < rightList.size()) {
-            if (comparator.compare(leftList.get(i), rightList.get(j)) < 0) {
-                data.set(k, leftList.get(i));
+        while (i < left.size() && j < right.size()) {
+            if (comparator.compare(left.get(i), right.get(j)) < 0) {
+                data.add(left.get(i));
                 i++;
             } else {
-                data.set(k, rightList.get(j));
+                data.add(right.get(j));
                 j++;
             }
-            k++;
         }
-        
+
         // finally, fill with the remainding elements
-        while (i < leftList.size()) {
-            data.set(k, leftList.get(i));
+        while (i < left.size()) {
+            data.add(left.get(i));
             i++;
-            k++;
         }
-        while (j < rightList.size()) {
-            data.set(k, rightList.get(j));
+        while (j < right.size()) {
+            data.add(right.get(j));
             j++;
-            k++;
         }
+
+        return data;
     }
 }

@@ -73,12 +73,9 @@ public class LegacyDataDTO implements Comparable<LegacyDataDTO> {
         return this.getArrivalDate().compareTo(o.getArrivalDate());
     }
 
-    public int compareToByDeparture(LegacyDataDTO o) {
-        return this.getDepartureDate().compareTo(o.getDepartureDate());
-    }
-
     @Override
     public String toString() {
+        // return TimeUtils.timeToString(arrivalDate);
         StringBuilder sb = new StringBuilder();
 
         sb.append(String.format("SNS User number: %s\n", this.snsNumber));
