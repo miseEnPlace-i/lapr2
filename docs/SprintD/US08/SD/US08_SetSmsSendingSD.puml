@@ -1,0 +1,61 @@
+@startuml US08_SetSmsSending_SD
+autonumber
+' hide footbox
+
+participant "vaccineAdministrationList\n:VaccineAdministrationList" as vaccineAdministrationList
+participant "snsUser\n:SNSUser" as snsUser
+participant "timer:Timer" as timer
+participant "removeRecoveryRoomTask:RemoveRecoveryRoomTask" as removeRecoveryRoomTask
+participant "vaccineAdministration\n:VaccineAdministration" as vaccineAdministration
+participant "recoveryRoom\n:RecoveryRoom" as recoveryRoom
+participant "vaccinationCenter\n:VaccinationCenter" as vaccinationCenter
+participant ":UserNotificationMapper" as userNotificationMapper
+participant ":SenderFactory" as senderFactory
+participant ":Sender" as sender
+
+[o-> vaccineAdministrationList : setSmsSending(vaccineAdministration, recoveryPeriod)
+activate vaccineAdministrationList
+  vaccineAdministrationList -> vaccineAdministration : snsUser = getSnsUser()
+  activate vaccineAdministration
+  deactivate vaccineAdministration
+  vaccineAdministrationList -> snsUser : phoneNumber = getPhoneNumber()
+  activate snsUser
+  deactivate snsUser
+  vaccineAdministrationList -> userNotificationMapper : notificationDto = toDto(phoneNumber, message)
+  activate userNotificationMapper
+  deactivate userNotificationMapper
+  note left
+    message content indicates to the user
+    that his recovery period is over
+  end note
+  vaccineAdministrationList -> removeRecoveryRoomTask** : task = create(vaccineAdministration, notificationDto)
+  vaccineAdministrationList -> timer** : create()
+  vaccineAdministrationList -> timer : schedule(task, recoveryPeriod)
+  note left
+    recoveryPeriod represents a long value
+    containing the recovery period in milliseconds
+  end note
+  activate timer
+    note over timer, vaccineAdministrationList
+      After the time specified in the recoveryPeriod has elapsed
+    end note
+    timer -> removeRecoveryRoomTask : run()
+    activate removeRecoveryRoomTask
+      removeRecoveryRoomTask -> vaccineAdministration : vaccinationCenter = getVaccinationCenter()
+      activate vaccineAdministration
+      deactivate vaccineAdministration
+      removeRecoveryRoomTask -> vaccinationCenter : recoveryRoom = getRecoveryRoom()
+      activate vaccinationCenter
+      deactivate vaccinationCenter
+      removeRecoveryRoomTask -> recoveryRoom : removeVaccineAdministration(vaccineAdministration)
+      activate recoveryRoom
+      deactivate recoveryRoom
+      removeRecoveryRoomTask -> senderFactory : sender = getSender()
+      activate senderFactory
+      deactivate senderFactory
+      removeRecoveryRoomTask -> sender : send(notificationDto)
+      activate sender
+      deactivate sender
+    deactivate removeRecoveryRoomTask
+  deactivate timer
+deactivate vaccineAdministrationList
