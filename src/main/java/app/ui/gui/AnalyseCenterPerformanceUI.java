@@ -54,9 +54,14 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
   @FXML
   private DatePicker dtpDate;
 
+  @FXML
+  private Label lblCenterName;
+
   @Override
   void init(CoordinatorUI parentUI) {
-    setParentUI(parentUI);
+    this.setParentUI(parentUI);
+
+    this.lblCenterName.setText(this.getParentUI().getVaccinationCenterName());
   }
 
   public void setEmployeeSession(EmployeeSession session) {
