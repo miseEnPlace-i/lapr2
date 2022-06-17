@@ -1,10 +1,7 @@
 package app.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.Map;
 import app.domain.model.Company;
 import app.domain.model.VaccinationCenter;
 import app.exception.NotAuthorizedException;
@@ -44,6 +41,8 @@ public class ExportCenterStatisticsController {
      */
     public void createFullyVaccinatedData(String filePath, Calendar start, Calendar end) {
         VaccinationCenter center = session.getVaccinationCenter();
+
+        if(end.before(start)) throw new IllegalArgumentException("Invalid date interval!");
 
         this.exporter = new FullyVaccinatedData(filePath, start, end, center);
     }

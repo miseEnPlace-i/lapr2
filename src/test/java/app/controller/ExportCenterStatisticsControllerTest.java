@@ -38,12 +38,12 @@ public class ExportCenterStatisticsControllerTest {
         slot = new Slot(5, 10);
 
         startDate = Calendar.getInstance();
-        startDate.set(Calendar.DAY_OF_MONTH, 20);
+        startDate.add(Calendar.DAY_OF_MONTH, -10);
 
         endDate = Calendar.getInstance();
-        startDate.set(Calendar.DAY_OF_MONTH, 25);
+        endDate.add(Calendar.DAY_OF_MONTH, -5);
 
-        Employee coordinator = new Employee("123", "test", "+351933456789", "email@email.com", new Address("street", 1, "10-10", "city"), "000000000ZZ4", Constants.ROLE_COORDINATOR);
+        Employee coordinator = new Employee("123", "test", "+351933456789", "email@email.com", new Address("street", 1, "10-10", "city"), "12345678", Constants.ROLE_COORDINATOR);
         EmployeeStore empStore = company.getEmployeeStore();
         empStore.saveEmployee(coordinator);
 
@@ -65,9 +65,17 @@ public class ExportCenterStatisticsControllerTest {
     /**
      * Checks that it is not possible to create a csv exporter with null values
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void ensureNullValuesNotAllowed() {
         ctrl.createFullyVaccinatedData(null, null, null);
+    }
+
+     /**
+     * Checks that it is not possible to create a csv exporter with null values
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureInvalidIntervalNotAllowed() {
+        ctrl.createFullyVaccinatedData(null, endDate, startDate);
     }
 
     /**
