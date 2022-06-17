@@ -67,6 +67,7 @@ public class ImportLegacyData2UI extends ChildUI<CoordinatorUI> {
       boolean isAsc = selOrder.valueProperty().get().equals("Ascending");
 
       this.ctrl.sort(legacyDtoList, isArrival, isAsc);
+      showData();
     };
 
     selParam.valueProperty().addListener(listener);
@@ -79,6 +80,7 @@ public class ImportLegacyData2UI extends ChildUI<CoordinatorUI> {
   }
 
   private void showData() {
+    this.lstData.getItems().clear();
     this.lstData.getItems().addAll(legacyDtoList);
   }
 

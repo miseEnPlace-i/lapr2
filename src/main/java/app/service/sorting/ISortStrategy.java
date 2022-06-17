@@ -1,5 +1,6 @@
 package app.service.sorting;
 
+import java.util.Comparator;
 import java.util.List;
 import app.dto.LegacyDataDTO;
 
@@ -9,5 +10,5 @@ import app.dto.LegacyDataDTO;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 public interface ISortStrategy {
-    void doSort(List<LegacyDataDTO> data);
+    void doSort(List<LegacyDataDTO> data, Comparator<LegacyDataDTO> c);
 }

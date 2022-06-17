@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import app.domain.model.CSVReader;
 import app.domain.model.Company;
@@ -17,6 +18,8 @@ import app.domain.model.list.AppointmentScheduleList;
 import app.domain.model.list.CenterEventList;
 import app.domain.model.list.VaccineAdministrationList;
 import app.domain.model.store.SNSUserStore;
+import app.dto.ArrivalCompare;
+import app.dto.DepartureCompare;
 import app.dto.LegacyDataDTO;
 import app.exception.NotFoundException;
 import app.mapper.LegacyDataMapper;
@@ -60,8 +63,8 @@ public class ImportLegacyDataController {
 
     public void sort(List<LegacyDataDTO> legacyDtoList, boolean isArrival, boolean isAsc) {
         ISortStrategy sortStrategy = SortFactory.getSortStrategy();
-        if (isArrival)
-        sortStrategy.doSort(legacyDtoList);
+        Comparator<LegacyDataDTO> comparator = isArrival ? new ArrivalCompare() : new DepartureCompare();
+        sortStrategy.doSort(legacyDtoList, comparator);
         if (!isAsc) Collections.reverse(legacyDtoList);
     }
 
