@@ -54,7 +54,6 @@ package core {
     package model {
       class VaccinationCenter {
         - name: String
-        - address: String
         - emailAddress: String
         - phoneNumber: String
         - faxNumber: String
@@ -63,12 +62,18 @@ package core {
         +VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slot,coordinator)
       }
 
+      class Address {
+        - street: String
+        - doorNumber: int
+        - postalCode: String
+        - city: String
+      }
+
       class Employee {
         -id: String 
         -name: String 
         -email: String 
         -phone: String 
-        -address: String 
         -citizenCardNumber: int 
         -roleId: String 
 
@@ -185,6 +190,11 @@ VaccinationCenter o-- Time : openingHours
 VaccinationCenter o-- Time : closingHours
 VaccinationCenter o-- Slot
 VaccinationCenter *-- CenterEventList
+
+VaccinationCenter o-- Address : has >
+Employee o-- Address : has >
+
+CenterEventList -- CenterEvent : stores >
 
 VaccinationCenter "1" -- "*" CenterPerformance : generates >
 

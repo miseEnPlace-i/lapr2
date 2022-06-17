@@ -87,14 +87,18 @@ There is a dependency found to US17 or US8. Only with one of those implemented t
 
 According to the taken rationale, the conceptual classes promoted to software classes are:
 
-- Employee Session
-- Class2
-- Class3
+- VaccinationCenter
+- Employee
+- CenterPerformance
 
 Other software classes (i.e. Pure Fabrication) identified:
 
-- xxxxUI
-- xxxxController
+- AnalyseCenterPerformanceUI
+- AnalyseCenterPerformanceController
+- Employee Session
+- MaxSumAdapter
+- MaxSum
+- MaxSumSublistService
 
 ## 3.2. Sequence Diagram (SD)
 
@@ -106,23 +110,68 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 4. Tests
 
-**Test 1:** Check that it is not possible to create an instance of the Example class with null values.
+**Test 1:** Check that the Max Sum of the sublist is correct
 
-    @Test(expected = IllegalArgumentException.class)
-    	public void ensureNullIsNotAllowed() {
-    	Exemplo instance = new Exemplo(null, null);
+    @Test
+    public void ensureMaxSumIsCorrect() throws ParseException {
+      SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+      CenterPerformance performance = center.getCenterPerformanceForDay(DateUtils.toCalendar(sdf.parse("05-10-2022")), 5);
+
+      assertEquals(performance.getMaxSum(), 4);
     }
+
+**Test 2** Check that the sublist is correct
+
+      @Test
+      public void ensureDifferencesListWithTinyIntervalIsCorrect() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        CenterPerformance performance = center.getCenterPerformanceForDay(
+        DateUtils.toCalendar(sdf.parse("05-10-2022")), 10);
+
+        Integer[] expected = new Integer[] {4, 0, -1, 0, 0, 0};
+        assertEquals(Arrays.asList(expected), performance.getDifferencesList());
+      }
 
 # 5. Construction (Implementation)
 
-_In this section, it is suggested to provide, if necessary, some evidence that the construction/implementation is in accordance with the previously carried out design. Furthermore, it is recommeded to mention/describe the existence of other relevant (e.g. configuration) files and highlight relevant commits._
+## Class AnalyseCenterPerformanceController
 
-_It is also recommended to organize this content by subsections._
+    public AnalyseCenterPerformanceController(Company company, EmployeeSession session) {
+      this.company = company;
+      this.session = session;
+    }
+
+
+    public CenterPerformance analyseCenterPerformance(Calendar day, int interval) {
+      VaccinationCenter center = session.getVaccinationCenter();
+      return center.getCenterPerformanceForDay(day, interval);
+    }
+
+## Class MaxSumService
+
+    public MaxSumSublistService(List<Integer> differenceList) {
+      if (differenceList.size() == 0) throw new IllegalArgumentException("The list cannot be empty");
+
+      IMaxSum strategy = getMaxSumStrategy();
+
+      int[] differencesArray = parseListToPrimitiveArray(differenceList);
+      long startTime = System.nanoTime();
+
+      int[] subArray = strategy.maxSum(differencesArray);
+
+      long endTime = System.nanoTime();
+
+      sublist = parseArrayToList(subArray);
+      this.timeElapsed = (endTime - startTime) / Math.pow(10, 6);
+
+      findIndexes(differenceList);
+      calculateSum(differenceList);
+    }
 
 # 6. Integration and Demo
 
-_In this section, it is suggested to describe the efforts made to integrate this functionality with the other features of the system._
+A new option was added to the coordinator menu.
 
 # 7. Observations
 
-_In this section, it is suggested to present a critical perspective on the developed work, pointing, for example, to other alternatives and or future related work._
+No observations.
