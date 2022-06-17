@@ -17,7 +17,7 @@ public class RegisterSNSUserControllerTest {
 
   @Test
   public void ensureSNSUserIsCreatedSuccessfully() throws ParseException {
-    String cc = "32517335";
+    String cc = "00000000";
     String snsNumber = "323456789";
     String name = "test";
     Date birthDay = new Date(20000);
@@ -34,7 +34,7 @@ public class RegisterSNSUserControllerTest {
 
   @Test
   public void ensureStringifyDataIsCorrect() throws ParseException {
-    String cc = "18925769";
+    String cc = "00000000";
     String snsNumber = "223456789";
     String name = "test";
     Date birthDay = new Date(20000);
@@ -57,7 +57,7 @@ public class RegisterSNSUserControllerTest {
 
   @Test
   public void ensureSaveWorksAsExpected() throws ParseException {
-    String cc = "19233952";
+    String cc = "00000000";
     String snsNumber = "123456789";
     String name = "test";
     Date birthDay = new Date(20000);

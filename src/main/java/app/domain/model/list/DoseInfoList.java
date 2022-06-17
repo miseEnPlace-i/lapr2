@@ -23,6 +23,10 @@ public class DoseInfoList implements Serializable {
     return doseInfoList;
   }
 
+  public int getSize() {
+    return doseInfoList.size();
+  }
+
   public DoseInfo getDoseInfoByDoseNumber(int doseNumber) {
     return doseInfoList.get(doseNumber - 1);
   }

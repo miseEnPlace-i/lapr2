@@ -42,4 +42,8 @@ public class Constants {
   public static final String DATA_FILE_PATH = "data.bin";
 
   public static final String PARAMS_AUTO_DESERIALIZE = "Init.AutoDeserialize.Enabled";
+  public static final String PARAMS_EXPORTATION_TIME = "DailyVaccinated.ExportationTime";
+  public static final String PARAMS_EXPORTATION_PATH = "DailyVaccinated.FilePath";
+  public static final String PARAMS_EXPORTATION_SEPARATOR = "DailyVaccinated.FileSeparator";
+
 }

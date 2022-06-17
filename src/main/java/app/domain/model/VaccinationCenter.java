@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import app.domain.model.list.AppointmentScheduleList;
 import app.domain.model.list.CenterEventList;
+import app.domain.model.list.VaccineAdministrationList;
 import app.service.FormatVerifier;
 import app.utils.Time;
 
@@ -14,6 +16,7 @@ import app.utils.Time;
  * Vaccination Center super class
  * 
  * @author André Barros <1211299@isep.ipp.pt>
+ * @author Carlos Lopes <1211277@isep.ipp.pt>
  */
 public abstract class VaccinationCenter implements Serializable {
   private String name;
@@ -32,6 +35,7 @@ public abstract class VaccinationCenter implements Serializable {
   private CenterEventList eventList;
   private List<VaccineAdministration> vaccineAdministrationList;
 
+
   /**
    * Constructor for the Vaccination Center
    * 
@@ -47,9 +51,8 @@ public abstract class VaccinationCenter implements Serializable {
    * @param maxVaccinesPerSlot the vaccination center maximum vaccines per slot
    * @param coordinator the vaccination center coordinator
    */
-  public VaccinationCenter(String name, Address address, String email,
-      String phoneNum, String faxNum, String webAddress, Time openingHours,
-      Time closingHours, Slot slot, Employee coordinator) {
+  public VaccinationCenter(String name, Address address, String email, String phoneNum, String faxNum, String webAddress, Time openingHours, Time closingHours,
+      Slot slot, Employee coordinator) {
     setName(name);
     setAddress(address);
     setEmail(email);
@@ -204,12 +207,9 @@ public abstract class VaccinationCenter implements Serializable {
    * @throws IllegalArgumentException if the phone number is null, empty or not valid.
    */
   private void setPhoneNum(String phoneNum) {
-    if (phoneNum == null || phoneNum.isEmpty())
-      throw new IllegalArgumentException(
-          "Phone number cannot be null or empty.");
+    if (phoneNum == null || phoneNum.isEmpty()) throw new IllegalArgumentException("Phone number cannot be null or empty.");
 
-    if (!FormatVerifier.validatePhoneNumber(phoneNum))
-      throw new IllegalArgumentException("Phone number is not valid.");
+    if (!FormatVerifier.validatePhoneNumber(phoneNum)) throw new IllegalArgumentException("Phone number is not valid.");
 
     this.phoneNum = phoneNum;
   }
@@ -222,11 +222,9 @@ public abstract class VaccinationCenter implements Serializable {
    * @throws IllegalArgumentException if the fax number is null, empty or not valid.
    */
   private void setFaxNum(String faxNum) {
-    if (faxNum == null || faxNum.isEmpty())
-      throw new IllegalArgumentException("Fax number cannot be null or empty.");
+    if (faxNum == null || faxNum.isEmpty()) throw new IllegalArgumentException("Fax number cannot be null or empty.");
 
-    if (!FormatVerifier.validateFaxNumber(faxNum))
-      throw new IllegalArgumentException("Fax number is not valid.");
+    if (!FormatVerifier.validateFaxNumber(faxNum)) throw new IllegalArgumentException("Fax number is not valid.");
 
     this.faxNum = faxNum;
   }
@@ -239,12 +237,9 @@ public abstract class VaccinationCenter implements Serializable {
    * @throws IllegalArgumentException if the website address is null, empty or not valid.
    */
   private void setWebAddress(String webAddress) {
-    if (webAddress == null || webAddress.isEmpty())
-      throw new IllegalArgumentException(
-          "Website address cannot be null or empty.");
+    if (webAddress == null || webAddress.isEmpty()) throw new IllegalArgumentException("Website address cannot be null or empty.");
 
-    if (!FormatVerifier.validateURL(webAddress))
-      throw new IllegalArgumentException("Website address is not valid.");
+    if (!FormatVerifier.validateURL(webAddress)) throw new IllegalArgumentException("Website address is not valid.");
 
     this.webAddress = webAddress;
   }
@@ -274,9 +269,7 @@ public abstract class VaccinationCenter implements Serializable {
    * @throws IllegalArgumentException if the closing hours are null, empty or not valid.
    */
   private void setClosingHours(Time closingHours) {
-    if (!closingHours.isAfter(openingHours))
-      throw new IllegalArgumentException(
-          "Closing hours must be after the opening hours.");
+    if (!closingHours.isAfter(openingHours)) throw new IllegalArgumentException("Closing hours must be after the opening hours.");
 
     this.closingHours = closingHours;
   }
@@ -329,14 +322,12 @@ public abstract class VaccinationCenter implements Serializable {
     return appointmentList;
   }
 
-  public CenterPerformance getCenterPerformanceForDay(Calendar day,
-      int interval) {
+  public CenterPerformance getCenterPerformanceForDay(Calendar day, int interval) {
     CenterEventList events = this.eventList.getEventListForDay(day);
 
     if (events.size() == 0) return null;
 
-    CenterPerformance centerPerformance =
-        new CenterPerformance(events, interval, openingHours, closingHours);
+    CenterPerformance centerPerformance = new CenterPerformance(events, interval, openingHours, closingHours);
 
     return centerPerformance;
   }
@@ -354,8 +345,7 @@ public abstract class VaccinationCenter implements Serializable {
     sb.append(String.format("Opening hours: %s\n", this.getOpeningHours()));
     sb.append(String.format("Closing hours: %s\n", this.getClosingHours()));
     sb.append(String.format("Slot duration: %s\n", this.getSlotDuration()));
-    sb.append(
-        String.format("Maximum vaccines per slot: %s\n", this.getMaxVacSlot()));
+    sb.append(String.format("Maximum vaccines per slot: %s\n", this.getMaxVacSlot()));
     sb.append(String.format("Coordinator: %s\n", this.getCoordinatorName()));
 
     return sb.toString();
@@ -393,8 +383,7 @@ public abstract class VaccinationCenter implements Serializable {
    */
   public Time getRealClosingHours() {
     int openingMinutesOfDay = openingHours.convertToMinutes();
-    int realClosingMinutesOfDay = openingMinutesOfDay
-        + (appointmentList.getNOfSlotsPerDay() * slot.getDuration());
+    int realClosingMinutesOfDay = openingMinutesOfDay + (appointmentList.getNOfSlotsPerDay() * slot.getDuration());
 
     realClosingMinutesOfDay--;
 
@@ -415,8 +404,62 @@ public abstract class VaccinationCenter implements Serializable {
    * 
    * @param vaccineAdministration the Vaccine Administration object to be added.
    */
-  public void addVaccineAdministrationToList(
-      VaccineAdministration vaccineAdministration) {
+  public void addVaccineAdministrationToList(VaccineAdministration vaccineAdministration) {
     this.vaccineAdministrationList.add(vaccineAdministration);
+  }
+
+
+
+  /**
+   * @return List<VaccineAdministration> list of vaccine administration from yesterday
+   */
+  public List<VaccineAdministration> getVaccineAdministrationFromYesterdayList() {
+    List<VaccineAdministration> subList = new ArrayList();
+    Calendar yesterday = getDateWithoutTime(Calendar.getInstance());
+    yesterday.add(Calendar.DATE, -1);
+
+    for (int i = 0; i < this.vaccineAdministrationList.size(); i++) {
+      if (getDateWithoutTime(this.vaccineAdministrationList.get(i).getDate()).equals(yesterday)) {
+        subList.add(this.vaccineAdministrationList.get(i));
+      }
+    }
+    return subList;
+  }
+
+
+  public Calendar getDateWithoutTime(Calendar date) {
+    date.set(Calendar.HOUR_OF_DAY, 0);
+    date.set(Calendar.MINUTE, 0);
+    date.set(Calendar.SECOND, 0);
+    date.set(Calendar.MILLISECOND, 0);
+
+    return date;
+  }
+
+  public List<VaccineAdministration> getVacAdminDayList(Calendar day) {
+    List<VaccineAdministration> vacAdminPerDay = new ArrayList<>();
+
+    for (VaccineAdministration vaccineAdministration : vaccineAdministrationList) {
+      if (generateKeyFromDate(vaccineAdministration.getDate()).equals(generateKeyFromDate(day))) {
+        vacAdminPerDay.add(vaccineAdministration);
+      }
+    }
+    return vacAdminPerDay;
+  }
+
+  /**
+   * 
+   * @param date the date of the appointment
+   * @return the key of the appointment in the map of the center's appointments
+   */
+  private Calendar generateKeyFromDate(Calendar date) {
+    Calendar key = Calendar.getInstance();
+    key.setTime(date.getTime());
+    key.set(Calendar.HOUR_OF_DAY, 0);
+    key.set(Calendar.MINUTE, 0);
+    key.set(Calendar.SECOND, 0);
+    key.set(Calendar.MILLISECOND, 0);
+
+    return key;
   }
 }

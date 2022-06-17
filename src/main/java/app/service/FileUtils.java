@@ -1,7 +1,9 @@
 package app.service;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -10,8 +12,14 @@ import java.util.Scanner;
 
 /**
  * File Utils.
+ * 
+ * @author André Barros <1211299@isep.ipp.pt>
+ * @author Tomás Lopes <1211289@isep.ipp.pt>
  */
 public class FileUtils {
+    private static String[] BANNED_CHARS = {",", "\"", "@", ":", ";", "!", "&", "%", "[", "]", "/"};
+    public static String OUTPUT_BASE_PATH = "export/";
+
     /**
      * Write to a file.
      * 
@@ -20,9 +28,9 @@ public class FileUtils {
      * @throws IOException if the file could not be written.
      * @return true if the file was written successfully, false otherwise.
      */
-    public static boolean writeToFile(String filename, String content) {
+    public static boolean writeToFile(String fileName, String content) {
         try {
-            File file = new File(filename);
+            File file = new File(fileName);
             file.createNewFile(); // creates a file if it does not exist
             PrintWriter writer = new PrintWriter(file);
             writer.write(content);
@@ -37,6 +45,7 @@ public class FileUtils {
 
     /**
      * Read from a file.
+     * 
      * @throws FileNotFoundException
      */
     public static List<String> readFromFile(String filename) throws FileNotFoundException {
@@ -51,6 +60,71 @@ public class FileUtils {
         scanner.close();
 
         return lines;
+
+    }
+
+    /**
+     * 
+     * @param fileName filename to sanitize
+     * @return sanitized filename
+     */
+    public static String sanitizeFileName(String fileName) {
+        String newFileName = fileName;
+        newFileName = removeExtension(fileName) + ".csv";
+
+        newFileName = removeSpecialChars(newFileName);
+        buildDirStructure(OUTPUT_BASE_PATH);
+        newFileName = OUTPUT_BASE_PATH + newFileName;
+
+        return newFileName;
+    }
+
+    /**
+     * 
+     * @param fileName filename to check if has extension
+     * @return true or false depending on whether the filename has extension or not
+     */
+    public static boolean hasNoExtension(String fileName) {
+        return fileName.indexOf(".") == -1;
+    }
+
+    /**
+     * 
+     * @param fileName
+     * @return
+     */
+    public static String removeExtension(String fileName) {
+        if (hasNoExtension(fileName)) return fileName;
+
+        return fileName.substring(0, fileName.indexOf("."));
+    }
+
+    /**
+     * 
+     * @param fileName filename to check if has special characters
+     * @return filename without special characters
+     */
+
+    public static String removeSpecialChars(String fileName) {
+        String newFileName = fileName;
+
+        for (int i = 0; i < BANNED_CHARS.length; i++)
+            newFileName = newFileName.replace(BANNED_CHARS[i], "");
+
+        return newFileName;
+    }
+
+    /**
+     * 
+     * @param dirStructure directory structure
+     */
+    public static void buildDirStructure(String dirStructure) {
+
+        File dirPath = new File(dirStructure);
+
+        if (!dirPath.exists() || !dirPath.isDirectory()) {
+            dirPath.mkdirs();
+        }
 
     }
 }

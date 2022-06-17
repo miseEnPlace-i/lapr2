@@ -2,11 +2,11 @@
 skinparam classAttributeIconSize 0
 
 package UI {
-class CsvExporterUI {}
+class ExportCenterStatisticsUI {}
 }
 
 package controllers {
-     class CsvExporterController {
+     class ExportCenterStatisticsController {
 
      }
 }
@@ -26,17 +26,23 @@ package core {
 
     package service {
 
-class CsvExporterData {
+class FileUtils {
+  +writeToFile()
+  +hasNoExtension()
+  +removeExtension()
+  +removeSpecialChars()
+  +buildDirStructure()
+}
+}
+
+    package model {
+
+class FullyVaccinatedData {
     +getVacAdminList()
     +getSnsUserAge()
     +getVaccine()
     +getVacType()
     }
-}
-
-    package model {
-
-class CsvExporter {}
 
 class VaccineAdministration {
   -snsUser: SNSUser
@@ -123,12 +129,9 @@ package stores {
 }
 
 
+ExportCenterStatisticsUI ..> ExportCenterStatisticsController
 
-
-
-CsvExportersUI ..> CsvExportersController
-
-CsvExportersController ..> Company
+ExportCenterStatisticsController ..> Company
 
 Company "1" -- "1" VaccinationCenterStore : knows >
 
@@ -141,12 +144,9 @@ Vaccine o-- VaccineType
 VaccineAdministration -- Vaccine
 VaccineAdministration -- SNSUser
 
-CsvExporterData -- VaccineAdministration : uses >
+FullyVaccinatedData -- VaccineAdministration : uses >
 
-CsvExporter -- CsvExporterData : sends data to <
-
-Employee -- CsvExporter : coordinator generates
-
+FileUtils <.. ExportCenterStatisticsController
 
 VaccinationCenterStore "1" --> "*" VaccinationCenter : stores >
 @enduml

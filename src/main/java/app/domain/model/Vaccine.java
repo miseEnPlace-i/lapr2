@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 import app.domain.model.list.AdminProcList;
 import app.service.CalendarUtils;
+import app.domain.model.list.DoseInfoList;
 
 /**
  * @author Carlos Lopes <1211277@isep.ipp.pt>
@@ -14,6 +15,7 @@ public class Vaccine implements Serializable {
   private String id;
   private VaccineType vacType;
   private AdminProcList adminProcList;
+
 
   public Vaccine(String designation, String id, String brand, VaccineType vacType) {
     setBrand(brand);
@@ -136,6 +138,16 @@ public class Vaccine implements Serializable {
     return null;
   }
 
+
+  public boolean checkUserFullyVaccinated(int age, int dose) {
+
+    AdminProcess adminProcByAge = getAdministrationProcessForGivenAge(age);
+    DoseInfoList doseInfoLst = adminProcByAge.getDoseInfoList();
+    int size = doseInfoLst.getSize();
+
+    return dose == size ? true : false;
+  }
+
   /**
    * Get the dosage for the given age and dose number.
    * 
@@ -176,3 +188,4 @@ public class Vaccine implements Serializable {
     else return false;
   }
 }
+

@@ -2,14 +2,15 @@ package app.domain.model;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Vaccine administration model class.
  * 
  * @author Tomás Russo <1211288@isep.ipp.pt>
+ * @author Carlos Lopes <1211277@isep.ipp.pt>
  */
-public class VaccineAdministration
-    implements Comparable<VaccineAdministration>, Serializable {
+public class VaccineAdministration implements Comparable<VaccineAdministration>, Serializable {
   private SNSUser snsUser;
   private Vaccine vaccine;
   private String lotNumber;
@@ -27,9 +28,7 @@ public class VaccineAdministration
    * @param vaccinationCenter the vaccination center where the vaccine was administered
    * @param date the date the vaccine was administered
    */
-  public VaccineAdministration(SNSUser snsUser, Vaccine vaccine,
-      String lotNumber, int doseNumber, VaccinationCenter vaccinationCenter,
-      Calendar date) {
+  public VaccineAdministration(SNSUser snsUser, Vaccine vaccine, String lotNumber, int doseNumber, VaccinationCenter vaccinationCenter, Calendar date) {
     this.snsUser = snsUser;
     this.vaccine = vaccine;
     setLotNumber(lotNumber);
@@ -44,13 +43,10 @@ public class VaccineAdministration
    * @param lotNumber the lot number of the vaccine
    */
   public void setLotNumber(String lotNumber) {
-    if (lotNumber == null)
-      throw new IllegalArgumentException("Lot number cannot be null");
-    if (lotNumber.isEmpty())
-      throw new IllegalArgumentException("Lot number cannot be empty");
+    if (lotNumber == null) throw new IllegalArgumentException("Lot number cannot be null");
+    if (lotNumber.isEmpty()) throw new IllegalArgumentException("Lot number cannot be empty");
 
-    if (!lotNumber.matches("^[A-Z0-9]{5}-[0-9]{2}$"))
-      throw new IllegalArgumentException("Lot number is not valid");
+    if (!lotNumber.matches("^[A-Z0-9]{5}-[0-9]{2}$")) throw new IllegalArgumentException("Lot number is not valid");
 
     this.lotNumber = lotNumber;
   }
@@ -61,8 +57,7 @@ public class VaccineAdministration
    * @param doseNumber the dose number of the vaccine
    */
   public void setDoseNumber(int doseNumber) {
-    if (doseNumber < 1)
-      throw new IllegalArgumentException("Dose number cannot be less than 1");
+    if (doseNumber < 1) throw new IllegalArgumentException("Dose number cannot be less than 1");
 
     this.doseNumber = doseNumber;
   }
@@ -104,15 +99,6 @@ public class VaccineAdministration
   }
 
   /**
-   * Gets the vaccine administration date.
-   * 
-   * @return the vaccine administration date
-   */
-  public Calendar getDate() {
-    return date;
-  }
-
-  /**
    * Checks if the vaccine administrated has the given vaccine type.
    * 
    * @param vaccineType the vaccine type to check
@@ -128,13 +114,22 @@ public class VaccineAdministration
     return this.date.compareTo(other.date);
   }
 
+  /**
+   * Gets the date of the vaccine administration
+   * 
+   * @return the date of the vaccine administration
+   */
+  public Calendar getDate() {
+    return this.date;
+  }
+
+
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
 
     sb.append(String.format("SNS User Name: %s\n", this.snsUser.getName()));
-    sb.append(
-        String.format("SNS User Number: %s\n", this.snsUser.getSnsNumber()));
+    sb.append(String.format("SNS User Number: %s\n", this.snsUser.getSnsNumber()));
     sb.append(String.format("Vaccine: %s\n", this.vaccine.getDesignation()));
     sb.append(String.format("Lot Number: %s\n", this.lotNumber));
     sb.append(String.format("Dose Number: %s\n", this.doseNumber));

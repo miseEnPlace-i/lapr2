@@ -7,7 +7,7 @@ import app.utils.Time;
  */
 public class HealthCareCenter extends VaccinationCenter {
 
-  private String ages;
+  private String aces;
   private String ars;
 
   /**
@@ -32,15 +32,15 @@ public class HealthCareCenter extends VaccinationCenter {
 
     super(name, address, email, phoneNum, faxNum, webAddress, openingHours, closingHours, slot, coordinator);
 
-    setAges(ages);
+    setAges(aces);
     setArs(ars);
   }
 
-  private void setAges(String ages) {
-    if (ages == null || ages.isEmpty()) {
+  private void setAges(String aces) {
+    if (aces == null || aces.isEmpty()) {
       throw new IllegalArgumentException("AGES not valid.");
     }
-    this.ages = ages;
+    this.aces = aces;
   }
 
   private void setArs(String ars) {
@@ -56,12 +56,13 @@ public class HealthCareCenter extends VaccinationCenter {
    */
   @Override
   public String toString() {
+
     StringBuilder sb = new StringBuilder();
     sb.append("Health Care Center data:\n");
 
     sb.append(super.toString());
 
-    sb.append(String.format("AGES: %s\n", this.ages));
+    sb.append(String.format("ACES: %s\n", this.aces));
     sb.append(String.format("ARS: %s\n", this.ars));
 
     return sb.toString();

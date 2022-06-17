@@ -26,13 +26,6 @@ class VaccinationCenter{
   -faxNumber
   -websiteAddress
   -time
-  -slot
-  -coordinator
-}
-
-class Time {
-  -hours
-  -minutes
 }
 
 class Slot {
@@ -41,8 +34,6 @@ class Slot {
 }
 
 class VaccineAdministration {
-  -snsUser
-  -vaccine
   -dose
   -lotNumber
   -date
@@ -59,13 +50,10 @@ class SNSUser {
   - address
 }
 
-class CsvExporter {}
-
 class Vaccine {
   -designation
   -id
   -brand
-  -vaccineType
 }
 
 class VaccineType {
@@ -81,9 +69,7 @@ Employee <|-- CenterCoordinator
 
 CenterCoordinator -- VaccinationCenter : has >
 
-VaccinationCenter "1" -- "1" Time : has >
 VaccinationCenter "1"-- "1" Slot : has >
-CsvExporter "1" -- "1" CenterCoordinator : generates <
 
 VaccineAdministration "*" -- "1" VaccinationCenter : has <
 VaccineAdministration "1" -- "*" SNSUser : has >
