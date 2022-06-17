@@ -11,17 +11,17 @@ public class RecoveryRoom implements Serializable {
     this.recoveryRoom = new ArrayList<VaccineAdministration>();
   }
 
-  public void addVaccineAdministration(VaccineAdministration vaccineAdministration) {
+  public void addVaccineAdministration(
+      VaccineAdministration vaccineAdministration) {
     this.recoveryRoom.add(vaccineAdministration);
-
-    setSMSSending(vaccineAdministration);
   }
 
   public int size() {
     return recoveryRoom.size();
   }
 
-  private void setSMSSending(VaccineAdministration vaccineAdministration) {
-
+  public void removeVaccineAdministration(
+      VaccineAdministration vaccineAdministration) {
+    this.recoveryRoom.remove(vaccineAdministration);
   }
 }

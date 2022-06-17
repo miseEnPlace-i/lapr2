@@ -43,7 +43,9 @@ public class HealthData implements Serializable {
 
   public boolean hasAppointmentForVaccineTypeInFuture(VaccineType vaccineType) {
     for (Appointment appointment : appointments) {
-      if (appointment.hasSnsNumber(snsUser.getSnsNumber()) && appointment.hasVaccineType(vaccineType) && isAppointmentInFuture(appointment.getDate())) {
+      if (appointment.hasSnsNumber(snsUser.getSnsNumber())
+          && appointment.hasVaccineType(vaccineType)
+          && isAppointmentInFuture(appointment.getDate())) {
         return true;
       }
     }
@@ -52,7 +54,9 @@ public class HealthData implements Serializable {
 
   public boolean hasAppointmentForVaccineTypeToday(VaccineType vaccineType) {
     for (Appointment appointment : appointments) {
-      if (appointment.hasSnsNumber(snsUser.getSnsNumber()) && appointment.hasVaccineType(vaccineType) && isAppointmentToday(appointment.getDate())) {
+      if (appointment.hasSnsNumber(snsUser.getSnsNumber())
+          && appointment.hasVaccineType(vaccineType)
+          && isAppointmentToday(appointment.getDate())) {
         return true;
       }
     }
@@ -60,11 +64,13 @@ public class HealthData implements Serializable {
   }
 
   private boolean isAppointmentInFuture(Calendar appointmentDate) {
-    return CalendarUtils.compareDates(appointmentDate, Calendar.getInstance()) > 0;
+    return CalendarUtils.compareDates(appointmentDate,
+        Calendar.getInstance()) > 0;
   }
 
   private boolean isAppointmentToday(Calendar appointmentDate) {
-    return CalendarUtils.compareDates(appointmentDate, Calendar.getInstance()) == 0;
+    return CalendarUtils.compareDates(appointmentDate,
+        Calendar.getInstance()) == 0;
   }
 
   /**
@@ -77,12 +83,29 @@ public class HealthData implements Serializable {
   }
 
   public boolean hasTakenAllDoses(VaccineType vaccineType) {
-    VaccineAdministration lastVaccineAdministration = vaccineAdministrationList.getLastVaccineAdministrationByVaccineType(vaccineType);
+    VaccineAdministration lastVaccineAdministration = vaccineAdministrationList
+        .getLastVaccineAdministrationByVaccineType(vaccineType);
     if (lastVaccineAdministration == null) {
       return false;
     }
 
-    return lastVaccineAdministration.getDoseNumber() == lastVaccineAdministration.getVaccine().getAdministrationProcessForGivenAge(snsUser.getAge())
-        .getNumberOfDoses();
+    return lastVaccineAdministration
+        .getDoseNumber() == lastVaccineAdministration.getVaccine()
+            .getAdministrationProcessForGivenAge(snsUser.getAge())
+            .getNumberOfDoses();
+  }
+
+  public boolean isTakingCorrectDoseOfVaccine(Vaccine vaccine, int doseNumber) {
+    VaccineAdministration lastVaccineAdministration = vaccineAdministrationList
+        .getLastVaccineAdministrationByVaccineType(vaccine.getVacType());
+    if (lastVaccineAdministration == null && doseNumber > 1) {
+      return false;
+    } else if (lastVaccineAdministration == null && doseNumber == 1) {
+      return true;
+    } else if (lastVaccineAdministration.getDoseNumber() == (doseNumber - 1)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
