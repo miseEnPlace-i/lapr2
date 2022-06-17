@@ -13,14 +13,16 @@ import app.service.PropertiesUtils;
 import app.session.EmployeeSession;
 import app.ui.gui.utils.Utils;
 import app.utils.Time;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.StackedBarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -149,7 +151,7 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
     FlowPane timeElapsedContainer = generatePaneWithData("Time Elapsed",
         performance.getTimeElapsed() + " ms", SCENE_WIDTH);
 
-    BarChart chart = generateChart(performance);
+    StackedBarChart<String, Number> chart = generateChart(performance);
     chart.setPrefWidth(SCENE_WIDTH - 80);
 
 
@@ -174,41 +176,75 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
     dialog.show();
   }
 
-  private BarChart<String, Number> generateChart(
+  private StackedBarChart<String, Number> generateChart(
       CenterPerformance performance) {
     CategoryAxis xAxis = new CategoryAxis();
+
     NumberAxis yAxis = new NumberAxis();
 
     XYChart.Series<String, Number> series = new XYChart.Series<>();
+    XYChart.Series<String, Number> worstSeries = new XYChart.Series<>();
 
     List<Integer> differences = performance.getDifferencesList();
     Time startingInterval = performance.getStartingInterval();
     Time endingInterval = performance.getEndingInterval();
-    Time tempInterval = startingInterval.clone();
+    Time tempInterval =
+        employeeSession.getVaccinationCenter().getOpeningHours();
 
     for (Integer value : differences) {
-      series.getData().add(
-          new XYChart.Data<String, Number>(tempInterval.toString(), value));
+      if (tempInterval.isBetweenExcludeRight(startingInterval, endingInterval))
+        worstSeries.getData().add(
+            new XYChart.Data<String, Number>(tempInterval.toString(), value));
+      else
+        series.getData().add(
+            new XYChart.Data<String, Number>(tempInterval.toString(), value));
 
       tempInterval.addMinutes(interval);
     }
 
-    BarChart<String, Number> chart = new BarChart<>(xAxis, yAxis);
+    StackedBarChart<String, Number> chart =
+        new StackedBarChart<>(xAxis, yAxis) {
+          @Override
+          protected void dataItemAdded(Series<String, Number> series,
+              int itemIndex, Data<String, Number> item) {
+            super.dataItemAdded(series, itemIndex, item);
+
+            Number val =
+                (Number) (item.getYValue() instanceof Number ? item.getYValue()
+                    : item.getXValue());
+            if (val.doubleValue() < 0) {
+              // add missing CSS class
+              item.getNode().getStyleClass().add("negative");
+            }
+          }
+
+          /**
+           * Override the method that breaks the graph, patch so it doesn't override styles.
+           */
+          @Override
+          protected void seriesChanged(
+              ListChangeListener.Change<? extends Series> c) {
+            for (int i = 0; i < getData().size(); i++) {
+              List<Data<String, Number>> items = getData().get(i).getData();
+              for (int j = 0; j < items.size(); j++) {
+                Node bar = items.get(j).getNode();
+                // change .setAll to .addAll to avoid overriding styles
+                bar.getStyleClass()
+                    .removeIf(s -> s.matches("chart-bar|(series|data)\\d+"));
+                bar.getStyleClass().addAll("chart-bar", "series" + i,
+                    "data" + j);
+              }
+            }
+          }
+        };
+
     chart.setTranslateX(32);
 
-    chart.getData().addAll(series);
-
-    for (XYChart.Data data : series.getData()) {
-      String time = (String) data.getXValue();
-      if (new Time(time).isBetweenExcludeRight(startingInterval,
-          endingInterval))
-        data.getNode().setStyle("-fx-bar-fill: #ff0000;");
-    }
+    chart.getData().addAll(worstSeries, series);
 
     series.setName("Better Performance");
+    worstSeries.setName("Worst Performance");
 
-    chart.setBarGap(0);
-    chart.setCategoryGap(4);
     chart.setTitle("Center Performance");
 
     return chart;
