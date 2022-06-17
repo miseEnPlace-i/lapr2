@@ -23,16 +23,18 @@ package core {
 Console ..> GUI
 
 Controllers ..> Mappers
+Controllers ..> Dto
 Controllers ..> Domain
 
 UI ..> Controllers
 
-Domain ..> Mappers
+Domain ..> Dto
 Domain ..> Utils
 Domain ..> Exception
 Domain ..> Service
 Domain ..> Session
 
 Mappers ..> Dto
+Mappers ..> Domain
 
 @enduml
