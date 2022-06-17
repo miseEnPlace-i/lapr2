@@ -181,7 +181,7 @@ activate COORDINATOR
           deactivate BUILDER
 
           note right of CTRL
-            <i><b>LegacyDataObjectBuilder</b></i> is responsible to create
+            <i><b>LegacyDataObjectBuilder</b></i> is responsible for creating
             instances of the classes needed.
           end note
 
