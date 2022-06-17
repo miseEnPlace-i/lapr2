@@ -151,8 +151,7 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
 
     BarChart chart = generateChart(performance);
     chart.setPrefWidth(SCENE_WIDTH - 80);
-    chart.setBarGap(0);
-    chart.setCategoryGap(0);
+
 
     VBox pane = new VBox(16);
 
@@ -181,7 +180,6 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
     NumberAxis yAxis = new NumberAxis();
 
     XYChart.Series<String, Number> series = new XYChart.Series<>();
-    XYChart.Series<String, Number> worstSeries = new XYChart.Series<>();
 
     List<Integer> differences = performance.getDifferencesList();
     Time startingInterval = performance.getStartingInterval();
@@ -189,23 +187,29 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
     Time tempInterval = startingInterval.clone();
 
     for (Integer value : differences) {
-      if (tempInterval.isBetween(startingInterval, endingInterval))
-        worstSeries.getData().add(
-            new XYChart.Data<String, Number>(tempInterval.toString(), value));
-      else
-        series.getData().add(
-            new XYChart.Data<String, Number>(tempInterval.toString(), value));
+      series.getData().add(
+          new XYChart.Data<String, Number>(tempInterval.toString(), value));
 
       tempInterval.addMinutes(interval);
     }
 
     BarChart<String, Number> chart = new BarChart<>(xAxis, yAxis);
+    chart.setTranslateX(32);
 
-    chart.getData().addAll(worstSeries, series);
+    chart.getData().addAll(series);
 
-    worstSeries.setName("Bad Performance");
-    series.setName("Good Performance");
+    for (XYChart.Data data : series.getData()) {
+      String time = (String) data.getXValue();
+      if (new Time(time).isBetweenExcludeRight(startingInterval,
+          endingInterval))
+        data.getNode().setStyle("-fx-bar-fill: #ff0000;");
+    }
 
+    series.setName("Better Performance");
+
+    chart.setBarGap(0);
+    chart.setCategoryGap(4);
+    chart.setTitle("Center Performance");
 
     return chart;
   }
