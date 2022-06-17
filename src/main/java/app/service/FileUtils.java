@@ -31,9 +31,12 @@ public class FileUtils {
             File file = new File(fileName);
 
             //create file path directory
+            
             File directory = file.getParentFile();
-            if (!directory.exists()) {
-                directory.mkdirs();
+            if (directory != null) {
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
             }
 
             file.createNewFile(); // creates a file if it does not exist

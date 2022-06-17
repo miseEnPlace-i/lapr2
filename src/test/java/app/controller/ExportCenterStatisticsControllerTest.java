@@ -163,7 +163,7 @@ public class ExportCenterStatisticsControllerTest {
 
         ctrl.generateFullyVaccinatedUsersInterval();
 
-        ctrl.saveData("Path..csv"); 
+        ctrl.saveData("Path.csv"); 
         
         String expected = "Date;NumberOfFullyVaccinatedUsers\n";
 
