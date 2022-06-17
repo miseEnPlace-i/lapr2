@@ -6,7 +6,6 @@ import app.utils.Time;
  * @author André Barros <1211299@isep.ipp.pt>
  */
 public class HealthCareCenter extends VaccinationCenter {
-
   private String aces;
   private String ars;
 
@@ -24,22 +23,21 @@ public class HealthCareCenter extends VaccinationCenter {
    * @param slotDuration the health care center slot duration
    * @param maxVacSlot the health care center maximum vaccines per slot
    * @param coordinator the health care center coordinator
-   * @param ages the health care center ages
+   * @param aces the health care center ages
    * @param ars the health care center ars
    */
   public HealthCareCenter(String name, Address address, String email, String phoneNum, String faxNum, String webAddress, Time openingHours, Time closingHours,
-      Slot slot, Employee coordinator, String ages, String ars) {
+      Slot slot, Employee coordinator, String aces, String ars) {
 
     super(name, address, email, phoneNum, faxNum, webAddress, openingHours, closingHours, slot, coordinator);
 
-    setAges(aces);
+    setAces(aces);
     setArs(ars);
   }
 
-  private void setAges(String aces) {
-    if (aces == null || aces.isEmpty()) {
-      throw new IllegalArgumentException("AGES not valid.");
-    }
+  private void setAces(String aces) {
+    if (aces == null || aces.isEmpty()) throw new IllegalArgumentException("AGES not valid.");
+
     this.aces = aces;
   }
 
@@ -67,5 +65,4 @@ public class HealthCareCenter extends VaccinationCenter {
 
     return sb.toString();
   }
-
 }

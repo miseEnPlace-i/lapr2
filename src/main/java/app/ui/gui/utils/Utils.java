@@ -58,9 +58,11 @@ public class Utils {
       App.getInstance().doLogout();
       App.getInstance().saveCurrentCompany();
       Platform.exit();
+      System.exit(0);
     } else if (result.get() == noButton) {
       App.getInstance().doLogout();
       Platform.exit();
+      System.exit(0);
     }
   }
 
