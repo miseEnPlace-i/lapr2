@@ -1,0 +1,40 @@
+@startuml US08_ValidateVaccineAdministration_SD
+autonumber
+' hide footbox
+
+participant "vaccineAdministrationList\n:VaccineAdministrationList" as vaccineAdministrationList
+participant "snsUser\n:SNSUser" as snsUser
+participant "userHealthData\n:UserHealthData" as userHealthData
+participant "vaccine\n:Vaccine" as vaccine
+participant "vaccineAdministration\n:VaccineAdministration" as vaccineAdministration
+participant "vaccinationCenter\n:VaccinationCenter" as vaccinationCenter
+
+[o-> vaccineAdministrationList : validateVaccineAdministration(vaccineAdministration)
+activate vaccineAdministrationList
+  vaccineAdministrationList -> vaccineAdministration : snsUser = getSnsUser()
+  activate vaccineAdministration
+  deactivate vaccineAdministration
+  vaccineAdministrationList -> snsUser : userHealthData = getUserHealthData()
+  activate snsUser
+  deactivate snsUser
+  vaccineAdministrationList -> vaccineAdministration : vaccine = getVaccine()
+  activate vaccineAdministration
+  deactivate vaccineAdministration
+  vaccineAdministrationList -> vaccineAdministration : doseNumber = getDoseNumber()
+  activate vaccineAdministration
+  deactivate vaccineAdministration
+  vaccineAdministrationList -> userHealthData : isTakingCorrectDoseOfVaccine(vaccine, doseNumber)
+  activate userHealthData
+  deactivate userHealthData
+  vaccineAdministrationList -> vaccineAdministration : vaccinationCenter = getVaccinationCenter()
+  activate vaccineAdministration
+  deactivate vaccineAdministration
+  vaccineAdministrationList -> vaccine : vaccineType = getVaccineType()
+  activate vaccine
+  deactivate vaccine
+  opt vaccinationCenter instanceOf CommunityMassVaccinationCenter
+    vaccineAdministrationList -> vaccinationCenter : administersVaccineType(vaccineType)
+    activate vaccinationCenter
+    deactivate vaccinationCenter
+  end
+deactivate vaccineAdministrationList

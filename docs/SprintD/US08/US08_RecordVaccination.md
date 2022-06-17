@@ -22,18 +22,44 @@ _"As a nurse, I want to record the administration of a vaccine to an SNS user. A
 
 **From the client clarifications:**
 
-> **Question:** Lorem ipsum
+> **Question:** "To access the user info - scheduled vaccine type and vaccination history -, should the nurse enter user's SNS number?"
 >
-> **Answer:** _"Lorem ipsum"_
+> **Answer:** _"The nurse should select a SNS user from a list of users that are in the center to take the vaccine."_
 
-> **Question:** Lorem ipsum
+> **Question:** "Supposing that the SNS user has already received a dose of a given vaccine type (for example, COVID-19), the user can only receive the same vaccine or a different one with the same vaccine type?"
 >
-> **Answer:** _"Lorem ipsum"_
+> **Answer:** _"The SNS user can only receive the same vaccine."_
+
+> **Question:** "1: The system displays the list of possible vaccines to be administered (considering the age group of the user); then the nurse selects the dose she is going to administer and gets information about the dosage. But wouldn't it be more correct, since the system knows the vaccination history, in other words, if the user has already taken x dose(s) of that vaccine, to simply show the dose and the respective dosage and not ask for the nurse to arbitrarily select it? 2: After giving the vaccine to the user, how should the nurse register the vaccine type?"
+>
+> **Answer:** _"1- If it is the first dose, the application should show the list of possible vaccines to be administered. If is not a single dose vaccine, when the SNS user arrives to take the vaccine, the system should simply show the dose and the respective dosage. 2- A vaccine is associated with a given vaccine type. Therefore, there is no need to register the vaccine type. Moreover, the nurse should also register the vaccine lot number (the lot number has five alphanumeric characters, a hyphen, and two numerical characters (example: 21C16-05))"_
+
+> **Question:** "As we can read in Project Description, the vaccination flow follows these steps: 1. Nurse calls one user that is waiting in the waiting room to be vaccinated; 2. Nurse checks the user's health data as well as which vaccine to administer; 3. Nurse administers the vaccine and registers its information in the system. The doubt is: do you want US08 to cover steps 2 and 3, or just step 3?"
+>
+> **Answer:** _"1. The nurse selects am SNS user from a list. 2. Checks user's Name, Age and Adverse Reactions registered in the system. 3. Registers information about the administered vaccine."_
+
+> **Question:** "Regarding the recovery period, how should we define it? Is it the same for all vaccines or should the nurse specify in each case what the recovery time is?"
+>
+> **Answer:** _"The recovery period/time is the same for all vaccines. The recovery period/time should be defined in a configuration file."_
+
+> **Question:** "1: Is the nurse responsible for registering in the system the recovery period? 2: If there are no adverse reactions detected/registered, after the given recovery period, the system notifies the user that his/her recovery period has ended, right? 3: If there are adverse reactions detected/registered, the system should not do anything additional?"
+>
+> **Answer:** _"1- No. The recovery period starts automatically after registering the administration of a given vaccine. 2 and 3- US7 and US 8 are independent user stories."_
+
+> **Question:** "In US 08 says: "At the end of the recovery period, the user should receive an SMS message informing the SNS user that he can leave the vaccination center." How should the SNS user receive and have access to the SMS message?"
+>
+> **Answer:** _"A file named SMS.txt should be used to receive/record the SMS messages. We will not use a real word service to send SMS's."_
+
 
 ### 1.3. Acceptance Criteria
 
+* **AC1:** If it's the first dose, the nurse should select a vaccine that has the vaccine type of the related appointment, and that has an administration process for the user.
 
-* **AC1:** The nurse should select a vaccine and the administered dose number.
+* **AC2:** The nurse should select a user from the waiting room, in order to administer a vaccine to him.
+
+* **AC3:** The lot number inserted should have five alphanumeric characters, a hyphen, and two numerical characters (example: 21C16-05).
+
+* **AC4:** An SMS should be sent to the user when the recovery period ends, informing him that he can leave the recovery room.
 
 
 ### 1.4. Found out Dependencies
@@ -54,16 +80,18 @@ _"As a nurse, I want to record the administration of a vaccine to an SNS user. A
 **Input Data:**
 
 * Typed data:
-	* SNS user number
-	* lote number
-	* dose number
+	* Lot number
 
 * Selected data:
-	* vaccine
+	* SNS User
+	* Vaccine (when administering first dose)
 
 **Output Data:**
 
+* List of SNS Users in the waiting room
+* Name, age, and previous adverse reactions of the user
 * List of vaccines that have the vaccine type of the most recent user arrival
+* Dose number and respective dosage of the vaccine that the user is going to receive
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
@@ -133,6 +161,8 @@ Other software classes (i.e. Pure Fabrication) identified:
 **Alternative 1**
 
 ![US08_SD](SD/US08_SD.svg)
+
+<!-- meter aqui os 5 refs -->
 
 ## 3.3. Class Diagram (CD)
 
