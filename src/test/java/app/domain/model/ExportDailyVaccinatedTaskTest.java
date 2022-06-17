@@ -98,7 +98,7 @@ public class ExportDailyVaccinatedTaskTest {
         String expected = "Center;" + vacType1.getDescription() + ";" + vacType2.getDescription() + "\n" +
                             center1.getName() + ";1;1\n" + center2.getName() + ";0;1\n";
 
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         Path expectedFilepath = Path.of("out\\test" + format.format(yesterday.getTime()) + ".csv");
 
         assertEquals(expected, Files.readString(expectedFilepath));

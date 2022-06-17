@@ -48,7 +48,7 @@ public class ExportDailyVaccinatedTask extends TimerTask {
         String content = convertToString(centerLst, vacTypeLst, dataMap);
         Calendar yesterday = Calendar.getInstance();
         yesterday.add(Calendar.DATE, -1);
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
         String filepath = this.filePath + format.format(yesterday.getTime()) + ".csv";
         FileUtils.writeToFile(filepath, content);

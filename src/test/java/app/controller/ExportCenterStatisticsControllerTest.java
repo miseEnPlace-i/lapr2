@@ -167,7 +167,7 @@ public class ExportCenterStatisticsControllerTest {
         
         String expected = "Date;NumberOfFullyVaccinatedUsers\n";
 
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-YYYY");
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/YYYY");
         expected += df.format(startDate.getTime()) + ";1\n" + df.format(endDate.getTime()) + ";0\n";
 
         Path expectedFilepath = Path.of("Path.csv");
