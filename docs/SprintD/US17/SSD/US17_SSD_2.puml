@@ -1,0 +1,37 @@
+@startuml US17_SSD_2
+autonumber
+
+actor "Center Coordinator" as COORDINATOR
+
+activate COORDINATOR
+
+COORDINATOR -> ":System" : starts the process of importing data from a legacy system
+activate ":System"
+
+":System" --> COORDINATOR : asks for the file that should be loaded
+deactivate ":System"
+
+COORDINATOR -> ":System" : selects the file
+activate ":System"
+
+' sorted by arrival time or by the center leaving time
+":System" --> COORDINATOR : opens the file and shows data sorted by arrival and ascending
+deactivate ":System"
+
+alt the user wants to sort the data in a different way
+    COORDINATOR -> ":System" : selects sorted by arrival/leaving time and order ascending/descending
+    activate ":System"
+
+    ":System" --> COORDINATOR : sorts data and shows it
+    deactivate ":System"
+end
+
+COORDINATOR -> ":System" : confirms the data
+activate ":System"
+
+":System" --> COORDINATOR : informs operation success
+deactivate ":System"
+
+deactivate COORDINATOR
+
+@enduml
