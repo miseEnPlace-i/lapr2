@@ -35,6 +35,7 @@ public class Constants {
   public static final byte VACCINE_TYPE_CODE_LENGTH = 5;
 
   public static final String SMS_FILE = "SMS.txt";
+  public static final String EMAIL_FILE = "Email.txt";
 
   public static final int MAX_OF_PASSWORD_TRIES = 3;
 
