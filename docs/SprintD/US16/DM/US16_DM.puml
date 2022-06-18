@@ -9,11 +9,8 @@ class VaccinationCenter {
   - phoneNumber
   - faxNumber
   - websiteAddress
-}
-
-class Time {
-  - hours
-  - minutes
+  - openingHours
+  - closingHours
 }
 
 class Slot {
@@ -39,6 +36,8 @@ class Address {
 class CenterPerformance {
   - day
   - maxSumSublist
+  - startTime
+  - endingTime
 }
 
 class Role {
@@ -48,13 +47,6 @@ class Role {
 class Company {}
 
 class CenterCoordinator {}
-
-
-VaccinationCenter "1" -- "1" Time : has closing hours >
-VaccinationCenter "1" -- "1" Time : has opening hours >
-
-CenterPerformance "1" -- "1" Time : has start time >
-CenterPerformance "1" -- "1" Time : has end time >
 
 VaccinationCenter "1" -- "1" Slot : has >
 
