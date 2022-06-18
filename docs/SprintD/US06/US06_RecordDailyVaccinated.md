@@ -46,32 +46,16 @@ DGS wants to record daily the total number of people vaccinated in each vaccinat
 
 ### 2.1. Relevant Domain Model Excerpt
 
-_In this section, it is suggested to present an excerpt of the domain model that is seen as relevant to fulfill this requirement._
-
-![USXXX-MD](USXXX-MD.svg)
-
-### 2.2. Other Remarks
-
-_Use this section to capture some aditional notes/remarks that must be taken into consideration into the design activity. In some case, it might be usefull to add other analysis artifacts (e.g. activity or state diagrams)._
+![US06-MD](./DM/US06_DM.svg)
 
 ## 3. Design - User Story Realization
 
 ### 3.1. Rationale
 
-**The rationale grounds on the SSD interactions and the identified input/output data.**
-
 | Interaction ID | Question: Which class is responsible for... | Answer | Justification (with patterns) |
 | :------------- | :------------------------------------------ | :----- | :---------------------------- |
 | Step 1         |                                             |        |                               |
-| Step 2         |                                             |        |                               |
-| Step 3         |                                             |        |                               |
-| Step 4         |                                             |        |                               |
-| Step 5         |                                             |        |                               |
-| Step 6         |                                             |        |                               |
-| Step 7         |                                             |        |                               |
-| Step 8         |                                             |        |                               |
-| Step 9         |                                             |        |                               |
-| Step 10        |                                             |        |                               |
+
 
 ### Systematization
 

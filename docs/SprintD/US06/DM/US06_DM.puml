@@ -1,4 +1,4 @@
-@startuml US15_DM
+@startuml
 hide methods
 skinparam classAttributeIconSize 0
 

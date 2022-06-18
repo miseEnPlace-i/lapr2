@@ -1,25 +1,24 @@
 @startuml
 skinparam classAttributeIconSize 0
 
-class Timer{
-    +scheduleAtFixedRate(task, firstTime, period)
-}
-
-interface Runnable{
-    +run()
-}
-
-abstract TimerTask{
-    +TimerTask()
-    +run()
-    +cancel()
-    +scheduleAtFixedRate(task, firstTime, period)
-}
-
-    class FileUtils {
-        +writeToFile(filepath, content)
+package java.util{
+    class Timer{
+        +scheduleAtFixedRate(task, firstTime, period)
     }
+    abstract TimerTask{
+        +TimerTask()
+        +run()
+        +cancel()
+        +scheduleAtFixedRate(task, firstTime, period)
+    }
+}
 
+package java.lang{
+    interface Runnable{
+        +run()
+    }
+}
+    
 package core {
     
 
@@ -91,6 +90,11 @@ package core {
             }
 
         }
+        package service{
+            class FileUtils {
+                +writeToFile(filepath, content)
+            }
+        }
     }
 }
 
@@ -104,7 +108,7 @@ Vaccine "*" o-- "1" VaccineType : has >
 VaccineAdministration "*" o-- "*" Vaccine : has >
 VaccinationCenter "1" o-- "*" VaccineAdministration : has >
 VaccineTypeStore "1" --> "*" VaccineType : store
-VaccinationCenterStore "1" --> "*" VaccinationCenter : stores
+VaccinationCenterStore "1" -> "*" VaccinationCenter : stores
 Company --> Timer : uses
 Timer --> ExportDailyVaccinatedTask : schedules
 
