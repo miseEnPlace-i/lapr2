@@ -46,6 +46,11 @@ public class CoordinatorUI extends EmployeeRoleUI {
     }
   }
 
+  @FXML
+  void toExportCenterStatistics(ActionEvent event) {
+    System.out.println("Export center statistics");
+  }
+
   public EmployeeSession getEmployeeSession() {
     return this.employeeSession;
   }

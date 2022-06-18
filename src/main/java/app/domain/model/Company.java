@@ -43,20 +43,16 @@ public class Company implements Serializable {
    * @param designation the designation of the company
    */
   public Company(String designation, String ongoingOutbreakVaccineTypeCode) {
-    if (StringUtils.isBlank(designation))
-      throw new IllegalArgumentException("Designation cannot be blank.");
+    if (StringUtils.isBlank(designation)) throw new IllegalArgumentException("Designation cannot be blank.");
 
-    if (ongoingOutbreakVaccineTypeCode == null)
-      throw new IllegalArgumentException(
-          "Ongoing outbreak vaccine type code cannot be null.");
+    if (ongoingOutbreakVaccineTypeCode == null) throw new IllegalArgumentException("Ongoing outbreak vaccine type code cannot be null.");
 
     this.designation = designation;
 
     this.authFacade = new AuthFacade();
     this.userStore = new UserStore();
     this.employeeRoleStore = new EmployeeRoleStore(this.authFacade);
-    this.employeeStore = new EmployeeStore(this.authFacade, this.userStore,
-        this.employeeRoleStore);
+    this.employeeStore = new EmployeeStore(this.authFacade, this.userStore, this.employeeRoleStore);
     this.snsUserStore = new SNSUserStore(this.authFacade, this.userStore);
     this.vaccinationCenterStore = new VaccinationCenterStore();
     this.vaccineStore = new VaccineStore();
@@ -141,12 +137,11 @@ public class Company implements Serializable {
     return this.userStore;
   }
 
-  public void scheduleDailyVaccinated(String filePath, String time, String separator){
+  public void scheduleDailyVaccinated(String filePath, String time, String separator) {
     Scheduler.scheduleExportDailyVaccinated(filePath, time, separator, this.vaccinationCenterStore, this.vaccineTypeStore);
   }
 
-  private void readObject(ObjectInputStream in)
-      throws IOException, ClassNotFoundException {
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
     try {
       in.defaultReadObject();
       this.employeeStore.updateAuthFacade(getAuthFacade());

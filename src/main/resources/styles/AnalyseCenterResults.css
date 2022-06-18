@@ -81,3 +81,7 @@
 .default-color1.chart-bar {
   -fx-bar-fill: #00ff00;
 }
+
+#container {
+  fx-alignment: CENTER;
+}
