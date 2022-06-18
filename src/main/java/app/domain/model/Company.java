@@ -3,6 +3,8 @@ package app.domain.model;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Timer;
 import org.apache.commons.lang3.StringUtils;
 import app.domain.model.store.EmployeeRoleStore;
 import app.domain.model.store.EmployeeStore;
@@ -138,7 +140,22 @@ public class Company implements Serializable {
   }
 
   public void scheduleDailyVaccinated(String filePath, String time, String separator) {
-    Scheduler.scheduleExportDailyVaccinated(filePath, time, separator, this.vaccinationCenterStore, this.vaccineTypeStore);
+    int timeInterval = 24*60*60;
+
+    String[] scheduleTime = time.split(":");
+    Calendar firstTime = Calendar.getInstance();
+
+    firstTime.set(Calendar.SECOND, 0);
+    firstTime.set(Calendar.MINUTE, Integer.valueOf(scheduleTime[1]));
+    firstTime.set(Calendar.HOUR_OF_DAY, Integer.valueOf(scheduleTime[0]));
+
+    if(firstTime.before(Calendar.getInstance())) firstTime.add(Calendar.SECOND, timeInterval);
+
+    ExportDailyVaccinatedTask task = new ExportDailyVaccinatedTask(filePath, separator.charAt(0), this.vaccinationCenterStore, this.vaccineTypeStore);
+    
+    Timer timer = new Timer();
+
+    timer.scheduleAtFixedRate(task, firstTime.getTime(), timeInterval);
   }
 
   private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
