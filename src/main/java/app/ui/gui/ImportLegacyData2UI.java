@@ -1,10 +1,13 @@
 package app.ui.gui;
 
 import java.util.List;
+import java.util.Properties;
 import app.controller.App;
 import app.controller.ImportLegacyDataController;
 import app.domain.model.Company;
+import app.domain.shared.Constants;
 import app.dto.LegacyDataDTO;
+import app.service.PropertiesUtils;
 import app.session.EmployeeSession;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
@@ -43,6 +46,12 @@ public class ImportLegacyData2UI extends ChildUI<CoordinatorUI> {
   @FXML
   private ChoiceBox<String> selOrder;
 
+  @FXML
+  private Label lblElapsedTime;
+
+  @FXML
+  private Label lblAlgorithm;
+
   void init(CoordinatorUI parentUI) {
     this.setParentUI(parentUI);
     Company company = App.getInstance().getCompany();
@@ -62,22 +71,30 @@ public class ImportLegacyData2UI extends ChildUI<CoordinatorUI> {
       boolean isArrival = selParam.valueProperty().get().equals("Arrival");
       boolean isAsc = selOrder.valueProperty().get().equals("Ascending");
 
-      this.ctrl.sort(legacyDtoList, isArrival, isAsc);
-      showData();
+      double elapsedTime = this.ctrl.sort(legacyDtoList, isArrival, isAsc);
+      showData(elapsedTime);
     };
 
     selParam.valueProperty().addListener(listener);
     selOrder.valueProperty().addListener(listener);
   }
 
-  public void setLegacyDtoList(List<LegacyDataDTO> legacyDtoList) {
+  public void setData(List<LegacyDataDTO> legacyDtoList, double elapsedTime) {
     this.legacyDtoList = legacyDtoList;
-    showData();
+    showData(elapsedTime);
   }
 
-  private void showData() {
+  private void showData(double elapsedTime) {
     this.lstData.getItems().clear();
     this.lstData.getItems().addAll(legacyDtoList);
+
+    // elapsed time; algorithm used
+    this.lblElapsedTime.setText(String.format("%.4f seconds", elapsedTime));
+
+    Properties props = PropertiesUtils.getProperties();
+    String algorithmUsed = props.getProperty(Constants.PARAMS_SORTING_ALGORITHM);
+    String[] temp = algorithmUsed.split("\\.");
+    this.lblAlgorithm.setText(temp[temp.length - 1]);
   }
 
   @FXML

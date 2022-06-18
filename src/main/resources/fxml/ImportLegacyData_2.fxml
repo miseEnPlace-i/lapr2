@@ -68,8 +68,24 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <HBox alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="900.0">
+            <HBox alignment="CENTER" prefHeight="39.0" prefWidth="900.0">
                <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Elapsed time: " />
+                              <Label fx:id="lblElapsedTime" text="- ms" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Algorithm used: " />
+                              <Label fx:id="lblAlgorithm" text="-" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                   <VBox prefHeight="40.0" prefWidth="172.0" spacing="4.0">
                      <children>
                         <Label text="Sort by" />
