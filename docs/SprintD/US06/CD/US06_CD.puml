@@ -1,8 +1,8 @@
 @startuml
 skinparam classAttributeIconSize 0
 
-class Company{
-    +scheduleExportDailyVaccinated(filePath, time, separator, timeInterval)
+class Timer{
+    +scheduleAtFixedRate(task, firstTime, period)
 }
 
 interface Runnable{
@@ -13,54 +13,99 @@ abstract TimerTask{
     +TimerTask()
     +run()
     +cancel()
-    +scheduledExecutionTime()
-}
-
-class ExportDailyVaccinatedTask {
-    +ExportDailyVaccinatedTask(filePath, separator, vacCenterSt, vacTypeSt)
-    +run()
-}
-
-class TimerTask{
-    +TimerTask()
     +scheduleAtFixedRate(task, firstTime, period)
 }
 
-class VaccinationCenterStore {
-    +getVaccinationCenters()
+    class FileUtils {
+        +writeToFile(filepath, content)
+    }
+
+package core {
+    
+
+    package domain{
+        package model{
+            class Company{
+                -designation: String
+                -vaccinationCenterStore: VaccinationCenterStore
+                -vaccineTypeStore: VaccineTypeStore
+                +Company(designation)
+                +scheduleExportDailyVaccinated(filePath, time, separator, timeInterval)
+            }
+
+
+            class ExportDailyVaccinatedTask {
+                -filePath: String
+                -vacCenterSt: VaccinationCenterStore
+                -vacTypeSt: VaccineTypeStore
+                -separator: char
+                +ExportDailyVaccinatedTask(filePath, separator, vacCenterSt, vacTypeSt)
+                +run()
+            }
+                    
+            class VaccinationCenter {
+                -name: String 
+                -address: Address
+                -phoneNumber: String
+                -emailAddress: String
+                -faxNumber: String
+                -webSiteAddress: String
+                +getVaccinaAdminList()
+                +getName()
+            }
+
+            class Vaccine {
+                -designation: String
+                -brand: String
+                -id: String
+                -vacType: VaccineType
+                -adminProcList: AdminProcList
+                +getVacType()
+            }
+
+            class VaccineAdministration {
+                -snsUser: SNSUser
+                -vaccine: Vaccine
+                -lotNumber: String
+                -doseNumber: int
+                -vaccinationCenter: VaccinationCenter
+                -date: Calendar
+                +getVaccine()
+            }
+
+            class VaccineType {
+                -code: String
+                -description: String
+                -technology: String
+                +getDescription()
+            }
+        }
+        package stores{
+            
+            class VaccinationCenterStore {
+                +getVaccinationCenters()
+            }
+
+            class VaccineTypeStore {
+                +getVaccineTypes()
+            }
+
+        }
+    }
 }
 
-class VaccineTypeStore {
-    +getVaccineTypes()
-}
-
-class VaccinationCenter {
-    +getVaccinaAdminList()
-    +getName()
-}
-
-class Vaccine {
-    +getVacType()
-}
-
-class VaccineAdministration {
-    +getVaccine()
-}
-
-class VaccineType {
-    getDescription()
-}
 
 TimerTask ..|> Runnable
 ExportDailyVaccinatedTask -|> TimerTask
+ExportDailyVaccinatedTask --> FileUtils : uses
 Company ..> VaccinationCenterStore : knows
 Company ..> VaccineTypeStore : knows
-Vaccine "*" *-- "1" VaccineType : has > 
-VaccineAdministration "*" *-- "*" Vaccine : has >
+Vaccine "*" o-- "1" VaccineType : has > 
+VaccineAdministration "*" o-- "*" Vaccine : has >
 VaccinationCenter "1" o-- "*" VaccineAdministration : has >
 VaccineTypeStore "1" --> "*" VaccineType : store
 VaccinationCenterStore "1" --> "*" VaccinationCenter : stores
 Company --> Timer : uses
-Timer --> ExportDailyVaccinatedTask : times
+Timer --> ExportDailyVaccinatedTask : schedules
 
 @enduml
