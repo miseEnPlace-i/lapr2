@@ -413,7 +413,7 @@ public abstract class VaccinationCenter implements Serializable {
   /**
    * @return List<VaccineAdministration> list of vaccine administration from yesterday
    */
-  public List<VaccineAdministration> getVaccineAdministrationFromYesterdayList() {
+  public List<VaccineAdministration> getVacAdminFromYesterdayList() {
     List<VaccineAdministration> subList = new ArrayList();
     Calendar yesterday = getDateWithoutTime(Calendar.getInstance());
     yesterday.add(Calendar.DATE, -1);

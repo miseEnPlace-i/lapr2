@@ -2,6 +2,10 @@
 autonumber
 'hide footbox
 
+actor "Timer" as ACT
+
+
+participant "App" as APP
 participant "Company" as COMP
 participant "task:\nExportDailyVaccinatedTask" as TASK
 participant "timer:\nTimer" as TIMER
@@ -12,18 +16,21 @@ participant "vacAdmin:\nVaccineAdministration" as VACADMIN
 participant "vaccine:\nVaccine" as VAC
 participant "csvEx:\nCsvExporter" as CSVEX
 participant "vacType:\nVaccineType" as VACTYPE
+participant "FileUtils" as FILEUTILS
 participant "vacAdminList:\nList<VaccineAdministration>" as VALST
-participant "dataMap:\nHashMap<VaccinationCenter,HashMap<VaccineType,Int>>" as VALST
+participant "dataMap:\nHashMap<VaccinationCenter,\nHashMap<VaccineType,Int>>" as MAP
 
-
-    [o-> COMP : scheduleExportDailyVaccinated(firstTime, period)
-    activate COMP
-
-        note right COMP 
-            filePath is a property of the system
-        end note
-        COMP --> TASK ** : create(filePath, vacCenterSt, vacTypeSt)
-
+    activate ACT
+    ACT -> APP : Asks to export daily vaccinated report
+    activate APP
+    note right APP 
+        filePath, time and separator are properties of the system
+    end note
+    APP-> COMP : scheduleDailyVaccinated(filePath, time, separator, timeInterval)
+    deactivate APP
+        
+        activate COMP
+        COMP --> TASK ** : create(filePath, separator, vacCenterSt, vacTypeSt)
         COMP --> TIMER ** : create()
 
         COMP -> TIMER : scheduleAtFixedRate(task, firstTime, period)
@@ -49,7 +56,7 @@ participant "dataMap:\nHashMap<VaccinationCenter,HashMap<VaccineType,Int>>" as V
             deactivate VTST
 
             loop foreach vaccination center
-                TASK -> CENTER : vacAdminList = getVaccinaAdminList()
+                TASK -> CENTER : vacAdminList = getVacAdminFromYesterdayList()
                 activate CENTER
                 deactivate CENTER
 
@@ -61,22 +68,30 @@ participant "dataMap:\nHashMap<VaccinationCenter,HashMap<VaccineType,Int>>" as V
                     TASK -> VAC : vacType = getVacType()
                     activate VAC
                     deactivate VAC
-
-                    TASK -> TASK : listIncrementVacType(vacType)
-                    activate TASK
-                    deactivate TASK
                 end
             end
 
-            TASK --> CSVEX ** : create(filePath)
-            TASK --> CSVEX : exportData(dataMap)
-            activate CSVEX
-            deactivate CSVEX
+            TASK -> TASK : content = convertToString(centerLst, vacTypeLst, dataMap)
+            activate TASK
+                loop foreach vacType
+                    TASK -> VACTYPE : getDescription()
+                    activate VACTYPE
+                    deactivate VACTYPE
+                end
+                loop foreach center
+                    TASK -> CENTER : getName()
+                    activate CENTER
+                    deactivate CENTER
+                end
+            deactivate TASK
+            TASK -> FILEUTILS : writeToFile(filepath, content)
+            activate FILEUTILS
+            deactivate FILEUTILS
 
         deactivate TASK
 
         note right TASK 
-            After the time specifiede by period has elapsed the task will be runned again
+            After period has elapsed the task will be runned again (message 6)
         end note 
         TIMER -> TASK : run()
         activate TIMER
