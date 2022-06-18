@@ -89,7 +89,7 @@ public class ImportLegacyData2UI extends ChildUI<CoordinatorUI> {
     this.lstData.getItems().addAll(legacyDtoList);
 
     // elapsed time; algorithm used
-    this.lblElapsedTime.setText(String.format("%.4f seconds", elapsedTime));
+    this.lblElapsedTime.setText(String.format("%.4f ms", elapsedTime));
 
     Properties props = PropertiesUtils.getProperties();
     String algorithmUsed = props.getProperty(Constants.PARAMS_SORTING_ALGORITHM);
