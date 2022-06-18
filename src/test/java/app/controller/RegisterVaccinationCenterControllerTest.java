@@ -84,7 +84,7 @@ public class RegisterVaccinationCenterControllerTest {
     sb.append(String.format("Slot duration: %s\n", "5"));
     sb.append(String.format("Maximum vaccines per slot: %s\n", "5"));
     sb.append(String.format("Coordinator: %s\n", "Joana"));
-    sb.append(String.format("AGES: %s\n", "test"));
+    sb.append(String.format("ACES: %s\n", "test"));
     sb.append(String.format("ARS: %s\n", "test"));
 
     return sb.toString();
