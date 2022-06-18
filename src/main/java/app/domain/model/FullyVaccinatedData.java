@@ -19,7 +19,6 @@ public class FullyVaccinatedData {
     private Calendar endDate;
     private VaccinationCenter center;
     private int snsUserAge;
-    private SNSUser snsUser;
     private Vaccine vaccine;
     private boolean fullyVaccinated;
 
@@ -60,11 +59,10 @@ public class FullyVaccinatedData {
      */
     private void validateDateInterval(Calendar start, Calendar end) {
         if (start == null && end == null) throw new IllegalArgumentException("Date cannot be null.");
-        if(start.after(end))
-            throw new IllegalArgumentException("End date must be after start date."); 
+        if (start.after(end)) throw new IllegalArgumentException("End date must be after start date.");
         if (end.after(Calendar.getInstance()))
             throw new IllegalArgumentException("It is not possible to export center statistics that contains days in the future.");
-        
+
     }
 
     /**

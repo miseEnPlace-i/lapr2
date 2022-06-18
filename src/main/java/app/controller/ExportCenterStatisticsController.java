@@ -42,7 +42,7 @@ public class ExportCenterStatisticsController {
     public void createFullyVaccinatedData(String filePath, Calendar start, Calendar end) {
         VaccinationCenter center = session.getVaccinationCenter();
 
-        if(end.before(start)) throw new IllegalArgumentException("Invalid date interval!");
+        if (end.before(start)) throw new IllegalArgumentException("Invalid date interval!");
 
         this.exporter = new FullyVaccinatedData(filePath, start, end, center);
     }
@@ -73,5 +73,9 @@ public class ExportCenterStatisticsController {
 
     public String exportFileString() {
         return exporter.toExportFileString(this.dataMap);
+    }
+
+    public LinkedHashMap<Calendar, Integer> getData() {
+        return this.dataMap;
     }
 }
