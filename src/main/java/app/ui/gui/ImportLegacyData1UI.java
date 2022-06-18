@@ -64,10 +64,10 @@ public class ImportLegacyData1UI extends ChildUI<CoordinatorUI> {
       List<String[]> fileData = this.ctrl.read(selectedFile.getAbsolutePath());
       List<LegacyDataDTO> legacyDtoList = this.ctrl.convert(fileData);
       this.ctrl.validate(legacyDtoList);
-      this.ctrl.sort(legacyDtoList, true, true);
+      double elapsedTime = this.ctrl.sort(legacyDtoList, true, true);
 
       ImportLegacyData2UI iUI = this.getParentUI().toImportLegacyDataScene2();
-      iUI.setLegacyDtoList(legacyDtoList);
+      iUI.setData(legacyDtoList, elapsedTime);
     } catch (FileNotFoundException e) {
       // the user may have deleted the file after selecting it
       displayFileNotFoundErrorAlert(e);

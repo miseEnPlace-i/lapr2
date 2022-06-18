@@ -60,11 +60,14 @@ public class ImportLegacyDataController {
     }
   }
 
-  public void sort(List<LegacyDataDTO> legacyDtoList, boolean isArrival, boolean isAsc) {
+  public double sort(List<LegacyDataDTO> legacyDtoList, boolean isArrival, boolean isAsc) {
     ISortStrategy sortStrategy = SortFactory.getSortStrategy();
     Comparator<LegacyDataDTO> comparator = isArrival ? new ArrivalCompare() : new DepartureCompare();
+    long startTime = System.nanoTime();
     sortStrategy.doSort(legacyDtoList, comparator);
+    long endTime = System.nanoTime();
     if (!isAsc) Collections.reverse(legacyDtoList);
+    return (endTime - startTime) / Math.pow(10, 6);
   }
 
   public void save(List<LegacyDataDTO> legacyDtoList) {
