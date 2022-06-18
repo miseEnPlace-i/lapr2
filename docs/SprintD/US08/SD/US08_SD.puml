@@ -1,4 +1,4 @@
-@startuml US01_SD
+@startuml US08_SD
 autonumber
 ' hide footbox
 actor "Nurse" as nurse
@@ -19,17 +19,6 @@ participant "UserVaccinationInfoMapper" as userVaccinationInfoMapper
 participant "DosageInfoMapper" as dosageInfoMapper
 participant "vaccineDto\n:VaccineDTO" as vaccineDto
 participant "vaccineAdministration\n:VaccineAdministration" as vaccineAdministration
-participant "waitingRoom\n:WaitingRoom" as waitingRoom
-participant "recoveryRoom\n:RecoveryRoom" as recoveryRoom
-participant "vaccinationCenter\n:VaccinationCenter" as vaccinationCenter
-participant "centerEventList\n:CenterEventList" as centerEventList
-participant "properties\n:Properties" as properties
-participant "PropertiesUtils" as propertiesUtils
-participant "UserNotificationMapper" as userNotificationMapper
-participant "SenderFactory" as senderFactory
-participant "Sender" as sender
-participant "timer:Timer" as timer
-participant "removeRecoveryRoomTask:RemoveRecoveryRoomTask" as removeRecoveryRoomTask
 
 participant "waitingRoomDto\n:List<ArrivalDTO>" as waitingRoomDto
 ' participant "vaccines\n:List<Vaccine>" as vaccinesList

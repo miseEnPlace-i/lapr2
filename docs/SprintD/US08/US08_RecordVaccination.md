@@ -145,24 +145,44 @@ n/a
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
- * Appointment
- * AppointmentScheduleList
- * VaccinationCenterStore
- * VaccineTypeStore
- * Company
+ * VaccineAdministration
+ * VaccineAdministrationList
+ * WaitingRoom
+ * SNSUser
+ * UserHealthData
+ * Vaccine
+ * VaccineStore
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
- * ScheduleVaccineUI
- * ScheduleVaccineController
+ * VaccineAdministrationUI
+ * VaccineAdministrationController
 
 ## 3.2. Sequence Diagram (SD)
 
-**Alternative 1**
+#### Main SD
 
 ![US08_SD](SD/US08_SD.svg)
 
-<!-- meter aqui os 5 refs -->
+#### EmployeeLogin SD
+
+![EmployeeLogin_SD](SD/EmployeeLogin_SD.svg)
+
+#### US05 SD
+
+![US05_SD](SD/US05_SD.svg)
+
+#### ValidateVaccineAdministration SD
+
+![US08_ValidateVaccineAdministration_SD](SD/US08_ValidateVaccineAdministrationSD.svg)
+
+#### SaveVaccineAdministration SD
+
+![US08_SaveVaccineAdministration_SD](SD/US08_SaveVaccineAdministrationSD.svg)
+
+#### SetSmsSending SD
+
+![US08_SetSmsSending_SD](SD/US08_SetSmsSendingSD.svg)
 
 ## 3.3. Class Diagram (CD)
 
@@ -174,43 +194,54 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ## Instantiate objects with null values
 
-**Test 1:** Check that it is not possible to create an instance of the Appointment class with null values. 
+**Test 1:** Check that it is not possible to create an instance of the Vaccine Administration class with null values. 
 
 	@Test(expected = IllegalArgumentException.class)
     public void ensureNullIsNotAllowed() {
-        Appointment instance = new Appointment(null, null, null, null, null);
+        new VaccineAdministration(null, null, null, 0, null, null);
+    }
+
+## Instantiate objects with invalid Lot Number (AC3)
+
+**Test 2:** Check that it is not possible to create an instance of the Vaccine Administration class with an invalid lot number. 
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureInvalidLotNumberIsNotAllowed() {
+        new VaccineAdministration(user1, vaccine, "aaaaa", 1, vaccinationCenter, Calendar.getInstance());
     }
 
 # 5. Construction (Implementation)
 
-## Class ScheduleVaccineController
+## Class RegisterVaccineAdministration
 
-    public void createAppointment(Date date, String time, VaccinationCenterListDTO centerDto, VaccineTypeDTO vaccineTypeDto, boolean sms) {
-        VaccinationCenter center = vaccinationCenterStore.getVaccinationCenterWithEmail(centerDto.getEmail());
-        this.appointmentSchedule = center.getAppointmentList();
+    public void createVaccineAdministration(ArrivalDTO arrivalDTO,
+        VaccineDTO vaccineDTO, String lotNumber, int doseNumber) {
+        vaccineAdministrationList =
+            getVaccineAdministrationListFromArrival(arrivalDTO);
 
-	    String email = App.getInstance().getCurrentUserSession().getUserId().getEmail();
-        SNSUser snsUser = snsUserStore.findSNSUserByEmail(email);
+        String id = vaccineDTO.getId();
 
-        try {
-            Calendar dateAndTime = CalendarUtils.parseDateTime(date, time);
+        Vaccine vaccine = vaccineStore.findVaccineById(id);
 
-            this.appointment = appointmentSchedule.createAppointment(snsUser, dateAndTime, vaccineTypeDto, sms);
-        } catch (ParseException ex) {
-            throw new IllegalArgumentException("Date or time invalid.");
-        }
+        VaccinationCenter vaccinationCenter = nurseSession.getVaccinationCenter();
 
-        appointmentSchedule.validateAppointment(this.appointment);
-  	}
+        Calendar date = Calendar.getInstance();
 
-## Class AppointmentScheduleList
+        vaccineAdministration =
+            vaccineAdministrationList.createVaccineAdministration(snsUser, vaccine,
+                lotNumber, doseNumber, vaccinationCenter, date);
 
-    public Appointment createAppointment(SNSUser snsUser, Calendar date, VaccineTypeDTO vaccineTypeDto, boolean sms) {
-        VaccineType vaccineType = VaccineTypeMapper.toModel(vaccineTypeDto);
+        vaccineAdministrationList
+            .validateVaccineAdministration(vaccineAdministration);
+    }
 
-        Appointment appointment = new Appointment(snsUser, date, this.vaccinationCenter, vaccineType, sms);
+## Class VaccineAdministrationList
 
-        return appointment;
+    public VaccineAdministration createVaccineAdministration(SNSUser snsUser, Vaccine vaccine, String lotNumber, int doseNumber,
+        VaccinationCenter vaccinationCenter, Calendar date) {
+        VaccineAdministration vaccineAdministration = new VaccineAdministration(snsUser, vaccine, lotNumber, doseNumber, vaccinationCenter, date);
+
+        return vaccineAdministration;
     }
 
 # 6. Integration and Demo 

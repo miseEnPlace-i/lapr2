@@ -1,0 +1,255 @@
+@startuml US08_CD
+skinparam classAttributeIconSize 0
+
+package UI {
+  class VaccineAdministrationUI {}
+}
+
+package core {
+  package domain {
+    package model {
+      class VaccinationCenter {
+        - name: String
+        - emailAddress: String
+        - phoneNumber: String
+        - faxNumber: String
+        - websiteAddress: String
+        
+        +VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slot,coordinator)
+      }
+
+      class CommunityMassVaccinationCenter {
+        - vaccineType : VaccineType
+
+        +CommunityMassVaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slot,coordinator,vaccineType)
+        +administersVaccineType(vaccineType)
+      }
+
+      class Address {
+        - street: String
+        - doorNumber: int
+        - postalCode: String
+        - city: String
+      }
+
+      class SNSUser {
+        - String citizenCard
+        - String snsNumber
+        - Date birthDay
+        - Char gender
+        - String phoneNumber
+        - String address
+        + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
+        + getUserHealthData()
+        + getName()
+        + getAge()
+        + getPhoneNumber()
+      }
+
+      class Employee {
+        -id: String 
+        -name: String 
+        -email: String 
+        -phone: String 
+        -citizenCardNumber: int 
+        -roleId: String 
+
+        +Employee(name,email,phone,address,citizenCardNumber,roleId)
+      }
+
+      class WaitingRoom {
+        -arrivals : List<Arrival> 
+
+        + removeUser(user)
+      }
+
+      class RecoveryRoom {
+        -VaccineAdministrations : List<VaccineAdministration>
+
+        + addVaccineAdministration(vaccineAdministration)
+        + removeVaccineAdministration(vaccineAdministration)
+      }
+
+      class CenterEvent {
+        - date: Date
+        - eventType: CenterEventType
+
+        + CenterEvent(date,eventType,snsUser)
+      }
+
+      class Vaccine {
+        - vaccineType : VaccineType
+
+        + getVaccineType()
+        + getDosageByDoseNumber(doseNumber, age)
+      }
+
+      class Slot {
+        -duration: int
+        -maxVaccinesPerSlot: int
+
+        +Slot(duration,maxVaccinesPerSlot)
+      }
+
+      class Company {
+        -designation: String
+        -authFacade: AuthFacade
+        -vaccineStore: VaccineStore
+        -snsUserStore : SNSUserStore
+        
+        +Company(designation)
+
+        +getVaccineStore()
+        +getSnsUserStore()
+      }
+
+      class Appointment {
+        - Date appointmentTime
+        - SNSUser snsUser
+        - VaccineType vaccineType
+
+        + getVaccineType()
+      }
+
+      class VaccineAdministration {
+        - SNSUser snsUser
+        - Vaccine vaccine
+        - String lotNumber
+        - int doseNumber
+        - VaccinationCenter vaccinationCenter
+        - Date administrationDate
+        ---
+        + VaccineAdministration(snsUser, vaccine, lotNumber, doseNumber, center, administrationDate)
+        + getSnsUser()
+        + getVaccine()
+        + getDoseNumber()
+        + getVaccinationCenter()
+      }
+
+      class Arrival {
+        - Date arrivalTime
+        - int status
+      }
+
+      package shared {
+        enum CenterEventType {
+          ARRIVAL
+          VACCINATED
+          DEPARTURE
+        }
+      }
+
+      package stores {
+
+        class VaccineStore {
+          + getVaccinesByVaccineTypeWithAdminProcessForAge(vaccineType, age)
+          + findVaccineById(id)
+        }
+
+        class SNSUserStore {
+          + findSNSUserByNumber(snsNumber)
+        }
+      }
+
+      package lists {
+        class CenterEventList {
+          - events: List<CenterEvent>
+
+          + create(date,eventType,snsUser)
+          + save(event)
+
+          +CenterEventList()
+        }
+
+        class VaccineAdministrationList {
+          - vaccineAdministrations : List<VaccineAdministration>
+
+          + getLastTakenVaccineByVaccineType(vaccineType)
+          + getNextDoseNumberOfVaccine(vaccine)
+          + createVaccineAdministration(snsUser, vaccine, lotNumber, doseNumber, center, administrationDate)
+          + validateVaccineAdministration(vaccineAdministration)
+          + saveVaccineAdministration(vaccineAdministration)
+        }
+      }
+    }
+  }
+
+  package controllers {
+    class RegisterVaccineAdministrationController {
+      + RegisterVaccineAdministrationController(nurseSession)
+      + getWaitingRoomListFromNurseCenter()
+      + getUserVaccinationInfoFromArrival(arrivalDto)
+      + getLastTakenVaccineFromArrival(arrivalDto)
+      + getListOfVaccinesWithVaccineTypeOfArrival(arrivalDto)
+      + getDosageInfoFromVaccineBySnsUser(vaccineDto, arrivalDto)
+      + createVaccineAdministration(arrivalDto, vaccineDto, lotNumber, doseNumber)
+      + save()
+    }
+  }
+
+  package utils {
+    class Time {
+      - hour: int
+      - minute: int
+      
+      +Time(hour,minute)
+      +Time(time)
+    }
+  }
+
+  package service {
+    package sender {
+      interface ISender {}
+
+      class SMSSender {
+        +sendSMS(phoneNumber, message)
+      }
+
+      class SenderFactory {}
+    }
+  }
+}
+
+VaccineAdministrationUI ..> RegisterVaccineAdministrationController
+RegisterVaccineAdministrationController ..> Company
+
+VaccineAdministrationList "1" --> "*" VaccineAdministration : stores
+VaccineAdministrationList --> SenderFactory
+
+Arrival "1" --> "*" Appointment : related to
+Appointment "1" --> "1" VaccineAdministration : related to
+
+VaccinationCenter o-- Employee : coordinator
+VaccinationCenter o-- Time : openingHours
+VaccinationCenter o-- Time : closingHours
+VaccinationCenter o-- Slot
+VaccinationCenter *-- CenterEventList
+
+VaccinationCenter o-- Address : has >
+Employee o-- Address : has >
+
+Employee "1" --> "*" VaccineAdministration : nurse administers >
+
+SNSUser --o VaccineAdministrationList
+SNSUser --o Appointment
+SNSUser --o Arrival
+
+CenterEventList -- CenterEvent : stores >
+
+Company "1" -- "1" SNSUserStore : knows >
+Company "1" -- "1" VaccineStore : knows >
+
+VaccineStore "1" --> "*" Vaccine : stores
+
+WaitingRoom "1" --> "*" Arrival : stores
+
+RecoveryRoom "1" --> "*" VaccineAdministration : stores
+
+VaccinationCenter <|-- CommunityMassVaccinationCenter
+
+SenderFactory --> ISender : creates >
+ISender <|.. SMSSender
+
+CenterEvent --o CenterEventType
+
+@enduml
