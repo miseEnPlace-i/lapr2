@@ -55,7 +55,7 @@ _"As a nurse, I want to record the administration of a vaccine to an SNS user. A
 
 * **AC1:** If it's the first dose, the nurse should select a vaccine that has the vaccine type of the related appointment, and that has an administration process for the user.
 
-* **AC2:** The nurse should select a user from the waiting room, in order to administer a vaccine to him.
+* **AC2:** The nurse should select a user from the waiting room, in order to administer a vaccine.
 
 * **AC3:** The lot number inserted should have five alphanumeric characters, a hyphen, and two numerical characters (example: 21C16-05).
 
@@ -124,22 +124,22 @@ n/a
 
 **SSD - Alternative 1 is adopted.**
 
-| Interaction ID                                                                   | Question: Which class is responsible for... | Answer                   | Justification (with patterns)                                                 |
-| :------------------------------------------------------------------------------- | :------------------------------------------ | :----------------------- | :---------------------------------------------------------------------------- |
-| Step 1: asks to schedule a vaccine                                               | ...instantiate a new Appointment            | AppointmentScheduleList  | Creator: it contains all appointment objects                                  |
-| Step 2: shows suggested vaccine type and asks to accept it                       | ...knowing the vaccine type to show?        | Company                  | IE: knows the suggested vaccine type defined in the configuration file        |
-| Step 3: accepts the suggested vaccine type                                       | ...saving the vaccine type?                 | Appointment              | IE: object created in step 1 has one vaccine type                             |
-| Step 4: shows a list of all vaccine types and asks to select one                 | ...knowing the vaccine types to show?       | VaccineTypeStore         | IE: knows all vaccine types                                                   |
-| Step 5: selects a vaccine type                                                   | ...saving the selected vaccine type?        | Appointment              | IE: object created in step 1 has one vaccine type                             |
-| Step 6: shows a list of all available vaccination centers and asks to select one | ...knowing the vaccination centers to show? | VaccinationCenterStore   | IE: knows all vaccination centers                                             |
-| Step 7: selects a vaccination center                                             | ...saving the selected vaccination center?  | Appointment              | IE: object created in step 1 has one vaccination center                       |
-| Step 8: requests data (date, time)                                               | n/a                                         | n/a                      | n/a                                                                           |
-| Step 9: types requested data                                                     | ...informing operation success?             | Appointment              | IE: object created in step 1 has date and time                                |
-| Step 10: asks permission to send sms about the scheduled vaccine                 | n/a                                         | n/a                      | n/a                                                                           |
-| Step 11: accepts or declines the request                                         | ...saving the selected option?              | Appointment              | IE: object created in step 1 has the information about the sending of the sms |
-| Step 12: shows all data and requests confirmation                                | ...validating the data introduced?          | AppointmentScheduledList | IE: knows all information needed to validate the appointment                  |
-| Step 13: confirms the data                                                       | ...saving the created appointment?          | AppointmentScheduledList | IE: holds all appointment objects                                             |
-| Step 14: informs operation success                                               | ...informing operation success?             | ScheduleVaccineUI        | IE: responsible for user interaction                                          |
+| Interaction ID                                                                        | Question: Which class is responsible for...   | Answer                    | Justification (with patterns)                                           |
+| :------------------------------------------------------------------------------------ | :-------------------------------------------- | :------------------------ | :---------------------------------------------------------------------- |
+| Step 1: asks to record the administration of a vaccine                                | ...instantiate a new VaccineAdministration    | VaccineAdministrationList | Creator: it contains all vaccine administration objects                 |
+| Step 2: shows a list of SNS users that are in the waiting room and asks to select one | ...knowing the SNS Users to show?             | WaitingRoom               | IE: aggregates all the Arrival objects                                  |
+| Step 3: selects an SNS user                                                           | ...saving the selected SNS User?              | VaccineAdministration     | IE: object created in step 1 has one SNS User                           |
+| Step 4: shows SNS user's name, age and previous adverse reactions                     | ...knowing all information to show?           | SNSUser / UserHealthData  | IE: knows its own data                                                  |
+| Step 5: asks to proceed                                                               | n/a                                           | n/a                       | n/a                                                                     |
+| Step 6: shows a list of possible vaccines to administer and asks to select one        | ...knowing the vaccines to show?              | VaccineStore              | IE: knows all vaccines                                                  |
+| Step 7: selects a vaccine                                                             | ...saving the selected vaccine?               | VaccineAdministration     | IE: object created in step 1 has one vaccine                            |
+| Step 8: shows dose number and dosage                                                  | ...knowing all information to show?           | Vaccine                   | IE: knows its own data                                                  |
+| Step 9: asks to proceed                                                               | n/a                                           | n/a                       | n/a                                                                     |
+| Step 10: requests data (lot number)                                                   | n/a                                           | n/a                       | n/a                                                                     |
+| Step 11: types requested data                                                         | ...saving the lot number?                     | VaccineAdministration     | IE: object created in step 1 has a lot number                           |
+| Step 12: shows all data and requests confirmation                                     | ...validating the introduced data?            | VaccineAdministrationList | IE: knows all information needed to validate the vaccine administration |
+| Step 13: confirms the data                                                            | ...saving the created vaccine administration? | VaccineAdministrationList | IE: holds all vaccine administration objects                            |
+| Step 14: informs operation success                                                    | ...informing operation success?               | VaccineAdministrationUI   | IE: responsible for user interaction                                    |
 
 ### Systematization ##
 
@@ -215,10 +215,10 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 6. Integration and Demo 
 
-A new option ("Schedule a Vaccine") was added to the SNS user menu.
+A new option ("Register Vaccine Administration") was added to the Nurse menu.
 
 For demo purposes, there are multiple objects of all classes created in the previous steps being created when the application is bootstrapped.
 
 # 7. Observations
 
-There are validations needed for this US that are not implemented in the system yet. Therefore, those validations are not implemented yet.
+n/a

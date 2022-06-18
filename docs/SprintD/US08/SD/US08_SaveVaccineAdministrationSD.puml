@@ -10,7 +10,7 @@ participant "recoveryRoom\n:RecoveryRoom" as recoveryRoom
 participant "vaccinationCenter\n:VaccinationCenter" as vaccinationCenter
 participant "centerEventList\n:CenterEventList" as centerEventList
 participant "properties\n:Properties" as properties
-participant ":PropertiesUtils" as propertiesUtils
+participant "PropertiesUtils" as propertiesUtils
 
 [o-> vaccineAdministrationList : saveVaccineAdministration(vaccineAdministration)
 activate vaccineAdministrationList
