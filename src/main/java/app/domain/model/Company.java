@@ -139,9 +139,7 @@ public class Company implements Serializable {
     return this.userStore;
   }
 
-  public void scheduleDailyVaccinated(String filePath, String time, String separator) {
-    int timeInterval = 24*60*60;
-
+  public void scheduleDailyVaccinated(String filePath, String time, String separator, int timeInterval) {
     String[] scheduleTime = time.split(":");
     Calendar firstTime = Calendar.getInstance();
 

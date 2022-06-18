@@ -31,7 +31,7 @@ public class ExportDailyVaccinatedTask extends TimerTask {
         List<VaccineType> vacTypeLst = vacTypeSt.getListOfVaccineTypes(); 
         
         for (int i = 0; i < centerLst.size(); i++) {
-            List<VaccineAdministration> vacAdminList = centerLst.get(i).getVaccineAdministrationFromYesterdayList();
+            List<VaccineAdministration> vacAdminList = centerLst.get(i).getVacAdminFromYesterdayList();
 
             HashMap<VaccineType, Integer> centerDataMap = new HashMap<VaccineType, Integer>();
             
