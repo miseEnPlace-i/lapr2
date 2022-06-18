@@ -15,15 +15,19 @@ public class BubbleSort implements ISortStrategy {
     @Override
     public void doSort(List<LegacyDataDTO> data, Comparator<LegacyDataDTO> c) {
         int n = data.size();
+        boolean flag = false;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n - i - 1; j++) {
+                flag = false;
                 // compare using the comparator
                 if (c.compare(data.get(j), data.get(j + 1)) > 0) {
+                    flag = true;
                     LegacyDataDTO temp = data.get(j);
                     data.set(j, data.get(j + 1));
                     data.set(j + 1, temp);
                 }
             }
+            if (flag) return;
         }
     }
 }
