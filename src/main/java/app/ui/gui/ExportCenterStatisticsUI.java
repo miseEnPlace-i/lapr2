@@ -27,15 +27,15 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -82,9 +82,11 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     this.ctrlCenter.findCoordinatorCenter();
 
     this.lblCenterName.setText(this.ctrlCenter.getVaccinationCenterName());
+
     try {
       this.ctrl = new ExportCenterStatisticsController(App.getInstance().getCompany(), employeeSession);
     } catch (NotAuthorizedException e) {
+      Logger.getLogger(ExportCenterStatisticsUI.class.getName()).log(Level.SEVERE, null, e);
     }
   }
 
@@ -172,15 +174,16 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     xAxis.setLabel("Days");
     yAxis.setLabel("Number of Fully Vaccinated Users");
 
-
     XYChart.Series<String, Number> series = new XYChart.Series<String, Number>();
 
     for (Map.Entry<Calendar, Integer> entry : data.entrySet()) {
+      System.out.println("Key: " + format.format(entry.getKey().getTime()) + " Value: " + entry.getValue());
       series.getData().add(new XYChart.Data<String, Number>(format.format(entry.getKey().getTime()), entry.getValue()));
     }
 
     LineChart<String, Number> lineChart = new LineChart<String, Number>(xAxis, yAxis);
     lineChart.setTitle("Center Statistics");
+    series.setName("Fully Vaccinated Users");
 
     lineChart.getData().addAll(series);
 
