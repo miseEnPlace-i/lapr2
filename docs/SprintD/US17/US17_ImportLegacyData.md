@@ -208,16 +208,33 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 4. Tests
 
-<!-- TODO -->
 <!-- ? In this section, it is suggested to systematize how the tests were designed to allow a correct measurement of requirements fulfilling. -->
 
 <!-- * DO NOT COPY ALL DEVELOPED TESTS HERE -->
 
-**Test 1:** Check that it is not possible to create an instance of the Example class with null values.
+## 4.1.
+
+**Test 1:** Ensure that it is not possible to create an instance of the LegacyData class with null values.
 
     @Test(expected = IllegalArgumentException.class)
-    	public void ensureNullIsNotAllowed() {
-    	Exemplo instance = new Exemplo(null, null);
+    public void ensureNullArgumentsNotValid() {
+        new LegacyData(null, null, 0, null, null, null, null, null, null);
+    }
+
+## 4.2.
+
+**Test 2:** Ensure that it is possible to create an instance of the LegacyData class.
+
+    @Test
+    public void ensureIsPossibleToCreateInstance() {
+        SNSUser snsUser = new SNSUser("12345678", "123123123", "a", new Date(), Gender.N_A, "987654321", "fa@gds.c", new Address("street", 1, "1345-124", "city"));
+        VaccineType vacType = new VaccineType("00000", "COVID-19", "M_RNA_TECHNOLOGY");
+        Vaccine vaccine = new Vaccine("Monkeypox vaccine", "00002", "PTVaccines", vacType);
+        Employee e = new Employee("1", "Name2", "+351916919269", "c@user.com", new Address("street", 1, "1-11", "city"), "15542404", Constants.ROLE_COORDINATOR);
+        Calendar now = Calendar.getInstance();
+        VaccinationCenter vc = new CommunityMassVaccinationCenter("Centro Vacinação de Teste", new Address("street", 1, "11-11", "city"), "test@gmail.com", "+351212345678", "+351212345679", "http://www.test.com", new Time("08:00"), new Time("20:00"), new Slot(1, 1), e2, vacType);
+
+        new LegacyData(snsUser, vaccine, 1, "lotNum", now, now, now, now, vc);
     }
 
 <!-- It is also recommended to organize this content by subsections. For example: -->
@@ -226,8 +243,30 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 5. Construction (Implementation)
 
-<!-- TODO -->
 <!-- ? In this section, it is suggested to provide, if necessary, some evidence that the construction/implementation is in accordance with the previously carried out design. Furthermore, it is recommeded to mention/describe the existence of other relevant (e.g. configuration) files and highlight relevant commits. -->
+
+## 5.1. Class ImportLegacyDataController
+
+    public ImportLegacyDataController(Company company, VaccinationCenter center) {
+        this.company = company;
+        this.center = center;
+        this.snsUserStore = this.company.getSNSUserStore();
+    }
+
+## 5.2. Class LegacyData
+
+    public LegacyData(SNSUser snsUser, Vaccine vaccine, int doseNumber, String lotNumber, Calendar arrivalDate, Calendar scheduledDate, Calendar administrationDate, Calendar departuredDate, VaccinationCenter center) {
+        this.snsUser = snsUser;
+        this.vaccine = vaccine;
+        this.doseNumber = doseNumber;
+        this.lotNumber = lotNumber;
+        this.arrivalDate = arrivalDate;
+        this.scheduledDate = scheduledDate;
+        this.administrationDate = administrationDate;
+        this.departuredDate = departuredDate;
+        this.center = center;
+        validate();
+    }
 
 <!-- It is also recommended to organize this content by subsections. For example: -->
 <!-- ## 5.1. Class ImportLegacyDataController -->

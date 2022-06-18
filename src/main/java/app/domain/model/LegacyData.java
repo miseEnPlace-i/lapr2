@@ -29,6 +29,14 @@ public class LegacyData {
         this.administrationDate = administrationDate;
         this.departuredDate = departuredDate;
         this.center = center;
+        validate();
+    }
+
+    private void validate() {
+        if (snsUser == null || vaccine == null || doseNumber < 0 || lotNumber == null || arrivalDate == null || scheduledDate == null
+                || administrationDate == null || departuredDate == null || center == null) {
+            throw new IllegalArgumentException();
+        }
     }
 
     // getters
