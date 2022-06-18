@@ -45,5 +45,4 @@ public class Constants {
   public static final String PARAMS_EXPORTATION_TIME = "DailyVaccinated.ExportationTime";
   public static final String PARAMS_EXPORTATION_PATH = "DailyVaccinated.FilePath";
   public static final String PARAMS_EXPORTATION_SEPARATOR = "DailyVaccinated.FileSeparator";
-
 }

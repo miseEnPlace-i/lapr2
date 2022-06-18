@@ -1,24 +1,20 @@
 package app.ui.gui;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import app.controller.App;
 import app.controller.ImportLegacyDataController;
 import app.domain.model.Company;
-import app.domain.shared.HelpText;
 import app.dto.LegacyDataDTO;
 import app.session.EmployeeSession;
-import app.ui.gui.utils.Utils;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 
 public class ImportLegacyData2UI extends ChildUI<CoordinatorUI> {

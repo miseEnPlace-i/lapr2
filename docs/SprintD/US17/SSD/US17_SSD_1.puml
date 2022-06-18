@@ -1,4 +1,4 @@
-@startuml US17_SSD
+@startuml US17_SSD_1
 autonumber
 
 actor "Center Coordinator" as COORDINATOR
@@ -8,10 +8,10 @@ activate COORDINATOR
 COORDINATOR -> ":System" : starts the process of importing data from a legacy system
 activate ":System"
 
-":System" --> COORDINATOR : asks for the file that should be loaded
+":System" --> COORDINATOR : asks for the file path that should be loaded
 deactivate ":System"
 
-COORDINATOR -> ":System" : selects the file
+COORDINATOR -> ":System" : inserts the file path
 activate ":System"
 
 ' sorted by arrival time or by the center leaving time

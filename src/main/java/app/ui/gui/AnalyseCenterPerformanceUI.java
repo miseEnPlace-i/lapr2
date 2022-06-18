@@ -66,8 +66,7 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
 
   public void setEmployeeSession(EmployeeSession session) {
     this.employeeSession = session;
-    this.ctrl = new AnalyseCenterPerformanceController(
-        App.getInstance().getCompany(), employeeSession);
+    this.ctrl = new AnalyseCenterPerformanceController(App.getInstance().getCompany(), employeeSession);
   }
 
   @FXML
@@ -77,11 +76,8 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
   }
 
   private boolean isValidInput() {
-    if (dtpDate.getValue() != null
-        && !StringUtils.isEmpty(txtInterval.getText()))
-      return true;
-    else
-      return false;
+    if (dtpDate.getValue() != null && !StringUtils.isEmpty(txtInterval.getText())) return true;
+    else return false;
   }
 
   @FXML
@@ -102,12 +98,10 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
     interval = Integer.parseInt(txtInterval.getText());
 
     try {
-      CenterPerformance performance =
-          ctrl.analyseCenterPerformance(day, interval);
+      CenterPerformance performance = ctrl.analyseCenterPerformance(day, interval);
 
       if (performance == null) {
-        Utils.showError("No performance data found",
-            "No performance data found for the selected date.");
+        Utils.showError("No performance data found", "No performance data found for the selected date.");
         resetFields();
         return;
       }
@@ -136,53 +130,46 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
     dialog.setHeight(SCENE_HEIGHT);
 
     Properties props = PropertiesUtils.getProperties();
-    String algorithmUsed =
-        props.getProperty(Constants.PARAMS_PERFORMANCE_ALGORITHM);
+    String algorithmUsed = props.getProperty(Constants.PARAMS_PERFORMANCE_ALGORITHM);
 
-    FlowPane inputListContainer = generatePaneWithData("Input List",
-        performance.stringifyDifferencesList(), SCENE_WIDTH);
-    FlowPane maxSubListContainer = generatePaneWithData("Max Sum Sublist",
-        performance.stringifyMaxSumSublist(), SCENE_WIDTH);
-    FlowPane sumContainer = generatePaneWithData("Max Sum",
-        "" + performance.getMaxSum(), SCENE_WIDTH);
-    FlowPane beginningIntervalContainer =
-        generatePaneWithData("Beginning Time of Interval",
-            performance.getStartingInterval() + "h", SCENE_WIDTH);
-    FlowPane endIntervalContainer = generatePaneWithData("End Time of Interval",
-        performance.getEndingInterval() + "h", SCENE_WIDTH);
-    FlowPane algorithmUsedContainer =
-        generatePaneWithData("Algorithm Used", algorithmUsed, SCENE_WIDTH);
-    FlowPane timeElapsedContainer = generatePaneWithData("Time Elapsed",
-        performance.getTimeElapsed() + " ms", SCENE_WIDTH);
+    FlowPane inputListContainer = generatePaneWithData("Input List", performance.stringifyDifferencesList(), SCENE_WIDTH);
+    FlowPane maxSubListContainer = generatePaneWithData("Max Sum Sublist", performance.stringifyMaxSumSublist(), SCENE_WIDTH);
+    FlowPane sumContainer = generatePaneWithData("Max Sum", "" + performance.getMaxSum(), SCENE_WIDTH);
+    FlowPane beginningIntervalContainer = generatePaneWithData("Beginning Time of Interval", performance.getStartingInterval() + "h", SCENE_WIDTH);
+    FlowPane endIntervalContainer = generatePaneWithData("End Time of Interval", performance.getEndingInterval() + "h", SCENE_WIDTH);
+    FlowPane algorithmUsedContainer = generatePaneWithData("Algorithm Used", algorithmUsed, SCENE_WIDTH);
+    FlowPane timeElapsedContainer = generatePaneWithData("Time Elapsed", performance.getTimeElapsed() + " ms", SCENE_WIDTH);
 
     StackedBarChart<String, Number> chart = generateChart(performance);
     chart.setPrefWidth(SCENE_WIDTH - 80);
 
-
-    VBox pane = new VBox(16);
-
+    VBox pane = new VBox(-16);
+    pane.setMinHeight(SCENE_HEIGHT);
+    pane.setMinWidth(SCENE_WIDTH);
+    pane.setPrefWidth(Double.MAX_VALUE);
+    pane.setMaxWidth(Double.MAX_VALUE);
     pane.setAlignment(Pos.CENTER);
-    pane.getChildren().addAll(inputListContainer, maxSubListContainer,
-        sumContainer, beginningIntervalContainer, endIntervalContainer,
-        algorithmUsedContainer, timeElapsedContainer, chart);
+
+    pane.getChildren().addAll(inputListContainer, maxSubListContainer, sumContainer, beginningIntervalContainer, endIntervalContainer, algorithmUsedContainer,
+        timeElapsedContainer, chart);
 
     ScrollPane container = new ScrollPane(pane);
-    container.setPadding(new Insets(16, 0, 32, 0));
-
+    container.setPadding(new Insets(32, 32, 32, 32));
+    container.setPrefWidth(Double.MAX_VALUE);
+    container.setMaxWidth(Double.MAX_VALUE);
+    container.setFitToWidth(true);
     container.setHbarPolicy(ScrollBarPolicy.NEVER);
 
     Scene scene = new Scene(container, SCENE_WIDTH, SCENE_HEIGHT);
-    scene.getStylesheets().add(getClass()
-        .getResource("/styles/AnalyseCenterResults.css").toExternalForm());
-    dialog.setResizable(false);
+    scene.getStylesheets().add(getClass().getResource("/styles/AnalyseCenterResults.css").toExternalForm());
+    dialog.setMinHeight(SCENE_HEIGHT + 80);
+    dialog.setMinWidth(SCENE_WIDTH + 80);
     dialog.setScene(scene);
     dialog.show();
   }
 
-  private StackedBarChart<String, Number> generateChart(
-      CenterPerformance performance) {
+  private StackedBarChart<String, Number> generateChart(CenterPerformance performance) {
     CategoryAxis xAxis = new CategoryAxis();
-
     NumberAxis yAxis = new NumberAxis();
 
     XYChart.Series<String, Number> series = new XYChart.Series<>();
@@ -191,54 +178,46 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
     List<Integer> differences = performance.getDifferencesList();
     Time startingInterval = performance.getStartingInterval();
     Time endingInterval = performance.getEndingInterval();
-    Time tempInterval =
-        employeeSession.getVaccinationCenter().getOpeningHours().clone();
+    Time tempInterval = employeeSession.getVaccinationCenter().getOpeningHours().clone();
 
     for (Integer value : differences) {
+      String intervalString = "[" + tempInterval.toString() + " - ";
+      tempInterval.addMinutes(interval);
+      intervalString += tempInterval.toString() + "[";
+      tempInterval.addMinutes(-interval);
+
       if (tempInterval.isBetweenExcludeRight(startingInterval, endingInterval))
-        worstSeries.getData().add(
-            new XYChart.Data<String, Number>(tempInterval.toString(), value));
+        worstSeries.getData().add(new XYChart.Data<String, Number>(intervalString, value));
       else
-        series.getData().add(
-            new XYChart.Data<String, Number>(tempInterval.toString(), value));
+        series.getData().add(new XYChart.Data<String, Number>(intervalString, value));
 
       tempInterval.addMinutes(interval);
     }
 
-    StackedBarChart<String, Number> chart =
-        new StackedBarChart<>(xAxis, yAxis) {
-          @Override
-          protected void dataItemAdded(Series<String, Number> series,
-              int itemIndex, Data<String, Number> item) {
-            super.dataItemAdded(series, itemIndex, item);
+    StackedBarChart<String, Number> chart = new StackedBarChart<>(xAxis, yAxis) {
+      @Override
+      protected void dataItemAdded(Series<String, Number> series, int itemIndex, Data<String, Number> item) {
+        super.dataItemAdded(series, itemIndex, item);
 
-            Number val =
-                (Number) (item.getYValue() instanceof Number ? item.getYValue()
-                    : item.getXValue());
-            if (val.doubleValue() < 0)
-              item.getNode().getStyleClass().add("negative");
+        Number val = (Number) (item.getYValue() instanceof Number ? item.getYValue() : item.getXValue());
+        if (val.doubleValue() < 0) item.getNode().getStyleClass().add("negative");
+      }
+
+      /**
+       * Override the method that breaks the graph, patch so it doesn't override styles.
+       */
+      @Override
+      protected void seriesChanged(ListChangeListener.Change<? extends Series> c) {
+        for (int i = 0; i < getData().size(); i++) {
+          List<Data<String, Number>> items = getData().get(i).getData();
+          for (int j = 0; j < items.size(); j++) {
+            Node bar = items.get(j).getNode();
+            bar.getStyleClass().removeIf(s -> s.matches("chart-bar|(series|data)\\d+"));
+            bar.getStyleClass().addAll("chart-bar", "series" + i, "data" + j);
           }
-
-          /**
-           * Override the method that breaks the graph, patch so it doesn't override styles.
-           */
-          @Override
-          protected void seriesChanged(
-              ListChangeListener.Change<? extends Series> c) {
-            for (int i = 0; i < getData().size(); i++) {
-              List<Data<String, Number>> items = getData().get(i).getData();
-              for (int j = 0; j < items.size(); j++) {
-                Node bar = items.get(j).getNode();
-                bar.getStyleClass()
-                    .removeIf(s -> s.matches("chart-bar|(series|data)\\d+"));
-                bar.getStyleClass().addAll("chart-bar", "series" + i,
-                    "data" + j);
-              }
-            }
-          }
-        };
-
-    chart.setTranslateX(32);
+        }
+      }
+    };
 
     chart.getData().addAll(worstSeries, series);
 
@@ -250,28 +229,24 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
     return chart;
   }
 
-  private FlowPane generatePaneWithData(String title, String data,
-      double width) {
-    final double padding = 80;
-
+  private FlowPane generatePaneWithData(String title, String data, double width) {
     Label lblInputList = new Label(title);
-    lblInputList.setTranslateX(padding + 2);
+    lblInputList.setMinWidth(width);
+    lblInputList.setPrefWidth(width);
 
     TextArea container = new TextArea(data);
     container.setFont(new Font("System", 17));
     container.setEditable(false);
     container.setWrapText(true);
-    container.setPrefWidth(width - padding * 2);
-    container.setTranslateX(padding);
-    container.setMaxWidth(Double.MAX_VALUE);
+    container.setMinWidth(width);
+    container.setMaxWidth(280);
 
     FlowPane inputListContainer = new FlowPane(lblInputList, container);
-    inputListContainer.setOrientation(Orientation.HORIZONTAL);
-    inputListContainer.setHgap(8);
+    inputListContainer.setOrientation(Orientation.VERTICAL);
     inputListContainer.setVgap(8);
-    inputListContainer.setAlignment(Pos.CENTER_LEFT);
-    inputListContainer.setMaxWidth(Double.MAX_VALUE);
-    inputListContainer.setPadding(new Insets(8, 8, 8, 8));
+    inputListContainer.setMinWidth(width);
+    inputListContainer.setAlignment(Pos.TOP_CENTER);
+    inputListContainer.setPrefHeight(280 + 24);
 
     return inputListContainer;
   }
