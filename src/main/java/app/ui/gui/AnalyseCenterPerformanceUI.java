@@ -183,7 +183,7 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
     for (Integer value : differences) {
       String intervalString = "[" + tempInterval.toString() + " - ";
       tempInterval.addMinutes(interval);
-      intervalString += tempInterval.toString() + "]";
+      intervalString += tempInterval.toString() + "[";
       tempInterval.addMinutes(-interval);
 
       if (tempInterval.isBetweenExcludeRight(startingInterval, endingInterval))
