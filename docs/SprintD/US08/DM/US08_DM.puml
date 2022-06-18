@@ -81,6 +81,13 @@ class VaccineAdministration {
   -date
 }
 
+class Address {
+  - street
+  - doorNumber
+  - postalCode
+  - city
+}
+
 Arrival "1" -- "0..1" Appointment : related to >
 
 Vaccine "*" -- "1" VaccineType : has <
@@ -98,6 +105,9 @@ VaccinationCenter "1" -- "1" Time : has >
 
 HealthCareCenter "*" -- "1" AGES : belongs to > 
 HealthCareCenter "*" -- "1" ARS : belongs to > 
+
+Employee "*" -- "1" Address : has >
+VaccinationCenter "*" -- "1" Address : has >
 
 Appointment "*" -- "1" VaccinationCenter : is held in >
 Appointment "1" -- "1" VaccineType : has a specific >
