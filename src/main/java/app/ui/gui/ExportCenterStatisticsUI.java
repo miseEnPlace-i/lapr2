@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import app.controller.App;
@@ -20,6 +22,10 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -70,7 +76,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
   @Override
   void init(CoordinatorUI parentUI) {
     this.setParentUI(parentUI);
-    this.employeeSession = new EmployeeSession();
+    this.employeeSession = parentUI.getEmployeeSession();
     this.ctrlCenter = new FindCoordinatorVaccinationCenterController(App.getInstance().getCompany(), employeeSession);
 
     this.ctrlCenter.findCoordinatorCenter();
@@ -114,13 +120,17 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
       displayExportInformation();
       if (validateDates() && validateFilePath()) {
         fileName = FileUtils.sanitizeFileName(txtFileName.getText());
+
         ctrl.createFullyVaccinatedData(fileName, getStartDate(), getEndDate());
         ctrl.generateFullyVaccinatedUsersInterval();
 
-        checkData();
-        if (!ctrl.saveData(fileName)) {
+        if (ctrl.saveData(fileName)) {
+          checkData();
+          success();
+        } else {
           displayErrorAlert();
         }
+
       } else if (!validateDates() || !validateFilePath()) {
         displayErrorAlert();
       } else {
@@ -154,6 +164,29 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     return containerData;
   }
 
+  private LineChart generateChart(LinkedHashMap<Calendar, Integer> data) {
+    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+    CategoryAxis xAxis = new CategoryAxis();
+    NumberAxis yAxis = new NumberAxis();
+    xAxis.setLabel("Days");
+    yAxis.setLabel("Number of Fully Vaccinated Users");
+
+
+    XYChart.Series<String, Number> series = new XYChart.Series<String, Number>();
+
+    for (Map.Entry<Calendar, Integer> entry : data.entrySet()) {
+      series.getData().add(new XYChart.Data<String, Number>(format.format(entry.getKey().getTime()), entry.getValue()));
+    }
+
+    LineChart<String, Number> lineChart = new LineChart<String, Number>(xAxis, yAxis);
+    lineChart.setTitle("Center Statistics");
+
+    lineChart.getData().addAll(series);
+
+    return lineChart;
+  }
+
   private void checkData() {
     try {
       final double SCENE_WIDTH = 640.0;
@@ -169,16 +202,18 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
 
       FlowPane inputListContainer = generatePaneWithData("Data from: " + lblCenterName.getText(), ctrl.dataToString());
 
-      VBox pane = new VBox(30);
+      VBox vbox = new VBox(30);
+
+      LineChart<String, Number> chart = generateChart(ctrl.getData());
 
       Button close = new Button("Close");
       // Setting the space between the nodes of a VBox pane
-      pane.setPadding(new Insets(40, 40, 40, 40));
-      pane.setAlignment(Pos.CENTER);
-      pane.getChildren().addAll(inputListContainer, close);
+      vbox.setPadding(new Insets(40, 40, 40, 40));
+      vbox.setAlignment(Pos.CENTER);
+      vbox.getChildren().addAll(chart);
 
 
-      ScrollPane container = new ScrollPane(pane);
+      ScrollPane container = new ScrollPane(vbox);
       container.setHbarPolicy(ScrollBarPolicy.NEVER);
 
       Scene scene = new Scene(container, SCENE_WIDTH, SCENE_HEIGHT);
