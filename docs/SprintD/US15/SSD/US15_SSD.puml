@@ -3,15 +3,15 @@ autonumber
 actor "Center Coordinator" as COOR
 
 activate COOR
-COOR -> ":System" : asks to export his center statistics
+COOR -> ":System" : asks to export and check center statistics
 activate ":System"
 ":System" --> COOR : requests data (fileName,startDate,endDate)
 deactivate ":System"
 
-COOR -> ":System" : types requested
+COOR -> ":System" : types requested data
 activate ":System"
 
-":System" --> COOR : shows center statistics
+":System" --> COOR : shows center statistics and exports to a CSV file
 deactivate ":System"
 deactivate COOR
 

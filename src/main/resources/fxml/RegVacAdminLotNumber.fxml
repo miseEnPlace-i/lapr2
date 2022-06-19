@@ -9,28 +9,6 @@
 
 <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="550.0" prefWidth="900.0" scaleShape="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.VaccineAdministrationUI">
    <children>
-      <MenuBar centerShape="false" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="32.0" prefWidth="900.0" scaleShape="false" GridPane.halignment="LEFT" GridPane.hgrow="NEVER" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem fx:id="menuSaveSession" mnemonicParsing="false" onAction="#handleSaveSession" text="Save session" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="menuLogout" mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
-                  <MenuItem fx:id="menuExit1" mnemonicParsing="false" onAction="#handleExit" text="Exit" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="About">
-            <items>
-              <MenuItem fx:id="menuDevelopmentTeam" mnemonicParsing="false" onAction="#handleDevelopmentTeam" text="Development Team" />
-            </items>
-          </Menu>
-            <Menu mnemonicParsing="false" text="Help">
-               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#handleHelp" text="Show Help" />
-               </items>
-            </Menu>
-        </menus>
-      </MenuBar>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="900.0" spacing="16.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
          <children>
             <Label text="Enter the Lot Number of the administered Vaccine.">
