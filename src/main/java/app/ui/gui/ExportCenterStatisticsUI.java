@@ -16,10 +16,10 @@ import app.controller.FindCoordinatorVaccinationCenterController;
 import app.exception.NotAuthorizedException;
 import app.service.FileUtils;
 import app.session.EmployeeSession;
+import app.ui.gui.utils.Utils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
@@ -29,14 +29,12 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -91,26 +89,6 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
   }
 
   /**
-   * Displays the export information selected by the user
-   */
-  private void displayExportInformation() {
-    Alert alert = new Alert(AlertType.CONFIRMATION);
-    alert.setTitle("Please confirm the data");
-    alert.setHeaderText("Confirm the data below:");
-    alert.setContentText(toString());
-
-    alert.showAndWait().ifPresent(response -> {
-      if (response == ButtonType.OK) {
-        Logger.getLogger(getClass().getName()).log(Level.INFO, "Operation running!");
-      } else {
-        clearFields();
-        Logger.getLogger(getClass().getName()).log(Level.INFO, "Operation canceled!");
-        cancel();
-      }
-    });
-  }
-
-  /**
    * Button to export the statistics
    * 
    * @param event
@@ -119,8 +97,8 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
   @FXML
   void export(ActionEvent event) throws Exception {
     try {
-      displayExportInformation();
-      if (validateDates() && validateFilePath()) {
+      boolean flag = Utils.showConfirmation("Please confirm the following data", toString());
+      if (flag && validateDates() && validateFilePath()) {
         fileName = FileUtils.sanitizeFileName(txtFileName.getText());
 
         ctrl.createFullyVaccinatedData(fileName, getStartDate(), getEndDate());
@@ -135,15 +113,21 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
 
       } else if (!validateDates() || !validateFilePath()) {
         displayErrorAlert();
-      } else {
-        displayErrorAlertOperation();
+      } else if (!flag) {
+        Utils.cancel();
       }
     } catch (NullPointerException e) {
       displayErrorAlertOperation();
     }
   }
 
-  private LineChart generateChart(LinkedHashMap<Calendar, Integer> data) {
+  /**
+   * Generates a LineChart
+   * 
+   * @param data the linkedHashMap with all the data
+   * @return the generated chart
+   */
+  private LineChart<String, Number> generateChart(LinkedHashMap<Calendar, Integer> data) {
     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
     CategoryAxis xAxis = new CategoryAxis();
@@ -167,6 +151,9 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     return lineChart;
   }
 
+  /**
+   * Creates a new stage to show the user the data
+   */
   private void checkData() {
     try {
       final double SCENE_WIDTH = 640.0;
@@ -252,33 +239,6 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
   }
 
   /**
-   * Button to help the user to know how to export statistics
-   * 
-   * @param event
-   */
-  @FXML
-  void helpUser(ActionEvent event) {
-    Alert alert = new Alert(AlertType.INFORMATION);
-    alert.setTitle("Help Exporting Center Statistics");
-    alert.setHeaderText("How it works?");
-    alert.setContentText(
-        "File name: write on the text area 'File name' the name you want to give to your file. Remember, you are going to export a CSV file\n\nDates: select days from the past and not in the future. You select the pretended interval on the calendars.");
-    alert.showAndWait();
-  }
-
-  /**
-   * Alert when user cancels the operation
-   */
-  private void cancel() {
-    Alert alert = new Alert(AlertType.WARNING);
-    alert.setTitle("Cancel");
-    alert.setHeaderText("Canceled the operation");
-    alert.setContentText("The file will not be exported.");
-    clearFields();
-    alert.showAndWait();
-  }
-
-  /**
    * Alert when the operation was a success
    */
   private void success() {
@@ -297,8 +257,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     Alert alert = new Alert(AlertType.ERROR);
     alert.setTitle("Oops!");
     alert.setHeaderText("Found an error!");
-    alert.setContentText(
-        String.format("Please try again. Check if every field is correctly filled. If having trouble, check on the menu bar 'File' the option 'Help'."));
+    alert.setContentText(String.format("Please try again. Check if every field is correctly filled."));
     clearFields();
     alert.showAndWait().ifPresent(response -> {
       Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, "Operation failed.");
