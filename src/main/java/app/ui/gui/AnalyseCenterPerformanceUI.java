@@ -96,6 +96,13 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
 
     interval = Integer.parseInt(txtInterval.getText());
 
+    if (interval <= 0) {
+      Utils.showError("Non valid input!", "Interval must be greater than 0.");
+      txtInterval.setText("");
+      txtInterval.requestFocus();
+      return;
+    }
+
     try {
       CenterPerformance performance = ctrl.analyseCenterPerformance(day, interval);
 
@@ -114,6 +121,7 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
   private void resetFields() {
     dtpDate.setValue(null);
     txtInterval.setText("");
+    dtpDate.requestFocus();
   }
 
   private void loadDialog(CenterPerformance performance) {
