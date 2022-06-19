@@ -4,18 +4,19 @@ import java.util.Optional;
 import app.controller.App;
 import app.controller.RegisterAdverseReactionController;
 import app.domain.model.Company;
+import app.domain.shared.HelpText;
 import app.session.EmployeeSession;
 import app.ui.gui.utils.Utils;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 
 public class AdverseReactionUI extends ChildUI<NurseUI> {
   private EmployeeSession employeeSession;
@@ -47,8 +48,7 @@ public class AdverseReactionUI extends ChildUI<NurseUI> {
 
   @FXML
   void enableConfirm(Event event) {
-    if (txtSnsUserNumber.getText().trim().isEmpty()
-        || txtAdverseReaction.getText().trim().isEmpty()) {
+    if (txtSnsUserNumber.getText().trim().isEmpty() || txtAdverseReaction.getText().trim().isEmpty()) {
       btnConfirm.setDisable(true);
     } else {
       btnConfirm.setDisable(false);
@@ -58,11 +58,9 @@ public class AdverseReactionUI extends ChildUI<NurseUI> {
   @FXML
   void handleConfirm(ActionEvent event) {
     try {
-      this.ctrl.createAdverseReaction(txtSnsUserNumber.getText(),
-          txtAdverseReaction.getText());
+      this.ctrl.createAdverseReaction(txtSnsUserNumber.getText(), txtAdverseReaction.getText());
     } catch (IllegalArgumentException e) {
-      Utils.showError("SNS User not found.",
-          "Please insert a valid SNS User Number.");
+      Utils.showError("SNS User not found.", "Please insert a valid SNS User Number.");
       txtSnsUserNumber.clear();
       txtSnsUserNumber.requestFocus();
       return;
@@ -76,8 +74,7 @@ public class AdverseReactionUI extends ChildUI<NurseUI> {
   void showDataAndAskToConfirm() {
     Alert alert = new Alert(AlertType.CONFIRMATION);
     alert.setTitle("Confirm the data");
-    alert.setHeaderText(
-        "Do you want to register the following Adverse Reaction?");
+    alert.setHeaderText("Do you want to register the following Adverse Reaction?");
     alert.setContentText(this.ctrl.stringifyData());
 
     Optional<ButtonType> result = alert.showAndWait();
@@ -86,9 +83,13 @@ public class AdverseReactionUI extends ChildUI<NurseUI> {
       Alert alertSuccess = new Alert(AlertType.CONFIRMATION);
       alertSuccess.setTitle("Success");
       alertSuccess.setHeaderText("Adverse Reaction registered successfully.");
-      alertSuccess.getDialogPane().lookupButton(ButtonType.CANCEL)
-          .setVisible(false);
+      alertSuccess.getDialogPane().lookupButton(ButtonType.CANCEL).setVisible(false);
       alertSuccess.showAndWait();
     }
+  }
+
+  @Override
+  void handleHelp(ActionEvent event) {
+    Utils.showHelp("Coordinator Help", HelpText.ADVERSE_REACTIONS);
   }
 }

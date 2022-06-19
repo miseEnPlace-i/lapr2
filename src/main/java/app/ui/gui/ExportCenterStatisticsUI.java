@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import app.controller.App;
 import app.controller.ExportCenterStatisticsController;
 import app.controller.FindCoordinatorVaccinationCenterController;
+import app.domain.shared.HelpText;
 import app.exception.NotAuthorizedException;
 import app.service.FileUtils;
 import app.session.EmployeeSession;
@@ -311,6 +312,11 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     initialDate.setValue(null);
     endDate.setValue(null);
     txtFileName.setText("");
+  }
+
+  @Override
+  void handleHelp(ActionEvent event) {
+    Utils.showHelp("Coordinator Help", HelpText.CENTER_STATISTICS);
   }
 }
 

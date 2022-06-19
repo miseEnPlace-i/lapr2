@@ -9,15 +9,17 @@ import java.util.logging.Logger;
 import app.controller.App;
 import app.controller.ImportLegacyDataController;
 import app.domain.model.Company;
+import app.domain.shared.HelpText;
 import app.dto.LegacyDataDTO;
 import app.exception.NotFoundException;
 import app.session.EmployeeSession;
+import app.ui.gui.utils.Utils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
 
 public class ImportLegacyData1UI extends ChildUI<CoordinatorUI> {
@@ -110,5 +112,10 @@ public class ImportLegacyData1UI extends ChildUI<CoordinatorUI> {
     alert.showAndWait().ifPresent(response -> {
       Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, e);
     });
+  }
+
+  @Override
+  void handleHelp(ActionEvent event) {
+    Utils.showHelp("Coordinator Help", HelpText.IMPORT_LEGACY_DATA_1);
   }
 }

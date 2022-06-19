@@ -6,9 +6,11 @@ import app.controller.App;
 import app.controller.ImportLegacyDataController;
 import app.domain.model.Company;
 import app.domain.shared.Constants;
+import app.domain.shared.HelpText;
 import app.dto.LegacyDataDTO;
 import app.service.PropertiesUtils;
 import app.session.EmployeeSession;
+import app.ui.gui.utils.Utils;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -116,5 +118,10 @@ public class ImportLegacyData2UI extends ChildUI<CoordinatorUI> {
     alert.showAndWait().ifPresent(response -> {
       super.toRoleScene();
     });
+  }
+
+  @Override
+  void handleHelp(ActionEvent event) {
+    Utils.showHelp("Coordinator Help", HelpText.IMPORT_LEGACY_DATA_2);
   }
 }

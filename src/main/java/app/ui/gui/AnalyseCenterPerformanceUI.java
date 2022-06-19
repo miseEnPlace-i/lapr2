@@ -8,11 +8,13 @@ import org.apache.commons.lang3.StringUtils;
 import app.controller.AnalyseCenterPerformanceController;
 import app.domain.model.CenterPerformance;
 import app.domain.shared.Constants;
+import app.domain.shared.HelpText;
 import app.service.PropertiesUtils;
 import app.session.EmployeeSession;
 import app.ui.gui.utils.Utils;
 import app.utils.Time;
 import javafx.collections.ListChangeListener;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -256,5 +258,10 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
     inputListContainer.setPrefHeight(280 + 24);
 
     return inputListContainer;
+  }
+
+  @Override
+  void handleHelp(ActionEvent event) {
+    Utils.showHelp("Coordinator Help", HelpText.ANALYSE_CENTER_PERFORMANCE);
   }
 }
