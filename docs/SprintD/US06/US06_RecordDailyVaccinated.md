@@ -23,12 +23,15 @@ DGS wants to record daily the total number of people vaccinated in each vaccinat
 > **Answer:** Should record vaccinations of the current day.
 >
 > **Question:** I'd like to clarify something, should we implement some sort of message for when the file is saved or warning if there were any errors saving the file using JavaFX or use JavaFX in any other away in US06?
+> 
 > **Answer:** No. The user story runs automatically without user interaction.
 >
 > **Question:** Also, is it supposed to have the possibility to change the information on the configuration file? If so, who can do it?
+> 
 > **Answer:** Yes. Please discuss this question with ESOFT teachers.
 > 
 > **Question:** "In the acceptance criteria, "the algorithm should run automatically at a time defined in a configuration file and should register a date, the name of the vaccination center and the total number of vaccinated users." How it is supposed to register this information? Should it be recorded in a file (ex: txt,..) or recorded in the system (ex: in a store) ?"
+> 
 > **Answer:** The data should be written to a CSV file (field delimiter should be a semicolon).
 
 
@@ -38,7 +41,15 @@ DGS wants to record daily the total number of people vaccinated in each vaccinat
   
 ### 1.4. Found out Dependencies
 
-* There is a dependency to US08 - "As a nurse, I want to record the administration of a vaccine to a SNS user. At the end of the recovery period, the user should receive a SMS message informing the SNS user that he can leave the vaccination center.", because in order to record the daily vaccinated people, its needed that the vaccine administration get registered in the system.
+
+* There is a dependency to "US01 - Schedule a Vaccine", as users need to schedule a vaccine in order to get it administered.
+* There is a dependency to "US03 - Register SNS User" since at leat one sns user needs to be registered in the system.
+* There is a dependency to "US04 - Register the Arrival of an SNS User", as receptionists need to register arrivals so that SNS Users can get vaccines administered.
+* There is a dependency to "US08 - Record Administration of Vaccine" since at least one vaccine needs to be administered to a sns user.
+* There is a dependency to "US09 - Register a Vaccination Center" since at least one vaccination center needs to be registered in the system.
+* There is a dependency to "US12 - Register a new Vaccine Type" since at least one vaccine type needs to be registered in the system.
+* There is a dependency to "US13 - Register a new Vaccine" since at least one vaccine needs to be registered in the system.
+
   
 ### 1.5 Input and Output Data
 
@@ -79,7 +90,7 @@ DGS wants to record daily the total number of people vaccinated in each vaccinat
 |  | ...  get the vaccine type of the vaccine administered? | Vaccine | IE: has a vaccine type |
 |  | ...  get the description of the vaccine type? | VaccineType | IE: has a description |
 |  | ...  get the vaccine name? | Vaccine | IE: has a name |
-|  | ... create and write data to file? | FileUtils | IE: knows how write in files |
+|  | ... create and write data to file? | FileUtils | Pure Fabrication |
 
 
 

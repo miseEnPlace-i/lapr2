@@ -6,6 +6,8 @@ actor "Timer" as ACT
 
 
 participant "App" as APP
+participant "PropertiesUtils" as PROPSU
+participant "props:\nProperties" as PROPS
 participant "Company" as COMP
 participant "task:\nExportDailyVaccinatedTask" as TASK
 participant "timer:\nTimer" as TIMER
@@ -23,9 +25,18 @@ participant "dataMap:\nHashMap<VaccinationCenter,\nHashMap<VaccineType,Int>>" as
     activate ACT
     ACT -> APP : Asks to export daily vaccinated report
     activate APP
-    note right APP 
-        filePath, time and separator are properties of the system
-    end note
+    APP -> PROPSU : props = getProperties()
+    activate PROPSU
+    deactivate PROPSU
+    APP -> PROPS : filePath = getProperty(Constants.PARAMS_EXPORTATION_PATH)
+    activate PROPS
+    deactivate PROPS
+    APP -> PROPS : time = getProperty(Constants.PARAMS_EXPORTATION_TIME)
+    activate PROPS
+    deactivate PROPS
+    APP -> PROPS : separator = getProperty(Constants.PARAMS_EXPORTATION_SEPARATOR)
+    activate PROPS
+    deactivate PROPS
     APP-> COMP : scheduleDailyVaccinated(filePath, time, separator, timeInterval)
     deactivate APP
         

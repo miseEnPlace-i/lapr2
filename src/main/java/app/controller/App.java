@@ -30,6 +30,7 @@ import app.domain.model.store.VaccineTypeStore;
 import app.domain.shared.Constants;
 import app.domain.shared.Gender;
 import app.service.PropertiesUtils;
+import javafx.scene.control.Separator;
 import pt.isep.lei.esoft.auth.AuthFacade;
 import pt.isep.lei.esoft.auth.UserSession;
 
@@ -72,10 +73,11 @@ public class App {
       writeCompany(this.company, Constants.DATA_FILE_PATH);
     }
 
-
+    String path = props.getProperty(Constants.PARAMS_EXPORTATION_PATH);
+    String time = props.getProperty(Constants.PARAMS_EXPORTATION_TIME);
+    String separator = props.getProperty(Constants.PARAMS_EXPORTATION_SEPARATOR);
     props = PropertiesUtils.getProperties();
-    this.company.scheduleDailyVaccinated(props.getProperty(Constants.PARAMS_EXPORTATION_PATH), props.getProperty(Constants.PARAMS_EXPORTATION_TIME),
-        props.getProperty(Constants.PARAMS_EXPORTATION_SEPARATOR), 24 * 60 * 60);
+    this.company.scheduleDailyVaccinated(path, time, separator, 24*60*60);
 
   }
 
