@@ -8,25 +8,20 @@ end note
 
 participant ":AuthUI" as AUTHUI
 participant ":CoordinatorUI" as EUI
-' participant ":FindCoordinatorVaccinationCenterUI" as UI
 participant ":FindCoordinatorVaccinationCenterController" as CTRL
 participant "employeeSession\n:EmployeeSession" as SESSION
 participant "company\n:Company" as COMP
 participant "vaccinationCenterStore\n:VaccinationCenterStore" as VACCS
-' participant "centerDTO\n:VaccinationCenterListDTO" as CDTO
 participant "company\n:Company" as COMP
 participant ":App" as _APP
 participant "app:App" as APP
 participant "vaccinationCenter\n:VaccinationCenter"
-' participant "vaccinationCenters\n:List<VaccinationCenterListDTO>"
+
 
 activate AUTHUI
 AUTHUI -> EUI **
 activate EUI
 EUI -> SESSION **
-' EUI -> UI **
-' AUTHUI -> UI : run()
-' activate UI
 activate COORDINATOR
 
 
@@ -63,29 +58,10 @@ deactivate SESSION
 
 deactivate CTRL
 
-
-' AUTHUI -> CTRL 
-' deactivate UI
-' CTRL -> CDTO : email=getEmail()
-' activate CDTO
-' deactivate CDTO
-' CTRL -> VACCS : vaccinationCenter=getVaccinationCenterWithEmail(email)
-' activate VACCS
-' deactivate VACCS
-' CTRL -> SESSION : setVaccinationCenter(vaccinationCenter)
-' activate SESSION
-' deactivate SESSION
-' deactivate EUI
-
-
-
 deactivate CTRL
-
-' deactivate UI
 
 deactivate COORDINATOR
 
-' |||
 
 note over COORDINATOR
   The employee vaccination center is stored in the EmployeeSession
