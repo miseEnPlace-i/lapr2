@@ -64,21 +64,6 @@ public class FileUtilsTest {
     }
 
     /**
-     * Test that sanitizeFileName works properly. When the fileName contains banned chars or has a extension different from
-     * ".csv", returns a fileName sanitized
-     */
-    @Test
-    public void ensureSanitizeFileName() {
-        String fileName = "tes@t.txt";
-
-        String actual = FileUtils.sanitizeFileName(fileName);
-
-        String expected = "out/test/test.csv";
-
-        assertEquals(expected, actual);
-    }
-
-    /**
      * Tests that it is possible to build a directory if it is not already created
      */
     @Test
