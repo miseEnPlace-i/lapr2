@@ -46,10 +46,20 @@ public class CenterPerformance implements Serializable {
     timeElapsed = maxSumSubListData.getTimeElapsed();
   }
 
+  /**
+   * 
+   * @param index The index of the event in the list.
+   * @return The time of the event.
+   */
   private Time convertIndexToTime(int index) {
     return new Time(openingHours.convertToMinutes() + index * interval);
   }
 
+  /**
+   * The list is calculated by the difference between arrivals and departures for a given interval of time, in minutes
+   * 
+   * @return The list of differences of the events
+   */
   private List<Integer> calculateDifferencesList() {
     int nOfWorkingMinutes = closingHours.convertToMinutes() - openingHours.convertToMinutes();
     int nOfIntervals = (int) Math.floor(nOfWorkingMinutes / interval);
@@ -72,6 +82,13 @@ public class CenterPerformance implements Serializable {
     return differences;
   }
 
+  /**
+   * 
+   * @param events The list of events.
+   * @param beginningTime The beginning of the interval.
+   * @param endingTime The end of the interval.
+   * @return The difference between the arrivals and departures for the given interval.
+   */
   private int getDifferenceForInterval(CenterEventList events, Time beginningTime, Time endingTime) {
     int intervalDifference = 0;
 
@@ -88,14 +105,27 @@ public class CenterPerformance implements Serializable {
     return intervalDifference;
   }
 
+  /**
+   * 
+   * @return The list of differences of the events.
+   */
   public List<Integer> getDifferencesList() {
     return differenceList;
   }
 
+  /**
+   * 
+   * @return A readable string with the differences of the events.
+   */
   public String stringifyDifferencesList() {
     return stringifyList(differenceList);
   }
 
+  /**
+   * 
+   * @param list The list to stringify.
+   * @return A readable string with the list.
+   */
   private String stringifyList(List<Integer> list) {
     StringBuilder sb = new StringBuilder();
     sb.append("[");
@@ -110,26 +140,50 @@ public class CenterPerformance implements Serializable {
     return sb.toString();
   }
 
+  /**
+   * 
+   * @return The max contiguous sum sublist.
+   */
   public List<Integer> getMaxSumSubList() {
     return maxSumSubList;
   }
 
+  /**
+   * 
+   * @return a readable string with the max contiguous sum sublist.
+   */
   public String stringifyMaxSumSublist() {
     return stringifyList(maxSumSubList);
   }
 
+  /**
+   * 
+   * @return The max sum of the maximum contiguous sum sublist.
+   */
   public int getMaxSum() {
     return maxSum;
   }
 
+  /**
+   * 
+   * @return The start time of the max contiguous sum sublist.
+   */
   public Time getStartingInterval() {
     return startingInterval;
   }
 
+  /**
+   * 
+   * @return The end time of the max contiguous sum sublist.
+   */
   public Time getEndingInterval() {
     return endingInterval;
   }
 
+  /**
+   * 
+   * @return The time elapsed to find the max contiguous sum sublist.
+   */
   public double getTimeElapsed() {
     return timeElapsed;
   }

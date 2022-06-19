@@ -24,6 +24,10 @@ public class WaitingRoom implements Iterable<Arrival>, Serializable {
     return waitingRoom.iterator();
   }
 
+  /**
+   * 
+   * @return the number of arrivals in the waiting room.
+   */
   public int size() {
     return waitingRoom.size();
   }
@@ -73,7 +77,7 @@ public class WaitingRoom implements Iterable<Arrival>, Serializable {
   }
 
   /**
-   * Prints the waiting room as a string
+   * @return a readable string representation of the Waiting Room.
    */
   public String toString() {
     StringBuilder sb = new StringBuilder();

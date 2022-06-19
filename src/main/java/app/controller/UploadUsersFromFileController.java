@@ -23,11 +23,26 @@ public class UploadUsersFromFileController {
     this.csvReader = null;
   }
 
+  /**
+   * @param filePathName the path of the file to be exported
+   * @return
+   */
   public CSVReader createCsvReader(String filePathName) {
     this.csvReader = new CSVReader(filePathName);
     return csvReader;
   }
 
+  /**
+   * 
+   * @return the list of read users
+   * @throws ParseException if the data is not valid and is not possible to parse it to the specified format
+   * @throws ClassNotFoundException if is not possible to convert the data to class
+   * @throws InstantiationException if is not possible to create an instance of the class
+   * @throws IllegalAccessException if is not possible to access the class
+   * @throws FileNotFoundException if the filepath is not valid
+   * @throws NoSuchMethodException if is not possible to access the method
+   * @throws InvocationTargetException if is not possible to invoke the method
+   */
   public List<SNSUser> readAndUpload() throws ParseException, ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException,
       NoSuchMethodException, InvocationTargetException {
     SNSUserStore store = this.company.getSNSUserStore();

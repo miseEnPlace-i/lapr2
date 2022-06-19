@@ -2,7 +2,6 @@ package app.domain.model;
 
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Vaccine administration model class.

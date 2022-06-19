@@ -16,14 +16,28 @@ public class CenterEvent implements Serializable {
     this.snsUser = snsUser;
   }
 
+  /**
+   * 
+   * @param day The day of the event.
+   * @return true if the event is on the given day, false otherwise.
+   */
   public boolean isInDay(Calendar day) {
     return this.date.get(Calendar.DAY_OF_YEAR) == day.get(Calendar.DAY_OF_YEAR);
   }
 
+  /**
+   * 
+   * @return The date of the event.
+   */
   public Calendar getDate() {
     return date;
   }
 
+  /**
+   * 
+   * @param type The type of the event.
+   * @return true if the event is of the given type, false otherwise.
+   */
   public boolean isType(CenterEventType type) {
     return type.equals(eventType);
   }

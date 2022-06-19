@@ -7,12 +7,10 @@ import app.domain.model.list.DoseInfoList;
  * @author Carlos Lopes <1211277@isep.ipp.pt>
  */
 public class AdminProcess implements Serializable {
-
   private int minAge;
   private int maxAge;
   private int numberOfDoses;
   private DoseInfoList doseInfoList;
-
 
   public AdminProcess(int minAge, int maxAge, int numberOfDoses) {
     setAgeInterval(minAge, maxAge);
@@ -20,7 +18,6 @@ public class AdminProcess implements Serializable {
     doseInfoList = new DoseInfoList();
   }
 
-  // GETTERS AND SETTERS
   public int getMinAge() {
     return this.minAge;
   }
@@ -46,18 +43,12 @@ public class AdminProcess implements Serializable {
     this.numberOfDoses = numberOfDoses;
   }
 
-
-  // VALIDATIONS
   public void validateMinAge(int minAge) {
-    if (minAge < 0) {
-      throw new IllegalArgumentException("The minimum age must be positive.");
-    }
+    if (minAge < 0) throw new IllegalArgumentException("The minimum age must be positive.");
   }
 
   public void validateMaxAge(int maxAge) {
-    if (maxAge < 0) {
-      throw new IllegalArgumentException("The maximum age must be positive.");
-    }
+    if (maxAge < 0) throw new IllegalArgumentException("The maximum age must be positive.");
   }
 
   public void validateNumberOfDoses(int numberOfDoses) {
