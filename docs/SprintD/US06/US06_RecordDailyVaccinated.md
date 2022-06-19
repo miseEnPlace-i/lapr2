@@ -137,11 +137,61 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 5. Construction (Implementation)
 
-_In this section, it is suggested to provide, if necessary, some evidence that thye construction/implementation is in accordance with the previously carried out design. Furthermore, it is recommeded to mention/describe the existence of other relevant (e.g. configuration) files and highlight relevant commits._
+**ExportDailyVaccinatedTask**
 
-_It is also recommended to organize this content by subsections._
+    @Override
+    public void run() {
+        HashMap<VaccinationCenter, HashMap> dataMap = new HashMap<VaccinationCenter, HashMap>();
+
+        List<VaccinationCenter> centerLst = vacCenterSt.getListOfVaccinationCenters();
+        List<VaccineType> vacTypeLst = vacTypeSt.getListOfVaccineTypes(); 
+        
+        for (int i = 0; i < centerLst.size(); i++) {
+            List<VaccineAdministration> vacAdminList = centerLst.get(i).getVacAdminFromYesterdayList();
+
+            HashMap<VaccineType, Integer> centerDataMap = new HashMap<VaccineType, Integer>();
+            
+            for (int j = 0; j < vacAdminList.size(); j++) {
+                Vaccine vaccine = vacAdminList.get(j).getVaccine();
+                
+                VaccineType vacType = vaccine.getVacType();
+
+                centerDataMap.merge(vacType, 1, Integer::sum);                             
+            }
+            dataMap.put(centerLst.get(i), centerDataMap);
+        }
+
+        String content = convertToString(centerLst, vacTypeLst, dataMap);
+        Calendar yesterday = Calendar.getInstance();
+        yesterday.add(Calendar.DATE, -1);
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+
+        String filepath = this.filePath + format.format(yesterday.getTime()) + ".csv";
+        FileUtils.writeToFile(filepath, content);
+    }
+
+**Company**
+
+    public void scheduleDailyVaccinated(String filePath, String time, String separator, int timeInterval) {
+   
+        String[] scheduleTime = time.split(":");
+        Calendar firstTime = Calendar.getInstance();
+
+        firstTime.set(Calendar.SECOND, 0);
+        firstTime.set(Calendar.MINUTE, Integer.valueOf(scheduleTime[1]));
+        firstTime.set(Calendar.HOUR_OF_DAY, Integer.valueOf(scheduleTime[0]));
+
+        if(firstTime.before(Calendar.getInstance())) firstTime.add(Calendar.SECOND, timeInterval);
+
+        ExportDailyVaccinatedTask task = new ExportDailyVaccinatedTask(filePath, separator.charAt(0), this.vaccinationCenterStore, this.vaccineTypeStore);
+        
+        Timer timer = new Timer();
+
+        timer.scheduleAtFixedRate(task, firstTime.getTime(), timeInterval);
+    }
 
 # 6. Integration and Demo
+
 
 
 # 7. Observations
