@@ -82,15 +82,16 @@ public class ExportDailyVaccinatedTaskTest {
 
   @Test
   public void ensureTaskExportWorksWithNoVacAdmin() throws IOException {
-    String expected =
-        "Center;" + vacType1.getDescription() + ";" + vacType2.getDescription() + "\n" + center1.getName() + ";0;0\n" + center2.getName() + ";0;0\n";
-    ExportDailyVaccinatedTask task = new ExportDailyVaccinatedTask("out/test/test1", ";".charAt(0), vcStore, vtStore);
+        ExportDailyVaccinatedTask task = new ExportDailyVaccinatedTask("out/test/test1", ";".charAt(0), vcStore, vtStore);
     task.run();
 
 
     Calendar today = Calendar.getInstance();
     SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
     Path expectedFilepath = Path.of("out/test/test1" + format.format(today.getTime()) + ".csv");
+
+    String expected = "Number of Vaccinated people in day " + format.format(today.getTime()) + "\n" +
+        "Center;" + vacType1.getDescription() + ";" + vacType2.getDescription() + "\n" + center1.getName() + ";0;0\n" + center2.getName() + ";0;0\n";
 
     assertEquals(expected, Files.readString(expectedFilepath));
   }
@@ -111,11 +112,13 @@ public class ExportDailyVaccinatedTaskTest {
     ExportDailyVaccinatedTask task = new ExportDailyVaccinatedTask("out/test/test2", ";".charAt(0), vcStore, vtStore);
     task.run();
 
-    String expected =
-        "Center;" + vacType1.getDescription() + ";" + vacType2.getDescription() + "\n" + center1.getName() + ";1;1\n" + center2.getName() + ";0;1\n";
-
+   
     SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
     Path expectedFilepath = Path.of("out/test/test2" + format.format(today.getTime()) + ".csv");
+
+    String expected = "Number of Vaccinated people in day " + format.format(today.getTime()) + "\n" +
+    "Center;" + vacType1.getDescription() + ";" + vacType2.getDescription() + "\n" + center1.getName() + ";1;1\n" + center2.getName() + ";0;1\n";
+
 
     assertEquals(expected, Files.readString(expectedFilepath));
   }

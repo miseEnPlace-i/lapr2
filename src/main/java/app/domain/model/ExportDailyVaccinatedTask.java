@@ -58,11 +58,11 @@ public class ExportDailyVaccinatedTask extends TimerTask {
       dataMap.put(centerLst.get(i), centerDataMap);
     }
 
-    String content = convertToString(centerLst, vacTypeLst, dataMap);
     Calendar today = Calendar.getInstance();
     SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
     String filepath = this.filePath + format.format(today.getTime()) + ".csv";
+    String content = "Number of Vaccinated people in day " + format.format(today.getTime()) + "\n" + convertToString(centerLst, vacTypeLst, dataMap);
     FileUtils.writeToFile(filepath, content);
   }
 
