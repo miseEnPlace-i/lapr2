@@ -1,24 +1,27 @@
 @startuml
 skinparam classAttributeIconSize 0
 
-package java.util{
-    class Timer{
-        +scheduleAtFixedRate(task, firstTime, period)
+package java{
+    package util{
+        class Timer{
+            +scheduleAtFixedRate(task, firstTime, period)
+        }
+        abstract TimerTask{
+            +TimerTask()
+            +run()
+            +cancel()
+            +scheduleAtFixedRate(task, firstTime, period)
+        }
     }
-    abstract TimerTask{
-        +TimerTask()
-        +run()
-        +cancel()
-        +scheduleAtFixedRate(task, firstTime, period)
-    }
-}
 
-package java.lang{
-    interface Runnable{
-        +run()
+
+    package lang{
+        interface Runnable{
+            +run()
+        }
     }
 }
-    
+ 
 package core {
     
 
