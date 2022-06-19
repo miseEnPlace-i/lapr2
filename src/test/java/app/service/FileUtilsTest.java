@@ -18,7 +18,7 @@ public class FileUtilsTest {
     @Before
     public void setUp() {
         content.add("content");
-        FileUtils.writeToFile("test", content.get(0));
+        FileUtils.writeToFile("out/test/test", content.get(0));
     }
 
     /**
@@ -73,7 +73,7 @@ public class FileUtilsTest {
 
         String actual = FileUtils.sanitizeFileName(fileName);
 
-        String expected = "export/test.csv";
+        String expected = "out/test/test.csv";
 
         assertEquals(expected, actual);
     }
@@ -93,7 +93,7 @@ public class FileUtilsTest {
      */
     @Test
     public void ensureWriteToFileWorks() {
-        String fileName = "test";
+        String fileName = "out/test/test";
         String content = "content";
 
         boolean actual = FileUtils.writeToFile(fileName, content);
@@ -108,7 +108,7 @@ public class FileUtilsTest {
      */
     @Test
     public void ensureReadFromFileWorks() throws FileNotFoundException {
-        String fileName = "test";
+        String fileName = "out/test/test";
 
         List<String> actual = FileUtils.readFromFile(fileName);
 
