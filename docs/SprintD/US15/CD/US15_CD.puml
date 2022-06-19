@@ -7,7 +7,12 @@ class ExportCenterStatisticsUI {}
 
 package controllers {
      class ExportCenterStatisticsController {
-
+       +createFullyVaccinatedData(filePath,startDate,endDate)
+       +generateFullyVaccinatedUsersInterval()
+       +saveData()
+       +exportFileString()
+       +getData()
+       +createFullyVaccinatedData()
      }
 }
 
@@ -45,30 +50,19 @@ class FullyVaccinatedData {
     }
 
 class VaccineAdministration {
-  -snsUser: SNSUser
-  -vaccine: Vaccine
-  -dose: int
-  -lotNumber: String
   -date: date
-}
-
-class Company {
-    +getDesignation()
+  +getSnsUserAge()
+  +getVaccine()
+  +getDose()
 }
 
 class VaccinationCenter {
     - name: String
-    - address: String
     - emailAddress: String
     - phoneNumber: String
     - faxNumber: String
     - websiteAddress: String
-    - openingHours: String
-    - closingHours: String
-    - slotDuration: int
-    - maximumVaccinesPerSlot: int
-    - coordinator
-        
+
     +VaccinationCenter(name,address,emailAddress,phoneNumber,faxNumber,websiteAddress,openingHours,closingHours,slot,coordinator)
 }
 
@@ -120,26 +114,30 @@ class SNSUser {
   + SNSUser(citizenCard, snsNumber, name, birthDay, gender, phoneNumber, email, address)
 }
 
+class Address {
+  - street: String
+  - doorNumber: String
+  - postalCode: String
+  - city: String
+}
+
 
 }
 
-package stores {
-      class VaccinationCenterStore {}
-      }
 }
 
 
 ExportCenterStatisticsUI ..> ExportCenterStatisticsController
 
-ExportCenterStatisticsController ..> Company
-
-Company "1" -- "1" VaccinationCenterStore : knows >
-
-VaccinationCenter o-- Employee
-VaccinationCenter o-- Time 
+VaccinationCenter o-- Employee : coordinator
+VaccinationCenter o-- Time : openingHours
+VaccinationCenter o-- Time : closingHours
 VaccinationCenter o-- Slot
+VaccinationCenter o-- Address : has <
 
 Vaccine o-- VaccineType
+
+Employee o-- Address : has <
 
 VaccineAdministration -- Vaccine
 VaccineAdministration -- SNSUser
@@ -148,5 +146,6 @@ FullyVaccinatedData -- VaccineAdministration : uses >
 
 FileUtils <.. ExportCenterStatisticsController
 
-VaccinationCenterStore "1" --> "*" VaccinationCenter : stores >
+ExportCenterStatisticsController ..> FullyVaccinatedData
+
 @enduml
