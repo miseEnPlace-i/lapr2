@@ -81,20 +81,17 @@ public class ExportDailyVaccinatedTaskTest {
   }
 
   @Test
-  public void ensureTaskDoesNotExportWithNoVacAdmin() throws IOException {
+  public void ensureTaskExportWorksWithNoVacAdmin() throws IOException {
     String expected =
         "Center;" + vacType1.getDescription() + ";" + vacType2.getDescription() + "\n" + center1.getName() + ";0;0\n" + center2.getName() + ";0;0\n";
-    ExportDailyVaccinatedTask task = new ExportDailyVaccinatedTask("out\\test", ";".charAt(0), vcStore, vtStore);
+    ExportDailyVaccinatedTask task = new ExportDailyVaccinatedTask("out\\test1", ";".charAt(0), vcStore, vtStore);
     task.run();
 
 
     Calendar yesterday = Calendar.getInstance();
     yesterday.add(Calendar.DATE, -1);
     SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-    Path expectedFilepath = Path.of("out\\test" + format.format(yesterday.getTime()) + ".csv");
-
-    System.out.println(expected);
-    System.out.println(Files.readString(expectedFilepath));
+    Path expectedFilepath = Path.of("out\\test1" + format.format(yesterday.getTime()) + ".csv");
 
     assertEquals(expected, Files.readString(expectedFilepath));
   }
@@ -113,14 +110,14 @@ public class ExportDailyVaccinatedTaskTest {
     VaccineAdministration vacAdmin3 = new VaccineAdministration(snsUser, vac2, "CCCCC-22", 1, center2, yesterday);
     center2.addVaccineAdministrationToList(vacAdmin3);
 
-    ExportDailyVaccinatedTask task = new ExportDailyVaccinatedTask("out\\test", ";".charAt(0), vcStore, vtStore);
+    ExportDailyVaccinatedTask task = new ExportDailyVaccinatedTask("out\\test2", ";".charAt(0), vcStore, vtStore);
     task.run();
 
     String expected =
         "Center;" + vacType1.getDescription() + ";" + vacType2.getDescription() + "\n" + center1.getName() + ";1;1\n" + center2.getName() + ";0;1\n";
 
-    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-    Path expectedFilepath = Path.of("out\\test" + format.format(yesterday.getTime()) + ".csv");
+    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+    Path expectedFilepath = Path.of("out\\test2" + format.format(yesterday.getTime()) + ".csv");
 
     assertEquals(expected, Files.readString(expectedFilepath));
   }
