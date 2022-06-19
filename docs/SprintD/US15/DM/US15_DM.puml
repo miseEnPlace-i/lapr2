@@ -54,7 +54,6 @@ class SNSUser {
   - gender
   - phoneNumber
   - email
-  - address
 }
 
 class Vaccine {
@@ -79,6 +78,8 @@ CenterCoordinator -- VaccinationCenter : has >
 
 VaccinationCenter "1"-- "1" Slot : has >
 VaccinationCenter "*" -- "1" Address : has >
+
+Address "1" -- "*" SNSUser : has <
 
 VaccineAdministration "*" -- "1" VaccinationCenter : has <
 VaccineAdministration "1" -- "*" SNSUser : has >
