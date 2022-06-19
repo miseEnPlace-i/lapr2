@@ -66,6 +66,7 @@ As a center coordinator, I intend to check and export vaccination statistic. I w
 
 **Output Data:**
 
+* Center Statistics
 * Registered statistics of a center into a CSV file between two dates.
 * Operation (in)success.
 
@@ -93,32 +94,31 @@ n/a.
 
 **SSD - Alternative 1 is adopted.**
 
-| Interaction ID | Question: Which class is responsible for... | Answer                     | Justification (with patterns)                                                                                 |
-| :------------- | :------------------------------------------ | :------------------------- | :------------------------------------------------------------------------------------------------------------ |
-| Step 1         | ... interacting with the actor?             | ExportStatisticsUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-|                | ... coordinating the US?                    | ExportStatisticsController | Controller                                                                                                    |
-| Step 2         | n/a                                         | n/a                        | n/a                                                                                                           |
-| Step 3         | ... knows the coordinator center?           | EmployeeSession            | IE: holds information about the sessions of the users                                                         |
-|                | ... instantiating new FullyVaccinatedData?  | FullyVaccinatedData        | IE: holds the information relevant to the statistics                                                          |
-|                | ... holds information needed to statistics? | VaccineAdministration      | IE: holds information about the vaccination process of every user                                             |
-|                | ... check sns user is fully vaccinated?     | Vaccine                    | IE: holds information about the administrations process                                                       |
-| Step 4         | ... saving the new statistics?              | CsvExporter                | IE: gets all the data needed to export the statistics                                                         |
-|                | ... exports the data to a csv file?         | CsvExporter                | IE: knows how to export to data to a csv file                                                                 |
-
+| Interaction ID                                    | Question: Which class is responsible for... | Answer                     | Justification (with patterns)                                                                                 |
+| :------------------------------------------------ | :------------------------------------------ | :------------------------- | :------------------------------------------------------------------------------------------------------------ |
+| Step 1                                            | ... interacting with the actor?             | ExportStatisticsUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+|                                                   | ... coordinating the US?                    | ExportStatisticsController | Controller                                                                                                    |
+| Step 2 requested data(fileName,startDate,endDate) | n/a                                         | n/a                        | n/a                                                                                                           |
+| Step 3                                            | ... knows the coordinator center?           | EmployeeSession            | IE: holds information about the sessions of the users                                                         |
+|                                                   | ... instantiating new FullyVaccinatedData?  | FullyVaccinatedData        | IE: holds the information relevant to the statistics                                                          |
+|                                                   | ... holds information needed to statistics? | VaccineAdministration      | IE: holds information about the vaccination process of every user                                             |
+|                                                   | ... check sns user is fully vaccinated?     | Vaccine                    | IE: holds information about the administrations process                                                       |
+| Step 4                                            | ... saving the new statistics?              | FileUtils                  | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+|                                                   | ... exports the data to a csv file?         | FileUtils                  | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+|                                                   | ... shows coordinator statistics?           | ExportCenterStatisticsUI   | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
 ### Systematization
 
 According to the taken rationale, the conceptual classes promoted to software classes are:
 
 - FullyVaccinatedData 
-- CsvExporter
 - VaccineAdministration
 - Vaccine
-- EmployeeSession
 
 Other software classes (i.e. Pure Fabrication) identified:
 
 - ExportCenterStatisticsUI 
 - ExportCenterStatisticsController
+- EmployeeSession
 
 ## 3.2. Sequence Diagram (SD)
 
@@ -130,24 +130,33 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 4. Tests
 
-_In this section, it is suggested to systematize how the tests were designed to allow a correct measurement of requirements fulfilling._
-
-**_DO NOT COPY ALL DEVELOPED TESTS HERE_**
-
-**Test 1:** Check that it is not possible to create an instance of the Example class with null values.
+**Test 1:** Check that it is not possible to create an instance of FullyVaccinatedData with invalid dates interval.
 
     @Test(expected = IllegalArgumentException.class)
-    	public void ensureNullIsNotAllowed() {
-    	Exemplo instance = new Exemplo(null, null);
+    public void ensureGetFullyVaccinatedUsersPerDayMapWorksDoesNotAcceptInvalidInterval() {
+        Calendar date1 = Calendar.getInstance();
+        date1.add(Calendar.DAY_OF_MONTH, -2);
+
+        Calendar date2 = Calendar.getInstance();
+        date2.add(Calendar.DAY_OF_MONTH, -1);
+
+        new FullyVaccinatedData("path", date2, date1, center1);
     }
 
-_It is also recommended to organize this content by subsections._
 
 # 5. Construction (Implementation)
 
-_In this section, it is suggested to provide, if necessary, some evidence that the construction/implementation is in accordance with the previously carried out design. Furthermore, it is recommeded to mention/describe the existence of other relevant (e.g. configuration) files and highlight relevant commits._
+### FullyVaccinatedData Constructor
 
-_It is also recommended to organize this content by subsections._
+	public FullyVaccinatedData(String path, Calendar start, Calendar end, VaccinationCenter center) {
+        validatePath(path);
+        validateDateInterval(start, end);
+        validateCenter(center);
+
+        this.startDate = start;
+        this.endDate = end;
+        this.center = center;
+    }
 
 # 6. Integration and Demo
 
@@ -155,4 +164,4 @@ _It is also recommended to organize this content by subsections._
 
 # 7. Observations
 
-_In this section, it is suggested to present a critical perspective on the developed work, pointing, for example, to other alternatives and or future related work._
+![SprintD](SprintD/../../CoordinatorLogin_SD.svg)
