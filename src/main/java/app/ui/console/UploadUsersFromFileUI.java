@@ -8,7 +8,7 @@ import app.domain.model.SNSUser;
 import app.ui.console.utils.Utils;
 
 /**
- * Vaccination Center mapper
+ * UploadUsersFromFileUI UI
  * 
  * @autor Carlos Lopes <1211277@isep.ipp.pt>
  */
@@ -26,17 +26,15 @@ public class UploadUsersFromFileUI implements Runnable {
   public void run() {
     System.out.println("\nRegister Vaccine UI:");
 
-    String filePath = insertData(); // asks to insert file path and instantiates CSVReader
+    String filePath = insertData();
 
     String message = "Are you sure you want to upload users from file: ";
 
-    // Get just the file name
     String fileName = filePath.substring(filePath.lastIndexOf("\\") + 1);
     fileName = fileName.substring(fileName.lastIndexOf("/") + 1);;
 
     message += (fileName + " (y/n)");
 
-    // asks to confirm the action
     if (!Utils.confirm(message)) return;
 
     List<SNSUser> userList = null;
@@ -44,10 +42,9 @@ public class UploadUsersFromFileUI implements Runnable {
     try {
       userList = ctrl.readAndUpload();
     } catch (Exception e) {
-      e.printStackTrace();
+      System.out.println("File not found!");
     }
 
-    // Lists SNS users registered information
     if (userList == null) {
       System.out.println("No users registered!");
     } else {
@@ -55,7 +52,6 @@ public class UploadUsersFromFileUI implements Runnable {
     }
   }
 
-  // Lists SNS users registered information
   private void displayRegisteredUsers(List<SNSUser> userList) {
     System.out.println("\nRegistered Users Info:\n");
 
@@ -74,7 +70,11 @@ public class UploadUsersFromFileUI implements Runnable {
 
   }
 
-  // asks to insert file path and instantiates CSVReader
+  /**
+   * Asks to insert the file Path
+   * 
+   * @return returns the file path entered
+   */
   public String insertData() {
     String filePath = Utils.readLineFromConsole("File Path: ");
 

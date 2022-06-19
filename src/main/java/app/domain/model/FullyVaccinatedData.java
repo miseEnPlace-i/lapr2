@@ -42,10 +42,10 @@ public class FullyVaccinatedData {
   /**
    * Validate file path
    * 
-   * @param path
+   * @param fileName
    */
-  private void validateName(String path) {
-    if (path == null || path == "") throw new IllegalArgumentException("File path cannot be null or empty!");
+  private void validateName(String fileName) {
+    if (fileName == null || fileName == "") throw new IllegalArgumentException("File name cannot be null or empty!");
   }
 
   /**
@@ -76,7 +76,7 @@ public class FullyVaccinatedData {
    * @return hashMap of all the data needed to do the statistics
    */
   public LinkedHashMap<Calendar, Integer> getFullyVaccinatedUsersPerDayMap() {
-    long nOfDaysBetween = getDaysBetweenTwoDates();
+    long nOfDaysBetween = ChronoUnit.DAYS.between(startDate.toInstant(), endDate.toInstant()) + 1;
     LinkedHashMap<Calendar, Integer> result = new LinkedHashMap<>();
 
     for (int i = 0; i < nOfDaysBetween; i++) {
@@ -86,7 +86,7 @@ public class FullyVaccinatedData {
 
       int nOfFullyVaccinated = 0;
 
-      List<VaccineAdministration> vacAdminList = vacAdminList(currentDay);
+      List<VaccineAdministration> vacAdminList = center.getVacAdminDayList(currentDay);
 
       for (int j = 0; j < vacAdminList.size(); j++) {
         fullyVaccinated = checkUserFullyVaccinated(vacAdminList, j);
@@ -97,24 +97,6 @@ public class FullyVaccinatedData {
     }
 
     return result;
-  }
-
-  /**
-   * Gets vaccine administration list
-   * 
-   * @param day the specific day to get the list of the center
-   * @return a List of VaccineAdministrations of that day
-   */
-  public List<VaccineAdministration> vacAdminList(Calendar day) {
-    return center.getVacAdminDayList(day);
-  }
-
-  /**
-   * 
-   * @return the number of days between the start and end date
-   */
-  public long getDaysBetweenTwoDates() {
-    return ChronoUnit.DAYS.between(startDate.toInstant(), endDate.toInstant()) + 1;
   }
 
   /**

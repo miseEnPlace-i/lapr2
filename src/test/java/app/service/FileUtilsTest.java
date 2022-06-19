@@ -18,7 +18,7 @@ public class FileUtilsTest {
     @Before
     public void setUp() {
         content.add("content");
-        FileUtils.writeToFile("test", content.get(0));
+        FileUtils.writeToFile("out/test/test", content.get(0));
     }
 
     /**
@@ -64,21 +64,6 @@ public class FileUtilsTest {
     }
 
     /**
-     * Test that sanitizeFileName works properly. When the fileName contains banned chars or has a extension different from
-     * ".csv", returns a fileName sanitized
-     */
-    @Test
-    public void ensureSanitizeFileName() {
-        String fileName = "tes@t.txt";
-
-        String actual = FileUtils.sanitizeFileName(fileName);
-
-        String expected = "export/test.csv";
-
-        assertEquals(expected, actual);
-    }
-
-    /**
      * Tests that it is possible to build a directory if it is not already created
      */
     @Test
@@ -93,7 +78,7 @@ public class FileUtilsTest {
      */
     @Test
     public void ensureWriteToFileWorks() {
-        String fileName = "test";
+        String fileName = "out/test/test";
         String content = "content";
 
         boolean actual = FileUtils.writeToFile(fileName, content);
@@ -108,7 +93,7 @@ public class FileUtilsTest {
      */
     @Test
     public void ensureReadFromFileWorks() throws FileNotFoundException {
-        String fileName = "test";
+        String fileName = "out/test/test";
 
         List<String> actual = FileUtils.readFromFile(fileName);
 

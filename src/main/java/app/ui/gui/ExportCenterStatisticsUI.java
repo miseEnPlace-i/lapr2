@@ -142,7 +142,6 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     XYChart.Series<String, Number> series = new XYChart.Series<String, Number>();
 
     for (Map.Entry<Calendar, Integer> entry : data.entrySet()) {
-      System.out.println("Key: " + format.format(entry.getKey().getTime()) + " Value: " + entry.getValue());
       series.getData().add(new XYChart.Data<String, Number>(format.format(entry.getKey().getTime()), entry.getValue()));
     }
 

@@ -3,12 +3,25 @@ package app.domain.model;
 import java.io.Serializable;
 import app.service.FormatVerifier;
 
+/**
+ * Address
+ * 
+ * @author Tomás Lopes <1211289@isep.ipp.pt>
+ */
 public class Address implements Serializable {
   private String street;
   private int doorNumber;
   private String postalCode;
   private String city;
 
+  /**
+   * Address Constructor
+   * 
+   * @param street
+   * @param doorNumber
+   * @param postalCode
+   * @param city
+   */
   public Address(String street, int doorNumber, String postalCode, String city) {
     if (street == null || street.isEmpty()) throw new IllegalArgumentException("Street is not valid.");
 
@@ -24,18 +37,38 @@ public class Address implements Serializable {
     this.city = city;
   }
 
+  /**
+   * Gets the street
+   * 
+   * @return street name
+   */
   public String getStreet() {
     return street;
   }
 
+  /**
+   * Gets the number
+   * 
+   * @return door number
+   */
   public int getNumber() {
     return doorNumber;
   }
 
+  /**
+   * Gets postal Code
+   * 
+   * @return postal code
+   */
   public String getPostalCode() {
     return postalCode;
   }
 
+  /**
+   * Gets the city
+   * 
+   * @return city name
+   */
   public String getCity() {
     return city;
   }
