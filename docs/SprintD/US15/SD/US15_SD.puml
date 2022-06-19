@@ -13,7 +13,7 @@ participant "vacAdminList\n:List<VaccineAdministration>" as VACDAYLIST
 participant "vaccine\n:Vaccine" as VACCINE
 participant "adminProcByAge\n:AdminProcess" as ADMINPROC
 participant "doseInfoLst\n:DoseInfoList" as DI_LIST
-participant "dataMap\n:Map<Calendar,Integer>" as MAP
+participant "dataMap\n:LinkedHashMap<Calendar,Integer>" as MAP
 participant "FileUtils" as FILEUTILS
 
 
@@ -68,14 +68,14 @@ FULLYDATA -> VACADMIN : vaccine = getVaccine()
 activate VACADMIN
 deactivate VACADMIN
 
-FULLYDATA -> VACADMIN : dose = getDose()
+FULLYDATA -> VACADMIN : dose = getDoseNumber()
 activate VACADMIN
 deactivate VACADMIN
 
 FULLYDATA -> VACCINE : fullyVaccinated =  checkUserFullyVaccinated(snsUserAge,dose)
 activate VACCINE
 
-VACCINE -> VACCINE : adminProcByAge = getAdminProc(snsUserAge)
+VACCINE -> VACCINE : adminProcByAge = getAdministrationProcessForGivenAge(snsUserAge)
 activate VACCINE
 deactivate VACCINE
 
@@ -88,12 +88,6 @@ activate DI_LIST
 deactivate DI_LIST
 deactivate VACCINE
 deactivate FULLYDATA
-
-opt fullyVaccinated == true
-FULLYDATA -> FULLYDATA : nOfFullyVaccinated += 1
-activate FULLYDATA
-deactivate FULLYDATA
-end
 end
 
 FULLYDATA -> MAP : put(day, nOfFullyVaccinated)
@@ -103,10 +97,23 @@ deactivate MAP
 end
 
 deactivate FULLYDATA
+deactivate CTRL
 
-CTRL -> FILEUTILS : saveData(fileName)
+UI -> CTRL : dataMap = saveData(fileName)
+activate CTRL
+
+CTRL -> CTRL : content = exportFileString()
+activate CTRL
+deactivate CTRL
+
+CTRL -> FILEUTILS : writeTofile(fileName,content)
 activate FILEUTILS
 deactivate FILEUTILS
+
+deactivate CTRL
+
+UI -> CTRL : dataMap = getData()
+activate CTRL
 deactivate CTRL
 
 UI --> COORDINATOR : shows center statistics and exports to CSV file
