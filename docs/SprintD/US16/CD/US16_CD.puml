@@ -165,9 +165,9 @@ package core {
 
   package controllers {
     class AnalyseCenterPerformanceController {
-      +getCategories()
-      +CheckWaitingRoom(ref,designation,informalDesc,technicalDesc,duration,cost,categoryId)
-      +saveTask()
+      - employeeSession: EmployeeSession
+      
+      +AnalyseCenterPerformanceController(day,interval)
     }
   }
 

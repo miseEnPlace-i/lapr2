@@ -19,6 +19,9 @@ public class ListUsersInWaitingRoomController {
     this.nurseSession = nurseSession;
   }
 
+  /**
+   * @return a list of ArrivalDTOs representing the users in the waiting room
+   */
   public List<ArrivalDTO> getWaitingRoomListFromNurseCenter() {
     VaccinationCenter vaccinationCenter = nurseSession.getVaccinationCenter();
 
