@@ -76,7 +76,6 @@ public class FullyVaccinatedData {
    * @return hashMap of all the data needed to do the statistics
    */
   public LinkedHashMap<Calendar, Integer> getFullyVaccinatedUsersPerDayMap() {
-
     long nOfDaysBetween = getDaysBetweenTwoDates();
     LinkedHashMap<Calendar, Integer> result = new LinkedHashMap<>();
 

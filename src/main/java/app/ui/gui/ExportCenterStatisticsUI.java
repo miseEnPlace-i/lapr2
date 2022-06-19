@@ -133,6 +133,9 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
 
     CategoryAxis xAxis = new CategoryAxis();
     NumberAxis yAxis = new NumberAxis();
+    yAxis.setMinorTickVisible(false);
+    yAxis.setTickUnit(1);
+
     xAxis.setLabel("Days");
     yAxis.setLabel("Number of Fully Vaccinated Users");
 
@@ -192,6 +195,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
       dialog.show();
       dialog.setMinWidth(SCENE_WIDTH);
       dialog.setMinHeight(SCENE_HEIGHT);
+      dialog.setMaxHeight(SCENE_HEIGHT);
 
       close.setOnAction(response -> {
         dialog.close();

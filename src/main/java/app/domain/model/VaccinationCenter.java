@@ -33,7 +33,6 @@ public abstract class VaccinationCenter implements Serializable {
   private CenterEventList eventList;
   private List<VaccineAdministration> vaccineAdministrationList;
 
-
   /**
    * Constructor for the Vaccination Center
    * 
@@ -406,8 +405,6 @@ public abstract class VaccinationCenter implements Serializable {
     this.vaccineAdministrationList.add(vaccineAdministration);
   }
 
-
-
   /**
    * @return List<VaccineAdministration> list of vaccine administration from yesterday
    */
@@ -416,11 +413,9 @@ public abstract class VaccinationCenter implements Serializable {
     Calendar yesterday = getDateWithoutTime(Calendar.getInstance());
     yesterday.add(Calendar.DATE, -1);
 
-    for (int i = 0; i < this.vaccineAdministrationList.size(); i++) {
-      if (getDateWithoutTime(this.vaccineAdministrationList.get(i).getDate()).equals(yesterday)) {
-        subList.add(this.vaccineAdministrationList.get(i));
-      }
-    }
+    for (int i = 0; i < this.vaccineAdministrationList.size(); i++)
+      if (getDateWithoutTime(this.vaccineAdministrationList.get(i).getDate()).equals(yesterday)) subList.add(this.vaccineAdministrationList.get(i));
+
     return subList;
   }
 
@@ -437,11 +432,9 @@ public abstract class VaccinationCenter implements Serializable {
   public List<VaccineAdministration> getVacAdminDayList(Calendar day) {
     List<VaccineAdministration> vacAdminPerDay = new ArrayList<>();
 
-    for (VaccineAdministration vaccineAdministration : vaccineAdministrationList) {
-      if (generateKeyFromDate(vaccineAdministration.getDate()).equals(generateKeyFromDate(day))) {
-        vacAdminPerDay.add(vaccineAdministration);
-      }
-    }
+    for (VaccineAdministration vaccineAdministration : vaccineAdministrationList)
+      if (generateKeyFromDate(vaccineAdministration.getDate()).equals(generateKeyFromDate(day))) vacAdminPerDay.add(vaccineAdministration);
+
     return vacAdminPerDay;
   }
 
