@@ -109,7 +109,6 @@ activate FILEUTILS
 deactivate FILEUTILS
 deactivate CTRL
 
-UI --> COORDINATOR : informs operation success
 UI --> COORDINATOR : shows center statistics and exports to CSV file
 
 deactivate COORDINATOR 

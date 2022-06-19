@@ -6,17 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
-import app.domain.model.Address;
-import app.domain.model.AdminProcess;
-import app.domain.model.Company;
-import app.domain.model.DoseInfo;
-import app.domain.model.Employee;
-import app.domain.model.FullyVaccinatedData;
-import app.domain.model.SNSUser;
-import app.domain.model.VaccinationCenter;
-import app.domain.model.Vaccine;
-import app.domain.model.VaccineAdministration;
-import app.domain.model.VaccineType;
 import app.domain.model.store.EmployeeStore;
 import app.domain.model.store.SNSUserStore;
 import app.domain.model.store.VaccinationCenterStore;
@@ -59,13 +48,14 @@ public class FullyVaccinatedDataTest {
         this.vacStore = company.getVaccineStore();
         this.vtechStore = company.getVaccineTechnologyStore();
 
-        this.snsUser =
-            snsUserStore.createSNSUser("00000000", "123456789", "name", Calendar.getInstance().getTime(), Gender.MALE, "+351212345678", "s@user.com", new Address("street", 1, "10-10", "city"));
+        this.snsUser = snsUserStore.createSNSUser("00000000", "123456789", "name", Calendar.getInstance().getTime(), Gender.MALE, "+351212345678", "s@user.com",
+                new Address("street", 1, "10-10", "city"));
         this.snsUserStore.saveSNSUser(snsUser);
 
-        Employee emp = empStore.createEmployee("Name", "+351916919268", "c1@user.com", new Address("street", 1, "10-10", "city"), "15542404", Constants.ROLE_COORDINATOR);
+        Employee emp = empStore.createEmployee("Name", "+351916919268", "c1@user.com", new Address("street", 1, "10-10", "city"), "15542404",
+                Constants.ROLE_COORDINATOR);
         this.empStore.saveEmployee(emp);
-        
+
 
         this.vtechStore.addVaccineTechnology("M_RNA_TECHNOLOGY");
 
@@ -96,8 +86,8 @@ public class FullyVaccinatedDataTest {
         this.vacStore.saveVaccine(vac2);
 
 
-        this.center1 = vcStore.createHealthCareCenter("Centro Vacinação de Teste", new Address("street", 1, "10-10", "city"), "test@gmail.com", "+351212345678", "+351212345679",
-        "http://www.test.com", "20:00", "21:00", 7, 5, emp, "ages", "ags");
+        this.center1 = vcStore.createHealthCareCenter("Centro Vacinação de Teste", new Address("street", 1, "10-10", "city"), "test@gmail.com", "+351212345678",
+                "+351212345679", "http://www.test.com", "20:00", "21:00", 7, 5, emp, "ages", "ags");
         this.vcStore.saveVaccinationCenter(this.center1);
     }
 
@@ -127,7 +117,9 @@ public class FullyVaccinatedDataTest {
         assertEquals(dataExpected, data);
     }
 
-    //ensures that getFullyVaccinatedUsersPerDayMap checks if it is the last dose for the admin process for user's age
+    /**
+     * Ensures that getFullyVaccinatedUsersPerDayMap checks if it is the last dose for the admin process for user's age
+     */
     @Test
     public void ensureGetFullyVaccinatedUsersPerDayMapWorksForNotLastDoseInAdminProcAge() {
         Calendar date1 = Calendar.getInstance();
@@ -149,7 +141,9 @@ public class FullyVaccinatedDataTest {
         assertEquals(dataExpected, data);
     }
 
-    //ensures that getFullyVaccinatedUsersPerDayMap doesn't accept invalid date intervals
+    /**
+     * ensures that getFullyVaccinatedUsersPerDayMap doesn't accept invalid date intervals
+     */
     @Test(expected = IllegalArgumentException.class)
     public void ensureGetFullyVaccinatedUsersPerDayMapWorksDoesNotAcceptInvalidInterval() {
         Calendar date1 = Calendar.getInstance();
@@ -161,7 +155,7 @@ public class FullyVaccinatedDataTest {
         new FullyVaccinatedData("path", date2, date1, center1);
     }
 
-    //ensures that getFullyVaccinatedUsersPerDayMap doesn't accept future date intervals
+    // ensures that getFullyVaccinatedUsersPerDayMap doesn't accept future date intervals
     @Test(expected = IllegalArgumentException.class)
     public void ensureGetFullyVaccinatedUsersPerDayMapWorksDoesNotAcceptFutureDateInterval() {
         Calendar date1 = Calendar.getInstance();
