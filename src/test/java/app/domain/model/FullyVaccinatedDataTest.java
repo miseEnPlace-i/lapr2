@@ -91,11 +91,17 @@ public class FullyVaccinatedDataTest {
         this.vcStore.saveVaccinationCenter(this.center1);
     }
 
+    /**
+     * Checks that it is not possible to instantiate FullyVaccinatedData with null values
+     */
     @Test(expected = IllegalArgumentException.class)
     public void ensureNullArgumentsAreNotAllowed() {
         new FullyVaccinatedData(null, null, null, null);
     }
 
+    /**
+     * Checks that getFullyVaccinatedUsersPerDayMap works
+     */
     @Test
     public void ensureGetFullyVaccinatedUsersPerDayMapWorks() {
         Calendar date1 = Calendar.getInstance();
@@ -110,7 +116,7 @@ public class FullyVaccinatedDataTest {
 
         center1.addVaccineAdministrationToList(new VaccineAdministration(snsUser, vac1, "AAAAA-11", 2, center1, date1));
 
-        FullyVaccinatedData fullyVaccinatedData = new FullyVaccinatedData("path", date1, date2, center1);
+        FullyVaccinatedData fullyVaccinatedData = new FullyVaccinatedData("name", date1, date2, center1);
 
         Map<Calendar, Integer> data = fullyVaccinatedData.getFullyVaccinatedUsersPerDayMap();
 
@@ -134,7 +140,7 @@ public class FullyVaccinatedDataTest {
 
         center1.addVaccineAdministrationToList(new VaccineAdministration(snsUser, vac2, "AAAAA-11", 1, center1, date1));
 
-        FullyVaccinatedData fullyVaccinatedData = new FullyVaccinatedData("path", date1, date2, center1);
+        FullyVaccinatedData fullyVaccinatedData = new FullyVaccinatedData("name", date1, date2, center1);
 
         Map<Calendar, Integer> data = fullyVaccinatedData.getFullyVaccinatedUsersPerDayMap();
 
@@ -142,7 +148,7 @@ public class FullyVaccinatedDataTest {
     }
 
     /**
-     * ensures that getFullyVaccinatedUsersPerDayMap doesn't accept invalid date intervals
+     * Ensures that getFullyVaccinatedUsersPerDayMap doesn't accept invalid date intervals
      */
     @Test(expected = IllegalArgumentException.class)
     public void ensureGetFullyVaccinatedUsersPerDayMapWorksDoesNotAcceptInvalidInterval() {
@@ -152,10 +158,12 @@ public class FullyVaccinatedDataTest {
         Calendar date2 = Calendar.getInstance();
         date2.add(Calendar.DAY_OF_MONTH, -1);
 
-        new FullyVaccinatedData("path", date2, date1, center1);
+        new FullyVaccinatedData("name", date2, date1, center1);
     }
 
-    // ensures that getFullyVaccinatedUsersPerDayMap doesn't accept future date intervals
+    /*
+     * Ensures that getFullyVaccinatedUsersPerDayMap doesn't accept future date intervals
+     */
     @Test(expected = IllegalArgumentException.class)
     public void ensureGetFullyVaccinatedUsersPerDayMapWorksDoesNotAcceptFutureDateInterval() {
         Calendar date1 = Calendar.getInstance();
@@ -164,7 +172,7 @@ public class FullyVaccinatedDataTest {
         Calendar date2 = Calendar.getInstance();
         date2.add(Calendar.DAY_OF_MONTH, 2);
 
-        new FullyVaccinatedData("path", date1, date2, center1);
+        new FullyVaccinatedData("name", date1, date2, center1);
     }
 
 }

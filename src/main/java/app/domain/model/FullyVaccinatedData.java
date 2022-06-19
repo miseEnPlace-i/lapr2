@@ -22,15 +22,15 @@ public class FullyVaccinatedData {
   private boolean fullyVaccinated;
 
   /**
-   * Constructor of the class
+   * FullyVaccinatedData Constructor
    * 
-   * @param path the file path
+   * @param fileName the file name
    * @param start the start date of the statistics
    * @param end the end date of the statistics
    * @param center the coordinator center of the statistics
    */
-  public FullyVaccinatedData(String path, Calendar start, Calendar end, VaccinationCenter center) {
-    validatePath(path);
+  public FullyVaccinatedData(String fileName, Calendar start, Calendar end, VaccinationCenter center) {
+    validateName(fileName);
     validateDateInterval(start, end);
     validateCenter(center);
 
@@ -44,7 +44,7 @@ public class FullyVaccinatedData {
    * 
    * @param path
    */
-  private void validatePath(String path) {
+  private void validateName(String path) {
     if (path == null || path == "") throw new IllegalArgumentException("File path cannot be null or empty!");
   }
 
