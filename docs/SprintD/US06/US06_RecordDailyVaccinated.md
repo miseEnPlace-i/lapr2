@@ -57,7 +57,7 @@ DGS wants to record daily the total number of people vaccinated in each vaccinat
 | Step 1 | ... instantiating ExportDailyVaccinatedTask? | Company | Creator |
 |  | ... instantiating Timer? | Company | Creator |
 |  | ... scheduling task operation? | Company | IE: knows necessary data for scheduling |
-|  | ... call task at time specified? | Timer | IE: know when to call task |
+|  | ... call task at time specified? | Timer | Pure Fabrication |
 |  | ... export daily vaccinated? | ExportDailyVaccinatedTask | IE: knows data necessary to do it |
 |  | ... get list of vaccination centers? | VaccinationCenterStore | IE/HC/LC: knows all vaccine centers |
 |  | ... get list of vaccine types? | VaccineTypeStore | IE/HC/LC: knows all vaccine types |
@@ -83,8 +83,10 @@ According to the taken rationale, the conceptual classes promoted to software cl
 - Vaccine
 - VaccineAdministration
 - ExportDailyVaccinatedTask
-- Timer
 - FileUtils
+
+Other software classes (i.e. Pure Fabrication) identified:
+- Timer
 
 ## 3.2. Sequence Diagram (SD)
 
@@ -96,18 +98,24 @@ According to the taken rationale, the conceptual classes promoted to software cl
 
 # 4. Tests
 
-_In this section, it is suggested to systematize how the tests were designed to allow a correct measurement of requirements fulfilling._
 
-**_DO NOT COPY ALL DEVELOPED TESTS HERE_**
+**VACCINATION CENTER TESTS**
 
-**Test 1:** Check that it is not possible to create an instance of the Example class with null values.
+**Test 1:** Check that if there are not any vaccine administration registered getVacAdminFromYesterdayList returns an empty list
 
-    @Test(expected = IllegalArgumentException.class)
-    	public void ensureNullIsNotAllowed() {
-    	Exemplo instance = new Exemplo(null, null);
+    @Test
+    public void ensureEmptyListWorks() {
+        VaccinationCenter center = new HealthCareCenter("Centro Vacinação Porto", new Address("street", 1, "11-11", "city"), "vacinacaoporto@gmail.com",
+            "+351912345678", "+351223456799", "https://www.centrovacinaoporto.com", openingHours, closingHours, slot, this.coordinator, "a", "a");
+        List<VaccineAdministration> emptyList = new ArrayList<>();
+
+        assertEquals(emptyList, center.getVacAdminFromYesterdayList());
     }
 
-_It is also recommended to organize this content by subsections._
+**VACCINATION CENTER TESTS**
+
+**Test 1:** Check that if there are not any vaccine administration exportation works
+
 
 # 5. Construction (Implementation)
 
