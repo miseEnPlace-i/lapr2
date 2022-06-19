@@ -124,7 +124,7 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
         fileName = FileUtils.sanitizeFileName(txtFileName.getText());
 
         ctrl.createFullyVaccinatedData(fileName, getStartDate(), getEndDate());
-        ctrl.generateFullyVaccinatedUsersInterval();
+        ctrl.generateFullyVaccinatedUsersData();
 
         if (ctrl.saveData(fileName)) {
           checkData();
@@ -141,29 +141,6 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
     } catch (NullPointerException e) {
       displayErrorAlertOperation();
     }
-  }
-
-  private FlowPane generatePaneWithData(String title, String data) {
-    Label titleLbl = new Label(title);
-    titleLbl.setAlignment(Pos.CENTER);
-    Label statistics = new Label(data);
-
-    ScrollPane container = new ScrollPane(statistics);
-    container.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
-    container.setPadding(new Insets(8, 8, 8, 8));
-    container.setPrefWidth(525);
-    container.setPrefHeight(350);
-    container.setMaxWidth(Double.MAX_VALUE);
-
-    FlowPane containerData = new FlowPane(titleLbl, container);
-    containerData.setOrientation(Orientation.HORIZONTAL);
-    containerData.setHgap(8);
-    containerData.setVgap(8);
-    containerData.setMaxWidth(Double.MAX_VALUE);
-    containerData.setAlignment(Pos.CENTER);
-    containerData.setPadding(new Insets(8, 8, 8, 8));
-
-    return containerData;
   }
 
   private LineChart generateChart(LinkedHashMap<Calendar, Integer> data) {
@@ -202,8 +179,6 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
       dialog.setTitle("Center Export Statistics");
       dialog.setWidth(SCENE_WIDTH);
       dialog.setHeight(SCENE_HEIGHT);
-
-      FlowPane inputListContainer = generatePaneWithData("Data from: " + lblCenterName.getText(), ctrl.dataToString());
 
       VBox vbox = new VBox(30);
 
