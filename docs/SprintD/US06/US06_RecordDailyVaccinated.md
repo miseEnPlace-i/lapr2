@@ -54,33 +54,45 @@ DGS wants to record daily the total number of people vaccinated in each vaccinat
 
 | Interaction ID | Question: Which class is responsible for... | Answer | Justification (with patterns) |
 | :------------- | :------------------------------------------ | :----- | :---------------------------- |
-| Step 1         |                                             |        |                               |
+| Step 1 | ... instantiating ExportDailyVaccinatedTask? | Company | Creator |
+|  | ... instantiating Timer? | Company | Creator |
+|  | ... scheduling task operation? | Company | IE: knows necessary data for scheduling |
+|  | ... call task at time specified? | Timer | IE: know when to call task |
+|  | ... export daily vaccinated? | ExportDailyVaccinatedTask | IE: knows data necessary to do it |
+|  | ... get list of vaccination centers? | VaccinationCenterStore | IE/HC/LC: knows all vaccine centers |
+|  | ... get list of vaccine types? | VaccineTypeStore | IE/HC/LC: knows all vaccine types |
+|  | ... get list of yesterday's vaccine administrations? | VaccinationCenter | IE: knows vaccine administration from center |
+|  | ... get the vaccine administered? | VaccineAdministration | IE: knows which vaccine was administered |
+|  | ...  get the vaccine type of the vaccine administered? | Vaccine | IE: has a vaccine type |
+|  | ...  get the description of the vaccine type? | VaccineType | IE: has a description |
+|  | ...  get the vaccine name? | Vaccine | IE: has a name |
+|  | ... create and write data to file? | FileUtils | IE: knows how write in files |
+
+
 
 
 ### Systematization
 
 According to the taken rationale, the conceptual classes promoted to software classes are:
 
-- Class1
-- Class2
-- Class3
-
-Other software classes (i.e. Pure Fabrication) identified:
-
-- xxxxUI
-- xxxxController
+- Company
+- VaccinationCenterStore
+- VaccineTypeStore
+- VaccinationCenter
+- VaccineType
+- Vaccine
+- VaccineAdministration
+- ExportDailyVaccinatedTask
+- Timer
+- FileUtils
 
 ## 3.2. Sequence Diagram (SD)
 
-_In this section, it is suggested to present an UML dynamic view stating the sequence of domain related software objects' interactions that allows to fulfill the requirement._
-
-![USXXX-SD](USXXX-SD.svg)
+![US06-SD](./SD/US06_SD.svg)
 
 ## 3.3. Class Diagram (CD)
 
-_In this section, it is suggested to present an UML static view representing the main domain related software classes that are involved in fulfilling the requirement as well as and their relations, attributes and methods._
-
-![USXXX-CD](USXXX-CD.svg)
+![US06-CD](./CD/US06_CD.svg)
 
 # 4. Tests
 
@@ -99,14 +111,13 @@ _It is also recommended to organize this content by subsections._
 
 # 5. Construction (Implementation)
 
-_In this section, it is suggested to provide, if necessary, some evidence that the construction/implementation is in accordance with the previously carried out design. Furthermore, it is recommeded to mention/describe the existence of other relevant (e.g. configuration) files and highlight relevant commits._
+_In this section, it is suggested to provide, if necessary, some evidence that thye construction/implementation is in accordance with the previously carried out design. Furthermore, it is recommeded to mention/describe the existence of other relevant (e.g. configuration) files and highlight relevant commits._
 
 _It is also recommended to organize this content by subsections._
 
 # 6. Integration and Demo
 
-_In this section, it is suggested to describe the efforts made to integrate this functionality with the other features of the system._
 
 # 7. Observations
 
-_In this section, it is suggested to present a critical perspective on the developed work, pointing, for example, to other alternatives and or future related work._
+The properties defined in the Sequence Diagram can be changed by the administrator.
