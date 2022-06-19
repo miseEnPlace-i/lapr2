@@ -80,13 +80,14 @@ public class ExportCenterStatisticsControllerTest {
         endDate = Calendar.getInstance();
         endDate.add(Calendar.DAY_OF_MONTH, -9);
 
-         this.snsUser =
-            snsUserStore.createSNSUser("00000000", "123456789", "name", Calendar.getInstance().getTime(), Gender.MALE, "+351212345678", "s@user.com", new Address("street", 1, "10-10", "city"));
+        this.snsUser = snsUserStore.createSNSUser("00000000", "123456789", "name", Calendar.getInstance().getTime(), Gender.MALE, "+351212345678", "s@user.com",
+                new Address("street", 1, "10-10", "city"));
         this.snsUserStore.saveSNSUser(snsUser);
 
-        Employee emp = empStore.createEmployee("Name", "+351916919268", "c1@user.com", new Address("street", 1, "10-10", "city"), "15542404", Constants.ROLE_COORDINATOR);
+        Employee emp = empStore.createEmployee("Name", "+351916919268", "c1@user.com", new Address("street", 1, "10-10", "city"), "15542404",
+                Constants.ROLE_COORDINATOR);
         this.empStore.saveEmployee(emp);
-        
+
 
         this.vtechStore.addVaccineTechnology("M_RNA_TECHNOLOGY");
 
@@ -117,8 +118,8 @@ public class ExportCenterStatisticsControllerTest {
         this.vacStore.saveVaccine(vac2);
 
 
-        this.center = vcStore.createHealthCareCenter("Centro Vacinação de Teste", new Address("street", 1, "10-10", "city"), "test@gmail.com", "+351212345678", "+351212345679",
-        "http://www.test.com", "20:00", "21:00", 7, 5, emp, "ages", "ags");
+        this.center = vcStore.createHealthCareCenter("Centro Vacinação de Teste", new Address("street", 1, "10-10", "city"), "test@gmail.com", "+351212345678",
+                "+351212345679", "http://www.test.com", "20:00", "21:00", 7, 5, emp, "ages", "ags");
         this.vcStore.saveVaccinationCenter(this.center);
 
         EmployeeSession session = new EmployeeSession();
@@ -170,13 +171,13 @@ public class ExportCenterStatisticsControllerTest {
         LinkedHashMap<Calendar, Integer> dataExpected = new LinkedHashMap<Calendar, Integer>();
         dataExpected.put(startDate, 1);
         dataExpected.put(endDate, 0);
-        
+
         center.addVaccineAdministrationToList(new VaccineAdministration(snsUser, vac1, "AAAAA-11", 2, center, startDate));
 
         ctrl.createFullyVaccinatedData("Path.csv", startDate, endDate);
 
-        ctrl.generateFullyVaccinatedUsersInterval();
-       
+        ctrl.generateFullyVaccinatedUsersData();
+
         String expected = "Date;NumberOfFullyVaccinatedUsers\n";
 
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/YYYY");
@@ -190,15 +191,15 @@ public class ExportCenterStatisticsControllerTest {
         LinkedHashMap<Calendar, Integer> dataExpected = new LinkedHashMap<Calendar, Integer>();
         dataExpected.put(startDate, 1);
         dataExpected.put(endDate, 0);
-        
+
         center.addVaccineAdministrationToList(new VaccineAdministration(snsUser, vac1, "AAAAA-11", 2, center, startDate));
 
         ctrl.createFullyVaccinatedData("Path.csv", startDate, endDate);
 
-        ctrl.generateFullyVaccinatedUsersInterval();
+        ctrl.generateFullyVaccinatedUsersData();
 
-        ctrl.saveData("Path.csv"); 
-        
+        ctrl.saveData("Path.csv");
+
         String expected = "Date;NumberOfFullyVaccinatedUsers\n";
 
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/YYYY");
@@ -209,21 +210,21 @@ public class ExportCenterStatisticsControllerTest {
         assertEquals(expected, Files.readString(expectedFilepath));
     }
 
-    //ensures that saveData checks if it is the last dose for the admin process for user's age
+    // ensures that saveData checks if it is the last dose for the admin process for user's age
     @Test
     public void ensureSaveDataWorksForNotLastDoseInAdminProcAge() throws IOException {
         LinkedHashMap<Calendar, Integer> dataExpected = new LinkedHashMap<Calendar, Integer>();
         dataExpected.put(startDate, 1);
         dataExpected.put(endDate, 0);
-        
+
         center.addVaccineAdministrationToList(new VaccineAdministration(snsUser, vac1, "AAAAA-11", 1, center, startDate));
 
         ctrl.createFullyVaccinatedData("Path.csv", startDate, endDate);
 
-        ctrl.generateFullyVaccinatedUsersInterval();
+        ctrl.generateFullyVaccinatedUsersData();
 
-        ctrl.saveData("Path.csv"); 
-        
+        ctrl.saveData("Path.csv");
+
         String expected = "Date;NumberOfFullyVaccinatedUsers\n";
 
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/YYYY");
