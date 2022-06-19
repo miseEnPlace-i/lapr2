@@ -19,7 +19,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#onKeyPressed" prefHeight="550.0" prefWidth="900.0" scaleShape="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.AnalyseCenterPerformanceUI">
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="550.0" prefWidth="900.0" scaleShape="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.AnalyseCenterPerformanceUI">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="120.0" />
   </columnConstraints>
@@ -84,7 +84,7 @@
       </AnchorPane>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="900.0" spacing="16.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
          <children>
-            <DatePicker fx:id="dtpDate" onAction="#checkAnalyseButtonEnable" prefHeight="25.0" prefWidth="320.0" promptText="Date" />
+            <DatePicker fx:id="dtpDate" onAction="#checkAnalyseButtonEnable" onInputMethodTextChanged="#checkAnalyseButtonEnable" onKeyPressed="#checkAnalyseButtonEnable" onKeyTyped="#checkAnalyseButtonEnable" prefHeight="25.0" prefWidth="320.0" promptText="Date" />
             <TextField fx:id="txtInterval" maxWidth="-Infinity" onKeyTyped="#checkAnalyseButtonEnable" prefHeight="25.0" prefWidth="320.0" promptText="Interval" />
          </children>
       </VBox>

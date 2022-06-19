@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.Region;
 
 public class Utils {
   // Private constructor to prevent instantiation
@@ -69,6 +70,7 @@ public class Utils {
   public static void showHelp(String title, HelpText text) {
     Alert alert = new Alert(AlertType.INFORMATION);
     alert.setTitle(title);
+    alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
     alert.setHeaderText(null);
     alert.setContentText(text.toString());
 

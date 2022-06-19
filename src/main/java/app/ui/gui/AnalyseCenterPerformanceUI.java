@@ -32,8 +32,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -79,11 +77,6 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
   private boolean isValidInput() {
     if (dtpDate.getValue() != null && !StringUtils.isEmpty(txtInterval.getText())) return true;
     else return false;
-  }
-
-  @FXML
-  void onKeyPressed(KeyEvent event) {
-    if (event.getCode() == KeyCode.ENTER) analyse();
   }
 
   @FXML
