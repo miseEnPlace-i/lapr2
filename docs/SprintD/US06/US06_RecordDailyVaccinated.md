@@ -99,7 +99,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 # 4. Tests
 
 
-**VACCINATION CENTER TESTS**
+**VaccinationCenter Tests**
 
 **Test 1:** Check that if there are not any vaccine administration registered getVacAdminFromYesterdayList returns an empty list
 
@@ -112,9 +112,27 @@ Other software classes (i.e. Pure Fabrication) identified:
         assertEquals(emptyList, center.getVacAdminFromYesterdayList());
     }
 
-**VACCINATION CENTER TESTS**
+**ExportDailyVaccinated Tests**
 
-**Test 1:** Check that if there are not any vaccine administration exportation works
+**Test 2:** Check that if there are not any vaccine administration exportation works
+
+    @Test
+    public void ensureTaskDoesNotExportWithNoVacAdmin() throws IOException {
+        String expected = "Center;" + vacType1.getDescription() + ";" + vacType2.getDescription() + "\n" + center1.getName() + ";0;0\n" + center2.getName() + ";0;0\n";
+        ExportDailyVaccinatedTask task = new ExportDailyVaccinatedTask("out\\test", ";".charAt(0), vcStore, vtStore);
+        task.run();
+
+        
+        Calendar yesterday = Calendar.getInstance();
+        yesterday.add(Calendar.DATE, -1);
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        Path expectedFilepath = Path.of("out\\test" + format.format(yesterday.getTime()) + ".csv");
+
+        System.out.println(expected);
+        System.out.println(Files.readString(expectedFilepath));
+
+        assertEquals(expected, Files.readString(expectedFilepath));
+    }
 
 
 # 5. Construction (Implementation)
