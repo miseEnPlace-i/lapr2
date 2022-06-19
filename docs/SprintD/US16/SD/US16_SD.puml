@@ -3,20 +3,18 @@ autonumber
 
 actor "Center Coordinator" AS COORD
 participant ":AnalyseCenterPerformanceUI" as UI
-participant ":App" as APP
 
 activate COORD
 activate UI
 COORD -> UI : asks to analyse the center performance for a given day in the coordinator center
-UI -> APP : getInstance()
-activate APP
-deactivate APP
-UI -> APP : company=getCompany()
-activate APP
-deactivate APP
 create ":AnalyseCenterPerformanceController" as CTRL
 
-UI --> CTRL : create(company,session)
+ref over UI 
+**coordinatorSession** is obtained through the coordinatorSession
+See here: CoordinatorLogin_SD.svg
+end ref
+
+UI --> CTRL : create(session)
 UI --> COORD : requests data (date & time interval)
 deactivate UI
 COORD -> UI : types the requested data
@@ -104,8 +102,6 @@ deactivate MAXSS
 PERF -> MAXSS : getTimeElapsed()
 activate MAXSS
 deactivate MAXSS
-|||
-VACC --> CTRL : centerPerformance
 
 deactivate VACC
 deactivate CTRL

@@ -8,63 +8,70 @@ import java.util.Calendar;
  * @author Ricardo Moreira <1211285@isep.ipp.pt>
  */
 public class LegacyData {
-    private SNSUser snsUser;
-    private Vaccine vaccine;
-    private int doseNumber;
-    private String lotNumber;
-    private Calendar arrivalDate;
-    private Calendar scheduledDate;
-    private Calendar administrationDate;
-    private Calendar departuredDate;
-    private VaccinationCenter center;
+  private SNSUser snsUser;
+  private Vaccine vaccine;
+  private int doseNumber;
+  private String lotNumber;
+  private Calendar arrivalDate;
+  private Calendar scheduledDate;
+  private Calendar administrationDate;
+  private Calendar departureDate;
+  private VaccinationCenter center;
 
-    public LegacyData(SNSUser snsUser, Vaccine vaccine, int doseNumber, String lotNumber, Calendar arrivalDate, Calendar scheduledDate,
-            Calendar administrationDate, Calendar departuredDate, VaccinationCenter center) {
-        this.snsUser = snsUser;
-        this.vaccine = vaccine;
-        this.doseNumber = doseNumber;
-        this.lotNumber = lotNumber;
-        this.arrivalDate = arrivalDate;
-        this.scheduledDate = scheduledDate;
-        this.administrationDate = administrationDate;
-        this.departuredDate = departuredDate;
-        this.center = center;
-    }
+  public LegacyData(SNSUser snsUser, Vaccine vaccine, int doseNumber, String lotNumber, Calendar arrivalDate, Calendar scheduledDate,
+      Calendar administrationDate, Calendar departureDate, VaccinationCenter center) {
+    this.snsUser = snsUser;
+    this.vaccine = vaccine;
+    this.doseNumber = doseNumber;
+    this.lotNumber = lotNumber;
+    this.arrivalDate = arrivalDate;
+    this.scheduledDate = scheduledDate;
+    this.administrationDate = administrationDate;
+    this.departureDate = departureDate;
+    this.center = center;
+    validate();
+  }
 
-    // getters
-    public SNSUser getSNSUser() {
-        return snsUser;
-    }
+  private void validate() {
+    if (snsUser == null || vaccine == null || doseNumber < 0 || lotNumber == null || arrivalDate == null || scheduledDate == null || administrationDate == null
+        || departureDate == null || center == null)
+      throw new IllegalArgumentException();
+  }
 
-    public Vaccine getVaccine() {
-        return vaccine;
-    }
+  // getters
+  public SNSUser getSNSUser() {
+    return snsUser;
+  }
 
-    public int getDoseNumber() {
-        return doseNumber;
-    }
+  public Vaccine getVaccine() {
+    return vaccine;
+  }
 
-    public String getLotNumber() {
-        return lotNumber;
-    }
+  public int getDoseNumber() {
+    return doseNumber;
+  }
 
-    public Calendar getArrivalDate() {
-        return arrivalDate;
-    }
+  public String getLotNumber() {
+    return lotNumber;
+  }
 
-    public Calendar getScheduledDate() {
-        return scheduledDate;
-    }
+  public Calendar getArrivalDate() {
+    return arrivalDate;
+  }
 
-    public Calendar getAdministrationDate() {
-        return administrationDate;
-    }
+  public Calendar getScheduledDate() {
+    return scheduledDate;
+  }
 
-    public Calendar getDeparturedDate() {
-        return departuredDate;
-    }
+  public Calendar getAdministrationDate() {
+    return administrationDate;
+  }
 
-    public VaccinationCenter getCenter() {
-        return center;
-    }
+  public Calendar getDepartureDate() {
+    return departureDate;
+  }
+
+  public VaccinationCenter getCenter() {
+    return center;
+  }
 }

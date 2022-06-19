@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Properties;
 import org.apache.commons.lang3.StringUtils;
 import app.controller.AnalyseCenterPerformanceController;
-import app.controller.App;
 import app.domain.model.CenterPerformance;
 import app.domain.shared.Constants;
 import app.service.PropertiesUtils;
@@ -66,7 +65,7 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
 
   public void setEmployeeSession(EmployeeSession session) {
     this.employeeSession = session;
-    this.ctrl = new AnalyseCenterPerformanceController(App.getInstance().getCompany(), employeeSession);
+    this.ctrl = new AnalyseCenterPerformanceController(employeeSession);
   }
 
   @FXML
@@ -97,6 +96,13 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
 
     interval = Integer.parseInt(txtInterval.getText());
 
+    if (interval <= 0) {
+      Utils.showError("Non valid input!", "Interval must be greater than 0.");
+      txtInterval.setText("");
+      txtInterval.requestFocus();
+      return;
+    }
+
     try {
       CenterPerformance performance = ctrl.analyseCenterPerformance(day, interval);
 
@@ -115,6 +121,7 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
   private void resetFields() {
     dtpDate.setValue(null);
     txtInterval.setText("");
+    dtpDate.requestFocus();
   }
 
   private void loadDialog(CenterPerformance performance) {
@@ -183,7 +190,7 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
     for (Integer value : differences) {
       String intervalString = "[" + tempInterval.toString() + " - ";
       tempInterval.addMinutes(interval);
-      intervalString += tempInterval.toString() + "]";
+      intervalString += tempInterval.toString() + "[";
       tempInterval.addMinutes(-interval);
 
       if (tempInterval.isBetweenExcludeRight(startingInterval, endingInterval))

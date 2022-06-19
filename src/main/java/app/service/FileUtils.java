@@ -1,12 +1,13 @@
 package app.service;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import app.utils.CustomScanner;
 
 /**
  * File Utils.
@@ -59,7 +60,7 @@ public class FileUtils {
   public static List<String> readFromFile(String filename) throws FileNotFoundException {
     File file = new File(filename);
     if (!file.exists()) throw new FileNotFoundException("This file does not exist.");
-    Scanner scanner = new Scanner(file);
+    CustomScanner scanner = new CustomScanner(new FileInputStream(file));
     List<String> lines = new ArrayList<String>();
 
     while (scanner.hasNextLine())
@@ -68,7 +69,6 @@ public class FileUtils {
     scanner.close();
 
     return lines;
-
   }
 
   /**

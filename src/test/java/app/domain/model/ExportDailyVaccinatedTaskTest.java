@@ -79,6 +79,24 @@ public class ExportDailyVaccinatedTaskTest {
     }
 
     @Test
+    public void ensureTaskDoesNotExportWithNoVacAdmin() throws IOException {
+        String expected = "Center;" + vacType1.getDescription() + ";" + vacType2.getDescription() + "\n" + center1.getName() + ";0;0\n" + center2.getName() + ";0;0\n";
+        ExportDailyVaccinatedTask task = new ExportDailyVaccinatedTask("out\\test", ";".charAt(0), vcStore, vtStore);
+        task.run();
+
+        
+        Calendar yesterday = Calendar.getInstance();
+        yesterday.add(Calendar.DATE, -1);
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        Path expectedFilepath = Path.of("out\\test" + format.format(yesterday.getTime()) + ".csv");
+
+        System.out.println(expected);
+        System.out.println(Files.readString(expectedFilepath));
+
+        assertEquals(expected, Files.readString(expectedFilepath));
+    }
+
+    @Test
     public void ensureTaskExportingCorrectly() throws IOException {
         Calendar yesterday = Calendar.getInstance();
         yesterday.add(Calendar.DATE, -1);
@@ -102,5 +120,5 @@ public class ExportDailyVaccinatedTaskTest {
         Path expectedFilepath = Path.of("out\\test" + format.format(yesterday.getTime()) + ".csv");
 
         assertEquals(expected, Files.readString(expectedFilepath));
-    }
+    } 
 }

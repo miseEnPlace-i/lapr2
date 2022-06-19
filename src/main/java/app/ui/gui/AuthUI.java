@@ -50,6 +50,7 @@ public class AuthUI implements Initializable, IGui {
 
       App.getInstance().restoreCompany();
       Platform.exit();
+      System.exit(0);
     }
   }
 

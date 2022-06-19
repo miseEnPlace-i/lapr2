@@ -9,9 +9,9 @@ participant "removeRecoveryRoomTask:RemoveRecoveryRoomTask" as removeRecoveryRoo
 participant "vaccineAdministration\n:VaccineAdministration" as vaccineAdministration
 participant "recoveryRoom\n:RecoveryRoom" as recoveryRoom
 participant "vaccinationCenter\n:VaccinationCenter" as vaccinationCenter
-participant ":UserNotificationMapper" as userNotificationMapper
-participant ":SenderFactory" as senderFactory
-participant ":Sender" as sender
+participant "UserNotificationMapper" as userNotificationMapper
+participant "SenderFactory" as senderFactory
+participant "Sender" as sender
 
 [o-> vaccineAdministrationList : setSmsSending(vaccineAdministration, recoveryPeriod)
 activate vaccineAdministrationList

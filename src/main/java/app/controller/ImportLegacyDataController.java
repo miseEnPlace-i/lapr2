@@ -36,6 +36,17 @@ public class ImportLegacyDataController {
     this.snsUserStore = this.company.getSNSUserStore();
   }
 
+  /**
+   * 
+   * @param filepath the path of the file to be imported
+   * @return a matrix representing the data imported
+   * @throws ClassNotFoundException if is not possible to convert the data to class
+   * @throws InstantiationException
+   * @throws IllegalAccessException
+   * @throws FileNotFoundException if the filepath is not valid
+   * @throws NoSuchMethodException
+   * @throws InvocationTargetException
+   */
   public List<String[]> read(String filepath)
       throws ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException, NoSuchMethodException, InvocationTargetException {
     CSVReader csvReader = new CSVReader(filepath);
@@ -60,13 +71,29 @@ public class ImportLegacyDataController {
     }
   }
 
-  public void sort(List<LegacyDataDTO> legacyDtoList, boolean isArrival, boolean isAsc) {
+  /**
+   * @param legacyDtoList the list of legacy data to be sorted
+   * @param isArrival true if the sorting is by arrival time, false if it is not
+   * @param isAsc true if the sorting is ascending, false if it is descending
+   * @return the time taken to sort the data
+   */
+  public double sort(List<LegacyDataDTO> legacyDtoList, boolean isArrival, boolean isAsc) {
     ISortStrategy sortStrategy = SortFactory.getSortStrategy();
     Comparator<LegacyDataDTO> comparator = isArrival ? new ArrivalCompare() : new DepartureCompare();
+
+    long startTime = System.nanoTime();
     sortStrategy.doSort(legacyDtoList, comparator);
+    long endTime = System.nanoTime();
+
     if (!isAsc) Collections.reverse(legacyDtoList);
+    return (endTime - startTime) / Math.pow(10, 6);
   }
 
+  /**
+   * Saves the data in the system.
+   * 
+   * @param legacyDtoList the list of legacy data to be imported
+   */
   public void save(List<LegacyDataDTO> legacyDtoList) {
     AppointmentScheduleList aptSchList = this.center.getAppointmentList();
     WaitingRoom waitingRoom = this.center.getWaitingRoom();

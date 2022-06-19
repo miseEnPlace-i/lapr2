@@ -46,83 +46,154 @@ DGS wants to record daily the total number of people vaccinated in each vaccinat
 
 ### 2.1. Relevant Domain Model Excerpt
 
-_In this section, it is suggested to present an excerpt of the domain model that is seen as relevant to fulfill this requirement._
-
-![USXXX-MD](USXXX-MD.svg)
-
-### 2.2. Other Remarks
-
-_Use this section to capture some aditional notes/remarks that must be taken into consideration into the design activity. In some case, it might be usefull to add other analysis artifacts (e.g. activity or state diagrams)._
+![US06-MD](./DM/US06_DM.svg)
 
 ## 3. Design - User Story Realization
 
 ### 3.1. Rationale
 
-**The rationale grounds on the SSD interactions and the identified input/output data.**
-
 | Interaction ID | Question: Which class is responsible for... | Answer | Justification (with patterns) |
 | :------------- | :------------------------------------------ | :----- | :---------------------------- |
-| Step 1         |                                             |        |                               |
-| Step 2         |                                             |        |                               |
-| Step 3         |                                             |        |                               |
-| Step 4         |                                             |        |                               |
-| Step 5         |                                             |        |                               |
-| Step 6         |                                             |        |                               |
-| Step 7         |                                             |        |                               |
-| Step 8         |                                             |        |                               |
-| Step 9         |                                             |        |                               |
-| Step 10        |                                             |        |                               |
+| Step 1 | ... instantiating ExportDailyVaccinatedTask? | Company | Creator |
+|  | ... instantiating Timer? | Company | Creator |
+|  | ... scheduling task operation? | Company | IE: knows necessary data for scheduling |
+|  | ... call task at time specified? | Timer | Pure Fabrication |
+|  | ... export daily vaccinated? | ExportDailyVaccinatedTask | IE: knows data necessary to do it |
+|  | ... get list of vaccination centers? | VaccinationCenterStore | IE/HC/LC: knows all vaccine centers |
+|  | ... get list of vaccine types? | VaccineTypeStore | IE/HC/LC: knows all vaccine types |
+|  | ... get list of yesterday's vaccine administrations? | VaccinationCenter | IE: knows vaccine administration from center |
+|  | ... get the vaccine administered? | VaccineAdministration | IE: knows which vaccine was administered |
+|  | ...  get the vaccine type of the vaccine administered? | Vaccine | IE: has a vaccine type |
+|  | ...  get the description of the vaccine type? | VaccineType | IE: has a description |
+|  | ...  get the vaccine name? | Vaccine | IE: has a name |
+|  | ... create and write data to file? | FileUtils | IE: knows how write in files |
+
+
+
 
 ### Systematization
 
 According to the taken rationale, the conceptual classes promoted to software classes are:
 
-- Class1
-- Class2
-- Class3
+- Company
+- VaccinationCenterStore
+- VaccineTypeStore
+- VaccinationCenter
+- VaccineType
+- Vaccine
+- VaccineAdministration
+- ExportDailyVaccinatedTask
+- FileUtils
 
 Other software classes (i.e. Pure Fabrication) identified:
-
-- xxxxUI
-- xxxxController
+- Timer
 
 ## 3.2. Sequence Diagram (SD)
 
-_In this section, it is suggested to present an UML dynamic view stating the sequence of domain related software objects' interactions that allows to fulfill the requirement._
-
-![USXXX-SD](USXXX-SD.svg)
+![US06-SD](./SD/US06_SD.svg)
 
 ## 3.3. Class Diagram (CD)
 
-_In this section, it is suggested to present an UML static view representing the main domain related software classes that are involved in fulfilling the requirement as well as and their relations, attributes and methods._
-
-![USXXX-CD](USXXX-CD.svg)
+![US06-CD](./CD/US06_CD.svg)
 
 # 4. Tests
 
-_In this section, it is suggested to systematize how the tests were designed to allow a correct measurement of requirements fulfilling._
 
-**_DO NOT COPY ALL DEVELOPED TESTS HERE_**
+**VaccinationCenter Tests**
 
-**Test 1:** Check that it is not possible to create an instance of the Example class with null values.
+**Test 1:** Check that if there are not any vaccine administration registered getVacAdminFromYesterdayList returns an empty list
 
-    @Test(expected = IllegalArgumentException.class)
-    	public void ensureNullIsNotAllowed() {
-    	Exemplo instance = new Exemplo(null, null);
+    @Test
+    public void ensureEmptyListWorks() {
+        VaccinationCenter center = new HealthCareCenter("Centro Vacinação Porto", new Address("street", 1, "11-11", "city"), "vacinacaoporto@gmail.com",
+            "+351912345678", "+351223456799", "https://www.centrovacinaoporto.com", openingHours, closingHours, slot, this.coordinator, "a", "a");
+        List<VaccineAdministration> emptyList = new ArrayList<>();
+
+        assertEquals(emptyList, center.getVacAdminFromYesterdayList());
     }
 
-_It is also recommended to organize this content by subsections._
+**ExportDailyVaccinated Tests**
+
+**Test 2:** Check that if there are not any vaccine administration exportation works
+
+    @Test
+    public void ensureTaskDoesNotExportWithNoVacAdmin() throws IOException {
+        String expected = "Center;" + vacType1.getDescription() + ";" + vacType2.getDescription() + "\n" + center1.getName() + ";0;0\n" + center2.getName() + ";0;0\n";
+        ExportDailyVaccinatedTask task = new ExportDailyVaccinatedTask("out\\test", ";".charAt(0), vcStore, vtStore);
+        task.run();
+
+        
+        Calendar yesterday = Calendar.getInstance();
+        yesterday.add(Calendar.DATE, -1);
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        Path expectedFilepath = Path.of("out\\test" + format.format(yesterday.getTime()) + ".csv");
+
+        System.out.println(expected);
+        System.out.println(Files.readString(expectedFilepath));
+
+        assertEquals(expected, Files.readString(expectedFilepath));
+    }
+
 
 # 5. Construction (Implementation)
 
-_In this section, it is suggested to provide, if necessary, some evidence that the construction/implementation is in accordance with the previously carried out design. Furthermore, it is recommeded to mention/describe the existence of other relevant (e.g. configuration) files and highlight relevant commits._
+**ExportDailyVaccinatedTask**
 
-_It is also recommended to organize this content by subsections._
+    @Override
+    public void run() {
+        HashMap<VaccinationCenter, HashMap> dataMap = new HashMap<VaccinationCenter, HashMap>();
+
+        List<VaccinationCenter> centerLst = vacCenterSt.getListOfVaccinationCenters();
+        List<VaccineType> vacTypeLst = vacTypeSt.getListOfVaccineTypes(); 
+        
+        for (int i = 0; i < centerLst.size(); i++) {
+            List<VaccineAdministration> vacAdminList = centerLst.get(i).getVacAdminFromYesterdayList();
+
+            HashMap<VaccineType, Integer> centerDataMap = new HashMap<VaccineType, Integer>();
+            
+            for (int j = 0; j < vacAdminList.size(); j++) {
+                Vaccine vaccine = vacAdminList.get(j).getVaccine();
+                
+                VaccineType vacType = vaccine.getVacType();
+
+                centerDataMap.merge(vacType, 1, Integer::sum);                             
+            }
+            dataMap.put(centerLst.get(i), centerDataMap);
+        }
+
+        String content = convertToString(centerLst, vacTypeLst, dataMap);
+        Calendar yesterday = Calendar.getInstance();
+        yesterday.add(Calendar.DATE, -1);
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+
+        String filepath = this.filePath + format.format(yesterday.getTime()) + ".csv";
+        FileUtils.writeToFile(filepath, content);
+    }
+
+**Company**
+
+    public void scheduleDailyVaccinated(String filePath, String time, String separator, int timeInterval) {
+   
+        String[] scheduleTime = time.split(":");
+        Calendar firstTime = Calendar.getInstance();
+
+        firstTime.set(Calendar.SECOND, 0);
+        firstTime.set(Calendar.MINUTE, Integer.valueOf(scheduleTime[1]));
+        firstTime.set(Calendar.HOUR_OF_DAY, Integer.valueOf(scheduleTime[0]));
+
+        if(firstTime.before(Calendar.getInstance())) firstTime.add(Calendar.SECOND, timeInterval);
+
+        ExportDailyVaccinatedTask task = new ExportDailyVaccinatedTask(filePath, separator.charAt(0), this.vaccinationCenterStore, this.vaccineTypeStore);
+        
+        Timer timer = new Timer();
+
+        timer.scheduleAtFixedRate(task, firstTime.getTime(), timeInterval);
+    }
 
 # 6. Integration and Demo
 
-_In this section, it is suggested to describe the efforts made to integrate this functionality with the other features of the system._
+
 
 # 7. Observations
 
-_In this section, it is suggested to present a critical perspective on the developed work, pointing, for example, to other alternatives and or future related work._
+The properties defined in the Sequence Diagram can be changed by the administrator.

@@ -75,6 +75,10 @@ public class RegisterSNSUserArrivalController implements IRegisterController<Arr
     this.snsUser = snsUser;
   }
 
+  /**
+   *
+   * @throws AppointmentNotFoundException if the appointment is not found
+   */
   public void findSNSUserAppointment() throws AppointmentNotFoundException {
     // acceptance criteria: validate if there is already an arrival for the user
     WaitingRoom waitingRoomList = center.getWaitingRoom();

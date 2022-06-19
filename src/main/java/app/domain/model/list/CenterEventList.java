@@ -21,19 +21,41 @@ public class CenterEventList implements Iterable<CenterEvent>, Serializable {
     return events.iterator();
   }
 
+  /**
+   * 
+   * @param i the index of the event to be returned
+   * @return the event at the given index
+   */
   public CenterEvent get(int i) {
     return events.get(i);
   }
 
+  /**
+   * 
+   * @param date the date of the event to be returned
+   * @param eventType the type of the event to be returned
+   * @param snsUser the SNSUser of the event to be returned
+   * @return the event at the given date and type and SNSUser
+   */
   public CenterEvent create(Calendar date, CenterEventType eventType, SNSUser snsUser) {
     CenterEvent centerEvent = new CenterEvent(date, eventType, snsUser);
     return centerEvent;
   }
 
+  /**
+   * Adds a new event to the list
+   * 
+   * @param event the event to be added to the list
+   */
   public void save(CenterEvent event) {
     this.events.add(event);
   }
 
+  /**
+   * 
+   * @param day the day of the events to be returned
+   * @return the list of events at the given day
+   */
   public CenterEventList getEventListForDay(Calendar day) {
     CenterEventList eventsInDay = new CenterEventList();
 
@@ -43,6 +65,10 @@ public class CenterEventList implements Iterable<CenterEvent>, Serializable {
     return eventsInDay;
   }
 
+  /**
+   * 
+   * @return the number of events in the list
+   */
   public int size() {
     return this.events.size();
   }

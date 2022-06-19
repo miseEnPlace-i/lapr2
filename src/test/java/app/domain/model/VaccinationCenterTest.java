@@ -3,14 +3,19 @@ package app.domain.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import app.domain.shared.Constants;
+import app.domain.shared.Gender;
 import app.utils.Time;
 
 /**
  * @author André Barros <1211299@isep.ipp.pt>
  * @author Tomás Lopes <1211289@isep.ipp.pt>
+ * @author Carlos Lopes <1211277@isep.ipp.pt>
  */
 public class VaccinationCenterTest {
   Employee coordinator;
@@ -200,4 +205,40 @@ public class VaccinationCenterTest {
 
     assertEquals(center, center2);
   }
+
+  /**
+   * Check that if there are not any vaccine administration registered getVacAdminFromYesterdayList returns an empty list
+   */
+  @Test
+  public void ensureEmptyListWorks() {
+    VaccinationCenter center = new HealthCareCenter("Centro Vacinação Porto", new Address("street", 1, "11-11", "city"), "vacinacaoporto@gmail.com",
+        "+351912345678", "+351223456799", "https://www.centrovacinaoporto.com", openingHours, closingHours, slot, this.coordinator, "a", "a");
+    List<VaccineAdministration> emptyList = new ArrayList<>();
+
+    assertEquals(emptyList, center.getVacAdminFromYesterdayList());
+  }
+
+  /**
+   * Check that getVacAdminFromYesterdayList works
+   */
+  @Test
+  public void ensureGetVacAdminFromYesterdayListMethodWorks() {
+    VaccinationCenter center = new HealthCareCenter("Centro Vacinação Porto", new Address("street", 1, "11-11", "city"), "vacinacaoporto@gmail.com",
+        "+351912345678", "+351223456799", "https://www.centrovacinaoporto.com", openingHours, closingHours, slot, this.coordinator, "a", "a");
+    List<VaccineAdministration> list = new ArrayList<>();
+
+    SNSUser snsUser = new SNSUser("12345678", "123456789", "name", Calendar.getInstance().getTime(), Gender.FEMALE, "+351923848576", "email@email.com", new Address("street", 2, "11111", "city"));
+    Vaccine vac = new Vaccine("designation", "id", "brand", new VaccineType("12345", "description", "technology"));
+
+    Calendar date = Calendar.getInstance();
+    date.add(Calendar.DAY_OF_MONTH, -1);
+
+    VaccineAdministration vacAdmin = new VaccineAdministration( snsUser , vac, "AAAAA-11", 2, center, date);
+    center.addVaccineAdministrationToList(vacAdmin);
+
+    list.add(vacAdmin);
+
+    assertEquals(list, center.getVacAdminFromYesterdayList());
+  }
+
 }

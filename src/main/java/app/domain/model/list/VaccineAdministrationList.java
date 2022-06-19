@@ -7,10 +7,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 import java.util.Timer;
-import app.dto.AdverseReactionDTO;
-import app.dto.UserNotificationDTO;
-import app.dto.VaccineDTO;
-import app.domain.model.AdverseReaction;
 import app.domain.model.CenterEvent;
 import app.domain.model.CommunityMassVaccinationCenter;
 import app.domain.model.HealthData;
@@ -19,18 +15,16 @@ import app.domain.model.RemoveRecoveryRoomTask;
 import app.domain.model.SNSUser;
 import app.domain.model.VaccinationCenter;
 import app.domain.model.Vaccine;
+import app.domain.model.VaccineAdministration;
 import app.domain.model.VaccineType;
 import app.domain.model.WaitingRoom;
 import app.domain.shared.CenterEventType;
 import app.domain.shared.Constants;
-import app.mapper.AdverseReactionMapper;
+import app.dto.UserNotificationDTO;
+import app.dto.VaccineDTO;
 import app.mapper.UserNotificationMapper;
 import app.mapper.VaccineMapper;
-import app.service.CalendarUtils;
 import app.service.PropertiesUtils;
-import app.service.sender.ISender;
-import app.service.sender.SenderFactory;
-import app.domain.model.VaccineAdministration;
 
 public class VaccineAdministrationList implements Serializable {
   private List<VaccineAdministration> vaccineAdministrations;
@@ -70,20 +64,18 @@ public class VaccineAdministrationList implements Serializable {
     Vaccine vaccine = vaccineAdministration.getVaccine();
     int doseNumber = vaccineAdministration.getDoseNumber();
 
-    if (!userHealthData.isTakingCorrectDoseOfVaccine(vaccine, doseNumber)) {
+    if (!userHealthData.isTakingCorrectDoseOfVaccine(vaccine, doseNumber))
       throw new IllegalArgumentException("SNS User is not taking the correct vaccine or the correct dose number");
-    }
 
     VaccinationCenter vaccinationCenter = vaccineAdministration.getVaccinationCenter();
 
     if (vaccinationCenter instanceof CommunityMassVaccinationCenter) {
-      // Vaccination center is a CMVC, so we check if it administers the vaccine type given
+      // Vaccination center is a Community Mass Vaccination Center, so we check if it administers the vaccine type given
 
       CommunityMassVaccinationCenter vacCenter = (CommunityMassVaccinationCenter) vaccinationCenter;
 
-      if (!vacCenter.administersVaccineType(vaccine.getVacType())) {
+      if (!vacCenter.administersVaccineType(vaccine.getVacType()))
         throw new IllegalArgumentException("Vaccination center does not administer the vaccine type of the vaccine");
-      }
     }
   }
 
@@ -137,6 +129,11 @@ public class VaccineAdministrationList implements Serializable {
     timer.schedule(task, minutesToMilliseconds(recoveryPeriod));
   }
 
+  /**
+   * 
+   * @param minutes the number of minutes to convert to milliseconds
+   * @return the number of milliseconds
+   */
   private long minutesToMilliseconds(int minutes) {
     return minutes * 60 * 1000;
   }

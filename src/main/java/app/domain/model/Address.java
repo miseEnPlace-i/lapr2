@@ -9,23 +9,14 @@ public class Address implements Serializable {
   private String postalCode;
   private String city;
 
-  public Address(String street, int doorNumber, String postalCode,
-      String city) {
-    if (street == null || street.isEmpty()) {
-      throw new IllegalArgumentException("Street is not valid.");
-    }
+  public Address(String street, int doorNumber, String postalCode, String city) {
+    if (street == null || street.isEmpty()) throw new IllegalArgumentException("Street is not valid.");
 
-    if (doorNumber < 0) {
-      throw new IllegalArgumentException("Number is not valid.");
-    }
+    if (doorNumber < 0) throw new IllegalArgumentException("Number is not valid.");
 
-    if (postalCode == null || postalCode.isEmpty()) {
-      throw new IllegalArgumentException("Postal code is not valid.");
-    }
+    if (postalCode == null || postalCode.isEmpty()) throw new IllegalArgumentException("Postal code is not valid.");
 
-    if (city == null || city.isEmpty()) {
-      throw new IllegalArgumentException("City is not valid.");
-    }
+    if (city == null || city.isEmpty()) throw new IllegalArgumentException("City is not valid.");
 
     this.street = street;
     this.doorNumber = doorNumber;
@@ -49,9 +40,13 @@ public class Address implements Serializable {
     return city;
   }
 
-  public void setPostalCode(String postalCode) {
-    if (!FormatVerifier.validatePostalCode(postalCode))
-      throw new IllegalArgumentException("Invalid postal code.");
+  /**
+   * Checks the validity of the postal code.
+   * 
+   * @param postalCode the postal code to be set
+   */
+  private void setPostalCode(String postalCode) {
+    if (!FormatVerifier.validatePostalCode(postalCode)) throw new IllegalArgumentException("Invalid postal code.");
     this.postalCode = postalCode;
   }
 
@@ -66,9 +61,7 @@ public class Address implements Serializable {
     if (other == this) return true;
     if (!(other instanceof Address)) return false;
     Address otherAddress = (Address) other;
-    return this.street.equals(otherAddress.street)
-        && this.doorNumber == otherAddress.doorNumber
-        && this.postalCode.equals(otherAddress.postalCode)
+    return this.street.equals(otherAddress.street) && this.doorNumber == otherAddress.doorNumber && this.postalCode.equals(otherAddress.postalCode)
         && this.city.equals(otherAddress.city);
   }
 }

@@ -5,8 +5,6 @@ actor "<<automatic>>\nTimer/Clock" as OE
 activate OE
 OE -> ":System" : asks to generate number daily vaccinated people CSV file
 activate ":System"
-":System" --> OE : generates CSV file
-deactivate ":System"
 
 
 @enduml

@@ -4,11 +4,9 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import app.domain.model.list.AppointmentScheduleList;
 import app.domain.model.list.CenterEventList;
-import app.domain.model.list.VaccineAdministrationList;
 import app.service.FormatVerifier;
 import app.utils.Time;
 
@@ -413,8 +411,8 @@ public abstract class VaccinationCenter implements Serializable {
   /**
    * @return List<VaccineAdministration> list of vaccine administration from yesterday
    */
-  public List<VaccineAdministration> getVaccineAdministrationFromYesterdayList() {
-    List<VaccineAdministration> subList = new ArrayList();
+  public List<VaccineAdministration> getVacAdminFromYesterdayList() {
+    List<VaccineAdministration> subList = new ArrayList<>();
     Calendar yesterday = getDateWithoutTime(Calendar.getInstance());
     yesterday.add(Calendar.DATE, -1);
 

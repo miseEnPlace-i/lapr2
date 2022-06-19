@@ -1,14 +1,12 @@
 package app.controller;
 
-import java.util.List;
 import app.domain.model.AdverseReaction;
 import app.domain.model.Company;
 import app.domain.model.HealthData;
 import app.domain.model.SNSUser;
 import app.domain.model.store.SNSUserStore;
 
-public class RegisterAdverseReactionController
-    implements IRegisterController<AdverseReaction> {
+public class RegisterAdverseReactionController implements IRegisterController<AdverseReaction> {
   private Company company;
   private SNSUserStore snsUserStore;
   private AdverseReaction adverseReaction;
@@ -19,17 +17,27 @@ public class RegisterAdverseReactionController
     this.snsUserStore = this.company.getSNSUserStore();
   }
 
+  /**
+   * Creates a new adverse reaction for a user
+   * 
+   * @param snsNumber the SNS number of the user
+   * @param description the description of the adverse reaction
+   */
   public void createAdverseReaction(String snsNumber, String description) {
     this.adverseReaction = new AdverseReaction(description);
     SNSUser snsUser = getSNSUser(snsNumber);
     this.userHealthData = snsUser.getUserHealthData();
   }
 
+  /**
+   * @param snsNumber the SNS number of the user
+   * @return the SNS user with the given SNS number
+   */
   private SNSUser getSNSUser(String snsNumber) {
     SNSUser snsUser = this.snsUserStore.findSNSUserByNumber(snsNumber);
-    if (snsUser == null) {
-      throw new IllegalArgumentException("SNS User not found");
-    }
+
+    if (snsUser == null) throw new IllegalArgumentException("SNS User not found");
+
     return snsUser;
   }
 
