@@ -10,7 +10,7 @@ import app.domain.model.SNSUser;
 import app.domain.model.store.SNSUserStore;
 
 /**
- * Vaccination Center mapper
+ * UploadUsersFromFileController Controller
  * 
  * @author Carlos Lopes <1211277@isep.ipp.pt>
  */

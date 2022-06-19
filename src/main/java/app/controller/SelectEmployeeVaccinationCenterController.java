@@ -7,6 +7,13 @@ import app.domain.model.store.VaccinationCenterStore;
 import app.dto.VaccinationCenterListDTO;
 import app.session.EmployeeSession;
 
+
+/**
+ * SelectEmployeeVaccinationCenterController
+ * 
+ * @author Ricardo Moreira <1211288@isep.ipp.pt>
+ * @author Tomás Lopes <1211289@isep.ipp.pt>
+ */
 public class SelectEmployeeVaccinationCenterController {
   private VaccinationCenterStore vaccinationCenterStore;
   private EmployeeSession session;
