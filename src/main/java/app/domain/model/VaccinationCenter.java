@@ -406,16 +406,17 @@ public abstract class VaccinationCenter implements Serializable {
   }
 
   /**
-   * @return List<VaccineAdministration> list of vaccine administration from yesterday
+   * @return List<VaccineAdministration> list of vaccine administration from today
    */
-  public List<VaccineAdministration> getVacAdminFromYesterdayList() {
+  public List<VaccineAdministration> getVacAdminFromTodayList() {
     List<VaccineAdministration> subList = new ArrayList<>();
-    Calendar yesterday = getDateWithoutTime(Calendar.getInstance());
-    yesterday.add(Calendar.DATE, -1);
+    Calendar today = getDateWithoutTime(Calendar.getInstance());
 
-    for (int i = 0; i < this.vaccineAdministrationList.size(); i++)
-      if (getDateWithoutTime(this.vaccineAdministrationList.get(i).getDate()).equals(yesterday)) subList.add(this.vaccineAdministrationList.get(i));
-
+    for (int i = 0; i < this.vaccineAdministrationList.size(); i++) {
+      if (getDateWithoutTime(this.vaccineAdministrationList.get(i).getDate()).equals(today)) {
+        subList.add(this.vaccineAdministrationList.get(i));
+      }
+    }
     return subList;
   }
 

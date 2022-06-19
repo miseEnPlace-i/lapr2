@@ -31,7 +31,7 @@ public class ExportDailyVaccinatedTask extends TimerTask {
     List<VaccineType> vacTypeLst = vacTypeSt.getListOfVaccineTypes();
 
     for (int i = 0; i < centerLst.size(); i++) {
-      List<VaccineAdministration> vacAdminList = centerLst.get(i).getVacAdminFromYesterdayList();
+      List<VaccineAdministration> vacAdminList = centerLst.get(i).getVacAdminFromTodayList();
 
       HashMap<VaccineType, Integer> centerDataMap = new HashMap<VaccineType, Integer>();
 
@@ -46,11 +46,10 @@ public class ExportDailyVaccinatedTask extends TimerTask {
     }
 
     String content = convertToString(centerLst, vacTypeLst, dataMap);
-    Calendar yesterday = Calendar.getInstance();
-    yesterday.add(Calendar.DATE, -1);
-    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+    Calendar today = Calendar.getInstance();
+    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
-    String filepath = this.filePath + format.format(yesterday.getTime()) + ".csv";
+    String filepath = this.filePath + format.format(today.getTime()) + ".csv";
     FileUtils.writeToFile(filepath, content);
   }
 

@@ -16,6 +16,19 @@ DGS wants to record daily the total number of people vaccinated in each vaccinat
 
 > **Question:** In the acceptance criteria, "the algorithm should run automatically at a time defined in a configuration file and should register a date, the name of the vaccination center and the total number of vaccinated users." How it is supposed to register this information? Should it be recorded in a file (ex: txt,..) or recorded in the system (ex: in a store) ?
 >  
+> **Answer:** The data should be written to a CSV file (field delimiter should be a semicolon). 
+>
+> **Question:** Does the report contain the count of vaccinations of the current day (which depending on the time of day can be incomplete) or the day before?
+> 
+> **Answer:** Should record vaccinations of the current day.
+>
+> **Question:** I'd like to clarify something, should we implement some sort of message for when the file is saved or warning if there were any errors saving the file using JavaFX or use JavaFX in any other away in US06?
+> **Answer:** No. The user story runs automatically without user interaction.
+>
+> **Question:** Also, is it supposed to have the possibility to change the information on the configuration file? If so, who can do it?
+> **Answer:** Yes. Please discuss this question with ESOFT teachers.
+> 
+> **Question:** "In the acceptance criteria, "the algorithm should run automatically at a time defined in a configuration file and should register a date, the name of the vaccination center and the total number of vaccinated users." How it is supposed to register this information? Should it be recorded in a file (ex: txt,..) or recorded in the system (ex: in a store) ?"
 > **Answer:** The data should be written to a CSV file (field delimiter should be a semicolon).
 
 
@@ -61,7 +74,7 @@ DGS wants to record daily the total number of people vaccinated in each vaccinat
 |  | ... export daily vaccinated? | ExportDailyVaccinatedTask | IE: knows data necessary to do it |
 |  | ... get list of vaccination centers? | VaccinationCenterStore | IE/HC/LC: knows all vaccine centers |
 |  | ... get list of vaccine types? | VaccineTypeStore | IE/HC/LC: knows all vaccine types |
-|  | ... get list of yesterday's vaccine administrations? | VaccinationCenter | IE: knows vaccine administration from center |
+|  | ... get list of today's vaccine administrations? | VaccinationCenter | IE: knows vaccine administration from center |
 |  | ... get the vaccine administered? | VaccineAdministration | IE: knows which vaccine was administered |
 |  | ...  get the vaccine type of the vaccine administered? | Vaccine | IE: has a vaccine type |
 |  | ...  get the description of the vaccine type? | VaccineType | IE: has a description |
@@ -101,7 +114,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 **VaccinationCenter Tests**
 
-**Test 1:** Check that if there are not any vaccine administration registered getVacAdminFromYesterdayList returns an empty list
+**Test 1:** Check that if there are not any vaccine administration registered getVacAdminFromTodayList returns an empty list
 
     @Test
     public void ensureEmptyListWorks() {
@@ -109,7 +122,7 @@ Other software classes (i.e. Pure Fabrication) identified:
             "+351912345678", "+351223456799", "https://www.centrovacinaoporto.com", openingHours, closingHours, slot, this.coordinator, "a", "a");
         List<VaccineAdministration> emptyList = new ArrayList<>();
 
-        assertEquals(emptyList, center.getVacAdminFromYesterdayList());
+        assertEquals(emptyList, center.getVacAdminFromTodayList());
     }
 
 **ExportDailyVaccinated Tests**
@@ -117,16 +130,15 @@ Other software classes (i.e. Pure Fabrication) identified:
 **Test 2:** Check that if there are not any vaccine administration exportation works
 
     @Test
-    public void ensureTaskDoesNotExportWithNoVacAdmin() throws IOException {
+    public void ensureTaskExportWorkWithNoVacAdmin() throws IOException {
         String expected = "Center;" + vacType1.getDescription() + ";" + vacType2.getDescription() + "\n" + center1.getName() + ";0;0\n" + center2.getName() + ";0;0\n";
         ExportDailyVaccinatedTask task = new ExportDailyVaccinatedTask("out\\test", ";".charAt(0), vcStore, vtStore);
         task.run();
 
         
-        Calendar yesterday = Calendar.getInstance();
-        yesterday.add(Calendar.DATE, -1);
+        Calendar today = Calendar.getInstance();
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        Path expectedFilepath = Path.of("out\\test" + format.format(yesterday.getTime()) + ".csv");
+        Path expectedFilepath = Path.of("out\\test" + format.format(today.getTime()) + ".csv");
 
         System.out.println(expected);
         System.out.println(Files.readString(expectedFilepath));
@@ -147,7 +159,7 @@ Other software classes (i.e. Pure Fabrication) identified:
         List<VaccineType> vacTypeLst = vacTypeSt.getListOfVaccineTypes(); 
         
         for (int i = 0; i < centerLst.size(); i++) {
-            List<VaccineAdministration> vacAdminList = centerLst.get(i).getVacAdminFromYesterdayList();
+            List<VaccineAdministration> vacAdminList = centerLst.get(i).getVacAdminFromTodayList();
 
             HashMap<VaccineType, Integer> centerDataMap = new HashMap<VaccineType, Integer>();
             
@@ -162,11 +174,10 @@ Other software classes (i.e. Pure Fabrication) identified:
         }
 
         String content = convertToString(centerLst, vacTypeLst, dataMap);
-        Calendar yesterday = Calendar.getInstance();
-        yesterday.add(Calendar.DATE, -1);
+        Calendar today = Calendar.getInstance();
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
-        String filepath = this.filePath + format.format(yesterday.getTime()) + ".csv";
+        String filepath = this.filePath + format.format(today.getTime()) + ".csv";
         FileUtils.writeToFile(filepath, content);
     }
 
@@ -192,7 +203,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 6. Integration and Demo
 
-
+Some properties were added to the config properties.
 
 # 7. Observations
 
