@@ -133,6 +133,9 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
 
     CategoryAxis xAxis = new CategoryAxis();
     NumberAxis yAxis = new NumberAxis();
+    yAxis.setMinorTickVisible(false);
+    yAxis.setTickUnit(1);
+
     xAxis.setLabel("Days");
     yAxis.setLabel("Number of Fully Vaccinated Users");
 
@@ -177,15 +180,22 @@ public class ExportCenterStatisticsUI extends ChildUI<CoordinatorUI> {
       vbox.setPadding(new Insets(40, 40, 40, 40));
       vbox.setAlignment(Pos.CENTER);
       vbox.getChildren().addAll(chart);
-
+      vbox.setMinHeight(SCENE_HEIGHT);
+      vbox.setMinWidth(SCENE_WIDTH);
+      vbox.setMaxWidth(Double.MAX_VALUE);
 
       ScrollPane container = new ScrollPane(vbox);
       container.setHbarPolicy(ScrollBarPolicy.NEVER);
+      container.setMaxWidth(Double.MAX_VALUE);
+      container.setFitToWidth(true);
+      container.setMinWidth(SCENE_WIDTH);
 
       Scene scene = new Scene(container, SCENE_WIDTH, SCENE_HEIGHT);
-      dialog.setResizable(false);
       dialog.setScene(scene);
       dialog.show();
+      dialog.setMinWidth(SCENE_WIDTH);
+      dialog.setMinHeight(SCENE_HEIGHT);
+      dialog.setMaxHeight(SCENE_HEIGHT);
 
       close.setOnAction(response -> {
         dialog.close();

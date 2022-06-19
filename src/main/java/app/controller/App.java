@@ -241,8 +241,8 @@ public class App {
     this.vacTypeStore.saveVaccineType(vacType2);
 
     Vaccine vaccine = this.vaccineStore.createVaccine("BioNTech, Pfizer vaccine", "00001", "Pfizer, BioNTech", vacType);
-    AdminProcess adminProcess1 = new AdminProcess(1, 20, 1);
-    AdminProcess adminProcess2 = new AdminProcess(21, 89, 2);
+    AdminProcess adminProcess1 = new AdminProcess(21, 90, 1);
+    AdminProcess adminProcess2 = new AdminProcess(1, 20, 2);
     DoseInfo doseInfo1 = new DoseInfo(11, 0);
     DoseInfo doseInfo2 = new DoseInfo(22, 30);
 
