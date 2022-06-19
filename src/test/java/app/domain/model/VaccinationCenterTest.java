@@ -215,7 +215,7 @@ public class VaccinationCenterTest {
         "+351912345678", "+351223456799", "https://www.centrovacinaoporto.com", openingHours, closingHours, slot, this.coordinator, "a", "a");
     List<VaccineAdministration> emptyList = new ArrayList<>();
 
-    assertEquals(emptyList, center.getVacAdminFromYesterdayList());
+    assertEquals(emptyList, center.getVacAdminFromTodayList());
   }
 
   /**
@@ -231,14 +231,13 @@ public class VaccinationCenterTest {
     Vaccine vac = new Vaccine("designation", "id", "brand", new VaccineType("12345", "description", "technology"));
 
     Calendar date = Calendar.getInstance();
-    date.add(Calendar.DAY_OF_MONTH, -1);
 
     VaccineAdministration vacAdmin = new VaccineAdministration( snsUser , vac, "AAAAA-11", 2, center, date);
     center.addVaccineAdministrationToList(vacAdmin);
 
     list.add(vacAdmin);
 
-    assertEquals(list, center.getVacAdminFromYesterdayList());
+    assertEquals(list, center.getVacAdminFromTodayList());
   }
 
 }
