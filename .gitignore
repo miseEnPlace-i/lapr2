@@ -8,6 +8,8 @@ node_modules/
 dist/
 out/
 
+export/*
+
 data.bin
 
 # Compiled Java class files

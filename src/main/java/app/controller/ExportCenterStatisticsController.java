@@ -53,7 +53,7 @@ public class ExportCenterStatisticsController {
    * @param exporter FullyVaccinatedData Object
    * @return hashMap will all the data needed
    */
-  public void generateFullyVaccinatedUsersInterval() {
+  public void generateFullyVaccinatedUsersData() {
     this.dataMap = this.exporter.getFullyVaccinatedUsersPerDayMap();
   }
 
@@ -68,16 +68,20 @@ public class ExportCenterStatisticsController {
   }
 
   /**
-   * @return a readable string representing the data
-   */
-  public String dataToString() {
-    return exporter.toString(this.dataMap);
-  }
-
-  /**
-   * @return a string of the data represented in a csv format
+   * Gets data formatted to CSV file
+   * 
+   * @return data ready to go to the file
    */
   public String exportFileString() {
     return exporter.toExportFileString(this.dataMap);
+  }
+
+  /**
+   * Gets the data
+   * 
+   * @return LinkedHashMap with all the data
+   */
+  public LinkedHashMap<Calendar, Integer> getData() {
+    return this.dataMap;
   }
 }

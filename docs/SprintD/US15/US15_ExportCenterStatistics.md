@@ -44,12 +44,14 @@ As a center coordinator, I intend to check and export vaccination statistic. I w
 
 * **AC1:** Output data should follow (date; number of fully vaccinated user).
 * **AC2:** The user should define a time interval (two dates). Should follow the the portuguese format (dd/mm/yyyy).
-* **AC3:** File name must be filled in.
-* **AC4:** All required fields must be filled in.
+* **AC3:** All dates must be in the past.
+* **AC4:** File name must be filled in.
+* **AC5:** All required fields must be filled in.
 
 ### 1.4. Found out Dependencies
-
+* There is a dependency to "US01 - Schedule a Vaccine", as users need to schedule a vaccine in order to get it administered.
 * There is a dependency to "US03 - Register SNS User" since at leat one sns user needs to be registered in the system.
+* There is a dependency to "US04 - Register the Arrival of an SNS User", as receptionists need to register arrivals so that SNS Users can get vaccines administered.
 * There is a dependency to "US08 - Record Administration of Vaccine" since at least one vaccine needs to be administered to a sns user.
 * There is a dependency to "US09 - Register a Vaccination Center" since at least one vaccination center needs to be registered in the system.
 * There is a dependency to "US12 - Register a new Vaccine Type" since at least one vaccine type needs to be registered in the system.
@@ -66,6 +68,7 @@ As a center coordinator, I intend to check and export vaccination statistic. I w
 
 **Output Data:**
 
+* Center Statistics
 * Registered statistics of a center into a CSV file between two dates.
 * Operation (in)success.
 
@@ -93,32 +96,34 @@ n/a.
 
 **SSD - Alternative 1 is adopted.**
 
-| Interaction ID | Question: Which class is responsible for... | Answer                     | Justification (with patterns)                                                                                 |
-| :------------- | :------------------------------------------ | :------------------------- | :------------------------------------------------------------------------------------------------------------ |
-| Step 1         | ... interacting with the actor?             | ExportStatisticsUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-|                | ... coordinating the US?                    | ExportStatisticsController | Controller                                                                                                    |
-| Step 2         | n/a                                         | n/a                        | n/a                                                                                                           |
-| Step 3         | ... knows the coordinator center?           | EmployeeSession            | IE: holds information about the sessions of the users                                                         |
-|                | ... instantiating new FullyVaccinatedData?  | FullyVaccinatedData        | IE: holds the information relevant to the statistics                                                          |
-|                | ... holds information needed to statistics? | VaccineAdministration      | IE: holds information about the vaccination process of every user                                             |
-|                | ... check sns user is fully vaccinated?     | Vaccine                    | IE: holds information about the administrations process                                                       |
-| Step 4         | ... saving the new statistics?              | CsvExporter                | IE: gets all the data needed to export the statistics                                                         |
-|                | ... exports the data to a csv file?         | CsvExporter                | IE: knows how to export to data to a csv file                                                                 |
+| Interaction ID                                         | Question: Which class is responsible for...                                 | Answer                     | Justification (with patterns)                                                                                 |
+| :----------------------------------------------------- | :-------------------------------------------------------------------------- | :------------------------- | :------------------------------------------------------------------------------------------------------------ |
+| Step 1 asks to export and check center statistics      | ... interacting with the actor?                                             | ExportStatisticsUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+|                                                        | ... coordinating the US?                                                    | ExportStatisticsController | Controller                                                                                                    |
+| Step 2 requested data(fileName,startDate,endDate)      | n/a                                                                         | n/a                        | n/a                                                                                                           |
+| Step 3 types the requested data                        | ... knows the coordinator center?                                           | EmployeeSession            | IE: holds information about the sessions of the employees                                                     |
+|                                                        | ... instantiating new FullyVaccinatedData?                                  | FullyVaccinatedData        | Creator: contains all data about fully vaccinated SNS Users                                                   |
+|                                                        | ... holds list of VaccineAdministrations?                                   | VaccinationCenter          | IE: holds information about the vaccination process of every user                                             |
+|                                                        | ... check sns user is fully vaccinated?                                     | Vaccine                    | IE: holds information about the administrations process                                                       |
+|                                                        | ... holds information about the vaccination administration of the SNS User? | VaccineAdministration      | IE: knows information about the process of vaccine administration                                             |
+| Step 4 shows center statistics and exports to CSV file | ... exports the data to a csv file?                                         | FileUtils                  | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+|                                                        | ... shows coordinator statistics?                                           | ExportCenterStatisticsUI   | IE: responsible for user interaction.                                                                         |
 
 ### Systematization
 
 According to the taken rationale, the conceptual classes promoted to software classes are:
 
-- FullyVaccinatedData 
-- CsvExporter
 - VaccineAdministration
 - Vaccine
-- EmployeeSession
+- VaccinationCenter
 
 Other software classes (i.e. Pure Fabrication) identified:
 
 - ExportCenterStatisticsUI 
 - ExportCenterStatisticsController
+- EmployeeSession
+- FullyVaccinatedData
+- FileUtils
 
 ## 3.2. Sequence Diagram (SD)
 
@@ -130,29 +135,64 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 4. Tests
 
-_In this section, it is suggested to systematize how the tests were designed to allow a correct measurement of requirements fulfilling._
-
-**_DO NOT COPY ALL DEVELOPED TESTS HERE_**
-
-**Test 1:** Check that it is not possible to create an instance of the Example class with null values.
+**Test 1:** Check that it is not possible to create an instance of FullyVaccinatedData with invalid dates interval.
 
     @Test(expected = IllegalArgumentException.class)
-    	public void ensureNullIsNotAllowed() {
-    	Exemplo instance = new Exemplo(null, null);
+    public void ensureGetFullyVaccinatedUsersPerDayMapWorksDoesNotAcceptInvalidInterval() {
+        Calendar date1 = Calendar.getInstance();
+        date1.add(Calendar.DAY_OF_MONTH, -2);
+
+        Calendar date2 = Calendar.getInstance();
+        date2.add(Calendar.DAY_OF_MONTH, -1);
+
+        new FullyVaccinatedData("path", date2, date1, center1);
     }
 
-_It is also recommended to organize this content by subsections._
+**Test 2:** Check that it is not possible to create an instance of FullyVaccinatedData with null values.
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureNullArgumentsAreNotAllowed() {
+        new FullyVaccinatedData(null, null, null, null);
+    }
+
+  **Test 3:** Check that it is not possible to create an instance of FullyVaccinatedData with future date intervals.
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureGetFullyVaccinatedUsersPerDayMapWorksDoesNotAcceptFutureDateInterval() {
+        Calendar date1 = Calendar.getInstance();
+        date1.add(Calendar.DAY_OF_MONTH, 1);
+
+        Calendar date2 = Calendar.getInstance();
+        date2.add(Calendar.DAY_OF_MONTH, 2);
+
+        new FullyVaccinatedData("path", date1, date2, center1);
+    }
 
 # 5. Construction (Implementation)
 
-_In this section, it is suggested to provide, if necessary, some evidence that the construction/implementation is in accordance with the previously carried out design. Furthermore, it is recommeded to mention/describe the existence of other relevant (e.g. configuration) files and highlight relevant commits._
+### ExportCenterStatisticsController Constructor
 
-_It is also recommended to organize this content by subsections._
+    public ExportCenterStatisticsController(Company company, EmployeeSession coordinatorSession) throws NotAuthorizedException {
+        if (!coordinatorSession.hasCenter()) throw new NotAuthorizedException("Coordinator is not logged in.");
+        this.session = coordinatorSession;
+    }
+
+### FullyVaccinatedData Constructor
+
+	public FullyVaccinatedData(String path, Calendar start, Calendar end, VaccinationCenter center) {
+        validatePath(path);
+        validateDateInterval(start, end);
+        validateCenter(center);
+
+        this.startDate = start;
+        this.endDate = end;
+        this.center = center;
+    }
 
 # 6. Integration and Demo
 
-* A new option on the Center Coordinator menu options was added (export statistics to a csv file).
+* A new option on the Center Coordinator menu options was added to check and export center statistics to a csv file.
 
 # 7. Observations
 
-_In this section, it is suggested to present a critical perspective on the developed work, pointing, for example, to other alternatives and or future related work._
+![SprintD](SprintD/../../CoordinatorLogin_SD.svg)

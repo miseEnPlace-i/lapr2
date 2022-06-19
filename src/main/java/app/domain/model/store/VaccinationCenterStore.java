@@ -68,7 +68,7 @@ public class VaccinationCenterStore implements Serializable {
   }
 
   public VaccinationCenter createHealthCareCenter(String name, Address address, String emailAddress, String phoneNum, String faxNum, String webAddress,
-      String openingHours, String closingHours, int slotDuration, int maxVacSlot, Employee coordinator, String ages, String ags) {
+      String openingHours, String closingHours, int slotDuration, int maxVacSlot, Employee coordinator, String aces, String ags) {
 
     boolean isCoordinatorValid = validateCoordinator(coordinator);
 
@@ -79,7 +79,7 @@ public class VaccinationCenterStore implements Serializable {
     Time closingHoursTime = new Time(closingHours);
 
     HealthCareCenter center =
-        new HealthCareCenter(name, address, emailAddress, phoneNum, faxNum, webAddress, openingHoursTime, closingHoursTime, slot, coordinator, ages, ags);
+        new HealthCareCenter(name, address, emailAddress, phoneNum, faxNum, webAddress, openingHoursTime, closingHoursTime, slot, coordinator, aces, ags);
 
     return center;
   }
@@ -205,7 +205,7 @@ public class VaccinationCenterStore implements Serializable {
     return !(getVaccinationCenterByPhone(phone) == null);
   }
 
-  public List<VaccinationCenter> getListOfVaccinationCenters(){
+  public List<VaccinationCenter> getListOfVaccinationCenters() {
     return this.vaccinationCenters;
   }
 }

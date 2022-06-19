@@ -48,7 +48,12 @@ public class CoordinatorUI extends EmployeeRoleUI {
 
   @FXML
   void toExportCenterStatistics(ActionEvent event) {
-    System.out.println("Export center statistics");
+    try {
+      ExportCenterStatisticsUI exportCenterStatisticsUI = (ExportCenterStatisticsUI) this.mainApp.replaceSceneContent("/fxml/ExportStatisticsInitialPage.fxml");
+      exportCenterStatisticsUI.init(this);
+    } catch (Exception e) {
+      Logger.getLogger(CoordinatorUI.class.getName()).log(Level.SEVERE, null, e);
+    }
   }
 
   public EmployeeSession getEmployeeSession() {

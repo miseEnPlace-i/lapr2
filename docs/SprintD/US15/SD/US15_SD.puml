@@ -4,7 +4,6 @@ actor "Center Coordinator" as COORDINATOR
 
 participant ":ExportCenterStatisticsUI" as UI
 participant ":ExportCenterStatisticsController" as CTRL
-participant ":Company" as COMP
 participant "fullyVaccinatedData\n:FullyVaccinatedData" as FULLYDATA
 participant "vaccineAdministration\n:VaccineAdministration" as VACADMIN
 participant "employeeSession\n:EmployeeSession" as EMPLOYEESESSION
@@ -19,7 +18,7 @@ participant "FileUtils" as FILEUTILS
 
 
 activate COORDINATOR
-COORDINATOR -> UI : asks to export center statistics
+COORDINATOR -> UI : asks to export and check center statistics
 activate UI
 
 ref over UI 
@@ -29,7 +28,7 @@ end ref
 
 UI --> CTRL** : create(company,coordinatorSession)
 
-UI --> COORDINATOR : requests data (filePath,startDate,endDate)
+UI --> COORDINATOR : requests data (fileName,startDate,endDate)
 deactivate UI
 
 COORDINATOR -> UI : types requested data
@@ -43,6 +42,10 @@ activate EMPLOYEESESSION
 deactivate EMPLOYEESESSION
 
 CTRL --> FULLYDATA** : create(fileName,startDate,endDate,center)
+deactivate CTRL
+
+UI -> CTRL : generateFullyVaccinatedUsersData()
+activate CTRL
 
 CTRL -> FULLYDATA : getFullyVaccinatedUsersPerDayMap()
 loop for each day between startDate and endDate selected
@@ -106,7 +109,7 @@ activate FILEUTILS
 deactivate FILEUTILS
 deactivate CTRL
 
-UI --> COORDINATOR : shows center statistics
+UI --> COORDINATOR : shows center statistics and exports to CSV file
 
 deactivate COORDINATOR 
 

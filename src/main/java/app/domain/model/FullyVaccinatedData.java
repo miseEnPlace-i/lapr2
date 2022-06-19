@@ -18,20 +18,19 @@ public class FullyVaccinatedData {
   private Calendar endDate;
   private VaccinationCenter center;
   private int snsUserAge;
-  private SNSUser snsUser;
   private Vaccine vaccine;
   private boolean fullyVaccinated;
 
   /**
-   * Constructor of the class
+   * FullyVaccinatedData Constructor
    * 
-   * @param path the file path
+   * @param fileName the file name
    * @param start the start date of the statistics
    * @param end the end date of the statistics
    * @param center the coordinator center of the statistics
    */
-  public FullyVaccinatedData(String path, Calendar start, Calendar end, VaccinationCenter center) {
-    validatePath(path);
+  public FullyVaccinatedData(String fileName, Calendar start, Calendar end, VaccinationCenter center) {
+    validateName(fileName);
     validateDateInterval(start, end);
     validateCenter(center);
 
@@ -45,7 +44,7 @@ public class FullyVaccinatedData {
    * 
    * @param path
    */
-  private void validatePath(String path) {
+  private void validateName(String path) {
     if (path == null || path == "") throw new IllegalArgumentException("File path cannot be null or empty!");
   }
 
@@ -138,19 +137,12 @@ public class FullyVaccinatedData {
     return fullyVaccinated;
   }
 
-  public String toString(Map<Calendar, Integer> data) {
-    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-    StringBuilder sb = new StringBuilder();
-
-    sb.append(String.format("Date %10s | Number of SNS Users Fully Vaccinated \n", ""));
-    for (Map.Entry<Calendar, Integer> entry : data.entrySet()) {
-      sb.append(format.format(entry.getKey().getTime()) + " | " + entry.getValue());
-      sb.append("\n");
-    }
-
-    return sb.toString();
-  }
-
+  /**
+   * Gets data ready to go to a CSV file
+   * 
+   * @param data
+   * @return String with the data formatted to CSV file
+   */
   public String toExportFileString(Map<Calendar, Integer> data) {
     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
     StringBuilder sb = new StringBuilder();
