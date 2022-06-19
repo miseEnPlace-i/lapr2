@@ -31,7 +31,6 @@ public class CommunityMassVaccinationCenter extends VaccinationCenter {
     super(name, address, email, phoneNum, faxNum, webAddress, openingHours, closingHours, slot, coordinator);
 
     setVaccineType(vaccineType);
-
   }
 
   private void setVaccineType(VaccineType vaccineType) {

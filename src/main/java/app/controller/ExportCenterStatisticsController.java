@@ -15,63 +15,69 @@ import app.session.EmployeeSession;
  * @author André Barros <1211299@isep.ipp.pt>
  */
 public class ExportCenterStatisticsController {
-    private EmployeeSession session;
-    private FullyVaccinatedData exporter;
-    private LinkedHashMap<Calendar, Integer> dataMap;
+  private EmployeeSession session;
+  private FullyVaccinatedData exporter;
+  private LinkedHashMap<Calendar, Integer> dataMap;
 
-    /**
-     * ExportCenterStatisticsController constructor
-     * 
-     * @param company the company
-     * @param coordinatorSession the coordinator session
-     * @throws NotAuthorizedException exception if coordinator is not logged in
-     */
-    public ExportCenterStatisticsController(Company company, EmployeeSession coordinatorSession) throws NotAuthorizedException {
-        if (!coordinatorSession.hasCenter()) throw new NotAuthorizedException("Coordinator is not logged in.");
-        this.session = coordinatorSession;
-    }
+  /**
+   * ExportCenterStatisticsController constructor
+   * 
+   * @param company the company
+   * @param coordinatorSession the coordinator session
+   * @throws NotAuthorizedException exception if coordinator is not logged in
+   */
+  public ExportCenterStatisticsController(Company company, EmployeeSession coordinatorSession) throws NotAuthorizedException {
+    if (!coordinatorSession.hasCenter()) throw new NotAuthorizedException("Coordinator is not logged in.");
+    this.session = coordinatorSession;
+  }
 
-    /**
-     * Creates fullyVaccinatedData
-     * 
-     * @param filePath the file path to save the statistics
-     * @param start the start date of statistics
-     * @param end the end date of statistics
-     * @return fullyVaccinatedData object
-     */
-    public void createFullyVaccinatedData(String filePath, Calendar start, Calendar end) {
-        VaccinationCenter center = session.getVaccinationCenter();
+  /**
+   * Creates fullyVaccinatedData
+   * 
+   * @param filePath the file path to save the statistics
+   * @param start the start date of statistics
+   * @param end the end date of statistics
+   * @return fullyVaccinatedData object
+   */
+  public void createFullyVaccinatedData(String filePath, Calendar start, Calendar end) {
+    VaccinationCenter center = session.getVaccinationCenter();
 
-        if(end.before(start)) throw new IllegalArgumentException("Invalid date interval!");
+    if (end.before(start)) throw new IllegalArgumentException("Invalid date interval!");
 
-        this.exporter = new FullyVaccinatedData(filePath, start, end, center);
-    }
+    this.exporter = new FullyVaccinatedData(filePath, start, end, center);
+  }
 
-    /**
-     * Gathers all the information needed to export to a file the statistics
-     * 
-     * @param exporter -> FullyVaccinatedData Object
-     * @return hashMap will all the data needed
-     */
-    public void generateFullyVaccinatedUsersInterval() {
-        this.dataMap = this.exporter.getFullyVaccinatedUsersPerDayMap();
-    }
+  /**
+   * Gathers all the information needed to export to a file the statistics
+   * 
+   * @param exporter FullyVaccinatedData Object
+   * @return hashMap will all the data needed
+   */
+  public void generateFullyVaccinatedUsersInterval() {
+    this.dataMap = this.exporter.getFullyVaccinatedUsersPerDayMap();
+  }
 
-    /**
-     * Saves data
-     * 
-     * @param dataMap the hashMap will all information
-     */
-    public boolean saveData(String fileName) {
-        String content = exportFileString();
-        return FileUtils.writeToFile(fileName, content);
-    }
+  /**
+   * Saves data
+   * 
+   * @param dataMap the hashMap will all information
+   */
+  public boolean saveData(String fileName) {
+    String content = exportFileString();
+    return FileUtils.writeToFile(fileName, content);
+  }
 
-    public String dataToString() {
-        return exporter.toString(this.dataMap);
-    }
+  /**
+   * @return a readable string representing the data
+   */
+  public String dataToString() {
+    return exporter.toString(this.dataMap);
+  }
 
-    public String exportFileString() {
-        return exporter.toExportFileString(this.dataMap);
-    }
+  /**
+   * @return a string of the data represented in a csv format
+   */
+  public String exportFileString() {
+    return exporter.toExportFileString(this.dataMap);
+  }
 }

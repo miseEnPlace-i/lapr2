@@ -35,8 +35,8 @@ public class LegacyDataObjectBuilder {
 
   public VaccineAdministration createAdministration() {
     VaccineAdministrationList administList = this.legacyData.getSNSUser().getUserHealthData().getVaccineAdministrationList();
-    return administList.createVaccineAdministration(this.legacyData.getSNSUser(), legacyData.getVaccine(), legacyData.getLotNumber(), legacyData.getDoseNumber(), legacyData.getCenter(),
-        legacyData.getAdministrationDate());
+    return administList.createVaccineAdministration(this.legacyData.getSNSUser(), legacyData.getVaccine(), legacyData.getLotNumber(),
+        legacyData.getDoseNumber(), legacyData.getCenter(), legacyData.getAdministrationDate());
   }
 
   public CenterEvent createArrivalEvent() {
@@ -51,6 +51,6 @@ public class LegacyDataObjectBuilder {
 
   public CenterEvent createDeparturedEvent() {
     CenterEventList centerEvents = this.legacyData.getCenter().getEvents();
-    return centerEvents.create(legacyData.getDeparturedDate(), CenterEventType.DEPARTURE, legacyData.getSNSUser());
+    return centerEvents.create(legacyData.getDepartureDate(), CenterEventType.DEPARTURE, legacyData.getSNSUser());
   }
 }

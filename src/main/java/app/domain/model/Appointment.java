@@ -52,18 +52,34 @@ public class Appointment implements Serializable {
     return this.snsUser;
   }
 
+  /**
+   * 
+   * @return The date of the appointment.
+   */
   public Calendar getDate() {
     return date;
   }
 
+  /**
+   * 
+   * @return The vaccine type of the appointment.
+   */
   public VaccineType getVaccineType() {
     return vaccineType;
   }
 
+  /**
+   * 
+   * @return true if the user wants to receive SMSs.
+   */
   public boolean isSms() {
     return sms;
   }
 
+  /**
+   * 
+   * @return The vaccination center of the appointment.
+   */
   public VaccinationCenter getVaccinationCenter() {
     return center;
   }

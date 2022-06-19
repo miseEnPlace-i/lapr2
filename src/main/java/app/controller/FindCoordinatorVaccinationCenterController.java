@@ -14,12 +14,18 @@ public class FindCoordinatorVaccinationCenterController {
     this.session = session;
   }
 
+  /**
+   * Finds the vaccination center of the coordinator
+   */
   public void findCoordinatorCenter() {
     String email = App.getInstance().getCurrentUserSession().getUserId().getEmail();
     VaccinationCenter center = this.vaccinationCenterStore.getVaccinationCenterWithCoordinatorEmail(email);
     this.session.setVaccinationCenter(center);
   }
 
+  /**
+   * @return the name of the coordinator's vaccination center
+   */
   public String getVaccinationCenterName() {
     if (!this.session.hasCenter()) return null;
     return this.session.getVaccinationCenter().getName();

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Properties;
 import org.apache.commons.lang3.StringUtils;
 import app.controller.AnalyseCenterPerformanceController;
-import app.controller.App;
 import app.domain.model.CenterPerformance;
 import app.domain.shared.Constants;
 import app.service.PropertiesUtils;
@@ -66,7 +65,7 @@ public class AnalyseCenterPerformanceUI extends ChildUI<CoordinatorUI> {
 
   public void setEmployeeSession(EmployeeSession session) {
     this.employeeSession = session;
-    this.ctrl = new AnalyseCenterPerformanceController(App.getInstance().getCompany(), employeeSession);
+    this.ctrl = new AnalyseCenterPerformanceController(employeeSession);
   }
 
   @FXML
