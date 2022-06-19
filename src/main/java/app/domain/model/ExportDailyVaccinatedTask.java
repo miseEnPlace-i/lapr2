@@ -9,6 +9,11 @@ import app.domain.model.store.VaccinationCenterStore;
 import app.domain.model.store.VaccineTypeStore;
 import app.service.FileUtils;
 
+/**
+ * ExportDailyVaccinatedTask
+ * 
+ * @author Carlos Lopes <1211277@isep.ipp.pt>
+ */
 public class ExportDailyVaccinatedTask extends TimerTask {
 
   String filePath;
@@ -16,6 +21,14 @@ public class ExportDailyVaccinatedTask extends TimerTask {
   VaccineTypeStore vacTypeSt;
   char separator;
 
+  /**
+   * ExportDailyVaccinatedTask
+   * 
+   * @param filePath the file path
+   * @param separator the separator
+   * @param vacCenterSt the vaccinationCenter store
+   * @param vacTypeSt the vaccineType store
+   */
   public ExportDailyVaccinatedTask(String filePath, char separator, VaccinationCenterStore vacCenterSt, VaccineTypeStore vacTypeSt) {
     this.filePath = filePath;
     this.vacCenterSt = vacCenterSt;

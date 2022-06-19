@@ -9,24 +9,47 @@ public class DoseInfo implements Serializable {
   private int dosage;
   private int timeSinceLastDose;
 
+  /**
+   * Dose Info Constructor
+   * 
+   * @param dosage
+   * @param timeSinceLastDose
+   */
   public DoseInfo(int dosage, int timeSinceLastDose) {
     setDosage(dosage);
     setTimeSinceLastDose(timeSinceLastDose);
   }
 
+  /**
+   * 
+   * @return dose number
+   */
   public int getDosage() {
     return this.dosage;
   }
 
+  /**
+   * Sets dosage
+   * 
+   * @param dosage
+   */
   public void setDosage(int dosage) {
     validateDosage(dosage);
     this.dosage = dosage;
   }
 
+  /**
+   * 
+   * @return the time since last dose
+   */
   public int getTimeSinceLastDose() {
     return this.timeSinceLastDose;
   }
 
+  /**
+   * 
+   * @param timeSinceLastDose
+   */
   public void setTimeSinceLastDose(int timeSinceLastDose) {
     validateTimeSinceLastDose(timeSinceLastDose);
     this.timeSinceLastDose = timeSinceLastDose;

@@ -42,10 +42,10 @@ public class FullyVaccinatedData {
   /**
    * Validate file path
    * 
-   * @param path
+   * @param fileName
    */
-  private void validateName(String path) {
-    if (path == null || path == "") throw new IllegalArgumentException("File path cannot be null or empty!");
+  private void validateName(String fileName) {
+    if (fileName == null || fileName == "") throw new IllegalArgumentException("File name cannot be null or empty!");
   }
 
   /**
