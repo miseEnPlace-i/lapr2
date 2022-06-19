@@ -163,7 +163,7 @@ public class ExportCenterStatisticsControllerTest {
      */
     @Test
     public void ensureItIsPossibleToCreateCsvExporter() {
-        ctrl.createFullyVaccinatedData("test.csv", startDate, endDate);
+        ctrl.createFullyVaccinatedData("/export/test.csv", startDate, endDate);
     }
 
     @Test
@@ -174,7 +174,7 @@ public class ExportCenterStatisticsControllerTest {
 
         center.addVaccineAdministrationToList(new VaccineAdministration(snsUser, vac1, "AAAAA-11", 2, center, startDate));
 
-        ctrl.createFullyVaccinatedData("Path.csv", startDate, endDate);
+        ctrl.createFullyVaccinatedData("/export/Path.csv", startDate, endDate);
 
         ctrl.generateFullyVaccinatedUsersData();
 
@@ -198,14 +198,14 @@ public class ExportCenterStatisticsControllerTest {
 
         ctrl.generateFullyVaccinatedUsersData();
 
-        ctrl.saveData("Path.csv");
+        ctrl.saveData("/export/Path.csv");
 
         String expected = "Date;NumberOfFullyVaccinatedUsers\n";
 
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/YYYY");
         expected += df.format(startDate.getTime()) + ";1\n" + df.format(endDate.getTime()) + ";0\n";
 
-        Path expectedFilepath = Path.of("Path.csv");
+        Path expectedFilepath = Path.of("/export/Path.csv");
 
         assertEquals(expected, Files.readString(expectedFilepath));
     }
@@ -223,14 +223,14 @@ public class ExportCenterStatisticsControllerTest {
 
         ctrl.generateFullyVaccinatedUsersData();
 
-        ctrl.saveData("Path.csv");
+        ctrl.saveData("/export/Path.csv");
 
         String expected = "Date;NumberOfFullyVaccinatedUsers\n";
 
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/YYYY");
         expected += df.format(startDate.getTime()) + ";0\n" + df.format(endDate.getTime()) + ";0\n";
 
-        Path expectedFilepath = Path.of("Path.csv");
+        Path expectedFilepath = Path.of("/export/Path.csv");
 
         assertEquals(expected, Files.readString(expectedFilepath));
     }
