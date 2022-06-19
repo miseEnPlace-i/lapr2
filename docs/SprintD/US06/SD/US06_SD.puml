@@ -16,11 +16,10 @@ participant "vacTypeSt:\nVaccineTypeStore" as VTST
 participant "center:\nVaccinationCenter" as CENTER
 participant "vacAdmin:\nVaccineAdministration" as VACADMIN
 participant "vaccine:\nVaccine" as VAC
-participant "csvEx:\nCsvExporter" as CSVEX
+participant "dataMap:\nHashMap<VaccinationCenter,\nHashMap<VaccineType,Int>>" as MAP
 participant "vacType:\nVaccineType" as VACTYPE
 participant "FileUtils" as FILEUTILS
 participant "vacAdminList:\nList<VaccineAdministration>" as VALST
-participant "dataMap:\nHashMap<VaccinationCenter,\nHashMap<VaccineType,Int>>" as MAP
 
     activate ACT
     ACT -> APP : Asks to export daily vaccinated report
@@ -79,6 +78,10 @@ participant "dataMap:\nHashMap<VaccinationCenter,\nHashMap<VaccineType,Int>>" as
                     TASK -> VAC : vacType = getVacType()
                     activate VAC
                     deactivate VAC
+
+                    TASK -> MAP : merge(vacType, 1, sum)
+                    activate MAP
+                    deactivate MAP
                 end
             end
 
