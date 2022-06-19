@@ -74,4 +74,15 @@ public class Utils {
 
     alert.showAndWait();
   }
+
+  /**
+   * Alert when user cancels the operation
+   */
+  public static void cancel() {
+    Alert alert = new Alert(AlertType.WARNING);
+    alert.setTitle("Cancel");
+    alert.setHeaderText("Canceled the operation");
+    alert.setContentText("The task was interrupted.");
+    alert.showAndWait();
+  }
 }
